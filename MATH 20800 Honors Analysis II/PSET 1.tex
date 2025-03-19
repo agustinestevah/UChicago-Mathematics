@@ -1,0 +1,404 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Panagiotis E. Souganidis}
+\newcommand{\assignment}{Problem Set 1}
+\newcommand{\semester}{Fall 2024}
+\newcommand{\duedate}{2024-13-01}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+Suppose $\alpha$ increases on $[a,b]$ $a \leq x_0 \leq b,$ $\alpha$ is continuous at $x_0,$ $f(x_0) = 1$ and $f(x) = 0$ for all $x\neq x_0.$ Prove that $f\in \mathcal{R}(\alpha)$ and that $\int f d\alpha =0.$
+\end{problem}
+\begin{solution}
+Let $\epsilon>0.$ Since $\alpha$ is continuous at $x_0,$ we have that that there exists a $\delta>0$ such that if $|x-t|< \delta,$ then $|\alpha(x) - \alpha(t)|< \frac{\epsilon}{2}.$ Thus, if we partition $P = \{x_0, x_1, \dots, x_n \}$ such that $||P||< \frac{\delta}{2},$ then we can say that $x_0 \in [x_{j-1}, x_j]$ for some $j \in [n]$ and thus $d(x_0), x_{j-1}< \delta$ and $d(x_0, x_j)< \delta.$ Moreover, we can say that by the triangle inequality, 
+\[|\alpha(x_j) - \alpha(x_{j-1})| \leq |\alpha(x_j) - \alpha(x_0)| + |\alpha(x_0) - \alpha(x_{j-1})|< \frac{\epsilon}{2} + \frac{\epsilon}{2}.\]
+Thus,
+\[U(P,f, \alpha) -L(P, f, \alpha) = \sum (M_i - m_i)\Delta \alpha_i = 0 + f(x_0)(\alpha(x_j) - \alpha(x_{j-1})) < \epsilon.\] This shows $f \in \mathcal{R}(\alpha).$
+We will show that $\inf_P U(P,f,\alpha) = 0 = \sup_P L(P,f,\alpha).$ Since for any $P,$ we have that $L(P,f,\alpha) \leq U(P,f\alpha),$ it will suffice to show that there exist partitions such that $U(P,f,\alpha)\leq 0$ and $L(P,f, \alpha)\geq 0.$ The lower sum is obvious, since for any partition, $\inf_{x\in [x_{i-1}, x_i]}f(x) = 0.$ Let $\epsilon>0,$ then we can take the same partition we took in the first part, which shows that $U(P,f,\alpha) < \epsilon,$ which implies that $U(P,f,\alpha)\leq 0.$
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+Suppose $f\geq 0,$ $f$ is continuous on $[a,b]$, and $\int_a^b f d\alpha = 0.$ Prove that $f(x) = 0$ for all $x\in [a,b].$
+\end{problem}
+\begin{solution}
+    Suppose not. Let $x_0 \in [a,b]$ with $f(x_0) > 0 $. By continuity of $f,$ there exists some $\delta>0$ such that if $x\in (x_0 - \frac{\delta}{2}, x_0 + \frac{\delta}{2}),$ then $f(x) > \frac{f(x_0)}{2}.$ Thus we have that 
+    \[\int_a^b fdx = \int_{[a,b]\setminus(x_0 - \delta, x_0 + \delta)}f dx + \int_{x_0-\delta}^ {x_0 + \delta}f dx\geq \int_{x_0-\delta}^ {x_0 + \delta}f dx \geq \frac{f(x_0)}{2}(2\delta) > 0,\] a contradiction! It might be worth noting that we know the second equality holds since $0\leq f$ on $[a,b]\setminus(x_0 - \delta, x_0 + \delta)$ and thus $0 \leq \int_{[a,b]\setminus(x_0 - \delta, x_0 + \delta)}f dx.$ Comparing this with problem 1, we see that 
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Define three functions, $\beta_1, \beta_2, \beta_3$ as follows: $\beta_j(x) = 0$ if $x<0,$ $\beta_j = 1$ if $x>0$ for $j = 1,2,3;$ and $\beta_1(0) = 0,$ $\beta_2(0) = 1,$ and $\beta_3(0) = \frac{1}{2}.$ Let $f$ be a bounded function on $[-1,1].$ 
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        Prove that $f\in \mathcal{R}(\beta_1)$ if and only if $f(0 + ) = f(0)$ and that then $\int f d\beta_1 = f(0).$
+    \end{problem}
+    \begin{solution}
+        \begin{itemize}
+            \item ($\implies$) Suppose $f\in \mathcal{R}(\beta_1)$ and assume that $f(0+)\neq f(0).$ Thus, for any $x>0,$ we can find some $x_0 \in (0,x)$ such that $f(x_0)\neq f(0).$ For any partition, can split the sum over the partitions into the terms where the intervals are less than $0,$ in which case $\Delta \beta_1 = 0$ since $\beta_1$ is identically $0$ here, the case when the interval contains $0$ and some points on the right, and the case when the interval are strictly greater than $0,$ in which the same thing as in the first case applies. Thus, we only have to worry about the interval $[x_{j-1}, x_j],$ where $0 \in [x_{j-1}, x_j]$ and $x_j > 0.$ Thus:
+            \[U(P, f, \beta_1) - L(P, f, \beta_1) =  (M_j  - m_j)(\beta_1(x_j) - \beta_1(x_{j-1})) = M_j - m_j \geq |f(x_0)- f(0)|,\] where $x_0$ is the point discussed at the beginning. Thus, we we have $f\notin \mathcal{R}(\beta_1),$ a contradiction.
+            \item ($\impliedby$) Suppose $\lim_{x\to 0^+}f(x) = 0.$ Thus, for any $\epsilon>0,$ there exists a $\delta>0$ such that if $x<\delta,$ then $|f(x) - f(0)|< \frac{\epsilon}{2}.$ Thus, we have that we can partition $[a,b]$ by $P = \{x_0,x_1, x_2, x_3\}$ where $x_2 - x_1 < \delta$ and $0 \in (x_1,x_2)$ Thus, we have that
+            \[U(P, f, \beta_1) - L(P, f, \beta_1) = (M_1 - m_1)\Delta_1 \beta_1 + (M_2- m_2)\Delta_2 \beta_1 + (M_3 - m_3)\Delta_3\beta_1.\] The first term is $0$ since for all $x\in [x_0, x_1],$ $x<0$ and so $\beta_1(x) = 0.$ Similarly for the third term. For the middle term, we have that $\beta(x_2) - \beta(x_1) = 1.$ For any $x\in [x_1, x_2],$ we have that $|x|< \delta,$ and thus $|f(x) - f(0)| < \frac{\epsilon}{2},$ and thus if $x,y \in [x_1, x_2],$ we have that 
+            \[|f(x) - f(y)|\leq |f(x) - f(0)| + |f(0) - f(y)|< \epsilon \implies M_2 - m_2 \leq \epsilon.\]
+        \end{itemize}
+    \end{solution}
+    \item 
+    \begin{problem}
+        State and prove a similar result for $\beta_2.$
+    \end{problem}
+    \begin{solution}
+        $f \in \mathcal{R}(\beta_2)$ if and only if $f(0-) = f(0)$ and that then 
+        \[\int f d\beta_2 = f(0).\] The proof is identical to the above, don't make me do this again (please).
+    \end{solution}
+    \item 
+    \begin{problem}
+            Prove that $f\in \mathcal{R}(\beta_3)$ if and only if $f$ is continuous at $0.$
+    \end{problem}
+    \begin{solution}
+        \begin{itemize}
+            \item ($\implies$) Suppose $f\in \mathcal{R}(\beta_3)$ but assume $f$ is not continuous at $0.$ Thus, for there exists some $\epsilon>0$ such that for any $\delta>0,$ if $|x|< \delta,$ then $|f(x) - f(0)| \geq \epsilon.$ Thus, for any partition $P,$ we have that there exists some $x \in [x_{j-1}, x_j]$ where $0 \in [x_{j-1}, x_j]$ such that $|f(x) - f(0)|\geq \epsilon.$ Thus we can say that 
+            \[U(P, f, \beta_1) - L(P, f, \beta_1) = \sum_{i=1}^n (M_i - m_i)\Delta_i \beta_3 \geq (M_j - m_j)(\beta(x_j) - \beta(x_{j-1}))\geq \frac{1}{2}\epsilon.\] Thus, $f\notin \mathcal{R}(\beta_3).$
+            \item ($\impliedby$) Suppose $f$ is continuous at $0.$ Let $\epsilon>0.$ By continuity of $f,$ we have a $\delta>0$ such that if $|x|< \delta,$ then $|f(x) - f(0)|< \frac{\epsilon}{2}.$ Thus let $P = \{x_0, x_1, x_2, x_3\}$ be a partition of $[a,b]$ such that $0 \in (x_1, x_2)$ and $x_2 - x_1< \delta.$ Thus, for any $x,y \in [x_1, x_2],$ \[|f(x) - f(y)| \leq |f(x) - f(0)| + |f(0) - f(y)| < \frac{\epsilon}{2} + \frac{\epsilon}{2}  = \epsilon \implies M_2 - m_2 \leq \epsilon.\] Thus, 
+            \[U(P,f,\beta_3) - L(P, f, \beta_3) = (M_1 - m_1)\Delta_1\beta_3 + (M_2 - m_2)\Delta_2 \beta_3 + (M_3 - m_3)\Delta_3 \beta_3.\] The first term goes away since $\beta(x_1) = \beta(x_0) = 0$ and the third dies off since $\beta(x_3) = \beta(x_2) = 1.$ Thus, we have that 
+            \[U(P,f, \beta_3) - L(P, f, \beta_3) < \epsilon \Delta_2 \beta_3 = \epsilon.\]
+        \end{itemize}
+    \end{solution}
+    \item 
+    \begin{problem}
+        If $f$ is continuous at $0,$ prove that 
+        \[\int f d\beta_1 = \int f d\beta_2 = \int f d\beta_3 = f(0).\] 
+    \end{problem}
+    \begin{solution}
+        Since $f$ is continuous at $0,$ then we have that $f(0+) = f(0-) = f(0)$ and so by the previous parts we have that $f\in \mathcal{R}(\beta_j)$ and that 
+        \[\int f d\beta_1 = \int f d\beta_2 = f(0).\] It suffices to show the last equality. We can use the same partition $P$ as we did in part (c) to show that 
+        \[U(P, f, \beta_3) = M_2.\] Thus, it suffices to notice that $M_2 \to f(0)$ as $|x_2 - x_1| \to 0,$ which is true continuity of $f$, however we can also note that $M_2 \geq f(0)$ and so since any partition will include at least one interval (and at most two) which contains $0,$ then for all partitions $P,$ $U(P,f,\beta_3) \geq f(0).$ Similarly, we have that for all partitions, $L(P,f,\beta_3)\leq f(0).$ Thus, since we know that $f$ is Stieltjes integrable, then these two lower and upper integrals must equal and so 
+        \[\int f d\beta_3 = \underline{\int} f d\beta_3 = \overline{\int} f d\beta_3 = f(0).\]
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    If $f(x) = 0$ for all irrational $x,$ $f(x) = 1$ for all rational $x,$ prove that $f\notin \mathcal{R}$ on $[a,b]$ for any $a<b.$
+\end{problem}
+    \begin{solution}
+        Let $P$ be a partition on $[a,b].$ For any interval in such partition, we have by the density of the rationals and irrationals that a rational and an irrational is in that interval, and thus for all $i,$ $M_i = 1$ and $m_i  = 0.$ Thus, 
+        \[U(P, f)  - L(P,f)= \sum_{i =1}^n M_i - m_i \Delta x_i = \sum_{i=1}^n \Delta x_i = b-a.\] Thus, $f$ is not Riemann-integrable.
+    \end{solution}
+    
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Suppose $f$ is a bounded real function on $[a,b],$ and $f^2 \in \mathcal{R}$ on $[a,b],$ does it follow that $f \in \mathcal{R}?$ Does the answer change if we assume that $f^3 \in \mathcal{R}.$
+\end{problem}
+\begin{solution}
+    Define $f:[a,b]\to \bbR$ such that 
+    \[f(x) = 
+    \begin{cases}
+        1, \qquad x \in \bbQ\\
+        -1, \qquad x \in \bbR \setminus \bbQ
+    \end{cases}.\]
+    We have that $f^2 \equiv 1$ which is obviously Riemann integrable, but by the previous part we showed that $f \notin \mathcal{R}.$ However if $f^3 \in \mathcal{R},$ then we claim that $f\in \mathcal{R}.$ This is due to the following lemma: if $\varphi$ is continuous and $f$ is bounded and integrable, then $\varphi \circ f$ is Riemann integrable (which was proved last quarter) in the book using the Riemann-Lebesgue criterion. Thus, since $\varphi = \sqrt[3]{x}$ is continuous and bounded on $[a,b]$ and $f^3\in \mathcal{R},$ then $\varphi \circ f^3 = \sqrt[3]{f^3} = f\in n\mathcal{R}.$   
+\end{solution}
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Let $C$ be the Cantor set. Let $f$ be a bounded real function on $[0,1]$ which is continuous at every point outside of $C.$ Prove that $f\in \mathcal{R}$ on $[0,1].$
+\end{problem}
+\begin{solution}
+Let $\epsilon>0,$ take $M = \sup_{x\in [0,1]}|f(x)|.$ Since $C$ has zero measure, there exists a countable covering $\{(a_k, b_k)\}$ such that 
+\[\sum_{k=1}^\infty b_k - a_k< \frac{\epsilon}{4M}.\] Since $C$ is compact, there exists a finite subcover and thus
+\[\sum_{k=1}^n b_k - a_k < \frac{\epsilon}{4M}.\] Split $[0,1]$ into $[0,1] = \{[a_k, b_k]\}_{k\in [n]} \cup [0,1]\setminus \bigcup\{(a_k, b_k)\}_{k\in [n]},$ which gives a natural partition of $[0,1]$ that contains the finite subcover. Consider that $[0,1]\setminus \bigcup_{k=1}^n (a_k, b_k)$ is compact in $\bbR,$ and thus $f$ is uniformly continuous on this set. Let $P'$ be a refinement of $P$ such that $||P'||< \delta,$ where $\delta$ is the one from uniform continuity of $f$ in the set outside the cover of $C$ that gives $|f(x) - f(y)| < \frac{\epsilon}{2(b-a)}$ 
+Then 
+\[U(P',f) - L(P',f) = \sum_{i=1}^n (M_i - m_i)\Delta x_i = \sum_{x_i \in \{[a_k, b_k]\}_{k\in [n]}} (M_i - m_i)\Delta x_i + \sum_{x_i\notin \{[a_k, b_k]\}_{k\in [n]}}(M_i - m_i)\Delta x_i.\] We need to bound both of these terms. The second one is easy, and we already did the work by setting $||P'||< \delta,$ since
+\[\sum_{x_i\notin \{[a_k, b_k]\}_{k\in [n]}}(M_i - m_i)\Delta x_i \leq \frac{\epsilon}{2(b-a)}\sum_{x_i\notin \{[a_k, b_k]\}_{k\in [n]}} \Delta x_i \leq \frac{\epsilon}{2}.\] For the first term, 
+\[\sum_{i \in \{[a_k, b_k]\}_{k\in [n]}} (M_i - m_i)\Delta x_i \leq 2M \sum_{k=1}^n b_k - a_k < \frac{\epsilon}{2}.\] We are done, but it is worth mentioning that if $M=0,$ our proof fails, but we could just replace $M$ everywhere with $K =  M+1$ and then our proof would hold so I don't really care.
+\end{solution}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    Suppose $f$ is a real function on $(0,1]$ and $f\in \mathcal{R}$ on $[c,1]$ for every $c>0.$ Define 
+    \[\int_0^1 f(x)dx = \lim_{c\to 0}\int_c^1 f(x)dx\] if this limit exists (and it finite).
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        If $f\in \mathcal{R}$ on $[0,1],$ show that this definition of the integral agrees with the old one.
+    \end{problem}
+    \begin{solution}
+        Let $\epsilon>0.$ Let $M= \sup_{x\in [0,1]} |f(x)|.$ Then as $c\to 0,$ we claim that
+        \[\left|\int_c^1 f(x)dx - \int_0^1 f(x)dx\right| \leq \epsilon.\] Since $f\in \mathcal{R},$ we have that there exists some $P$ partition of $[0,1]$ such that 
+        \[U(P,f) - L(P,f) = \sum_{i=1}^n (M_i - m_i)\Delta x_i < \frac{\epsilon}{4}.\] This in turn implies that 
+        \[|\int_0^1 f - U(P,f)| < \frac{\epsilon}{4}, \qquad |\int_0^1 f - L(P,f)|< \frac{\epsilon}{4}.\]
+        
+        Thus, because $c\in [x_{k-1}, x_k]$ for some $k\in [n],$ then since $c\to 0,$ we can make $c< \frac{\epsilon}{4M},$ and thus for the interval $[c,1],$ we obviously still have that 
+        \[\sum_{i=k}^n (M_i - m_i)\Delta x_i < \frac{\epsilon}{4},\] 
+        \[|\int_c^1 f - U(P_c,f)| < \frac{\epsilon}{4}, \qquad |\int_c^1 f - L(P_c,f)|< \frac{\epsilon}{4}.\]
+        but we also know that 
+        \[|\sum_{i=1}^n M_i \Delta x_i - \sum_{i=k}^n M_i \Delta x_i| = |\sum_{i=1}^k M_i \Delta x_i|\leq M\sum_{i=1}^k \Delta x_i| < M\frac{\epsilon}{4M} = \frac{\epsilon}{4}\] Similarly, 
+        \[|L(P,f) - L(P_c,f)| < \frac{\epsilon}{4}.\] We are pretty much done now, since we have shown that
+        \begin{align*}
+        \left|\int_c^1 f(x)dx - \int_0^1 f(x)dx\right| &\leq \left| \int_0^1 f - U(P,f)\right| + \left|U(P,f) - L(P,f)\right|\\
+        &\quad + \left|L(P,f) - L(P_c,f)\right| + \left|L(P_c, f) - \int_c^1 f\right|\\
+        &< \epsilon.
+        \end{align*}
+    
+    \end{solution}
+    \item 
+    \begin{problem}
+        Construct a function $f$ such that the above limit exists, although it fails to exist with $|f|$ in place of $f.$
+    \end{problem}
+    \begin{solution}
+        Consider $f:(0,1]\to \bbR$ such that 
+        \[f(x) = 
+        \begin{cases}
+            0, \qquad x = 0\\
+            \frac{2^{2n}}{2n-1}, \qquad x\in [\frac{1}{2^{2n}}, \frac{1}{2^{2n-1}})\\
+            \frac{-2^{2n-1}}{2n}, \qquad x\in (\frac{1}{2^{2n-1}}, \frac{1}{2^{2n-2}}]
+        \end{cases}
+        \]
+        then we sum over all the intervals of length 
+        \[\int_{\frac{1}{2^{2n}}}^\frac{1}{2^{2n-1}} f(x) = \frac{1}{2n-1}, \qquad \int_\frac{1}{2^{2n-1}}^ \frac{1}{2^{2n-2}}f(x) = \frac{-1}{n}\]
+        \[\int_c^1 f(x) = \sum_{n=1}^N (\frac{1}{2n-1} - \frac{1}{n}) = \sum_{n=1}^N \frac{(-1)^{n}}{n}.\] Thus, as $c\to 0,$ we take $N\to \infty$ and so the integral converges because its the alternating harmonic test. However, $|f(x)|$ results in the harmonic series which is divergent.
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 8}
+\begin{problem}
+    Suppose $f\in \mathcal{R}$ on $[a,b]$ for every $b>a$ where $a$ is fixed. Define 
+    \[\int_a^\infty f(x)dx =\lim_{b\to \infty}\int_a^b f(x)dx\] if this limit exists (and is finite). In that case, we say that the integral on the left converges. If it also converges after $f$ has been replaced by $|f|,$ it is said to converge absolutely.\\
+    Assume that $f(x)\geq 0$ and that $f$ decreases monotonically on $[1, \infty).$ Prove that 
+    \[\int_a^\infty f(x)dx\] converges if and only if 
+    \[\sum_{n=1}^\infty f(n)\] converges.
+\end{problem}
+\begin{solution}
+Without loss of generality since we only care about the behavior of the tail section, we let $a = 1.$ Thus, consider that 
+\[\int_0^1f(x)dx \geq f(1), \quad \int_1^2 f(x)dx \geq f(2), \dots \implies \sum_{k=1}^n f(k) \leq \sum_{k=0}^n \int_{k-1}^{k}f(x)dx= f(0) + \int_1^n f(x)dx.\] By the comparison test, $F_n = \sum_{n=1}^\infty f(n)$ converges. Conversely, 
+\[f(1)\geq \int_1^2 f(x)dx, \dots \implies \sum_{k=1}^n f(k) \geq \sum_{k=1}^n \int_{k}^{k+1}f(x)dx\] which again converges by the comparison test. Moreover, we have that from both equations above:
+\[\sum_{k=1}^n [f(k)] - f(0) \leq \int_1^n f \leq \sum_{k=1}^{n-1} f(n),\] and so the integral and the sum converge and diverge together.
+\end{solution}
+
+\newpage
+\section*{Problem 9}
+\begin{problem}
+    Show that integration by parts can sometimes be applied to the ``improper" integrals defined in Problems 7 and 8 (state appropriate hypothesis, formulate a theorem, and prove it.) For instance show that 
+\[\int_0^\infty \frac{\cos x}{1 + x}dx = \int_0^\infty \frac{\sin x}{(1 + x)^2}dx.\] Show that one of these integrals converges \textit{absolutely,} but that the other does not.
+\end{problem}
+\begin{solution}
+    Let $f, g$ be functions defined on some open interval containing $[a, b]$ such that $f'$ and $g'$ exist and are continuous on $(0, b]$ (Problem 7) or $[a, \infty)$ (Problem 7). Then if (7) $\lim_{a\to \infty} f(a)g(a)$ exists or $\lim_{b\to \infty}f(g)g(b)$ exists and $\lim_{a\to \infty} \int_a^b f'g < \infty $ or (8) $\lim_{b\to \infty} \int_a^b f'g < \infty,$ then 
+	\[
+		\int_0^b fg' = \lim_{a\to 0} [f(b)g(b) - f(a)g(a)] - \lim_{a\to 0}\int_a^b f' g.
+	\]
+    \[\int_a^\infty fg' = \lim_{b\to \infty} [f(b)g(b) - f(a)g(a)] - \lim_{b\to \infty}\int_a^b f' g.\] To prove this theorem, simply look at positive $a$ or finite $b$ and run integration by parts on them, then, for example
+    \[\int_a^b fg' = [f(b)g(b) - f(a)g(a)] - \int_a^b f'g,\] where the RHS exists by assumption, so as $a\to 0$ or $b\to \infty,$ the LHS will converge. 
+    Letting $f = \sin(x)$ and $g = (1 + x)^{-1},$ we get that using our theorem above, since 
+    \[\lim_{b\to \infty} f(b)g(b) = 0, \qquad \lim_{b\to \infty}\int_0^b f'g = \int_0^\infty \frac{\sin(x)}{(1 + x)^2}dx < \int_0^\infty \frac{1}{(1 + x)^2}dx = \frac{1}{2},\] then we can use our integration by parts theorem and show that 
+    \[-\int_0^\infty \frac{\sin(x)}{(1 + x)^2} = 0 - \int_0^\infty \frac{\cos(x)}{1 + x} dx.\] We showed above that 
+    \[\int_0^\infty \frac{\sin(x)}{(1 + x)^2}\] converges absolutely, and we claim the other doesn't converge absolutely:
+    \begin{align*}
+        \int_0^\infty \frac{|\cos(x)|}{|1 + x|}dx  &= \int_0^\infty \frac{|\cos x|}{1 + x}dx\\
+        &\geq \sum_{k=0}^\infty \int_{\pi k}^{\pi(k+1)}\frac{|\cos x|}{1 + x} dx
+    \end{align*}
+    Since $1+x$ is increasing on each $[\pi k, \pi (k+1)]$ interval, then $\frac{1}{1 + x} \geq \frac{1}{1 + \pi(k+1)}$ on each interval. Thus, since we know that $\int_0^\pi |\cos(x)|dx = \int_\pi^{2\pi}\sin(x) = 2,$ then
+    \begin{align*}
+        \sum_{k=0}^\infty \int_{\pi k}^{\pi(k+1)}\frac{|\cos x|}{1 + x} dx &\geq \sum_{k=0}^{\infty}\frac{1}{1 + \pi(k+1)}\int_{\pi k}^{\pi(k+1)}|\cos(x)|dx\\
+        &= \sum_{k=0}^\infty \frac{2}{1 + \pi k + \pi)}\\
+        &\geq \sum_{k=0}^\infty \frac{2}{\pi (k+2)}\\
+        &= \frac{2}{\pi}\sum_{k=0}^\infty \frac{1}{k+2}\\
+        &> \infty
+    \end{align*}
+\end{solution}
+
+
+\newpage
+\section*{Problem 10}
+\begin{problem}
+    Suppose $f$ is a real, continuously differentiable function on $[a,b],$ $f(a) = f(b) = 0,$ and 
+    \[\int_a^bf^2(x)dx = 1.\] Prove that 
+    \[\int_a^b xf(x)f'(x)dx = -\frac{1}{2}\]
+    and that 
+    \[\int_a^b[f'(x)]^2dx \cdot \int_a^b x^2 f^2(x)dx \geq \frac{1}{4}.\]
+\end{problem}
+\begin{solution}
+    Using the integration by parts formula:
+    \[\int uv' = uv - \int u'v,\] if we let
+    \[u = f^2(x), \quad u' = 2f(x)f'(x), \quad v = x, \quad v' = 1\]
+    then
+    \[1 = \int_a^b f^2(x)dx = 2xf^2(x)|_a^b - \int_a^b 2f(x)f'(x)dx.\] The first term on the RHS is $0$ due to the fact that $f(a) = f(b) = 0$ by assumption and thus we get the desired result.\\
+    Apply the Cauchy-Shwartz Inequality, which states that 
+    \[\langle \varphi, g\rangle\leq |\varphi| \cdot |g|,\] we let $\varphi = f'(x)$ and $g = xf(x)$ to find that in the usual inner product of function spaces,
+    \[\frac{-1}{2} = \int_a^b xf(x)f'(x)\leq \sqrt{\int_a^bx^2f^2(x)dx} \sqrt{\int_a^b[f'(x)]^2dx}.\] Square both sides and we are done.
+\end{solution}
+
+\newpage
+\section*{Problem 11}
+\begin{problem}
+    For $1< s< \infty,$ define 
+    \[\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}.\] Prove that 
+    \end{problem}
+
+    \begin{enumerate}
+        \item 
+        \begin{problem}
+            \[\zeta(s) = s\int_a^\infty \frac{\lfloor x\rfloor}{x^{s+1}}dx\]
+        \end{problem}
+        \begin{solution}
+        Since the floor function remains constant in intervals $[n, n+1],$ we get that
+        \begin{align*}
+            s\int_1^\infty \frac{\lfloor c \rfloor}{x^{s+1}}dx &= \sum_{n=1}^\infty \int_n^{n+1}\frac{sn}{x^{s+1}}dx\\
+            &= \sum_{n=1}^\infty sn\left[\frac{1}{sn^s} - \frac{1}{s(n+1)^s}| \right]\\
+            &= \sum_{n=1}^\infty \frac{n}{n^s} - \sum_{n=1}^\infty \frac{n}{(n+1)^s}
+        \end{align*}
+            Using a change of variable in the second summation:
+            \[\sum_{n=1}^\infty \frac{n}{n^s} - \sum_{n=1}^\infty \frac{n}{(n+1)^s} = \sum_{n=1}^\infty \frac{n}{n^s} - \sum_{n=1}^\infty \frac{n-1}{(n)^s} = \sum_{n=1}^\infty \frac{1}{n^s} = \zeta(s)\]
+        \end{solution}
+        \item 
+        \begin{problem}
+            \[\zeta(s) = \frac{s}{s-1} - s\int_1^\infty \frac{x - \lfloor x \rfloor }{x^{s+1}}.\]
+        \end{problem}
+        \begin{solution}
+            By part $a,$ we have that 
+            \[\zeta(s) = s\int_1^\infty \frac{\lfloor x\rfloor}{x^{s+1}} \implies \zeta(s) - s\int_1^\infty \frac{x}{x^{s+1}} = s\int_1^\infty \frac{x - \lfloor x \rfloor }{x^{s+1}}.\] Thus, it suffices to show that 
+            \[s\int_1^\infty \frac{x}{x^{s+1}} = \frac{s}{s-1}.\] Simplify
+            \[s\int_1^\infty \frac{x}{x^{s+1}} = s\int_1^\infty \frac{1}{x^s} = s\frac{x^{s-1}}{s-1}\bigg|_1^\infty = \frac{s}{s-1}\]
+        \end{solution}
+    \end{enumerate}
+\newpage
+\section*{Problem 12}
+\begin{problem}
+    Suppose $\alpha$ increases monotonically on $[a,b],$ $g$ is continuous, and $g(x) = G'(x)$ for $a\leq x \leq b.$ Prove that
+    \[\int_a^b \alpha(x)g(x)dx = G(b)\alpha(b) - G(a)\alpha(a) - \int_a^b G d\alpha.\]
+\end{problem}
+\begin{solution}
+    Let $P$ be a partition on $[a,b].$ By the mean value theorem, we know that there exists some $t_i$ for every interval $t_i\in[x_{i-1}, x_i]$ such that 
+    \[G(x_i) - G(x_{i-1}) = G'(t_i)\Delta x_i = g(t_i)\Delta x_i.\] Thus, we see that by opening parenthesis:
+    \begin{align*}
+    \sum_{i=1}^n \alpha(x_i)g(t_i)\Delta x_i &= \sum_{i=1}^n \alpha(x_i)(G(x_i) - G(x_{i-1}))\\ &= \alpha(x_1)(G(x_1) - G(x_0)) + \alpha(x_2)(G(x_2) - G(x_1) + \dots + \alpha(x_n)(G(x_n) - G(x_{n-1}))\\
+    &= \alpha(x_n)G(x_n) - \alpha(x_1)G(x_0) + \alpha(x_1)G(x_1) - \alpha(x_2)G(x_1) + \dots\\
+    &= \alpha(x_n)G(x_n) - \alpha(x_0)G(x_0) + G(x_1)(\alpha(x_1) - \alpha(x_2)) + G(x_2)(\alpha(x_2) - \alpha(x_3)) + \dots\\
+    &= \alpha(x_n)G(x_n) - \alpha(x_0)G(x_0) - \sum_{i=1}^n G(x_{i-1})\Delta \alpha_i.
+    \end{align*}
+    By continuity of $G,$ $G\in \mathcal{R}(\alpha)$ and moreover using the same process as we have in class and in previous exercises, it is obvious that by taking $n\to \infty,$ we have by the continuity of $G$ that 
+    \[\overline{\int_a^b} Gd\alpha - \sum_{i=1}^n G\Delta \alpha_i < \epsilon, \qquad \underline{\int_a^b} Gd\alpha - \sum_{i=1}^n G\Delta \alpha_i < \epsilon.\] Thus, by taking limits in the equation above, we reach our desired result (noting that $\alpha g\in \mathcal{R}$ by the Riemann-Lebesgue Theorem discussed last quarter).\footnote{The left hand side of the equation similarly gets $\epsilon$ close to $\int_a^b \alpha g dx$ by the same argument as the right hand side}
+\end{solution}
+\end{document}

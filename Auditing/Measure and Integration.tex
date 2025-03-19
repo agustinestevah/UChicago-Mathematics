@@ -1,0 +1,764 @@
+\documentclass[10pt, oneside]{article} 
+\usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry, esint}
+
+
+\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}  
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\Cdot}{\boldsymbol{\cdot}}
+\newcommand{\scA}{\mathscr{A}}
+\newcommand{\curl}{\text{curl}}
+
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{conv}{Convention}
+\newtheorem{rem}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\input{paolo-pset.tex}
+
+
+
+\title{UChicago Measure and Integration Notes}
+\author{Notes by Agustín Esteva, Lectures by Kenig, Books by Stein and Sakarchi, }
+\date{Academic Year 2024-2025}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\vspace{.25in}
+
+\section{Lectures}
+
+\subsection{Tuesday, Jan 21: Measurable Sets}
+\begin{defn}
+    We say that $E \subset \bbR^d$ is \textit{measurable} if, given $\epsilon>0,$ there exists an open set $O$ such that $E \subset O$ and 
+    \[m_\ast(O - E)< \epsilon\]
+\end{defn}
+This is almost equivalent to saying that 
+\[m_\ast(O) \leq m_\ast(E) + \epsilon\]
+\begin{prop}
+    The following are properties of measurable sets:
+    \begin{enumerate}
+        \item If $O$ is open, then $O$ is measurable (they cover themselves)
+        \item If $m_\ast(E) = 0,$ then $E$ is measurable.
+        \item A countable union of measurable sets is measurable.
+        \item Closed sets are measurable
+        \item Complements are measurable
+    \end{enumerate}
+\end{prop}
+\begin{prop}
+    A countable intersection of measurable sets is measurable.
+\end{prop}
+\begin{proof}
+    Let 
+    \[E = \bigcap E_j,\] where $E_j$ is measurable for all $j.$ Then we get that by DeMorgan's law:
+    \[\bigcap E_j = \left(\bigcup E_j\right)^c,\] so we are done by the previous proposition.
+\end{proof}
+\begin{thm}
+    Suppose $E_1, E_2, \dots$ are measurable and mutually disjoint, then 
+    \[m\left(\bigcup E_j\right) = \sum_j m(E_j).\]
+\end{thm}
+\begin{proof}
+    We claim that if $E$ is measurable, and $\epsilon>0,$ then there exists some closed $F \subset E$ such that $m(E - F) < \epsilon.$ To see this, consider that $E^c$ is measurable, and thus there exists an open set $O$ such that $m_\ast(O - E^c) < \epsilon.$ We let $F = O^c,$ and then $F \subset E,$ and $F$ is closed. Then we have that $O - E^c = O\cap E = F\cap E.$ We know that $m(O\cap E) < \epsilon.$ Note that we have that 
+    \[E - F = E \cap F^c = E \cap O,\] and thus $m(E - F) < \epsilon.$
+
+    Assume $E_j$ are bounded for all $j.$ By the previous claim, there exists a closed $F_j \subset E_j$ such that 
+    \[m(E_j - F_j) < \frac{\epsilon}{2^j}\] for all $j.$ Note that by boundedness of $E_j$ and by closedness of $F_j,$ the $F_j$ are compact and disjoint. Fix $N\in \bbN,$ then we have that 
+    \[m\left(\bigcup_1^N F_j\right) = \sum_1^Nm(F_j)\] Let $E = \bigcup E_j,$ then we have that $\bigcup F_j \subset E_j.$ Thus, we have that 
+    \[m(E)\geq m(\bigcup_1^N E_j) = \sum_1^N m(E_j).\] Thus, we get that 
+    \[m(E) \geq \sum_{j=1}^Nm(F_j) \geq \sum_{j=1}^N m(E_j) - \frac{\epsilon}{2^j}\geq \sum_{j=1}^N m(E_j) - \epsilon.\] Letting $N\to \infty,$ we get that 
+    \[m(E)\geq \sum_{j=1}^\infty m(E_j).\] By subadditivity, we also have that 
+    \[m(E)\leq \sum_{j=1}^\infty m(E_j).\]
+
+    For the general case, find cubes $Q_k \subset Q_{k+1}$ such that $\bigcup Q_k = \bbR^d.$ Then let $E_{j,k} = E_j \cap (Q_k - Q_{k-1}).$ Then we have that $E = \bigcup_{k,j} E_{k,j},$ where the $E_{k,j}$ are disjoint and bounded. Then we have by the work done above that 
+    \[m(E_j) = \sum_{j}\sum_k m(E_{k,j}) = \sum_j m(E_j)\]
+\end{proof}
+\begin{cor}
+    Suppose $\{E_j\}$ is a countable collection of measurable subsets of $\bbR^d.$ Assume further that $E_j\subset E_{j+1},$ and that $E  = \bigcup_j E_j.$ Then we have that 
+    \[m(E) = \lim_{n\to \infty} m(E_n).\] If, on the other hand, the $E_j$ decrease to $E,$ that is, $E = \bigcap_j E_j,$ then if $m(E_k)< \infty,$ then 
+    \[m(E) = \lim_{n\to \infty} m(E_n)\]
+\end{cor}
+\begin{proof}
+    For the first result, let $G_1 = E_1, $ $G_2 = E_2 - E_1,$ and so on until 
+    \[G_n = E_n - E_{n-1}.\] Obviously, the $G_k$ are measurable and disjoint and $E = \bigcup_k G_k.$ Then 
+    \[m(E) = \sum_{k=1}^\infty m(G_k) = \lim_{n\to \infty} \sum_{k=1}^n m(G_k) = m\left(\lim_{n\to \infty}\bigcup_{k=1}^N G_k\right) = m\left(\lim_{n\to \infty} E_n\right)\]
+
+    For the second result, we assume without loss of generality that $E_1 <\infty,$ and we set $G_1 = E_1 - E_2,$ $G_2 = E_2 - E_3.$ Again, the $G_k$ are mutually disjoint and measurable and 
+    \[E_1 = E \cup \bigcup_{k=1}^\infty G_k.\]
+    Thus, we get that (letting $N\to \infty$)
+    \[m(E_1) = m(E) + \sum_{k=1}^N m(G_k) = m(E) + \sum_{k=1}^\infty m(G_{k}) - m(G_{k+1}) = m(E) + m(E_1) - m(E_N).\]
+\end{proof}
+\begin{thm}
+    Suppose $E \subset \bbR^d,$ $E$ is measurable. Then for all $\epsilon >0:$
+    \begin{enumerate}
+        \item There exists an open $O$ with $E \subset O$ such that $m(O - E)< \epsilon.$
+        \item There exists a closed $F$ with $F\subset E$ such that $m(E - F)< \epsilon.$
+        \item If $m(E) < \infty,$ then there exists a compact set $K$ such that 
+        $K \subset F$ and $m(E - K)< \epsilon.$
+        \item If $m(E) < \infty,$ then there exists $F = \bigcup Q_j$ such that 
+        $m(E \triangle F) < \epsilon.$ (note that the symmetric difference refers to the points belonging to only one of the sets).
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (i) and (ii) have already been proved. For (iii), pick $F$ closed such that $F\subset E$ and $m(E - F) < \frac{\epsilon}{2}.$ Let $K_m = F \cap \overline{B_m(0)}.$ Evidently, each $K_m$ is compact and we have that 
+    \[E - K_m \downarrow E - F.\] We know by the previous corollary that 
+    \[m(E - F) = \lim_{m\to \infty} (E - K_m),\] and so for $m$ large, $m(E - K_m)< \epsilon.$
+
+    For (iv), we pick closed $\{Q_j\}$ such that $E \subset \bigcup Q_j$ and $\sum Q_j \leq m(E) + \frac{\epsilon}{2}.$ Thus, the series is convergent, and there exists some large $N$ such that $\sum_{N+1}^\infty |Q_j| \leq \frac{\epsilon}{2}.$ Now we let $F = \bigcup_{j=1}^N Q_j.$ We thus get that 
+    \begin{align*}
+        m(E \triangle F) = &m(E - F) +  m(F - E)\\
+        &= \sum_{N+1}^\infty m(Q_j) + (\sum m(Q_j) - m(E))\\
+        &< \epsilon.
+    \end{align*}
+\end{proof}
+
+\newpage
+\subsection{Thursday, Jan 23: Constructing a Non-Measurable Set and Measurable Functions}
+\begin{lemma}
+    Suppose $a\in \bbR,$ then $m^\ast (E + a) = m^\ast(E).$
+\end{lemma}
+\begin{proof}
+    Note that $E + a  = \{x + a \; ; \; x\in E\}.$ Pick $E \subset^\infty \bigcup Q_i$ such that $\sum |Q_i| \leq m^\ast(E) + \epsilon,$ then 
+    \[E \subseteq \bigcup_{i=1}^\infty (Q_i + a) \implies m^\ast(E + a)  \geq \sum |Q_i + a| + \epsilon.\]
+    For the reverse direction, consider that 
+    \[m^\ast(E + a) \leq m^\ast((E + a) - a)  = \m^\ast (E).\]
+\end{proof}
+\begin{thm}
+    (Axiom of Choice) If $\mathcal{E} = \{S_\alpha \; : \;  \alpha \in \mathcal{A}, S_\alpha \neq \emptyset \; \forall \alpha \in \mathcal{A}\},$ then there exists a function $f: \mathcal{E} \to \bigcup S_\alpha$ such that $f(S_\alpha) \in S_\alpha.$
+\end{thm}
+Define $\sim$ from $[0,1]$ such that $x\sim y$ if $x-y \in \bbQ.$ Thus, 
+\[[0,1] = \bigcup_{x\in [0,1]} [x].\] As an example, \[[0] = \bbQ \cap [0,1], \qquad [\frac{1}{\sqrt{2}}] = \{\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}} + \frac{1}{4}, \dots\}\] Using the Axiom of Choice, pick $\alpha \in [x]$ such that if $[x] \neq [y],$ then $\alpha_x \neq \alpha_y.$ Define 
+\[N := \{\alpha_{[x]}\}.\]
+\begin{thm}
+    $N$ is not measurable.
+\end{thm}
+\begin{proof}
+    Suppose it is. Define $\{r_k\} = \bbQ \cap [-1, 1],$ and define $N_k = N + r_k.$ We claim that $N_k \cap N_j = \emptyset$ when $k\neq j.$ To see this, let $x$ be in the intersection, then 
+    \[x = \alpha_1 + r_k = \alpha_2 + r_j \implies \alpha_1 - \alpha_2 = r_j - r_k \in \bbQ \implies \alpha_1 = \alpha_2 \implies r_j = r_k,\] contradiction the fact that $k\neq j.$ We further claim that 
+    \[[0,1]\subseteq \bigcup N_k \subseteq [-1, 2].\] The second inclusion is by construction. Let $x\in [0,1],$ then there exists some $\alpha \in [x],$ and thus 
+    \[\alpha \in N \implies x-a \in \bbQ \implies x = \alpha + r_k \implies x\in N_k\] By the first claim, we have that by translation invariance, that
+    \[m(\bigcup N_k) = \sum m(N_k) = \sum m(N) = \{0, \infty\}.\] But then 
+    \[1 = m([0,1])\leq m(\bigcup N_k) \leq m([-1,2]) = 3,\] which is a contradiction.
+\end{proof}
+\begin{defn}
+    A collection of sets $S\subset P(X)$ is a \textbf{$\sigma-$algebra} if:
+    \begin{enumerate}
+        \item $X \in S;$
+        \item If $\{E_i\} \in S,$ then $\bigcup E_i \in S.$
+        \item If $E \in S,$ then $E^c \in S.$
+    \end{enumerate}
+\end{defn}
+\begin{exmp}
+Examples of $\sigma-$algebras:
+    \begin{enumerate}
+        \item $S = \{\emptyset, X\}$
+        \item Set of measurable sets.
+        \item $2^\bbR$
+    \end{enumerate}
+\end{exmp}
+\begin{lemma}
+    Suppose $\mathcal{F}_\alpha,$ $\alpha \in \mathcal{A}$  is a collection of $\sigma-$algebras on $X,$ then 
+    \[\mathcal{F} = \bigcap_\alpha \mathcal{F}_\alpha\] is a $\sigma-$algebra.
+\end{lemma}
+\begin{proof}
+    Since $X \in \mathcal{F}_\alpha$ for all $\alpha,$ then $X\in \mathcal{F}.$ Suppose $\{E_i\}\in \mathcal{F},$ then for all $\alpha,$ $\{E_i\} \in \mathcal{F}_\alpha,$ and thus
+    \[\bigcup E_i \in \mathcal{F_\alpha}\] for all $\alpha,$ and because this holds for all $\alpha,$ then we are done. The proof for the third property is the same as the previous one.
+\end{proof}
+\begin{defn}
+    If $\mathcal{E} \subseteq P(X),$ then we define
+    \[\sigma(\mathcal{E}) := \bigcap_{\mathcal{E}\subseteq \mathcal{F}_\alpha} \mathcal{F}_\alpha\]
+\end{defn}
+\begin{defn}
+    The \textbf{Borel $\sigma-$algebra}, $\mathcal{B}(\bbR^n),$ is defined to be $\sigma(O),$ where $O \subseteq \bbR^n$ are open.
+\end{defn}
+\begin{prop}
+$\mathcal{B}$ satisfies the following properties:
+    \begin{enumerate}
+        \item All open sets are in the $\mathcal{B}$
+        \item All closed sets are in $\mathcal{B}$
+        \item If $E \in \mathcal{B},$ then $E$ is measurable.
+    \end{enumerate}
+\end{prop}
+
+\begin{defn}
+    A set is $G_\delta$ if $E = \bigcap O_i,$ where $O_i$ is open.
+
+    A set is $F_\sigma$ if $E = \bigcup F_i,$ where $F_i$ is closed.
+\end{defn}
+\begin{thm}
+    $A\subseteq \bbR^n$ is measurable if and only there exists a $G \in G_\delta$ set such that $A\subseteq G$ and $m^\ast(G - A) = 0.$ The symmetric claim holds for $F_\sigma$ sets as well.
+\end{thm}
+\begin{proof}
+    $(\implies)$ If $A$ is measurable, then there exists $O_n \supset A$ open such that $m^\ast(O_n - A)< \frac{1}{n}.$ We let $G = \bigcap O_n.$ 
+
+    $(\impliedby)$ Since null sets are measurable, then since $A = G - (G - A),$ so $A$ is measurable.
+\end{proof}
+
+\begin{rem}
+    Let $E\subseq \bbR^d,$ then 
+    \[\chi_E(x) = \begin{cases}
+        1, \quad x\in E\\
+        0, \quad x\notin E
+    \end{cases}.\]
+\end{rem}
+It would make sense for $\chi_E(x)$ to be measurable when $E$ is measurable!
+\begin{defn}
+    A \textbf{simple function} is defined to be 
+    \[f(x) = \sum_{k=1}^n a_k \chi_{E_k}(x), \qquad m(E) < \infty.\]
+\end{defn}
+\begin{defn}
+    A \textbf{step function} is defined to be 
+    \[f = \sum_{k=1}^n a_k \chi_{R_k}, \qquad R_k \; \text{rect}\]
+\end{defn}
+\begin{defn}
+Let $f: \bbR^d \to \bbR \cup \{\pm \infty\}.$ We say $f$ is \textbf{finite value} if $f(x) \neq \{\pm \infty\}$ for all $x\in \bbR^d$    
+\end{defn}
+
+\begin{defn}
+    We say $f$ is \textbf{measurable} if for all $a\in \bbR,$ $f^{-1}([-\infty, a))$ is measurable. In other words, 
+    \[m(\{x \; | \; f(x)< a\})< \infty.\]
+\end{defn}
+
+\begin{thm}
+    $f$ is measurable if and only if for all $a\in \bbR,$ $\{x \; | \; f(x)\leq a\}$ is measurable.
+\end{thm}
+\begin{proof}
+    We can write 
+    \[\{f \leq a\} = \bigcap \{ f < a + \frac{1}{k}\},\] and since the countable intersection of measurable sets is measurable, we are done. For the other direction, consider that
+    \[\{f < a\} = \bigcup \{f \leq a - \frac{1}{k}\}.\]
+\end{proof}
+
+\newpage
+\subsection{Tuesday, Jan 28: Measurable Functions}
+\begin{prop}
+    If $f$ is finite valued, then $f$ is measurable if and only if $f^{-1}(O)$ is measurable for all $O$ open if and only if $f^{-1}(F)$ is measurable for all $F$ closed. 
+\end{prop}
+This It follows immediately that
+\begin{prop}
+    If $f$ is continuous on $\bbR^d,$ then $f$ is measurable. Moreover, if $f$ is measurable, finite valued, and $\Phi$ is continuous on $\bbR,$ then $\Phi \circ f$ is measurable.
+\end{prop}
+\begin{proof}
+    We prove the second statement. Since $\Phi$ is continuous, we have that $O_a =  \Phi^{-1}((-\infty, a))$ is open. Since $f$ is measurable, we have that $f^{-1}(O_a)$ is measurable, and thus $(\Phi\circ f) ((-\infty, a )) = f^{-1}(\Phi^{-1}((-\infty, a)))$ 
+\end{proof}
+
+\begin{prop}
+    Suppose $\{f_n\}$ is a sequence of measurable functions. Then $\sup_n f_n(x)$ and $\inf_n f_n(x),$ $\limsup_n f_n(x)$ and $\liminf_n f_n(x)$ are all measurable.
+\end{prop}
+\begin{proof}
+    Consider that \[ \{\sup_n f_n(x) > a\} = \bigcup_n \{f_n(x) > a\}\] We also have that $-\inf_n(-f_n(x)) = \sup_n f_n(x)$ and that 
+    \[\limsup_n f_n(x) = \inf_n(\sup_k\geq n f_k(x))\]
+\end{proof}
+As a quick consequence, we have that if the $f_n$ are measurable, then $\lim_{n\to \infty} f_n(x) = f(x)$ is measurable.
+\begin{prop}
+    \begin{enumerate}
+        \item Suppose that $f$ is measurable, then $f^k$ is measurable.
+        \item If $f$ and $g$ are measurable, then $f + g$ and $fg$ are measurable (given that $f$ and $g$ are finite valued).
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    The first is a simple consequence of Proposition 5. We claim that 
+    \[\{f + g > a\} = \bigcup_{r\in \bbR}(f > a-r) \cap \{g > r\}.,\] which proves the second. Consider now that 
+    \[fg = \frac{1}{4}\left[(f + g)^2 - (f - g)^2\right]\]
+\end{proof}
+
+\begin{defn}
+    We say that $f$ and $g$ are equal \textbf{almost everywhere}, or equal \textbf{a.e.} if $m\{f(x) \neq g(x)\} = 0.$
+\end{defn}
+\begin{prop}
+    If $f$ is measurable and $f = g$ a.e, then $g$ is measurable.
+\end{prop}
+\begin{rem}
+    If $f_n$ are measurable and $\lim_{n\to \infty}f_n(x) = g(x)$ a.e, then $g$ is measurable. 
+\end{rem}
+
+\begin{thm}
+    Suppose $f\geq 0$ and measurable on $\bbR^d.$ Then there exists an increasing sequence of non-negative simple functions $(\varphi_k)$ such that 
+    \[\varphi_k(x) \leq \varphi_{k+1}(x), \qquad \lim_{k\to \infty} \varphi_k(x) = f(x). \qquad \forall x\]
+\end{thm}
+\begin{proof}
+    For each $k,$ subdivide the values of $f$ which fall in $[0,k].$ Partition $[0,k]$ into subintervals $[\frac{j-1}{2^k}, \frac{j}{2^k}].$ Define 
+    \[\tilde{\varphi_k}(x) = \begin{cases}
+        \frac{j-1}{2^k}, \qquad f(x)\in [\frac{j-1}{2^k}, \frac{j}{2^k}]\\
+        k, \qquad f(x) \geq k
+    \end{cases},\]
+Obviously, $\tilde{\phi_k}$ is measurable and $\tilde{\varphi_k} \leq \tilde{\vaprhi_{k+1}}.$ 
+
+When $f(x) = \infty,$ we have that $\tilde{\varphi_k}(x) = k$ for any $k,$ so then $\varphi_k \uparrow f.$ On the other hand, suppose $f(x) < \infty,$ then there exists some $k_0$ such that for all $k>k_0,$ $f(x)< k,$ and 
+\[0 \leq f(x) - \tilde{\varphi_k} \leq \frac{1}{2^k} \implies \tilde{\varphi_k} \to f.\] Define
+\[\varphi_k(x) = \tilde{\varphi_k}(x)\cdot \chi_{B_k(0)}.\] Because $\chi_{B_k(0)}\leq \chi_{B_{k+1}(0)},$ we have that $\varphi_k(x) \leq \varphi_{k+1}(x).$
+
+Let $x$ be fixed, and choose $k$ such that $|x| < k,$ then $\varphi_k(x) = \tilde{\varphi_k(x)}.$
+\end{proof}
+
+\newpage
+\subsection{Thursday, Jan 30: Constructing the Lebesgue Integral}
+\begin{rem}
+    To handle negative functions, then consider the general case when $f$ is measurable. Then let 
+    \[f_+ = \max(f(x), 0), \qquad f_- = \max(- f(x), 0).\] Both are nonnegative, and we have that 
+    \[f(x) = f_+(x) - f_-(x).\]
+    Thus, when $f\leq 0,$ we have that 
+    \[f_+(x)  =0, \qquad f_-(x) = -f(x).\] 
+\end{rem}
+
+\begin{thm}
+    Suppose $f$ is measurable. Then there exists a sequence $(\varphi_k) \to f$ such that $\varphi_k$ are simple functions with $|\varphi_k| \leq |\varphi_{k+1}|.$ In particular, we have that 
+    \[|\varphi_k(x)| \leq |f(x)|, \qquad \forall k, x\]
+\end{thm}
+\begin{proof}
+    From Theorem 7, we can pick a sequence $(\varphi^{(i)}_k),$ where $i = \{1,2\}$ such that 
+    \[0 \leq \varphi_{k+1}^{(1)}(x)\leq \varphi_{k+1}^{(1)}, \varphi_k^{(1)}\uparrow f_+(x),\] and similarly for $\varphi_k^{(2)}\uparrow f(x).$ 
+    \[\varphi_k := \varphi_k^{1} - \varphi_k^{2} \to f(x).\] It remains to be seen that 
+    \[|\varphi_k(x)| = \varphi_k^{1} + \varphi_k^{2}.\]
+
+    If $f_+ = 0,$ then $\varphi_k^{(1)} = 0,$ and so 
+    \[\varphi_k(x) = -\varphi_k^{(2)},\] and so our claim is proven.
+
+    If $f_- = 0,$ then $\varphi_k^{(2)} = 0,$ and so 
+    \[\varphi_k(x) = \varphi_k^{(1)},\] and so our claim is proven.
+
+    When $f_+(x) >0,$ then $f_-(x) = 0,$ and so $\varphi-k^{(2)} = 0,$ and $|f(x)| = f(x)$ and thus our claim is proven. Similarly for when $f_-(x) < 0.$
+\end{proof}
+
+\begin{thm}
+    Suppose $f$ is measurable. Then there exists a sequence of step functions $(\psi_k(x))$ such that 
+    \[\psi_k(x) \to f(x) \qquad a.e.\]
+\end{thm}
+\begin{proof}
+    Suppose that 
+    \[f(x) = \chi_E(x),\] where $E$ is a measurable set of finite measure, then aply the previous theorem. Let $\epsilon > 0.$ There exist cubes $Q_j$ such that $E \subset \bigcup_{j=1}^N Q_j$ and 
+    \[m(\Delta \bigcup_{j=1}^N Q_j)< \epsilon.\] Thus, there exist almost disjoint rectangles $\tilde{R_1}, \dots, \tilde{R_n}$ such that 
+    \[\bigcup_{j=1}^N Q_j = \bigcup_{j=1}^M \tilde{R_j},\] then find $R_j \subset \tilde{R_j}.$ We have that $R_j$ are disjoint and 
+    \[m(E \Delta \bigcup_{j=1}^M R_j) \leq 2\epsilon.\] Thus, except for a set of measure $\leq 2\epsilon,$ we have that 
+    \[f(x) = \sum_{j=1}^M \chi_{R_j}(x)\]
+
+    For all $k\geq 1,$ there exists a step funcntion $\psi_k(x)$ such that if 
+    \[E_k = \{x \: : \: f(x) \neq \psi_k(x)\},\] then $m(E_k) \leq \frac{1}{2^k}.$ Thus, 
+    \[F_K = \bigcup_{j=K+1}^\infty E_j, \qquad F = \bigcap_{k=1}^\infty F_K.\] By the Borel-Cantelli lemma, we have that $m(F) = 0.$ To see that $\psi_k \to f$ for $x\in F^c$ consider that 
+    \[F^c = \bigcup_{j=1}^\infty \bigcap_{k\geq j}F^c_k.\] Thus, if $x\in F^c,$ then there exists a $j$ such that than $x\in \bigcap_{k\geq j}F_k^c,$ and then $\psi_k(x) = f(x).$
+\end{proof}
+
+\newpage
+\subsection{Tuesday, Feb 4: Littlewood's Three Principles}
+\begin{enumerate}
+    \item Every measurable set is a finite union of intervals. (For intuition, look at Theorem 2.d)
+    \item Every measurable function is continuous almost everywhere. (Lusin)
+    \item Every pointwise convergence sequence of measurable functions is uniformly convergence. (Egorov)
+\end{enumerate}
+We begin with (c).
+\begin{thm}
+    (Egorov) Let $\{f_k(x)\}$ be a sequence on measurable functions on a measurable set $E$ such that $m(E) < \infty.$ Assume that $f_n(x) \to f$ almost everywhere. Then for all $\epsilon>0,$ there exists $A_\epsilon \subset E$ such that $A_\epsilon$ is closed and $m(E \setminus A_\epsilon) < \epsilon.$ Moreover, $f_n(x) \to f(x)$ uniformly for $x\in A_\epsilon.$
+\end{thm}
+\begin{proof}
+    Without loss of generality, we suppose 
+    \[f_n(x) \to f(x) \qquad \forall \; x\in E.\] For each $k,n \in \bbN,$ define 
+    \[E_k^n = \{x \in E \; ; \; |f_j(x) - f(x)| < \frac{1}{n}, \quad \forall j\geq k\}.\]
+    Obviously, we have that 
+    \[E_k^n \subset E_{k+1}^n, \qquad E_{k}^n \uparrow E \implies E = \bigcup_{k=1}^\infty E_{k}^n = \lim_{n\to \infty}E_k^n,\] and so 
+    \[\lim_{t\to \infty}m(E_k^n) = m(E).\] There exists some $k_m$ such that $m(E) - m(E^k^n_{k_m}) = m(E \setminus E^n_{k_m}) < \frac{1}{2^n}.$ Thus, 
+    \[|f_j(x) - f(x)| < \frac{1}{2^n} \qquad j\geq k_m, \; x\in E^n_{n_m}.\] Let $\epsilon>0.$ Choose $N$ such that 
+    \[\sum_{N}^\infty \frac{1}{2^n} < \frac{\epsilon}{2},\] and so if we define 
+    \[\tilde{A}_\epsilon = \bigcap_{m\geq N} E^n_{k_m}.\] Thus, 
+    \[m(E \setminus \tilde{A}_\epsilon) =m(E \cap \bigcup_{m\geq N} (E^n_{k_m})^c) = m(\bigcup E\cap (E^n_{k_m})^c) = m(\bigcup E\setminus E^n_{k_m}) \leq \sum_{N}^\infty \frac{1}{2^n} < \frac{\epsilon}{2}\]
+
+    Let $\delta>0$ and let $\frac{1}{n}< \delta,$ then for any $x\in \tilde{A}_\epsilon,$ we have that $x\in E^n_{k_m},$ and thus if $j\geq n,$ we have that 
+    \[|f_j(x) - f(x)|< \frac{1}{n}< \delta,\] and so $f$ is uniformly continuous on $\tilde{A}_\epsilon.$ 
+
+    By Theorem 2, there exists some closed $A_\epsilon \subset \tilde{A}_\epsilon$ such that 
+    $m(\tilde{A}_\epsilon \setminus A_\epsilon)< \frac{\epsilon}{2}.$ 
+\end{proof}
+
+\begin{thm}
+    (Luzin) Suppose $f$ is measurable and finite valued on $E,$ where $E$ is of finite measure. For all $\epsilon >0,$ there exists a closed $F_\epsilon$ such that $m(F \setminus F_\epsilon) < \epsilon$ and $f|_{F_\epsilon}$ is continuous.
+\end{thm}
+\begin{proof}
+    Let $(f_n)$ be a sequence of step functions such that $f_n \to f$ almost everywhere. Find $E_n \subset E$ such that $m(E_n)< \frac{1}{2^n}$ and $f_n$ are continuous on $E_n^c$ (since we would be taking only the value $1$ or $0$ on this set). By Egorov, there exists a closed set $A_\frac{\epsilon}{3}$ such that $f_n \to f$ uniformly on $A_\frac{\epsilon}{3}$ and $m(A_\frac{\epsilon}{3})< \frac{\epsilon}{3}.$
+    Let 
+    \[F:= A_\frac{\epsilon}{3} \setminus \bigcup_{n\geq N} E_n = A_\frac{\epsilon}{3} \cap \bigcup_{n\geq N}E_n^c.\] Thus, we have that 
+    \[m(E \setminus F') = m(E \cap (\bigcup_{n\geq N}A_\frac{\epsilon}{3}\cap E_n^c)^c) = m(E \cap \bigcap_{n\geq N} A_\frac{\epsilon}{3}^c \cup E_n) \leq m(E \setminus A_\frac{\epsilon}{3}) + m(E \setminus E \bigcap_{m\geq n} E_n) < \frac{2\epsilon}{3}.\] We know that $f_n \to f$ uniformly on $F',$ and since each $f_n$ is continuous on $F',$ then $f$ is continuous on $F'.$ 
+
+    There exists a closed $F_\epsilon\subset F'$ closed such that $m(F' \setminus F_\epsilon)< \frac{\epsilon   }{3}$ 
+\end{proof}
+
+\newpage
+\subsection{Tuesday, Feb 11: The Lebesgue Integral}
+We will build the integral in four steps
+\begin{enumerate}
+    \item Simple functions
+    \item Bounded functions
+    \item Supported on sets with final measure
+    \item Non-negative functions
+\end{enumerate}
+Then we will generalize.
+\begin{rem}
+    Let $\varphi(x)$ be simple, then 
+    \[\varphi(x) := \sum_{i=k}^n a_k \chi_{E_k}(x).\] 
+    We run into a problem!
+    \[0 = \chi_E(x) - \chi_E(x),\] so if we define the integral as simply the $\sum a_k \times m(E_k),$ we run into a uniqueness problem.
+\end{rem}
+\begin{defn}
+    The \textbf{canonical form} of $\varphi,$ a simple function, is such that $\varphi$ takes finitely many different values on disjoint sets.
+\end{defn}
+\begin{rem}
+    (Existence) Suppose $\varphi$ takes the values $c_1, \dots, c_m$ which are all distinct (we throw out repeats). Let \[F_k := \{x \; ; \; \varphi(x) = c_k\}.\] Note first that $F_k$ is measurable. Then note that for $k \neq k',$ then $F_k \cap F_{k'} = \emptyset.$ Evidently
+    \[\varphi(x) = \sum_{i=1}^M c_k \chi_{F_k}(x).\] Becase $m(E_j) < \infty$ for each $j,$ and $F_k \subset \bigcup_{j=1}^N E_j,$ and thus $m(F_k) < \infty.$
+\end{rem}
+\begin{defn}
+    Let $\varphi(x) = \sum_{k=1}^M c_k \chi_{F_k}$ be the canonical representation of a simple function $\varphi,$ then the \textbf{Lebesgue integral} of $\varphi$ is
+    \[\int \varphi = \sum_{k=1}^M c_k m(F_k)\]
+\end{defn}
+\begin{rem}
+    If $E$ is measurable, then $\chi_E(\varphi)$ is simple. Then by definition,
+    \[\int_E\varphi = \int \varphi \cdot \chi_E\]
+\end{rem}
+\begin{prop}
+The following hold
+\begin{enumerate}
+    \item If $\varphi = \sum_{i=1}^N a_k \chi_{E_k}$ is any representation of $\varphi$ as a simple function, then
+    \[\int \varphi = \sum_{k=1}^N a_k m(E_k).\]
+    \item If $\varphi$ and $\psi$ are simple, and $a,b \in \bbR,$ then 
+    \[\int (a\varphi + b\psi) = a\int \varphi + b\int\psi\]
+    \item Suppose $E, F$ are disjoint measurable sets with finite measure, then 
+    \[\int_{E\cup F} \varphi = \int_E \varphi + \int_F \varphi\]
+    \item Suppose $\varphi \leq \psi$ where both are simple. Then 
+    \[\int \varphi \leq \int \psi\]
+    \item Let $\varphi$ be a simple function, then $|\varphi|$ is a simple function and 
+    \[\left|\int \varphi\right|\leq \int |\varphi|\]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+    (a) Consider first the case when 
+    \[\varphi(x) = \sum_{k=1}^N a_k \chi_{E_k},\] such that $E_k$ are mutually disjoint but the $a_k$ are not necessarily distinct. For all $a\neq 0$ such that $a\in \{a_k\},$ we define $E_a' = \bigcup E_{k_a},$ such that $a_k = a.$ Evidently, $E_a'$ are disjoint and measurable. Moreover, $m(E_a') = \sum m(E_{k_{a}}).$ Thus, $\phi = \sum a \chi_{E_a'},$ which is the canonical representationof $\varphi.$ Thus, we find that 
+    \[\int \varphi = \sum a m(E_a') = \sum a \sum m(E_{k_a}) = \sum a_k m(E_k)\]
+
+    Now for the general case, suppose $\varphi = \sum a_k \chi_{E_k}.$ Refine 
+    \[\bigcup_{k=1}^N E_k = \bigcup_{j=1}^m E_j^*,\] where the $E_j^*$ are mutually disjoint, and for each $k,$ 
+    \[E_k = \bigcup E_k^* \cdot E_j^* \subset E_k.\] For each $j,$ we let $a_j^* = \sum a_k,$ where $E_k \supset E_j^*.$ Thus, we have decomposed it to the first case.
+
+    (b) Obvious
+
+    (c) Obvious with $\chi_{E \cup F} = \chi_{E} + \chi_F$
+
+    (d) Obvious with $\varphi \geq 0$ case.
+
+    (d) Obvious from triangle inequality of summations of the canonical representation
+\end{proof}
+
+\newpage
+\subsection{Thursday, Feb 18: The Lebesgue Integral, Bounded Convergence Theorem, Fatou}
+I missed the class where the integral was constructed with (b) bounded functions and (d) None-negative functions. Srry.
+
+\begin{thm}
+    (Bounded Convergence Theorem) Suppose $(f_n)$ is a sequence of measurable functions, all uniformly bounded by some $M>0,$ all suppose on some finitely measurable $E,$ with $f_n(x) \to f(x)$  almost everywhere. Then 
+    \[\lim_{n\to \infty}\int f_n = \int f\]
+\end{thm}
+The proof pretty much uses Ergorov's Theorem (Look at Tuesday, Feb 4: Littlewood's Three Principles)
+
+\begin{thm}
+    Suppose $f$ is Riemann integrable on $[a,b],$ then $f$ is measurable and 
+    \[\int_{[a,b]}^\mathcal{R} f = \int_{[a,b]}^\mathcal{L}f\]
+\end{thm}
+\begin{proof}
+    By definition of the Riemann integral, $f$ is bounded by some $M>0.$ There exist $(\varphi_k), (\psi_k)$ step functions uniformly bounded by $M,$ and the $\varphi_k$ are increasing and the $\psi_k$ are decreasing. Here, $\varphi_k$ and $\psi_k$ are the infemum and supremum over the sub intervals of partitions. 
+    \[\lim_{k\to \infty}\int_{[a,b]}^{\cal R} \varphi_k = \lim_{k\to \infty}\int_{[a,b]}^\cal R \psi_k = \int_{[a,b]}^\cal R f.\]  For step functions, we obviously have that since the Riemann integral of the step function is the Lebesgue integral of the step function, then
+    \begin{align}
+    \lim_{k\to \infty}\int_{[a,b]}^{\cal R} \varphi_k  = \lim_{k\to \infty}\int_{[a,b]}^{\cal L} \varphi_k, \qquad \lim_{k\to \infty}\int_{[a,b]}^{\cal R} \psi_k  = \lim_{k\to \infty}\int_{[a,b]}^{\cal L} \psi_k.    
+    \end{align}
+    Since both sequences are monotonic and bounded, we define
+    \[\tilde{\varphi} := \lim_{k\to \infty} \varphi_k, \qquad \tilde{\psi} := \lim_{k\to \infty} \psi_k,\] and clearly, 
+    \[\tilde{\varphi} \leq f \leq \tilde{\psi}.\] Limits of measurable functions are measurable, and the bounded convergence theorem yields that 
+    \[\lim_{k\to \infty}\int_{[a,b]}^{\cal L} \varphi_k = \int_{[a,b]}^{\cal L} \widetilde{\varphi}\]
+    \[\lim_{k\to \infty}\int_{[a,b]}^{\cal L} \psi_k = \int_{[a,b]}^{\cal L} \widetilde{\psi}\] Using, (1), we see that 
+    \[\int_{[a,b]}^ {\cal L} \widetilde{\varphi} = \int_{[a,b]}^ {\cal L} \widetilde{\psi}  = \int_{[a,b]}^ {\cal L} f,\] and so 
+    \[\int_{[a,b]}^ {\cal L} (\widetilde{\psi} - \widetilde{\varphi}) = 0.\] Since $\widetilde{\psi}\geq \widetilde{\varphi},$ then by a classic result, we have that $\widetilde{\psi} = \widetilde{\varphi}$ a.e., and so they also equal $f$ a.e. Moreover, $\psi_k \to f$ a.e., and so by the BCT,
+    \[\lim_{k\to \infty}\int_{[a,b]}^{\cal L} \psi_k = \int_{[a,b]}^{\cal L} f,\] and we are done by (1) and the results above.
+\end{proof}
+
+If $f\geq 0,$ then recall we construct its Lebesgue integral by 
+\[\int f = \sup \int g,\] where $0\leq g \leq f,$ $g$ are bounded by $M,$ and $\sup g$ has finite measure.
+
+\begin{prop}
+    If $f$ is integrable, then $f(x)< \infty$ a.e. 
+\end{prop}
+\begin{proof}
+    Let $E_k = \{x \; : \; f(x) > k\},$ then $k \chi_{E_k} \leq k,$ and so 
+    \[k m(E_k) \leq \int f < \infty,\] and so $m(E_k) \to 0$ by moving the $k$ to the other side. Thus, since $E_k \downarrow E_\infty,$ then
+    \[m(E_\infty) = 0.\]
+\end{proof}
+\begin{prop}
+    If $\int f = 0,$ and $f\geq 0,$ then $f = 0$ a.e.
+\end{prop}
+\begin{proof}
+    If $g$ is bounded w support of finite measure, then 
+    \[0 \leq \int g \leq f,\] but $g = 0,$ and so $\sup g = f = 0.$ Define 
+    \[\widetilde{E}_k = \{x \; : \; f(x) > \frac{1}{k}\},\] and thus 
+    \[\frac{1}{k}m(\tilde{E}_k) \leq \int f = 0,\] and so $m(\widetilde{E}_k) = 0,$ and so 
+    \[\{x \; : \; f(x) >0\} = \bigcup_k \widetilde{E}_k \implies m(x \; : \; f(x)>0) = 0.\]
+\end{proof}
+
+
+\begin{lemma}
+    (Fatou's Lemma) Suppose $(f_n)$ is non-negative and measurable, and $f(x) = \lim_{n\to \infty}f_n(x)$ a.e. Then 
+    \[\int f \leq \liminf_{n\to \infty}\int f_n.\]
+\end{lemma}
+\begin{proof}
+    Let $0\leq g \leq f,$ with $g$ bounded and has finitely measured support $E$. Let $g_n = \min(g, f_n).$ Evidently, $g_n$ is bounded and support of $g_n$ is contained in $E.$ Notice that $g_n \to g$ a.e. Using the bounded convergence theorem, we have that 
+    \[\lim_{n\to \infty} \int g_n = \int g\]
+    \[\int g_n \leq \int f_n \implies \int g \leq \liminf_{n\to \infty}\int f_n,\] and so taking the supremum over all such $g$ yields the result.
+\end{proof}
+
+\begin{cor} (Monotone Convergence Theorem)
+    Suppose $f_n\geq 0,$ $f_n$ is measurable with $0 \leq f_n\leq f$ such that $f_n \to f$ a.e. Then 
+    \[\lim_{n\to \infty} \int f_n = \int f\]
+\end{cor}
+\begin{proof}
+    We have that 
+    \[f_n \leq f \implies \int f_n \leq \int f \implies \limsup_{n\to \infty} \int f_n \leq \int f.\] By Fatou's Lemma, we have that 
+    \[\int f \leq \liminf_{n\to \infty}\int f_n.\] Thus, the limit exists and it equals the integral of the limit. 
+\end{proof}
+
+\begin{cor}
+    Consider $\sum_{k\geq 0} a_k(x),$ with $a_k \geq 0$ and measurable. Then 
+    \[\int \sum a_k(x) = \sum \int a_k\] and 
+    if 
+    \[\sum^\infty \int a_k < \infty,\] then $\sum a_k(x)$ converges a.e.
+\end{cor}
+\begin{proof}
+    Let $f_n(x) = \sum_{k=1}^n a_k(x)$ and $f(x) = \sum^\infty a_k(x).$ Then $f_n(x)\geq 0,$ and $f_n \uparrow f.$ By the monotone convergence theorem, we have that 
+    \[\int\sum_{k=1}^\infty a_k(x) = \lim_{n\to \infty}\int f_n(x) = \lim_{n\to \infty}\int \sum_{k=1}^n a_k(x) = \lim_{n\to \infty}\sum_{k=1}^n \int a_k(x) = \sum_{k=1}^\infty \int a_k(x).\] 
+
+    For the second claim, we have that if $\sum \int a_k < \infty,$ then $\int \sum a_k < \infty,$ and so $\sum a_k < \infty$ by Proposition 10.
+\end{proof}
+
+\begin{lemma}
+    (Borel-Cantelli) Suppose $(E_k).$ Define 
+    \[E := \{x \; : \: x\in \bigcup E_k \text{ i.o.}\}.\] That is, 
+    \[E = \bigcap_{n=1}^\infty \bigcup_{k\geq m}^\infty E_k.\] If $m(E_k)< \infty,$ then $m(E) = 0.$
+\end{lemma}
+\begin{proof}
+    Let $a_k(x) = \chi_{E_k},$ since $x\in E,$ then 
+    \[\sum a_k(x) = \infty \iff \sum m(E_k) = \sum \int a_k < \infty,\] and so $\sum a_k < \infty$ a.e, and so we are done.
+\end{proof}
+
+We will begin our final stage of constructing the integral. If $f$ is real valued, then $f$ is Lebesgue integrable if $|f|$ is.
+
+\begin{defn}
+    Suppose $f$ is integrable. Then 
+    \[f^+ = \max(0, f), \qquad f^- = \max (0, -f).\] Thus, 
+    \[|f|= f^+ - f^-.\] Moreover, we say that $f$ is \textbf{Lebesgue Integrable} if $f^+$ and $f^-$ are integrable. If $f$ is integrable, then 
+    \[\int f = \int f^+ - \int f^-\]
+\end{defn}
+\begin{prop}
+    Suppose $f = f_1 - f_2,$ where $f_i \geq 0$ is measurable and integrable. Then 
+    \[\int f = \int f_1 - \int f_2.\]
+\end{prop}
+\begin{proof}
+    We have that $f = f^+ - f^-,$ and so 
+    \[f^+ - f^- = f_1 - f_2.\] Thus, 
+    \[f^+ + f_2 = f_1 + f^- \implies \int f^+ + \int f_2 = \int f_1 + \int f^- \implies \int f = \int f^+ - \int f^- = \int f^1 - \int f^2\]
+\end{proof}
+
+\begin{prop}
+    If $f$ is integrable, then $|f(x)|< \infty$ a.e.
+\end{prop}
+
+\begin{prop}
+    The integral of Lebesgue measurable functions is linear, additive, monotonic, and satisfies the triangle inequality.
+\end{prop}
+
+\begin{prop}
+    Let $f$ be integrable on $\bbR^d,$ $\epsilon>0.$ Then 
+    \begin{itemize}
+        \item there exists a set $B$ of finite measure such that 
+        \[\int_{B^c} |f| < \epsilon\]
+        \item (absolute continuity) There exists a $\delta>0$ such that if $m(E) \leq \delta,$ then $\int_E |f|\leq \epsilon.$
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    Without loss of generality, let $f\geq 0.$ Let 
+    \[B_N := \{\|x\| < N\}, \quad f_N(x) = f(x)\chi_{B_N}(x).\] Evidently, $f_N \geq 0$ and $f_N \uparrow f.$ Thus, we use the monotone convergence theorem:
+    \[\int f = \lim_{N\to \infty}\int f_N = \lim_{N\to \infty}\int f(x)\chi_{B_N} = \lim_{N\to \infty}\int_{B_N}f(x).\] Thus, for large $N:$
+    \[|\int f- \int_{B_N} f| = |\int_{B_N^c} f| <\epsilon\]
+
+    For (ii), let 
+    \[E_N := \{x \in \; : \; f(x) < N\}, \qquad f_N = \chi_{E_N}f.\] Then $f_N \geq 0,$ $f_N \uparrow f.$ Let $\epsilon>0.$ Again, by the monotone convergence therem, for large $n \geq N,$
+    \[\int f - f_n < \frac{\epsilon}{2}.\]  Let $\delta>0$ such that $N\delta \leq \frac{\epsilon}{2}.$ Thus, if $m(E) < \delta,$ then 
+    \[\int_E f = \int_E f - f_N  + \int_E f_N \leq \frac{\epsilon}{2} + \int_{E_N \cap E}f < \frac{\epsilon}{2} + m(E_N) N < \epsilon\]
+\end{proof}
+
+\begin{thm}
+    (Dominated Convergence Theorem) Suppose $(f_N)$ is measurable, $f_n(x)\to f(x)$ a.e. If $|f_x(x)|\leq g(x),$ where $g$ is integrable, then 
+    \[\int |f_n - f|\to 0 \implies \int f_n \to \int f\]
+\end{thm}
+
+\begin{proof}
+    Let $E_N = \{x\; : \: |x| \leq N, |g(x)| \leq N\}.$ Let $\epsilon>0.$ By the previous proposition, letting $g_n = g \chi_{E_n}$ there exists some $N$ such that $\int_{E_N^c}g < \epsilon.$ 
+
+    By the bounded convergence theorem, since $f_n \chi_{E_n} \leq g$ for all $f,$ $E_N \subset B_N$ (finite measure), then 
+    \[\int_{E_n} f_n \to f.\] Thus, we find that 
+    \begin{align*}
+        \int |f_n - f| &= \int_{E_N}|f_n - f| + \int_{E_N^c}|f_n - f|\\
+        &< \epsilon + 2\int_{E_N^c}g\\
+        &< \epsilon
+    \end{align*}
+\end{proof}
+
+\newpage
+\subsection{Tuesday, Feb 25: The Completeness of $L^1$}
+\begin{defn}
+    A \textbf{complex valued function} is a function such that 
+    $f(x) = u(x) + iv(x),$ where $u(x), v(x)\in \bbR$ for all $x.$
+\end{defn}
+\begin{rem}
+    We note that 
+    \[|f(x)| = (u^2(x) + v^2(x))^\frac{1}{2},\] and $f$ is measurable if and only if $u,v$ are measurable. We say that $f$ is integrable if and only if $|f(x)|$ is integrable. Moreover, $f$ is integrable on $E$ measurable if $\chi_E f$ is integrable. 
+\end{rem}
+\begin{prop}
+    If $a\in \bbC$ and $f$ is integrable, then $af$ is integrable.
+\end{prop}
+\begin{proof}
+    We can express $a$ as $a = \alpha + i\beta$ and so 
+    \[af = (\alpha + i \beta)(u + iv) = (au - \beta v) + i(\alpha v + \beta u).\] It remains to check that 
+    $|a f| = |a||f|.$
+\end{proof}
+
+\begin{defn}
+    We say that 
+    \[L^1 := \{f \; : \; |f| \text{ is integrable}\}\] and $L^1$ is equipped with 
+    \[\|f\|_{L^1} = \int |f |\]
+\end{defn}
+\begin{prop}
+    Suppose $f,g \in L^1(\bbR^d),$ then 
+    \begin{enumerate}
+        \item $\|af\|_{L^1} = |a|\|f\|_{L^1}$
+        \item $\|f + g\|_{L^1}\leq \|f\|_{L^1} + \|g\|_{L^1}$
+        \item $\|f\|_{L^1} = 0$ if and only if $f \equiv 0$
+        \item $d(f,g) = \|f - g\|_{L^1}$
+    \end{enumerate}
+\end{prop}
+Thus, $L^1$ is a normed space.
+\begin{thm}
+    (Riesz-Fischer) $L^1$ is complete. 
+\end{thm}
+\begin{proof}
+    Suppose $(f_n)\in L^1$ is Cauchy, then for large $n,m > N_k$ we have that 
+    \[\|f_n - f_m\|_{L^1} = \int |f_n(x) - f_m(x)|dx < \frac{1}{2^k}.\] Thus, if there exists a subsequence where $n_k = \sum N_K$ such that
+    \[\|f_{n_{k+1}} - f_{n_k}\| < \frac{1}{2^k}.\] Thus, let 
+    \[f(x):= f_{n_1}(x) + \sum_{k=1}^\infty f_{n_{k+1}}(x) - f_{n_k}(x).\] To show this $f$ is well defined, first we have that 
+    \[g(x) = |f_{n_1}(x)| + \sum_{k=1}^\infty |f_{n_k+1}(x) - f_{n_k}(x)|.\]
+    First, $g\geq 0$ and 
+    \[\int |f_{n_1}(x)| + \sum_{k=1}^\infty |f_{n_k+1}(x) - f_{n_k}(x)|dx= \int f_{n_1}(x) + \sum_{k=1}^\infty \int |f_{n_k+1}(x) - f_{n_k}(x)| \leq \int |f_{n_1}| + \sum_{k=1}^\infty \frac{1}{2^k} < \infty,\] and so $g\in L^1.$ By the dominated convergence theorem, we have that $f_j\in L^1,$ where 
+    \[|f_j(x)|:=  \left|f_{n_1}(x) +\sum_{k=1}^j f_{n_{k+1}}(x) - f_{n_k}(x)\right|,\] and since $f_j \to f,$ and $|f_j| \in L^1,$ then by the dominated convergence theorem,
+    \[\int |f_j| \leq \int g \implies \int |f| \leq \int g.\] Thus, $f\in L^1,$ and so $|f|< \infty$ almost everywhere. Consider that by telescoping the sum, we have that
+    \[f_{j}(x) = f_{n_{j+1}},\] and so $f_{n_{k+1}}(x)\to f$ a.e. Thus, since our subsequence converges to $f$ and $(f_n)$ is Cauchy, then the series converges to $f$ pointwise almost everywhere. By Egorov's theorem, we are done. 
+\end{proof}
+
+\begin{defn}
+    A family $\cal F$ is dense in $L^1$ if for any $\epsilon>0$ and for any $f\in L^1,$ there exists some $g\in \cal F$ such that $\|f - g\|< \epsilon.$
+\end{defn}
+\begin{thm}
+    The following families $\cal F$ are dense in $L^1:$
+    \begin{enumerate}
+        \item Simple functions
+        \item Step functions
+        \item Continuous functions with compact support
+    \end{enumerate}
+\end{thm}
+
+\newpage
+\subsection{Thursday Feb 27: Invariance Properties}
+For a function on $\bbR^d,$ $h \in \bbR^d,$ we denote $f_h(x) = f(x-h).$
+\begin{prop}
+    Suppose $f$ is integrable. Then $f_h$ is integrable and 
+    \[\int f_h = \int f\]
+\end{prop}
+\begin{proof}
+    Suppose in the degenerate case that $f = \chi_E,$ where $E$ is measurable. Then of course, $f_h = \chi_{E_h}$ where $E_h$ is $E$ translated by $h,$ and so $f$ is integrable since $m(E + h) = m(E).$ Thus we know this is true for simple functions, and we can approximate all $L^1$ functions by simple functions and so we conclude.
+\end{proof}
+The following two proofs are similar
+\begin{prop}
+    Suppose $f$ is integrable, then if $\delta>0,$ then $f_\delta(x) = f(\delta x)$ is integrable. Moreover,
+    \[\int f_\delta = \delta^d \int f\]
+\end{prop}
+\begin{prop}
+    Suppose $f(x)$ is integrable, then $f(-x)$ is integrable and 
+    \[\int f(x) = \int f(-x)\]
+\end{prop}
+
+\begin{prop}
+    Suppose $f \in L^1,$ then $\|f_h - f\|_{L^1} \xrightarrow[]{h \to 0} 0.$
+\end{prop}
+\begin{proof}
+    If $g$ is continuous w compact support, then $g$ is uniformly continuous. Thus, 
+    \[\int |g_h (x) - g(x)|dx \xrightarrow[]{|h|\to 0}0\]
+
+    Thus, if $f \in L^1,$ then 
+    \[\|f_h - f\| \leq \|f_h - g_h\| + \|g_h - g\| + \|g - f\| = 2\|f - g\| + \|g_h - g\|,\] where the first term on the RHS is less than $\epsilon$ since $C([a,b])$ is dense in $L^1.$
+\end{proof}
+
+\begin{thm}
+    (Fubini) Let $x\in \bbR^{d_1}$ and $y\in \bbR^{d_2},$ where $\bbR^d = \bbR^{d_1} \times \bbR^{d_2}.$ Suppose $f$ is a function on $\bbR^d,$ then the slice of $f$ corresponding on $\bbR^{d_1}$ is (we hold $y$ constant)
+    \[f^y(x):=f(x,y)\] and similarly for the slice for the $y'$s. Then 
+    \begin{enumerate}
+        \item $f^y$ is integrable on $\bbR^{d_1}$
+        \item $F_y(x) = \int_{\bbR^{d_1}}f^y(x)$ is integrable on $\bbR^{d_2}.$
+        \item 
+        \[\int_{\bbR^{d_2}}\left(\int_{\bbR^{d_1}}f^y(x)\right) = \int_{\bbR^d}f\]
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+(Step 1) Define 
+\[\mathcal{F}:= \{\text{integrable functions on $\bbR^d$ such that $a,b,c$ hold}\}\] Let $\{f_n\} \subset \cal F.$ For all $k \in [n],$ there exists some $A_k \subset \bbR^{d_2}$ such that $m(A_k) = 0$ and $f_k^y$ is integrable on $\bbR^d,$ where $y\notin A_k.$ Let $A = \bigcup_{k=1}^N A_k.$ Then $m(A) = 0$ and $y\in A^c,$ and $f_k^y$ is measurable and integrable for all $k \leq n.$  By linearity, we have that $\text{span}\bigcup f_n\subset \cal F.$
+
+(Step 2) Suppose $\{f_n\} \subset \cal F$ and either $f_n\uparrow f$ or $f_n \downarrow f.$ We claim that either $f\in \cal F.$ Consider $-f_n,$ then we can assume WLOG that $f_n \uparrow f.$ Now consider $f_n - f_1 \geq 0,$ then WLOG, $f_n \geq 0.$ Let $A = \bigcup A_n.$ the $m(A) = 0$ and $y\notin A$ and $f_n^y$ is integrable on $\bbR^{d_1}.$ Thus, by monotone convergence theorem on $x$,
+\[g_n(y) = \int_{\bbR^{d_1}} f_n^y(x) \uparrow g(y) = \int_{\bbR^{d_1}}f^y(x)dx\] By the monotone convergence in $y,$ we have that 
+\[\int f_k(x,y)dxdy=\int g_k(y)\uparrow \int g(y)  = \int  \left(\int f(x,y)dx\right)dy\]
+
+(Step 3) Suppose $f = \chi_E,$ $E = G_\delta,$ then $f \in \cal F$ (if $m(E)< \infty.$)
+\begin{enumerate}
+    \item $E_1 = Q_1 \times Q_2,$ where $Q_1 \subset \bbR^{d_1}$ and $Q_2 \subset \bbR^{d_2}$ are both open. Then 
+    \[\chi_{E}(x,y) = \chi_{Q_1 \times Q_2}(x,y) = \chi_{Q_1}(x) \chi_{Q_2}(y),\] and so for each $y,$ and so for each $y,$ $\chi_E(x,y)$ is measurable in $x,$ and 
+    \[\int \chi_E(x,y)dx = \chi_{Q_2}(y)\int \chi_{Q_1}(x)dx = \chi_{Q_2}(y)|Q_1|\] and 
+    \[\int \left(\int \chi_E(x,y)dx\right)dy = |Q_2||Q_1| = m(E),\] and so $\chi_E \in \cal F.$
+    \item Suppose $E \subset \partial Q,$ where $Q\subset \bbR^d$ is a closed cube. Evidently, $m(E) = 0,$ and so $\int \chi_E(x,y) dx dy = 0.$ For almost every $y$ (except for bottom and top lines), $E^y$ has measure $0$ on $\bbR^{d_1},$ and so $\int\chi_E^y(x)dx = 0$ almost everywhere, and thus $\int\left(\int\chi_E^y(x)dx \right)dy = 0,$ and thus $\chi_E \in \cal F.$
+    \item Suppose $E = \bigcup_{k=1}^K Q_k,$ where $Q_k$ are closed cubes with disjoint interiors. Let $\text{int}Q_k = \tilde{Q}_k.$ And let $\chi_E$ be a finite linear combination of $\chi_{\tilde{Q}_k}$ and $\chi_{A_k},$ where $A_k\subset \partial Q_k.$ That is,
+    \[\chi_E = \sum a_k\left(\chi_{\tilde{Q}_k} + \chi_{A_k}\right),\] and thus by previous steps we know that $\chi_E \in \cal F.$
+    \item Suppose $E$ is open and has finite measure. Then 
+    \[E = \bigcup_{k=1}^\infty Q_k,\] $Q_k$ closed cubes with disjoint interior. Let $f_k = \sum_{j=1}^k \chi_{Q_j} \in \cal F$ from stage 3. But $f_k \uparrow \chi_E,$ and so then by step 2 we are done.
+    \item Suppose $E$ is $G_\delta$ of finite measure. Since $E \subset G_\delta,$ then there exists $(\tilde{O}_n)$ such that 
+    \[E = \bigcap \tilde{ O}_k\] $E$ is measurable, and thus $E\subset O,$ where $O$ is open and measurable, and so take 
+    \[O_k = O \cap \bigcap_{n=1}^k \tilde{O}_k,\] and we see that $(O_k)$ is non increasing with 
+    \[E = \bigcap O_k.\] Let $f_k = \chi_{O_k},$ then $f_k \in \cal F$ and $\chi_E  \in L^1$ and $f_k \downarrow \chi_E,$ and thus $\chi_E \in \cal F.$
+\end{enumerate}
+(Step 4) Suppose $E \subset \bbR^d$ with $m(E) = 0$. There exists some $G \in G_\delta$ such that $E \subset G$ with $m(G) = 0.$ But by the previous step, $\chi_G \in \cal F$ with 
+\[\int \left(\int \chi_G(x,y)dx\right)dy = 0.\] Thus, for almost every $y,$ 
+\[\int \chi_G(x,y)dx = 0 = \int_{\bbR^{d_1}}\chi^y_{G}x dx.\] But $E^y \subset G^y,$ and so $m_\ast(E^y)\leq m_\ast(G^y) = 0,$ and thus $m(E^y) = 0$ and $\chi_{E}^y(x)$ is measurable with integral $0$ and thus $\chi_E \in \cal F.$
+
+(Step 5) Suppose $f = \chi_E$ with $m(E)< \infty,$ then $E = G \cup Z,$ where $G\in G_\delta$ with $m(G)< \infty$ and $m(Z) = 0.$ Then $\chi_E \in \cal F.$ 
+
+(Step 6) Let $f\in L^1.$ WLOG, $f\geq 0.$ There exist $(\varphi_n)$ simple functions such that $\varphi_n \uparrow f,$ where $\varphi \in \cal F$ by like step 1 or something. Thus, $f\in \cal F.$
+\end{proof}
+
+\begin{thm}
+    Assume $f(x,y) \geq 0$ is measurable on $\bbR^d.$ Then for almost every $y \in \bbR^{d_2},$ 
+    \begin{itemize}
+        \item $f^y$ is measurable on $\bbR^{d_1}$
+        \item $F^y = \int f^y(x) dx$ is measurable on $\bbR^{d_2}$
+        \item $\int F^y  = \int f(x,y)dxdy.$
+    \end{itemize}
+\end{thm}
+
+
+
+\end{document}

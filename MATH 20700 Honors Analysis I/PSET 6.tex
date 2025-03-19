@@ -1,0 +1,504 @@
+\documentclass[11pt]{article}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustin Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Luis Silvestre}
+\newcommand{\assignment}{Problem Set 6}
+\newcommand{\semester}{Fall 2024}
+\newcommand{\duedate}{2024-11-11}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+\section*{Problem 1}
+\begin{problem}
+    Suppose that $f: M \to M$ and for all $x,y \in M,$ if $x \neq y$ then $d(f(x), f(y))< d(x,y).$ Such an $f$ is a \textit{weak contraction}.
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        Is a weak contraction a contraction? (Proof or counterexample.)
+    \end{problem}
+    \begin{solution}
+        \textbf{No.} Consider $f: [0,\frac{1}{2}]\to [0, \frac{1}{2}]$ such that $f(x) = x^2.$\footnote{Note that $f$ does not need to be a surjection in order to be a contraction, which is good because $f([0, \frac{1}{2}]) = [0, \frac{1}{4}]$} $f$ is a contraction because for any $x,y \in [0,\frac{1}{2}],$ we have that $|x+y|\leq 1,$ and thus if $x\neq y,$ then
+        \[|f(x) - f(y)| = |x^2 - y^2| = |x-y| |x+y|< |x-y|.\] Thus, $f$ is a weak contraction. Suppose $f$ is a contraction as well. Then there exists some $k<1$ such that $d(f(x), f(y)) \leq kd(x,y).$ However, take $x = k$ and $y = \frac{1-k}{2},$ then we have that 
+        \[|x+y| > k \implies |x+y||x-y|>k|x-y| \implies |f(x) - f(y)|> k|x-y|,\] and thus $f$ is not a contraction.
+    \end{solution}
+    \item 
+    \begin{problem}
+        If $M$ is compact is a weak contraction a contraction?
+    \end{problem}
+    \begin{solution}
+        \textbf{No.} The above example works.
+    \end{solution}
+    \item 
+    \begin{problem}
+        If $M$ is compact, prove that a weak contraction has a unique fixed point.
+    \end{problem}
+    \begin{solution}
+        Since $f$ is a contraction and $f: M \to M,$ then we claim that $f(M)\subset M.$ Since $f$ is a contraction, we have that there exists some $\delta>0$ such that if $d(x,y)< \frac{\delta}{2},$ then $d(f(x), f(y))< \frac{\delta}{2}.$ Cover $M$ by $\delta$ balls. Then if $y \in B_\delta(x)\subset M,$ we have that $d(f(x), f(y))< \frac{\delta}{2},$ and thus $f(x)$ and $f(y)$ are in (possible another) $\delta$ ball of $M,$ and so $f(M)\subset M.$ Since $f$ is continuous and $M$ is compact, then $f(M)$ is compact.
+        We can induct on this process and notice that 
+        \[M \supset f(M) \supset f^2(M)\supset \dots\] with each set compact. We now claim that if 
+        \[X = M \cap \bigcap_{n\in \bbN} f^n(M),\] then $X$ is our set of fixed point. To see this, notice that each set is compact and nonempty, and thus $X$ is compact and nonempty. We now wish to show that $f(X) = X.$ One inclusion is easy. If $x \in f(X),$ then since $f(X)\subset X$ by the above logic, $x \in X.$ Suppose now that $x \in X.$ Thus, $x \in M \cap \bigcap_{n\in \bbN} f^n(M).$ Since $x \in f(M),$ then there exists some $m_1 \in M$ such that $f(m_1) = x.$ Similarly, there exists some $m_2 \in M$ such that $f^2(m_2) = x.$ Take the sequence 
+        \[y_1 = m_1, \; y_2 = f(m_2), \; \dots \; y_n= f^{n-1}(m_n).\]
+        We have by compactness of $M$ that it has some convergent subsequence $(y_{n_k}) \to y_{\infty}.$ We claim that $f(y_\infty) = x.$ To see this, consider that since $f$ is continuous, we have that $f(y_{n_k}) \to f(y_{\infty}).$ However, we by construction that \[f(y_{n_k}) = f(f^{n_{k-1}}(m_{n_k})) = x\implies f(y_\infty) = x.\] Moreover, we have that $y_\infty \in f^n(M)$ for every $n \in \bbN$ by closedeness, and thus \[y_\infty \in X \implies f(y_\infty) \in f(X) \implies x \in f(X).\]
+
+        It suffices to show that $\diam(X) = 0.$ Suppose not, then $\diam(X) > 0.$ Thus, since $X$ is compact, we have that there must exist $x_1, x_2 \in X$ such that $d(x_1, x_2) >0.$ However, we have proved that $f(x_1) = x_1$ and $f(x_2) =  x_2,$ and thus 
+        \[d(f(x_1), f(x_2)) = d(x_1, x_2) >0,\] which is a contradiction to the fact that $f$ is a contraction. Thus, $\diam(X) = 0$ and thus $X$ is a single point and thus we have that there exists a unique $x \in X$ such that $f(x) = x.$
+    \end{solution}
+    \begin{reflection}
+        The following is a proof I am currently in the process of fixing, but have not figured out how:\\
+        
+        Let $x_0 \in M.$ Let $x_n = f^n(x_0),$ where $f^n(x_0) = (f\circ f\circ f\circ \dots \circ f)(x_0),$ with $f$ composite itself $n$ times. Thus, since $f^n(x_0)\in M$ for any $n,$ then by compactness, $(x_n)\in M$ has a convergent subsequence $x_{n_k} \to x_{\infty}.$ We claim that $x_{\infty}$ is a fixed point. To see this, notice that since $(x_{n_k})$ is convergent, then it is Cauchy, and thus for any $\epsilon>0,$ there exists some $N\in \bbN$ such that if $n_k, m_k \geq N_1,$ we have $d(x_{n_k}, x_{m_k}) < \frac{\epsilon}{3}.$ Since $x_{n_k}\to x_\infty,$ then there exists some $N_2$ such that if $n_k\geq N_2,$ then $d(x_{n_k}, x_\infty)< \frac{\epsilon}{3}.$ Take $N = \min\{N_1, N_2\},$ then we have if $x_{n_k}> N,$
+        \begin{align*}
+          d(x_\infty, f(x_\infty))&\leq d(x_\infty, x_{n_k}) + d(x_{n_k}, f(x_{n_k})) + d(f(x_{n_k}), f(x_{\infty}))\\
+          &< \frac{\epsilon}{3} + d(x_{n_k}, x_{n_{k+1}}) + d(x_{n_k}, x_\infty)\\
+          &< \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3}.
+        \end{align*}
+        The second term of the second inequality follows by definition of $(x_{n_k}),$ and the last term of the second inequality follows from the fact that $f$ is a contraction. Suppose $f$ has another unique point at some $p \in M,$ then $|f(p) - f(x_\infty)| = |p - x_\infty|\not < |p-x_\infty|,$ and thus $f$ is not a contraction.
+    \end{reflection}
+\end{enumerate}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Suppose that $f: \bbR \to \bbR$ is differentiable and its derivative satisfies $|f(x)|< 1$ for all $x \in \bbR.$
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        Is $f$ a contraction?
+    \end{problem}
+    \begin{solution}
+        Consider $f: \bbR \to \bbR$ such that 
+        \[f(x) = 
+        \begin{cases}
+            x-\arctan(x)
+        \end{cases}
+        \] \textbf{We claim without proof} that $f'(x) = 1- \frac{1}{x^2 + 1}.$ Thus, we have that $f'(x)<1$ for all $x\in \bbR,$ but as $x\to \infty,$ $f'(x)\to 1.$ Suppose $f$ is a contraction, then there exists some $k<1$ such that if $x,y \in \bbR,$ then 
+        \[|f(x) - f(y)| \leq k |x-y|\implies \frac{|f(x) - f(y)|}{|x-y|} = |f'(\theta)| \leq k\] for some $\theta \in (x,y).$ However, taking $x = 0$ and $y = k+1,$ then we have that 
+        \[|f(x) - f(y)| = |k+1 - \arctan(k+1)|\]
+    \end{solution}
+    \item 
+    \begin{problem}
+        Is $f$ a weak contraction?
+    \end{problem}
+    \begin{solution}
+        \textbf{Yes.} Let $x,y \in \bbR,$ then since $f$ $f$ is differentiable on $(x,y)$ and continuous on $[x,y],$ there exists some $\theta \in (y,x)$ such that 
+        \[|f(y) - f(x)| = f'(\theta)|x-y|< |x-y|\] since $f'(\theta)< 1.$
+    \end{solution}
+    \item 
+    \begin{problem}
+        Does it have a fixed point?
+    \end{problem}
+    \begin{solution}
+        \textbf{No.} 
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Give an example to show that the fixed-point in Brouwer’s Theorem need not
+ be unique.
+\end{problem}
+\begin{solution}
+    Let $B^1$ be the closed unit ball in $\bbR^1,$ and let $f: B^1 \to B^1$ such that $f(x) = x.$ Obviously, $f$ is continuous. Every point in $B^1$ is a fixed point, and thus there is no uniqueness.
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{enumerate}
+    \item 
+\begin{problem}
+    Give an example of a function $f: [0,1]\cross [0,1]\to \bbR$ such that for each fixed $x,$ then function $y \to f(x,y)$ is a continuous function of $y,$ and for each fixed $y,$ the function $x\to f(x,y)$ is a continuous function of $x,$ but $f$ is not continuous.
+\end{problem}
+\begin{solution}
+    Consider the function $f: [0,1]\cross [0,1]\to \bbR$ such that \[f(x,y) = 
+    \begin{cases}
+        \frac{xy}{x^2 + y^2}, \qquad (x, y)\neq (0, 0)\\
+        0,\qquad \qquad (x,y) = (0,0)
+    \end{cases}\]
+    Clearly, $x \to f(x,y)$ is continuous for all fixed $y\neq 0.$ Take some sequence $(x_n, 0)\to (0,0).$ By examining the function, it is clear that $f(x_n, 0) = f(0,0) = 0.$ Same for $y \to f(x,y).$ To prove that $f$ is not continuous at $(0,0),$ take the sequence $(\frac{1}{n}, \frac{1}{n}) \to (0,0).$ We want to show that $f(\frac{1}{n}, \frac{1}{n})$ does not converge to $f(0,0) = 0$. To see this, consider that 
+    \[f(\frac{1}{n}, \frac{1}{n}) = \frac{\frac{1}{n}\frac{1}{n}}{\frac{1}{n^2} + \frac{1}{n^2}} = \frac{\frac{1}{n^2}}{\frac{2}{n^2}} =\frac{1}{2}.\]
+\end{solution}
+\item 
+\begin{problem}
+    Suppose in addition that the set of functions 
+    \[\mathcal{E} = \{x \to f(x,y) \; \; y \in [0,1]\}\] is equicontinous. Prove that $f$ is continuous.
+\end{problem}
+\begin{solution}
+    Let $(x_n, y_n) \to (x,y),$ where $(x_n)\in [0,1]$ and $(y_n)\in [0,1].$ We want to show that $f(x_n, y_n) \to f(x,y).$ Thus, it suffices to show that for any $\epsilon>0,$ we have $n$ large such that
+    \[d(f(x_n, y_n), f(x,y))< \epsilon.\] 
+    Since $\mathcal{E}$ is equicontinuous, then for any $\epsilon>0,$ we have that there exists a $\delta>0$ such that if $|x-t|< \delta,$ then for any $f$ such that $f$ is a function that sends $x\to f(x,y)$ with $y$ fixed, $|f(x,y) - f(t,y)|< \frac{\epsilon}{2},$ Since $x_n \to x,$ then we have that for large $n,$ $|x- x_n|< \delta.$ Since for each fixed $x,$ function $y \to f(x,y)$ is a continuous function of $y,$ then we have that if $(y_n) \to y,$ then $f(x, y_n) \to f(x,y).$ Thus, for large enough $n,$ we have that $d(f(x, y_n), f(x,y))< \frac{\epsilon}{2}$
+    \[d(f(x_n, y_n), f(x,y)) \leq d(f(x_n, y_n), f(x,y_n)) + d(f(x, y_n), f(x,y)) < \frac{\epsilon}{2} + \frac{\epsilon}{2}.\]
+\end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Let $T: V \to W$ be a linear transformation and let $p \in V$ be given. Prove that the following are equivalent.
+    \begin{enumerate}
+        \item $T$ is continuous at the origin.
+        \item $T$ is continuous at $p.$
+        \item $T$ is continuous at at least one point of $V.$
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    Suppose $T$ is continuous at the origin, then we claim that $T$ is continuous. To see this, we will first show that $||T||< \infty.$ Let $\epsilon = 1,$ then there exists a $\delta>0$ such that if $u \in V$ and $|u|< \delta,$ then 
+    \[|T(u)|<1.\] Let $v \in V$ nonzero, then let $\lambda = \frac{\delta}{2|v|},$ and thus $u = \lambda v.$
+    $|u| = \frac{\delta}{2}$ and due to the properties of linear transforms and norms, we have that:
+    \[\frac{|T(v)|}{|v|} = \frac{|T(\frac{u}{\lambda})|}{|\frac{u}{\lambda}|} = \frac{|T(u)|}{u}< \frac{1}{|u|} = \frac{2}{\delta}.\] Thus, $||T||< \infty.$ Let $v, v' \in V$ with $|v-v'|< \frac{\epsilon}{||T||},$ then 
+    \[|T(v) - T(v')| = |T(v-v')|\leq ||T|||v-v'|< \epsilon,\] and thus $T$ is uniformly continuous. Thus, we have $b$ and $c.$\\
+
+    Suppose $c,$ then $T$ is continuous at some $u \in V.$ Let $\epsilon>0,$ then get the $\delta>0$ from the continuity of $u.$ Thus, if $|v|< \delta,$ then we let $v = u - (u + \frac{\delta}{2}).$ Notice that 
+    we have that $|u - (u + \frac{\delta}{2})| = \frac{\delta}{2}< \delta,$ and thus 
+    \[|T(u) - T(u + \frac{\delta}{2})| < \epsilon.\] Because $T$ is a linear transform, we also have that 
+    \[|T(u) - T(u + \frac{\delta}{2})| = |T(u - (u + \frac{\delta}{2}))| = |T(v)|< \epsilon.\] Thus, we have that for all $\epsilon>0,$ there exists a $\delta>0$ such that if $v < \delta,$ then $|T(v)|< \epsilon,$ and thus $T$ is continuous at the origin.
+\end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+Let $\mathcal{L}$ be the vector space of continuous linear transformations from a normed space $V$ to a normed space $W.$ Show that the operator norm makes $\mathcal{L}$ a normed space.    
+\end{problem}
+\begin{solution}
+    Suppose $T, T' \in \mathcal{L}$ and let $\lambda \in \mathbb{F}.$ Note that $||T||$ is well defined since it is finite since $f$ is continuous.
+    \begin{enumerate}
+        \item 
+        \[||T|| = \sup\{\frac{|T(v)|_W}{|v|_V}, v \neq 0.\}\] Since $T: V\to W,$ then $T(v)\in W,$ and thus since $W$ is a normed space, we have that $|T(v)|_W\geq 0$ for all $T(v)\in W.$ Similarly, we have that $|v|_V\geq 0$ for all $v \in V.$ Thus, $||T||\geq 0.$ Suppose $T$ is the zero transformation, then $T(v) = 0$ for any $v\in V.$ Thus, we have that 
+        \[||T|| = \sup\{\frac{|T(v)|_W}{|v|_V}, v \neq 0.\} = \sup\{\frac{0}{|v|_V}, v \neq 0.\} = 0.\]
+        \item Since $|T(v)|_W$ is a norm in $W,$ then if $\lambda$ is a scalar, we have that $|\lambda T(v)|_W = |\lambda||T(v)|_W.$ Similarly for $V.$
+        \[||\lambda T|| = \sup_{v\in V}\{\frac{|\lambda T(v)|_W}{|v|_V}\; ; \; v \neq 0\} = \sup_{v\in V}\{\frac{|\lambda| |T(v)|_W}{|v|_V}\; ; \; v \neq 0\} = |\lambda|\sup\{\frac{|T(v)|_W}{|v|_V}, v \neq 0.\}.\] Thus, $||\lambda T|| = |\lambda|||T||.$
+        \item Since $W$ is a normed space, we have that $|T(v) + T'(v)|_W \leq |T(v)|_W + |T(v)|_W.$
+        \begin{align*}
+          ||T + T'|| &= \sup\{\frac{|T(v) + T'(v)|_W}{|v|_V}\; ;\; v \neq 0\}\\
+          &\leq \sup\{\frac{|T(v)| + |T'(v)|_W}{|v|_V}\; ;\; v \neq 0\}\\
+          &\leq \sup\{\frac{|T(v)|}{|v|_V}\; ;\; v \neq 0\} + \sup\{\frac{|T'(v)|_W}{|v|_V}\; ;\; v \neq 0.\}\\
+          &= ||T|| + ||T'||
+        \end{align*}
+        The last inequality comes from the fact that $\sup(f(x) +g(x))\leq \sup(f(x)) + \sup(g(x)).$\footnote{Proved on PSET 5, but $f(x)\leq \sup f(x)$ and $g(x)\leq \sup g(x)$ imply that $f(x) + g(x)\leq \sup f(x) + \sup g(x)$ for all $x.$}
+    \end{enumerate}
+\end{solution}
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Two norms $|\;|_1$ and $|\;|_2$ on a vector space are \textit{comparable} if there are positive constants $c$ and $C$ such that for all nonzero vectors in $V$ we have
+    \[c \leq \frac{|v|_1}{|v|_2}\leq C.\]
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+         Prove that comparability is an equivalence relation on norms.
+    \end{problem}
+    \begin{solution}
+    It will suffice to show the three properties of an equivalence relation. Let $|\;|_1, |\;|_2$ be norms on a vector field $V,$ and let $v \in V.$ 
+        \begin{enumerate}
+            \item (Reflexive) We want to show that $|\;|_1$ is comparable to itself. This is clear, since we have that 
+            \[\frac{|v|_1}{|v|_1} = 1 \implies \frac{1}{2}\leq \frac{|v|_1}{|v|_1}\leq 2,\] and thus $|\;|_1$ is comparable to itself.
+            \item (Symmetry) We want to show that if $|\;|_1$ is comparable to $|\;|_2,$ then $|v|_2$ is comparable to $|v|_1.$ By assumption, $c$ and $C$ are constants such that
+            \[c \leq \frac{|v|_1}{|v|_2} \leq C \implies \frac{1}{C}\leq \frac{|v|_2}{|v|_1}\leq \frac{1}{c}.\] Since $\frac{1}{C}$ and $\frac{1}{c}$ are positive constants, then $|\;|_2$ is comparable to $|\;|_1.$
+            \item (Transitive) Suppose $|\;|_1$ is comparable to $|\;|_2$ and $|\;|_2$ is comparable to $|\;|_3,$ then there exists positive constants $c, C$ and $c', C'$ such that
+            \[c \leq \frac{|v|_1}{|v|_2} \leq C, \qquad c' \leq \frac{|v|_2}{|v|_3} \leq C'.\] Thus, we have that since everything is positive,
+            \[cc' \leq \frac{|v|_1}{|v|_2} \frac{|v|_2}{|v|_3}\leq CC' \implies cc' \leq \frac{|v|_1}{|v|_3} \leq CC',\] and thus $|\;|_1$ is comparable to $|\;|_3.$
+        \end{enumerate}
+    \end{solution}
+    \item 
+    \begin{problem}
+        Prove that any two norms on a finite-dimensional vector space are comparable.
+    \end{problem}
+    \begin{solution}
+        Let $V$ be a finite dimensional vector space and $|\;|_1, |\;|_2$ be norms on $V$. Let $T: (V, |\;|_1) \to (V, |\;|_2)$ be the identity map.\footnote{$T$ is a linear transform because $T(\alpha v + w) = \alpha v + w = \alpha T(v) + T(w)$.} By Corollary 4 on the book, we have that $T$ is continuous (and indeed, a homoemorphism), and thus by Theorem 2, $||T||< \infty.$ Thus, we have that 
+        \begin{align}
+        \sup_{v \in V}\frac{|T(v)|_2}{|v|_1} < \infty. 
+        \end{align}
+        In particular, since we are dealing with the identity map, we have that there exists some positive $C$ constant such that for all nonzero vectors $v \in V,$ 
+        \[\frac{|v|_2}{|v|_1}\leq C.\] Now consider $T^{-1}.$ This is also continuous because $T$ is a homoeomorphism, and so $||T^-1||< \infty.$ Thus, we have that 
+        \[\sup_{v\in V}\frac{|T(v)|_1}{|v|_2}< \infty.\] In particular, since we are dealing with the identity map, there exists some positive $c$ constant such that for all nonzero vectors $v \in V,$
+        \begin{align}
+        \frac{|v|_1}{|v|_2}\leq c.    
+        \end{align}
+        Combining $(1)$ and $(2)$ we find that 
+        \[\frac{1}{C}\leq \frac{|v|_1}{|v|_2}\leq c,\] and thus $|\;|_1$ and $|\;|_2$ are comparable.
+    \end{solution}
+    \item  
+    \begin{problem}
+        Consider the norms 
+        \[|f|_{L^1} = \int_0^1 |f(t)|dt, \qquad |f|_{C^0} = \max\{f(t)\;: \; t\in[0,1]\},\] defined on the infinite-dimensional vector space $C^0([0,1], \bbR).$ Show that the norms are not comparable by finding functions $f \in C^0([0,1], \bbR),$ whose integral norm is small but whose $C^0$ is $1.$
+    \end{problem}
+    \begin{solution}
+    Suppose $|\;|_{L^1}$ and $|\;|_{C^0}$ are comparable, then there exists some positive $c, C$ such that for any $f \in C^0([0,1], \bbR),$
+    \[c \leq \frac{\int_0^1 f(t)dt}{\max\{f(t)\; ; \; t\in [0,1]\}}\leq C.\]
+        Consider a sequence of functions $f_n: [0,1]\to \bbR.$
+        \[f_n(x)= x^n.\] Each $f_n$ is continuous, and each achieves their maximum at $x = 0$ at $f(x) = 1.$ However, as $n\to \infty,$ we claim that $\int_0^1|f_n(t)|dt \to 0.$ To see this, use the FTC:
+        \[\left|\int_0^1|t^n|dt\right| = \int_0^1|t^n|dt = \int_0^1 t^ndt = \frac{1}{n+1}\to 0.\] Thus, for any $c>0,$ there exists an $N\in \bbN$ such that if $n\geq N,$  we have that 
+        \[|f_n|_{L^1}< c,\] and thus we have a contradiction since for any $c>0,$ we have that for large $n,$
+        \[\frac{\int_0^1 f_n(t)dt}{\max\{f_n(t)\;:\;t\in [0,1]\}} = \int_0^1 t^n dt = \frac{1}{n+1} < c.\]
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    Let $|\;| = |\;|_{C^0}$ be the supremum norm on $C^0$ as defined ini Problem 6. Define an integral transformation $T: C^0 \to C^0$ by 
+    \[T: f \to \int_0^xf(t)dt.\]
+\end{problem}
+\begin{enumerate}
+    \item Show that $T$ is linear, continuous, and find its norm.
+    \begin{solution}
+        \begin{enumerate}
+            \item (Linear) We want to show that if $f,g \in C^0$ and $\alpha \in \bbR,$ then $T(\alpha f + g) = \alpha T(f) + T(g).$ Thus, we use the linearity of the integral:
+            \begin{align*}
+                T(\alpha f +g) &= \int_0^x \alpha f(t) + g(t)dt\\
+                &= \int_0^x \alpha f(t)dt + \int g(t)dt\\
+                &= \alpha\int_0^x f(t)dt + \int g(t)dt\\
+                &= \alpha T(f) + T(g).
+            \end{align*}
+            \item (Continuous) To show that $T$ is continuous, then by Theorem 2, it will suffice to show that $||T||< \infty.$ Since $f$ is continuous on $[0,1],$ it achieves its maximum on it. Thus, for any $f\in C^0,$ we have that 
+            \[\left|\int_0^xf(t)dt\right| \leq \max\{f(t)\; : \;t\in [0,1]\}.\]
+            Thus, for any $f \in C^0,$ we have that 
+            \begin{align*}
+                |T(f)| &= |\int_0^1 f(t)dt|_{C^0}\\
+                &\leq |\max\{f(t) \; : \; t\in [0,1]\}|_{C^0}\\
+                &= \max\{f(t) \; : \; t\in [0,1]\}\\
+                &= |f|_{C^0}
+            \end{align*}
+            Thus, for any $f \in C^0:$
+            \begin{align*}
+                \frac{|T(f)|_{C^0}}{|f|_{C^0}} &\leq \frac{|f|_{C^0}}{|f|_^{C^0}}\\
+                &= 1
+            \end{align*}
+            Thus, because this is true for any $f\in C^0,$ we have that $||T||< 1 < \infty.$
+            \item (Norm) We defined the usual operator norm on $T:$
+            \[||T|| = \sup_{f\in C^0}\frac{|T(f)|_{C^0}}{|f|_{C^0}}.\]
+        \end{enumerate}
+    \end{solution}
+    \item  Let $f_n(t) = \cos(nt)$, $n=1,2, \dots$ What is $T(f_n)$?
+    \begin{solution}
+        We use the fundamental theorem of calculus!
+        \[T(f_n) = \int_0^x \cos(nt)dt = \frac{1}{n}
+        \sin(nx)\]
+    \end{solution}
+    \item  Is the set of functions $K = \{f_n : n \in \bbN\}$ closed? Bounded? Compact?
+    \begin{solution} We shall check each condition.
+        \begin{enumerate}
+            \item (Closed) Not closed since $K$ has no limit points. Suppose it is closed though! Then $f_n(t) \to f$ with $f \in K.$ Thus, we have that for large $n,$ 
+            \[|f_n - f|_{C^0}< \epsilon,\] and thus using the reverse triangle, we have that 
+            \[||f_n|_{C^0} - |f|_{C^0}|\leq |f_n - f|_{C^0} , \epsilon.\] Since $|f_n|_{C^0} = 1,$ then we have that $|f|_{C^0} = 1.$ Since $f_n(t) \to f$ and since $T$ is continuous, we now have that $T(f_n) \to T(f).$ By work in the following section, we have that $T(f(n))\to 0,$ and thus by the same logic as above, $|T(f)|_{C^0} = 0.$ However, this is a contradiction, since 
+            \[T(f) = \int_0^1 f(t)dt\] and $|f(t)|_{C^0} = 1,$ which, since $T$ is a linear transform, implies that $T$ only sends the zero vector to the zero vector!
+
+            
+            \item For any $n \in \bbN,$ we have that 
+            \[|\cos(nt)|_{C^0} =1,\] and thus $f_n$ is uniformly bounded since for any $t \in [0,1],$ $n \in \bbN,$ $f_n(t)\leq 1.$
+            \item We claim that $K$ is not compact. By Arzela-Ascoli, it suffices to show that $K$ is not equicontinuous. Let $\epsilon = \frac{1}{2}$ and take $x = 0$ and $y = \frac{\pi}{2 n}$ then for all $\delta>0,$ if $n$ large, we have that $|x-y|< \delta,$ but 
+            \[|f_n(x) - f_n(y)|_{C^0} = |\cos(n0) - \cos(n\frac{\pi}{2n})|_{C^0} = |1 - \cos(\frac{\pi}{2})|_{C^0} = 1.\] Thus, $K$ is not equicontinuous, and thus not compact.
+        \end{enumerate}
+    \end{solution}
+    \item 
+    \begin{problem}
+        Is $T(K)$ compact? How about its closure?
+    \end{problem}
+    \begin{solution}
+    We make heavy use of Arzela-Ascoli.
+        \begin{enumerate}
+            \item $(T(K))$ We claim that $T(K)$ is not compact. To do this, it suffices by Arzela-Ascoli to show that it is not closed. Consider that $T(K) = \{\frac{1}{n}\sin(nx)\; :\; n \in \bbN\}$ by part (b). We claim that $z(x) = 0$ is a limit point of $T(k),$ but $z(x)\notin T(k).$ We claim that 
+            $T(f_n)\to z(x)$ uniformly. To see this, let $\epsilon>0,$ then for $n$ large, we have that 
+            \[\left|T(f_n(x)) - 0\right| = \left|\frac{1}{n}\sin(nx)\right|\leq \frac{1}{n}< \epsilon.\] Evidently, we have that $z(x)\notin T(K)$ since $z(x)\neq \frac{1}{n}\sin(nx)$ for any $n\in \bbN.$ Thus, $T(K)$ is not closed.
+            \item $(\overline{T(K)})$ By definition, $\overline{T(K)}$ is closed. Let $\overline{(T(f_n))\in T(K)}.$ Thus, $T(f_n)= \frac{1}{n}\sin(nx),$ which converges, and thus any subsequence of it converges to a function which is in the closure. Thus, the closure is compact. Evidently, since $T(K)$ is uniformly bounded, then $\overline{T(K)}$ is uniformly bounded. Thus, by Arzela-Ascoli, we have compactness.
+        \end{enumerate}
+    \end{solution}
+\end{enumerate}
+\newpage
+\section*{Problem 8}
+\begin{problem}
+     Let $f : U \to \bbR^m$ be differentiable, $[p,q] \subset U\subset \bbR^n$ , and ask whether the direct generalization of the one-dimensional Mean Value Theorem is true: Does there
+ exist a point $\theta \in [p,q]$ such that
+ \begin{align}
+ f(q) - f(p) = Df_{\theta}(q-p)?    
+ \end{align}
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+         Take $n=1,$ $m=2,$ and examine the function $f(t) = (\cos(t), \sin(t))$ for $t \in [\pi, 2\pi].$ Take $p =\pi$ and $q = 2\pi.$ Show that there is no $\theta \in [p,q]$ that satisfies (3).
+    \end{problem}
+    \begin{solution}
+       Suppose there does exist some $\theta \in [\pi, 2\pi]$ such that 
+       \[f(2\pi) - f(\pi) = 
+       \begin{bmatrix}
+           1 & 0
+       \end{bmatrix} - \begin{bmatrix}
+           -1 & 0
+       \end{bmatrix}
+       = \begin{bmatrix}
+           2 & 0
+       \end{bmatrix}= Df_\theta(\pi).\] Since $\theta$ exists, we have that 
+       \[Df_\theta = \begin{bmatrix}
+           \frac{\partial f_1}{\partial \theta} & \frac{\partial f_2}{\partial \theta}
+       \end{bmatrix} = \begin{bmatrix}
+           -\sin(\theta) & \cos(\theta)
+           \end{bmatrix},\] thus, we have that 
+           \[
+            \begin{bmatrix}
+                2 & 0
+            \end{bmatrix} = \begin{bmatrix}
+                -\pi \sin(\theta) & \pi \cos(\theta)
+            \end{bmatrix}
+           \implies \theta = \frac{3\pi}{2}.
+           \] However, since $\theta = \frac{3\pi}{2},$ then $-\pi\sin(\theta) = \pi \neq 2,$ which is a contradiction.
+    \end{solution}
+    \item 
+    \begin{problem}
+    Assume the set of derivatives 
+    \[(Df)_x \in \{\mathscr{L}(\bbR^n, \bbR^m)\; : \; x\in [p,q]\}\] is convex. Prove there exists $\theta \in [p,q]$ which satisfies (28).    
+    \end{problem}
+    \begin{solution}
+        We use two facts from googling support plane:
+        \begin{enumerate}
+            \item If $X$ is compact convex and $Y$ is closed convex and $X \cap Y = \emptyset,$ there exists a hyperplane $H_{u,\alpha} = \{x \; | \alpha = \langle u, x \rangle\}$ such that for all $x \in X$ and $y \in Y,$ we have that 
+            \[\langle u, x\rangle < \alpha < \langle u, y\rangle.\]
+            \item If $X$ is convex and non-singular and $x_0 \in \text{rel. bd}(X),$ then there exists a hyperplane $H_{u,\alpha}$ such that $x_0 \in H_{u, \alpha}$ and for all $x\in X,$ $\langle u, x\rangle \leq \alpha$ and $X \not \subset H_{u,\alpha}.$
+        \end{enumerate}
+        Define 
+        \[\mathscr{A} := \{Df_x(q-p) \; : \; x \in [p,q]\}.\] Note that $\mathscr{A}$ is convex since if $t \in [0,1]$ we have that by the linearity of the derivative:
+        \[tDf_x(q-p) + (1-t)Df_y(q-p) = [tDf_x + (1-t)Df_y](q-p),\] where the inside of the bracket is a convex combination of the derivatives, which are convex, and thus is a derivative itself. We claim that $f(p) - f(q)\in \mathscr{A}.$ To see this, let $X = \{f(p) - f(q)\}$ and $Y = \overline{\mathscr{A}}.$ Suppose $f(q) - f(p)\not \in Y,$ then we have that $X \cap Y  = \emptyset,$ and from fact (1) we have a hyperplane $H_{u,\alpha}$ such that 
+        \[\langle u, x\rangle < \alpha < \langle u, Df_x(q-p)\rangle.\]
+        We now claim that if $U \subset \bbR^m,$ then there exists some $z_u\in [p,q]$ such that 
+        \[\langle u, f(q) - f(p)\rangle = \langle u, Df_{z_u}(q-p)\rangle.\] Let $u \in \bbR^m$ and let \[F_u(t) = \langle u, f\left(t(q) - (1-t)p\right)\rangle\] and apply one-dimensional MVT and Leibniz product rule:
+        \[F_u(1) - F_u(0) = \langle u, f(q) - f(p)\rangle = F_u'(\theta) = \langle u, Df_{\theta q + (1-\theta)p}(q-p)\rangle = \langle u, D_{z_u}(q-p)\rangle.\] Note here that $\theta \in [0,1]$ and thus $z_u  = \theta q + (1-\theta)p\in [p,q].$\\
+
+        Thus, if $f(q) - f(p) \in \mathscr{A},$ then  we are done. If it is not in $\mathscr{A},$ then either $f(q) - f(p) \in \text{rel. bd.}(\mathscr{A})$ or $f(q)  - f(p) \in \{rel. int\}(\mathscr{A}).$ If the latter, then we are done since it is still in the closure. If the former, then by fact (ii), we have that there exists a hyperplane $H_{u, \alpha}$ such that $f(q) - f(p) \in H_{u, \alpha}$ and $\langle u, f(q) - f(p)\rangle  = \alpha.$ Define $F: \bbR \to \bbR$ by 
+        \[F(t) = \langle u, f(tq  + (1-t)p)\rangle - \langle u, f(q) - f(p) \rangle t.\] $F$ is differentiable, and thus using the product rule and the chain rule and the Leibniz product rule and fact (ii) and squeez theorem (jk!):
+        \[F'(t) = \langle u, D_{tq + (1-t)p}(q-p)\rangle - \langle u, f(q) - f(p)\rangle = \langle u, D_{z_u}(q-p)\rangle - \alpha \leq 0.\]
+        Now, we basically win, since by fact (ii), we again have that $\mathscr{A} \not \subset H_{u,\alpha},$ then there exists some $t' \in [p,q]$ such that that since $F'(t)\leq 0$ for all $t$ and 
+        \[F'(t') < 0 \implies F(1) < F(0).\] However, by the very definition $F,$ we have that 
+        \[F(1) - F(0) = \langle u, f(p)\rangle - \langle u, f(q) - f(p)\rangle + \langle u, f(q)\rangle = 0.\] A contradiction! Thus, $f(q) - f(p) \in \mathcal{A}$ and we are done.
+    \end{solution}
+    
+\end{enumerate}
+
+\newpage
+\section*{Problem 9}
+ \begin{problem}
+     Assume that $U$ is a connected open subset of $\bbR^n$ and $f : U \to \bbR^m$ is differentiable everywhere on $U$. If $(Df)_p =0$ for all $p \in U$, show that $f$ is constant.
+ \end{problem}
+ \begin{solution}
+    Let $p \in U.$ Define:
+    \[A:= \{x\; : \; f(x) = f(p)\}.\] We want to show that $A$ is equal to $U.$ To do this, we prove that $A$ is clopen and that $A \neq \emptyset.$ The latter is obvious since $p \in A.$ To prove that $A$ is closed, consider that $A = f^{-1}\{f(p)\}.$ Since $f$ is differentiable on $U,$ then it is continuous on $U,$ and thus we have that since $\{f(p)\}$ is closed in $\bbR^m$ (since it is a single point), then $f^{-1}\{f(p)\}$ is closed in $U.$ To prove that $A$ is open, we must show that for any $a\in A,$ there exists some $r>0$ such that
+    \[B_r(a)\subset A.\] Since $U$ is open and $a \in U,$ then there exists some $r'>0$ such that 
+    \[B_{r'}(a)\subset U.\] Thus, let $b\in B_{\frac{r'}{2}}(a),$ then $b \in U$ and $[a,b]\subset U.$ Thus, we have by the multivariate MVT that 
+    \[|f(b) - f(a)| \leq M |b-a|, \quad M = \sup\{(Df)_x \; x \in [a,b]\} = 0.\] Thus, 
+    \[f(b) = f(a) = f(p) \implies b \in A.\] Thus, $A$ is open. Thus we have that $A$ is clopen, and thus $A = U.$ Thus, for all $x\in U,$ $f(x) = f(p),$ and so $f$ is constant on $U.$
+ \end{solution}
+
+\end{document}

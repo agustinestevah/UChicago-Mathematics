@@ -1,0 +1,763 @@
+\documentclass[11pt]{article}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustin Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Luis Silvestre}
+\newcommand{\assignment}{Problem Set 6}
+\newcommand{\semester}{Fall 2024}
+\newcommand{\duedate}{2024-11-11}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+\newcommand{\osc}{\text{osc}}
+\newcommand{\diam}{\text{diam}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+\section*{Problem 1}
+\begin{problem}
+Let $R_t = (t, t + 2\pi )\times (-\frac{1}{2}, \frac{1}{2})\subset \bbR^2.$ For each $t,$ parameterize the M\"{o}bius band by $\gamma_t: R_t \to \bbR^3$ as 
+\[\gamma_t(\theta, r) = \begin{pmatrix}
+    (1 + r\sin(\frac{\theta}{2}))\cos\theta\\
+    (1 + r\sin(\frac{\theta}{2}))\sin\theta\\
+    r\cos(\frac{\theta}{2})
+\end{pmatrix}.\] Let $F$ be a vector field such that 
+\[F = \begin{bmatrix}
+    1\\1\\1
+\end{bmatrix}\] and show that the surface integral 
+\[\int\int_{R_t} F \cdot \left(D_\theta(\gamma(\theta, r)\times D_r(\gamma(\theta, r)))\right)d\theta dr\] depends on $t.$ Evaluate the surface integral for $t\in\{0,\frac{\pi}{2},\pi,\frac{3\pi}{2},2\pi\}$. Why are the values for $t=0$ and $t=2\pi$ related?
+\end{problem}
+\begin{solution}
+    This is equivalent to integrating over $\det(F, D_\theta(\gamma), D_r(\gamma)),$ that is, we are integrating the flux form $\Phi_{F}$ over the curve $R_t$ applied to the vectors as being the partials. Thus, we have that using the change of variable formula, if we let $M$ denote the band and we let 
+    \[D_1\gamma(\theta, r) = \begin{bmatrix}
+        \frac{r}{2}\cos(\frac{\theta}{2})\cos(\theta) - r\sin(\frac{\theta}{2})\sin(\theta) - \sin(\theta)\\
+        \frac{r}{2}\cos(\frac{\theta}{2})\sin(\theta) + r\sin(\frac{\theta}{2})\cos(\theta) + \cos(\theta)\\
+        \frac{-r}{2}\sin(\frac{\theta}{2})
+    \end{bmatrix}\] and 
+    \[D_r(\gamma(\theta, r)) = \begin{bmatrix}
+        \sin(\frac{\theta}{2})\cos(\theta)\\\sin(\frac{\theta}{2})\sin(\theta)\\\cos(\frac{\theta}{2})
+    \end{bmatrix}\]
+    \begin{align*}
+    \int_M \Phi_F &= \int_{R_t} \Phi_F\left(P_{\gamma(\theta,r)} (D_1\gamma(\theta, r), D_r(\gamma(\theta, r)))\right) d\theta dr\\
+    &= \int_t^{t + 2\pi}\int_{-\frac{1}{2}}^\frac{1}{2} dy \wedge dz - dx \wedge dz + dx \wedge dy \left(P_{\begin{pmatrix}
+    (1 + r\sin(\frac{\theta}{2}))\cos\theta\\
+    (1 + r\sin(\frac{\theta}{2}))\sin\theta\\
+    r\cos(\frac{\theta}{2})
+\end{pmatrix}}\left( D_1\gamma(\theta, r), D_2\gamma(\theta, r)
+\right)\right)\\
+&= \int_t^{t + 2\pi}\int_{-\frac{1}{2}}^\frac{1}{2} \cos(\frac{\theta}{2})(\cos(\theta) + \sin(\theta)) - \sin(\frac{\theta}{2}) + \frac{r}{2}(\sin(\theta) -\cos(\theta))d\theta dr
+    \end{align*}
+We use Fubini's theorem to first evaluate the $dr$ integral:
+\[\int_{-\frac{1}{2}}^\frac{1}{2}\cos(\frac{\theta}{2})(\cos(\theta) + \sin(\theta)) - \sin(\frac{\theta}{2})dr + [\sin(\theta) - \cos(\theta)]\int_{-\frac{1}{2}}^\frac{1}{2}\frac{r}{2}dr\]
+\[= \cos(\frac{\theta}{2})(\cos(\theta) + \sin(\theta)) - \sin(\frac{\theta}{2}).\]
+Thus we need only evaluate the following:
+\begin{align*}
+\int_M \Phi_F &= \int_{t}^{t + 2\pi}\cos(\frac{\theta}{2})(\cos(\theta) + \sin(\theta)) - \sin(\frac{\theta}{2})d\theta\\
+&= -\frac{4}{3}\left(\sin(\frac{t}{2}) + \cos(\frac{t}{2})\right)^3
+\end{align*}
+Which is obviously dependent on $t.$ Here is the godawful calculation that simplifies the integral!
+   \begin{align*}
+        D_\theta(\gamma(\theta, r))\times D_r(\gamma(\theta, r)) &= \begin{bmatrix}
+        \frac{r}{2}\cos(\frac{\theta}{2})\cos(\theta) - r\sin(\frac{\theta}{2})\sin(\theta)- \sin(\theta)\\
+        \frac{r}{2}\cos(\frac{\theta}{2})\sin(\theta) + r\sin(\frac{\theta}{2})\cos(\theta)+ \cos(\theta)\\
+        \frac{-r}{2}\sin(\frac{\theta}{2})
+    \end{bmatrix} \times \begin{bmatrix}
+        \sin(\frac{\theta}{2})\cos(\theta)\\\sin(\frac{\theta}{2})\sin(\theta)\\\cos(\frac{\theta}{2})
+    \end{bmatrix}
+     \end{align*}\[=\det|\begin{bmatrix}
+        \hat{i} & \hat{j} &\hat{k}\\
+        
+        \frac{r}{2}\cos(\frac{\theta}{2})\cos(\theta) - r\sin(\frac{\theta}{2})\sin(\theta) - \sin(\theta) &
+        \frac{r}{2}\cos(\frac{\theta}{2})\sin(\theta) + r\sin(\frac{\theta}{2})\cos(\theta)  + \cos(\theta) & 
+        \frac{-r}{2}\sin(\frac{\theta}{2})\\
+        
+        \sin(\frac{\theta}{2})\cos(\theta)&
+        \sin(\frac{\theta}{2})\sin(\theta)&
+        \cos(\frac{\theta}{2})
+    \end{bmatrix}|\]
+    \[
+=\cos\left(\frac{\theta}{2}\right)\cos(\theta) - \frac{r\cos^2\left(\frac{\theta}{2}\right)\cos(\theta)}{2} + r\cos\left(\frac{\theta}{2}\right)\cos(\theta)\sin\left(\frac{\theta}{2}\right) -\] 
+\[-\cos^2(\theta)\sin\left(\frac{\theta}{2}\right) - \frac{r\cos(\theta)\sin^2\left(\frac{\theta}{2}\right)}{2} - r\cos^2(\theta)\sin^2\left(\frac{\theta}{2}\right)
+\]
+\[
++ \cos\left(\frac{\theta}{2}\right)\sin(\theta) + \frac{r\cos^2\left(\frac{\theta}{2}\right)\sin(\theta)}{2} + r\cos\left(\frac{\theta}{2}\right)\sin\left(\frac{\theta}{2}\right)\sin(\theta) +\] \[+\frac{r\sin^2\left(\frac{\theta}{2}\right)\sin(\theta)}{2} - \sin\left(\frac{\theta}{2}\right)\sin^2(\theta) - r\sin^2\left(\frac{\theta}{2}\right)\sin^2(\theta).
+\]
+\[ = \cos(\frac{\theta}{2})\cos(\theta) - \frac{r}{2}\cos(\theta)  + \frac{r}{2}\sin^2(\theta) - \sin(\frac{\theta}{2})- r\sin^2(\frac{\theta}{2}) + \cos(\frac{\theta}{2})\sin(\theta)\]
+\[+\frac{r}{2}\sin(\theta) + \frac{r}{2}\sin^2(\theta)\]
+\[ = \cos(\frac{\theta}{2})\cos(\theta) - \frac{r}{2}\cos(\theta)  - \sin(\frac{\theta}{2}) + \cos(\frac{\theta}{2})\sin(\theta)+\frac{r}{2}\sin(\theta)\]
+\[= \cos(\frac{\theta}{2})(\cos(\theta) + \sin(\theta)) - \sin(\frac{\theta}{2}) + \frac{r}{2}(\sin(\theta) -\cos(\theta))\]
+\end{solution}
+   \begin{table}[h!]
+    \centering
+    \begin{tabular}{c|c}
+        $t$ & \text{Surface Integral Value} \\
+        \hline
+        $0$ & $\frac{-4}{3}$ \\
+        $\frac{\pi}{2}$ & $-\frac{8\sqrt{2}}{3}$ \\
+        $\pi$ & $\frac{-4}{3}$ \\
+        $\frac{3\pi}{2}$ & $0$ \\
+        $2\pi$ & $\frac{4}{3}$ \\
+    \end{tabular}
+    \caption{Values of the surface integral for various $t$.}
+    \label{tab:surface_integral}
+\end{table}
+\begin{solution}
+$t = 0$ and $t = 2\pi$ are related because we have gone one full rotation across the Mobius strip and they change in sign is due to the non-orientability of the strip.
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Let $\gamma:\mathbb{R}^2\rightarrow\mathbb{R}^3$ given by
+\begin{equation*}
+\gamma(u,v)=\bigg(\frac{2u}{1+u^2+v^2},\:\frac{2v}{1+u^2+v^2},\:\frac{-1+u^2+v^2}
+{1+u^2+v^2}\bigg)
+\end{equation*}
+\noindent be a parametrization for a surface $\Sigma\subset\mathbb{R}^3$
+\end{problem}
+\begin{itemize}
+\begin{problem}
+    \item[(a)] Show that $\Sigma\subset S^2$.
+    \end{problem}
+    \begin{solution}Let $p \in \Sigma.$ Since $\Sigma$ is parameterized by $\gamma,$ we have that there exist $u, v\in \bbR^2$ such that 
+        \[\gamma(u, v) = p = \left(\frac{2u}{1+u^2+v^2},\:\frac{2v}{1+u^2+v^2},\:\frac{-1+u^2+v^2}
+{1+u^2+v^2}\right).\] It suffices to show that $||p|| = 1$ or equivalently, $||p||^2 = 1$ To do this, consider that 
+\begin{align*}
+    ||p||^2 &= (\frac{2u}{1+u^2+v^2})^2 + (\frac{2v}{1+u^2+v^2})^2 + (\frac{-1+u^2+v^2}
+{1+u^2+v^2})^2\\
+&= \frac{4u^2 + 4v^2 + (-1 + u^2 + v^2)^2}{(1 + u^2 + v^2)^2}\\
+&= \frac{4u^2 + 4v^2 + 1 - 2(u^2 + v^2) + (u^2 + v^2)^2}{(1 + u^2 + v^2)^2}\\
+&= \frac{2u^2 + 2v^2 + 1 u^4 + 2u^2v^2 + v^4}{(1 + u^2 + v^2)^2}\\
+&= 1
+\end{align*} Thus, we have that $p \in S^2.$
+\end{solution}
+\begin{problem}
+    
+\item[(b)] Show that $\alpha$ is a bijection from $\mathbb{R}^2$ to $S^2\setminus(0,0,1)$. The parametrization $\gamma$ is known as stereographic
+projection, and can be viewed geometrically as follows: take a line $L$ in $\bbR^3$ that connects the north pole $(0,0,1)$ and a point $(u,v,0)$. Then $\gamma(u,v)$ is the point of intersection of $L$ and $S^2\setminus(0,0,1)$.
+\end{problem}
+\begin{solution}
+    Suppose $\gamma(u,v) = \gamma(u', v'),$ we wish to show that $(u,v) = (u',v').$
+        \[\gamma(u,v) = \bigg(\frac{2u}{1+u^2+v^2},\:\frac{2v}{1+u^2+v^2},\:\frac{-1+u^2+v^2}
+{1+u^2+v^2}\bigg) = \bigg(\frac{2u'}{1+u'^2+v'^2},\:\frac{2v'}{1+u'^2+v'^2},\:\frac{-1+u'^2+v'^2}
+{1+u'^2+v'^2}\bigg)\] and so
+\[\frac{2u}{1+u^2+v^2} = \frac{2u'}{1+u'^2+v'^2}\]
+\[\frac{2v}{1+u^2+v^2} = \frac{2v'}{1+u'^2+v'^2}\]
+\[\frac{-1+u^2+v^2}
+{1+u^2+v^2} = \frac{-1+u'^2+v'^2}
+{1+u'^2+v'^2}\] If we call the denominators $d$ and $d',$ respectively, then we get that 
+\[u = \frac{u'd}{d'}, \quad v = \frac{v'd}{d'}, \quad \frac{-1+u^2+v^2}
+{d} = \frac{-1+u'^2+v'^2}
+{d'}.\]
+Three equations, three unknowns. Oh boy. From the third equation:
+\[\frac{-2 + d}{d}= \frac{-2 + d'}{d'} \implies d = d'.\] The rest follows from here, as $u = u'$ and $v = v'.$ Thus, we have a nice injection.\\
+
+Let $s \in S^2\sm (0,0,1).$ We can express $s$ as $(x,y,z).$ Thus, we get that 
+\[z = \frac{-1 + u^2 +v^2}{1 + u^2 + v^2}\implies z(1 + u^2 + v^2) = -1 + u^2 + v^2 \implies u^2 + v^2 = \frac{1+z}{1 -z}.\]
+Thus, we get that 
+\[x = \frac{2u}{1 + \frac{1+z}{1-z}} \implies u = \frac{x + x\frac{1+z}{1-z}}{2}, \qquad v = \frac{y + y\frac{1+z}{1-z}}{2}.\] It is left up to the reader to double check that using these choices of $u$ and $v$ yields $(x,y,z),$ but note that the reader should use the fact that $x^2 + y^2 + z^2 =1.$
+\end{solution}
+\begin{problem}
+    
+\item[(c)] Using the parametrization $\gamma$, compute the surface area of $S^2$.
+\end{problem}
+\begin{solution}
+We compute using the flux form of $\Phi_F,$ where $F$ is just the parametrization.
+\begin{align*}
+    \int_S^2 \Phi_F &=
+    \int_{S^2} x dy\wedge dz - y dx\wedge dz + z dx \wedge dy\\ &= \int_{\gamma[\bbR^2]}dy\wedge dz - dx\wedge dz + dx \wedge dy\\
+    &= \int_\bbR\int_\bbR x dy\wedge dz - y dx\wedge dz + z dx \wedge dy\left(P_{\gamma(u,v) } D_1\gamma(u,v), D_2(\gamma(u,v))\right)dudv\\
+    &= \int_\bbR\int_\bbR xdy\wedge dz - ydx\wedge dz + zdx \wedge dy\left(P_{\gamma(u,v) } \begin{bmatrix}
+\frac{2(1 + v^2 - u^2)}{(1 + u^2 + v^2)^2} \\
+\frac{-4uv}{(1 + u^2 + v^2)^2} \\
+\frac{2u}{(1 + u^2 + v^2)^2}
+\end{bmatrix}, 
+\begin{bmatrix}
+\frac{-4uv}{(1 + u^2 + v^2)^2} \\
+\frac{2(1 + u^2 - v^2)}{(1 + u^2 + v^2)^2} \\
+\frac{2v}{(1 + u^2 + v^2)^2}
+\end{bmatrix}\right)dudv\\
+&= \int_{\bbR^2} \frac{2u}{1 + u^2 + v^2}\det 
+\begin{bmatrix}
+    \frac{-4uv}{(1 + u^2 + v^2)^2} & \frac{2(1 + u^2 - v^2)}{(1 + u^2 + v^2)^2}\\
+    \frac{2u}{(1 + u^2 + v^2)^2} & \frac{2v}{(1 + u^2 + v^2)^2}
+\end{bmatrix} du dv\\
+&\qquad -\int_{\bbR^2} \frac{2v}{1 + u^2 + v^2}\det
+\begin{bmatrix}
+    \frac{2(1 + v^2 - u^2)}{(1 + u^2 + v^2)^2} & \frac{-4uv}{(1 + u^2 + v^2)^2}\\
+    \frac{2u}{(1 + u^2 + v^2)^2} & \frac{2v}{(1 + u^2 + v^2)^2}
+\end{bmatrix}du dv\\
+ &\qquad + \int_{\bbR^2} \frac{-1 + u^2 + v^2}{1 + u^2 + v^2}\det
+ \begin{bmatrix}
+     \frac{2(1 + v^2 - u^2)}{(1 + u^2 + v^2)^2} & \frac{-4uv}{(1 + u^2 + v^2)^2}\\
+     \frac{-4uv}{(1 + u^2 + v^2)^2} & \frac{2(1 + u^2 - v^2)}{(1 + u^2 + v^2)^2}
+ \end{bmatrix} du dv\\
+ &= \int_{\bbR^2} \frac{4}{(1 + u^2 + v^2)^2}dudv
+\end{align*}
+Using the change of variable 
+\[g(u,v) = \begin{bmatrix}
+    r\cos(\theta)\\
+    r\sin(\theta)
+\end{bmatrix},\] then we get that using the nifty change of variable formula:
+\begin{align*}
+\int_{\bbR^2}  \frac{4}{(1 + u^2 + v^2)^2}du\wedge dv &= \int_0^{2\pi}\int_0^\infty \frac{4}{(1 + u^2 + v^2)^2}du\wedge dv \left(|P_{\begin{pmatrix}
+    r\cos(\theta)\\
+    r\sin(\theta)
+\end{pmatrix}}, \begin{pmatrix}
+    \cos(\theta) \\ \sin(\theta) 
+\end{pmatrix}, \begin{pmatrix}
+    -r\sin(\theta)\\r\cos(\theta)
+\end{pmatrix}\right)drd\theta  \\
+&= \int_0^{2\pi}d\theta\int_0^\infty \frac{4r}{(1 + r^2)^2} dr\\
+&= 4\pi
+\end{align*}
+
+
+    
+\end{solution}
+
+\item[(d)] Compute the surface area of $S^2$ again, now using the parametrization
+$\beta:[0,2\pi)\times[0,\pi]\rightarrow\bbR^3$ given by
+\begin{equation*}
+\beta(\theta,\phi)=\big(\cos\theta\sin\phi,\:\sin\theta\sin\phi,\:\cos\phi\big).
+\end{equation*}
+\begin{solution}
+    Using the same thing:
+    \begin{align*}
+        &\int_{S^2} xdy\wedge dz - ydx\wedge dz + zdx \wedge dy= \int_{\beta} xdy\wedge dz - ydx\wedge dz + zdx \wedge dy\left(P_{\beta(\theta, \phi)}, D_1\beta, D_2 \beta\right)\\
+        &= \int_0^{2\pi}\int_0^\pi xdy\wedge dz - ydx\wedge dz + zdx \wedge dy \left(P_{\beta} \begin{bmatrix}
+            -\sin\theta\sin\phi\\
+            \cos\theta\sin\phi\\
+            0
+        \end{bmatrix}\begin{bmatrix}
+            \cos\theta\cos\phi\\
+            \sin\theta\cos\phi\\
+            -\sin\phi
+        \end{bmatrix}\right)d\theta d\phi\\
+        &= \int_0^{2\pi}\int_0^\pi \cos\theta\sin\phi\det 
+        \begin{bmatrix}
+            \cos\theta\sin\phi & \sin\theta\cos\phi\\
+            0 & -\sin\phi
+        \end{bmatrix} - \sin\theta\sin\phi\det
+        \begin{bmatrix}
+            -\sin\theta\sin\phi & \cos\theta\cos\phi\\
+            0 & -\sin\phi
+        \end{bmatrix} + 
+        \\&\qquad + 
+        \cos \phi\det
+        \begin{bmatrix}
+            -\sin\theta\sin\phi & \cos\theta\cos\phi\\
+            \cos\theta\sin\phi & \sin\theta\cos\phi
+        \end{bmatrix} d\theta d\phi\\
+        &= \int_0^{2\pi}\int_0^\pi (-\cos^2\theta \sin^3\phi -  \sin^2\theta\sin^3\phi - \sin\phi\cos^2\phi) d\theta d\phi\\
+        &= -\int_0^{2\pi}\int_0^\pi \sin^3\phi + \sin\phi\cos^2\phi d\theta d\phi\\
+        &= -\int_0^{2\pi}\int_0^\pi \sin\phi d\theta d\phi\\
+        &= 4\pi
+    \end{align*}
+\end{solution}
+\end{itemize}
+
+\newpage
+\section*{Problem 3}
+\begin{itemize}
+\begin{problem}
+\item[(a)] Compute the surface integral \[\iint_{S_r}F\cdot n\:dA,\] where $F$ is
+the vector field
+\begin{equation*}
+F(x,y,z)=\frac{\vec{r}}{|r|^3}=\bigg(\frac{x}{(x^2+y^2+z^2)^\frac{3}{2}},\frac{y}
+{(x^2+y^2+z^2)^\frac{3}{2}},\frac{z}{(x^2+y^2+z^2)^\frac{3}{2}}\bigg).
+\end{equation*}
+Here $S_r$ is the sphere of radius $r$ centered at the origin.
+\end{problem}
+\begin{solution}
+    We have that 
+    \[\int\int_{S_r} F \cdot n dA = \int \int_{S_r}\Phi_F,\] where $\Phi_F$ is the flux form of $F.$ Using Stoke's Theorem/Divergence Theorem, we have that since $S_r$ is the boundary of the open ball $B_r(0),$ then 
+    \[\int \int_{S_r}\Phi_F = \int_{B_r(0)}d\Phi_F = \int_{B_r(0)} M_{\nabla \cdot F} = \int_{B_r(0)}\nabla \cdot F dx \wedge dy \wedge dz.\] We can parameterize $B_r(0)$ by 
+    \[\gamma: [0,2\pi]\times [0,\pi]\times (0,r) \to \bbR^3\]
+    \[\gamma(\theta,\phi, r) = \begin{pmatrix}
+        r\cos\theta \sin\phi\\
+        r\sin\theta \sin\phi\\
+        r\cos\phi
+    \end{pmatrix}\]
+    Thus, we have that 
+    \[D_1\gamma = \begin{bmatrix}
+        -r\sin\theta\sin\phi\\
+        r\cos\theta\sin\phi\\
+        0
+    \end{bmatrix}, \quad D_2\gamma = \begin{bmatrix}
+        r\cos\theta\cos\phi\\
+        r\sin\theta\cos\phi\\
+        -r\sin\phi
+    \end{bmatrix}, \quad D_3\gamma =  \begin{bmatrix}
+        \cos\theta \sin\phi\\
+        \sin\theta \sin\phi\\
+        \cos\phi
+    \end{bmatrix}.\] 
+    
+    Moreover, we have that 
+    \begin{align*}
+    \nabla \cdot F &= \frac{(x^2 + y^2 + z^2)^{\frac{3}{2}} - 3x^2(x^2+ y^2 + z^2)^\frac{1}{2}}{(x^2 + y^2 + z^2)^3} + \frac{(x^2 + y^2 + z^2)^{\frac{3}{2}} - 3y^2(x^2+ y^2 + z^2)^\frac{1}{2}}{(x^2 + y^2 + z^2)^3} + \frac{(x^2 + y^2 + z^2)^{\frac{3}{2}} - 3z^2(x^2+ y^2 + z^2)^\frac{1}{2}}{(x^2 + y^2 + z^2)^3}\\
+    &= 0, \qquad (x,y,z)\neq 0
+   \end{align*} Since the divergence is not well defined over all the sphere, we cannot resort to using the Divergence Theorem. Thus, we must resort to applying computing the surface integral directly (the second equality I put for how the differential form would have worked, but it is much too tedious to compute) using a change of variable with the parameterization of the sphere given in the previous problem.
+   \begin{align*}
+       \int\int_{S_r}\Phi_F &=\int \int_{\beta} F_1 dy \wedge dz - F_2 dx\wedge dz + F_3dx \wedge dy \left(P_{\beta} \begin{bmatrix}
+            -\sin\theta\sin\phi\\
+            \cos\theta\sin\phi\\
+            0
+        \end{bmatrix}\begin{bmatrix}
+            \cos\theta\cos\phi\\
+            \sin\theta\cos\phi\\
+            -\sin\phi
+        \end{bmatrix}\right) d\theta d\phi\\
+       &= \int_0^{2\pi}\int_0^\pi \frac{\hat{r}}{r^2}\cdot \hat{r}\det \begin{bmatrix}
+        -r\sin\theta\sin\phi & r\cos\theta\cos\phi &\cos\theta \sin\phi\\
+        r\cos\theta\sin\phi & r\sin\theta\cos\phi &\sin\theta \sin\phi\\
+        0 & -r\sin\phi & \cos\phi
+    \end{bmatrix}d\theta d\phi \\
+    &= \int_0^{2\pi}\int_0^\pi  \frac{1}{r^2}\cdot r^2\sin\theta d\theta d\phi\\
+    &= \int_0^{2\pi}\int_0^\pi  \sin\theta d\theta d\phi \\
+    &= 4\pi 
+   \end{align*}
+   
+    
+\end{solution}
+\begin{problem}
+\item[(b)] Compute $\mathrm{div} F$ on $\mathbb{R}^3\setminus\{0\}$.
+\end{problem}
+\begin{solution}
+    As shown above, $\nabla \cdot F = 0.$
+\end{solution}
+\item[(c)] Let $\Omega$ be some arbitrary bounded open set in $\bbR^3$ that contains
+the origin and has a smooth boundary. Compute
+\begin{equation*}
+\int_{\partial \Omega}F\cdot n \, \dd A.
+\end{equation*}
+\begin{solution}
+   Since $\Omega$ is open, there exists some $r>0$ such that $B_r(0)\subset \Omega.$ Thus, we compute the surface integral by splitting $\Omega$ into $B_r(0)$ and $\Omega \setminus B_r(0):$ 
+   \[\int_{\partial \Omega}F\cdot n \, \dd A = \int_{S_r}F\cdot n \dd A + \int_{\partial (\Omega\setminus B_{r}(0))} F\cdot n \dd A.\] The first term we have computed in part $A,$ and the second we use the fact that we can now in fact use the divergence theorem with $\nabla \cdot F = 0.$ Thus, we are simply left with 
+   \[\int_{\partial \Omega}F\cdot n \, \dd A = 4\pi.\]
+\end{solution}
+\end{itemize}
+
+\begin{reflection}
+This motivates us saying that $\mathrm{div}F=4\pi\delta$ (where $\delta$ is
+the ``Dirac delta").
+\end{reflection}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    For a $C^2$ function $f:U\subset\mathbb{R}^2\rightarrow\mathbb{R}$, we define the
+Laplacian as
+\begin{equation*}
+\Delta f=\mathrm{div}(\nabla f).
+\end{equation*}
+Let $\Omega$ be any open set inside $U$ with a piecewise smooth boundary. We write
+$\partial\Omega$ to denote the boundary of $\Omega$ and $n$ is the unit normal
+vector pointing outwards. We write $\dd A$ to denote the differential of area on $\partial \Omega$ and $\partial_n u$ is the directional derivative in the direction
+$n$. Prove the following two identities.
+\begin{align*}
+\int_\Omega |\nabla u|^2 + u \Delta u \, \dd x &= \int_{\partial \Omega} u \partial_n u \, \dd A, \\
+\int_\Omega u \Delta v - v \Delta u \, \dd x &= \int_{\partial \Omega} u \partial_n
+v - v \partial_n u \, \dd A.
+\end{align*}
+\end{problem}
+\begin{solution}
+    We assume $u: U \subset \bbR^2 \to \bbR$ and same for $v.$ We have by the Divergence theorem that 
+    \[\int_\Omega (\nabla \cdot F) d^3x = \int_{d\Omega} F \cdot n dA.\]
+    Recall that  
+    \[\partial_n u  = \nabla u \cdot n\]
+    Thus, if we let $F = u\nabla u,$ then \[F\cdot n = u\nabla u \cdot n = u\partial_nu.\]
+    On the left hand side, we claim that 
+    \[\nabla \cdot F = \nabla \cdot (u\nabla u) = \nabla u \cdot \nabla u + u\nabla \cdot \nabla u = |\nabla u|^2 + u\nabla^2 u.\] The second equality is all we need to show, and so it suffices to show that
+    \[\nabla \cdot (uA) = \nabla u \cdot A + u(\nabla \cdot A).\]
+    We only need to prove it for our case, so we let 
+    \[A = \begin{bmatrix}
+        v_1\\ v_2
+    \end{bmatrix} \implies uA = \begin{bmatrix}
+        uv_1\\ uv_2
+    \end{bmatrix} \implies \nabla \cdot (uA) = D_1 uv_1 + D_2 uv_2 = \left(\frac{\partial u}{\partial x}v_1 + \frac{\partial v_1} {\partial x}u\right) + \left(\frac{\partial u}{\partial y}v_2 + \frac{\partial v_2} {\partial y}u\right)\]
+    Thus, we have that 
+    \[\nabla \cdot (uA) = \left(\frac{\partial u}{\partial x}v_1 + \frac{\partial u}{\partial y}v_2\right) +u\left(\frac{\partial v_1} {\partial x} + \frac{\partial v_2} {\partial y}\right)\]
+    On the RHS, we have that 
+    \[\nabla u \cdot A= \begin{bmatrix}
+        D_1 u\\ D_2 u
+    \end{bmatrix}\cdot \begin{bmatrix}
+        v_1\\ v_2
+    \end{bmatrix} = \left(\frac{\partial u}{\partial x}v_1 + \frac{\partial u}{\partial y}v_2\right)\]
+    \[\nabla\cdot  A = D_1v_1 + D_2v_2 = \frac{\partial v_1} {\partial x} + \frac{\partial v_2} {\partial y}\]
+
+    For the latter identity, we again make use of the divergence theorem, letting 
+    \[F = u\nabla v - v\nabla u \implies F \cdot n = (u\nabla v - v\nabla u)\cdot n = u\partial_n v - v\partial_n u.\]
+    Thus, we have that by Gauss that 
+    \[\int_{d\Omega} F \cdot n dA = \int_\Omega (\nabla \cdot F) d^3x,\] so it suffices to show that 
+    \[\nabla \cdot (u\nabla v - v\nabla u) = u\nabla^2 v  - v\nabla^2 u.\]
+    We have that 
+    \[\nabla \cdot (u\nabla v - v\nabla u) = \nabla \cdot u\nabla v - \nabla \cdot v\nabla u.\] By the logic in the previous problem, we have that 
+    \[\nabla \cdot u \nabla v = \nabla u \cdot \nabla v + u(\nabla \cdot \nabla v) = \nabla u \cdot \nabla v + u\nabla^2v, \quad \nabla\cdot v\nabla u = \nabla v \cdot \nabla u + v(\nabla \cdot \nabla u) = \nabla v \cdot \nabla u + v\nabla^2 u\]
+    Thus, we have that the difference between the two quantities above gives 
+    \[u\nabla^2 v - v\nabla^2 u,\] as desired.
+\end{solution}
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Let $f:U\subset\mathbb{R}^2\rightarrow\mathbb{R}^2$ be a continuously
+differentiable function. Write $f$ as
+\begin{equation*}
+f(x,y)=u(x,y)e_1+v(x,y)e_2=\begin{pmatrix}u(x,y) \\ v(x,y)\end{pmatrix}.
+\end{equation*}
+\noindent Assume that for all $p\in U$ the derivative of $f$ at $p$ (which we write
+$Df_p$) is a scalar matrix (a multiple of the identity). In other words, we have
+\begin{equation*}
+Df_p= \lambda(p) \mathrm{I} = \begin{bmatrix}
+    \frac{\partial u(x,y)}{\partial x} = \lambda(p) & \frac{\partial u(x,y)}{\partial y} = 0\\
+    \frac{\partial v(x,y)}{\partial x} = 0 & \frac{\partial v(x,y)}{\partial y} = \lambda(p)
+\end{bmatrix}
+\end{equation*}
+\noindent where $\lambda:U\rightarrow\mathbb{R}$ is some continuous strictly-
+positive function on $U$. Let $\gamma$ be a simple closed curve in $U$ which bounds
+a region entirely contained in $U$. Prove that
+\begin{equation*}
+\int_\gamma u\:dx+u\:dy=\int_\gamma-v\:dx+v\:dy.
+\end{equation*}
+\end{problem}
+\begin{solution}
+    We use Green's theorem, which states that if $W_f$ is the one-form of $f,$ then if $S$ is the surface bounded by $\gamma:$
+    \begin{align}
+      \int_\gamma W_f = \int_S dW_f  
+    \end{align}
+    Let \[W_{f_1} = udx + udy,\qquad W_{f_2} = -vdx + vdy.\] 
+    Thus. we claim that that:
+    \begin{align}
+        dW_{f_1} &= (D_1u - D_2u)dx\wedge dy = (\lambda(p) - 0)dx \wedge dy;\\
+        dW_{f_2} &= (D_1v + D_2v)dx\wedge dy = (0 + \lambda(p))dx \wedge dy.
+    \end{align}
+    This first equality can be shown as follows. Suppose $F = \begin{bmatrix}
+        F_1\\ F_2
+    \end{bmatrix},$ then $W_F = F_1dx + F_2.$ Then by properties of the exterior derivative and the wedge product:
+    \begin{align*}
+        dW_{F} &= d(F_1dx + F_2dy)\\ &= (D_1F_1dx + D_2F_1 dy)\wedge dx + (D_1F_2dx + D_2F_2dy)\wedge dy\\ &= (D_1F_2-D_2F_1) dx \wedge dy.
+    \end{align*}
+    Thus, from (1), (2), and (3), we get:
+    \[\int_\gamma udx + udy =\int_\gamma W_{f_1} = \int_S dW_{f_1} = \int_S \lambda(p)dx\wedge dy = \int_S dW_{f_2} =  \int_\gamma W_{f_2} = \int_\gamma -vdx + vdy.\]
+\end{solution}
+
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Find an open set $\Omega \subset \bbR^2$ and a smooth vector field $F :\Omega \to \bbR^2$ such that the set
+\[ \left\{ \int_{C} F \cdot \tau \, \dd s : C \text{ is a closed loop contained
+in } \Omega \right\}\]
+is dense in $\bbR$.
+\end{problem}
+\begin{solution}
+    We have by work shown in class that if $F_1 = \begin{bmatrix}
+        F_1\\F_2
+    \end{bmatrix},$ then $F\cdot \tau ds = W_F = F_1dx + F_2dy.$ Thus, Green states that if $C$ is the curve around some region $S \subset \bbR^2,$ then
+    \[\int_C F_1dx + F_2dy = \int_C W_F = \int_S dW_F = \int_S(D_2F_1 - D_1F_2)dx \wedge dy.\] Thus, it suffices to find some $F$ and some $\Omega$ such that if $S_\alpha\subset \Omega,$ then 
+    \[\{\int_{S_\alpha}(D_2F_1 - D_1F_2)dx \wedge dy\}\] is dense in $\bbR.$ We let 
+    \[F = 
+        \begin{bmatrix}
+        -y\\x
+    \end{bmatrix}\] and $\Omega = \bbR^2.$ Then we have that if $S_r$ is square of side length $r,$ then 
+    \[\int_{S_r}(D_2F_1 - D_1F_2)dx \wedge dy = \int_0^r\int_0^r (-1 -1)dx\wedge dy = -2\int_0^r\int_0^r dx = -2r^2.\] Since we are ranging over all of $\bbR$ and we are able to change the orientation of $S_r$ and thus change the sign of the integral.  
+\end{solution}
+\begin{reflection}
+    If $F$ were not smooth for the sake of me not reading the problem, then 
+    We let 
+    \[F = 
+        \begin{bmatrix}
+        \frac{3}{2y^2}\\x
+    \end{bmatrix}\] and $\Omega = B_{10000}(0).$ Then we have that if $S_r$ is square of side length $r,$ then 
+    \[\int_{S_r}(D_2F_1 - D_1F_2)dx \wedge dy = \int_0^r\int_0^r (\frac{-3}{y^3} -1)dx\wedge dy = (\frac{1}{r^2}-r)\int_0^r dx = \frac{1}{r} -r^2.\] We claim that $\{\frac{1}{r}-r^2\}$ is dense in $\bbR.$ This is because $r$ can range over $(-2,2)$ since then we would have $S_{r}\subset B_{10000}(0).$ From this, it is obvious that if $(a,b)\subset \bbR,$ then there exists some $r\in (-2,2)$ such that $\frac{1}{r} - r^2 \in (a,b).$
+\end{reflection}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    This exercise is asking you to verify the uniqueness of solutions of an ODE without
+assuming that $F$ is Lipchitz, but assuming something else in exchange.
+Let $F : \bbR^2 \to \bbR^2$ be a vector field so that for every closed curve $C$ in $\bbR^2$, we have
+\[ \int_C F^\perp \cdot \tau \, \dd s = 0.\]
+Assume further that $F(x,y) \neq 0$ for all $(x,y) \in \bbR^2$.
+Here $v^\perp$ denotes the ninety degree rotation of the vector $v$. Thus, $(x,y)^\perp := (-y,x)$.
+\begin{enumerate}
+\item If $F$ is $C^1$, prove that $\mathrm{div } F = 0$.
+\begin{solution}
+    We use Green's Theorem. Let $F(x,y) = \begin{bmatrix}
+        F_1(x,y)\\
+        F_2(x,y)
+    \end{bmatrix},$ then we have that 
+    \begin{align}
+        F^\perp(x,y) = \begin{bmatrix}
+        -F_2(x,y)\\ F_1(x,y)
+    \end{bmatrix}
+    \end{align}
+    Then we have that that if $S$ is the region bounded by $C,$ then
+    \[\int_C F^\perp \cdot \tau ds = \int_C W_{F^\perp} = \int_C -F_2(x,y)dx + F_1(x,y)dy = \int_S \left(-D_2F_2 - D_1F_1\right)dx \wedge dy = 0.\] Thus, because we have this for any (closed) curve $C,$ then
+    \[D_1F_1+ D_2F_2 = 0,\] but this expression is exactly $\nabla \cdot F.$
+\end{solution}
+\item Without assuming that $F$ is $C^1$ (or even Lipchitz), prove that the
+ODE
+\[ x'(t) = F(x(t))\]
+has at most one solution on any time interval $t \in (-\delta,\delta)$.
+\end{enumerate}
+I know two different proofs of this fact. When I was reviewing them, I
+realized that in both there is an elegant idea to prove that if we have two
+solutions $x(t)$ and $y(t)$, they must parametrize the same curve on $\bbR^2$.
+However, we are then left with the nontrivial task of analyzing if they could
+potentially be two different parametrizations of the same curve.
+Let us keep it simple and focus on the first part only. That is, let us prove that
+any two solutions of the ODE give us the same curve on $\bbR^2$. That would get you
+full score.\\
+
+Assuming that there are two solutions of the ODE that trace different curves
+on $\bbR^2$, these curves must split somewhere. If we look at their last point in
+common, we would have two solutions of the ODE going to different paths from there.
+It is easy to see that the two curves must be tangent at any contact point. Can you
+find something that goes wrong in the last intersection point, leading to a
+contradiction?
+Alternatively, you may construct a clever curve on $\bbR^2$ using some theorem that
+we learned earlier in this class and then verify that any solution to the ODE must
+stay within this curve.
+\end{problem}
+\begin{solution}
+Suppose that we dislike using $x$ and so we have that 
+\begin{align}
+\gamma'(t) = F(\gamma(t))    
+\end{align}
+where $\gamma: \bbR \to \bbR^2.$ 
+    Since 
+    \[\int_C F^\perp \cdot \tau ds = 0,\] then we have that there exists some scalar function $f: \bbR^2 \to \bbR$ such that 
+    \[\nabla f(x,y) = F^\perp(x,y) = \begin{bmatrix}
+        -F_2(x,y)\\ F_1(x,y)
+    \end{bmatrix} \neq 0 \qquad \forall (x,y)\in \bbR^2\] by the assumption that  $F(x,y)\neq \begin{bmatrix}
+        0\\0
+    \end{bmatrix}, \quad \forall (x,y)\in \bbR^2.$ Thus, we use the fundamental theorem of line integrals (seen in class) that if $t_0,t_1 \in C,$ where $C$ is the curve defined by $\gamma$ (not necessarily closed) then 
+    \[\int_C F^\perp \cdot \tau ds = \int_C \nabla f \cdot \tau ds = f(\gamma(t_1)) - f(\gamma(t_0)).\] However, we also have that by (5) and a u-substitution:
+    \[\int_C F^\perp \cdot \tau ds = \int_{\gamma[t_0, t_1]} F^\perp \cdot \tau ds = \int_{t_0}^{t_1} F^\perp(\gamma)\cdot \gamma'(t)dt = \int_{t_0}^{t_1} F^\perp(\gamma)\cdot F(\gamma)dt = 0\] since $F\cdot F^\perp = 0$ by orthagonality. Thus, we have that $f(\gamma(t))$ is constant for any $t\in (-\delta, \delta).$ Without loss of generality, we call $f(\gamma(t)) = 0$ for all $t \in (-\delta, \delta).$ Thus, we have that $\gamma$ lies within the level set $0$ of $f.$ If we show that the level sets of $f$ are curves, then we will know that if $\gamma$ and $\sigma$ are two solutions to (5), then they must lie on the same curve and indeed be the same path.\\
+
+    For the next step, we will assume with loss of generality that $F$ is continuous, as I do not know how to solve the problem without this. Thus we have that $f$ is $C^1$ since $F^\perp$ is continuous and $\grad f = F^\perp.$ 
+    Thus, if we let $z_0 = (x_0, y_0)\in \bbR^2$ with $f(x_0, y_0) = f(z_0) = 0$ for some $c\in \bbR$ (we do this without loss of generality), then by the Implicit Function Thm, there exists some open $V_1 \subset \bbR$  and $V_2 \subset \bbR$ such that $x_0 \in V_1$ and $y_0 \in V_2$ and a map $g \in C^1(V_1, V_2)$ such that 
+    \[f(t, g(t)) =0, \qquad \forall t\in V_1.\] Thus, locally within $t\in (-\delta, \delta)$ out level set is given by \[L(t) = \begin{pmatrix}
+        t \\ g(t)
+    \end{pmatrix} \implies L((-\delta, \delta))\subset \bbR^2 \qquad \text{is a curve},\] and so we know that any solution to (5) lies locally within $L,$ implying uniqueness as before.
+\end{solution}
+
+   \newpage
+   \section*{Problem 8}
+   \begin{problem}
+       Find a differential form $\omega$ (of any degree and dimension) so that $\omega \
+\wedge \omega \neq 0$.
+   \end{problem}
+   \begin{solution}
+   Consider the $0-$ differential form $f,$ where $f=1$ is a function. Note that $f \wedge f$ is still a zero form, since it does not take in any vectors, and thus we have that $f \wedge f = 1$ still.
+   \end{solution}
+
+\newpage
+\section*{Problem 9}
+\begin{problem}
+    In any dimension, a $1$-form is associated to a vector field $F$. In particular, in
+3D it takes the form
+\[ W_F = F_1 \dd x + F_2 \dd y + F_3 \dd z.\]
+In 3D, $2$-forms are also associated to a vector field $F$ by the following
+identification
+\[ \Phi_F = F_1 \dd y \wedge \dd z + F_2 \dd z \wedge \dd x + F_3 \dd x \wedge \dd y.\]
+We say that $G = \curl F$ if $\mathrm d W_F = \Phi_G$.
+\begin{itemize}
+\begin{problem}
+\item[(a)] Compute an explicit formula for $\curl F$ in terms of the
+components of $F$ and their partial derivatives.
+\end{problem}
+\begin{solution}
+    Using the properties of the exterior derivative, we get that 
+    \begin{align*}
+        dW_F &= (D_1F_1 dx + D_2F_1 dy + D_3 F_1dz) dx + (D_1F_2 dx + D_2F_2 dy + D_3 F_2dz) dy\\ \qquad &+ (D_1F_3 dx + D_2F_3 dy + D_3 F_3dz) dz\\
+        &= -D_2F_1 dx \wedge dy + D_3F_1 dz \wedge dx +\\
+        \qquad &+ D_1F_2 dx\wedge dy - D_3F_2 dy\wedge dz\\
+        \qquad &- D_1F_3 dz \wedge dx + D_2F_3dy \wedge dz\\
+        &= (D_2F_3 - D_3F_2)dy \wedge dz + (D_3F_1-D_1F_3)dz\wedge dx + (D_1F_2 - D_2F_1)dx\wedge dy\\
+        &= G_1 \dd y \wedge \dd z + G_2 \dd z \wedge \dd x + G_3 \dd x \wedge \dd y.
+    \end{align*}
+    where 
+    \[G = \nabla \times F = \begin{bmatrix}
+        D_2F_3 - D_3F_2\\
+        D_3F_1-D_1F_3\\
+        D_1F_2 - D_2F_1
+    \end{bmatrix}\]
+\end{solution}
+\begin{problem}
+\item[(b)] For any $C^1$ scalar function $p : \bbR^3 \to \bbR$, prove that $dp= W_{\nabla p}$.    
+\end{problem}
+\begin{solution}
+    We have that 
+    \[dp = D_1pdx + D_2pdy + D_3pdz\]
+    Similarly, we have byb definition that since 
+    \[\nabla p = \begin{bmatrix}
+        D_1p\\
+        D_2p\\
+        D_3p
+    \end{bmatrix},\] then 
+    \[W_{\nabla p} = D_1p dx + D_2p dy + D_3p dz.\]
+\end{solution}
+
+\begin{problem}
+\item[(c)] For any $C^1$ vector field $F : \bbR^3 \to \bbR^3$, prove that $d\Phi_F = (\nabla \cdot F) dx \wedge dy \wedge dz$.
+\end{problem}
+\begin{solution}
+    We have that since $dx \wedge dx = 0,$ then:
+    \begin{align*}
+    \Phi_F &= F_1dy \wedge dz + F_2 dz \wedge dx + F_3dx\wedge dy \implies\\
+    d\Phi_F &= (D_1F_1dx + D_2F_2dy + D_3F_3dz)\wedge dy\wedge dz + dF_2 \wedge dz \wedge dx + dF_3\wedge dx\wedge dy\\
+    &= D_1F_1dx \wedge dy \wedge dz  + D_2F_2 dy \wedge dz \wedge dx + D_3F_3dz \wedge dx\wedge dy\\
+    &= (D_1F_1 + D_2F_2 + D_3F_3)dx \wedge dy \wedge dz\\
+    &= (\nabla \cdot F) dx \wedge dy \wedge dz
+    \end{align*}
+    Where the second to last equality comes from the fact that we only needed even permutations to get the desired quantity.
+\end{solution}
+
+\begin{problem}
+    \item[(d)] For any $C^2$ scalar function $f : \bbR^3 \to \bbR$, prove that $\curl
+\nabla f = 0$.
+\end{problem}
+\begin{solution}
+    Consider that since $f$ is a zero form, then 
+    \[df = D_1fdx + D_2fdy + D_3f dz\] is a one form. Note that we have by (b) that 
+    \[df = W_{\nabla f}.\] By a theorem in class, we have that the two form
+    \[ddf = 0,\] and by (a) we have that 
+    \[ddf = dW_{\nabla f} = \Phi_{\nabla \cross \nabla f} = 0.\] Note that this happens if and only if $\nabla \times \nabla f = \begin{bmatrix}
+        0\\0\\0
+    \end{bmatrix}.$
+\end{solution}
+\begin{problem}
+    \item[(e)] For any $C^2$ vector field $F : \bbR^3 \to \bbR^3$, prove that $\nabla \cdot (\curl F) = 0$.
+\end{problem}
+\begin{solution}
+    Consider the one form defined by $F,$ which is
+    \[W_F = F_1dx + F_2dy + F_3dz.\] We have by (a) that 
+    \[dW_F = \Phi_{\nabla \times F},\] and thus by the same logic as before we have that by (c):
+    \[ddW_F = 0\implies ddW_F = d\Phi_{\nabla \times F} = (\nabla \cdot ({\nabla \times F}))dx\wedge dy\wedge dz = 0.\]
+    Thus, we have that $\nabla \cdot ({\nabla \times F}) = 0.$
+\end{solution}
+\end{itemize}
+\end{problem}
+\newpage
+\begin{problem}
+    Find typos.
+\end{problem}
+\begin{solution}
+    What the fuck are $u$ and $v$ in Problem 4.
+\end{solution}
+
+
+
+\end{document}

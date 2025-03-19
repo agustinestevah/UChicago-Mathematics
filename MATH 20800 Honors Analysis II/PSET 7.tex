@@ -1,0 +1,412 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Panagiotis E. Souganidis}
+\newcommand{\assignment}{Problem Set 7}
+\newcommand{\semester}{Winter 2024}
+\newcommand{\duedate}{\today}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    Suppose $f: E\to \bbR$ is a linear functional with $\ker f $ is closed and $E$ is a topological vector space. Then $\{x\in E \; : \; f(x) < 0\}$ is open and 
+    \[\overline{\{x\in E \; : \; f(x) < 0\}} = \{x\in E \; : \; f(x) \leq 0\}\]
+\end{problem}
+\begin{solution}
+If $U$ is an open neighborhood of $0,$ then there exists some open $V\subset U$ such that \[\lambda V \subset V,\qquad  \forall \; |\lambda| < 1\qquad (\star)\]  Since $\ker f$ is closed and $f\neq 0,$ there exists some $x$ and open $U\ni 0$ such that $x + U \subset (\ker f)^c.$ Since $U$ is an open neighborhood of $0,$ we can find some $V\subset U$ such that $\star$ above is satisfied. We claim that $f(V)$ is bounded. Suppose not, then we will show that $f(V) = \bbR.$ There exists some $\{x_n\}\subset V$ such that $|f(x_n)| > n$ for all $n.$ For $\lambda \in [0,1],$ we have that $\lambda V\subseteq V,$ and so $\lambda f(V)\subseteq f(V).$ If $c\in f(V),$ then for all $t \in [-c,c]$ $t\in f(V)$ Thus, $-f(V)\subseteq f(V),$ and given that $c\in f(V),$ we have that $-c \in f(V).$ Thus, $f(V) = \bbR$. Let $x\in V.$ There exists some $y\in V$ such that $f(y) = -f(x),$ and so $f(x +y) = 0,$ and so $x + y \in \ker f.$ Thus, $\ker f = V,$ and so $\ker f$ is open, which is a contradiction. Thus, $f(V)$ is bounded by some $c >0$. We show in the next problem that this implies that $f$ is continuous at $0.$ Since $f$ is linear, we have that $f$ is continuous everywhere. Since $(-\infty, 0)$ is open and $f$ is continuous, then $f^{-1}((-\infty, 0))$ is open, proving the first claim. 
+
+For the second claim, suppose that $x \in f^{-1}((\infty, 0])$ and $(x_n)\in f^{-1}((-\infty, 0))$ with $x_n \to x.$ This is convergence with respect to open sets. That is, for any open neighborhood of $x,$ there exists some $N$ such that for all $n\geq N,$ we have that $x_n \in V.$ If $x \in f^{-1}((-\infty, 0)),$ then we can just take the sequence to be itself, so consider then $x \in f^{-1}(\{0\}).$ But then since $x_n \to x$ and $f$ is continuous, we have that $f(x_n) \to f(x)  = 0,$ and so $x\in \ker f,$ but $\ker f$ is closed, and so $x\in f^{-1}(\{0\}).$
+
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Let $E$ be a real topological vector space. Let $f: E\to \bbR$ be a linear functional and $p: E\to \bbR$ be a continuous function at $0$ such that $f\leq p,$ then $f$ is continuous. 
+\end{problem}
+\begin{solution}
+Let $\epsilon>0.$ 
+By the continuity at $0$ of $p,$ there exists some $U$  open neighborhood of $0$ such that for all $x\in U,$ $|p(x) - p(0)|< \epsilon.$ Since $f\leq p,$ then $f(x) \leq p(0) + \epsilon$ for all $x\in U.$ We have that $-p$ is continuous at $0,$ and so it must be the case that there exists some $U'$ open neighborhood of $0$ such that for all $x\in U,$ 
+$-p(x)\in (-p(0)- \epsilon, -p(0) + \epsilon).$ We have that $-p \leq -f,$ and so $-p(0) - \epsilon < f(x)$ for all $x\in U'.$ Take $V = U \cap U',$ then for all $x\in V,$ $|f(x)|\leq c$ for some $c>0.$
+
+Let $W\subset \bbR$ be some open neighborhood containing $0.$ There exists some $\epsilon>0$ such that if $x\in \bbR$ with $|x|< \epsilon,$ then $x\in W.$ Let 
+\[W' = \frac{\epsilon}{c}W\subset V\] Evidently, $W'$ is open. Moreover, $|f(x)| = \frac{\epsilon}{c}|f(x)|\leq \epsilon,$ and so $f(x)\in W.$ That is $f(W')\subset W,$ and so $0 \in W' \subset f^{-1}(W).$ Thus, $f$ is continuous at $0.$ Since $f$ is linear, then $f$ is continuous everywhere. 
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Let $(x_n)$ be a sequence in $X,$ where $X$ is a Banach space. Then $x_n \rightharpoonup x$ if and only if $\{x_n\}_{n\in \bbN}$ is bounded and $\{f\in X^* \; : \; \langle f, x_n \rangle \to \langle f, x\rangle\}$ is dense in $X^*.$
+\end{problem}
+\begin{solution}
+    ($\implies$) Suppose $x_n \rightharpoonup x.$ Then by definition, we have that for all $f\in X^*,$ $ \langle f, x_n \rangle \to \langle f, x\rangle,$ and so $\{f\in X^* \; : \; \langle f, x_n \rangle \to \langle f, x\rangle\} = X^*.$ By the uniform boundedness principle, we have that if $T_nf = \langle f, x_n \rangle,$ then since $f_n \to f,$ then $T_n f$ is bounded, and so there exists some $c>0$ such that
+    \[\|T_n f\|< c\|f\|.\] Thus, 
+    \[\|x_n\| = \sup_{\|f = 1\|}|\langle f, x_n \rangle| =\sup_{\|f = 1\|}\|T_n f\| < c \sup_{\|f\| = 1}\|f\|< c\] and so $\|x_n\| < c$ for all $n,$ and thus the set is bounded.
+
+    ($\impliedby$) Let $f\in X^*.$ Since the set $\{g\in X^* \; : \; \langle g, x_n \rangle \to \langle g, x\rangle\}$ is dense in $X^*,$ then there exists some $g\in X^*$ such that $\|g - f\|< \epsilon$ and $\langle g, x_n \rangle \to \langle g, x\rangle.$ Thus, we have that 
+    \begin{align*}
+    |\langle f, x_n \rangle - \langle f, x\rangle| &= 
+    |\langle f, x_n \rangle - \langle g, x_n\rangle + \langle g, x_n\rangle - \langle f, x\rangle|\\
+    &\leq |\langle f, x_n \rangle - \langle g, x_n\rangle| + |\langle g, x_n\rangle - \langle f, x\rangle|\\
+    &= |\langle f - g, x_n \rangle| + |\langle g, x_n\rangle - \langle g, x \rangle + \langle g, x \rangle - \langle f, x\rangle|\\
+    &\leq \|f - g\|\|x_n\| + |\langle g, x_n\rangle - \langle g, x \rangle| + |\langle g, x\rangle - \langle f, x\rangle|\\
+    &= \|f - g\|\|x_n\| + |\langle g, x_n\rangle - \langle g, x \rangle| + |\langle g-f, x\rangle|\\
+    &\leq \|f - g\|\|x_n\| +|\langle g, x_n\rangle - \langle g, x \rangle|+ \|g-f\| \|x\|\\
+    &\to 0,
+    \end{align*}
+    where the first and third terms use the fact that $(x_n)$ is bounded (and $x$ is bounded) and that $f$ is $\epsilon$ close to $f,$ and the second inequality uses the fact that $\langle g, x_n \rangle \to \langle g, x\rangle.$
+\end{solution}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Suppose $(x_n) \in X$ is Cauchy and $X$ is a normed vector space. If $x_n \rightharpoonup 0,$ then $x_n \to 0.$
+\end{problem}
+\begin{solution}
+    We generalize and let $x_n \rightharpoonup x.$ Thus, suppose $f\in E^*,$ then for all $\epsilon>0:$
+    \[\|\langle f, x_n \rangle - \langle f, x\rangle\| <\epsilon,\] but we have that
+    \begin{align*}
+        |\langle f, x_n \rangle - \langle f, x\rangle|
+        &= |\langle f, x_n \rangle -\langle f, x_m \rangle + \langle f, x_m\rangle\| - \langle f, x\rangle|\\
+        &\leq |\langle f, x_n \rangle -\langle f, x_m \rangle| + |\langle f, x_m\rangle - \langle f, x\rangle|\\
+        &\leq \|f\|\|x_n - x_m\| + |\langle f, x_m\rangle - \langle f, x\rangle|\\
+        &< \|f\|\|x_n - x_m\| + \epsilon
+    \end{align*}
+    Thus,
+    \[\|x_n - x\| = \sup_{\|f\| = 1}|\langle f, x_n \rangle - \langle f, x\rangle| \leq \|x_n - x_m\| + \epsilon< 2\epsilon\]
+\end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    
+\end{problem}
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Show that if $X$ is infinite dimensional Banach Space, then $0 \in \overline{S_X}^{\sigma(X, X^*)}.$
+\end{problem}
+\begin{solution}
+    It suffices to show that 
+    \[B_X = \overline{S_X}^{\sigma(X, X^*)}.\] To show the first inclusion, let $x_0 \in B_X.$ Let $V$ be a weakly open neighborhood of $x_0.$ We wish to show that $V\cap S_X \neq \emptyset.$ Without loss of generality, we can assume
+    \[V = \{x \in E \; : \; |\langle f_i, x_0\rangle|< \epsilon, \quad i \in [k]\}.\] There exists some $y_0 \in E$ such that for all $i,$ $\langle f_i, y_0 \rangle = 0.$ If not, then $\ker F = 0,$ where $F: E\to \bbR^k$ such that each component of $F$ is $f_i.$ Then $F$ is injective and so $\dim E < \infty.$ Thus, consider $g(t) = \|x_0 + ty_0\|.$ Since $x_0 \in B_X,$ then $g(0) \leq 1$ and $g(\infty) = \infty.$ Since $g$ is continuous, there exists some $t_0$ such that $g(t_0) = 1,$ and so $x_0 
+ ty_0\in S_X.$ Moreover, $g(t_0) \in V$ since for all $i,$ we have that $\langle f_i, x_0  + ty_0 \rangle = \langle f_i, x_0\rangle  + t\langle f_i, y_0 \rangle = \langle f_i, x_0\rangle < \epsilon.$ Thus, $x_0 + yt_0 \in S_X,$ and so $B_X \subset \overline{S_X}^{\sigma(X, X^*)}.$ Since $S_X \subset B_X,$ suffices to show that $B_X$ is closed, which is inmediate since 
+ \[B_X  = \bigcap_{\|f\| \leq 1} \{x\in E \; : \; |\langle f, x\rangle| \leq 1\}.\] Thus, $B_X = \overline{S_X}^{\sigma(X, X^*)},$ and since $0\in B_X,$ then we are done. 
+\end{solution}
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    In $c_0,$ let $x_n =n e_n.$ Show that $x_n \to 0$ pointwise but not weakly. 
+\end{problem}
+\begin{solution}
+    Let $x_n = (x_n^{(k)}) = 
+    \left(\begin{pmatrix}
+        1 \\ 0 \\ \vdots
+    \end{pmatrix}, \begin{pmatrix}
+        0 \\ 2 \\ \vdots
+    \end{pmatrix}, \dots\right)$ Let $n$ be arbitrary. To show that $x_n^{(k)}\to 0$ as $k\to \infty,$ consider that for all $k\geq n,$ $x_{n}^{(k)} = 0,$ and thus $x_n^{(k)}\to 0.$
+
+    Suppose that $x_n\rightharpoonup 0.$ Then we have that for any $f\in (c_0)^*,$ $f(x_n) \to f(0) = 0.$ Since $(c_0)^* = \ell^1,$ then for each $f\in (c_0)^*,$ then there exists a unique $(a_{k,n})\in \ell^1$ such that
+    \[\langle f, x_n \rangle = \sum_{k=1}^\infty  a_{k,n} x_{n}^{(k)} \xrightarrow{n\to \infty} 0.\] But we have that $x_{n}^{(k)} = \begin{cases}
+        n, \qquad n=k\\
+        0, \qquad n\neq k
+    \end{cases},$ and so $\langle f, x_n \rangle = na_n.$ Since $(c_0)^* = \ell^1,$ we consider $a_{k} = \delta_{k,n},$ and thus $\langle f, x_n \rangle = n.$ Note that $\delta_{k,n} \in \ell^1$ since $\sum_{k=1}^\infty \delta_{k,n} = 1 < \infty.$ Thus, we have that $\langle f, x_n \rangle = n \to \infty,$ which is a contradiction. 
+\end{solution}
+
+\newpage
+
+\section*{Problem 8}
+\begin{problem}
+    Show that there exists a sequence $(f_n) \in X^*$ for some normed linear space $X$ such that $(f_n(x))$ is bounded for each $x \in X$ but $\|f_n\|\to \infty.$ 
+\end{problem}
+\begin{solution}
+    Let $X = c_0,$ and thus $X^*= \ell^1.$ Consider that for each $f\in (c_0)^*,$ there exists a unique $a\in \ell^1$ such that
+    \[\langle f, x\rangle = \sum_{k=1}^\infty a_kx_k.\] Consider the sequence 
+    \[a_n = ne_n \implies a_{n}^{(k)} = n\chi_n \] ($\chi_n$ being the indicator function) Let $x\in c_0,$ then we have that 
+    \[|\langle f_n, x\rangle| = |\sum_{k=1}^\infty a_{n}^{(k)}x_i| \leq \|a_n\|_{\ell^1}\|x\|_{c_0} = n\|x\|_{c_0}\]
+    
+    
+    Then we have that 
+    \[\|f_n\|_{c_0^*} = \|a_n\|_{\ell^1} = \|ne_n\|_{\ell^1} = n \xrightarrow{n\to \infty} \infty\]
+\end{solution}
+\newpage
+
+\section*{Problem 9}
+\begin{problem}
+    In $c_0,$ there exists a sequence $f_n \in (c_0)^*$ such that $f_n \stackrel{\ast}{\rightharpoonup} 0$ and yet every convex combination $h$ of the $f_n$ has $\|h\| = 1.$
+\end{problem}
+\begin{solution}
+    Since $(c_0)^* = \ell^1,$ consider a sequence $f_n \in (c_0)^*$ such that
+    \[\langle f_n, x \rangle = \sum_{i=1}^\infty e_n^{(i)} x_i = x_n,\] where $(e_n)$ is the canonical basis of $\ell^1.$ To show that $f_n  \stackrel{\ast}{\rightharpoonup} 0,$ let $x\in c_0,$ and so there exists some $N$ such that if $n\geq N,$ we have that $x_n = 0.$ Thus, for large $n,$ we have that 
+    \[\langle f_n, x \rangle = x_n \to 0.\] Thus, $f_n \stackrel{\ast}{\rightharpoonup}  0.$ Let $\lambda_i >0$ and suppose $\sum_{i=1}^k \lambda_i = 1.$ Then
+    \[\|h\| = \|\sum_{i=1}^k f_n \lambda_i\| = \sum_{i=1}^k \|f_i\||\lambda_i| = \sum_{i=1}^k \|e_i\|\lambda_i = \sum_{i=1}^k \lambda_i = 1.\]
+\end{solution}
+\newpage
+
+\section*{Problem 10}
+\begin{problem}
+    Show that if $T$ is bounded and injective from $\ell^1$ to $\ell^2,$ then $T(\ell^1)$ is not closed in $\ell^2.$ 
+\end{problem}
+\begin{solution}
+    Suppose $T(\ell^1)$ is closed in $\ell^2.$ Since $\ell^1$ and $\ell^2$ are both Banach and $T$ is continuous bijection unto $T(\ell^1)$, then $T$ is an isomorphism to the image of $\ell^1.$ Since $\ell^2$ is reflexive and $T(\ell^1)$ is a closed linear subspace of $\ell^2,$ then $T(\ell^1)$ is reflexive. By the isomorphism, we must have that $\ell^1$ is reflexive, which is of course not true.
+\end{solution}
+
+
+
+
+\newpage
+\section*{Problem 11}
+\begin{problem}
+    Suppose $E$ is a Banach space and let $A\subset E$ be weakly compact. Prove that $A$ is bounded.
+\end{problem}
+\begin{solution}
+    We aim to show that for any $f\in E^*,$ $f(A)$ is bounded. Suppose not, then we have that for all $n>0,$ there exist $x_n \in A$ with $\|f(x_n)\| >n.$ Since $(x_n) \in A$ and $A$ is weakly compact, there exists a subsequence $(x_{n_k})\in A$ such that it weakly converges to some limit in $A,$ that is, $x_{n_k}\rightharpoonup x\in A.$ Thus, $f(x_{n_{k}})\to f(x),$ and thus we have a contradiction since for $n_k$ large enough, $|f(x_{n_k})|\leq n_k.$ Thus, $f(A)$ is bounded. Since this is true for all $f \in E^*,$ then the uniform boundedness principle (see problem 3) says that $A$ is bounded.
+\end{solution}
+
+
+\newpage
+\section*{Problem 12}
+\begin{problem}
+    Let $E$ be Banach and suppose $(x_n)\in E$ with $x_n \rightharpoonup x$ in $\sigma(E, E^*).$ Define
+    \[\sigma_n = \frac{1}{n}(x_1 + \cdots + x_n).\] Show that $\sigma_n \rightharpoonup x$ in $\sigma(E, E^*).$
+\end{problem}
+\begin{solution}
+    Suppose $f \in E^*.$ Let $\epsilon>0.$ Since $x_n \rightharpoonup x,$ we have that $f(x_n)\to f(x).$ Thus, there exists some $N$ such that if $n\geq N,$ then $\|f(x_n) - f(x)\|< \epsilon.$ Therefore,
+    \begin{align*}
+        \|\frac{1}{n-N-1}\sum_{N+1}^n f(x_i) - f(x)\| &= |\frac{1}{n-N-1}\sum_{N+1}^n (f(x_i) - f(x))\|\\
+        &\leq \frac{1}{n-N-1}\sum_{N+1}^n\|f(x_i) - f(x)\|\\
+        &< \epsilon.
+    \end{align*}
+    Thus, we triangle on this equality till it ins:
+    \begin{align*}
+    |f(\sigma_n) - f(x)| &\leq |f(\sigma_n) - \frac{1}{n-N-1}\sum_{N+1}^nf(x_i)| + |\frac{1}{n-N-1}\sum_{N+1}^nf(x_i) - f(x)|\\
+    &= |\frac{1}{n}\sum_{i=1}^n f(x_i) - \frac{1}{n-N-1}\sum_{N+1}^nf(x_i)| + \frac{\epsilon}{2}
+    \end{align*}
+    The first term obviously goes to $0$ for large $n$ (do another triangle inequality)
+\end{solution}
+
+\newpage
+\section*{Problem 13}
+\begin{problem}
+    Let $E$ be Banach. Suppose $A\subset E$ is convex. Show that the strong closure of $A$ is the same as the weak closure of $A.$
+\end{problem}
+\begin{solution}
+    Since every weakly closed set is strongly closed, then we have that 
+    \[A \subset \overline{A}^{\sigma(E, E^*)} \implies \overline{A}\subset \overline{\overline{A}^{\sigma(E, E^*)}} = \overline{A}^{\sigma(E, E^*)}\]
+    \[A \subset \overline{A}^{\sigma(E, E^*)}\subset \overline{A}.\] Since $\overline{A}$ is strongly closed and convex\footnote{We proved this in PSET 4}, then we know by a theorem in class that it is weakly closed. Thus, 
+    \[A \subset \overline{A} \implies \overline{A}^{\sigma(E, E*)}\subset \overline{\overline{A}}^{\sigma(E, E^*)} = \overline{A},\] and so we are done.
+\end{solution}
+
+\newpage
+\section*{Problem 14}
+\begin{problem}
+    Let $E$ be a Banach space and suppose $K\subset E$ is strongly compact. Suppose $(x_n)\in K$ such that $x_n \rightharpoonup x.$ Then $x_n \to x$
+\end{problem}
+\begin{solution}
+    Suppose not. Thus, there exists some $x_{n_k}$ subsequence such that $\|x_{n_k} - x\|\geq \epsilon$ for some $\epsilon>0.$ Since $(x_{n_k}) \in K$ and $K$ is compact, we have that there exists some subsequence $x_{n_{k_j}}\to y$ where $y\in K,$ and since strong convergence implies weak convergence, then $x_{n_{k_j}}\rightharpoonup y.$ But since $X_{n_{k_J}}$ is a subsequence of a sequence converging to $x,$ then it suffices to show that weak limits are unique and thus we must have that $y=x,$ a contradiction!
+
+    To show that weak limits are unique, suppose not.
+\end{solution}
+
+\newpage
+\section*{Problem 15}
+\begin{problem}
+    Let $E$ and $F$ be two Banach spaces. Let $T\in \mathcal{L}(E,F)$ so that $T^* \in \mathcal{L}(F^*, E^*)$ Prove that $T^*$ is continuous from $F^*$ (equipped with $\sigma(F^*, F)$) unto $E^*$ (equipped with $\sigma(E^*, E)$).
+\end{problem}
+\begin{solution}
+    Since $T^*: F^* \to E^*,$ let's consider $T^*: F^*_* \to E^*_*,$ where the underscore denotes that we are considering the weak $*$ topology. Let $\varphi_x: E^* \to \bbR$ such that $\varphi_x \circ T: F^*_* \to \bbR$ such that for all $x\in E:$ 
+    \[\varphi_x\circ T(v) = \langle T^*v, x\rangle = \langle v, Tx\rangle,\] which is of course a linear functional on $F,$ and is thus continuous in the weak $^*$ topology of $F^*.$
+\end{solution}
+
+\newpage
+\section*{Problem 16}
+\begin{problem}
+    Let $E$ be a Banach space. Let $(x_n)\in E$ and let 
+    \[K_n = \overline{\text{conv}\left(\bigcup_{i=n}^\infty\{x_i\}\right)}.\]
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        If $x_n \rightharpoonup x,$ then 
+        \[\bigcap_{n=1}^\infty K_n = \{x\}\]
+    \end{problem}
+    \begin{solution}
+    Since $K_n$ is convex and strongly closed, then $K_n$ is weakly closed. Evidently, $x\in \overline{\overline{K_n}}^{\sigma(E, E^*)}$ for all $n,$ and thus since $K_n$ is weakly closed, $x\in K_n$ for any $n,$ and thus $x\in \bigcap K_n.$
+
+    Let $V$ be some weak convex neighborhood of $x.$ Since $x_n \rightharpoonup x,$ we have that there exists some $N$ such that for $n\geq N,$ $K_n \subset \overline{V},$ and so $\bigcap K_n \subset \overline{V}.$ Suppose $y\in \bigcap K_n$ with $y \neq x.$ Suppose $r = \|y-x\|.$ Let $B_{\frac{r}{2}, \sigma(E, E^*)}(x)$ be a weakly open convex neighborhood of $x.$ Then there exists some $N$ such that for all $n\geq N,$ we have that $x_n \in B_{\frac{r}{2}, \sigma(E, E^*)}(x),$ and so $y\notin \overline{\text{conv}\left(\bigcup_{i=n}^\infty \{x_i\}\right)},$ a contradiction to the fact that $y\in \bigcap K_n.$
+    \end{solution}
+    \item 
+    \begin{problem}
+        Assume that $E$ is finite dimensional and $\bigcap_{n=1}^\infty K_n = \{x\}.$ Prove that $x_n \to x.$
+    \end{problem}
+    \begin{solution}
+        Since $E$ is finite dimensional, a $x_n \rightharpoonup x$ if and only if $x_n \to x.$ 
+        Let $V$ be a weakly open neighborhood of $x.$ Consider $K_n' = K_n \cap V^c.$ Since $\bigcap K_n = \{x\},$ then we must have that $K_n$ is bounded for each $n.$ To show this, suppose that for some $N,$ we have that $K_N$ is unbounded. This implies that $x_n \to \pm \infty$  for $n\geq N,$ and thus $K_n$ is unbounded for all $n \geq N,$ and so $\bigcap K_n = \emptyset.$ Thus, $K_n$ is bounded. Since $K_n\subset E$ is closed  and convex and $E$ is reflexive (by finite dimensions), then $K_n$ is compact in $\sigma(E^*,E)$, and since $K_n'$ is a closed ($V^c$ is closed) subset of $K_n,$ then $K_n'$ is compact. Since $\bigcap K_n' = \bigcap (K_n \cap V^c) = \bigcap K_n \cap V^c = \{x\}\cap V^c = \emptyset.$ Since each $K_n'$ is compact, and $K_n' \downarrow$ then we must necessarily have some $N$ such that $K_N' = \emptyset.$ Thus, $K_N \cap V^c = \emptyset,$ and so $K_N \subset V,$ and so for all $n\geq N,$ $K_n \subset V,$ and so $x_n \in V.$ Thus, $x_n \rightharpoonup x.$
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 17}
+\begin{problem}
+    Let $E$ be a Banach space.
+    \begin{enumerate}
+        \item Let $(f_n) \in E^*$ such that for all $x\in E,$ $\langle f_n, x \rangle$ converges to a limit. Prove that there exists some $f\in E^*$ such that $f\stackrel{\ast}{\rightharpoonup} f.$
+    \begin{solution}
+        We want to show that there exists some $f \in E^*$ such that for all $x\in E,$ $\langle f_n, x \rangle \to \langle f, x\rangle.$ We know that $\|f_n\| >0$ for large $n$ for if not, then just take $f = 0$ and we are done.
+        
+        Let 
+        \[\langle f_n, x\rangle \to y_x.\] By the uniform boundedness principle, we have that $\sup_{n}\|f_n\|< \infty.$ Call $A = \sup_{n}\|f_n\|.$
+        
+        Consider the sequence 
+        \[\hat{f}_n = 
+            \frac{f_n}{A} \implies \hat{f}_n \in B_{E^*}.\] Since $B_{E^*}$ is compact, there exists some $\hat{f}\in B_{E^*}$ and some subsequence such that $\hat{f}_{n_k} \stackrel{\ast}{\rightharpoonup} f.$ That is, for all $x\in E,$ 
+        \[\langle \hat{f}_{n_k}, x\rangle \to \langle \hat{f}, x\rangle.\] 
+        Thus, we have that for $n$ large
+        \[\langle \hat{f}_{n_k}, x\rangle = \langle \frac{f_{n_k}}{A}, x\rangle = \langle \hat{f}, x\rangle \implies \langle f_{n_k}, x \rangle = \langle A\hat{f}, x\rangle.\] But we already know that $\langle f_n , x\rangle$ converges to a limit, and so the entire sequence must converge to that same limit, $y_x,$ i.e,
+        \[\langle f_{n}, x \rangle = \langle A\hat{f}, x\rangle.\]
+        
+        Thus, since limits are unique because $\sigma(E^*, E)$ is Hausdorff, then limits are unique, and thus $y_x = \langle Af, y_x\rangle.$ Because this is true for all $x \in E,$ we have that $f_{n_k} \stackrel{\ast}{\rightharpoonup}  Af.$ 
+    \end{solution}
+    \item Assume that $E$ is reflexive. Let $(x_n)$ be a sequence in $E$ such that for every $f\in E^*,$ $\langle f, x_n \rangle$ converges to a limit. Prove that there exists some $x\in E$ such that $x_n \rightharpoonup x$ in $\sigma(E, E^*).$
+    \begin{solution}
+        It suffices to show that for all $f\in E^*,$ 
+        \[\langle f, x_n \rangle \to \langle f, x\rangle.\] This proof would follow exactly as above, switching up the $E$s and the $E^*.$ 
+        Define $T_nf = \langle f, x_n\rangle.$ We know that $T_nf \to y_f.$ Thus, by the uniform boundedness principle, we know that $\sup_{n}\|T_nf\| = \sup_{n}\|\langle f, x_n\| < \infty.$ Denote this by $A = \sup_{n}\|\langle f, x_n\rangle\| < \infty.$ Define 
+        \[\hat{T}_n = \frac{T_n}{A},\] and thus 
+        \[\hat{T}_nf = \frac{\langle f, x_n \rangle}{A} \leq 1 \qquad \forall n.\] We know that $B_{E^*}$ is compact in the weak $\star$ topology, but since $E$ is reflexive, then we know that $B_{E^*}$ is strongly compact. Thus, there exists some subsequence such that 
+        \[\hat{T}_{n_k} \to \hat{T}\in B_{E^*},\] and thus for any $f\in E^*,$
+        \[\frac{\langle f, x_{n_k} \rangle}{A} \to T(f) = \langle f, x\rangle \implies \langle f, x_{n_k}\rangle \to AT(f).\] But we know that $\langle f, x_n \rangle \to y_f,$ and thus $A\langle f, x\rangle = y_f.$
+    \end{solution}
+    \item 
+    \begin{problem}
+        Construct an example in a non-reflexive space $E$ where the conclusion of 2 fails.
+    \end{problem}
+    \begin{solution}
+        Consider $E = c_0.$ Let 
+        \[x_n = (1, 1, \dots, 1_{(n)}, 0, 0 , \dots)\] Let $f\in (c_0)^*,$ then 
+        \[f(x_n) = f\left(\sum_{i=1}^\infty x_i e_i\right) = f\left(\sum_{i=1}^n e_i\right) = \sum_{i=1}^n f(e_i).\] We know that $(c_0)^* = \ell^1,$ and thus $f(e_i)\in \ell^1,$ and so 
+        \[\lim_{n\to \infty} \langle f, x_n \rangle = \lim_{n\to \infty}\sum_{i=1}^n f(e_i) = \sum_{i=1}^\infty f(e_i)< \infty,\] and so $\langle f, x_n \rangle$ converges to a limit, in particular, it converges to 
+        \[\sum_{i=1}^\infty f(e_i) = f((1,1,1,\dots))\]
+        
+        Thus, 
+        \[x_n \rightharpoonup (1,1,1,\dots),\] but $(1,1,1,\dots)\notin c_0,$ which is a contradiction.
+    \end{solution}
+        \end{enumerate}
+
+\end{problem}
+
+
+\end{document}

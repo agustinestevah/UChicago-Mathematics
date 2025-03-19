@@ -1,0 +1,277 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Panagiotis E. Souganidis}
+\newcommand{\assignment}{Problem Set 2}
+\newcommand{\semester}{Fall 2024}
+\newcommand{\duedate}{2024-20-01}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    Prove H\"{o}lder's inequality. Suppose that $n \in \bbN$ and $\frac{1}{q} + \frac{1}{p} = 1$ with $1 \leq p < \infty.$ Let $(a_k), (b_k)\in \bbR$ with $1\leq k \leq n,$ then 
+    \[\sum_{k=1}^\infty [a_k b_k] \leq \left(\sum_{k=1}^\infty [a_k]^{p}\right)^\frac{1}{p}\left(\sum_{k=1}^\infty [b_k]^{q}\right)^\frac{1}{q}\]
+\end{problem}
+\begin{solution}
+    Consider the degenerate case when 
+    \begin{align}
+      \sum_{k=1}^n [a_k]^p  = \sum_{k=1}^n [a_k]^q = 1  
+    \end{align}
+    By properties of $\log,$ it is obvious that 
+    \[\log(a_k b_k)  = \frac{1}{p}\log([a_k]^p) + \frac{1}{q}\log([b_k]^q).\] By the convexity of $\log$ (I talk more about this later), we have that 
+    \[\frac{1}{p}\log([a_k]^p) + \frac{1}{q}\log([b_k]^q) \leq \log(\frac{1}{p}[a_k]^p + \frac{1}{q}[b_k]^q).\] By monotonocity of $\log,$ we thus have that 
+    \[a_kb_k \leq \frac{1}{p}[a_k]^p + \frac{1}{q}[b_k]^q \implies \sum_{k=1}^n[a_k b_k] \leq \sum_{k=1}^n\left[\frac{1}{p}[a_k]^p + \frac{1}{q}[b_k]^q\right] = \frac{1}{p}\sum_{k=1}^n [a_k]^p + \frac{1}{q}\sum_{k=1}^n[b_k]^q = 1.\] Thus, we get the result that when (1) holds, we have that 
+    \begin{align}
+    \sum_{k=1}^n[a_k b_k] \leq 1.    
+    \end{align}
+     Consider now any $(a_k)$ and $(b_k).$ Consider 
+    \[c_k = \frac{a_k}{\left(\sum_{k=1}^n [a_k]^p\right)^{\frac{1}{p}}}, \implies \sum_{k=1}^n [c_k]^p = \frac{\sum_{k=1}^n [a_k]^p}{\sum_{k=1}^n[a_k]} = 1.\] 
+    \[d_k = \frac{b_k}{\left(\sum_{k=1}^n [b_k]^q\right)^{\frac{1}{q}}} \implies \sum_{k=1}^n [b_k]^q = 1.\]
+    Thus, we see that $c_k$ and $d_k$ satisfy (1) and thus use (2), which yields
+    \[\sum_{k=1}^n [c_k d_k] = \sum_{k=1}^n \left[\frac{a_k}{\left(\sum_{k=1}^n [a_k]^p\right)^{\frac{1}{p}}}\right]\left[\frac{b_k}{\left(\sum_{k=1}^n [b_k]^q\right)^{\frac{1}{q}}}\right] \leq 1.\] Multipying by the denominator (and taking $n\to \infty$) yields H\"{o}lder's Inequality.
+
+    For the case when $p = \infty,$ we will show that 
+    \[\lim_{p\to \infty} \|a\|_p = \|a\|_\infty = A\] 
+    Consider that for any $n,$ we have that by taking limits
+    \[\sum_{k=1}^\infty |a_k|^p \geq |a_n|^p \implies \|a\|_\infty \leq \|a\|_p.\] On the other hand, we have that since $a\in \ell^p,$ then
+    \[\sum_{k=1}^\infty |a_k|^p < \infty,\] Thus, there must exist some $C$ such that \[\sum_{k=1}^\infty |\frac{a_k}{A}|^p  \leq C \implies \left(\sum_{k=1}^\infty |\frac{a_k}{A}|^p\right)^\frac{1}{p}  = C^{\frac{1}{p}}.\] By homogeneity, we have that 
+    \[\|a\|_p \leq C^\frac{1}{p}\|a\|_\infty.\] Since for large $p,$ we have that $|C^\frac{1}{p} - 1|< \epsilon,$ then 
+    \[\|a\|_p \leq C^\frac{1}{p}\|a\|_\infty \to \|a\|_\infty\] Thus, as $p\to \infty,$ we have that $\|a\|_p = \|a\|_\infty.$ Moreover, as $p\to \infty,$ we have that $q \to 1,$ and thus 
+    \[\left(\sum_{k=1}^\infty |b_k|^q\right)^\frac{1}{q} = \sum_{k=1}^\infty |b_k|.\] so it suffices to show that 
+    \[\sum_{k=1}^n {a_k b_k}\leq \|a\|_\infty \|b\|_1,\] which is obvious, since 
+    \[a_kb_k \leq \|a\|_\infty b_k \implies \sum_{k=1}^\infty a_k b_k \leq \|a\|_\infty \sum_{k=1}^\infty b_k.\]
+\end{solution}
+\begin{reflection}
+    Here we use the fact that if $f$ is convex, then for all $x,y$ and for all $0 < \alpha <1,$ we have that 
+    \[f(\alpha x + (1-\alpha)y) \geq \alpha f(x) + (1-\alpha)f(y).\]
+    To see that $f(x) = \log(x)$ is convex, take the second derivative:
+    \[f'(x) = \frac{1}{x}, \qquad f''(x) = \frac{-1}{x^2} < 0 \; \forall x\in \bbR\sm{0}\]
+\end{reflection}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Prove Minkowski's Inequality. Suppose that $(a_k), (b_k)\in \bbR$ and that $n\in \bbN$ and $1\leq k \leq n.$ If $1 \leq p < \infty,$ then 
+    \[\left(\sum_{k=1}^n|a_k + b_k|^p\right)^{\frac{1}{p}} \leq \left(\sum_{k=1}^n|a_k|^p\right)^{\frac{1}{p}} + \left(\sum_{k=1}^n|b_k|^p\right)^{\frac{1}{p}}\]
+\end{problem}
+\begin{solution}
+    By the triangle inequality, we have that 
+    \[|a_k + b_k|^p  = |a_k + b_k||a_k + b_k|^{p-1} \leq |a_k||a_k + b_k|^{p-1} + |b_k||a_k + b_k|^{p-1},\] and thus
+    \begin{align}
+    \sum_{k=1}^n|a_k + b_k|^p  \leq \sum_{k=1}^n|a_k||a_k + b_k|^{p-1} + \sum_{k=1}^n|b_k||a_k + b_k|^{p-1}.    
+    \end{align}
+     Applying H\"{o}lder's inequality to both terms using $\frac{1}{p}$ and $\frac{p-1}{p}:$
+    \[\sum_{k=1}^n|a_k||a_k + b_k|^{p-1} \leq \left(\sum_{k=1}^n |a_k|^p \right)^{\frac{1}{p}}\left(\sum_{k=1}^n|a_k + b_k|^p\right)^{\frac{p-1}{p}}\]
+    \[\sum_{k=1}^n|b_k||a_k + b_k|^{p-1} \leq \left(\sum_{k=1}^n |b_k|^p \right)^{\frac{1}{p}}\left(\sum_{k=1}^n|a_k + b_k|^p\right)^{\frac{p-1}{p}}.\] Putting those back into (3):
+    \begin{align*}
+    \sum_{k=1}^n|a_k + b_k|^p &\leq \left(\left(\sum_{k=1}^n|a_k|^p\right)^{\frac{1}{p}} + \left(\sum_{k=1}^n|b_k|^p\right)^{\frac{1}{p}}\right)\left(\sum_{k=1}^n|a_k + b_k|^p\right)^{\frac{p-1}{p}}\\ &= \left(\left(\sum_{k=1}^n|a_k|^p\right)^{\frac{1}{p}} + \left(\sum_{k=1}^n|b_k|^p\right)^{\frac{1}{p}}\right)\frac{\left(\sum_{k=1}^n|a_k + b_k|^p\right)}{\left(\sum_{k=1}^n|a_k + b_k|^p\right)^{\frac{1}{p}}}    
+    \end{align*}
+    Multiplying both sides by 
+    \[\left(\frac{\left(\sum_{k=1}^n|a_k + b_k|^p\right)}{\left(\sum_{k=1}^n|a_k + b_k|^p\right)^{\frac{1}{p}}}\right)^{-1}\] yields Minkowski's inequality.
+
+    For the case when $p = \infty,$ we have seen that 
+    \[\|a+ b\|_p = \|a + b\|_\infty,\] and thus since (we will prove this in a later problem) 
+    \[\sup_{n}|a_n + b_n| \leq \sup_n|a_n| + \sup_n|b_n|,\] then 
+    \[\|a + b\|_\infty \leq \|a\|_\infty + \|b\|_\infty,\] and so the inequality does hold. 
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+Show that $\ell^p$ is a Banach Space with the $p-$norm from above when $p \in [1,\infty)$ and when $p = \infty,$ show it is a Banach space with $\|a\|_\infty = \sup_n{|a_n|}$
+\end{problem}
+\begin{solution}
+For the following, let $a = (a_n) = (a_1, a_2, \dots)\in \ell^p.$
+    Starting when $p \in [1,\infty),$ we have that if $a_n \neq (0,0,0,\dots),$ then there exists some $a_i \in (a_n)$ such that $|a_i|>0,$ and thus
+    \[\|a_n\| = \left(\sum_{i=1}^\infty |a_i|^p\right)^{\frac{1}{p}} >0.\] By the absolute value, we obviously have that $\|a_n\| = 0$ if and only if $a_n = (0,0,\dots).$ 
+
+    Let $\lambda\in \bbR.$ 
+    \[\|\lambda a\| = \left(\sum_{n=1}^\infty |\lambda a_n|^p\right)^{\frac{1}{p}} = \left(\sum_{n=1}^\infty |\lambda|^p |a_n|^p\right)^{\frac{1}{p}} = \left(|\lambda|^p \sum_{n=1}^\infty  |a_n|^p\right)^{\frac{1}{p}} = |\lambda|\left(\sum_{n=1}^\infty  |a_n|^p\right)^{\frac{1}{p}} = |\lambda| \|a\|\]
+
+    Using problem 2 (Minkowski's inequality), we have inmediately that
+    \[\|a + b\| = \left(\sum_{k=1}^n|a_k + b_k|^p\right)^{\frac{1}{p}} \leq \left(\sum_{k=1}^n|a_k|^p\right)^{\frac{1}{p}} + \left(\sum_{k=1}^n|b_k|^p\right)^{\frac{1}{p}} = \|a\| + \|b\|\]
+
+    To show it is complete, take a Cauchy sequence $(a_n) = (a_{n}^{(i)})_{n\in \bbN} \in \ell^p.$ That is, \[(a_{n}^{(i)})_{n\in \bbN} = (a_{1}^{(i)}, a_{2}^{(i)}, \dots)_{i\in \bbN}\] such that for all $\epsilon>0,$ there exists an $N$ such that if $n,m\geq N,$ then
+    \[\|a_n - a_m\| = \left(\sum_{i=1}^\infty|a_{n}^{(i)} - a_{m}^{(i)}|^p\right)^{\frac{1}{p}} < \epsilon\] We claim that for each fixed $i,$ $(a_{n}^{(i)})$ converges to some $a^{(i)}.$ To see this, we claim that $(a_{n}^{(i)})$ is/are Cauchy. Take $i =1,$ then for any $n,m \geq N,$ we have that 
+    \[\left(\sum_{i=1}^\infty|a_{n}^{(i)} - a_{m}^{(i)}|^p\right)^{\frac{1}{p}} = \left(|a_{n}^{(1)} - a_{m}^{(1)}|^p + \sum_{i=2}^\infty|a_{n}^{(i)} - a_{m}^{(i)}|^p\right)^{\frac{1}{p}}< \epsilon,\] and thus
+    \[|a_{n}^{(1)} - a_{m}^{(1)}| < \left(\epsilon^p - \sum_{i=2}^n|a_{n}^{(i)} - a_{m}^{(i)}|^p\right)^{\frac{1}{p}} \to 0.\] Thus, we have that for $n, m\geq N$ (notice how this choice of has not at any point depended on our choice of $i = 1$), then
+    \[|a_{n}^{(1)} - a_{m}^{(1)}| < \epsilon,\] and thus $(a_{n}^{(1)})$ is a Cauchy sequence of reals. Thus, it converges, $(a_{n,1}) \to a^{(1)}.$ Because there was nothing special about $i=1,$ we have that for all $i \in \bbN,$ there exists a limit $a^{(i)}\in \bbR$ such that for each fixed $i,$ \[a_{n}^{(i)} \to a^{(i)}.\] Let $(A_n) = (a^{(1)}, a^{(2)}, \dots) = (a^{(i)})_{i\in \bbN}.$ We claim that $(a_{n}^{(i)})_{n\in \bbN} \to (A_n).$ Let $\epsilon>0.$ Since each $a_{n}^{(i)} \to a^{(i)}$ (in a `uniform' sense, as we have a single $N$ controlling the convergence of all $i,$ as seen by the indifference of choosing $N$ in the $i=1$ calculation above) we let $n\geq N$ such that \[|a_{n,i} - a^{(i)}|< \frac{\epsilon}{2^{\frac{i}{p}}},\] then 
+    \begin{align*}
+        \|(a_n) - A_n\| &= \left(\sum_{i=1}^\infty |a_{n,i} - a^{(i)}|^p\right)^{\frac{1}{p}}\\
+        &< \left(\sum_{i=1}^\infty \frac{\epsilon^p}{2^{i}}\right)^{\frac{1}{p}}\\
+        &= (\epsilon^p)^\frac{1}{p}\\
+        &= \epsilon.
+    \end{align*}
+
+    In the case when $p = \infty,$ I think that the positive definiteness of $\|a\|$ is obvious. 
+    
+    Homogeneity is also kinda obvious, noting that 
+    \[\|\lambda a\| = \sup_{n\in \bbN}|\lambda a_n| = |\lambda|\sup_{n\in \bbN}|a_n| = \lambda \|a\|\] 
+
+    Triangle inequality follows from triangle inequality since for any $n:$
+    \[|a_n + b_n| \leq |a_n| + |b_n| \implies \sup_{n\in \bbN}|a_n + b_n| \leq |a_n| + |b_n| \leq \sup_{n\in \bbN}|a_n| + \sup_{n\in \bbN}|b_n|.\] Thus, we have that
+    \[\|a + b\| = \sup_{n\in \bbN} |a_n + b_n| \leq \sup_{n\in \bbN}|a_n| + \sup_{n\in \bbN}|b_n| = \|a\| + \|b\|\]
+
+    Let $(a_n) = (a_{n}^{(i)})_{n \in \bbN} = (a_{1,i}, a_{2,i}, \dots) \in \ell^\infty$ be Cauchy. That is, for all $\epsilon>0,$ there exists an $N \in \bbN$ such that if $n, m\geq N,$ then 
+    \[\|a_{n}^{(i)} - a_{m}^{(i)}\| = \sup_{i \in \bbN}|a_{n}^{(i)} - a_{m}^{(i)}|< \epsilon.\] Fix $i.$ Then we have that there exists an $N \in \bbN$ such that if $n,m \geq N,$ then 
+    \[|a_{n}^{(i)} - a_{m}^{(i)}| \leq \sup_{i \in \bbN}|a_{n}^{(i)} - a_{m}^{(i)}| < \epsilon,\] which implies that for fixed $i,$ $(a_{n}^{(i)})_{n\in \bbN}$ is Cauchy sequence of reals, and thus converges to something. For each $i,$ let 
+    \[a_{n}^{(i)} \to a^{(i)}.\] Then we have that if $(A_n) = (a^{(1)}, a^{(2)}, \dots),$ then for all $\epsilon>0,$ there exists an $N\in \bbN$ such that if $n \geq N,$ then \[|a_{n}^{(i)} - a^{(i)}|< \epsilon \qquad \forall \epsilon \implies \|a_{n}^{(i)} - A_n\| = \sup_{i\in\bbN}|a_{n,i} - a^{(i)}| \leq \epsilon.\]
+
+    It suffices to show that $(A_n) \in \ell^p.$ To see this, it will suffice to see that $\|(A_n)\|_p < \infty$ for any $p\in [1,\infty].$ Using Minkowski's inequality (which we have seen in valid for all $p\geq 1,$) we see that for large enough $n,$
+    \[\|(A_n)\|_p \leq \|(A_n) - a_{n}^{(i)}\|_p + \|a_{n}^{(i)}\|_p < \epsilon +  \|a_{n}^{(i)}\|_p.\] Since for each $n,$ we have that $a_{n}^{(i)} \in \ell^p,$ then $\|a_{n}^{(i)}\|_p < \infty,$ and thus $\|(A_n))\|_p < \infty,$ and thus $(A_n) \in \ell^p.$
+\end{solution}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Prove that \( c_0 = \{ (a_n)_{n \in \mathbb{N}} \in l^\infty : \lim_{n \to \infty} a_n = 0 \} \) is a Banach space with norm \( \|a\|_\infty \).
+\end{problem}
+\begin{solution}
+    We claim that it suffices to show that $c_0$ is closed. Why? Let $W\subset V,$ where $V$ is Banach and $W$ is closed. The $(x_n) \in W$ be Cauchy, then it inherits from the subspace vector space to the super space Banach space, and thus $(x_n)$ is Cauchy in $W,$ implying that $(x_n)$ converges to some $x_n \to x.$ Since $W$ is closed, we have that $x\in W,$ and thus $W$ is Banach. 
+
+    Let $(a_n^{i})_{n\in \bbN}^{i \in \bbN} = (a_{1}^{i}, a_{2}^{2}, \dots) \in c_0$ such that $(a_n^i) \to a^i = (a^{(1)}, a^{(2)}, \dots).$ We want to show that $a^i \in c_0,$ so it suffices that $\displaystyle\lim_{i\to \infty} a^i = 0.$ Since $(a_n^i) \to a^i,$ we have that there exists an $N_1 \in \bbN$ such that if $m\geq N_1,$ then 
+    \[\|a_m^i - a^i\| < \frac{\epsilon}{2}.\] Since $(a_n^i) \in c_0,$ then there exists an $N_2$ such that if $m \geq N_2,$ then 
+    \[\|a_m^i\| < \frac{\epsilon}{2}.\] Thus, take $N = \max\{N_1, N_2\},$ and we have that if $m\geq N,$ then
+    \[\|a^i\| \leq \|a^i - a_m^i\| + |a_m^i| < \epsilon\] Thus, $a^i \in c_0$ and so $c_0$ is closed and so $c_0$ is Banach.
+\end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+Let \( p \in [1, \infty) \) and \( 1/p + 1/q = 1 \). Show that, for any \( b \in l^q \), the map \( F_b : l^p \to \mathbb{R} \) given by \[F_b(a) = \sum_{k=1}^\infty a_k b_k \] is a bounded linear functional on \( \ell^p \).
+\end{problem}
+\begin{solution}
+For the following, we let $b\in \ell^q$ be arbitrary, noting that 
+\[\|b\|_q = C  <\infty\] by definition of it being the the $\ell^q$ space.
+
+    Evidently, $F_b$ is a functional. To show it is linear, let $a, c \in \ell^p$ and $\lambda \in \bbR.$ We use the linearity of the sum:
+    \[F_b(\lambda a  + c) = \sum_{k=1}^\infty (\lambda a_k + c_k)b_k = \sum_{k=1}^\infty \lambda a_kb_k + c_kb_k = \lambda \sum_{k=1}^\infty a_kb_k + \sum_{k=1}^\infty c_kb_k = \lambda \lambda F_b(a) + F_b(c).\] TO show it is bounded, we use H\"{o}lder's inequality. Let $a \in \ell^p,$ then 
+    \begin{align*}
+        |F_b(a)| &= |\sum_{k=1}^\infty a_k b_k|\\
+        &\leq \sum_{k=1}^\infty |a_k b_k|\\
+        &\leq \left(\sum [a_k]^{p}\right)^\frac{1}{p}\left(\sum [b_k]^{q}\right)^\frac{1}{q}\\
+        &= \|a\|_p\|b\|_q\\
+        &= C\|a\|_p
+    \end{align*}
+\end{solution}
+
+
+
+
+
+
+\end{document}
+
+

@@ -1,0 +1,428 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Panagiotis E. Souganidis}
+\newcommand{\assignment}{Problem Set 6}
+\newcommand{\semester}{Winter 2024}
+\newcommand{\duedate}{\today}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    Define 
+    \[c_0 := \{(a_n)\in \ell^\infty \; : \; a_n \to 0\}\]
+    Show that $c_0^* = \ell^1.$
+\end{problem}
+\begin{solution}
+    Let $x\in c_0.$ We represent $x$ via a Schauder basis:
+    \[x = \sum_{n=1}^\infty x_ne_n,\] where $e_n = \delta_{ni}$ (kronecker-delta) and $x_n \in \bbR.$ Evidently, this representation is unique for each $x.$
+    Thus, we have that for any $f\in c_0^*,$ 
+    \[\langle f, x\rangle = \langle f, \sum_{n=1}^\infty x_n e_n \rangle = \sum_{n=1}^\infty x_n f(e_n).\] We define $f(e_n)= a_n.$ Thus, 
+    \[f(x) = \sum_{n=1}^\infty x_na_n.\] Uniqueness comes from the uniqueness of the Schauder basis. We note that 
+    \begin{align}
+        |f(x)| \leq \|f\|_{c_0^*}\|x\|_\infty
+    \end{align}
+   
+    We will next show that $(a_n)\in \ell^1.$  Define 
+    \[x_i = 
+    \begin{cases}
+        \text{sign}(a_n), \qquad n\leq N\\
+        0, \qquad \qquad \quad n>N
+    \end{cases}.\] Evidently, $x\in c_0$ with $\|x\|_\infty = 1$
+    We use (1) and see that
+    \begin{align}
+      \sum_{n=1}^N |a_n| = |f(x)| = \left|\sum_{n=1}^\infty x_na_n\right| \leq \|f\|_{c_0^*}\|x\|_\infty  = \|f\|_{c_0^*}   
+    \end{align}
+        Thus, because $f\in c_0^*$ then $\|f\|< \infty$ and because $x\in c_0.$ Thus, because (2) holds for any $N,$ we see that $a\in \ell^1.$ To see that $f \to a$ is an isometry, we need to show that $\|f\|_{c_0^*} = \|a\|_1.$
+    We use H\"older's inequality for one side:
+    \[|f(x)| = \sum_{n=1}^\infty x_n a_n \leq \|x\|_\infty\|a\|_1 \implies \sup_{\|x\|_\infty =1}|f(x)| = \|f\|_{c_0^*} \leq \|a\|_1.\] We use (2) to directly show that $\|a\|_1 \leq \|f\|_{c_0^*}.$
+
+    Finally, we see that $f$ is bounded. $f$ linear is obvious from the definition.
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Show that $(\ell^1)^* = \ell^\infty.$ 
+\end{problem}
+\begin{solution}
+    Let $x\in \ell^1.$ We represent $x$ via a Schauder basis:
+    \[x = \sum_{n=1}^\infty x_n e_n\] as in the problem above. Thus, for any $f\in (\ell^1)^*:$
+    \[\langle f, x\rangle = \langle f, \sum_{n=1}^\infty x_n e_n \rangle = \sum_{n=1}^\infty x_n f(e_n).\] We define $f(e_n)= a_n.$ Thus, 
+    \[f(x) = \sum_{n=1}^\infty x_na_n.\] Uniqueness comes from the uniqueness of the Schauder basis. We note that 
+    \begin{align*}
+        |f(x)| \leq \|f\|_{c_0^*}\|x\|_1
+    \end{align*}
+    To show that $a = (a_n)\in \ell^\infty,$ simply notice that 
+    \begin{align}
+|a_n| = |f(e_n)| \leq \|f\|\|e_n\|_1 = \|f\| \implies \|a\|_\infty = \sup_{n}|a_n| \leq \|f\|        
+    \end{align}
+
+Thus, $a \in \ell^\infty.$ 
+
+To see that $f\mapsto a$ is an isometry, we use H\"older's inequality:
+\[|f(x)| = \left|\sum_{n=1}^\infty x_n a_n\right|\leq \|x\|_1\|a\|_\infty \implies \|f\| = \sup_{\|x\|_1 = 1}|f(x)| \leq \|a\|_\infty.\] We use (3) to see the other side of the inequality.
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Suppose $p\in (1, \infty)$ and $q\in \bbR$ with $\frac{1}{p} + \frac{1}{q} = 1.$ Prove that $(\ell^p)^* = \ell^q.$
+\end{problem}
+\begin{solution}
+    Let $x\in \ell^p.$ We represent $x$ via a Schauder basis:
+    \[x = \sum_{n=1}^\infty x_n e_n\] as in the problem above. Let $f\in (\ell^p)^*.$ Then
+    \[\langle f, x\rangle = \langle f, \sum_{n=1}^\infty x_n e_n \rangle = \sum_{n=1}^\infty x_n f(e_n).\] We define $f(e_n)= a_n.$ Thus, 
+    \[f(x) = \sum_{n=1}^\infty x_na_n,\] and so 
+    \[|f(x)|\leq \|f\|\|x\|_p.\] To show that $a\in \ell^q,$ we define 
+    \[x_n = 
+    \begin{cases}
+    \frac{|a_n|^q}{a_n}, \qquad a_n \neq 0, n\leq N\\
+    0, \qquad \quad \: \: a_n = 0, n> N
+    \end{cases}\]
+    Thus, we see that 
+    \[|f(x)| = \left|\sum_{n=1}^\infty x_na_n\right| = \sum_{n=1}^N |a_n|^q\leq \|f\|\|x\|_p= \|f\|\left(\sum_{n=1}^\infty|a_n|^{(q-1)p}\right)^\frac{1}{p} = \|f\| \left(\sum_{n=1}^\infty |a_n|^q\right)^\frac{1}{p},\] and so taking $N\to \infty$ and dividing by the very last term, we see that $a\in \ell^q$ since $\|a\|_q \leq \|f\|.$ 
+
+    We use H\"older again:
+    \[|f(x)| \leq \sum_{n=1}^\infty |x_n| |a_n| \leq \|x\|_p \|a\|_q \implies \|f\| = \sup_{\|x\|_p = 1} \leq \|a\|_q.\]
+\end{solution}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Let $C$ be a convex symmetric subset of a Banach space $X.$ Assume that the linear functional $f$ on $X$ is continuous at $0$ when restricted to $C.$ Show that $f|_C$ is uniformly continuous.
+\end{problem}
+\begin{solution}
+    Since $f|_C$ is continuous at $0,$ then for all $\epsilon>0,$ there exists some $\delta>0$ such that if $v\in C$ with $\|v\|< \delta,$ then $\|f(v)\|< \epsilon.$ Take $x,y \in C$ with $\|x-y\|< \delta.$ Since $y \in C$ and $C$ is symmetric, then $-y \in C.$ Take $t = \frac{1}{2},$ then by convexity,
+    \[g(t) := tx + (1-t)(-y) \implies g(\frac{1}{2}) = \frac{1}{2}x - \frac{1}{2}y = \frac{1}{2}(x-y)\in C.\] Thus, 
+    \[\|\frac{1}{2}(x-y)\| < \delta \implies \|f(\frac{1}{2}(x-y))\| = \frac{1}{2}\|f(x) - f(y)\|< \epsilon,\] and so $f$ is uniformly continuous on $C.$
+\end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Let $f$ be a linear functional on a Banach space $X.$ Suppose $f\not \equiv 0,$ then the following are equivalent:
+    \begin{enumerate}
+        \item $f$ is continuous.
+        \item $f$ is continuous at $0.$
+        \item $f^{-1}(\{0\})$ is closed.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    (i $\mapsto$ ii) is obvious. 
+
+    (ii $\mapsto$ iii) Let $(x_n)\in f^{-1}(0)$ with $x_n \to x.$ We want to show that $f(x) = 0.$ Since $f$ is continuous at $0,$ then for all $\epsilon>0,$ there exists a $\delta>0$ such that if $v\in X$ with $\|v\|< \delta,$ then $\|f(v)\|< \epsilon.$
+    
+    For $n$ large, we have that $\|x_n - x\|<\delta,$ and thus since $f(x_n) = 0:$
+    \[\|f(x)\| = \|f(x) - f(x_n)\| = \|f(x - x_n)\| < \epsilon,\] and thus $f(x) = 0,$ and so $x\in f^{-1}(0).$
+
+    (iii $\mapsto$ i) Suppose that for each $n,$ there exists some $x_n \in X$ with $x_n \neq 0$ such that 
+    \[\|f(x_n)\| \geq n\|x\_n|,\] that is $X$ is not bounded. Let 
+    \[z_n ;= x_1 - f(x_1)\frac{x_n}{f(x_n)}.\] Thus, $f(z_n) = 0,$ and so $z_n \in f^{-1}(\{0\}).$ Moreover, $z_n \to x_1$ since 
+    \[\|z_n - x_1\| = \| x_1 - f(x_1)\frac{x_n}{f(x_n)} - x_1\| = \|f(x_1) \frac{x_n}{f(x_n)}\| = |f(x_1)|\frac{\|x_n\|}{|f(x_n)|} \leq |f(x_1)|\frac{1}{n}\]
+    Thus, $z_n \to x_1$ but $f(x_1) \geq |x_1|>0$ and so $x_1 \notin f^{-1}(\{0\}),$ and thus $f^{-1}(\{0\})$ is not closed, a contradiction. Thus, $f$ is bounded and so $f$ is continuous.
+\end{solution}
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Suppose $X$ is finite dimensional Banach space and $C$ is a convex subset that is dense in $X.$ Then $C = X.$
+\end{problem}
+\begin{solution}
+    Suppose not. Then let $x_0 \in C\setminus C.$ Since $C$ and $\{x_0\}$ are convex, disjoint, and nonempty, then the finite dimensional Hahn-Banach states that there exists some closed hyperplane $H = [f = \alpha]$ such that 
+    \[f(C) \leq \alpha \leq f(x_0).\] Let $z_0 = x_0 + \frac{x_0}{f(x_0)}\in X.$ Then 
+    \begin{align}
+    f(C) \leq \alpha \leq f(x_0) < f(z_0) = f(x_0) + 1.  
+    \end{align}
+     Let $\epsilon = \frac{f(z_0)}{2}.$ By continuity of $f,$ there exists some $\delta>0$ such that if $\|x-z_0\| < \delta,$ we have that $\|f(x) - f(z_0)\|< \frac{f(z_0)}{2}.$ Since $C$ is dense in $X,$ we can find some $c \in C$ with $\|c - z_0\|< \delta,$ a contradiction to (4).
+\end{solution}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    Suppose $C\subset X$ with $X$ Banach and $f: C\to \bbR$ Lipshitz. Show that $f$ can be extended to all of $X.$
+\end{problem}
+\begin{solution}
+    Define $F: X\to \bbR$ such that 
+    \[F(x):= \inf_{c\in C}\left[f(c) + L\|x-c\|\right].\] If $c_0\in C,$ then 
+    \[F(c_0) = \inf_{c\in C}\left[f(c) + L\|c_0-c\|\right] \leq f(c_0) + L\|c_0-c_0\| = f(c_0).\]
+    We also have that for any $c\in C:$
+    \[f(c_0) - f(c) \leq L\|c_0 - c\| \implies f(c_0) \leq f(c) + L\|x_0 - c\| \implies f(c_0) \leq F(x).\]
+    We see that $F|_C= f.$ 
+    
+
+    Suppose $x,y \in X.$ By definition, for all $\epsilon>0,$ there exists some $c_x \in C$ such that 
+    \[F(x) \geq f(c_x) + L\|x - c_x\| - \epsilon.\] Since $c_x \in C,$ then  
+    \[F(y) \leq f(c_x) + L\|y-c_x\|.\]
+    Using the reverse triangle inequality:
+    \begin{align*}
+        F(y) - F(x) &\leq f(c_x) +L\|y - c_x\| - f(c_x) - L\|x - c_x\| + \epsilon\\
+        &\leq L\|y - c_x\| - L\|c_x - x\| + \epsilon\\
+        &\leq L\|y - x\| + \epsilon
+    \end{align*}
+    Because this is true for all $\epsilon>0,$ we see that $F(y) - F(x) \leq L\|y - x\|.$ 
+
+    For all $\epsilon>0,$ there exists some $c_y \in C$ such that 
+    \[F(y) \geq f(c_y) + L\|y - c_y\| - \epsilon.\] Since $c_y \in C,$ we have that 
+    \[F(x) \leq f(c_y) + L\|x- c_y\|.\] Using the reverse triangle inequality:
+    \begin{align*}
+        F(x) - F(y) &\leq f(c_y) + L\|x- c_y\| - [f(c_y) + L\|y - c_y\| - \epsilon]\\
+        &= f(c_y) + L\|x- c_y\| - f(c_y) - L\|y - c_y\| + \epsilon\\
+        &= L(\|x - c_y\| - \|c_y - y\|) + \epsilon\\
+        &\leq L(\|x - y\|) + \epsilon,
+    \end{align*}
+    and so $F(x) - F(y) \leq L\|x - y\|.$ Putting it together, we see that 
+    \[|F(x) - F(y)| \leq L\|x-y\|\]
+\end{solution}
+
+
+
+\newpage
+\section*{Problem 8}
+\begin{problem}
+    Let $X = \bbR^2$ with \[\|x\| = (|x_1|^{4} + |x_2|^{4})^\frac{1}{4}.\] Calculate directly the dual norm on $X^*.$ 
+\end{problem}
+\begin{solution}
+   Let $x\in \bbR^2.$
+    \[f(x) = f(x_1e_1 + x_2e_2) = x_1f(e_1)+ x_2f(e_2).\] Thus, using H\"older's inequality:
+    \begin{align*}
+    |f(x)| &= |x_1f(e_1)+ x_2f(e_2)|\\
+    &\leq |x_1||f(e_1)| + |x_2||f(e_2)|\\
+    &\leq (|x_1|^4 + |x_2|^4)^\frac{1}{4}(|f(e_1)|^\frac{4}{3} + |f(e_2)|^\frac{4}{3})^\frac{3  }{4}.
+    \end{align*}
+    Thus, 
+    \[\sup_{\|x\| = 1} |f(x)| \leq (|f(e_1)|^\frac{4}{3} + |f(e_2)|^\frac{4}{3})^\frac{3  }{4}.\]
+    Let $x\in \bbR^2$ with 
+    \[x_n = \begin{cases}
+        \frac{|f_n|^\frac{4}{3}}{f_n}, \qquad f_n \neq 0\\
+        0, \qquad \;\;\:\: \quad f_n = 0
+    \end{cases}.\] Thus, we see that 
+    \[|f(x)| = \left|\sum_{n=1}^2x_nf_n\right| = \sum_{n=1}^2 |f_n|^\frac{4}{3} \leq \|f\|\|x\| = \|f\|\left(\sum_{n=1}^2|x_n|^4\right)^\frac{1}{4} = \|f\|\left(\sum_{n=1}^2 |f_n|^\frac{4}{3}\right)^\frac{1}{4}.\] Dividing by the very last term, we see that 
+    \[\left(\sum_{n=1}^2 |f_n|^\frac{4}{3}\right)^\frac{3}{4} \leq \|f\|.\] Thus, 
+    \[\|f\| = \left(\sum_{n=1}^2 |f_n|^\frac{4}{3}\right)^\frac{3}{4}\]
+\end{solution}
+
+\newpage
+\section*{Problem 9}
+\begin{problem}
+    Let $X,Y$ be Banach spaces and suppose $T\in \mathcal{L}(X,Y).$ Show the following are equivalent:
+    \begin{enumerate}
+        \item $T(X)$ is closed.
+        \item $T$ is an open mapping from $X$ unto $T(X)$
+        \item There exists some $M>0$ such that for all $y\in T(X),$ there exists some $x\in T^{-1}(y)$ such that $\|x\|_X \leq M \|y\|_Y.$
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    (i $\mapsto$ ii) Suppose $T(X)$ is closed. Since $T(X)\subset Y$ and $Y$ is Banach, then $T(X)$ is Banach. Thus, $T$ is surjective unto $T(X),$ and so by the open mapping theorem, $T$ is an open map from $X$ unto $T(X).$
+
+    (ii $\mapsto$ iii) Suppose $T$ is an open map from $X$ unto $T(X).$ Thus, there exists some $c>0$ such that $B^F_c(0)\subset T(B_E).$ Let $y \in T(X).$ Then $\frac{1}{c}y \in B_c^F(0),$ and so $\frac{1}{c}y \in T(B_E).$ Thus, there exists some $x\in B_E$ such that $T(x) = \frac{1}{c}y.$ That is, $x = T^{-1}(\frac{1}{c}y).$ Thus, 
+    \[\|x\| = \|T^{-1}\frac{1}{c}y\| \leq \frac{1}{c}\|T\|\|y\|_Y.\] Let $M = \frac{1}{c}\|T^{-1}\|.$ It suffices to show that $T^{-1}: T(X)\to Y$ is bounded, but this comes from the fact that $T^{-1}(B_c^F(0))\subset B_E.$
+
+    (iii $\mapsto$ i) Define $\pi: E \to E/\ker T$ to be the canonical surjection. We know that 
+    \[\|\pi x\| = \text{dist}\|x- N(T)\|,\] and that $T = \tilde{T}\circ \pi,$ where $\tilde{T}: E/\ker T \to F$ is a bijection from $E/\ker T$ to $R(T)$ with $R(T) = R(\tilde{T})$ Moreover, $\|T\| = \|\tilde{T}\|.$ Since $\tilde{T}$ is bijective and it is known that $E/\ker T$ is a Banach Space, then $R(\tilde{T})\subset F$ is closed if and only if $R(\tilde{T})$ is a Banach space if and only if (by a corollary of the open mapping theorem) $\tilde{T}^{-1}$ is continuous if and only if there exists some $M>0$ such that for all $y\in R(T),$ we have that
+    \[\|\tilde{T}^{-1}y\| = \|x\|\leq M\|y\|.\] Without using the open mapping theorem, we have that $\tilde{T}^{-1}$ is continuous since $\tilde{T}$ is an isomorphism. Thus, we see that if $y_n \to y$ with $(y_n)\in T(X),$ then $(y_n)$ is Cauchy and so for large enough $n,$ we get that if $x_n = \tilde{T}^{-1}y_n$
+    \[\|x_n - x_m\| \leq M\|T(x_n - x_m)\| = M\|Tx_n - Tx_m\|= M\|y_n - y_m\|< \epsilon,\] and so $(x_n)\in X$ is Cauchy and thus converges to some $x$ via the completeness of $X,$ and we claim that $Tx = y:$
+    \[\|Tx - y\|\leq \|Tx - Tx_n\| + \|Tx_n - y\| \leq \|T\|\|x - x_n\| + \|y_n - y\| < \epsilon.\]
+\end{solution}
+
+\newpage
+\section*{Problem 10}
+\begin{problem}
+Let $X,Y$  be Banach and suppose $T\in \mathcal{L}(X,Y).$ Show that if $T$ maps closed sets in $X$ unto closed sets on $Y,$ then $T(X)$ is closed in $Y.$     
+\end{problem}
+
+\begin{solution}
+    By the previous problem, it suffices to show that $T$ is an open mapping from $X$ unto $T(X).$ By class, it suffices to show that there exists some $c>0$ such that $B_c^F(0)\subset T(B_E).$ We will show this result for $\tilde{T}.$ That is, $T = \tilde{T}\circ \pi,$ where $\tilde{T}: X/\ker T \to Y$ is a bijection from $E/\ker T$ to $R(T)$ with $R(T) = R(\tilde{T})$ Moreover, $\|T\| = \|\tilde{T}\|$ and $\tilde{T}$ is bijective.
+
+    To show that $\tilde{T}$ maps closed sets (in $X/\ker T$ with the norm $\|[x]\|_{X/\ker T} = \text{dist}(x - \ker T)$) to closed sets in $Y,$ let $K$ be closed in $X/\ker T.$ Let $(y_n)\in \tilde{T}(K)$ with $y_n \to y.$ Since $\tilde{T}$ is bijective, then the inverse exists and is continuous, and thus there exists $(x_n)\in X\setminus \ker T$ such that $x_n= y_n$ and $\|x\| = \|\tilde{T}^{-1}y_n\| \leq \|T^{-1}\|\|y_n\| \leq C\|y_n\|.$ Thus, since $(y_n)$ is Cauchy, then for large $n,m:$
+    \[\|x_n - x_m\| \leq C\|y_n - y_m\|< \epsilon,\] and thus $(x_n)$ is Cauchy. We wish to show that $x_n \to x \in K,$ so it suffices to notice that $K$ is closed and $X/\ker T$ is Banach, and thus $K$ is Banach. Of course, it remains to check that $X/\ker T$ is actually Banach:
+
+    Let $M\subset X$ be closed and suppose $\pi: X \to X/M$ is the natural surjection. Then let $(\pi(x_n))\in X/M$ be Cauchy. We can assume by passing unto a subsequence that 
+    \[\|\pi(x_{n_{k+1}}) - \pi(x_{n_{k}})\|_{X/M} < \frac{1}{2^{k}}\] By the definition of the norm, there exists some $(m_{n_k})\in M$ such that 
+    \[\|x_{n_{k+1}} - x_{n_{k}} - m_{n_k}\|_{X} < \frac{1}{2^{k}}.\] Without any issue, we write $m_{n_k} = u_{n_{k+1}} - u_{n_k}$ and ($u_{n_1} = 0$) to see that $x_{n_k} - u_{n_k}$ is Cauchy in $X,$ and thus converges to a limit in $X,$ and so $\pi(x_{n_k} - u_{n_k}) = \pi(x_{n_k})$ also converges to a limit, and since the sequence is Cauchy, then the entire sequence converges to a limit. 
+
+    Thus, we find that since $\ker T$ is closed, then $X/\ker T$ is Banach, and so we have found that $x\in K.$ To see that $Tx= y,$ notice that for large $n:$
+    \[\|Tx - y\|\leq \|Tx - Tx_n\| + \|Tx_n - y\| \leq \|T\|\|x - x_n\| + \|y_n - y\| < \epsilon.\] Thus, $\tilde{T}$ maps closed maps into closed maps. 
+
+    Suppose $\tilde{T}$ is not an open mapping. Then for all $n>0,$ there exists some $y_n\in R(\tilde{T})$ with $\|y_n\| \leq \frac{1}{n}$ such that $y_n \notin \tilde{T}(B_{x/\ker T}).$ By the bijectivity of $\tilde{T},$ there exist $x_n \in X/\ker T$ such that $x_n = \tilde{T}^{-1}y_n$ and $\|x_n\|\geq 1.$ Since $\tilde{T}^{-1}$ is continuous, then $\|x_n\|\leq C\|y_n\|$ for all $n,$ and thus if 
+    \[\hat{y}_n = \frac{y_n}{\|x_n\|}\] and $\hat{x}_n = \tilde{T}^{-1}\hat{y}_n,$ then $\hat{x}_n \in \overline{B_{X/\ker T}}$ for any $n$ since $\|\hat{x}_n\| = 1.$ Notice how we have that $\|\hat{y}_n\| < \frac{1}{n},$ and so $y_n \to y,$ where $(\hat{y}_n)\in \tilde{T}(\overline{B_{X/\ker T}}).$ Since $\tilde{T}$ is a closed mapping, then $\hat{y}\in \tilde{T}(B_{X/\ker T}),$ and since $\|\hat{y}_n\|< \frac{1}{n},$ $\hat{y} = 0.$
+    There exists some $\hat{x}\in B_{X/\ker T}$ such that $\tilde{T}\hat{x} = \hat{y}.$ To see that $\hat{x}_n \to x,$ consider that 
+    \[\|\hat{x}_n - \hat{x}\|= \|T^{-1}(\hat{y}_n - \hat{y})\| \leq C\|\hat{y}_n - \hat{y}\| < \epsilon.\] We have that $\hat{x} \in B_{X/\ker T}$ and in fact, $\|\hat{x}\| = 1.$ However, 
+    \[T\hat{x}_n = \hat{y}_n \to \hat{y} = 0\] But 
+    \[T\hat{x}_n \to T\hat{x} \neq 0,\] a contradiction! 
+    
+    Thus, $\tilde{T}$ is an open mapping unto $R(\tilde{T}).$ By the previous problem, $R(\tilde{T})$ is closed. Finally, we use that $R(\tilde{T}) = R(T)$ and we conclude.
+    
+\end{solution}
+
+
+
+
+\newpage
+\section*{Problem 11}
+\begin{problem}
+    Let $T\in \mathcal{L}(X,Y).$ Prove the following:
+    \begin{enumerate}
+        \item $\ker(T) = R(T^*)^\perp$
+        \item $\ker(T^*) = R(T)^\perp$
+        \item $\overline{R(T)} = \ker(T^*)^\perp$
+        \item $\overline{R(T^*)} \subset \ker(T)^\perp$
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    (a) We begin by noting the definitions: 
+    \[\ker(T) = \{x \in X \; : \; Tx = 0\}\]
+    \[R(T^*)^\perp = \{x\in X \; : \; \langle T^*v, x\rangle = 0, \; \forall \: v \in Y^*\}.\]
+    Let $x\in \ker T,$ then $Tx = 0,$ and so 
+    \[\langle T^* v, x\rangle = \langle v, Tx\rangle=  \langle v, 0\rangle = 0,\] and so $x\in R(T^*)^\perp.$ Thus $\ker T \subset R(T^*)^\perp.$
+
+    Let $x\in R(T^*)^\perp$ and suppose $x\not \in \ker(T).$ Thus, $(x,0)\not \in G(T).$ $T$ is continuous, and so $G(T)$ is closed. Thus, we use Hahn-Banach. There exist $(f,g)\in E^* \times F^*$ such that 
+    \[\langle f, x\rangle + \langle g, Tx\rangle < \alpha < \langle f, u \rangle + \langle g, 0\rangle = \langle f, u \rangle, \quad \forall x\in D(T).\] Because $G(T)$ is a linear subspace, then 
+    \begin{align}
+    \langle f, x\rangle + \langle g, Tx\rangle = 0    
+    \end{align}
+     and thus $|\langle g, Tx \rangle| \leq \|f\|\|x\|,$ and so $g\in D(T^*).$ Using (5), we see that 
+     \[\langle f + T^* g, x\rangle = 0, \quad \forall x\in D(T) \implies f = T^*(g).\] Thus, $\langle f, u \rangle = \langle T^*g, u \rangle >0,$ but $u\in R(T^*)^\perp,$ and so $\langle T^*g, u\rangle = 0.$ A contradiction! Thus, we get (a).
+
+     To see (b), we let $v\in \ker(T^*).$ Thus, $T^*v = 0,$ and so for any $x\in D(T),$ we have that 
+     \[0 = \langle T^* v, x \rangle =\langle v, Tx\rangle ,\] and so $v\in R(T)^\perp.$
+
+     Let $v\in R(T)^\perp.$ Then for all $x\in D(T),$ $\langle v, Tx \rangle = 0.$ Thus, $|\langle T^* v, x| \leq 0 \|x\|.$ If $v\in D(T^*),$ then $0 = \langle v, Ax \rangle = \langle T^*v, x \rangle  =0$ for all $x\in D(T)$ and so $T*v = 0$ and so $v\in \ker(T^*.)$ This shows (b).
+
+     For (c), it suffices to see that $(M^\perp)^\perp = \overline{M},$ where $M\subset X$ is a linear subspace.
+     \[M^\perp = \{f\in Y^* \; : \; \langle f, x\rangle = 0, \; \forall\: x\in X\}\subset Y^*.\] Thus, 
+     \[(M^\perp)^\perp =\{x\in X \; : \; \langle x, f \rangle = 0, \quad \forall \; f\in M^\perp\} \subset X\] Evidently, $M \subset (M^\perp)^\perp.$ $(M^\perp)^\perp$ is closed, and thus $\overline{M}\subset (M^\perp)^\perp.$
+
+     Suppose there is some $x_0\in \overline{M}$ such that $x\notin (M^\perp)^\perp.$ We use Hahn Banach to separate $\{x_0\}$ and $\overline{M}.$ There exists some closed $f = [H = \alpha]$ such that 
+     \begin{align}
+     f(\overline{M}) < \alpha < f(x_0),    
+     \end{align}
+      and thus $f(M) = 0,$ and so for all $x\in M,$ we have that $\langle f, x \rangle = 0,$ and so $f\in M^\perp$ and thus $\langle f, x_0 \rangle = 0,$ a contradiction to (6). Thus, since $R(T)\subset Y$ is a linear subspace, then $(R(T)^\perp)^\perp = \overline{R(T)},$ and by (c), we see that $\overline{R(T)} = \ker(T^*)^\perp.$
+
+      Suppose that $M\subset E^*.$ We want to show that $\overline{M}\subset (M^\perp)^\perp.$ This is clear from the definition and the above. Thus the result follows directly from (a).
+\end{solution}
+
+\newpage
+\section*{Problem 12}
+\begin{problem}
+    Let $X,Y$ be Banach with $T\in \mathcal{L}(X,Y).$ Show that $T$ maps $X$ unto a dense set if and only if $T^*$ is injective. 
+\end{problem}
+\begin{solution}
+    $T^*$ is injective if and only if $\ker T^* = \{0\}$ if and only if $\ker(T^*)^\perp = Y$ if and only if $\overline{R(T)} = Y.$
+\end{solution}
+
+
+\end{document}

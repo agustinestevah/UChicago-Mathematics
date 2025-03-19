@@ -1,0 +1,393 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Panagiotis E. Souganidis}
+\newcommand{\assignment}{Problem Set 8}
+\newcommand{\semester}{Winter 2024}
+\newcommand{\duedate}{\today}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    Let $(u_n) \in H$ and $(t_n) \in (0,\infty)$ such that 
+    \[(t_nu_n - t_mu_m, u_n - u_m) \leq 0,\]
+    \begin{enumerate}
+        \item Suppose $(t_n)$ is nondecreasing. Prove that $(u_n)$ converges to a limit.
+        \begin{solution}
+       Consider that \[|u_n - u_m|^2 = |u_n|^2 + |u_m|^2 - 2(u_n, u_m).\]
+            Using bilinearity and properties of the inner product, we have that by plugging the above at a convenient spot:
+            \begin{align*}
+               (t_nu_n - t_mu_m, u_n - u_m) &= (t_nu_n, u_n) - (t_nu_n, u_m)- (t_mu_m, u_n) + (t_mu_m, u_m)\\
+               &= t_n|u_n|^2 - t_n(u_n, u_m) - t_m(u_n, u_m) + t_m|v_m|^2\\
+               &= t_n|u_n|^2 - (t_n + t_m)(u_n, u_m) + t_m|v_m|^2\\
+               &= t_n|u_n|^2 - \frac{1}{2}(t_n + t_m)(-|u_n - u_m|^2 + |u_n|^2 + |u_m|^2) + t_m|v_m|^2\\
+               &= \frac{1}{2}(t_n - t_m)|u_n|^2 +\frac{1}{2}(t_n + t_m)(|u_n - u_m|^2) - \frac{1}{2}(t_n - t_m)|u_m|^2\\
+               &= \frac{1}{2}(t_n - t_m)(|u_n|^2 - |u_m|^2) + \frac{1}{2}(t_n + t_m)(|u_n - u_m|^2)\\
+               &\leq 0
+            \end{align*}
+            The first term must necessarily be negative since the second is positive, and so
+            \begin{align}
+                (t_n - t_m)(|u_n|^2 - |u_m|^2) \leq 0
+            \end{align}
+            Since $(t_n)$ is nondecreasing, then for $n>m,$ we have that $t_n - t_m \geq 0,$ and thus by (1) we have that 
+            \[|u_n|^2 - |u_m|^2 \leq 0 \implies |u_n|\leq |u_m|,\] and so $|u_n|$ is nonincreasing. Moreover, we have that 
+            \[\frac{1}{2}(t_n + t_m)(|u_n - u_m|^2) \leq -\frac{1}{2}(t_n - t_m)(|u_n|^2 - |u_m|^2) = \frac{1}{2}(t_n - t_m)(|u_m|^2- |u_n|^2)\leq \frac{1}{2}t_n(|u_m|^2- |u_n|^2),\] and so since $t_n \leq t_n + t_m,$ we have that
+            \[|u_n - u_m|^2 \leq |u_m|^2 - |u_n|^2.\] Letting $n\to \infty,$  we see that since $|u_n|$ is nonincreasing and bounded below, that $|u_n|\to L,$ and so $|u_n|^2 \to L^2$ Thus, taking letting $m\to \infty$ and letting $n = m+1,$ we see that 
+            \[|u_n - u_m|^2 \leq |u_m|^2 - |u_n|^2 \to L^2 - L^2 = 0,\] and so $|u_n - u_m|$ is Cauchy. Thus, since $(u_n)\in H,$ we have that $(u_n)$ converges.
+        \end{solution}
+        \begin{problem}
+            Assume that $(t_n)$ is non increasing. Then either:
+            \begin{enumerate}
+                \item $|u_n|\to \infty$
+                \item or $(u_n)$ converges
+            \end{enumerate}
+            If $t_n \to t >0,$ show that $(u_n)$ converges. 
+        \end{problem}
+        \begin{solution}
+            Let $n>m,$ then by (1) we have that since $t_n - t_m \leq 0,$ then $(|u_n|^2 - |u_m|^2)\geq 0 \implies |u_n|^2 \leq |u_m|^2,$ and so $|u_n|$ is non decreasing. From the above calculations, we have that 
+            \[|u_n - u_m|^2 \leq |u_n|^2 - |u_m|^2.\] Thus, if $|u_n| \to L \leq \infty,$ then by the above reasoning, $(u_n)$ converges. If $|u_n| \to \infty,$ then evidently $(u_n) \to \infty.$ 
+
+            Suppose $t_n \to t.$ As per the hint, we let $v_n = t_nu_n$ and so $s_n = \frac{1}{t_n},$ then 
+            \[(s_nv_n - s_mv_m, v_n - v_m)\leq 0,\] then by the work above, $v_n$ converges and so $u_n$ converges. 
+        \end{solution}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Let $K\subset H$ be a closed convex set and let $f\in H.$ If $u = P_Kf,$ then show that for any $v\in K$
+    \[|v-u|^2 \leq |v-f|^2 - |f-u|^2,\] deduce that 
+    \[|v-u|\leq |v-f|\] and give a geometric interpretation.
+\end{problem}
+\begin{solution}
+    Consider that 
+    \begin{align*}
+        |v - u|^2 &= |v-f + f-u|^2\\
+        &= (v-f + f-u ,v-f + f-u)\\
+        &= (v-f, v-f) + 2(v-f, f-u) + (f-u, f-u)\\
+        &= |v-f|^2 + |f-u|^2 + 2(v - f, f-u)\\
+        &= |u-f|^2 + |v-f|^2 + 2(f-u, v-f)\\
+        &= |u-f|^2 + |v-f|^2 + 2(f-u, v-u + u -f)\\
+        &= |u-f|^2 + |v-f|^2 + 2(f - u, v-u) -2 (f-u, f-u)\\
+        &= |u-f|^2 + |v-f|^2 + 2(f - u, v-u) -2 |f-u|^2\\
+        &= |v-f|^2 - |f-u|^2 + 2(f-u, v-u)\\
+        &\leq |v-f|^2 - |f-u|^2
+    \end{align*}
+    Suppose not for the second part, then 
+    \[|v-u| > |v-f| \implies |v-u|^2 > |v-f|^2 \implies |v-u|^2 > |v-f|^2 - |f-u|^2,\] which is a contradiction.
+    A geometric interpretation:
+    
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+\begin{enumerate}
+    \item Let \( (K_n) \) be a nonincreasing sequence of closed convex sets in \( H \) such that \( \bigcap_n K_n \neq \emptyset \).
+   Prove that for every \( f \in H \) the sequence \( u_n = P_{K_n} f \) converges (strongly) to a limit and identify the limit.
+   \begin{solution}
+       There really is only one natural candidate for the limit. We claim that 
+       \[u_n \to u, \quad u = P_{K_\infty}f.\] Where $K_\infty = \bigcap_{n=1}^\infty K_n.$ We know that $K_\infty$ is is closed since it is the intersection of closed sets, and we know it is convex since the intersection of nested convex sets is convex. We have that since 
+       \[K_1 \supset K_2 \cdots,\] then since $\bigcap K_n \subset K_n$ for any $n,$ $u\in K_n$ for all $n.$ Let $d_n = |f - u_n|.$ Since $K_{n+1}\subset K_n,$ and each $K_n$ is closed, then
+       \[d_n = \inf_{v\in K_n} |f-v| \leq \inf_{v\in K_{n+1}}|f-v|= d_{n+1} \leq \cdots \leq \inf_{v\in K_\infty}|f-v| = d.\] Thus, $d_n$ is monotonic increasing and bounded above, and thus converges to some $d_n \to L.$
+       
+       
+       Apply the parallelogram law to $a = f-u_n$ and $b = f - u_m,$ then 
+       \[\left|\frac{f-u_n + f - u_m}{2}\right|^2 + \left|\frac{u_n - u_m}{2}\right|^2 = \frac{1}{4}|(f - u_n) + (f-u_m)|^2 + \frac{1}{4}|u_n - u_m|^2 = \frac{1}{4}(d_n + d_m)^2 +\frac{1}{4}|u_n - u_m|^2\] is equal to 
+       \[\frac{1}{2}(|d_n|^2 + |d_m|^2).\] Thus, we have that since $d_n \geq 0$ for any $n,$ then 
+       \[|u_n - u_m|^2  = 2|d_n|^2 + 2|d_m|^2 - (d_n + d_m)^2 = |d_n|^2 + 2d_nd_m + |d_m|^2  = (d_m -d_n)^2.\] Thus, since $(d_n)$ converges, then it is Cauchy and thus
+       \[|u_n - u_m| < d_m - d_n \to 0,\]
+       and so $(u_n)$ is Cauchy in a Hilbert space and thus converges to some $u$. We claim that $u\in K_\infty.$ Since $(u_n)\in K_1$ for all $n$ and $K_1$ is closed, we have that $u\in K_1,$ similarly, since $(u_n)\in K_2$ for all $n$ except for possible $u_1,$ then $u\in K_2.$ Because this holds for all $n,$ then $u\in K_\infty.$ Similarly, we have that $|f-u_1|\leq |f-v|$ for all $v\in K_\infty,$ and $|f-u_2| \leq |f-v|$ for all $v\in K_\infty,$ and taking the limit we see that $|f-u|\leq |f-v|$ for all $v\in K_\infty.$
+   \end{solution}
+   \item Let \( (K_n) \) be a nondecreasing sequence of nonempty closed convex sets in \( H \).
+   Prove that for every \( f \in H \) the sequence \( u_n = P_{K_n} f \) converges (strongly) to a limit and identify the limit.
+   \begin{solution}
+       Since $K_1 \subset K_2 \cdots,$ then either $\bigcup K_n = H$ or $\bigcup K_n = K_\infty \neq H.$ Suppose the first case, then $f\in H,$ and so $f\in K_n$ for some $n,$ and thus $P_{K_n}f = f$ Since $K_n \subset K_m$ for all $m\geq n,$ then $P_{K_m} = f$ for all $m \geq n,$ and thus $u_n \to f.$ 
+
+       Consider the second case now, then either $f\in K_\infty,$ in which case we revert back to the first case, or $f\notin K_\infty.$ If the latter, then consider that $d_n = P_{K_n}f$ is a decreasing sequence bounded below by $0,$ and thus converges to a limit. By the reasoning above, we have that $(u_n)$ converges to some $u.$ We claim that $u = P_{\overline{K_\infty}}f,$ where $\overline{K_\infty}$ is obviously closed. To see that $\overline{K_\infty}$ convex, it suffices to notice that $\bigcup K_n$ is convex (since the closure of a convex set is convex). Since $u_n \in K_m$ for all $m> n,$ which implies $u \in \overline{K_\infty}.$ Moreover, let $v\in \overline{K_\infty},$ then either $v\in K_n$ for some $n$ or $v\in LP(\bigcup K_n).$ Suppose the former, then
+       \[|f - u|\leq |f-u_n| \leq |f-v| \quad \forall v\in K_n.\] Now suppose the latter, then there exist some $(v_n)\in \bigcup K_n$ such that $v_n \to v.$ But we have that for any $n,$
+       \[|f-u| \leq |f - v_n| \implies |f-u| \leq \liminf_{n\to \infty}|f-v_n| = |f-v|,\]
+        the conclusion from both of these cases is that while we first showed that $u_n \to u,$ now this shows that $u  = P_{\overline{K_\infty}}f$
+   \end{solution}
+   
+   \item Let \( \varphi : H \to \mathbb{R} \) be a continuous function that is bounded from below and let $K_n$ be as above in part (b). Prove that the sequence \( \alpha_n = \inf_{K_n} \varphi \) converges and identify the limit. 
+   \begin{solution}
+       Consider that $\alpha_n = \inf\{\varphi(x) \; | \; x\in K_n\}.$ Thus, if $n< m,$ then $K_n \subseteq K_m,$ and thus $\alpha_n \geq \alpha_m.$ Thus, $(\alpha_n)$ is non-increasing and bounded below, and so we let 
+       \[\alpha_n \to \alpha_\infty,\] and claim that 
+       \[\alpha_\infty = \inf_{\overline{\bigcup_{n=1}^\infty K_n}}\varphi.\] Let $u \in \overline{\bigcup K_n},$ then by part (b), we have that $u_n = P_{K_n}u \to u.$ Thus, since $\alpha_n(x) \leq \varphi(x)$ for any $x\in K_n,$ then since $u_n \in K_n,$ we have that $\alpha_n(u_n)\leq \varphi(u_n).$ Since both are continuous, we have that $\alpha_n(u) \leq \varphi(u)$ for all $n,$ and so $\alpha_\infty(u)\leq \varphi(u).$ Because this holds for any $u \in K_\infty,$ then 
+       \[\alpha_\infty \leq \inf_{\overline{\bigcup K_n}}\varphi\]
+       Since for any $n,$ we have that $K_n \subset \overline{\bigcup}_{i=1}^\infty K_i,$ then $\alpha_n \geq \alpha_\infty,$ and so \[\alpha_\infty \geq \inf_{\overline{\bigcup_{n=1}^\infty K_n}}\varphi.\] 
+       
+   \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 4}
+    \begin{problem}
+        Let $F: H \to \bbR$ be convex and $C^1.$ Let $K\subset H$ be convex and let $u\in H.$ Show the following are equivalent:
+        \begin{enumerate}[label=(\roman*)]
+            \item $F(u) \leq F(v), \qquad \forall v\in K$
+            \item $(F'(u), v-u) \geq 0 \qquad \forall v\in K.$
+        \end{enumerate}
+    \end{problem}
+    \begin{solution}
+        ($a \mapsto b$) Suppose $F(u)\leq F(v),$ then if we let $v' = tu + (1-t)v,$ where $v \in K,$ we have that since $K$ is convex, $v' \in K,$ and thus
+        \[F(u)\leq F(v') = F((1-t)u + tv),\] and so 
+        \[0 \leq \frac{F(u + t(u-v)) - F(u)}{t} \xrightarrow[]{t\to 0} F_{u-v}'(u) = (F'(u), u-v)\]
+
+        ($b\mapsto a$) We claim that a a continuously differentiable function is convex if and only if its graph lies above all its tangents. That is, since $u\in H,$ then\footnote{MVT} 
+        \[F(v) \geq F(u) + F'(u)\cdot(v-u).\] By assumption, we have that 
+        \[F(v)- F(u) \geq (F'(u), (v-u)) \geq 0 \implies F(v) \geq F(u)\]
+    \end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Let \( G \subset H \) be a linear subspace of a Hilbert space \( H \); \( G \) is equipped with the norm of \( H \). Let \( F \) be a Banach space. Let \( S : G \to F \) be a bounded linear operator. Prove that there exists a bounded linear operator \( T : H \to F \) that extends \( S \) and such that
+
+
+\[
+\|T\|_{\mathcal{L}(H,F)} = \|S\|_{\mathcal{L}(G,F)}.\]
+\end{problem}
+\begin{solution}
+    Since $\overline{G}$ is a closed linear subspace, then $P_{\overline{G}}: H \to \overline{G}$ is a continuous function since for any $f_1, f_2 \in H,$ we have that 
+    \[\|P_{\overline{G}}f_2 - P_{\overline{G}}f_2\|\leq \|f_1 - f_2\|.\] Define $\overline{S}: \overline{G}\to F$ as an extension of $S$ such that if $v\in \overline{G}\sm G$ and $(v_n)\in G$ with $v_n \to v,$ then 
+    \[\overline{S}(v) = \lim_{n\to \infty} S(v_n).\] If $v\in G,$ then let $\overline{S}(v) = S(v).$ To show that $\overline{S}$ is continuous, let $s_1, s_2 \in \overline{G},$ such that $\|s_1 - s_2\|\leq \epsilon,$ then for $n$ large enough, we have that if $s_n^1 \to s_1$ and $s_n^2 \to s_2,$ then by continuity:
+    \[\|s_n^1 - s_n^2\|\leq \|s_n^1 - s_1\| + \|s_1 - s_2\| + \|s_2  - s_n^2\|< \delta \implies \|S(s_n^1) - S(s_n^2)\|< \frac{\epsilon}{3}\]
+    Since $S(s_n^1) \to \overline{S}(s_1)$ and $S(s_n^2) \to \overline{S}(s_2),$ then 
+    \[\|\overline{S}(s_1) - \overline{S}(s_2)\|\leq \|\overline{S}(s_1) - S(s_n^1)\| + \|S(s_n^1) - S(s_n^2)\| + \|S(s_n^2 - \overline{S}(s_n^2))\|< \epsilon,\] and thus $\overline{S}$ is continuous. $\overline{S}$ is clearly linear by the linearity of limits. Since the composition of continuous functions is continuous, then 
+    \[T = \overline{S}\circ P_{\overline{G}}: H \to F \] extends $S$ and is a bounded linear operator. 
+
+    Consider that since $T = \overline{S}\circ P_{\overline{G}},$ then since for any $\|x\| = 1,$ we have that $\|P_{\overline{G}}\| = 1$
+    \[\|T\| \leq \|\overline{S}\|\|P_{\overline{G}}\| = \|S\|\|P_{\overline{G}}\| \leq \|S\|.\] The other inequality is clear since $T$ is just an extension of $S.$
+\end{solution}
+
+\end{problem}
+\newpage
+
+\section*{Problem 6}
+\begin{problem}
+    Let $M, N \subset H$ be two closed linear subspaces. Assume that $(u,v) = 0$ for all $u \in M,$ and $v\in N.$ Show that $M+ N$ is closed.
+\end{problem}
+\begin{solution}
+    Suppose $f\in H$ with $(u_k)\in M + N$ such that $u_k \to f.$ Since $(u_k)\in M+ N,$ then there exist $m_k \in M$ and $n_k \in N$ such that $m_k + n_k  = u_k \to f.$ 
+    Thus, for any $k,$ we have that 
+    \[\|m_k + n_k\|^2 = \|m_k\|^2 + \|n_k\|^2 + 2(m_k,n_k) = \|m_k\|^2 + \|n_k\|^2\geq \|m_k\|^2 \geq 0.\] That is, 
+    \[\|m_k + n_k\| \geq \|m_k\|\geq 0,\] and so $m_k$ is bounded (since $m_k + n_k$ converges and is thus bounded). Thus, there exists some convergent subsequence $m_{k_j} \to m.$ Since $m$ is closed, we have that $m \in M.$ 
+    
+    Consider now that 
+    \[n_{k_j} = u_{k_j} - m_{k_j} \to f - m,\] where again, $f-m \in N$ by the closedness of $N.$ Thus, $f = f-m + m \in M+ N,$ and we are done.
+\end{solution}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    Let $C\subset H$ be a nonempty closed convex set and suppose $T: C \to C$ is a non-linear contraction such that for any $u,v \in C,$
+    \[|Tu - Tv|\leq |u-v|\]
+\end{problem}
+\begin{enumerate}
+    \item Let $(u_n)\in C$ such that $u_n \rightharpoonup u$ and $(u_n - Tu_n)\to f.$ Prove that 
+    \[u - Tu = f\]
+    \begin{solution}
+    Let $g: C \to H$ such that $g(v) = v - Tv.$ Since $T$ is continuous (since it is a contraction), then $g$ is continuous.  Since $C$ is convex and strongly closed, then $C$ is weakly closed, and so $u_n \rightharpoonup u \in C.$ 
+    \begin{align*}
+    \|u- u_n\|^2  &\geq \|Tu - Tu_n\|^2\\
+    &=\|(g(u_n) - g(u) - u_n + u\|^2\\
+    &=\|(g(u_n) - g(u)) + (u - u_n)\|^2\\
+    &= \|g(u_n) - g(u)\|^2 + \|u-u_n\|^2  +2(g(u_n) - g(u), (u-u_n))
+    \end{align*}
+    and so 
+    \[0 \geq \|g(u_n) - g(u)\|^2 + 2(g(u_n) - g(u), (u-u_n))\] Consider $\varphi: C \to \bbR$ defined by 
+    \[\varphi(v) = (g(v) - g(u),u - v).\] Then $\varphi \in C^*$ since the inner product is bilinear and thus $\varphi(u_n) \to \varphi(u),$ and so 
+    \[2 \varphi(u_n) = (g(u_n) - g(u), (u-u_n)) \to (g(u) - g(u), (u-u)) = \varphi(u) = 0.\] Thus, for large enough $n,$ we have that $\|g(u_n) - g(u)\|^2 \leq 0,$ and so $g(u_n) = g(u),$ but this then implies that 
+    \[u_n - Tu_n = u - Tu, \qquad n \text{ large}\]
+    \end{solution}
+\item If $C$ is bounded with $T(C)\subset C,$ then $T$ has a fixed point.
+\begin{solution}
+    As per the hint, fix $a\in C$ and consider $T_\epsilon: C \to C$
+    \[T_\epsilon(u) = (1-\epsilon)Tu + \epsilon a.\] Consider that for any $u,v \in C,$
+    \[|T_\epsilon u - T_\epsilon v| = |(1-\epsilon)Tu + \epsilon a - (1-\epsilon)Tv + \epsilon a| = (1-\epsilon) |Tu - Tv| \leq (1-\epsilon)|u-v|.\] Thus, $T_\epsilon$ is a contraction and $C$ is Banach (closed subset of a Hilbert space), and Banach contraction principle tells us that for all $1>\epsilon>0,$ $T_\epsilon$ has a fixed point at some $p_\epsilon.$ Thus, 
+    \[p_\epsilon = (1-\epsilon)Tp_\epsilon + \epsilon a\] Consider letting $\epsilon = \frac{1}{n}$ for each $n,$ then \[p_\frac{1}{n}  = (1-\frac{1}{n})Tp_\frac{1}{n} + \frac{1}{n} a = Tp_{\frac{1}{n} } - \frac{1}{n}Tp_\frac{1}{n} + \frac{1}{n}a,\] and so as $n\to \infty,$
+    \[p_\frac{1}{n} - Tp_\frac{1}{n} \to 0.\] Since $(p_\frac{1}{n}) \in C$ and $C$ is bounded and closed and convex, then we claim that $C$ is compact in the weak topology. Consider that since $H$ is reflexive, then $B_E$ is weakly compact, and thus there exists some $K$ such that $C \subset KB_E,$ where $KB_E$ is weakly compact. Since $C$ is convex and strongly closed, then it is weakly closed, and thus $C$ is weakly compact. Thus, there exists some subsequence $(p_\frac{1}{n_k}) \rightharpoonup p_0,$ where $p_0 \in C.$ Note that we still have that 
+    
+    then by part 1, we have that $p_\frac{1}{n_k} - Tp_\frac{1}{n_k} \to 0.$ By part 1, we have that
+    \[p_0 - Tp_0  = 0 \implies p_0 = Tp_0.\]
+\end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 8}
+\begin{problem}
+    Let \( D \subset H \) be a subset such that the linear space spanned by \( D \) is dense in \( H \). 
+Let \( (E_n)_{n \geq 1} \) be a sequence of closed subspaces in \( H \) that are mutually orthogonal. 
+Assume that 
+\begin{align}
+\sum_{n=1}^{\infty} |P_{E_n} u|^2 = |u|^2 \quad \forall u \in D    
+\end{align}
+ 
+Prove that \( H \) is the Hilbert sum of the \( E_n \)'s.
+
+\end{problem}
+\begin{solution}
+    Let $E = \text{span}\bigcup E_n.$
+    
+    We know that for any $v\in H,$ if $v_k = P_{E_k}v,$ then if $S_n = \sum_{k=1}^n P_{E_k},$ we have that 
+    \[S_n \to S = P_{\overline{E}}v.\] Thus, by Parseval's identity, we have that
+    \begin{align}
+    \sum_{k=1}^\infty |v_k|^2= |P_{\overline{E}}v|^2
+    \end{align}
+    
+    Now let $u \in D,$ combining (2) and (3), we see that $|u|^2 = |P_{\overline{E}}u|^2.$ First, we note that if $M$ is a closed subspace of a Hilbert space $H$ and $f \in H,$ then
+    \[f = P_Mf + P_{M^\perp}f.\] To see this, consider that $M \cap M^\perp = \{0\}$ and $M + M^\perp = H,$ then 
+    \[f = P_Mf + (f - P_Mf) = P_Mf + P_{M^\perp}f.\] Thus, since $u\in D\subset H$ and $\overline{E}$ is a closed subspace, then by orthogonality
+    \[u = P_{\overline{E}}u + P_{\overline{E}^\perp}u \implies |u|^2 = |P_{\overline{E}}u|^2 + |P_{\overline{E}}u|^2 + 2|(P_{\overline{E}}u, P_{\overline{E}^\perp} u)| = |P_{\overline{E}}u|^2 + |P_{\overline{E}^\perp}u|^2\] From our conclusion above, we see that 
+    \[0 = |P_{\overline{E}^\perp}u|^2 \implies P_{\overline{E}^\perp}u = 0.\] Because this holds for any $u \in D,$ and $D$ is dense in $H,$ then $\overline{E}^\perp = \{0\},$ and so $\overline{E} = H.$
+\end{solution}
+
+
+\newpage
+\section*{Problem 9}
+\begin{problem}
+\begin{enumerate}
+    \item Suppose $H$ is separable. Let $V\subset H$ be a linear subspace that is dense in $H,$ then $V$ contains an orthonormal basis of $H.$
+    \begin{solution}
+        Since $H$ is separable and $V\subset H,$ then $V$ is separable. Let $(v_n)$ be a countably dense subset of $V,$ and let $F_k = \text{span}\{v_1, \dots, v_k\}.$ $F_k$ is finite and $\bigcup F_k$ is dense in $V.$ Since $F_1$ is finite, then for any $x\in F_1,$ $x = x_1 e_1,$ where $\|e_1\| = 1.$ Thus, take $e_1.$ If $F_2 \neq F_1,$ then let 
+        $u_2 \in F_2 \setminus F_1,$ and define 
+        \[e_2 = \frac{u_2 - (u_2, e_1)e_1}{\|u_2 - (u_2, e_1)e_1\|},\] and so 
+        \[(e_1, e_2) = (e_1, \frac{u_2 - (u_2, e_1)e_1}{\|u_2 - (u_2, e_1)e_1\|}) = \frac{1}{\|u_2 - (u_2, e_1)e_1\|}[(e_1, u_2) - (u_2, e_1)(e_1, e_1)] = 0.\] Continue this process, then $(e_n)$ is a an orthonormal basis of $V,$ and since $\overline{V} = H,$ then
+        \[\overline{\text{span}\{e_1, \dots\}} = V \implies \overline{\text{span}\{e_1, \dots\}} = H,\] and so $(e_n)$ is an orthonormal basis of $H.$
+    \end{solution}
+    \item Let $(e_n)$ be an orthonormal sequence in $H$ such that $(e_i, e_j)= \delta_{ij}.$ Prove there exists some orthonormal basis of $H$ that contains $\bigcup_{i=1}^\infty e_n.$
+    \begin{solution}
+        Consider $E_k = \text{span}\{e_1, \dots, e_k\}.$ Define $F_k$ as above, then if
+        \[\overline{E} = \overline{\bigcup_{k=1}^\infty E_k} \neq \bigcup F_k = F,\] we let $w_k \in F\setminus \overline{E},$ then let $k$ be such that $w\in F_k$ but $w\notin F_{k-1}.$
+        
+        Define $e_1'$ such that \[e_1' = \frac{w_k - \sum_{j=1}^{k-1}(w_k, e_j)e_j}{\|w_k - \sum_{j=1}^{k-1}(w_k, e_j)e_j\|}.\] Then for any $e_i \in E,$ we have that by the same reasoning as the first problem, $(e_i, e_1')=0.$ Then redefine $E =(e_n)\cup e_1'$ which is an orthonormal sequence in $H.$ Continue this procedure until $\overline{E} = F,$ and then $E$ is an orthonormal basis of $H$ containing $\bigcup e_n.$
+    \end{solution}
+\end{enumerate}
+    
+    
+\end{problem}
+
+
+
+
+
+
+
+
+
+\end{document}

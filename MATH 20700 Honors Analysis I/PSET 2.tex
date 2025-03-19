@@ -1,0 +1,447 @@
+\documentclass[11pt]{article}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{207}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$}
+\newcommand{\instructors}{Luis Silvestre}
+\newcommand{\assignment}{Problem Set 2}
+\newcommand{\semester}{Fall 2024}
+\newcommand{\duedate}{2024-14-10}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    For $p,q\in S^1,$ the unit circle in the plane, let \[d_a(p,q) = \min\{|\measuredangle(p) - \measuredangle(q)|, 2\pi - |\measuredangle(p) - \measuredangle(q)|\},\] where $\measuredangle(z)\in (0,2\pi]$ is the angle $z$ makes with the positive $x$ axis. 
+\end{problem}
+\begin{solution}:\\
+    \begin{enumerate}
+        \item Let $p=q,$ then 
+        \[d_a(p,q) = \min\{|\measuredangle(p) - \measuredangle(q)|, 2\pi  - |\measuredangle(p) - \measuredangle(q)|\} = \min\{0, 2\pi\} = 0.\]
+        Let $p\neq q,$ then since we are dealing with absolute value, it suffices to show $|\measuredangle(p) - \measuredangle(q)|\leq 2\pi.$ However, by definition, the furthest apart the angles can be is if (without loss of generality), $\measuredangle(q) = 2\pi$ and $\measuredangle(p) = \epsilon>0$ for small $\epsilon,$ and thus $|\measuredangle(p) - \measuredangle(q)|<2\pi.$
+        \item We have that by definition of absolute value, 
+        \begin{align*}
+            d_a(p,q) &= \min\{|\measuredangle(p) - \measuredangle(q)|, 2\pi - |\measuredangle(p) - \measuredangle(q)|\}\\ &= \min\{|\measuredangle(q) - \measuredangle(p)|, 2\pi - |\measuredangle(q) - \measuredangle(p)|\}\\ &= d_a(q,p)
+        \end{align*}
+        \item Let $p,q,r\in S.$ We wish to bound $d(p,r).$ This problem reduces to a few cases, but we will work, without loss of generality by shifting $p$ to be at $(1,0).$ and $r$ to be above or on the $x$ axis. Thus, $d(p,r) = \measuredangle(r)$
+        Thus, we only have two cases (note that for this problem it makes the arithmetic simpler if we let $\measuredangle(z)\in [0,2\pi)$).
+        \begin{enumerate}
+            \item If $q$ is above or on the $x$ axis, then evidently: $d(p,q) = \measuredangle(q)$ Note also that since $p$ is above the axis as well, $d(q,r) = |\measuredangle(q) - \measuredangle(r).|.$ Thus, we have that 
+            \begin{align*}
+                d(p,r) &= \measuredangle(r)\\
+                &= \measuredangle(r) - \measuredangle(q) + \measuredangle(q)\\
+                &\leq |\measuredangle(r) - \measuredangle(q)| + \measuredangle(q)\\
+                &= d(q,r) + \measuredangle(q,p).
+            \end{align*}
+            \item If $q$ is below the $x$ axis, then we have that $d(p,q) = 2\pi - \measuredangle(q).$ Moreover, we have that either $d(q,r) = \measuredangle(q) - \measuredangle(r),$ or $d(q,r) = 2\pi - (\measuredangle(q)- \measuredangle(r)) = 2\pi - \measuredangle(q) + \measuredangle(r)$
+            \begin{enumerate}
+                \item If the former, then since $r$ is above the $x-$axis:
+                \begin{align*}
+                    d(p,r) &= \measuredangle(r)\\
+                    &\leq 2\pi - \measuredangle(r)\\
+                    &= 2\pi - \measuredangle(r) + \measuredangle(q) - \measuredangle(q)\\
+                    &= 2\pi - \measuredangle(q) + \measuredangle(q) - \measuredangle(r)\\
+                    &= d(p,q) + \measuredangle(q,r).
+                \end{align*}
+                \item If the latter, then a similar argument can be applied. However, one could also bootleg the first case by noting that we can compare $d(q,r)$ by moving $q$ to $(1,0)$ and repeating the arguments above.
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+\end{solution}
+\newpage
+
+\section*{Problem 2}
+\begin{problem}
+    For $p,q\in [0,\frac{\pi}{2}),$ let 
+    \[d_s(p,q) = \sin|p-q|.\]
+    Use your calculus talent to decide whether $d_s$ is a metric.
+\end{problem}
+\begin{solution}:\\
+    \begin{enumerate}
+        \item If $p=q,$ then by calculus knowledge, $d_s(p,q) = \sin(0) = 0.$ If $p\neq q,$ then since $\sin(x)$ is increasing in the interval, then $d_s(p,q)\geq d_s(p,p) = 0.$
+        \item $d_s(p,q) = d_s(q,p)$ because subtraction is commutative inside the absolute value.
+        \item Let $p,q,r \in (0, \frac{\pi}{2},$ then since $\sin$ is increasing in the interval, 
+        \begin{align*}
+            d_s(p,r) &= \sin|p-r|\\
+            &= \sin|p-q + q-r|\\
+            &= \sin|p-q|\cos|q-r| + \cos|p-q|\sin|q-r|\\
+            &\leq \sin|p-q| + \sin|q-r|\\
+            &= d_s(p,q) + d_s(q,r)
+        \end{align*}
+        Where the inequality holds because for $x\in [0,\frac{\pi}{2}),$ we have that $\cos(x)\leq 1.$
+    \end{enumerate}
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Prove that every convergent sequence $(p_n)$ in a metric space $M$ is bounded.
+\end{problem}
+\begin{solution}
+    Let $p_n \to p.$ Let $\epsilon = 1,$ then there exists some $N\in \bbN$ such that if $n\geq N,$ we have that $d(p_n, p)<1.$ Thus, we have that for all $n\geq N,$ $p_n$ are bounded by the ball $B_1(p)$. It will suffice to show that for $n  =1, 2,\dots, N-1,$ $p_n$ is also bounded. Consider that if we let $r = 1 + \max\{d(p_1, p), d(p_2, p),\dots, d(p_{n-1}, p)\},$ then we have that for all $n\in \bbN,$ $p_n \in M_r p.$
+\end{solution}
+\begin{reflection}
+    Bound the infinite.
+\end{reflection}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+A sequence $(x_n)$ in $\bbR$ \textit{increases} if $n<m$ implies $x_n \leq x_m.$ It \textit{strictly increases} if $x_n < x_m.$ A sequence is \textit{monotone} if it increases or it decreases. Prove that every sequence in $\bbR$ which is monotone and bounded converges in $\bbR$.
+\end{problem}
+\begin{solution}
+    Suppose $x_n$ is increasing (the proof for when it is decreasing is similar).
+    Let $\{x_n\}$ be the set of the values of $(x_n).$ Evidently, since $(x_n)$ is bounded then $\{x_n\}$ is also bounded. Moreover, $x_1 \in \{x_n\}\neq \emptyset.$ Since we are in $\bbR,$ then by the least upper bound property, $s = \sup\{x_n\}$ exists. We claim that $(x_n) \to s.$ Assume not, that is, there exists some $\epsilon>0$ such that if $n\in \bbN,$ $d(x_n, s)\geq \epsilon.$ Thus, we have that for all $n\in \bbN,$ $s - \epsilon \geq x_n,$ implying that $s$ is not the least upper bound, a contradiction!
+\end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Let $(x_n)$ be a sequence in $\bbR.$
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        Prove that $(x_n)$ has a monotone subsequence.
+    \end{problem}
+\begin{solution}
+    Let \[S := \{x_{n_k} | \;\text{$\forall\ell > n_k,$ $x_{\ell}\leq x_{n_k}$}\}\]
+    Either $S$ is finite or it is infinite.
+    \begin{enumerate}
+        \item Suppose $S$ is finite, then we claim that $(x_n)$ has a strictly increasing subsequence. Take the greatest $k$ such that $x_{n_k}\in S.$ 
+        Note that it must be the case that $x_{n_k + 1}\leq x_{n_k},$ as otherwise, we would have that $x_{n_k}\notin S.$
+        Define \[S_1 := \{x_{n_i} | \text{$\forall i>n_{k}+1,$ $x_i > x_{n_{k}+1}$}\}.\] Observe that $S_1 \neq \emptyset,$ for if it were, then $x_{n_k +1} \in S.$ Take the first $i$ such that $x_{n_i}\in S_1,$ then $n_k+1<n_i$ and $x_{n_k+1}< x_{n_i}.$ Let 
+        \[S_2 : = \{x_{n_j} | \text{$\forall j>n_{i},$ $x_j > x_{i}$}.\}.\] Similarly, $S_2\neq \emptyset$ for if it were, then $x_i\in S.$ Take the first $j$ such that $x_{n_j}\in S_2,$ then $n_i < n_j$ and $x_{n_k+1} < x_{n_i}<x_{n_j}.$ Because we can continue this process infinitely, then we have built a strictly increasing subsequence. 
+        \item If $S$ is infinite, then we can take our decreasing sequence to be $(x_{n_k}).$ To see this, assume it is strictly increasing, then for some $j<\ell,$ we have that $x_{n_j}<x_{n_{\ell}},$ but then we have that by definition of the set, $x_{n_j}\notin S.$
+    \end{enumerate}
+\end{solution}
+\item 
+\begin{problem}
+    How can you deduce that every bounded sequence in $\bbR$ has a convergent
+ subsequence?
+\end{problem}
+\begin{solution}
+    It is evident that if the parent sequence is bounded, then any subsequence must also be bounded. By $a,$ every bounded sequence in $\bbR$ has a monotone subsequence. By problem 4, since this monotone sequence is bounded, then it must converge in $\bbR.$
+\end{solution}
+\item 
+\begin{problem}
+    Infer that you have a second proof of the Bolzano-Weierstrass Theorem in
+ $\bbR$.
+\end{problem}
+\begin{solution}
+        By part $b,$ every bounded sequence in $\bbR$ has a convergent subsequence. This is literally the Bolzanno-Weirstrass Theorem in $\bbR.$
+\end{solution}
+\item 
+\begin{problem}
+    What about the Heine-Borel Theorem?
+\end{problem}
+\begin{solution}
+    We want to show that if $X\subset \bbR$ is closed and bounded, then it is compact. Let $(x_n)$ be a sequence in $X.$ Since $X$ is bounded and $(x_n)\in X,$ then the sequence is bounded. Thus, by part c, there exists a convergent subsequence $(x_{n_k})\to x.$ Since $X$ is closed, then $x\in X,$ and thus $X$ is compact.
+\end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 6}
+Let $(p_n)$ be a sequence and $f: \bbN \to \bbN$ be a bijection. The sequence $(q_{k})$ with $q_k = p_{f(k)}$ is a \textit{rearrangement} of $(p_n).$
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        Are limits of a sequence unaffected by rearrangement?
+    \end{problem}
+    \begin{solution}
+        Suppose $p_n \to p.$ We claim that if $f$ is a bijection, that $p_{f(k)}\to p.$ Since $p_n \to p,$ then for all $\epsilon>0,$ there exists an $N\in \bbN$ such that if $n\geq N,$ we have that $|p_n - p|<\epsilon.$ Thus, there exists infinitely many $i\in \bbN$ such that $|p_i - p|\leq \epsilon.$ 
+        Suppose $p_{f(k)}\not \to p,$ then if $N$ is large, $|p_N - p|\geq \epsilon.$ Thus, there exists finite $j$ such that $|p_j - p|\leq \epsilon.$ Thus, since $f$ is bijective, we must have an injective correspondence between the infinite such $i$ and the finitely many $j,$ which is absurd. Thus, $p_{f(k)}\to p.$
+    \end{solution}
+    \item 
+    \begin{problem}
+        What if $f$ is an injection?
+    \end{problem}
+    \begin{solution}
+        Suppose $p_n \to p$ and $f: \bbN \to \bbN$ is an injection. We claim that as $k\to \infty,$  $f(k)\to \infty.$ Suppose not, then as $k\to \infty, f(k)\to n$ for some $n,$ which is ridiculous since this means that after some large $N,$ $n\geq N$ are sent to $0,$ and is thus not injective. Thus, since \[\lim_{n\to \infty}p_n = \lim_{f(k)\to \infty}p_n,\] then the limit is not affected.\\
+        
+        However, consider the sequence $a_n = (-1)^n,$ and the injection $f: \bbN \to \bbN$ that sends
+        \[f(k) = 2k\] Evidently, $f$ is an injection. However, $a_{f(k)} = (-1)^{2k} = 1$ for any $k,$ and thus $\displaystyle\lim_{k\to \infty}a_{k}= \displaystyle\lim_{k\to \infty}a_{f(k)} = 1.$
+    \end{solution}
+    \begin{reflection}
+    We can think of $f$ as sampling a subsequence from the original sequence. Thus, if the original sequence converges, then the rearrangement will converge, but if it doesn't, then we can sometimes sample a converging sequence from it.
+    \end{reflection}
+    \item 
+    \begin{problem}
+    What if $f$ is a surjection?
+    \end{problem}
+    \begin{solution}
+    Suppose $p_n = \frac{1}{n}$ and $f: \bbN \to \bbN$ is defined by 
+    \[f(k) = \begin{cases}
+        1, \qquad \text{$k$ is odd}\\
+        \frac{k}{2}+1, \qquad \text{$k$ is even}
+    \end{cases}.\] Then $f$ is a surjection since for every $n\in \bbN,$ there exists some $2(n-1)\in \bbN$ such that $f(2n-2) = n.$ Moreover, we have that $\frac{1}{n}\to 0,$ but $\lim_{k\to \infty}p_{f(k)}$ does not exist.
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+Assume that $f: M \to N$ is a function from one metric space to another which satisfies the following condition: if a sequence $(p_n)\in M$ converges, then the sequence $(f(p_n))\in N$ converges. Prove that $f$ is continuous.
+\end{problem}
+\begin{solution}
+    We claim that $f(p_n) \to f(p).$ Let $x_n$ be a sequence such that $x_n = p$ for even $n$ and $x_n = p_{\frac{n-1}{2}}$ for odd $n$.\footnote{For $n =1$ just let $x_n = p_1,$ it doesn't matter.} Thus, $x_n$ alternates between foreshawdowing the limit at $p$ during the even $n$ and a slower $p_n$ in the odd $n.$ We take $x_{n_k}$ to be the subsequence of $x_n$ that samples from even $n$s, and thus $x_{n_k} = p$ for all $k$ and $f(x_{n_k}) = f(p),$ and so the subsequence converges to $f(p).$ Since a subsequence converges to the same limit as its mother sequence, we have that $f(x_n)\to f(p).$ We know that odd subsequence converges to the same limit, and that the odd subsequence is just $(p_n)$, and thus we have shown that $f(p_n)\to f(p).$ 
+\end{solution}
+\newpage
+
+\section*{Problem 8}
+\begin{problem}
+    Which capital letters of the Roman alphabet are homeomorphic? Are any
+ isometric? Explain.
+\end{problem}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/HW2.1.png}
+    \caption{Letters to be used, ignore \LaTeX font except when convenient}
+\end{figure}
+\begin{solution}
+    Homeomorphic groups with explanations:
+    \begin{enumerate}
+        \item \{C, G, J, L, M, N, S, U, V, W, Z\} One can stretch all these into a single line.
+        \item \{A,R\} You can compress the bubble in the $R$ and more the right line up and it will become $A.$
+        \item \{P,Q\} For this one, I am assuming that the line in the Q is not inside the $O.$ Then it is fairly obvious.
+        \item \{E, F, T, Y\} Can all become $F$ with minimal bending.
+        \item \{D,O\} Not gonna explain.
+        \item $\{X\}$
+        \item \{K,H, I\} The $I$ and $K$ are obvious, the $K$ one can just move the right line to the end and then extend.
+        \item \{B\} Homeomorphic to $8.$
+    \end{enumerate}
+\end{solution}
+\begin{solution}
+    By problem 14.b, if a function is not a homeomorphism, then it is not an isometry. Thus, it suffices to show there exists isometries within the homeomorphic groups. Two objects are isometric up to reflections and translation and rotations. Thus, if we place all the letters in $\bbR^2$ with the euclidean metric, we only have two isometry groups:
+    \begin{enumerate}
+        \item $\{N,Z\},$ because we can flip $N$ $90$ degrees to get $Z.$
+        \item $\{M,W\},$ because we can rotate $M$ $180$ degrees to get $W$ (this lowkey depends on the font, on this font no).
+    \end{enumerate}
+    You cannot rotate, reflect, or translate any other letter to become exactly another.
+\end{solution}
+
+\newpage
+\section*{Problem 9}
+\begin{problem}
+     If every closed and bounded subset of a metric space $M$ is compact, does it
+ follow that $M$ is complete? (Proof or counterexample.)
+\end{problem}
+\begin{solution}
+    Let $(a_n)$ be Cauchy in $M.$ Then we claim that the sequence forms a bounded subset of $M.$ Take $\epsilon =1,$ then there is some $N\in  \bbN$ such that if $n,m\geq N,$ we have that $d(p_n, p_m)<1.$ Let $r>1 + \max\{d(p_1, p_2), \dots, d(p_1,p_N)\},$ then for any $i\in \bbN$
+    \[d(p_1, p_i)\leq d(p_1, p_N) + d(p_N, p_i)\leq r,\] and thus the sequence is contained in $B_r(p_1).$ Take the closure of $B_r(p_1)$ to be $\overline{B_r(p_1)},$ then since $B_r(p_1)\subset \overline{B_r(p_1)},$ the sequence is contained in a closed and bounded subset of $M.$ Thus, since $\overline{B_r(p_1)}$ is compact, then $(a_n)$ has a convergent subsequence $a_{n_k}\to a,$ where $a\in M.$ Thus, it suffices to show that if $(a_n)$ is Cauchy and it has a convergent subsequence, then $(a_n)$ must converge. Observe that since $(a_n)$ is Cauchy, then there exists some $N_1\in \bbN$ such that $n>N_1,$ then $d(a_n,a_{n_k})<\frac{\epsilon}{2}$ (since $n_k$ is implicitly greater than $n$). Since $(a_{n_k})$ converges to $a,$ then there exists some $N_2,$ such that if $n>N_2,$ we have that $d(a_{n_k},a)<\frac{\epsilon}{2}.$ Thus if $N = \max\{N_1, N_2\}$ and $n\geq N,$
+    \[d(a_n, a)\leq d(a_n, a_{n_k}) + d(a_{n_k}, a)\leq \epsilon.\]
+\end{solution}
+\begin{reflection}
+    Convergent sub-Cauchy? Convergent Cauchy!
+\end{reflection}
+
+\newpage
+\section*{Problem 10}
+\begin{problem}
+    A map $f: M \to N$ is said to be \textit{open} if for all open $U\subset M,$ we have that $f(U)$ is open in $N.$
+\end{problem}
+\begin{enumerate}
+    \item  
+    \begin{problem}
+        If f is open, is it continuous?
+    \end{problem}
+    \begin{solution}
+        \textbf{Not necessarily.} Let $Id:(M,d)\to (N,d'),$ where $d$ is the euclidean metric and $d'$ is the discrete metric. Let $U$ be open in $M,$ then $id(U) = U$ is open in $N$ since we can write $U= \displaystyle\bigcup_{\alpha\in \mathscr{A}}u_\alpha,$ where $\{u_\alpha\}$ is every point in $U.$ Since $B_{\frac{1}{2}}(u_\alpha) = \{u_\alpha\},$ and the ball of radius $\frac{1}{2}$ is open in $N,$ then $\{u_\alpha\}$ is open. Thus, since unions of open sets are open, $U$ is open in $N$ and thus $id$ is open.\\
+        Let $\{x\}\subset N.$ Then $\{x\}$ is open in $N.$ Since $id^{-1}(\{x\}) = \{x\}$ is closed in $M,$ then $id$ is not continuous.
+    \end{solution}
+    \item 
+    \begin{problem}
+        If $f$ is a homeomorphism, is it open?
+    \end{problem}
+    \begin{solution}
+        \textbf{Yes.} Let $U\subset M$ be open. Since $f$ is bijective, there exists $L\subset N$ such that $f^{-1}(L) = U.$ Suppose $L$ is closed, then by continuity, $U$ is closed. Thus, $L$ is open, and so $f(U) = f(f^{-1}(L)) = L$ is open.
+    \end{solution}
+    \item
+    \begin{problem}
+        If $f$ is an open continuous bijection, is a homeomorphism?
+    \end{problem}
+    \begin{solution}
+        \textbf{Yes.} Suppose $U\subset M$ is open. Since $f$ is bijective, there exists some $L\subset N$ such that $f^{-1}(L) = U.$ Since $f$ is open, then $f(U) = f(f^{-1}(L)) = L$ is open. Thus, $f^{-1}(U)$ is continuous.
+    \end{solution}
+    \item 
+    \begin{problem}
+        If $f: \bbR \to \bbR$ is continuous and surjective, is it open?
+    \end{problem}
+    \begin{solution}
+        \textbf{Not necessarily.} Let $f:\bbR \to \bbR$ be a continuous surjection. We claim that we can map $(0,1) \mapsto [0,1]$. Let $a<b$ with $a,b\in (0,1)$ such that $f(a) = 0$ and $f(b) = 1,$ then by the IVT, $f([a,b]) = [0,1],$ and so if we let $0<x<a$ be mapped by $f(a) = 0$ and $b<x<1$ be mapped by $f(x) = 1,$ we are sending an open set to a closed set.
+    \end{solution}
+    \item 
+    \begin{problem}
+        If $f: \bbR \to \bbR$ is a continuous, open, and a surjection, must it be a homeomorphism?
+    \end{problem}
+    \begin{solution}
+        \textbf{Yep.} By (c), it suffices to show that $f$ is an injection. Suppose $f(x) = f(y)$ with $x<y,$ then by the extreme value theorem, there exists $m$ and $M$ maximum and minimum achieved in the interval $f((x,y)).$ Then by the IVT, $f((x,y)) = [m,M],$ and thus $f$ is not open. Therefore, $f$ must be an injection.
+    \end{solution}
+    \item 
+    \begin{problem}
+        What happens in $(e)$ if $\bbR$ is replaced by the unit circle $S^1.$ 
+    \end{problem}
+    \begin{solution}
+    The same is not true. Consider $f: S^1 \to S^1,$ where if $z\in S^1,$ then $f(z) = z^2.$ Obviously, $f$ is continuous and open and a surjection. However, $f$ is not injective since if $f(z_1) = f(z_2) = (-1,0),$ then $z_1 = (0,1)$ and $z_2 = (0,-1)$ give $z_1^2 = (0,1)(0,1) = (-1, 0)$ and $z_2^2 = (0,-1)(0,-1) = (-1,0).$ Thus $f$ is not injective.    
+    \end{solution}
+    \end{enumerate}
+
+\newpage
+\section*{Problem 11}
+\begin{problem}
+    Let $\Sigma$ be the set of all infinite ones and zeroes. Let $a = (a_n)$ and $b= (b_n)$ be in $\Sigma,$ then define the metric
+    \[d(a,b) = \sum\frac{|a_n-b_n|}{2^n}\]
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        Prove that $\Sigma$ is compact. 
+    \end{problem}
+    \begin{solution}
+        Let $(B_k) = ((b_{n_1}), (b_{n_2}), \dots),$ where $(b_{n_k})\in \Sigma$ for all $k.$ We wish to find some converging subsequence $(B_{k_j})$ of $(B_k).$\\
+        
+        Let $(x_{n_1})$ be first sequence of $(B_{k_j})$ such that it is sampled from $(B_k)$ by choosing a sequence $(b_{n_k})$ with $b_{1_k} = 1.$ If no such sequence in $(B_k)$ exists, then choose the sequence $(b_{n_k})$ with $b_{2_k} = 1.$ If no such sequence exists then keep repeating the process (this process terminates since otherwise, we would have every sequence in $(B_k)$ be $(000\dots)$)\\
+
+        Suppose every sequence in $(B_k)$ is of the form $(00\dots1\dots),$ where $1 = b_{j_k}$ from the process above (every sequence is all zeroes then a $1$ at the same position). Then we repeat the process above to change $(x_{n_1})$ to be sampled as the sequence $(b_{n_k})$ with $b_{{j+1}_k} = 1.$ If no such sequence exists, then keep going as in above to find one that exists. Thus, $(x_{n_1}) = (00\dots 100\dots1\dots).$ Suppose every sequence in $(B_k)$ is of the same form, then we repeat the process to change $(x_{n_1}).$\\
+
+        At some point, there will exist some $(b_{n_k})$ who will not be of the same form (i.e, will have have the same sequence of numbers as $(x_{n_k})$ but will have a $0$ instead of a $1$ in the pivotal position (the important position we have talked about above)). Sample $(x_{n_2})$ with such a sequence. Then if $(x_{n_1}) = (00\dots 100\dots 1\dots),$ we shall have that $(x_{n_2}) = (00\dots 100\dots 0\dots).$\\ 
+        
+        Repeat the entire process to find the subsequence $(B_{k_j}).$ We claim that this subsequence converges.
+        To see this, consider 
+        \[d((x_{n_k}), (x_{n_{k+1}})) = \sum\frac{|x_{i_k} - x_{i_{k+1}}|}{2^i} \leq \frac{1}{2^{k-1}}.\] This is because $|x_{i_k} - x_{i_{k+1}}|\leq 1$ and (as shown in the last PSET), $\sum_{i=n}^\infty\frac{1}{2^i} = \frac{1}{2^{n-1}}.$\\
+        
+        Let $\epsilon>0.$ By the Archimidean property, there exists some $K$ large such that if $k, k'\geq K,$ we have that $d((x_{n_k}), (x_{n_{k'}})<\epsilon.$ Therefore, $(B_{k_j})$ is Cauchy. \\
+
+        Let $p_1 = \displaystyle\lim_{k\to \infty}(x_{1_k}).$ By construction of the sequence, this limit is well defined and is either $0$ or $1.$ For $k'$ large, we have that $|x_{1_{k'}} - p_1| = 0.$ Similarly, $p_n = \displaystyle\lim_{k\to \infty}(x_{n_k})$ is well defined. We claim that $B_{k_j}\to p_n.$ Suppose not, then for some $\epsilon>0$ and $k'$ large, we have that $d((x_{n_{k'}}), (p_n))\geq \epsilon.$ However, we have that 
+        \[\sum\frac{|x_{i_{k'}} - p_i|}{2^i}\leq 0 + \frac{1}{2^{{k'-1}}},\] where the $0$ comes from all the terms that agree (as in the example above), and the other term comes from the terms that don't. Evidently, for $k'$ large enough, this difference is $<\epsilon.$\\
+
+        Therefore, since $\Sigma$ is complete (there was nothing special about our sequence so we can generalize our convergence argument) and our subsequence is Cauchy, then it converges to some limit in $\Sigma,$ and thus $\Sigma$ is compact.
+    \end{solution}
+    \item 
+    \begin{problem}
+        Prove that $\Sigma$ is homeomorphic to the Cantor set.
+    \end{problem}
+    \begin{solution}
+        Let $C_0 = [0,\frac{1}{3}],$ $C_1 = [\frac{2}{3},1],$ and $C^1 = C_0 \cup C_1.$ Let $C_{00} = [0, \frac{1}{9}],$ and let $C^2 = C_{00} \cup C_{01} \cup C_{10}\cup C_{11}.$ Keep going with this construction.\\
+        Let $\omega \in \Sigma,$ then by the previous construction, we have that \[C_{\omega_1} \supset C_{\omega_1\omega_2}\supset \dots \supset C_{\omega_1\dots \omega_n}\supset \dots\]
+        Define a function $p: \Sigma \to C$ such that \[p(\omega) = \bigcap_{n\in \bbN}C_{\omega | n},\] where $\omega | n = \omega_1\omega2,\dots, \omega_n.$ Note that $p$ is well defined because the intersection of a nested sequence of compact non-empty sets is compact and nonempty and since the diameter of $C_{\omega_1\dots\omega_n}\to 0$ as $n\to \infty,$ we have that the intersection is a single point.\\
+        
+        Let $c\in C,$ then because $\Sigma$ is the infinite sequences of ones and zeros, there exists some $\omega = \omega(p)$ such that if $c\in C_\alpha$ of $C^n,$ $\alpha = \omega | n.$ Thus, $p(\omega) = c$ and so $p$ is surjective.\\
+
+        Suppose $c_1 \neq c_2 \in C,$ then for some $n$ large, they lie in different $C_\alpha$ for some $C^n,$ and their corresponding sequences will truncate to different values at $n.$ Thus, $p$ is injective\\
+
+        We wish to show that $p$ is continuous at $\omega'.$ For any $\epsilon>0,$ there exists some large $n$ such that if $\omega \in \Sigma$ and $d(\omega, \omega')< \frac{1}{2^n},$ then we have by work in part a that $\omega|{[n-1]} = \omega'|{[n-1]}.$ Thus, $p(\omega),p(\omega')\in C_{\omega_1\dots\omega_{n-1}},$ and so $d(p(w), p(w'))\leq \frac{1}{3^{n-1}}<\epsilon$ for large $n.$ Because this is true for any $\omega \in \Sigma,$ then $p$ is continuous.\\
+
+        Thus, since $p:\Sigma \to C$ is a continuous surjection and $\Sigma$ is compact, then by Theorem 42 in Pugh (proved in class), $p$ is homeomorphic.
+    \end{solution}
+\end{enumerate}
+\end{document}
