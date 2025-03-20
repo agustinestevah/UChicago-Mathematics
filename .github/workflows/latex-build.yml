@@ -35,3 +35,4 @@ jobs:
           git add **/*.pdf
           git commit -m "Auto-compiled PDFs"
           git push origin main
+          
