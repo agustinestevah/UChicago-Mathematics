@@ -1,38 +1,37 @@
-name: Compile LaTeX Files and Push PDFs
+name: LaTeX Compilation
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    paths:
+      - '**.tex'  # Runs when any .tex file is pushed
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Set up LaTeX
-        uses: dante-ev/latex-action@latest
-        with:
-          root_file: "**/*.tex"  # Compile all .tex files in all directories
-          continue_on_error: true  # Prevent failures if a file has issues
-
-      - name: Move PDFs to Corresponding Folders
+      - name: Install TeX Live
         run: |
-          find . -name '*.pdf' -print0 | while IFS= read -r -d '' pdf; do
-            tex_file="${pdf%.pdf}.tex"
-            if [ -f "$tex_file" ]; then
-              mv "$pdf" "$(dirname "$tex_file")/"
-            fi
+          sudo apt-get update
+          sudo apt-get install -y texlive-full
+
+      - name: Compile LaTeX Files
+        run: |
+          find . -name "*.tex" -print0 | while IFS= read -r -d '' file; do
+            dir=$(dirname "$file")
+            filename=$(basename "$file" .tex)
+            echo "Compiling $file..."
+            pdflatex -output-directory="$dir" "$file"
           done
 
-      - name: Commit and Push PDFs
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Automatically compiled PDFs from LaTeX files"
-          file_pattern: "**/*.pdf"
+      - name: Push PDFs to Repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add **/*.pdf
+          git commit -m "Auto-compiled PDFs"
+          git push origin main
