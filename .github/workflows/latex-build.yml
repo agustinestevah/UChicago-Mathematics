@@ -1,34 +1,27 @@
-name: Compile LaTeX Document
+name: Build LaTeX and Push PDF to GitHub
 
 on:
   push:
     branches:
-      - main  # Change if you're using another branch
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build_latex:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Compile LaTeX
-        uses: xu-cheng/latex-action@v2
+      
+      - name: Set up LaTeX
+        uses: dante-ev/latex-action@latest
         with:
-          root_file: main.tex  # Change to your main LaTeX file
-          latexmk_use_xelatex: true  # Use XeLaTeX; modify if needed
+          root_file: main.tex  # Change this to your main .tex file
 
-      - name: Upload PDF to Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Commit and Push Generated PDFs
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          name: compiled-pdf
-          path: main.pdf  # Change if your output is named differently
-
-      - name: Commit and Push PDF
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add main.pdf
-          git commit -m "Auto-compile and update PDF"
-          git push
+          commit_message: "Automatically generated and pushed PDF"
+          file_pattern: "*.pdf"
