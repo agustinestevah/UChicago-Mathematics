@@ -1,4 +1,4 @@
-name: Build LaTeX and Push PDF to GitHub
+name: Compile LaTeX Files and Push PDFs
 
 on:
   push:
@@ -11,17 +11,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      
+
       - name: Set up LaTeX
         uses: dante-ev/latex-action@latest
         with:
-          root_file: 20700 Notes.tex  # Change this to your main .tex file
+          root_file: "**/*.tex"  # Compile all .tex files in all directories
+          continue_on_error: true  # Prevent failures if a file has issues
 
-      - name: Commit and Push Generated PDFs
+      - name: Move PDFs to Corresponding Folders
+        run: |
+          find . -name '*.pdf' -print0 | while IFS= read -r -d '' pdf; do
+            tex_file="${pdf%.pdf}.tex"
+            if [ -f "$tex_file" ]; then
+              mv "$pdf" "$(dirname "$tex_file")/"
+            fi
+          done
+
+      - name: Commit and Push PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Automatically generated and pushed PDF"
-          file_pattern: "*.pdf"
+          commit_message: "Automatically compiled PDFs from LaTeX files"
+          file_pattern: "**/*.pdf"
