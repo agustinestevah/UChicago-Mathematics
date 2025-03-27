@@ -1,0 +1,170 @@
+\documentclass[10pt, oneside]{article} 
+\usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry, esint, float}
+
+
+\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}  
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\Cdot}{\boldsymbol{\cdot}}
+\newcommand{\scA}{\mathscr{A}}
+\newcommand{\curl}{\text{curl}}
+
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{conv}{Convention}
+\newtheorem{rem}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\input{paolo-pset.tex}
+
+
+
+\title{UChicago Markov Chains, Martingales, and Brownian Motion Analysis Notes: 23500}
+\author{Notes by Agustín Esteva, Lectures by Stephen Yearwood, Books by }
+\date{Academic Year 2024-2025}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\vspace{.25in}
+
+
+\newpage
+\section{Lectures}
+
+\subsection{Monday, Mar 24: Markov Processes: Basic Definitions and Examples}
+He is British, I am fucked.
+\begin{defn}
+    A \textbf{stochastic process}  is a collection of random variables $\{X_t\}_{t \in T}$ indexed by time, where each $X_t$ takes values in $S$
+\end{defn}
+We call $S$ our \textit{state space}. In discrete time, it should be obvious that $T = \bbN_0^*$ (scale the naturals by a constant) and $T = [0, \bbR)$ in continuous time. We say that $S$ is a discrete space if it is countable and continuous if it is $\bbR^d.$
+\begin{rem}
+    In order to characterize the distribution of $\{X_n\},$ we must specify $\mathbb{P}\{X_0 = S_0, \dots, X_n = S_n\}$ for all $n \in \bbN$ and for all $S_0, \dots, S_n \in S.$ It is much easier work with conditional probability. We will see that with Markov Chains, the Strong Markov Property guarantees that we only need to worry about the distribution of $X_{n-1}$ to figure out $X_n.$
+\end{rem}
+\begin{defn}
+    If $E,F$ are events with $\mathbb{P}\{F\} >0,$ then the \textbf{conditional probability} of $E$ given $F$ is 
+    \[\mathbb{P}(E | F) = \frac{\mathbb{P}(E \cap F)}{\mathbb{P}(F)}\]
+\end{defn}
+
+\begin{defn}
+    A stochastic process is called a \textbf{Markov Chain} if for all $n \in \bbN,$ and for all $S_0, \dots, S_n \in S,$ we have that 
+    \[\bbP(X_n = S_n |  X_0= S_0, \dots, X_{n-1}= S_{n-1}) = \bbP(X_n = S_n | X_{n-1} =S_{n-1})\]
+\end{defn}
+\begin{defn}
+    A Markov Chain $\{X_n\}$ is \textbf{time-homogeneous} if for all $n\in N,$ for all $x,y \in S,$ 
+    \[\bbP(X_n = y | X_{n-1} = x) = \bbP(X_1 = y | X_0 = x)\]
+\end{defn}
+Thus, it does not matter when you get to the states, and so we can just specify the distribution of $X_0$ and the transition probability;
+\[p(x,y) := \bbP(X_1 = y | X_0 = x)\]
+and then scale to find the rest.
+\begin{exmp}
+    Let $S = \{0,1\}.$ A Markov chain taking values in $S$ specified by $p = p(0,1)$ and $q = p(1,0).$ It is obvious that $p(0,0) = 1-p$ and $q(1,1) = 1-q.$
+\end{exmp}
+\begin{exmp}
+    Let $S = \bbZ.$ Let $\{X_n\}_{n\geq 0}$ be defined by $X_0 = X_1 = X_2 =0$ and for $n\geq 3,$ then 
+    \[X_n = \begin{cases}
+        X_{n-1} + 1,\\
+        X_{n-1} - 1,\\
+        X_{n-3}
+    \end{cases}\]
+    each with with probability $1/3.$ This is NOT a Markov Process since $X_n$ can depend on $X_{n-3}.$
+\end{exmp}
+
+\begin{defn}
+    The $n-$step transition probabilities 
+    \[p^n(x,y) = \bbP(X_n = y | X_0 = x).\]
+\end{defn}
+That is, if we start at $x,$ what is the probability that the $n$th step is $y$?
+\begin{prop}
+    For all $m,n \in \bbN$ and for all $x,y \in S,$ then 
+    \[p^{n + m}(x,y) = \sum_{z\in S}p^n(x,z)p^m(z,y)\]
+\end{prop}
+\begin{proof}
+    Induction?
+\end{proof}
+\begin{defn}
+    The \textbf{transition matrix} of a Markov Chain the the $N \times N$ matrix $P$ whose $ij$ entry is $p(i,j).$
+\end{defn}
+\begin{prop}
+    For each $n \in \bbN,$ $P^n$ is the matrix whose $ij$ entry is $p^n(i,j).$
+\end{prop}
+\begin{proof}
+    We prove by induction. It is trivial for $n = 1.$ Assume it is true for any general $n-1.$ Thus, the $ij$ entry of $P^n = P^{n-1}P$ is \[\sum_{k=1}^n P^{n-1}_{ik}P_{kj} = \sum_{k=1}^n p^{n-1}(i,k)p(k,j) = p^n(i,j),\] where the last equality comes from Proposition 1.
+\end{proof}
+
+\newpage
+\subsection{Wednesday, Mar 26: Recurrence and Transience for Finite State Space}
+We illustrate the stuff from last class with a simple example:
+\begin{exmp}
+    Consider the two state Markov chain with $S = \{0,1\}$ and 
+    \[p(1,0) = \frac{1}{3}, \quad p(1,0) = \frac{1}{2},\] then 
+    \[P = \begin{pmatrix}
+        p(0,0) & p(0,1)\\
+        p(1,0) & p(1,1) 
+    \end{pmatrix} = \begin{pmatrix}
+        \frac{2}{3} & \frac{1}{3}\\
+        \frac{1}{2} & \frac{1}{2}
+    \end{pmatrix},\] then 
+    \[\bbP\{X_3 = 0 | X_0 = 0\} = p^3(0,0) = \frac{65}{108}\]
+\end{exmp}
+For the following, we consider a Markov chain $\{X_n\}$ with state space $S.$
+\begin{defn}
+    Two states $x,y \in S$ \textbf{communicate} if there exists $m,n >0$ such that $p^n(x,y) >0$ and $p^m(y,x) > 0 .$ We write $x \leftrightarrow y.$
+\end{defn}
+\begin{rem}
+    Communication is an equivalence relation, and so we can partition $S$ into a disjoint union of communication classes by modding out the communication classes.
+\end{rem}
+\begin{defn}
+    A communication class $c$ is \textbf{recurrent} if $p(x,y) = 0$ for all $x\in C$ and $y \in S\setminus\{C\}.$ Otherwise, we say that the communication class is \textbf{transient}.
+\end{defn}
+
+\begin{defn}
+    A Markov chain is \textbf{irreducible} if there is only one communication class.
+\end{defn}
+
+\begin{exmp}
+    Consider a Markov chain with $S  = \{1,2,3,4,5\}$ and 
+    \[P = \begin{pmatrix}
+        \frac{1}{5} & \frac{1}{5} & 0 & 0 & \frac{3}{5}\\
+        0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & \frac{1}{2} & \frac{1}{2} & 0\\
+        0 & 0 & \frac{1}{4} & \frac{3}{4} & 0\\
+        \frac{1}{2} & \frac{1}{4} & \frac{1}{4} & 0 & 0
+    \end{pmatrix}\] then 
+    \[C_1 = \{1,2,5\}, \qquad C_2 = \{3,4\}\] and $C_1$ is transient and $C_2$ is recurrent
+\end{exmp}
+
+\begin{exmp} (Gambler's ruin)
+    Consider the random walk on $S = \{0,1,2, \dots, N\}$ with absorbing boundary, and transition probability
+    \[p(x,x+1) = p(x, x-1) = \frac{1}{2}, \quad x\in \{\1,2,\dots, N-1\}\] and 
+    \[p(0,0) = p(N,N) = 1\]
+\end{exmp}
+
+\begin{prop}
+    Suppose $S$ is finite. If $C$ is a recurrent communication class, then if $\{X_n\}$ starts in $C,$ with probability $1,$ $\{X_n\}$ visits every state in $C$ infinitely often. That is, for each $x,y \in C,$ $\bbP\{X_n = y \text{ i.o.} \; | \; X_0 = x\} = 1.$
+\end{prop}
+\begin{proof}
+    Since $C$ is a communication class, then for every $z \in C,$ there exists some $n_z \in \bbN$ such that $p^{n_z}(z,y) >0.$ Let $n = \max\{n_z\; \forall z \in C\},$ and $q = \min\{p^{n_z}(z,y)\; | \; z\in C\}.$ Note that this quantities necessarily exist because $S$ is finite. Let $E_k = \{X_i = y, \; | \; i \in \{(k-1)n + 1, (k-1)n + 2\, \dots (k-1)nk\}\}.$ Then for states $s_0, s_1, \dots, s_{nk} \in S,$ we have that 
+    \[\bbP\{E_{k+1} \: | \: X_0 = s_0, X_1 = s_1, \dots, X_{nk} = S_{nk}\} = \bbP\{E_1 \; | \; X_0 = s_{nk}\} \geq q.\] For $M, N \in \bbN$ with $M > N,$ we have that 
+    \begin{align*}
+      \bbP\{E_k \text{ does not occur for any any } k \in \{N, N + 1, \dots, M\}\} &= \bbP\{\bigcap_{k=N}^M E_k^c\}  \\
+      &= \bbP\{E_M^c \:  | \: \bigcap_{k = N}^{M-1}E_k\}\bbP\{\bigcap_{K=N}^{M-1}E_k\}\\
+      &\leq (1-q)\bbP\{\bigcap_{K=N}^{M-1}E_k\} \\
+      &\leq\dots\leq (1-q)^{M-N} \to 0
+    \end{align*}
+\end{proof}
+\begin{prop}
+    Suppose $S$ is finite. If $C$ is a transient communication class, then w.p. 1, $X$ eventually leaves $C$ and never returns.
+\end{prop}
+
+\end{document}
