@@ -1,0 +1,234 @@
+\documentclass[11pt]{article}
+\usepackage{float}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{Marrs}
+\newcommand{\subject}{Honors Marrs in $\bbR^n$}
+\newcommand{\instructors}{Marrs}
+\newcommand{\assignment}{Problem Set Marrs}
+\newcommand{\semester}{Marrs 2024}
+\newcommand{\duedate}{2024-13-Marrs}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+
+\begin{problem}
+    Let $E$ be a Banach space and $T: E\to E^*$ such that for all $x\in E,$
+    \[\langle Tx, x\rangle \geq 0.\] Show that $T$ is a bounded operator.
+\end{problem}
+\begin{solution}
+By the closed graph theorem, it suffices to see that $G(T)\subset E \times E^*$ is closed. Let $Tx_n \to y$ with $x_n \to x.$ Evidently $x\in E.$ It suffices to show that $Tx = y,$ that is, for any $u\in E,$ 
+we have that 
+\[\langle T x, u \rangle = \langle y, u\rangle.\] Let $u \in E.$ There exists some $\lambda \in \bbR$ such that  $x\lambda = u,$ where $\lambda \in \bbR.$ By assumption,
+\[\langle Tx_n - Tu, x_n - u\rangle \geq 0 \to \langle y - Tu, x-u\rangle \geq 0.\] Thus,
+\[\langle y, x - u \rangle \geq \langle Tu, x-u\rangle,\] and so plugging in our definition of $u,$ we see that 
+\[\langle y, \frac{u}{\lambda} - u\rangle \geq \langle T(\lambda x), \frac{u}{\lambda} - u\rangle,\] and so 
+\[(\frac{1}{\lambda} -1)\langle y, u\rangle \geq (\frac{1}{\lambda} -1)\langle T(\lambda), u\rangle \implies \langle y, u\rangle \geq \lambda \langle Tx, u\rangle\] Letting $\lambda \to 1$ we see that $\langle y, u\rangle \geq \langle Tx, u\rangle$ and letting $\lambda \to -1,$ see the opposite inequality.
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Let $E$ be Banach and $A: D(A) \subset E \to E^*$ be a densely defined unbounded operator. 
+    \begin{enumerate}
+        \item Suppose that there exists some $C$ such that for all $u\in D(A),$ we have that 
+        \begin{align}
+        \langle Au, u\rangle \geq -C\|Au\|^2    
+        \end{align}
+         Show that $N(A)\subset N(A^*)$
+        \begin{solution}
+    Since \[A: D(A)\subset E \to E^*\implies A^*:D(A^*)\subset E^{**} \to E^*\]
+    By that lecture Marr's did in class, it suffices to show that since $N(A^*) = R(T)^\perp,$  we have that $N(A)\subset R(T)^\perp.$ That is, 
+    we want to show that 
+    \[\{u \in E \: |\: Au = 0\} \subset \{u\in E^{**} \; : \; \langle u, Av\rangle = 0 \; \forall v \in D(A)\}.\] In non-reflexive spaces, we have that $E\subset E^{**},$ so this might be an equality in reflexive spaces. Anyways, let $u\in N(A),$ then $Au = 0.$ Let $v\in D(A).$ Then for any $t \in \bbR,$ we have that by the given inequality, 
+    \[\langle A(u + tv), u + tv \rangle \geq -C \|A(u + tv)\|^2\] Expanding the left side, we see that 
+    \begin{align*}
+      \langle A(u + tv), u + tv \rangle &= \langle Au, u + tv\rangle + \langle tAv, u + tv \rangle\\ 
+      &=0 + t\langle Av, u\rangle +t \langle Av, u\rangle + t^2\langle Av, v\rangle\\
+      &\geq -C t^2\|Av\|^2  
+    \end{align*}
+    Thus, 
+    \[2t\langle Av, u\rangle + t^2(\langle Av,v\rangle +C\|Av\|^2) \geq 0.\] This is a quadratic equation in terms of $t,$ and thus 
+    \[at^2 + bt \geq 0 \implies b^2 - 4ac \leq 0 \implies b^2 \leq 0,\] but $b^2 = (2\langle Av, u\rangle)^2 \leq 0 \implies b = 0$ and so $\langle Av, u\rangle = 0,$ and so $u \in R(A)^\perp.$ 
+        \end{solution}
+    \item Prove that the converse holds if $A$ is closed and $R(A)$ is closed. 
+    \begin{solution}
+        Since $N(A)\subset N(A^*)$ by assumption, then 
+        $N(A)\subset R(A)^\perp,$ and so for any $u\in N(A),$ we have that $u\in R(A)^\perp.$ We claim that it suffices to find some $v\in D(A)$ for any $u\in D(A)$ such that $Au = Av.$ That is, 
+        \[\langle Au, x\rangle = \langle Av, x\rangle, \quad \forall x\in D(A) \implies Au- Av = A(u-v) = 0 \implies u-v \in \ker A.\] Thus, we see that by assumption, $u-v \in R(A)^\perp,$ and so for any $x\in D(A)$
+        \[\langle u-v, Ax \rangle = 0.\]
+        In particular, letting $x = u$ we see that 
+        \[\langle Au, u\rangle = \langle Au, v\rangle\]
+        Letting $x = v,$ we see that 
+        \[\langle Av, u\rangle = \langle Av, v\rangle.\]
+        Thus, 
+        \begin{align}
+        \langle Au, u \rangle= \langle Av,v\rangle    
+        \end{align}
+        
+
+        To find such a $v,$ consider that since $R(A)\subset E^*$ is a closed subset of a Banach space, then $R(A)$ is a Banach space. Thus, $A$ is an open mapping, i.e, there exists some $c >0$ such that
+        \[B_c^{R(A)}(0)\subset A(B_1^{(D(A))}(0)).\] Thus, for any $f \in R(A),$ with $\|f\|\leq c,$ there exists some $u \in D(A)$ such that $Au = cf,$ and so $Au' = f,$ where $u' = \frac{u}{c}\in D(A)$ since $D(A)$ is densely defined linear subspace.  Thus, $\|u'\| = \|\frac{u}{c}\| \leq \|f\|\implies \|u\|\leq c\|f\|$ Because this holds for any $f\in R(A)$ (you can just scale any $f$ not in the $c-$ball) and $A$ is surjective, then let $u\in D(A)$ with $Au = f.$ But since $f\in R(A),$ then we know by the open mapping theorem there exists some $v\in D(A)$ with $Av = f$ and $-c \|Au\|\leq \|v\| \leq \|c\|\|Au\|.$ Thus, we have found our $u-v \in N(A).$ Hence by (2), we have that since $|\langle f, u\rangle|\leq \|f\|\|u\|,$ then 
+        \[\langle Au, u \rangle \geq -c\|Au\|\|v\| \geq -c\|Au\|^2\]
+    \end{solution}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Suppose $X$ is a separable Banach space and $M\subset X$ is a closed subspace. Then $X/M$ is separable.
+\end{problem}
+\begin{solution}
+    Let $\pi: X\to X/M$ be the canonical linear surjection and let $(v_n)$ be a countably dense subset of $X.$ We claim that $\pi(v_n)$ is a countably dense subset of $X/M.$ Recall that for any since $X$ is Banach, then $X/M$ is Banach with respect to the norm
+    \[\|u\|_{X/M} = \inf_{m\in M}\|u - m\|_X.\] Let $u \in X/M,$ and $\epsilon>0.$ Since $\pi$ is surjective, there exists some $v\in X$ such that $\pi(v) = x,$ and thus there exists some $v_k \in (v_n)$ such that 
+    \[\|v_k - v\|< \epsilon\] 
+    Thus, we have that 
+    \begin{align*}
+        \|\pi(v_n) - u\|_{X/M} &= \|\pi(v_n) - \pi(v)\|_{X/M}\\ 
+        &=\|\pi(v_n  - v)\|_{X/M}\\
+        &= \inf_{m\in M} \|v_n - v - m\|_X\\
+        &\leq \|v_n - v\|_X + \inf_{m\in M}\|m\|_X\\
+        &= \|v_n - v\|\\
+        &< \epsilon.
+    \end{align*}
+Then we have that $(\pi(v_n))$ is countably dense in $X/M,$ as required.
+\end{solution}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Suppose that $X$ is a Banach space, $M\subset X$ is closed and separable. If $X/M$ is separable, then $X$ is separable.
+\end{problem}
+\begin{solution}
+    Let $(u_n)\subset M$ be a countably dense subset of $M$ and let $([w_n])\subset X/M$ be a countably dense subset of $X/M$ and choose a representative $w_n \in X$ such that $[w_n] = \pi(w_n).$ Thus, let $u \in M$ and $[w] \in X/M,$ then there exist $u_n\in (u_n),$ $[w_k]\in ([w_n])$ such that 
+    \begin{align}
+        \|u_n - u\|_X< \frac{\epsilon}{2}
+    \end{align}
+    \begin{align}
+        \|[w_k] - [w]\|_{X/M} = \|\pi(w_k - w)\|_{X/M} = \inf_{m\in M}\|w_k - w - m\|< \frac{\epsilon}{2}
+    \end{align}
+
+    Consider $F = \{u_n + w_n \; : \: u_n \in (u_n), w_n \in (w_n)\},$ we claim that $F$ is countably dense in $X.$ The countability comes from the fact that 
+    \[F = \bigcup_{k=1}^\infty\bigcup_{n=k}^\infty (u_n + w_k).\] Let $x\in X.$ Then for any $\epsilon>0,$ we have by the above that if $m\in M$ and $u_n$ and $w_k$ are chosen such that (3) and (4) are satisfied, then
+    \begin{align*}
+        \|x - (u_n + w_n)\|_X &\leq \|x - w_n - m\| + \|m - u_n\|\\
+        &< \epsilon
+    \end{align*}
+    Thus, we are done.
+\end{solution}
+\begin{reflection}
+    This might be wrong, I didn't use the fact that $X$ was Banach, but in the book the quotient space is only defined for Banach spaces, so maybe I did?
+\end{reflection}
+
+
+\end{document}

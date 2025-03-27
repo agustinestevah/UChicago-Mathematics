@@ -1,0 +1,1109 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{208}
+\newcommand{\subject}{Honors Analysis in $\bbR^n$ II}
+\newcommand{\instructors}{Panagiotis E. Souganidis}
+\newcommand{\assignment}{Problem Set 4-5}
+\newcommand{\semester}{Fall 2024}
+\newcommand{\duedate}{2024-10-02}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+Let $E$ be a vector space of dimension $n$ and let $(e_i)_{1\leq i\leq n}$ be a basis of $E.$ That is, given $x\in E,$ we can write 
+\[x = \sum_{i=1}^n x_i e_i,\] with $x_i \in \bbR.$ Given $f\in E^\ast,$ we can set $f_i = f(e_i).$ Recall that we define the duality map $F: E \to E^\ast$ as
+\[F(x) = \{f\in E^* \; ; \; \|f\| = \|x\| \;\; \text{and} \;\; \langle f, x\rangle = \|x\|^2\}\]
+    \begin{enumerate}
+    \item Consider on \( E \) the norm
+    
+
+\[
+    \|x\|_1 = \sum_{i=1}^{n} |x_i|.
+    \]
+
+
+    \begin{enumerate}
+        \item Compute explicitly, in terms of the \( f_i \)'s, the dual norm \( \|f\|_{E^*} \) of \( f \in E^* \).
+        \begin{solution}
+            \begin{align*}
+                \|f\|_{E^\ast} &= \sup_{x \in E, \|x\| = 1} |\langle f, x\rangle|\\
+                &= \sup_{x \in E, \|x\| = 1} |\langle f, \sum_{i=1}^n x_i e_i\rangle|\\
+                &= \sup_{x \in E, \|x\| = 1} |\sum_{i=1}^n x_i\langle f, e_i\rangle|\\
+                &= \sup_{x \in E, \|x\| = 1} |\sum_{i=1}^n x_if_i|\\
+                &\leq \sup_{x \in E, \|x\| = 1} |\sum_{i=1}^n x_i\max_{1\leq i \leq n}f(e_i)|\\
+                &= \max_{1\leq i \leq n}|f(e_i)||\sum_{i=1}^n x_i|\\
+                &\leq \max_{i\in [n]}|f_i|
+            \end{align*}
+            Suppose $\max_{i\in [n]}|f_i| = f(e_j)$ for some $j\in [n].$ then we have that if $x \in E$ such that $x_i = 0$ and $x_j = 1,$ then $\|x\| = 1$ and 
+            \[f(e_j) = f_j = |\sum_{i=1}^n x_i f_i| \leq \sup_{x\in E, \|x\| = 1}|\sum_{i=1}^n x_i f_i| = \|f\|_{E^\ast}.\] Thus, we have that $\max_{i\in [n]}f_i = \|f\|_{E^\ast}$
+        \end{solution}
+        \item Determine explicitly the set \( F(x) \) (duality map) for every \( x \in E \).
+        \begin{solution}
+            We claim that, 
+            \[F(x) = \{f \; ; \; f(e_i) = \text{sign}(x_i) \|x\|\}.\] Evidently, \[\|f\| = \max_{i\in [n]}|f_i| = \max_{i\in [n]}\|x\| = \|x\|\] and 
+            \[\langle f, x \rangle = \sum_{i=1}^n x_i f_i = \sum_{i=1}^n |x_i|\|x\| = \|x\|\sum_{i=1}^n |x_i| = \|x\|^2\]
+        \end{solution}
+    \end{enumerate}
+    \item Same questions but where \( E \) is provided with the norm
+    
+
+\[
+    \|x\|_\infty = \max_{1 \leq i \leq n} |x_i|.
+    \]
+    \begin{solution}
+        From the previous problem, we have that 
+        \begin{align*}
+            \|f\|_{E^\ast} &= \sup_{x \in E, \|x\| = 1} |\sum_{i=1}^n x_if_i|\\
+            &\leq \sup_{x \in E, \|x\| = 1} \sum_{i=1}^n |x_i||f_i|\\
+            &= \sum_{i=1}^n |f_i|
+        \end{align*}
+        Conversely, we have that if $x\in E$ with $x_i = \text{sign}(f_i)$ for all $i\in [n],$ then we have that 
+        \[\sum_{i=1}^n |f_i| = \sum_{i=1}^n |x_i f_i| = |\sum_{i=1}^n x_if_i| \leq \sup_{x\in E, \|x\| = 1}|\sum_{i=1}^n x_if_i| = \|f\|_{E^*}\]
+        \end{solution}
+    \begin{solution}
+        We claim that $f\in F(x)$ if 
+        \[f_i = 0 \qquad \text{if}\;\; |x_i| \neq \max_{k\in [n]}|x_k|\]
+        \[\sum_{i=1}^n|f_i| = \max_{k\in n}|x_i| \qquad \text{if}\;\; |x_i| \neq \max_{k\in [n]}|x_k|\]
+        Thus, we obviously have that 
+        \[\|f\|_{E^*} = \|x\|_\infty\] and sure enough, we have that
+        \[\langle f, x\rangle = \sum_{i=1}^nx_i f_i = \sum_{x_i = \|x\|_\infty} x_i^2 = \|x\|^2_\infty\]
+    \end{solution}
+
+    \item Same questions but where \( E \) is provided with the norm
+    
+
+\[
+    \|x\|_2 = \left( \sum_{i=1}^{n} |x_i|^2 \right)^{1/2},
+    \]
+
+
+    and more generally with the norm
+    
+
+\[
+    \|x\|_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}, \quad \text{where } p \in (1, \infty).
+    \]
+    \begin{solution}
+    Let $q\in (1,\infty)$ such that $\frac{1}{p} = \frac{1}{q} = 1.$ We use holder's inequality from last PSET
+        \begin{align*}
+            \|f\|_{E^\ast} &= \sup_{x \in E, \|x\| = 1} |\sum_{i=1}^n x_if_i|\\
+            &= \sup_{x \in E, \|x\| = 1} \sum_{i=1}^n |x_i||f_i|\\
+            &=\sup_{x \in E, \|x\| = 1} \left(\sum_{i=1}^n |x_i|^p\right)^\frac{1}{p}\left( \sum_{i=1}^n |f_i|^q\right)^\frac{1}{q}\\
+            &= \left(\sum_{i=1}^n |f_i|^q\right)^\frac{1}{q}
+        \end{align*}
+    \end{solution}
+\begin{solution}
+    $f_i \in F(x)$ if 
+    \[\left(\sum_{i=1}^n |x_i|^p\right)^\frac{1}{p} = \left(\sum_{i=1}^n |f_i|^q\right)^\frac{1}{q}\]
+    and 
+    \[\sum_{i=1}^n|f_i||x_i| = \left(\sum_{i=1}^n |x_i|^p\right)^\frac{2}{p}.\] Using H\"older's inequality on the last statement we find that applying the first equality,
+    \[\sum_{i=1}^n|f_i||x_i| \leq \left(\sum_{i=1}^n |f_i|^q\right)^\frac{1}{q}\left(\sum_{i=1}^n |x_i|^p\right)^\frac{1}{p} = \left(\sum_{i=1}^n |x_i|^p\right)^\frac{2}{p},\] an so
+    \[\langle f, x\rangle = \|f\|_q\|x\|_p.\] As proved in a previous PSET, an equality like this implies that 
+    \[\sum_{i=1}^n |\hat{x_i}||\hat{f_i}| = 1,\] where
+    \[\hat{x_i} = \frac{x_i}{\|x\|_p}, \qquad \hat{f_i} = \frac{f_i}{\|f\|_q}.\] Reversing the argument from the previous PSET, we get that
+    \[f_i^q = Cx_i^p \implies f_i = C^\frac{1}{q}x_i^\frac{p}{q}.\] Using the second line, we find that 
+    \[\sum_{i=1}^n |f_i||x_i| = \sum_{i=1}^n |C^\frac{1}{q}x_i^\frac{p}{q}||x_i^\frac{1}{p}| = C^\frac{1}{q} \sum_{i=1}^n |x_i^{p-1}|x_i| = C^\frac{1}{q}\sum_{i=1}^n |x_i|^p = \left(\sum_{i=1}^n |x_i|^p\right)^\frac{2}{p}.\]
+    Thus, 
+    \[C^\frac{1}{q} = (\|x\|_p)^{2-p} \implies f_i= (\|x\|_p)^{2-p} |x_i|^{p-1}\]
+
+    We claim that 
+    \[F(x) = \]
+\end{solution}
+
+
+\end{enumerate}
+
+\end{problem}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Consider the space \( E = c_0 \) (sequences tending to zero) with its usual norm (see Section 11.3). For every element \( u = (u_1, u_2, u_3, \ldots) \) in \( E \) define
+
+
+\[ 
+f(u) = \sum_{n=1}^{\infty} \frac{1}{2^n} u_n. 
+\]
+
+
+
+\begin{enumerate}
+    \item Check that \( f \) is a continuous linear functional on \( E \) and compute \( \|f\|_{E^*} \).
+\begin{solution}
+    Obviously, $f: E \to \bbR.$ 
+
+    Let $u, w \in E$ and $\lambda\in \bbR.$ Then we have that 
+    \[f(\lambda  u + w) = \sum_{n=1}^{\infty} \frac{1}{2^n} (\lambda u_n + w_n) = \lambda \sum_{n=1}^{\infty} \frac{1}{2^n} u_n + \sum_{n=1}^{\infty} \frac{1}{2^n} w_n = \lambda f(u) + f(w)\]
+
+    Let $u\in E.$ Then 
+    \begin{align}
+    \|f(u)\|_\bbR = |\sum_{n=1}^{\infty} \frac{1}{2^n} u_n| \leq \sum_{n=1}^{\infty} \frac{1}{2^n} |u_n| \leq \|u\|\sum_{n=1}^{\infty} \frac{1}{2^n}  = \|u\|    
+    \end{align}
+     and thus $f$ is bounded linear functional. Thus, $f$ is continuous, and so $f\in E^*.$ Using (1), we see that
+    \begin{align*}
+        \|f\|_{E^*} &= \sup_{u\in E, \|u\| = 1} \|f(u)\|\\
+        &= \sup_{u\in E, \|u\| = 1} \|f(u)\|\\
+        &= \sup_{u\in E, \|u\| = 1}\|u\|\\
+        &= 1.
+    \end{align*}
+\end{solution}
+
+    
+    \item Can one find some \( u \in E \) such that \( \|u\| = 1 \) and \( f(u) = \|f\|_{E^*} \)?
+    \begin{solution}
+        No, but suppose we can. That is, there exists some $u \in E$ with $\|u\| = 1$ such that 
+        \[\sum_{n=1}^{\infty} \frac{1}{2^n} u_n = 1.\] We claim that for all $n,$ $u_n = 1.$ Suppose not, that there exists some $i$ such that $u_n <1.$ Then 
+        \[f(u) = \sum_{n = 1}^\infty \frac{1}{2^n}u_n = \sum_{n\neq i}\frac{1}{2^n} + \frac{1}{2^i}u_n < \sum_{n=1}^\infty \frac{1}{2^n} = 1.\] Thus, $f(u) < 1.$ 
+    \end{solution}
+    
+\end{enumerate}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Let $E$ be a normed vector space and let $H\subset E$ be a hyperplane. Let $V\subset E$ be an affine subspace such that $H\subset V.$
+\end{problem}
+\begin{enumerate}
+    \item Prove that either $V = H$ or $V = E.$
+    \begin{solution}
+    Since $V$ is affine, there exists some linear subspace $U\subset E$ such that 
+    \[V = x_0 + U.\]
+        Suppose $V\neq H.$ That is, there exists some $v\in V$ such that $f(v) \neq \alpha.$ Let $x \in E.$ Either $f(x) = \alpha,$ in which case $x\in H \subset V$ and we are done, or $f(x) \neq \alpha.$ We wish to show that $x = x_0 + u$ for some $u\in U.$ 
+
+        Suppose $f(v) = f(x).$ Then $f(v - x) = 0$ and so if $z\in H,$ we have that $f(v - x + h) = \alpha,$ and so $v-x + h \in H$ and so $v- x + h \in V.$  Consider now that $(v-x + z) \in V,$ $v\in V$ and  $z\in V,$ then there exist $u_{i}$ for $i = \{1,2,3\}$ such that
+        \[x = -(x - y + z) + x + z = -(x_0 + u_1) + (x_0 + u_2) + (x_0 + u_3) = x_0 + (u_2 + u_3 - u_1).\] Since $U$ is a linear subspace, $(u_2 + u_3 - u_1)\in U$ and thus $x\in V.$
+
+        Suppose $f(v) \neq f(x),$ and now consider 
+        \[g(t) = tf(v) + (1-t)f(x)\] to be the line intersecting $f(v)$ and $f(x).$ We claim that for some $t,$ $g(t) = \alpha.$ Indeed, after some algebra, one can confirm that if 
+        \[\tau = \frac{f(x) - \alpha}{f(x) - f(v)}, \implies g(\tau)= \alpha.\] Thus, $g(\tau) = \tau f(v) - (1-\tau)f(x)\in H.$ Moreover, we have that 
+        \[\alpha = \tau f(v) + (1-\tau)f(x) = f(v\tau) + f((1-\tau)x) = f(v\tau + (1-\tau)x),\] and so 
+        \[v\tau + (1-\tau)x = \in H \subset V. \implies v\tau + (1-\tau)x = u_1 + x_0, \quad u_1 \in U.\] Since $v\in V,$ we let $v = u_2 + x_0,$ where $u_2 \in U.$ Thus, we get that 
+        \[(1-\tau)x = (1-\tau)x_0 + u_1 - \tau u_2,\] and so $(1-\tau)x,$ dividng by $(1-\tau)$ and using the fact that $U$ is a subspace gives that $x\in V.$ 
+
+        In either case, we have that $E \subset V \subset E,$ and thus $E = V$ whenever $H \neq V.$
+    \end{solution}
+    \item Prove that either $H$ is closed or dense in $E.$
+    \begin{solution}
+        Let $x\in E$ such that $f(x) = \alpha.$ Let $v \in \ker f,$ then $f(x + v) = f(x) + f(v)= \alpha,$ and so $v + x \in H,$ and so $\ker f + x \subset H.$ We claim that $\ker f$ is a subspace of $E,$ and thus $\ker f + x$ is an affine subspace. Let $z \in H.$ Then \[f(z) = \alpha = f(x) \implies f(z - x) = 0 \implies z-x \in \ker f \implies z\in \ker f  + x \implies H\subset \ker f + x.\]
+        Thus, we have that $\ker f + x = H,$ and so $H \subset \overline{\ker f} + x = V  \subset E.$ Thus, we have from part (a) that either $V = H,$ in which case $H$ is closed since $V$ is closed, or $V = E.$ Suppose the latter, then $\overline{\ker f} + x = E,$ and so since $H = \ker f  + x,$ we have that $H$ is dense in $E$ by definition.
+    \end{solution}
+\end{enumerate}
+\end{problem}
+
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    
+Let \( E \) be an n.v.s. with norm \( \| \cdot \| \). Let \( C \subset E \) be an open convex set such that \( 0 \in C \). Let \( p \) denote the gauge of \( C \) (see Lemma 1.2).
+
+\begin{enumerate}
+    \item Assuming \( C \) is symmetric (i.e., \( -C = C \)) and \( C \) is bounded, prove that \( p \) is a norm which is equivalent to \( \| \cdot \| \).
+    \begin{solution}
+    Recall that 
+    \[p(x):= \inf\{\alpha \; ; \; \frac{1}{\alpha}x \in C\}\]
+        It was shown in class that $p$ was a Minkowski functional. That is, 
+        \[p(\lambda v) = |\lambda|p(v), \qquad p(v + w) \leq p(v) + p(w),\] thus, it remains to show that $p(v) = 0$ if and only if $v = 0.$ 
+        
+        Suppose $v = 0,$ then we know $v\in C,$ moreover, for any $\alpha >0,$ we have that $\frac{1}{\alpha}v = 0 \in C,$ in particular, as $\alpha \to 0,$ we have that $\frac{1}{\alpha}v = 0,$ and thus $p(v) = 0.$ On the other hand, suppose $p(v) = 0,$ then for any $n \in \bbN,$ there exists an $\alpha>0$ such that $0 < \alpha < \frac{1}{n}$ and $\frac{1}{\alpha}v \in C.$ However, we have that $nv < \frac{1}{\alpha}v \in C,$ and thus $nv \in C$ for all $C,$ which implies $C$ is unbounded. Thus, $v = 0$ and so $p$ is a norm.
+
+        We will show that for some $K \in \bbR,$ for any $v\in E$
+        \[\|v\| \leq Kp(v).\] Since $C$ is bounded, then for any $v\in E,$ we have that $\|v\|< K.$ That is, if $c \in C,$ then $\|c\| < K.$ Thus, let $v\in E,$ then by definition of $p(v):$ 
+        $\frac{v}{p(v)} \in C$\footnote{This is not necessarily true, since $p(v)$ could be $0,$ but we make this statement informally and note that one could talk about this using arbitrarily close $\alpha.$ Either way, the next line is correct.}, which implies that $\|v\| \leq K\|p(v)\|$
+
+        
+    \end{solution}
+
+\item Let \( E = C([0, 1]; \mathbb{R}) \) with its usual norm
+
+
+\[
+\|u\| = \max_{t \in [0,1]} |u(t)|.
+\]
+
+
+
+Let
+
+
+\[
+C = \left\{ u \in E; \int_0^1 |u(t)|^2 \, dt < 1 \right\}.
+\]
+
+
+
+Check that \( C \) is convex and symmetric and that \( 0 \in C \). Is \( C \) bounded in \( E \)? Compute the gauge \( p \) of \( C \) and show that \( p \) is a norm on \( E \). Is \( p \) equivalent to \( \| \cdot \| \)?
+\begin{solution}
+    Let $f,g \in C.$ Let $t \in [0,1],$ we need to check that 
+    \[tf + (1-t)g \in C.\] Consider that since we are working with real valued functions, $|u(t)|^2 = (u(t))^2$
+\begin{align*}
+    \int_0^1 |tf(x) - (1-t)g(x)|^2 dx &= \int_0^1 (tf(x) - (1-t)g(x))^2 dx\\
+    &= \int_0^1 t^2 f^2(x)dx - \int_0^1 2t(1-t)f(x)g(x)dx + \int_0^1 (1-t)^2 g^2(x)dx\\
+    &= t^2\int_0^1 f^2(x)dx - 2t(1-t)\int_0^1 f(x)g(x)dx + (1-t)^2\int_0^1  g^2(x)dx\\
+    &< t^2 - 2t(1-t)\int_0^1 f(x)g(x)dx + (1-t)^2
+\end{align*}
+We claim that $\int_0^1 f(x)g(x)dx < 1,$ which we prove using Holder's inequality
+\[\int_0^1 f(x)g(x)\leq \left(\int_0^1 f(x)dx\right)^\frac{1}{2} \left(\int_0^1 g(x)dx\right)^\frac{1}{2} < 1.\] Thus, we have that since $t\in [0,1]:$
+\[\int_0^1 |tf(x) - (1-t)g(x)|^2 < t^2 - 2t(1-t) + (1-t)^2 = (t - (1-t))^2 = (2t - 1)^2 < 1,\] and so $C$ is convex. 
+
+Let $f\in C.$ symmetry comes straight out of the fact that $(-f)^2 = f^2$ and thus they integrate to less than one.
+
+Consider the function $f_n(x) = \frac{\sqrt{n}}{1 + nx},$ then we have that 
+\[\int_0^1 \frac{\sqrt{n}}{1+ nx} dx=\sqrt{n}\int_0^1 \frac{1}{1 + nx}dx = \sqrt{n}\int_1^{1 + n} \frac{1}{u}du = \frac{\log(1 + n)}{\sqrt{n}} < 1.\] To see the final inequality, consider that for $x>1,$ we have that $4x < 1 + 2x + x^2,$ which implies that $\frac{1}{1 + x} < \frac{1}{2\sqrt{x}},$ thus, we gave that $(\log(1 + x))' < (\sqrt{x})',$ for all $x>1,$ so it suffices to show that $ \log(2) < \sqrt{1},$ which you can just look up, i don't care. So then we have that $\frac{\log(n+1)}{\sqrt{n}}< 1$ for $n>1.$ Thus, $f_n \in C$ for all $n.$ However, we have that 
+\[\|f_n\| = \frac{\sqrt{n}}{1} = \sqrt{n},\] which is certainly not bounded, and so $p$ is not equivalent to $\|\cdot\|,$ since $\|f\| \geq M$ for any $M\in \bbR.$
+    \end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Let \( E \) be a finite-dimensional normed space. Let \( C \subset E \) be a nonempty convex set such that \( 0 \notin C \). We claim that there always exists some hyperplane that separates \( C \) and \(\{0\}\).
+
+\begin{quote}
+    [Note that every hyperplane is closed (why?). The main point in this exercise is that no additional assumption on \( C \) is required.]
+\end{quote}
+\begin{solution}
+    We see that every hyperplane is closed because if $H = [f = \alpha],$ where $f: E\to \bbR$ is a linear functional, then the fact that $E$ is finite dimensional implies that $f$ is finite. 
+\end{solution}
+
+\begin{enumerate}
+    \item Let \((x_n)_{n \geq 1}\) be a countable subset of \( C \) that is dense in \( C \) (why does it exist?). For every \( n \) let
+    
+
+\[
+    C_n = \text{conv}\{x_1, x_2, \ldots, x_n\} = \left\{ x = \sum_{i=1}^n t_i x_i; \ t_i \geq 0 \ \forall i \ \text{and} \ \sum_{i=1}^n t_i = 1 \right\}.
+    \]
+
+
+    Check that \( C_n \) is compact and that \( \bigcup_{n=1}^\infty C_n \) is dense in \( C \).
+\begin{solution}
+    Define $\varphi: \bbR^n \to C_n$ such that if $y\in \bbR^n,$ then \[\varphi(y) = \varphi\begin{pmatrix}
+        y_1 \\\vdots \\y_n
+    \end{pmatrix} = \sum_{i=1}^n y_i x_i.\] Define \[X = \{t = \begin{pmatrix}
+        t_1 \\\vdots\\t_n
+    \end{pmatrix}\; ; \; t_i \geq 0, \quad \sum_{i=1}^n t_i = 1\},\] then we have that $c^{(n)}\in C_n$ if and only if $\varphi^{-1}(c^{(n)})\in X.$ That is, $\varphi(X) = C_n.$ Equip $X$ with the $\|y\|_1 = \sum_{i=1}^n y_i$ norm. We see that $X\subset \bbR^n,$ and thus it suffices to show that $X$ is closed. Let $t_m = \begin{pmatrix}
+        t_1^{(m)}\\t_2^{(m)}\\\vdots \\t_n^{(m)}
+    \end{pmatrix} \to \tilde{t} = \begin{pmatrix}
+        \tilde{t_1}\\ \tilde{t_2} \\ \vdots \\\tilde{t_n}
+    \end{pmatrix}$ where $(t_m)\in X.$ Then we have (by the previous PSET) that $t_i^{(m)} \to \tilde{t_i}$ at the same rate. That is, there exists an $N\in \bbN$ such that if $m \geq N,$ then 
+    $|\tilde{t_i} - {t_i}^{(m)}| < \frac{\epsilon}{2^n},$ and so
+    \[|1 - \sum_{i=1}^n \tilde{t_i}| \leq |1 - \sum_{i=1}^n t_i^{(m)}| + |\sum_{i=1}^n t_i^{(m)} - \sum_{i=1}^n \tilde{t_i}| < \epsilon.\] Thus, $X$ is closed and bounded (bounded by $B_2(0)$), and so $X$ is compact. Since $\varphi$ is continuous, (linear function between finite dimensional spaces), we have that $\varphi(X) = C_n$ is compact. 
+    
+    
+    Evidently, we have that $C_n \subset C_{n+1}.$ Let $x\in C$ and $\epsilon>0.$ We claim that there is some $c \in \bigcup C_n$ such that $c\in B_\epsilon(x).$ Since $(x_n)$ is dense in $C,$ then there is some $x_k \in (x_n)$ such that $x_k \in B_\epsilon(x).$ Consider now that if $t_i = 0$ except for $t_k = 1,$ then $\sum_{i=1}^k t_i = 1$ and  \[c = x_k = \sum_{i=1}^k t_i x_i \in C_k \in \bigcup_{n=1}^\infty C_n\] 
+\end{solution}
+
+    \item Prove that there is some \( f_n \in E^\star \) such that
+    
+
+\[
+    \|f_n\| = 1 \ \text{and} \ \langle f_n, x \rangle \geq 0 \ \forall x \in C_n.
+    \]
+
+\begin{solution}
+    We have that $C_n$ compact and $\{0\}$ is closed, and they are disjoint. By the Hahn-Banach separation theorem (second geometric form), there exists a closed hyperplane $H_n = [f_n = \alpha_n]$ that strictly separates $C_n$ and $\{0\}.$ That is, for all $x\in C_n,$ 
+    \[0 = f_n(0) \leq \alpha_n - \epsilon < \alpha_n + \epsilon \leq f_n(x) = \langle f_n, x \rangle.\] Thus, we can take 
+    \[\varphi_n(x) = \frac{f_n(x)}{\|f_n(x)\|},\] and so we have that $\|\varphi_n(x)\| = 1$ and $\langle \varphi_n, x \rangle \geq 0.$
+\end{solution}
+
+    \item Deduce that there is some \( f \in E^\star \) such that
+    
+
+\[
+    \|f\| = 1 \ \text{and} \ \langle f, x \rangle \geq 0 \ \forall x \in C.
+    \]
+
+
+    Conclude.
+    \begin{solution}
+        Take \[\lim_{n\to \infty}\varphi_n(x) := \varphi(x)\] Take some $x\in C.$ Let $\delta>0$ from continuity.
+        By the density of the $(x_n),$ there exists some $k$ such that $x_k \in B_\frac{\delta}{2}(x).$ Thus, we have that since $C_n \subset C_{n+1},$ then by the definition of $\varphi,$ we have that $\langle \varphi, x_k \rangle \geq 0$ and $\|\varphi\| = 1.$ Thus, by continuity, we have that $\|\varphi(x)\| \geq 0$ and $\|\varphi\| = 1$ for all $x\in C.$
+    \end{solution}
+
+    \item Let \( A, B \subset E \) be nonempty disjoint convex sets. Prove that there exists some hyperplane \( H \) that separates \( A \) and \( B \).
+    \begin{solution}
+        Take $C = A - B.$ Since $A$ and $B$ are disjoint, we have that $0\notin C.$ Evidently, $C$ is nonempty. We just have to show that $C$ is convex. Let $x,y \in C$ and let 
+        \[f(t) = tx + (1-t)y = t(a_1 - b_1) + (1-t)(a_2 - b_2) = ta_1 + (1-t)a_2 -(tb_1  +(1-t)b_2) = a - b \in C,\] by convexity. By the previous parts, there exists some $f\in E^*$ such that $\|f\| = 1$ and
+        \[ 0\leq \langle f, C\rangle = \langle f, A-B\rangle = \langle f, A\rangle - \langle f, B\rangle.\] Thus, for all $a\in A,$ $b\in B,$ we have that 
+        \[\langle f, b\rangle \leq \langle f, a \rangle,\] and so there exists a hyperplane separating the two. Specifically, fix a constant such that 
+        \[\langle f, b \rangle \leq \alpha \leq \langle f, a\rangle\] and take the hyperplane $H = [f = \alpha].$
+    \end{solution}
+\end{enumerate}
+
+\end{problem}
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+Let $E = \ell^1$ (see Section 11.3) and consider the two sets
+\[
+X = \left\{ x = (x_n)_{n \geq 1} \in E; \quad x_{2n} = 0 \quad \forall n \geq 1 \right\}
+\]
+and
+\[
+Y = \left\{ y = (y_n)_{n \geq 1} \in E; \quad y_{2n} = \frac{1}{2^n} y_{2n-1} \quad \forall n \geq 1 \right\}.
+\]
+
+\begin{enumerate}
+    \item Check that $X$ and $Y$ are closed linear spaces and that $\overline{X + Y} = E$.
+\begin{solution}
+    Let \[
+    \begin{pmatrix}
+        x_1^{(1)}\\
+        x_2^{(1)}\\
+        \vdots\\
+        x_i^{(1)}\\
+        \vdots
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        x_1^{(2)}\\
+        x_2^{(2)}\\
+        \vdots\\
+        x_i^{(2)}\\
+        \vdots
+    \end{pmatrix},
+    \dots,
+    \begin{pmatrix}
+        x_1^{(n)}\\
+        x_2^{(n)}\\
+        \vdots\\
+        x_i^{(n)}\\
+        \vdots
+    \end{pmatrix},
+    \dots =
+    x^{(n)}_i \to (x_i) = x = \begin{pmatrix}
+        x_1\\x_2\\\vdots\\ x_i \\\vdots
+    \end{pmatrix}\] where $(x^{(n)}_i) \in X.$ Thus, we have that for all $\epsilon>0,$ for all $i,$ for $n$ large, we have
+    \[\|x^{n}_{(i)} - x\|_{\ell^1} = \sum_{i=1}^\infty |x_i^{(n)} - x_i| < \epsilon.\] Thus, we have that 
+    \[\sum_{i=2k}^\infty |x_i^{(n)} - x_i|  = \sum_{i=2k}^\infty |x_i| < \epsilon.\] Because this is true for all $\epsilon >0,$ then it must be that $x_i = 0$ for all $i = 2k$ for $k\in \bbN,$ and so $x\in X.$
+
+    Let \[
+    \begin{pmatrix}
+        y_1^{(1)}\\
+        y_2^{(1)}\\
+        \vdots\\
+        y_i^{(1)}\\
+        \vdots
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        y_1^{(2)}\\
+        y_2^{(2)}\\
+        \vdots\\
+        y_i^{(2)}\\
+        \vdots
+    \end{pmatrix},
+    \dots,
+    \begin{pmatrix}
+        y_1^{(n)}\\
+        y_2^{(n)}\\
+        \vdots\\
+        y_i^{(n)}\\
+        \vdots
+    \end{pmatrix},
+    \dots =
+    y^{(n)}_i \to (y_i) = y = \begin{pmatrix}
+        y_1\\y_2\\\vdots\\ y_i \\\vdots
+    \end{pmatrix}\] where $(y^{(n)}_i) \in Y.$ Thus, we have that for all $\epsilon>0,$ for all $i,$ for $n$ large, we have
+    \[\|y^{n}_{(i)} - y\|_{\ell^1} = \sum_{i=1}^\infty |y_i^{(n)} - y_i| < \epsilon.\] and thus for all $i:$
+    \[|y_i^{(n)} - y_i| \leq \|y_{i}^{(n)} - y\|_{\ell^1}<\epsilon,\] and so 
+    \[y_i^{(n)} = y_i\] for large $n,$ and thus
+    \[y^{(n)}_{2i} = \frac{1}{2^{2i}}y^{(n)}_{2i-1}\xrightarrow{n\to \infty} \frac{1}{2^{2i}}y_{2i-1},\] and so we are done, since this shows that $y\in Y.$ 
+
+    Evidently, $\overline{X + Y}\subset E.$ Let $e \in E.$ Then we define 
+    \[x_{2n} = 0, \quad y_{2n} = e_{2n}\]
+    \[x_{2n-1} =e_{2n-1} - 2^{2n}e^{2n}, \quad y_{2n-1} = 2^{2n}e_{2n},\] then obviously, $x \in X$ and $y\in Y$ and this sequence converges to $e\in E.$ Thus, $E\subset \overline{X + Y}$
+    
+\end{solution}
+    \item Let $c \in E$ be defined by
+    \[
+    c_n =
+    \begin{cases}
+        0, & \forall n \geq 1, \quad n \text{ odd}, \\
+        \frac{1}{2^n}, & \forall n \geq 1, \quad n \text{ even}.
+    \end{cases}
+    \]
+    Check that $c \notin X + Y$.
+    \begin{solution}
+        Suppose it is! Then we would have (by logic from above), that 
+        \[x_{2n}= 0, \qquad x_{2n-1} = \frac{1}{2^{2n-1}} 
+ - 1\]
+        \[y_{2n} = \frac{1}{2^{2n}} \qquad y_{2n-1} = 2^{2n}\frac{1}{2^{2n}} = 1.\]
+        Thus, $c = x+y,$ But then $y\notin \ell^1$
+    \end{solution}
+    \item Set $Z = X - c$ and check that $Y \cap Z = \emptyset$. Does there exist a closed hyperplane in $E$ that separates $Y$ and $Z$? Compare with Theorem 1.7 and Exercise 1.9.
+    \begin{solution}
+    Suppose not, then let $\chi \in Y \cap Z.$ Since $\chi \in Y,$ there exists some sequence $y\in Y$ such that $\chi = y.$ Similarly, there exists some $z\in Z$ such that $\chi = z.$ Since $Z = X - c,$ then there exists some $x\in X$ such that $\chi = x-c,$ and thus $y = x-c,$ and so $c = x + (-y),$ which is a contradiction to what we have seen above, since $-y \in Y.$ 
+
+    Suppose we could separate $Y$ and $Z$ with some closed hyperplane $H = [f = \alpha].$ Then there exists some $\alpha$ such that for all $y \in Y,$ $z\in Z,$ we have that 
+    \[f(y) < \alpha < f(z) = f(x-c) = f(x) - f(c) \implies f(Y) < \alpha < f(Z).\] By the lemma below, we have that this implies that since $Y$ and $X$ are linear subspaces (easy to show), then $f(Y) = f(X) = 0.$  Thus, we have that $Y, X \subset \ker f.$ Moreover, we also know that by the strict separation, we have that $f(c) <0.$ We get that $X + Y \subset \ker f,$ and since $f$ is continuous, then $\overline{ X + Y}\subset \ker f,$ and so $E \subset \ker f.$ Thus, $f \equiv 0$ on all $E,$ which is a contradiction to the fact that $f(c) < 0.$
+    \end{solution}
+    \begin{reflection}
+        We claim that if $W$ is subspace and $f: W\to \bbR$ is a linear functional. Then either $f \equiv 0$ or $f(W) = \bbR.$ Suppose $f\not \equiv 0,$ then there exists some $w\in W$ such that $f(w) = a >0.$ Then for any $x\in \bbR,$ we have that  $\frac{x}{a}f(w) = \frac{x}{a} a,$ and thus since $f(\frac{x}{a}w)= x$ and $\frac{x}{a}q\in W,$ then we are done. 
+    \end{reflection}
+\end{enumerate}
+\end{problem}
+
+
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+Let $E $ be a normed vector space and let $f\in E^*$ with $f\neq 0.$ Let $M = [f = 0].$
+    \begin{enumerate}
+    \item Determine $M^\perp$.
+    \begin{solution}
+        We recall that 
+        \[M^\perp = \{\varphi \in E^* \; ; \; \langle \varphi , x\rangle = 0 \; \forall x\in M\}.\] We claim that
+        \[M^\perp = \{\sum_{i=1}^n \lambda_i f(x)\;;\; x\in M\},\] where $f$ is the functional from the hyperplane.
+
+        Let $g\in \{\sum_{i=1}^n \lambda_i f(x)\;;\; x\in M\},$ then $g(x) = \lambda_1f(x) + \cdots \lambda_n f(x) = 0.$
+
+        Let $g\in M^\perp,$ then for all $x\in M,$ we have that $g(x) = 0.$ Suppose that $g\notin \text{span}\{f\},$ then we have that $f$ and $g$ are linearly independent, and thus 
+        \[a_1 f  + a_2 g = 0\] is satisfied if and only if $a_1, a_2 = 0.$ This is obviously not true, since $f, g = 0$ and so the equation is satisfied for any scalars, and so the vectors are linearly dependent, and so $g\in \text{span}(f).$
+    \end{solution}
+    \item Prove that for every $x \in E$, 
+    \[
+    \text{dist}(x, M) = \inf_{y \in M} \|x - y\| = \frac{|\langle f, x \rangle|}{\|f\|}.
+    \]
+    [Find a direct method or use Example 3 in Section 1.4.]
+    \begin{solution}
+        We have that for $y\in M,$ $\langle f, y \rangle = 0,$ and so 
+        \[|\langle f, x\rangle| = |\langle f, x-y \rangle| \leq \|f\|\|x-y\| \implies \frac{|\langle f,x\rangle|}{\|f\|} \leq \|x-y\|\]
+        Thus, 
+        \[\frac{|\langle f,x\rangle|}{\|f\|} \leq \text{dist}(x,M).\] 
+        For the other direction, take $v \in E\setminus M.$\footnote{We know $v \notin M$ since $f(v) = 0$ if it were, and thus we can ignore it for the operator norm}  Then 
+        \[\|f\| = \sup_{v}\frac{|f(v)|}{|v|}.\] Note that we have that 
+        \[d(x,M)\leq \|x - (x - \frac{f(x)}{f(u)}u)\| = \|\frac{f(x)}{f(u)}(u)\|\leq \frac{\|f\|}{|f(u)|}\|u\|,\] and so using the definition of the operator norm above, we are done.
+    \end{solution}
+    \item Assume now that 
+    \[
+    E = \{ u \in C([0,1]; \mathbb{R}) ; \quad u(0) = 0 \}
+    \]
+    and that
+    \[
+    \langle f, u \rangle = \int_0^1 u(t) dt, \quad u \in E.
+    \]
+    Prove that
+    \[
+    \text{dist}(u, M) = \left| \int_0^1 u(t) dt \right| \quad \forall u \in E.
+    \]
+    Show that 
+    \[
+    \inf_{v \in M} \|u - v\|
+    \]
+    is never achieved for any $u \in E \setminus M$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+    Consider that 
+    \[\|f\| = \sup_{\|u\| = 1} \langle |f(u)\rangle| = \sup_{\|u\| = 1}|\int_0^1 u(t)dt| = |\int_0^1 dt| = 1.\] Thus, by part (ii), 
+    \[\text{dist}(u,M) = \inf_{u\in M}\|x-u\| = \frac{|\langle f, u\rangle|}{\|f\|} = |\langle f, u\rangle| = \left| \int_0^1 u(t)dt\right|.\] Suppose $u\in E\setminus M,$ then 
+    \[|\int_0^1u(t)dt)| = 0,\] then $\int_0^1 u(t)dt = 0,$ and so $\langle f, u \rangle = 0,$ and so $u \in M.$
+\end{solution}
+
+\newpage
+\section*{Problem 8}
+\begin{problem}
+    Let $X$ be a normed vector space. Assume that for some $x,y \in X,$ we have that 
+    \[\|x + y\| = \|x\| + \|y\|.\] Show that for every $\alpha, \beta >0$ we have that 
+    \[\|\alpha x + \beta y\| = \alpha\| x\| +\beta \| y\|\]
+    \end{problem}
+\begin{solution}
+    Without loss of generality, suppose $\alpha \geq \beta.$ By the triangle inequality, we have that 
+    \[\|\alpha x + \beta y\| \leq \alpha\| x\| +\beta \| y\|,\] so it suffices to show that 
+    \[\|\alpha x + \beta y\| \geq \alpha\| x\| +\beta \| y\|.\] Consider that by the reverse triangle inequality,
+    \begin{align*}
+        \|\alpha x + \beta y\| &= \|\alpha (x + y) + (\beta - \alpha)y\|\\
+        &\geq \|\alpha (x + y)\| - \|(\beta - \alpha)y\|\\
+        &=\alpha\|x\|+ \alpha\|y\| + (\beta - \alpha)\|y\|\\
+        &= \alpha\|x\| + \beta \|y\|
+    \end{align*}.
+\end{solution}
+
+\newpage
+\section*{Problem 9}
+\begin{problem}
+    Let $1\leq p \leq q < \infty.$ Then $\|x\|_q \leq \|x\|_p.$
+\end{problem}
+\begin{solution}
+Consider the case when $\|x\|_p = 1.$ Then we have that necessarily, $|x_i| \leq 1$ for all $i,$ and thus $|x_i|^q \leq |x_i|$ for all $i.$ Thus, 
+\[\sum_{i=1}^\infty |x_i|^q \leq \sum_{i=1}^\infty |x_i| =1 \implies \|x\|_q \leq 1.\] For the general case, take 
+\[y_k = \frac{x_k}{\|x\|_p},\] then $\|y\|_p = 1$ and thus 
+\[\|y\|_q \leq \|y\|_p = 1,\] but we have that 
+\[\|y\|_q = \frac{\|x\|_q}{\|x\|_p} \leq 1,\] and so we are done.
+\end{solution}
+
+\end{enumerate}
+
+\newpage
+\section*{Problem 10}
+\begin{problem}
+    Show that 
+    \[\lim_{p\to \infty}\|x\|_p = \|x\|_\infty\]
+\end{problem}
+\begin{solution}
+    Consider that for any $n,$ we have that by taking limits
+    \[\sum_{k=1}^\infty |a_k|^p \geq |a_n|^p \implies \|a\|_\infty \leq \|a\|_p.\] On the other hand, we have that since $a\in \ell^p,$ then
+    \[\sum_{k=1}^\infty |a_k|^p < \infty,\] Thus, there must exist some $C$ such that \[\sum_{k=1}^\infty |\frac{a_k}{A}|^p  \leq C \implies \left(\sum_{k=1}^\infty |\frac{a_k}{A}|^p\right)^\frac{1}{p}  = C^{\frac{1}{p}}.\] By homogeneity, we have that 
+    \[\|a\|_p \leq C^\frac{1}{p}\|a\|_\infty.\] Since for large $p,$ we have that $|C^\frac{1}{p} - 1|< \epsilon,$ then 
+    \[\|a\|_p \leq C^\frac{1}{p}\|a\|_\infty \to \|a\|_\infty\] Thus, as $p\to \infty,$ we have that $\|a\|_p = \|a\|_\infty.$
+\end{solution}
+
+\newpage
+
+\section*{Problem 11}
+\begin{problem}
+    Show that a normed space $X$ is Banach if and only if $\sum x_n$ converges in $X$ whenever $\|x_n\|< \frac{1}{2^n}$ for every $n.$
+\end{problem}
+\begin{solution}
+    Suppose $X$ is Banach. Suppose $\|x_n\|< \frac{1}{2^n},$ then 
+    \[\sum_{n=1}^\infty \|x_n\| < \sum_{n=1}^\infty \frac{1}{2^n} = 1,\] and thus since $X$ is Banach and the series is absolutely summable, then it is summable, and thus 
+    \[\sum_{n=1}^\infty x_n < \infty.\]
+
+    Let $(x_n) \in X$ be Cauchy. Thus, for all $n, m\geq N_k,$ we have that  
+    \[\|x_n - x_m\| < \frac{1}{2^k}.\] Let $n_K = N_1 + N_2 + \dots + N_k.$ Obviously, $n_{k+1} \geq n_k \geq N_K$ and thus our subsequence $(x_{n_k})$ is Cauchy by
+    \[\|x_{n_k} - x_{n_{k+1}}\|< \frac{1}{2^k}.\] Thus, we have by assumption that our series is summable or that
+    \[\sum_{k=1}^K x_{n_k} - x_{n_{k+1}} = x_{n_K} - x_{n_1} \xrightarrow{n\to \infty} x - x_{n_1} \] as $K \to \infty,$ and thus our Cauchy subsequence converges to a limit. Thus, it suffices to show that if $(a_n)$ is Cauchy and it has a convergent subsequence, then $(x_n)$ must converge. Observe that since $(x_n)$ is Cauchy, then there exists some $N_1\in \bbN$ such that $n>N_1,$ then $d(a_n,a_{n_k})<\frac{\epsilon}{2}$ (since $n_k$ is implicitly greater than $n$). Since $(x_{n_k})$ converges to $x,$ then there exists some $N_2,$ such that if $n>N_2,$ we have that $d(x_{n_k},x)<\frac{\epsilon}{2}.$ Thus if $N = \max\{N_1, N_2\}$ and $n\geq N,$
+    \[d(x_n, x)\leq d(x_n, a_{x_k}) + d(x_{n_k}, x)\leq \epsilon.\]
+\end{solution}
+
+
+\end{problem}
+
+
+\newpage
+\section*{Problem 12}
+Let $X$ be a normed vector space obtained from 
+\[c_0 = \{(x_n) \; ; \; \lim_{n\to \infty}x_n = 0\}\] equipped with the norm $\|x\|_0 = \sum_{n=1}^\infty \frac{1}{2^k}|x_k|.$ Show that $X$ is not Banach.
+
+\begin{solution}
+    Consider the following sequence in $c_0:$
+    \[(x_{n}^{(i)}) = 
+    \begin{pmatrix}
+        1 & 1 & 1 & \cdots \\
+        0 & 1 & 1 & \cdots \\
+        0 & 0 & 1 & \cdots 
+    \end{pmatrix},\] where the columns are the sequences in $(x_{n}^{(i)}).$ Let $\epsilon>0,$ we can find a $K$ such that $\frac{1}{2^K} < \epsilon$ and thus if $n,m \geq K,$ then
+    \[\|x_{n}^{(i)} - x_{m}^{(i)}\|_0 \leq \sum_{n+1}^m\frac{1}{2^k} < \frac{1}{2^n} < \frac{1}{2^K},\] and thus $(x_{n}^{(i)})$ is Cauchy. Evidently, we have that 
+    \[(x_{n}^{(i)}) \to (1,1,1,\dots),\] which is not in $c_0.$
+\end{solution}
+\newpage
+
+\section*{Problem 13}
+\begin{problem}
+    Let $X$ be a normed vector space and suppose $C\subset X$ is nonempty and convex. Then $\text{int}(C)$ and $\overline{C}$ are both convex.
+\end{problem}
+\begin{solution}
+    Suppose not. Let $x, y \in \text{int}(C)$ and let
+    \[z = tx + (1-t)y\] such that $z\notin \text{int}(C).$ Thus, for all $\epsilon>0,$ $B_\epsilon(z)\not\subset C.$ Specifically, let $z_0$ be such a point. Since $x, y \in \text{int} (C),$ then there exist $\epsilon>0$ such that 
+    \begin{align}
+    B_\epsilon(x) \subset \text{int}(C) \qquad C_\epsilon(y) \subset \text{int}(C).    
+    \end{align}
+    Consider now that
+    \[f(t) = t(x - (z - z_0)) + (1-t)(y - (z - z_0)) = z_0,\] and so it suffices to show that $z - (z-z_0)$ and $y - (z - z_0)$ are in $C,$ since this would imply that there is a convex combination of them that are not in $C.$
+    Since $z_0 \in B_\epsilon(z),$ we have that 
+    \[\|z - z_0\|< \frac{\epsilon}{2}.\] Thus, by (2),
+    \[\|x - (z - z_0)\| \leq \|x\| + \|z - z_0\|< \|x\| + \frac{\epsilon}{2} \implies (x- (z - z_0))\in C.\] Similarly, $y - (z - z_0)\in C.$
+\end{solution}
+\begin{solution}
+    Let $x,y \in \overline{C}$ and suppose there exists 
+    \[z= tx - (1-t)y\notin \overline{C}\] Thus, there exists some $\epsilon>0$ such that $B_\epsilon(z)$ contains no points of $C.$ Specifically, let $z_0 \in B_\epsilon(z)$ such that $z_0 \notin C.$ Again, we do the exact same thing as above to conclude that we can express $z_0$ as convex combinations of $x_0 \in B_\epsilon(x)$ and $y_0 \in B_\epsilon(y),$ where $x_0 \in C$ and $y_0 \in C,$ and thus $C$ is not convex. 
+\end{solution}
+
+\newpage
+\section*{Problem 14}
+\begin{problem}
+    Let $X$ be a normed vector space. If $A\subset X$ is open, then $\text{conv}(A)$ is open. Is the convex hull of closed sets in $\bbR^n$ closed?
+\end{problem}
+\begin{solution}
+    Recall that 
+    \[\text{conv}(A) = \{\sum_{i=1}^nt_i a_i, \; a_i \in A \;\forall i, \; t_i \geq 0\; \forall i, \;\sum_{i=1}^n t_i = 1\}.\]  Let $a_0 \in \text{conv(A)},$ then 
+    \[a_0 = \sum_{i=1}^nt_i a_i.\] Since each $a_i \in A,$ then there exists some $r_i>0$ such that 
+    \[B_{r_i}(a_i)\subset U.\] Let $r = \min_{i\in [n]} \{r_i\}.$ We can then conclude that
+    \[\sum_{i=1}^n t_iB_{r}(a_i) = \sum_{i=1}^n(t_ia_i + t_i B_r(0)) = B_r(0) + \sum_{i=1}^nt_ia_i = B_r(a_0),\] and thus any $a\in B_r(a_0)$ can be written as a convex combination of $a_i'\in A.$
+
+    The convex hull of closed sets in $\bbR^n$ is not necessarily closed. Let $f: \bbR\setminus\{0\} \to \bbR$ such that $f(x) = \frac{1}{x^2}.$ Then consider the graph of $f$ as
+    \[G(f) = \{(x, f(x))\}.\] Obviously, $G(f)$ is closed. It is not hard to see that the convex hull is simply the upper plane, which is not closed. 
+\end{solution}
+
+\newpage
+\section*{Problem 15}
+\begin{problem}
+    Suppose $X,Y$ are nonempty normed vector spaces and $T\in \mathcal{L}(X, Y),$
+    then 
+    \[\|T\| = \sup_{\|x\| = 1}\{\|T(x)\}\} = \sup_{\|x\| \leq 1}\{\|T(x)\}\}\]
+\end{problem}
+\begin{solution}
+    Consider that \[\|Tx\| \leq \|T\|\|x\| \leq \|T\|,\] and thus \[\sup_{\|x\| \leq 1}\{\|T(x)\|\} \leq \sup_{\|x\| = 1}\{\|T(x)\|\}\]
+    The other direction is obvious, since we can just take $\|x|\ = 1$ and thus $\|x\| \leq 1$ and so
+    \[\sup_{\|x\| = 1}\{\|T(x)\|\} \leq \sup_{\|x\| \leq 1}\{\|T(x)\|\}\]
+\end{solution}
+\newpage
+\section*{Problem 16}
+\begin{problem}
+    Let \( X, Y \) be Banach spaces and \( T \in \mathcal{L}(X, Y) \). If there exists \( \delta > 0 \) such that \( \|T(x)\| \geq \delta \|x\| \) for all \( x \in X \), then \( T(X) \) is closed in \( Y \).
+\end{problem}
+\begin{solution}
+    Suppose that $(w_n) \in T(X)$ with $(w_n)\to w.$ We want to show that there exists some $v\in X$ such that $T(v) = w.$ Because $(w_n) \in T(X)$ for all $n,$ then there exists $(v_n)$ such that $T(v_i) = w_i.$ Since $(w_n) \to w,$ then $(w_n)$ is Cauchy. There exists some $N$ such that if $n, m \geq N,$ then $\|w_n - w_m\|  = \|T(v_n) - T(v_m)\| < \epsilon \delta.$ 
+    \[\delta\|v_n - v_m\|\leq \|T(v_n - T_m)\| = \|T(v_n) - T(v_m)\| = \|v_n - v_m\|< \epsilon \delta,\] and thus 
+    \[\|v_n - v_m\| < \epsilon.\] Since $(v_n) \in X$ is Cauchy and $X$ is Banach, we have that there exists some $v\in X$ such that $v_n \to v.$ Since $T\in \mathcal{L}(V,W),$ then $T$ is continuous, and thus 
+    \[T(v_n) \to T(v) = w\in Y.\]
+\end{solution}
+
+\newpage
+\section*{Problem 17}
+\begin{problem}
+    Show that the norm \( \|x\| = \sum_{i=1}^{\infty} 2^{-i} |x_i| \) in \( \ell^2 \) is not equivalent to the \( \|\cdot\|_2 \) norm.
+\end{problem}
+\begin{solution}
+    Let $(x_n) = \frac{1}{\sqrt{n}}.$ Since $(x_n)$ is monotonic and bounded, then by the claim in the reflection, we have that $\|x\| = \sum_{n=1}^\infty \frac{1}{2^n}\frac{1}{\sqrt{n}} < \infty.$ However, in the other norm, we have that 
+    \[\|x\|_2 = \left(\sum_{n=1}^\infty |\frac{1}{\sqrt{n}}|^2\right)^\frac{1}{2} =\left(\sum_{n=1}^\infty \frac1n\right)^\frac{1}{2} = \infty\] since the harmonic series diverges. Thus, the norms are not equivalent.
+\end{solution}
+\begin{reflection}
+\begin{problem}
+If $\sum a_n$ converges and $(b_n)$ is monotonic and bounded, prove that $\sum a_nb_n$ converges.
+\end{problem}
+    We claim that if $(c_n)\to 0$ is monotone decreasing, then $\sum a_k c_n$ converges. By Luis' hint during office hours, we have that:
+    \begin{align*}
+    \sum_{k=1}^{n-1}A_k(c_k - c_{c+1}) &= A_1(c_1 -c_2) + A_2(c_2 - c_3)+ \dots\\
+    &= \sum_{k=1}^{n-1}a_kc_k -  A_{n-1}c_{n},
+    \end{align*} which can be proved by induction.
+    We have that since $A_n$ converges, then it is bounded by some $|A_k|\leq A.$ Thus, we note that since $c_{k} - c_{k+1}\geq 0$ for all $k,$ then
+    \begin{align*}
+        \left|\sum_{k=m+1}^n a_k c_k\right| &= \left|\sum_{k=1}^{n-1}A_k(c_k - c_{k+1}) + A_{n-1}c_n - (\sum_{k=1}^mA_k(c_{k} - c_{k+1}) + A_mc_{m+1})\right|\\
+        &= \left| \sum_{k=m+1}^{n-1}A_k(c_{k} - c_{k+1}) + A_{n-1}c_n + A_mc_{m+1}\right|\\
+        &\leq \left| \sum_{k=m+1}^{n-1}A(c_{k} - c_{k+1}) + Ac_n + Ac_{m+1}\right|\\
+        &\leq A\left(\sum_{k=m+1}^{n-1}(c_k - c_{k+1}) + c_n + c_{m+1}\right)\\
+        &= A \left(2c_{m+1}\right)\\
+        &< 2A\frac{\epsilon}{2A}.\\
+    \end{align*}
+    The last inequality comes from the fact that $c_n \to 0.$ Suppose that $b_n$ is monotone increasing and bounded. Thus, it converges to some $b.$ Let $c_n = b- b_n.$ Then we have that $c_n \to 0$ and $c_n$ is monotonically decreasing. Thus, by the work above, we have that 
+    \[\sum_{k=1}^n a_k(b-b_k) = b\sum_{k=1}^na_k - \sum_{k=1}^n a_kb_k\] converges. Since $b\sum_{k=1}^n a_k$ converges, then $\sum_{k=1}^n a_k b_k$ converges. Suppose $b_n$ is monotone decreasing and bounded, then $b_n -b\to 0$ and  $c_n = b_n - b$ is monotone decreasing. Thus, we can use the same strategy as above to show that $\sum a_kb_k$ converges.
+\end{reflection}
+
+\newpage
+$<$3 love you (thanks gaya)
+\section*{Problem 17}
+\begin{problem}
+Let \( E \) and \( F \) be two Banach spaces and let \( (T_n) \) be a sequence in \( \mathcal{L}(E, F) \).  
+Assume that for every \( x \in E \), \( T_nx \) converges as \( n \to \infty \) to a limit denoted by \( Tx \).  
+Show that if \( x_n \to x \) in \( E \), then \( T_nx_n \to Tx \) in \( F \).
+\end{problem}
+\begin{solution}
+Since $T_nx \to Tx$ for every $x,$ we have that there exists some $N_1 $ such that if $n\geq N_1,$ then 
+\[\|T_nx - Tx\|< \frac{\epsilon}{2}.\]
+By the uniform boundedness theorem, we have that 
+\[\|T_n(x_n - x)\|\leq c\|x_n - x\|,\] so there exists some $N_2$ such that if $n\geq N_2,$ we have that because $x_n \to x,$ then 
+\[\|x_n - x\| < \frac{\epsilon}{2c}.\] Take the max between the $N_1$ and $N_2,$ then for $n$ larger,
+    \begin{align*}
+        \|T_nx_n - Tx\| &\leq \|T_nx_n - T_n x\| + \|T_nx -Tx\|\\
+        &\leq \|T_n(x_n - x)\| + \|T_nx - Tx\|\\
+        &< c\|x_n - x\| + \frac{\epsilon}{2}\\
+        &< \epsilon
+    \end{align*}
+\end{solution}
+
+
+
+
+\newpage
+\section*{Problem 18}
+\begin{problem}
+
+
+\[
+\text{ Let } E \text{ and } F \text{ be two Banach spaces and let } a : E \times F \rightarrow \mathbb{R} \text{ be a bilinear form satisfying:}
+\]
+
+
+
+
+\[
+\begin{aligned}
+(i) & \text{ for each fixed } x \in E, \text{ the map } y \mapsto a(x, y) \text{ is continuous;} \\
+(ii) & \text{ for each fixed } y \in F, \text{ the map } x \mapsto a(x, y) \text{ is continuous.}
+\end{aligned}
+\]
+
+
+
+
+\[
+\text{Prove that there exists a constant } C \geq 0 \text{ such that}
+\]
+
+
+
+
+\[
+|a(x, y)| \leq C \|x\| \|y\| \quad \forall x \in E, \quad \forall y \in F.
+\]
+
+
+   
+\end{problem}
+
+\begin{solution}
+    We introduce new notation (because the author believes $a$ is stupid) and let $T(x,y)$ be the bilinear map denoted by $a$ in the problem. It suffices to show that 
+    \[\sup_{\substack{\|x\|\leq 1\\\|y\|\leq 1}}|T(x,y)| = \|T\| < \infty,\] since this shows that $T$ is bounded in both arguments. Fix $x\in E.$ We have that $\langle T, (x,y) \rangle  = T_x(y)$ is continuous, that is:
+    \[\sup_{\|y\|\leq 1} |T_x| < \infty.\] We will show that if $\overline{B_E}$ is the closed unit ball in $E,$ then $y \mapsto T(\overline{B_E}, y)$ is bounded. Obviously, $T(\overline{B_E}, y)\subset F^*.$ By corollary 2.5, it suffices to show that for every $y\in F,$ the set 
+    \[T_y(B_E)\] is bounded, which comes from the fact that for fixed $y,$ $T$ is continuous, and thus 
+    \[|T_y(B_E)|< \infty,\] and so by the corollary $|T(B_E, y)|< \infty.$ In particular, we have that for all $\|y\|\leq 1,$ $|T(B_E, B_F)|< \infty,$ which is equivalent to saying that 
+    \[\|T\| < \infty.\]
+\end{solution}
+
+\newpage
+\section*{Problem 19}
+
+\begin{problem}
+
+{ Let } $\alpha = (\alpha_n)$ { be a given sequence of real numbers and let } $1 \leq p \leq \infty.$ { Assume that } $\sum |\alpha_n||x_n| < \infty$ { for every element } $x = (x_n)$ { in } $\ell^p$ { (the space } $\ell^p$ { is defined in Section 11.3).}
+
+{Prove that } $\alpha \in \ell^{p'}.$
+\end{problem}
+\begin{solution}
+    Define 
+    \[\langle \alpha_n x \rangle = \sum_{i=1}^n |\alpha_i| |x_i|.\] We see that by assumption, each $\alpha_n$ is a bounded linear map and that 
+    \[\langle \alpha_n, x\rangle \to \langle \alpha, x\rangle = \sum_{i=1}^\infty|a_i||x_i| < \infty.\] and so $\alpha \in \mathcal{L}(\ell^p, \bbR).$ It remains to show that $\alpha \in \ell^{p'},$ that is, there exists some $C$ such that
+    \[\|\alpha\|_{\ell^{p'}}  = \left(\sum_{n=1}^\infty |\alpha_n|^{p'}\right)^\frac{1}{p'} \leq C.\] By the uniform boundedness principle, there exists some $c$ such that since
+    \[\|\alpha_n x\|_\bbR = |\alpha_n x|  = \sum_{i=1}^n |\alpha_i||x_i|\leq c \|x\|_{\ell^p} = c\left(\sum_{i=1}^\infty |x_i|^p\right)^\frac{1}{p},\] for all $n,$ then 
+    \[\sum_{i=1}^\infty |\alpha_i||x_i| \leq c \|x\|_{\ell^p},\] and so $\alpha$ is a bounded linear map.   
+
+    Choose $x$ such that $x_i = \frac{|\alpha_i|^{p'}}{|a_i|}.$ Thus, we find that 
+    \[\sum_{i=1}^\infty |\alpha_i||x_i| = \sum_{i=1}^\infty |\alpha_i||\frac{|\alpha_i|^{p'}}{|a_i|}| = \sum_{i=1}^\infty |\alpha_i|^{p'} < \infty,\] and thus $\alpha \in \ell^{p'}$ 
+
+\end{solution}
+
+\newpage
+\section*{Problem 20}
+\begin{problem}
+{ Let } $E$ \text{ and } $F$ { be two Banach spaces and let } $T \in \mathcal{L}(E, F)$ { be surjective.}
+
+1. Let \( M \) be any subset of \( E \). Prove that \( T(M) \) is closed in \( F \) if and only if \( M + N(T) \) is closed in \( E \).
+\begin{solution}
+    Suppose $T(M)$ is closed in $F.$ Let $(x_n)\in M+ N(T),$ such that $x_n \to x.$
+    
+    then $x_n = m_n + n_n$ \footnote{I would be sorry about notation but then I remember how I am not sorry about notation} Thus, we have that $T(x_n) = T(m_n + T(n_n)) = T(m_n).$ Since $T(M)$ is closed we have that the graph of $T$ is closed and so $(x_n, T(x_n)) \to (x, y).$ Thus $T(x_n) \to y$ and $y \in T(M)$ and thus $Tx = y.$ In other words, we have that $M + N(T) = T^{-1}(T(M))$ is closed since by the closed graph theorem, $T$ is continuous.
+
+    Suppose $M+ N(T)$ is closed. Then we have that $E \setminus (M + N(T))$ is open. Thus, we have by the open mapping theorem that \[T(E \setminus (M + N(T))) = T(E)\setminus T(M + N(T)) = F \setminus (T(M) + T(N(T)))= F \setminus T(M)\] is open, and thus $T(M)$ is closed.
+\end{solution}
+
+2. Deduce that if \( M \) is a closed vector space in \( E \) and \( \dim N(T) < \infty \), then \( T(M) \) is closed.
+\begin{solution}
+    It suffices to show that $M + N(T)$ is closed.  Take a sequence $(x_n)\in M + N(T)$ such that $x_n = m_n + \eta_n$ where $(m_n)\in M$ and $(\eta_n)\in N(T)$ and $(x_n) \to x.$ We want to show $m_n \to m \in M$, and that $\eta_n \to \eta \in N(T).$ 
+    
+    
+    Suppose $M \cap N(T) = \{0\}.$ Define $\eta_n' = \frac{\eta_n}{\|\eta_n\|}.$ Then $\eta' = (\eta_n')$ is in the closed unit ball in $N(T)$ since $\|\eta'\| = 1,$ and so it has a convergent subsequence $ \eta_{n_k}'\to \eta' \in N(T)$ since $N(T)$ is finite dimensional\footnote{The closed unit ball is compact if and only if the space is finite dimensional is a big theorem from last year}. 
+    Suppose $\|\eta_{n_k}\|\to \infty,$ then 
+    \[m_{n_k}' = x_{n_k}' - \eta_{n_k}' \to -\eta'.\] Since $M$ is closed, we have that $-\eta' \in M,$ and so $\eta' \in M,$ and thus we must have that $\eta' = 0,$ which is a contradiction to the fact that $\|\eta_{n_k}\|\to \infty.$ Thus, by scaling, $\eta_{n_k} \to \eta \in N(T),$ and so 
+    \[m_{n_k} = x_{n_k} - \eta_{n_0} \to x-\eta \in M,\] and thus $x \in M + N(T).$ 
+
+    For the general case, let $\alpha$ be the basis of $M\cap N(T).$ Let $\beta$ be a basis of $N(T)$ such that $\alpha\setminus\{0\}\subset  \beta.$ We see that 
+    \[M + N(T) = M + N(T)\setminus\{\text{span}(\alpha)\}\] and that $M\cap N(T)\setminus\{\alpha\} = \{0\},$ and so $M + N(T)\setminus\{\text{span}(\alpha)\}$ is closed, and so $M + N(T)$ is closed.
+\end{solution}
+
+\end{problem}
+
+
+
+\newpage
+\section*{Problem 21}
+\begin{problem}
+    \textit{Let } $E$ \textit{ be a Banach space, } $F = \ell^1$, \textit{ and let } $T \in \mathcal{L}(E, F)$ \textit{ be surjective. Prove that there exists } $S \in \mathcal{L}(F, E)$ \textit{ such that } $T \circ S = I_F$, \textit{ i.e., } $S$ \textit{ has a right inverse of } $T$. 
+
+\textbf{[Hint:} Do not apply Theorem 2.12; try to define $S$ explicitly using the canonical basis of $\ell^1$.]
+
+\end{problem}
+\begin{solution}
+    $T$ is an open map by the open mapping theorem, and thus 
+    \[c B_0^{\ell^1}(1)\subset T(B_0^{E}(1)).\] Thus, if $(e_n) = (0,0,\dots, 1, 0, 0, \dots),$ where $1$ is in the $n$th spot is the canonical $\ell^1$ basis, then since $e_n \in B_0^{\ell^1}(1),$ then there exists some $v_n \in B_0^{E}(\frac{1}{c})$ such that $e_n = T(v_n).$ Define $S: \ell^1 \to E$ such that if $y = (y_1, y_2, \dots) \in \ell^1,$ then
+    \[S(y) = \sum_{n=1}^\infty v_ny_n.\] Then we have that 
+    \[T(S(y)) = T\sum_{n=1}^\infty v_n y_n = \sum_{n=1}^\infty T(v_n)y_n = \sum_{n=1}^\infty e_ny_n = y.\] We might need to justify the fact that linear transforms are linear under an infinite sum, but if we really wanted to, we would just define $S_n$ as a limit series up to $S$ and take limits then, which would be fine since $S_n$ is continuous. 
+\end{solution}
+
+\newpage
+\section*{Problem 22}
+\begin{problem}
+ \text{ Let } E \text{ be a Banach space. Let } G \text{ and } L \text{ be two closed subspaces of } E. \text{ Assume that there exists a constant } C \text{ such that}
+
+
+\[
+\text{dist}(x, G \cap L) \leq C \, \text{dist}(x, L), \quad \forall x \in G.
+\]
+
+
+\text{Prove that } G + L \text{ is closed.}
+
+\end{problem}
+\begin{solution}
+    (From answer key) Let $T: G\to E\setminus L$ such that $Tx = \pi x,$ where $\pi: E\to E/ L$ is the canonical surjection. Thus, we have that 
+    \[\text{dist}(x, \ker T) = \text{dist}(x, G\cap L) \leq C\text{dist}(x,L) = C \|Tx\|.\] Thus, we have that $\pi(G)$ is closed, and so 
+    \[\pi^{-1}(\pi(G)) = G\cap L\] is closed.
+\end{solution}
+
+
+\newpage
+\section*{Problem 23}
+\begin{problem}
+    Let \( E = C([0,1]) \) with its usual norm. Consider the operator \( A : D(A) \subset E \to E \) defined by
+\[
+D(A) = C^1([0,1]) \quad \text{and} \quad (Au)(t) = u'(t).
+\]
+\begin{enumerate}
+    \item Check that \( \overline{D(A)} \neq E \).
+    \begin{solution}
+        Obviously, we have that $D(A)\subset E,$ and thus 
+        \[\overline{D(A)}\subset \overline{E}.\] Under the $\sup$ norm, we know that $C^1([]0,1])$ is closed. Thus, we have that 
+        \[\overline{D(A)}\subset E.\] Let $f\in E.$ By the Stone-Weirstrass theorem, for all $n,$ there exists a polynomial $P_n \in C^1([0,1])$ such that 
+        \[\|P_n - f\| \leq \frac{1}{n},\] and so $P_n \to f,$ and thus $f \in LP(D(A)),$ and so $f\in \overline{D(A)}.$ Thus, we have that 
+        \[E \subset \overline{D(A)}.\] 
+    \end{solution}
+    \item Is \( A \) closed?
+    \begin{solution}
+        Ee know that a linear operator $T$ is closed if and only if its graph is closed. Thus, consider if $f_n \to f$ with $(f_n, f_n') \to (f, g).$ We have that
+    \[f_n = \int f_n' \to f = \int g \implies f' = g,\] and so $g = Af.$ To see that $f\in D(A),$ we see that $g$ must be continuous since it is the uniform limit of continuous functions, and thus $f'$ is continuous (and evidently $f$ is differentiable).
+    \end{solution}
+    \item Consider the operator \( B : D(B) \subset E \to E \) defined by
+    \[
+    D(B) = C^2([0,1]) \quad \text{and} \quad (Bu)(t) = u'(t).
+    \]
+    Is \( B \) closed?
+    \begin{solution}
+        No, it is not. Let $(f_n)\in C^2([0,1])$ be a sequence of functions converging to $f(x) = x|x|.$ Then $f_n' \to g,$ where $g = |x| = f'.$ However, $f$ is obviously not in $C^2,$ and so we are done.
+    \end{solution}
+\end{enumerate}
+\end{problem}
+
+\newpage
+\section*{Problem 24}
+\begin{problem}
+    Let \( E \) and \( F \) be two Banach spaces. Let \( T \in \mathcal{L}(E, F) \) and let \( A : D(A) \subset E \to F \) be an unbounded operator that is densely defined and closed. Consider the operator \( B : D(B) \subset E \to F \) defined by  
+\[
+D(B) = D(A), \quad B = A + T.
+\]
+
+\begin{enumerate}
+    \item Prove that \( B \) is closed.
+\begin{solution}
+Let $(x_n) \in D(B)$ such that $x_n \to x$ and $B(x_n) \to y.$ First, we know that 
+\[B(x_n) = (A + T)(x_n) = A(x_n)+ T(x_n).\] Since $(x_n) \in D(B)$ and $D(A)= D(B),$ then $(x_n)\in D(A),$ and so  $A$ being closed implies that 1) $x\in D(A) = D(B)$ and that $A(x_n) \to A(x).$ Since $T$ is continuous, we have that $T(x_n) \to T(x).$ Thus, 
+\[B(x_n) \to A(x) + T(x) = Bx,\] and so we have proved that $y = Bx$ and that $x\in D(B).$
+\end{solution}
+
+    \item Prove that \( D(B^\star) = D(A^\star) \) and \( B^\star = A^\star + T^\star \).\begin{solution}
+    
+Let $c_A, c_B>0.$
+By definition, we have that 
+\[D(A^*) = \{f\in F^* \; |\langle f, Ax \rangle| \leq c_A\|x\| \quad \forall x\in D(A)\}\]
+\[D(B^*) = \{f\in F^* \; |\langle f, Bx \rangle| \leq c_B\|x\| \quad \forall x\in D(B)\}\]
+Let $f\in D(A^*),$ then for all $x\in D(A) = D(B),$ we have that 
+\[|\langle f, Bx \rangle|  = |\langle f, (A + T)x \rangle| = |\langle f, Ax + Tx \rangle| \leq |\langle f, Ax \rangle| + |\langle f, Tx \rangle |, \qquad \forall \; x\ni D(B) = D(A)\] The first term is bounded by $c_A\|x\|.$ As for the second, we know that $T$ is a bounded linear operator and that $f \in F^*,$, and thus there is some $c_T, c_f >0$ such that for all $x\in E,$ 
+\[\|\langle f, Tx\rangle\| \leq \|f\|\|Tx\| \leq \|f\|c_T\|x\| \leq c_Fc_T\|x\|.\] Thus, we have that $f\in D(B^*).$ 
+
+Let $f\in D(B^*).$ Then there exists some $c_B$ such that for all  
+\[|\langle f ,  Bx\rangle| \leq c_B \|x\|.\] Thus, we have that 
+\[|\langle f ,  Bx\rangle| = |\langle f ,  Ax\rangle| + |\langle f, Tx\rangle| \leq c_B \|x\|.\] In particular, we have that 
+\[\|\langle f, Ax\rangle \| \leq c_B\|x\|, \qquad \forall \; x \in D(A) = D(B).\] and so $f\in D(A^*).$
+
+Thus, we have that $D(A^*) = D(B^*).$ To show that $B^* = A^* + T^*,$ then since for all $x\in D(B),$ $f\in D(B^*)$
+\[\langle f, Bx\rangle = \langle B^*f, x\rangle,\] then by the previous parts, it will suffice to show that 
+\[\langle f, Bx\rangle = \langle (A^* + T^*)f, x\rangle.\] We use bilinearity and the definition of the adjoints:
+\[\langle (A^* + T^*)f, x\rangle = \langle A^*f +T^*f, x\rangle = \langle A^*f, x\rangle + \langle T^*f, x\rangle = \langle f, Ax\rangle + \langle f, Tx \rangle = \langle f, (A + T)x\rangle = \langle f, Bx\rangle.\] If you have any issues with the forall $x\in D(A)$ or $x\in E$ definition of the adjoint, consider that $D(A) = D(B)\subset E$ and $D(A^*)= D(B^*)\subset F^*.$   
+\end{solution}
+\end{enumerate}
+\end{problem}
+
+\newpage
+\section*{Problem 25}
+\begin{problem}
+    The purpose of this exercise is to construct an unbounded operator \( A : D(A) \subset E \to E \) that is densely defined, closed, and such that \( \overline{D(A^\star)} \neq E^\star \).
+
+Let \( E = \ell^1 \), so that \( E^\star = \ell^\infty \). Consider the operator \( A : D(A) \subset E \to E \) defined by
+
+
+\[
+D(A) = \left\{ u = (u_n) \in \ell^1; \ (nu_n) \in \ell^1 \right\} \text{ and } Au = (nu_n).
+\]
+
+
+
+1. Check that \( A \) is densely defined and closed.
+\begin{solution}
+    Let $x = (x_n)\in \ell^1$ and $\epsilon>0.$ Since $x\in \ell^1,$ we have that 
+    \[\sum_{n=1}^\infty x_n < \infty \implies \sum_{n = N_\epsilon}^\infty x_n < \epsilon\] for some $N_\epsilon.$ Take 
+    \[u = (u_n) = \begin{cases}
+        x_n, \quad n \leq N\\
+        0, \quad n > N
+    \end{cases}.\] Evidently, we have that $u \in \ell^1$ and $(nu_n)\in \ell^1.$ Moreover, we have that 
+    \[\sum_{n=1}^\infty |u_n - x_n| = \sum_{N+1}^\infty |x_n|< \epsilon,\] and so we have that for any $B_\epsilon(x),$ there is some $u \in D(A)$ such that $u \in B_\epsilon(x),$ implying that $\overline{D(A)} = \ell^1.$
+
+    Let $(x_n) \to x$ with $(x_n)\in D(A)$ and suppose $A(x_n) \to y.$ We want to show that $y = A(x),$ where $x\in D(A).$ For the latter, fix $\epsilon = 1.$ Then we have that there exists some $N$ such that $\|x_n - x\|< 1,$ and so since $x_N \in \ell^1:$
+    \[\|x\| \leq \|x - x_N\| + \|x_N\|| < 1 + \|x_N\| < \infty.\] Thus, $x\in \ell^1.$ To show that $(nx_n)\in \ell^1,$ we let $(kx_n^{(k)})  = x_n'$ and $(kx^{(k)}) = x'.$ We have that $x_n' \in \ell'$ by assumption, and 
+    \[\|x'\|_1 \leq \|x' - x_n'\| + \|x_n'|\|,\] so it remains to bound the first term. For all $\epsilon>0,$ there exists some $k>0$ so that $\frac{1}{k2^k}< \epsilon.$ Thus, for $n$ large enough, we have that that for all $k,$ \[|x_n^{(k)} - x^{(k)}| \leq \|x_n - x\|< \frac{1}{k2^k}\] and thus 
+    \[\|x_n' - x'\| = \sum_{k=1}^\infty |kx_n^{(k)} - kx^{k}| = 1,\] and so we are done, since this also shows that $(nx_n) = y.$
+\end{solution}
+2. Determine \( D(A^\star) \), \( A^\star \), and \( \overline{D(A^\star)} \).
+\end{problem}
+\begin{solution}
+
+    We have that 
+    \begin{align*}
+        D(A^*) = \{x \in \ell^\infty \; ; \; \langle x, Au\rangle \leq c\|u\|, \quad \forall \; u\in \ell^1\} &= \{x \in \ell^\infty \; ; \; \langle x, (nu_n)\rangle \leq c\|u\|, \quad \forall \; u\in \ell^1\}\\ &= \{x\in \ell^\infty \; ; \; (nx_n)\in \ell^\infty\}
+    \end{align*}
+    Using the fact that if $x\in \ell^\infty$ and $u\in \ell^1,$ then 
+    \begin{align}
+\langle x, Au\rangle = \langle x, (nu_n) \rangle  = \sum_{n=1}^\infty nx_nu_n = \langle A^* x, u\rangle.
+    \end{align}
+ 
+    And clearly, we define $A^*: D(A^*) \subset \ell^\infty \to \ell^\infty$ such that if $x\in \ell^\infty,$ then 
+    \[A^*(x) =  (nx_n),\] which satisfies  (3). 
+Since for $x\in D(A^*)$ we need that \[\limsup_{n\to \infty} (nx_n) < \infty,\] then we must have that $x_n \to 0.$ Thus, we claim that $c_0 = \overline{D(A^*)}.$ One inclusion is clear as previously stated. Let $y\in c_0.$ Then we have that $y_n \to 0$ as $n\to \infty.$ We claim that there exists some sequence $(x_n)\in D(A^*)$ such that $x_n \to y.$ To see this, just let 
+\[x_1 = (0, y_2 , y_3, \dots),\] which is evidently in $\ell^\infty$ and so is $(nx_n).$ Then we have that 
+\[\|x_n - y\| = \sup_{n}|y_n - x_n| = y_n \to 0.\]
+\end{solution}
+
+\newpage
+\section*{Problem 27}
+\begin{problem}
+    Let \( E = \ell^1 \), so that \( E^\star = \ell^\infty \). Consider the operator \( T \in \mathcal{L}(E, E) \) defined by
+
+
+
+\[ Tu = \left( \frac{1}{n} u_n \right)_{n \geq 1} \text{ for every } u = (u_n)_{n \geq 1} \text{ in } \ell^1. \]
+
+
+
+Determine \( N(T) \), \( N(T)^\perp \), \( T^\star \), \( R(T^\star) \), and \( \overline{R(T^\star)} \). Compare with Corollary 2.18.
+\end{problem}
+\begin{solution}
+Obviously, 
+\[N(T) = \{0\},\] since the only map to zero is the zero vector. We have that 
+\[N(T)^\perp = \{x \in \ell^\infty \; ; \;  \langle y, x\rangle = 0, \quad \forall \; y \in N(T)\}.\] Since $\{0\} = N(T),$ we have that for any $x\in \ell^\infty,$ 
+\[\langle 0, x\rangle = 0 \implies N(T)^\perp = \ell^\infty.\]
+Let $y\in D(T^*),$ (evidently, we have that 
+\[D(T^*) = \{y \in \ell^\infty \;  ; \; (\frac{1}{n}y_n)\in \ell^1\}\]), then 
+\begin{align*}
+    \langle y, Tx \rangle &=  \langle y, (\frac{1}{n}x_n)\rangle\\
+    &= \sum_{n=1}^\infty |y_n||\frac{1}{n}x_n|\\
+    &= \sum_{n=1}^\infty |\frac{1}{n}y_n||x_n|\\
+    &= \langle (\frac{1}{n}y_n), x\rangle\\
+    &= \langle T^*y, x\rangle,
+\end{align*}
+an so $T^*: D(T^*)\subset \ell^\infty \to \ell^\infty$ is defined by 
+\[T^*(y)= (\frac{1}{n}y_n).\] This is also the range, $R(T^*),$ all the sequences that can be expressed as $\frac{1}{n}y_n.$ 
+
+It is clear that $\overline{R(T^*)} = c_0$ from similar work as in the previous problem. 
+\end{solution}
+\end{document}
+
+

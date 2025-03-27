@@ -1,0 +1,243 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{208}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 1}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{\today}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+
+
+\newpage
+
+\section*{Problem 2}
+\begin{problem}
+    Let $x \in \mathbb{R}^n$, and $A \subseteq \mathbb{R}^n$. Prove that
+\[
+\mathbf{m}^*(x + A) = \mathbf{m}^*(A),
+\]
+where $x + A = \{x + y \mid y \in A\}$. Prove that, if $A \in \mathcal{M}(\mathbf{m})$, then $x + A \in \mathcal{M}(\mathbf{m})$.
+\end{problem}
+\begin{solution}
+    \begin{lemma}
+    Let $X$ be a metric space and $A \subset X$ be open. Let $x\in X.$ Then $x + A$ is open.
+    \end{lemma}
+    \begin{proof}
+        Let $z \in x + A.$ Then $z = x + a$ for some $a \in A.$ Since $a \in A$ and $A$ is open, there exists some $r>0$ such that $B_r(a)\subset A.$ We claim that $x + B_r(a) \subset x + A.$ Indeed, since $x + B_r(a) = B_r(a + x) = B_r(z),$ then it suffices to show that $x + B_r(a) \subset x + A.$ Let $z' \in x + B_r(a),$ then $z' = x + a'$ for some $a' \in B_r(a) \subset A,$ and so $z' \in x + A.$ Thus, we have found some $r>0$ such that $B_r(z)\subset x + A,$ and thus $x + A$ is open.
+    \end{proof}
+    \begin{lemma}
+        Let $\{A_n\}_{n =1}^\infty$ be a countable open cover of $A \subset X,$ where $X$ is a topological space. If $x \in X,$ then $\{x + A_n\}$ is a countable open cover of $x + A.$
+    \end{lemma}
+    \begin{proof}
+        Let $z \in x + A.$ Then $z = x + a$ for some $a\in A$ and thus there exists some $k \in \bbN$ such that $A_k \in \{A_n\}$ and $a \in A_k.$ Thus, $z\in x + A_k.$ By Lemma 1, we know that $x + A_k$ is open, and thus $\{x + A_n\}_{n =1}^\infty$ is a countable open cover of $x + A.$
+    \end{proof}
+    \begin{lemma}
+     Suppose $E \in \cal E,$ and $E \subset \bbR^n.$ Then for any $x\in \bbR^n,$ $x + E \in \cal E.$
+    \end{lemma}
+    \begin{proof}
+        It suffices to show that $x + E$ is the union of finite intervals. Since $E \in \cal E,$ then $E = \bigcup_{k=1}^n I_k.$ Thus, we claim that
+        \[x + E = x + \bigcup_{k=1}^N I_k = \bigcup_{k=1}^N(x + I_k).\] The only equality that needs explaining is the second one. To see it, let $z \in x + \bigcup_{k=1}^N I_k,$ then there exists some $j \in [N]$ and some $x_j \in I_j$ such that $z = x + x_j.$ Thus, $z \in x + I_j,$ and so $x \in \bigcup_{k=1}^N (x + I_k).$ For the other inclusion, let $z\in \bigcup_{k=1}^N (x + I_k),$ then there exists some $j \in [N]$ such that $z\in x + I_j.$ Thus, $z = x + x_j$ for some $x_j \in I_j.$ Since $x_j \in \bigcup I_k,$ then $z \in x + \bigcup I_k.$
+        
+        We claim that $x + I_k$ is an interval for any $k \in [n].$ It should be obvious that if $I_k$ is the interval made of points $\textbf{x} = (x_1, \dots, x_n) \in \bbR^n$ such that $a_i \leq x_i \leq b_i$ (where the $\leq$ can be replaced with $<$), then $x + I_k$ is the set of points $\textbf{x}' = (x_1', \dots, x_n')$ such that $a_i  + x \leq x_i' \leq b_i + x,$ and thus $x + I_k$ is an interval. 
+    \end{proof}
+    
+    \begin{lemma}
+        Suppose $E \in \cal E,$ and $E \subset \bbR^n.$ Then for any $x\in \bbR^n,$ we have that $\Vol(E) = \Vol(x + E).$ 
+    \end{lemma}
+    \begin{proof}
+        First, we know that $\Vol(x + E)$ is well defined since by Lemma 3, $x + E \in \cal E.$ By work in class, we know that we can decompose $E$ into $E = \bigsqcup_{k=1}^N I_k,$ where each the $I_k$ are disjoint intervals. By work done in the Lemma 3, we know that $x + E = \bigsqcup_{k=1}^N (x + I_k),$ where again, $(x + I_k)$ are disjoint nonempty intervals made of points such that $\textbf{x} \in (x + I_k)$ if and only if 
+        \[a_i  + x \leq x_i \leq b_i + x,\] where $(a_i, b_i)$ are the endpoints of the edges of each $I_i.$ Thus, we have that 
+        \begin{align*}
+            \Vol(E) &= \Vol(\bigsqcup_{k=1}^N I_k)\\
+            &= \sum_{k=1}^N \Vol(I_k)\\
+            &= \sum_{k=1}^N \prod_{i=1}^n(b_i^k - a_i^k)\\
+            &= \sum_{k=1}^N \prod_{i=1}^n(b_i^k - a_i^k + x - x)\\
+            &= \sum_{k=1}^N \prod_{i=1}^n((b_i^k + x) - (a_i^k + x))\\
+            &= \sum_{k=1}^N (x + I_k)\\
+            &= \Vol(x + E)
+        \end{align*}
+    \end{proof}
+Finally, we are ready to prove the statement. Let $\epsilon>0.$ Let $\{A_n\}_{n=1}^\infty$ be a countable open cover of $A$ such that each $A_n \in \cal E$ and 
+\[\sum_{n=1}^\infty \Vol(A_n) \leq m^*(A) + \epsilon.\] By Lemma 4, we have that 
+\[\sum_{n=1}^\infty \Vol(A_n) = \sum_{n=1}^\infty\Vol(x + A_n).\] By Lemma 2, we know that $\{x + A_n\}_{n=1}^\infty$ is a countably open cover of $x + A.$ By Lemma 3, $x + A_n \in \cal E$ for all $n.$ Thus, 
+\[m^*(x + A) \leq\sum_{n=1}^\infty\Vol(x + A_n) =\sum_{n=1}^\infty \Vol(A_n) \leq m^*(A) + \epsilon,\] and so because this holds for any $\epsilon>0,$ we have that.
+\begin{align}
+    m^*(x + A) \leq m^*(A)
+\end{align}
+
+Let $\{x + A_n\}_{n=1}^\infty$ be a countable open cover of $x + A$ such that each $x + A_n \in \cal E$ and 
+\[\sum_{n=1}^\infty \Vol(x + A_n) \leq m^*(x + A) + \epsilon\]
+We can apply all our lemmas to $A_n$ since $A_n = (-x) + x + A_n.$ Thus, $\{A_n\}_{n=1}^\infty$ is a countable cover of $A$ with $A_n \in \cal E$ for all $n.$  Thus, 
+\[m^*(A) \leq \sum_{n=1}^\infty \Vol(A_n) \leq \sum_{n=1}^\infty \Vol(x + A_n) \leq m^*(x + A) + \epsilon.\] Because this holds for all $\epsilon>0,$ we have that 
+\begin{align}
+    m^*(A) \leq m^*(x + a)
+\end{align}
+Putting together (1) and (2), we see that $m^*(A) = m^*(x + A).$
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Consider the real line in $\mathbb{R}^2$, 
+\[
+X = \{(x,0) \mid x \in \mathbb{R}\}.
+\]
+What is $m^*(X)$ (where $m^*$ is the Lebesgue outer measure defined on $\mathbb{R}^2$)? Show that $X \in \mathcal{M}(m)$.
+\end{problem}
+\begin{solution}
+Define 
+\[X_n := \{(x,0) \mid x \in (-n, n)\}\]
+Evidently, $X = \bigcup_{n=1}^\infty X_n.$ Thus, we know by Theorem 11.8 in Rudin that
+\begin{align}
+m^*(X) \leq \sum_{n=1}^\infty m^*(X_n)    
+\end{align}
+Let $\epsilon>0.$ For each $n,$ define 
+\[E_\epsilon^n = \{(x,y) \in \bbR^2 \mid x \in (-n, n), y \in (-\frac{\epsilon}{2^n \cdot 4n}, \frac{\epsilon}{2^n \cdot 4n})\}.\] Clearly, we know that 
+\begin{enumerate}
+    \item $X_n \subset E_\epsilon^n$ for any $n,$ for any $\epsilon>0.$ Thus, $E_\epsilon^n$ is an open cover of $X_n,$ and so 
+    \begin{align}
+        m^*(X_n) \leq \Vol(E_\epsilon^n), \qquad \forall \;n \in \bbN
+    \end{align}
+    \item $E_\epsilon^n$ is an interval, and thus 
+    \begin{align}\Vol(E_\epsilon^n) = (2n)(\frac{\epsilon}{2^n \cdot 2n}) = \frac{\epsilon}{2^n}    
+    \end{align}
+By (3), (4), and (5):
+\[m^*(X) \leq \sum_{n=1}^\infty m^*(X_n)\leq \sum_{n=1}^\infty \Vol(E_\epsilon^n) \leq \sum_{n=1}^\infty \frac{\epsilon}{2^n} = \epsilon.\] Because this holds for all $\epsilon>0$, $m^*(X) = 0.$
+\end{enumerate}
+\end{solution}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Let $A, B \subseteq \mathbb{R}^n$, and suppose that
+\[
+d := \inf_{x \in A, y \in B} |x - y| > 0.
+\]
+Prove that
+\[
+m^*(A \cup B) = m^*(A) + m^*(B).
+\]
+\end{problem}
+\begin{solution}
+    From Theorem 11.8 in Rudin, we have that 
+    \[m^*(A \cup B) \leq m^*(A) + m^*(B),\] so it suffices to show the other inequality.
+
+    Let $\epsilon>0.$ There exists $\{X_n\}_{n=1}^\infty$ countable open cover of $A\cup B$ such that
+    \[\sum_{n=1}^\infty \Vol(X_n) \leq m^*(A \cup B) + \epsilon.\] Si
+\end{solution}
+\end{document}
