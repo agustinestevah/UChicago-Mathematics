@@ -49,7 +49,7 @@ He is British, I am fucked.
 \end{defn}
 We call $S$ our \textit{state space}. In discrete time, it should be obvious that $T = \bbN_0^*$ (scale the naturals by a constant) and $T = [0, \bbR)$ in continuous time. We say that $S$ is a discrete space if it is countable and continuous if it is $\bbR^d.$
 \begin{rem}
-    In order to characterize the distribution of $\{X_n\},$ we must specify $\mathbb{P}\{X_0 = S_0, \dots, X_n = S_n\}$ for all $n \in \bbN$ and for all $S_0, \dots, S_n \in S.$ It is much easier work with conditional probability. We will see that with Markov Chains, the Strong Markov Property guarantees that we only need to worry about the distribution of $X_{n-1}$ to figure out $X_n.$
+    In order to characterize the distribution of $\{X_n\},$ we must specify $\mathbb{P}\{X_0 = S_0, \dots, X_n = S_n\}$ for all $n \in \bbN$ and for all $S_0, \dots, S_n \in S.$ It is much easier work with conditional probability. We will see that with Markov Chains, the Markov Property guarantees that we only need to worry about the distribution of $X_{n-1}$ to figure out $X_n.$
 \end{rem}
 \begin{defn}
     If $E,F$ are events with $\mathbb{P}\{F\} >0,$ then the \textbf{conditional probability} of $E$ given $F$ is 
@@ -166,5 +166,70 @@ For the following, we consider a Markov chain $\{X_n\}$ with state space $S.$
 \begin{prop}
     Suppose $S$ is finite. If $C$ is a transient communication class, then w.p. 1, $X$ eventually leaves $C$ and never returns.
 \end{prop}
+
+\newpage
+\subsection{Friday, Mar 28: The Strong Markov Property}
+
+\begin{defn}
+    A random time $\tau \in \bbN_0 \cup \{\infty\}$ is called a \textbf{stopping time} if, for all $n \in \bbN,$ the event $\{\tau = n\}$ is determined by $X_0, X_1, \dots, X_n.$ 
+\end{defn}
+\begin{exmp}
+\begin{enumerate}
+    \item (The Hitting Time) \[\tau = \min\{n \mid X_n = x\}, \quad x\in S.\]
+    In the Gambler's ruin model, where the gambler starts with $k-$dollars and gambles all the way to $N$ or $0$ dollars, the hitting time is the first the the gambler reaches $\$1$.
+    \item $\tau = k^\text{th}$ time for which $X_n \in A,$ $k\in \bbN,$ $A \subset S.$
+    \item $\tau = \min\{\tau_1, \tau_2\},$ where $\tau_1$ and $\tau_2$ are stopping times. 
+    \item Let $N \in \bbN,$ $x\in S,$ $\tau$ be the last time $n \leq N$ for which $X_n = x,$ and $\tau  = 0$ if no such time exists. $\tau$ is NOT a stopping time because it  depends on stuff in the future.
+\end{enumerate}
+\end{exmp}
+
+\begin{thm}
+    (Strong Markov Property) Let $\tau$ be a stopping time for $\{X_n\}.$ Let $n \geq 0,$ $m\geq 1,$ $x_n \dots, x_n \in S$ such that 
+    \[\bbP\{X_0 = x_0, \dots, X_\tau = X_n\} >0,\] and 
+    let $y_1, \dots, y_m \in S.$ Then 
+    \[\bbP\{X_{\tau + 1} = y, \dots, X_{\tau + m} = y_m\mid X_0 = x_0, \dots, X-\tau = x_n\} =\bbP\{X_{\tau + 1} = y, \dots, X_{\tau + m} = y_m\mid X_0 = x_n\}\]
+\end{thm}
+\begin{proof}
+    The event $\{X_0 = x_0, \dots, X_\tau = x_n\}$ is the same as the event $\{X_0 = x_0, \dots, X_n = x_n\}$ and $\{\tau = n\}.$ Since $\tau$ is a stopping time determined where the event $\{\tau = n\}$ by $\{X_0, \dots, X_n\}.$ Thus, we get that the events $\{X_0 = x_0, \dots, X_\tau = x_n\} = \{X_0 = x_0, \dots, X_n = n\}\cap \{\tau = n\},$ then 
+    \begin{align*}
+        \bbP\{X_{\tau + 1} = y_1, \dots, X_{\tau  + m} = y_m \mid X_0 = x_0, \dots, X_\tau = x_n\} &= \bbP\{X_{n + 1} = y_1, \dots, X_{n  + m} = y_m \mid X_0 = x_0, \dots, X_n = x_n\}\\
+        &= \bbP\{X_{n + 1} = y_1, \dots, X_{n  + m} = y_m \mid X_n = x_n\}
+    \end{align*} and conclude with the regular markov property and $n-$step invariance.
+\end{proof}
+
+\begin{exmp}
+    Let $x\in S$ with $S$ finite and let $\tau = \min\{n \geq 0 \mid X_n = x\}.$ Assume that $\bbP\{\tau < \infty\} = 1.$ For any $x_0, \dotss, x_n \in S$ such that 
+    $\bbP\{X_0 = x_0, \dots, X_\tau = x_n\} >0,$ we have $x_n = x,$ and so the conditional distribution of $\{X_{\tau + j}\}_{j \geq 0}$ given everything up to $\tau$ is the same as the original chain starting at $x.$ 
+
+    Thus, the Strong Markov property essentially guarantees that the Markov chain resets after hitting $\tau$!
+\end{exmp}
+    
+\begin{defn}
+    Let $X_n$ be a Markov chain on a countable state space $S.$ For any $x\in S,$ the \textbf{period} of $x$ is the greatest common divisor of $J_x = \{n \geq 1 \mid p^n(x,x) >0\}.$
+\end{defn}
+\begin{exmp}
+    If $p(x,x) >0,$ then $1 \in J_x,$ and so the period of $x$ is $1.$
+\end{exmp}
+
+\begin{thm}
+    If $x\leftrightarrow y,$ the periods of $x$ and $y,$ denoted by $d_x$ and $d_y$ respectively, are the same. 
+\end{thm}
+\begin{proof}
+    Choose $n, m$ such that $p^n(x,y) >0$ and $p^m(y,x) >0.$ Then $p^{n +m}(x,x) >0$ and $p^{m + n}(y,y) >0.$ Thus, $ n + m \in J_x \cap J_y.$ Assume that $d_x < d_y.$ Then there exists some $k \in K_x$ not divisible by $d_y.$ Then $n + m + k \in J_y,$ and so $d_y$ divides $n + m + k$ and $n + m,$ and so $d_y$ divides $k,$ which is a contradiction.    
+\end{proof}
+
+\begin{defn}
+    A Markov chain is aperiodic if every state has period $1.$
+\end{defn}
+
+\begin{exmp}
+    A knight on an $8\times 8$ chessboard selects one of the next legal moves with equal probability, independently of the past. 
+    \[S = \{(x,y) \in \bbR^2 \mid x \in \{1, \dots, 8\}, y \in \{1, \dots, 8\}\}.\]  The period is $2.$ 
+\end{exmp}
+
+
+
+
+
 
 \end{document}
