@@ -121,11 +121,108 @@
 	\psetheader
 
 \section*{Problem 1}
+\begin{problem}
+    Let $\mathcal{R}$ be the ring of all elementary subsets of $(0, 1]$. If $0 < a \leq b \leq 1$, define
+\[
+\phi([a, b]) = \phi([a, b)) = \phi((a, b]) = \phi((a, b)) = b - a,
+\]
+but define
+\[
+\phi((0, b)) = \phi((0, b]) = 1 + b
+\]
+if $0 < b \leq 1$. Show that this gives an additive set function $\phi$ on $\mathcal{R}$, which is not regular and which cannot be extended to a countably additive set function on a $\sigma$-ring.
+\end{problem}
+\begin{solution}
+    (Additive) Let $A, B \in \cal R$ disjoint. Suppose neither $A$ nor $B$ contain intervals of the form $(0,b]$ or $(0,b).$ Since both $A$ and $B$ are elementary, then we can write $A$ and $B$ as a disjoint union of finite intervals. That is \[A = \bigcup_{i=1}^\infty (a_i, b_i), \qquad B = \bigcup_{i=1}^\infty (c_i, d_i), \qquad \text{The parenthesis may be replaced by $[\cdot,\cdot], [\cdot,\cdot),$ or $(\cdot,\cdot]$}\] Since $A \cap B  = \emptyset,$ $(a_i, b_i) \cap (c_j, d_j) = \emptyset$ for all $i,j.$ Thus we can write 
+    \[A \cup B = \bigcup_{i=1}^\infty (e_i, d_i)\] where each interval is disjoint and moreover, 
+    \[\phi(A \cup B) =\phi\left( \bigcup_{i=1}^\infty (e_i, d_i)\right) = \sum_{n=1}^\infty \phi((e_i, d_i)) = \sum_{n=1}^\infty \phi(a_i, b_i) + \sum_{n=1}^\infty \phi(c_i, d_i) = \phi(A) + \phi(B)\]
+    Suppose $A$ contains an interval $(a_k,b_k)$ such that $a_k = 0.$ Then since $A$ and $B$ are disjoint, it is clear that $B$ cannot also contain some interval $(c_{k'}, d_{k'})$ such that $c_{k'} = 0,$ as then the sets would not be disjoint. But then the above formula still holds, noting that we can separate the infinite sum by singling out the $(a_k, b_k)$ interval and adding $1$ on both sides. 
 
+    (Not Regular) Suppose $\phi$ were regular. Let $A = (0, 1].$ Then $A \in \cal R$ and $\phi(A) = 1 + 1 = 2.$ Let $\epsilon = \frac{1}{2}$ Since $\phi$ is regular, there exists some closed $F \in \cal R$ such that $F \subset A$ and $\phi(A) \leq \phi(F) + \frac{1}{2}.$ However, since $F$ is closed and $F\subset A,$ then $F$ cannot contain an interval of the form $(0,b)$ or $(0,b],$ as otherwise, it would not be closed. So then $\phi(F) \leq \phi((\frac{1}{n}, 1]) = 1-\frac{1}{n}$ for any $n,$ and we arrive at a contradiction, since $\phi(F) + \frac{1}{2} < 1.5 < 2 = \phi(A).$  
+
+    (Not countably additive) Suppose that $\phi$ is countably additive, then consider that 
+    \[(0,1] = \bigcup_{n=1}^\infty (\frac{1}{2^n},\frac{1}{2^{n-1}}].\] We know that $\phi(0,1] = 2,$ but 
+    \[\phi\left(\bigcup_{n=1}^\infty \right) = \sum_{n=1}^\infty \phi\left((\frac{1}{2^n},\frac{1}{2^{n-1}}]\right) = \sum_{n=1}^\infty \frac{1}{2^n} = 1.\] Since $1\neq 2,$ we arrive at a contradiction and so $\phi$ is not countably additive on $\cal R.$
+\end{solution}
 
 \newpage
 
+\newpage
 \section*{Problem 2}
+\begin{problem}
+    \begin{enumerate}
+        \item If $A$ is open, then $A \in \mathcal{M}(m).$ If $B$ is closed, then $B \in \mathcal{M}(m).$
+        \begin{solution}
+            \begin{lemma}
+                Suppose $U\subset \bbR^d$ is open. Then it can be uniquely expressed as a countable union of disjoint open intervals, where the endpoints of the intervals don't belong to $U.$ 
+            \end{lemma} 
+            \begin{proof}
+            (We were shown this proof in Honors Analysis 1, so it might resemble the one found in Pugh's Real Analysis). 
+                Let $x\in U.$ Define then 
+                \[a_x = \inf\{a \mid (a,x) \subseteq U\}, \qquad b_x = \sup\{b \mid (x,b)\subseteq U\}, \qquad I_x = (a_x, b_x).\]  Suppose, for the sake of contradiction, that $b_x \in U.$ There exists some open $J_x \subseteq U$ such that $J \ni b_x$ (by the above construction), so then $A_x = J_x \cup I_x$ is an open interval containing $b_x$ and $x.$ Since $A_x$ is open, then $b_x \in B_r(b_x) \subseteq A_x,$ and thus there exists some $b' >b_x$ such that $b' \in A_x \subset U,$ and so $b_x \neq \sup\{b \mid (x,b) \subseteq U\}.$ Thus, neither $b_x$ nor $a_x$ are in $U.$ Let $y\in U.$ Either $I_x, I_y$ are disjoint, or by the above argument, since $I_x \cup I_y$ is an open interval containing $x,$ and $y,$ $I_x = I_y.$ Let $q_x \in I_x$ for each disjoint interval in $U,$ where $q_x \in \bbQ,$ then we can count the $I_x$ by the rationals within them. 
+
+                As a side note, it is valid for $a_x = -\infty$ and $b_x = \infty.$
+            \end{proof}
+            By the above lemma, $A = \bigcup_{k=1}^\infty I_k,$ where each $I_k$ is a disjoint open interval. 
+            We have shown in class that if $I_k \in \cal E,$ then $I_k \in \mathcal{M}(m).$ Since $\mathcal{M}(m)$ is a $\sigma-$algebra, then it is closed under countable unions, and thus $U \in \mathcal{M}(m).$ 
+
+            We know that since $B$ is closed, then $B^c$ is open, and thus $B^c \in \mathcal{M}(m).$ Since it is a $\sigma-$algebra closed under complements, then $(B^c)^c = B \in \mathcal{M}(m).$
+        \end{solution}
+        \item Let $\epsilon>0$ and suppose $E \in \mathcal{M}(m).$ Then there exist closed $F$ and open $G$ such that $F \subset E \subset G$ and
+        \[m(G\setminus E) < \epsilon, \qquad m(E \sm A)< \epsilon.\]
+    \begin{solution}
+        \begin{lemma}
+            Suppose $A, B$ are measurable, then $A \setminus B$ is measurable. 
+        \end{lemma}
+        \begin{proof}
+            It is easy to show that 
+            \[A \setminus B = A \cap B^c.\] Thus, since $B$ is measurable, then $B^c$ is measurable. Since $\mathcal{M}(m)$ is closed under finite (indeed countable ) intersections, and $A$ is measurable, then $A \cap B^c \in \mathcal{M}(m).$ 
+        \end{proof}
+    \begin{lemma}
+        Suppose $G$ and $A$ are measurable, then 
+        \[m(G) - m(A) = m(G\setminus A).\]
+    \end{lemma}
+    \begin{proof}
+        We have that $G\setminus A$ is measurable by lemma 1. We can write
+        \[G = (G\setminus A) \cup A.\] Since the decomposition is disjoint and $m$ is countably additive, then 
+        \[m(G) = m(G\setminus A) + m(A),\] and we are done.
+    \end{proof}
+        Since $E \in \mathcal{M}(m),$ then $m(E) = m^*(E).$ There exist $\{E_n\}$ countable open cover of elementary sets such that 
+        \[E \subset \bigcup_{n=1}^\infty E_n, \qquad \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon.\] Define $G = \bigcup E_n,$ then since $m^* = m$ on elementary sets and $m$ is countably additive and $G$ is an open set and thus measurable by part (a), we have that
+        \[m(G) = m(\bigcup_{n=1}^\infty E_n) = \sum_{n=1}^\infty m(E_n) = \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon = m(E) + \epsilon.\] By the previous lemma, we have that subtracting the $m(E)$ from the right hand side,
+        \[m(G \setminus A) = m(G) - m(A) < \epsilon.\]
+
+        Since $E \in \mathcal{M}(m),$ then $E^c \in \mathcal{M}(m),$ and thus by the above, there exists some open $G\supset E^c$ such that $m(G \setminus E^c) < \epsilon.$ Because $G^c$ is closed and clearly $G^c \subset E,$ it suffices to show that $m(E \setminus G^c) < \epsilon.$ Clearly, $E\setminus G^c = G\setminus E^c$ and so $m(E\sm G^c) = m(G \sm E^c) < \epsilon.$ Call $F = G^c$ and you are done.
+    \end{solution}
+    \item 
+    $\cal B$ are the Borel sets, where $\mathcal{B} = \sigma(\cal G),$ where $\cal G$ is the collection of open sets in $\bbR.$ Show that if $A \in \cal B,$ then $A\in \mathcal{M}(m).$
+    \begin{solution}
+        Suppose $A \in \cal B,$ then $A$ is made up of countable unions, intersection, and/or complements of open sets. But since open sets are measurable by part (a) and $\mathcal{M}(m)$ is closed under all of these operations, then $A \in \mathcal{M}(m).$ 
+    \end{solution}
+    \item  Suppose $E \in \mathcal{M}(m),$ then there exist $F,G \in \cal B$ such that $F \subset E \subset G.$
+    \[m(G\sm B) = m(B\sm F)\]
+    \begin{solution}
+        Let $E \in \mathcal{M}(m),$ let $n \in \bbN.$ By part (b), there exists an open $G_n\supset E$ such that \[m(G_n \sm E) < \frac{1}{n}.\] Since $G_n$ is open, then $G_n \in \cal B.$ Define $G: = \bigcap_{n=1}^\infty G_n.$ Since $\cal B$ is a $\sigma-$algebra, then $G \in \cal B.$ Moreover, we have that for any $n,$ since $G \in \mathcal{B} \subset \mathcal{M}(m)$
+        \[G \sm E \subseteq G_n \sm E \implies m(G \sm E) \leq m(G_n \sm E)< \frac{1}{n},\] and so $m(G \sm E) = 0.$ 
+
+        We have that $E^c \in \mathcal{M}(m),$ and so there exists some $G\in \cal B$ containing $E^c$ such that $m(G\sm E^c) = 0.$ But then $G\sm E^c = E\sm G^c.$ $G^c \in \cal B,$ so call $F = G^c,$ and we get that $m(E \sm F) = 0.$
+    \end{solution}
+    \item Let $\mathcal{N}(m) = \{A \in \mathcal{M}(m) \mid m(A) = 0\}.$ Then $\mathcal{N}(m)$ is a $\sigma-$algebra.
+    \begin{solution}
+        Since $m(\emptyset) = 0,$ then $\emptyset \in \mathcal{N}(m).$
+
+        Suppose $A_1, \dots \in \mathcal{N}(m).$ Then since $m$ is countably additive, 
+        \[m(\bigcup_{n=1}^\infty A_n) = \sum_{n=1}^\infty m(A_n) = 0,\] and so $\bigcup_{n=1}^\infty A_n \in \mathcal{N}(m).$
+
+        Suppose $A \in \mathcal{N}(m),$ then $A^c = \bbR^d \setminus A$ 
+    \end{solution}
+    \end{enumerate}
+
+\end{problem}
+
+
+\newpage
+\section*{Problem 3}
 \begin{problem}
     Let $x \in \mathbb{R}^n$, and $A \subseteq \mathbb{R}^n$. Prove that
 \[
@@ -188,10 +285,26 @@ We can apply all our lemmas to $A_n$ since $A_n = (-x) + x + A_n.$ Thus, $\{A_n\
     m^*(A) \leq m^*(x + a)
 \end{align}
 Putting together (1) and (2), we see that $m^*(A) = m^*(x + A).$
+
+\begin{lemma}
+    Suppose $A, B \subset \bbR^d.$ Then for any $x\in \bbR^d,$ 
+    \[m^*(A \triangle B) = m^*\big[(x + A)\triangle (x + B)\big]\]
+\end{lemma}
+\begin{proof}
+    It should be easy to see that under some set manipulation, we get that 
+    \[(x + A)\triangle (x + B) = x + A\triangle B.\] So then by the translation invariance we proved above, 
+    \[m^*\big[(x + A)\triangle (x + B)\big] = m^*(x + A\triangle B) = m^*(A\triangle B).\]
+\end{proof}
+
+Suppose $A \in \mathcal{M}(m),$ then there exists some $(A_n)\in \mathcal{M}_F(m)$ such that $A = \bigcup_{n=1}^\infty A_n$. We claim that $x + A = \bigcup_{n=1}^\infty (x + A_n)$ where $x + A_n \in \mathcal{M}_F(m).$ To see the second claim, consider that since $A_n \in \mathcal{M}_F(m),$ then for each $n,$ there exists a sequence $(E^{(n)}_k) \in \cal E$ such that $E^{(n)}_k \to A_n$ (in exterior measure) as $k\to \infty.$ Thus, for every $n,$ we have by lemma 8 that for large $k,$ 
+\[m^*(E^{(n)}_k \triangle A_n) = m^*\big[(x + E^{(n)}_k) \triangle (x + A_n)\big] < \epsilon\]
+
+By lemma 6, we know that $x + E_k^{(n)} \in \cal E,$ so then $x + A_n \in \mathcal{M}_F(m)$ for every $n.$ It remains to show that 
+\[x + A = \bigcup_{n=1}^\infty (x + A_n),\] but the logic of this proof is identical to that of Lemma 5's.
 \end{solution}
 
 \newpage
-\section*{Problem 3}
+\section*{Problem 4}
 \begin{problem}
     Consider the real line in $\mathbb{R}^2$, 
 \[
@@ -217,12 +330,14 @@ Let $\epsilon>0.$ For each $n,$ define
     \begin{align}\Vol(E_\epsilon^n) = (2n)(\frac{\epsilon}{2^n \cdot 2n}) = \frac{\epsilon}{2^n}    
     \end{align}
 By (3), (4), and (5):
-\[m^*(X) \leq \sum_{n=1}^\infty m^*(X_n)\leq \sum_{n=1}^\infty \Vol(E_\epsilon^n) \leq \sum_{n=1}^\infty \frac{\epsilon}{2^n} = \epsilon.\] Because this holds for all $\epsilon>0$, $m^*(X) = 0.$
+\[m^*(X) \leq \sum_{n=1}^\infty m^*(X_n)\leq \sum_{n=1}^\infty \Vol(E_\epsilon^n) \leq \sum_{n=1}^\infty \frac{\epsilon}{2^n} = \epsilon.\] Because this holds for all $\epsilon>0$, $m^*(X) = 0.$ 
+
 \end{enumerate}
+Since $X_n \in \cal E$ for all $n$ because they are all intervals, then $X_n \in \mathcal{M}(m)$ for all $n.$ Thus, since $\mathcal{M}(m)$ is closed under countable unions and $X = \bigcup_{n=1}^\infty X_n,$ then $X \in \mathcal{M}(m).$
 \end{solution}
 
 \newpage
-\section*{Problem 4}
+\section*{Problem 5}
 \begin{problem}
     Let $A, B \subseteq \mathbb{R}^n$, and suppose that
 \[
@@ -238,6 +353,44 @@ m^*(A \cup B) = m^*(A) + m^*(B).
     \[m^*(A \cup B) \leq m^*(A) + m^*(B),\] so it suffices to show the other inequality.
 
     Let $\epsilon>0.$ There exists $\{X_n\}_{n=1}^\infty$ countable open cover of $A\cup B$ such that
-    \[\sum_{n=1}^\infty \Vol(X_n) \leq m^*(A \cup B) + \epsilon.\] Si
+    \begin{align}
+    \sum_{n=1}^\infty \Vol(X_n) \leq m^*(A \cup B) + \epsilon.    
+    \end{align}
+    Each $X_n \in \cal E,$ so we can subdivide the $X_n$ into $\tilde{X}_n$ so that each $\title{X}_n$ has diameter less than $\frac{d}{2}$ and each $\tilde{X}_n$ intersects at least one $A$ or $B$ (we can throw out the ones that don't without any consequence). Thus, there exists some index set $I$ such that if $i \in I,$ then $X_i \cap B = \emptyset.$ Since $\text{diam}(X_n) <\frac{d}{2},$ then  there exists if $j \in I^c,$ then $X_j \cap A = \emptyset.$ Thus, $\{X_i\}_{i \in I}$ is a countable open cover of $A$ disjoint completely from $\{X_j\}_{j \in I^c},$ which is a countable open cover of $B.$ Thus by (6), 
+    \[m^*(A) + m^*(B) \leq \sum_{i \in I} \Vol(X_i) + \sum_{j \in I^c} \Vol(X_i) \leq \sum_{n=1}^\infty \Vol(X_n) \leq m^*(A \cup B) + \epsilon.\] Because this holds for any $\epsilon>0,$ we are done.
 \end{solution}
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Let $f: \bbR \to \bbR.$ We define the \textbf{graph} of $f$ to be the set 
+    \[G(f)= \{(x,y) \in \bbR^2 \mid f(x) = y\}\] Show that if $f$ is continuous, then $m\left(G(f)\right) = 0.$
+\end{problem}
+\begin{solution}
+    First, we will show that $G(f)$ is measurable. Let $\epsilon>0.$ If we define 
+    \[A_n = \{(x, f(x))\in \bbR^2 \mid x \in [-n, n]\},\] then 
+    \[G(f) = \bigcup_{n=1}^\infty A_n.\] We want to show that $A_n \in \mathcal{M}_F(m)$ for each $n.$ Thus, it suffices to find a sequence $E^{(n)}_k \in \cal E$ such that $E^{(n)}_k \to A_n$ (in outer measure) as $k\to \infty.$ 
+    Consider that since $f$ is continuous and $[-n, n]\subset \bbR$ is compact, then $f$ is uniformly continuous on $[-n,n].$  There exists some $\delta_n >0$ such that if $x,y \in [-n, n]$ and $|x-y| < \delta_\epsilon,$ then $|f(x) - f(y)|< \frac{\epsilon}{2^{{n+1}}}.$ 
+    
+    
+    Partition $[-n, n]$ into a partition $P,$ $-n = t_0< \dots< t_K = n$ such that $\|P\| < \min\{1, \delta_n\}.$ Thus if $x,y \in [t_i, t_{i+1}],$ then $|f(x) - f(y)|< \frac{\epsilon}{2^{n+1}}.$ Call $E^{(n)}_i$ the boxes of height $2 \cdot \frac{\epsilon}{2^{n+1}} = \frac{\epsilon}{2^n}$ for each subinterval $[t_i, t_{i+1}]$ of $P.$ Notice that each $E_{i}^{(n)}$ is an interval and thus 
+    \[m^*(E_{i}^{(n)}) = \Vol(E_{i}^{(n)}) = (t_{i} - t_{i-1}) \cdot \frac{\epsilon}{2^{n+1}}\]
+    
+    Call $E^{(n)}_K = \bigcup_{i \in [K]} E_i^{(n)}$ the union of all such boxes. Note that again, $E^{(n)}_K \in \cal E$ since it is the finite union of intervals.
+    
+    Since $A^n \subset E_K^{(n)}$ by the construction of $E_K^{(n)},$ we have that $E_K^{(n)} \triangle A_n = A_n.$ Therefore, using the finite additivity of $m^*,$ we see that by telescoping the sum:
+    \begin{align*}
+      m^*(E_K^{(n)} \triangle A_n) &= m^*(A_n) \leq m^*(E_K^{(n)})\\ 
+      &= m^*\left(\bigcup_{i\in [K]} E_i^{(n)}\right)\\
+      &= \sum_{i =1}^{K}m^*(E_i^{(n)})\\
+      &= \sum_{i=1}^K (t_{i} - t_{i-1}) \cdot \frac{\epsilon}{2^{n+1}}\\ 
+      &= (2n)\cdot \frac{\epsilon}{2^{n+1}}\\
+      &= \frac{\epsilon}{2^n}\\
+      &< \epsilon
+    \end{align*}
+    Thus, we see that $A_n \in \mathcal{M}_F(m),$ and since $G(f) = \bigcup_{n=1}^\infty A_n,$ then $G(f)$ is measurable. Using the countable additivity of the Lebesgue measure, and the above calculation:
+    \[m(G(f)) = \sum_{n=1}^\infty m(A_n) < \sum_{n=1}^\infty \frac{\epsilon}{2^n} = \epsilon.\] Because this holds for any $\epsilon>0,$ we see that $m(G(f)) = 0.$
+\end{solution}
+
+
 \end{document}
