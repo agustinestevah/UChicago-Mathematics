@@ -43,11 +43,11 @@
 \section{Lectures}
 
 \subsection{Monday, Mar 24: Markov Processes: Basic Definitions and Examples}
-He is British, I am fucked.
+He is from Trinidad and Tobago. 
 \begin{defn}
     A \textbf{stochastic process}  is a collection of random variables $\{X_t\}_{t \in T}$ indexed by time, where each $X_t$ takes values in $S$
 \end{defn}
-We call $S$ our \textit{state space}. In discrete time, it should be obvious that $T = \bbN_0^*$ (scale the naturals by a constant) and $T = [0, \bbR)$ in continuous time. We say that $S$ is a discrete space if it is countable and continuous if it is $\bbR^d.$
+We call $S$ our \textit{state space}. In discrete time, it should be obvious that $T = \bbN_0^*$ (where $\bbN_0^*$ is when on goscale the naturals by a constant) and $T = [0, \bbR)$ in continuous time. We say that $S$ is a discrete space if it is countable and continuous if it is $\bbR^d.$
 \begin{rem}
     In order to characterize the distribution of $\{X_n\},$ we must specify $\mathbb{P}\{X_0 = S_0, \dots, X_n = S_n\}$ for all $n \in \bbN$ and for all $S_0, \dots, S_n \in S.$ It is much easier work with conditional probability. We will see that with Markov Chains, the Markov Property guarantees that we only need to worry about the distribution of $X_{n-1}$ to figure out $X_n.$
 \end{rem}
@@ -55,6 +55,10 @@ We call $S$ our \textit{state space}. In discrete time, it should be obvious tha
     If $E,F$ are events with $\mathbb{P}\{F\} >0,$ then the \textbf{conditional probability} of $E$ given $F$ is 
     \[\mathbb{P}(E | F) = \frac{\mathbb{P}(E \cap F)}{\mathbb{P}(F)}\]
 \end{defn}
+\begin{prop}
+    (Law of Total Probability) Recall that if $(B_n) \in S$ is a sequence of mutually exclusive and exhaustive events, then 
+    \[P(A) = \sum_{n=1}^\infty P(A \cap B_n) = \sum_{n=1}^\infty P(A \mid B_n)P(B_n)\]
+\end{prop}
 
 \begin{defn}
     A stochastic process is called a \textbf{Markov Chain} if for all $n \in \bbN,$ and for all $S_0, \dots, S_n \in S,$ we have that 
@@ -90,7 +94,11 @@ That is, if we start at $x,$ what is the probability that the $n$th step is $y$?
     \[p^{n + m}(x,y) = \sum_{z\in S}p^n(x,z)p^m(z,y)\]
 \end{prop}
 \begin{proof}
-    Induction?
+    We have that by time homogeneity, 
+    \[p^n(x,z)p^m(z,y) = \bbP[X_n = z \mid X_0 = x] \bbP[X_{n + m} = y \mid X_n = z]\] By the Markov Property,
+    \[\bbP[X_{n + m} = y \mid X_n = z] = \bbP[X_{n + m} = y \mid X_n = z, X_0 = x]\] By Bayes' rule:
+    \[\bbP[X_n = z \mid X_0 = x]\bbP[X_{n + m} = y \mid X_n = z, X_0 = x] = \bbP[X_{n +m} = y, X_n = z \mid X_0 = x]\] Thus, 
+    \[\sum_{z \in S}p^n(x,z)p^m(z,y) = \sum_{z\in S}\bbP[X_{n +m} = y, X_n = z \mid X_0 = x] = \bbP[X_{n + m} = y \mid X_0 = x] = p^{n + m}(x,y)\]
 \end{proof}
 \begin{defn}
     The \textbf{transition matrix} of a Markov Chain the the $N \times N$ matrix $P$ whose $ij$ entry is $p(i,j).$
@@ -127,6 +135,8 @@ For the following, we consider a Markov chain $\{X_n\}$ with state space $S.$
 \begin{defn}
     A communication class $c$ is \textbf{recurrent} if $p(x,y) = 0$ for all $x\in C$ and $y \in S\setminus\{C\}.$ Otherwise, we say that the communication class is \textbf{transient}.
 \end{defn}
+In other words, if $C$ is recurrent, then the chain never leaves. If it is transcient, then there is no problem leaving.
+
 
 \begin{defn}
     A Markov chain is \textbf{irreducible} if there is only one communication class.
@@ -146,8 +156,10 @@ For the following, we consider a Markov chain $\{X_n\}$ with state space $S.$
 
 \begin{exmp} (Gambler's ruin)
     Consider the random walk on $S = \{0,1,2, \dots, N\}$ with absorbing boundary, and transition probability
-    \[p(x,x+1) = p(x, x-1) = \frac{1}{2}, \quad x\in \{\1,2,\dots, N-1\}\] and 
+    \[p(x,x+1) = p(x, x-1) = \frac{1}{2}, \quad x\in \{1,2,\dots, N-1\}\] and 
     \[p(0,0) = p(N,N) = 1\]
+
+    $\{1,\dots, N-1\}$ is a transient communication class, while $\{0\}, \{N\}$ are both recurrent communication classes.
 \end{exmp}
 
 \begin{prop}
