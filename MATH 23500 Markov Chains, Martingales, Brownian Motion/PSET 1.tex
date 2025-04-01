@@ -175,9 +175,29 @@ be the number of \( 1 \)'s in the \( (n-1)^{\text{th}} \) and \( n^{\text{th}} \
 \begin{enumerate}
     \item[(a)] Explain why \( \{X_n\} \) is a (time-homogeneous) Markov chain.
     \begin{solution}
-    Intuitively, $\{X_n\}$ is a Markov chain because the the history of the system is not important, only the current state of the system. Knowing how many white balls are in the left ball in the present will give you the probability of the number of white balls in the next turn, since one you draw the balls, you will be able to tell how many white balls are going to be in the left urn given the present. It does not matter how you got to the present, but only where you are in the present. 
+    Define 
+    \[L_n := \begin{cases}
+        -1, \quad \text{white is picked from left urn on $n$th time}\\
+        0 \quad \quad \;\text{else}
+    \end{cases}\]  \[R_n := \begin{cases}
+        1, \quad \;\;\;\text{white is picked from right urn on $n$th time}\\
+        0 \quad \quad \;\text{else}
+    \end{cases}\]
+    Clearly, $L_{n+1}$ depends only on $X_n,$ since it is independent of the number of urns at any time before the present. Similarly, $R_{n + 1}$ is independent of any $X_i$ with $i < n.$ Since  $X_{n + 1} = X_n + (L_{n+1} + R_{n+1}),$ and $(L_{n + 1} + R_{n+1})$ are independent of any $X_i$ with $i<n,$ then for any $j \in \{0,1,2,3,4,5\},$ for any $s_0, \dots, s_n \in \{0,1,2,3,4,5\}$
+    \begin{align*}
+    \bbP\{X_{n + 1} &= j\mid X_n = s_n, X_{n-1} = s_{n-1}, \dots, X_0 = s_0\} = \bbP\{X_n + R_{n + 1} + L_{n + 1} = j \mid X_n = s_n, X_{n-1} = s_{n-1}, \dots, X_0 = s_0\}\\ &= \bbP\{X_n + R_{n + 1} + L_{n + 1} \mid X_n = s_n\}    
+    \end{align*}
 
-    This process is clearly time independent since, for example, if there are $m$ white balls on the left urn on the first turn, then probability of there being $m-1, m,$ or $m+1$ white balls on the left urn on the second turn will be the same as if it were the $100-$turn and there were $m$ white balls in the left urn, since nothing about the process changes with time if the number of white balls in the left urn is the same.
+    The process is time independent if and only if, for any $x,y \in S = \{0,1,2,3,4,5\},$ we have $\bbP\{X_{n + 1} = x\mid X_n = y\} = \bbP\{X_1 = x \mid X_0 = y\}.$ From before, 
+    \begin{align*}
+        \bbP\{X_{n + 1} = x \mid X_n = y\} &= \bbP\{X_n + L_{n + 1} + R_{n + 1} =x\mid X_n = y\}\\
+        &= \bbP\{L_{n + 1} + R_{n + 1}=x-y \mid X_n = y\}\\
+        &= \bbP\{L_1 + R_1 = x-y \mid X_0 = y\}\\
+        &= \bbP\{X_0 + L_1 + R_1  = x\mid X_0 = y\}\\
+        &= \bbP\{X_1 = x \mid X_0 = y \}
+    \end{align*}
+    The key assumption being that $L_{n+1}$ and $R_{n+1}$ are independent from time $n,$ which is obvious, as they depend only on the number of balls at time $n.$
+    
     \end{solution}
     \item[(b)] Find the state space and transition matrix for this Markov chain.
     \begin{solution}
@@ -290,8 +310,8 @@ We use Wolfram and see that
 \begin{problem}
     Suppose \( \{X_n\} \) is a Markov chain with state space \( S = \{A, B, C, D\} \) and transition matrix
 \[
-P = \begin{pmatrix}
-0 & \frac{1}{2} & \frac{1}{4} & \frac{1}{2} \\
+\begin{pmatrix}
+0 & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\
 0 & \frac{1}{2} & \frac{1}{2} & 0 \\
 1 & 0 & 0 & 0 \\
 0 & 0 & \frac{1}{2} & \frac{1}{2}
@@ -301,39 +321,51 @@ P = \begin{pmatrix}
 \begin{enumerate}
     \item[(a)] Draw a (directed) graph depicting the states and the corresponding transition probabilities (i.e., label each edge that you draw with the probability of traversing it). Explain why \( \{X_n\} \) is irreducible.
     \begin{solution}
+Graph:
         \begin{center}
 \begin{tikzpicture}[scale=1.2, every node/.style={draw, circle, inner sep=1pt}]
-    \node (A) at (-2,0) {1};
-    \node (B) at (0,2) {2};
-    \node (C) at (2,0) {3};
-    \node (D) at (0,-2) {4};
+    \node (A) at (-2,0) {A};
+    \node (B) at (0,2) {B};
+    \node (C) at (2,0) {C};
+    \node (D) at (0,-2) {D};
 
-    \draw[->] (A) -- (B) node[midway, above left] {\textcolor{red}{$\frac{1}{2}$}};
+    \draw[->] (A) -- (B) node[midway, above left] {\textcolor{red}{$\frac{1}{4}$}};
     \draw[->, loop above] (B) edge node {\textcolor{red}{$\frac{1}{2}$}} (B);
     \draw[->] (B) -- (C) node[midway, above right] {\textcolor{red}{$\frac{1}{2}$}};
     \draw[->] (B) -- (C) node[midway, above right] {\textcolor{red}{$\frac{1}{2}$}};
     
-    \draw[->] (A) -- (C) node[midway, below] {\textcolor{red}{$\frac{1}{4}$}};
+    \draw[->] (A) -- (C) node[midway, below] {\textcolor{red}{$\frac{1}{2}$}};
     \draw[->, bend right=20] (C) to node[midway, above] {\textcolor{red}{$1$}} (A);
-    \draw[->] (A) -- (D) node[midway, below left] {\textcolor{red}{$\frac{1}{2}$}};
-    \draw[->, loop below] (D) edge node {\textcolor{red}{$\frac{1}{4}$}} (D);
+    \draw[->] (A) -- (D) node[midway, below left] {\textcolor{red}{$\frac{1}{4}$}};
+    \draw[->, loop below] (D) edge node {\textcolor{red}{$\frac{1}{2}$}} (D);
     \draw[->] (D) -- (C) node[midway, below right] {\textcolor{red}{$\frac{1}{2}$}};
 \end{tikzpicture}
 \end{center}
-$\{X_n\}$ is irreducible because for every $i,j \in S,$ there exists some $n$ such that $p^n(i,j) >0.$ To see this, consider that since $1\to 2 \to 3 \to 1,$ then $2\to 1$ and thus $3\leftrightarrow 1\leftrightarrow2.$ Similarly, $3\leftrightarrow1 \leftrightarrow4.$ By transitivity and symmetry, 
-\[1 \leftrightarrow 2\leftrightarrow 3\leftrightarrow 4,\] and so $S$ itself is the only communication class.
+$\{X_n\}$ is irreducible. For the following table, the first number is the smallest number of turns it takes for $p^n(i,j) >0.$ 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|l|l|l|} \hline 
+         &   A&B & C&D\\ \hline 
+         A& 
+     $3 \text{ w.p. } \geq\frac{1}{16}$ & $1 \text{ w.p. }\frac{1}{4}$& $2 \text{ w.p. }\geq\frac{1}{8}$ &$1 \text{ w.p. }\frac{1}{4}$\\ \hline 
+ B&$2 \text{ w.p. }\geq\frac{1}{2}$ &$1 \text{ w.p. }\frac{1}{2}$ & $1 \text{ w.p. }\frac{1}{2}$&$3\text{ w.p. }\geq\frac{1}{8}$\\ \hline 
+ C&$1 \text{ w.p. }{1}$ &$2 \text{ w.p. }\geq\frac{1}{4}$ &$3 \text{ w.p. }\geq\frac{1}{8}$ &$2 \text{ w.p. }\geq\frac{1}{4}$\\ \hline 
+ D&$2 \text{ w.p. }\geq \frac{1}{4}$ &$2 \text{ w.p. }\geq\frac{1}{8}$ &$1 \text{ w.p. }\frac{1}{2}$ &$1 \text{ w.p. }\frac{1}{2}$\\ \hline\end{tabular}
+    \caption{Irreducibility} 
+\end{table}
+Thus, for every $i,j \in S,$ there exists some $n,m>0$ such that $p^n(i,j) >0$ and $p^m(j,i) >0,$ as you can see in the table above. 
     \end{solution}
     \item[(b)] Assume that the chain starts with \( X_0 = B \). What is the probability that \( X_3 = C \)?
 \begin{solution}
     Using Wolfram, we see that 
     \[P^3 = 
 \begin{pmatrix}
-\frac{1}{2} & \frac{1}{4} & \frac{5}{16} & \frac{1}{4} \\
-\frac{1}{4} & \frac{3}{8} & \frac{1}{4} & \frac{1}{4} \\
-\frac{1}{4} & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\
-\frac{1}{4} & \frac{1}{4} & \frac{1}{2} & \frac{3}{8}
+\frac{1}{4} & \frac{3}{16} & \frac{3}{8} & \frac{3}{16} \\
+\frac{1}{4} & \frac{1}{4} & \frac{3}{8} & \frac{1}{8} \\
+\frac{1}{2} & \frac{1}{8} & \frac{1}{4} & \frac{1}{8} \\
+\frac{1}{4} & \frac{1}{8} & \frac{3}{8} & \frac{1}{4}
 \end{pmatrix}
-,\] and thus 
+\] and thus 
 \[\boxed{p^3(C, B)} = \frac{1}{4}\]
 
 \end{solution}
@@ -341,29 +373,159 @@ $\{X_n\}$ is irreducible because for every $i,j \in S,$ there exists some $n$ su
 \begin{solution}
     \[P^4 = 
 \begin{pmatrix}
-\frac{5}{16} & \frac{3}{8} & \frac{3}{8} & \frac{3}{8} \\
-\frac{1}{4} & \frac{5}{16} & \frac{3}{8} & \frac{1}{4} \\
-\frac{1}{2} & \frac{1}{4} & \frac{5}{16} & \frac{1}{4} \\
-\frac{1}{4} & \frac{1}{4} & \frac{3}{8} & \frac{5}{16}
+\frac{3}{8} & \frac{5}{32} & \frac{5}{16} & \frac{5}{32} \\
+\frac{3}{8} & \frac{3}{16} & \frac{5}{16} & \frac{1}{8} \\
+\frac{1}{4} & \frac{3}{16} & \frac{3}{8} & \frac{3}{16} \\
+\frac{3}{8} & \frac{1}{8} & \frac{5}{16} & \frac{3}{16}
 \end{pmatrix}
 \]
 and so 
-\[\boxed{p^4(A, B)} = \frac{3}{8}.\]
-\[P^6(B, B) = \begin{pmatrix}
-    \frac{29}{64} & \frac{23}{64} & \frac{7}{16} & \frac{23}{64}\\
-    \frac{11}{32} & \frac{21}{64} & \frac{23}{64} & \frac{5}{16}\\
-    \frac{3}{18} & \frac{11}{32} & \frac{29}{64} & \frac{11}{32}\\
-    \frac{11}{32} &\frac{5}{16} & \frac{23}{64} & \frac{21}{64}
-\end{pmatrix}\]
+\[\boxed{p^4(A, B) = \frac{5}{32}}.\]
+\[P^6 = \begin{pmatrix}
+\frac{11}{32} & \frac{21}{128} & \frac{21}{64} & \frac{21}{128} \\
+\frac{11}{32} & \frac{11}{64} & \frac{21}{64} & \frac{5}{32} \\
+\frac{5}{16} & \frac{11}{64} & \frac{11}{32} & \frac{11}{64} \\
+\frac{11}{32} & \frac{5}{32} & \frac{21}{64} & \frac{11}{64}
+\end{pmatrix}
+\]
 and so 
-\[\boxed{p^6(B,B) = \frac{21}{64}}\]
+\[\boxed{p^6(B,B) = \frac{11}{64}}\]
 \end{solution}
     \item[(d)] Compute the invariant probability vector for this Markov chain.
+\begin{solution}
+    We need to find some $\pi = (\pi_1, \pi_2, \pi_3, \pi_4)$ probability vector such that 
+    \[\pi P  = \pi \iff P^T\pi^T = \pi^T \iff (P^T - I)\pi^T = 0\iff (4P^T - 4I)\pi^T = 0\] Thus, we need to find $N(4P^T - 4I):$
+    \begin{align*}
+        N(4P^T - 4I) &= 
+        \left[\begin{array}{cccc|c}
+            -4 & 1 & 2 & 1 & 0\\
+            0 & -2 & 2 & 0 & 0 \\
+            4 & 0 & -4 & 0 & 0\\
+            0 & 0 & 2 & -2 & 0
+        \end{array}\right]\\
+        &\sim
+        \left[\begin{array}{cccc|c}
+            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
+            0 & -2 & 2 & 0 & 0 \\
+            0 & 1 & -2 & 1 & 0\\
+            0 & 0 & 2 & -2 & 0
+        \end{array}\right]\\
+        &\sim
+        \left[\begin{array}{cccc|c}
+            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
+            0 & 1 & -1 & 0 & 0 \\
+            0 & 1 & -2 & 1 & 0\\
+            0 & 0 & 2 & -2 & 0
+        \end{array}\right]\\
+        &\sim 
+        \left[\begin{array}{cccc|c}
+            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
+            0 & 1 & -1 & 0 & 0 \\
+            0 & -1 & 2 & -1 & 0\\
+            0 & 0 & 2 & -2 & 0
+        \end{array}\right]\\
+        &\sim
+        \left[\begin{array}{cccc|c}
+            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
+            0 & 1 & -1 & 0 & 0 \\
+            0 & 0 & 1 & -1 & 0\\
+            0 & 0 & 0 & 0 & 0
+        \end{array}\right]\\
+    \end{align*}
+    Call $\pi^T = x$ for simplification. We get the following four equations:
+    \begin{align}
+        x_1 - \frac{1}{4}x_2 - \frac{1}{2}x_2 - \frac{1}{4}x_4 = 0
+    \end{align}
+    \begin{align}
+        x_2 = x_3
+    \end{align}
+    \begin{align}
+        x_3 = x_4
+    \end{align}
+    \begin{align}
+        x_1 + x_2 + x_3 + x_4 = 1
+    \end{align}
+Plugging (2) and (3) into (1):
+\begin{align}
+    x_1 = x_2 = x_3 = x_4
+\end{align}
+By (4), we see that 
+\[x = \begin{pmatrix}
+    \frac{1}{4}\\
+    \frac{1}{4}\\
+    \frac{1}{4}\\
+    \frac{1}{4}
+\end{pmatrix}\] and thus $\pi = (\frac{1}{4}, \frac{1}{4}, \frac{1}{4}, \frac{1}{4})$ is our invariant probability vector. 
+
+\end{solution}
     \item[(e)] Let \( J_n \) denote the probability that at time \( n \) the system has been in state \( C \) exactly the same number of times it has been in state \( A \). Find
     \[
     \lim_{n \to \infty} J_n.
-    \]
+    \] Here again suppose that $X_0 = B$
 \end{enumerate}
+\begin{solution}
+    Since $\{X_n\}$ is irreducible and aperiodic, we have that 
+    \[\lim_{n\to \infty}p^n(C,B) = \pi_C, \qquad \lim_{n\to \infty}p^n(A,B) = \pi_A,\] where 
+    \[\pi_C = \pi_A = \frac{1}{4}\] Thus, if 
+    \[J_n = \bbP\{\sum_{k=1}^n \mathbbm{1}_{X_i = C}=  \sum_{k=1}^n \mathbbm{1}_{X_i = A}\}\]
+\end{solution}
+\end{problem}
+
+\newpage
+\section*{Problem 9}
+\begin{problem}
+    Let \( G \) be a finite, connected graph (i.e., any two vertices can be joined by a path of edges). Let \( X_n \) and \( Y_n \) be independent lazy random walks on \( G \), meaning that at each step \( X_n \) stays put with probability \( \frac{1}{2} \) and moves to a uniformly chosen neighboring vertex with probability \( \frac{1}{2} \), and similarly for \( Y_n \). In other words, the transition probabilities for \(\{X_n\}\) (and also for \(\{Y_n\}\)) are given by
+
+\[
+p(x, y) = \begin{cases} 
+\frac{1}{2}, & \text{if } x = y \\
+\frac{1}{2 \deg x}, & \text{if } x \neq y \text{ and } x \text{ and } y \text{ are joined by an edge} \\
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+
+
+(a) Show that for any possible starting points \( X_0  = x_0\) and \( Y_0= y_0 \), with probability 1, there exists \( n \) such that \( X_n = Y_n \).
+\begin{solution}
+Denote \[p^n_X(i,j) =\bbP\{X_n = i \mid X_0 = j\}, \qquad P^n_Y(i,j)=\bbP\{Y_n = i \mid Y_0 = j\}.\] Fix some $j \in V(G).$ 
+Enumerate the vertices of the graph by $V(G) = \{1,2,\dots, N\},$ and fix $j \in [N].$
+    Since $G$ is connected, then it is clearly recurrent, and so $n_z = p_Y^{n_z}(z,y_0) >0$ for any $z\in V(G).$ Since $V(G)$ is finite, we know that $n := \max\{n_z \mid z\in V(G)\}$ exists. 
+    
+    We know that $p_X^n(j,j) > \frac{1}{2^n}.$ Let $\tau = \min\{k>0 \mid X_k = j\}.$ We know that $\bbP(\tau < \infty) = 1$ since $\{X_n\}$ is recurrent. By the strong Markov property, we lose no generality in assuming that $X_0 = j.$ Let $Y_0 = i.$ 
+
+    
+    
+    Let $E_k := \{X_i = j\; \forall \; i \in \{nk-n, \dots, nk\} \}.$ Thus, $E_k$ is the event that $\{X_n\}$ stays at $j$ for $n$ turns, starting at turn $k.$ We know that, by the strong Markov property assumed above and the normal Markov property and time homogeneity, for any $s_0, \dots, s_{nk}\in V(G)$
+    \[\bbP\{E_{k+1} \mid X_0 = s_0, \dots, X_{nk}= s_{n_k}\} = \bbP\{E_1 \mid X_0 = j\} > \frac{1}{2^n}.\] Thus, for any $M>0,$ we have that 
+    \begin{align*}
+        \bbP\{\text{not $E_k$ for any $k \in [M]$}\} &= \bbP\{\bigcap_{k=1}^M E_k^c\}\\
+        &= \bbP\{E_M^c \mid \bigcap_{k=1}^{M-1} E_k^c \}\bbP\{\bigcap_{k=1}^{M-1} E_k^c\}\\
+        &\leq (1-\frac{1}{2^n})\bbP\{\bigcap_{k=1}^{M-1} E_k^c\}\\
+        &\leq (1-\frac{1}{2^n})^M\xrightarrow[M\to \infty]{} 0
+    \end{align*}
+    Thus, with probability $1,$ there exists some time interval of length $n$ such that $X = j$ for the entire interval.
+    
+    Let $F_k$ denote the probability that $Y$ hits $j$ at some point during the interval $nk - n.$ We know by a theorem in class that with probability $1,$ $F_k$ happens for some $M \in \bbN.$ 
+
+    Since $Y$ and $X$ are independent, we get that 
+    \[\bbP(E_M \cap F_M) = \bbP(E_M)\bbP(F_M) \xrightarrow[M\to \infty]{}1\]
+\end{solution}
+
+(b) Give an example of a graph \( G \) for which the conclusion of part (a) fails if \( X_n \) and \( Y_n \) are ordinary random walks rather than lazy random walks (i.e., \( X_{n+1} \) is never equal to \( X_n \) and \( Y_{n+1} \) is never equal to \( Y_n \).
+\begin{solution}
+Consider the following graph $G:$
+    \begin{center}
+\begin{tikzpicture}[scale=1.2, every node/.style={draw, circle, inner sep=1pt}]
+    \node (A) at (-2,0) {1};
+    \node (B) at (2,0) {2};
+
+    \draw[-] (A) -- (B) node[midway, above left] {\textcolor{red}{${1}$}};
+    \end{tikzpicture}
+\end{center}
+And consider when $X_0 = 1$ and $Y_0 = y.$ Then since $X_n = S\setminus\{Y_n\},$ the Markov chains will never be the same.
+\end{solution}
+
 \end{problem}
 
 \end{document}

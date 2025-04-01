@@ -9,6 +9,7 @@
 \newcommand{\bbZ}{\mathbb{Z}}
 \newcommand{\bbP}{\mathbb{P}}
 \newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbE}{\mathbb{E}}
 \newcommand{\bbQ}{\mathbb{Q}}
 \newcommand{\Cdot}{\boldsymbol{\cdot}}
 \newcommand{\scA}{\mathscr{A}}
@@ -95,10 +96,10 @@ That is, if we start at $x,$ what is the probability that the $n$th step is $y$?
 \end{prop}
 \begin{proof}
     We have that by time homogeneity, 
-    \[p^n(x,z)p^m(z,y) = \bbP[X_n = z \mid X_0 = x] \bbP[X_{n + m} = y \mid X_n = z]\] By the Markov Property,
-    \[\bbP[X_{n + m} = y \mid X_n = z] = \bbP[X_{n + m} = y \mid X_n = z, X_0 = x]\] By Bayes' rule:
-    \[\bbP[X_n = z \mid X_0 = x]\bbP[X_{n + m} = y \mid X_n = z, X_0 = x] = \bbP[X_{n +m} = y, X_n = z \mid X_0 = x]\] Thus, 
-    \[\sum_{z \in S}p^n(x,z)p^m(z,y) = \sum_{z\in S}\bbP[X_{n +m} = y, X_n = z \mid X_0 = x] = \bbP[X_{n + m} = y \mid X_0 = x] = p^{n + m}(x,y)\]
+    \[p^n(x,z)p^m(z,y) = \bbP\{X_n = z \mid X_0 = x\} \bbP\{X_{n + m} = y \mid X_n = z\}\] By the Markov Property,
+    \[\bbP\{X_{n + m} = y \mid X_n = z\} = \bbP\{X_{n + m} = y \mid X_n = z, X_0 = x\}\] By Bayes' rule:
+    \[\bbP\{X_n = z \mid X_0 = x\}\bbP\{X_{n + m} = y \mid X_n = z, X_0 = x\} = \bbP\{X_{n +m} = y, X_n = z \mid X_0 = x\}\] Thus, 
+    \[\sum_{z \in S}p^n(x,z)p^m(z,y) = \sum_{z\in S}\bbP\{X_{n +m} = y, X_n = z \mid X_0 = x\} = \bbP\{X_{n + m} = y \mid X_0 = x\} = p^{n + m}(x,y)\]
 \end{proof}
 \begin{defn}
     The \textbf{transition matrix} of a Markov Chain the the $N \times N$ matrix $P$ whose $ij$ entry is $p(i,j).$
@@ -239,9 +240,217 @@ In other words, if $C$ is recurrent, then the chain never leaves. If it is trans
     \[S = \{(x,y) \in \bbR^2 \mid x \in \{1, \dots, 8\}, y \in \{1, \dots, 8\}\}.\]  The period is $2.$ 
 \end{exmp}
 
+\newpage
+\subsection{Monday, Mar 31: Stationary Distributions}
+\begin{defn}
+    Let $\tilde{v} = (\tilde{v}_1, \tilde{v}_2, \dots, \tilde{v}_n)$ be a vector such that $\tilde{v}_j = \bbP\{X_0 = j\}.$ We say that $\tilde{v}$ is the \textbf{initial distribution} of the Markov chain.
+\end{defn}
+\begin{prop}
+    For each $i \in [n],$ then $i$th entry of the row vector $\tilde{v} P$ is $\bbP\{X_1 = i\}.$
+\end{prop}
+\begin{exmp}
+    Consider the Markov chain with $S = \{1,2,3,\}$ and 
+    \[P = \begin{pmatrix}
+        \frac{1}{2} & \frac{1}{4} & \frac{1}{4}\\
+        \frac{1}{4} & \frac{1}{2} & \frac{1}{4}\\
+        0 & \frac{1}{4} & \frac{3}{4}
+    \end{pmatrix}\]
+    For $n$ large, 
+        \[P^n = \begin{pmatrix}
+        \frac{1}{6} & \frac{1}{3} & \frac{1}{2}\\
+        \frac{1}{6} & \frac{1}{3} & \frac{1}{2}\\
+        \frac{1}{6} & \frac{1}{3} & \frac{1}{2}
+    \end{pmatrix}.\] We encounter the phenomena that the limit of $P^n,$ if it exists, has identical rows. 
+
+    Call this row $\pi.$ For any probability vector $\Tilde{v},$ $\lim_{n\to \infty} \Tilde{v} P^n = \pi$
+\end{exmp}
+
+Suppose $\pi$ is a limiting probability vector. That is, for any initial distribution $\Tilde{v},$ $\lim_{n\to \infty}\Tilde{v}P^n = \pi.$ Then 
+\[\pi = \lim_{n\to \infty}\Tilde{v}P^{n + 1} = (\lim_{n\to \infty}\Tilde{v}P^n)P = \pi P\] We say that $\pi$ is a {stationary/invariant/equilibrium/steady-state} distribution for the Markov chain. 
+
+\begin{defn}
+    Let $\pi: S \to [0,1]$ be a probability distribution on $S$ such that $\sum_{x\in S} \pi_x = 1.$ We say that $\pi$ is a \textbf{stationary distribution} of $\{X_n\}$ if 
+    \[\pi_y = \sum_{x\in S}\pi_x p(x,y), \quad \forall y \in S.\] That is, $\pi P =  \pi.$
+\end{defn}
+
+\begin{thm}
+    If $S$ is finite and $\{X_n\}$ is an irreducible and aperiodic chain, then there exists a unique stationary distribution $\pi$ for $\{X_n\}.$ Moreover, for any $x,y \in S,$ \[\lim_{n\to \infty}p^n(y,x) = \pi_y\]
+\end{thm}
+
+\begin{proof}
+    (Existence) Fix $z \in S.$ Suppose $X_0 = z.$ Let $\tau = \min\{n \geq 1 \mid X_n = z\}$ be the first return time to $z.$ Note that $\tau < \infty $ by proposition $4.$ For any $x\in S,$ define
+    \[\Tilde{\pi}_x := \mathbb{E}[ \#\{n \in \{0,1, \dots \tau - 1\} \mid X_n = x\}]\] 
+    We claim that 
+    \[x \mapsto \frac{\pi_x}{\bbE[\tau]}\] is a stationary distribution for $\{X_n\}.$ We want to show that for all $y \in S,$ $\tilde{\pi}_y = \sum_{x\in S} \Tilde{\pi}_x p(x,y).$ Evidently, 
+    \[\tilde{\pi}_x = \mathbb{E}\left[\sum_{x\in S}\mathbbm{1}_{\{X_n = x\}}\right] = \mathbb{E} \left[\sum_{n = 0}^\infty \mathbbm{1}_{\{X_n = x, \tau >n\}}\right] = \sum_{n =0}^\infty \bbP\{X_n = x, \tau >n\}.\] Thus, 
+    \[\sum_{x\in S}\tilde{\pi}_x p(x,y) = \sum_{x\in S}\sum_{n = 0}^\infty \bbP\{X_n = x, \tau >n\} p(x,y) = \sum_{n = 0}^\infty \sum_{x\in S} \bbP\{X_n = x, T >n X_{n + 1}  = y\} = \sum_{n = 0}^\infty \bbP\{\tau >{n + 1}X_{n + 1} = y\} = \tilde{\pi}_y\]
+    In order to find a stationary probability distribution, we need that 
+    \[\sum_{x\in S} \frac{\tilde{\pi}_x}{\mathbb{E}[\tau]} = 1.\] But then 
+    \[\tilde{pi}_x = \sum_{n = 0}^\infty \bbP\{X_n = x , \tau >n\} = \sum_{n = 0}^\infty \bbP\{\tau > n, X_n = x \mid X_n = x\}.\] SO then 
+    \[\tilde{\pi}_x  = \sum_{n  = 0}^\infty \sum_{x\in S}\bbP\{\tau > n  \mid X_n = x\}\bbP\{\tau  > n \mid X_n  = x\}\bbP\{X_n = x\} = \sum_{n = 0}^\infty \bbP\{\tau >n\} = \mathbbE[\tau]\]
+\end{proof}
+
+\begin{exmp}
+    Consider a Markov chain $\{X_n\}$ with 
+    \[P = \begin{pmatrix}
+        \frac{1}{3} & \frac{1}{3} & \frac{1}{3}\\
+        \frac{1}{2} & 0 & \frac{1}{2}\\
+        \frac{1}{5} & \frac{1}{5} & \frac{3}{5}
+    \end{pmatrix}.\] $\{X_n\}$ is clearly aperiodic and irreducible. To compute $\pi,$ we solve the system $\pi P  = \pi,$ with $\pi_1 + \pi_2  + \pi_3 = 1.$ 
+    \[(\pi_1 , \pi_2 ,\pi_3) P  = \pi \iff \frac{1}{3}\pi_1 + \frac{1}{2}\pi_2 + \frac{1}{5}\pi_3 = \pi_1,\quad  \frac{1}{3}\pi_1 + \frac{1}{5}\pi_3  = \pi_2, \quad  \frac{1}{3}\pi_1 + \frac{1}{2}\pi_2 + \frac{3}{5}\pi_3\]
+    Thus, we find that solving for the RREF
+    \[\begin{bmatrix}
+        \frac{1}{3} & \frac{1}{3} & \frac{1}{5} & | & 1\\
+        \frac{1}{3} & 0 & \frac{1}{5}& | & 1\\
+        \frac{1}{3} & \frac{1}{2} & \frac{3}{5}& | & 1\\
+        1 & 1 & 1 & | & 1
+    \end{bmatrix}\]
+    Thus, 
+    \[\pi = (\frac{3}{10}, \frac{1}{5}, \frac{1}{2})\]
+\end{exmp}
 
 
 
+\newpage
+\section{Problem Sessions}
+\subsection{Monday, Mar 31: Problem Session 1}
+When do we run into the issue that $\lim_{n\to \infty}\pi P^n$ does not exist? 
+\begin{enumerate}
+    \item[(1)] If Period $> 1$
+    \item[(2)] If there are multiple recurrence classes that are transient.
+\end{enumerate}
 
+Problems:
+\begin{enumerate}
+    \item Let $X_0, X_1, \dots$ be a Markov chain with state space $S = \{0, 1, 2, 3\}$, and with transition matrix
+    \[
+    \begin{bmatrix}
+        \frac{1}{4} & 0 & \frac{1}{2} & \frac{1}{4} \\
+        0 &  \frac{1}{5} & 0 & \frac{1}{5} \\
+        0 & 1 & 0 & 0 \\
+        \frac{1}{3} & \frac{1}{3} & 0 & \frac{1}{3}
+    \end{bmatrix}.
+    \]
+    A new process is defined by $Z_n = 0$ if $X_n = 0$ or $1$ and $Z_n = X_n$ if $X_n = 2$ or $3$. Find $P(Z_{n+1} = 2 | Z_n = 0, Z_{n-1} = 2)$ and $P(Z_{n+1} = 2 | Z_n = 0, Z_{n-1} = 3)$. Is $Z_n$ a Markov chain?
+    \begin{solution}
+    \begin{align*}
+        \bbP\{Z_{n + 1}= 2 \mid Z_n = 0, Z_{n-1} = 2\} &= \frac{\bbP\{Z_{n + 1} = 2, Z_{n} = 0, Z_{n-1} = 2\}}{\bbP\{Z_n = 0, Z_{n-1 } = 2\}}\\
+        &= \frac{\bbP\{Z_{n + 1} = 2, Z_{n} = 0 \mid Z_{n-1} =2\}}{\bbP\{Z_n = 0 \mid Z_{n-1} = 2\}}\\
+        &= 0
+    \end{align*}
+    \begin{align*}
+        \bbP\{Z_{n + 1} = 2 \mid Z_n = 0, Z_{n-1} = 3\} &= \frac{\bbP\{Z_{n + 1} = 2, Z_{n} = 0 \mid Z_{n-1} =3\}}{\bbP\{Z_n = 0 \mid Z_{n-1} = 3\}}\\
+        &= \frac{\bbP\{X_n = 2, X_n = 0 \mid X_{n-1} = 3\} +\bbP\{X_n = 2, X_n = 1 \mid X_{n-1} = 3\}}{\bbP\{X_n = 0 \mid X_{n-1} =3\} + \bbP\{X_{n} = 1 \mid X_{n-1} = 3\}}\\
+        &= \frac{\frac{1}{3}\frac{1}{2} + 0}{\frac{1}{6} + \frac{1}{6}}\\
+        &= \frac{1}{4}
+    \end{align*}
+    Thus, $\{Z_n\}$ is not a Markov chain
+    \end{solution}
 
+    \item We repeatedly roll two four-sided dice with numbers 1, 2, 3, and 4 on them. Let $Y_k$ be the sum on the $k$-th roll, $S_n = Y_1 + Y_2 + \dots + Y_n$ be the total of the first $n$ rolls, and $X_n = S_n (\text{ mod } 6)$. Find the transition matrix for $\{X_n\}$.
+    \begin{solution}
+        $\{X_n\}$ is a Markov process because it only depends on the current state $S_n,$ as you can figure out the next turn only from this, since 
+        \[X_{n + 1} = S_{n + 1}\text{ mod } 6 = (S_{n} + Y_{n + 1})\text{ mod } 6= S_n \text{ mod } 6 + Y_{n + 1}\text{ mod } 6 = X_n + Y_{n+1}\text{ mod } 6\] 
+        \[P = \begin{bmatrix}
+            \frac{3}{16} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{3}{16} & \frac{1}{4}\\
+             \frac{1}{4} & \frac{3}{16}& \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{3}{16} \\
+             \frac{3}{16} & \frac{1}{4} & \frac{3}{16}& \frac{1}{8} & \frac{1}{8} & \frac{1}{8} \\
+             \frac{1}{8} & \frac{3}{16} & \frac{1}{4} & \frac{3}{16}& \frac{1}{8} & \frac{1}{8} \\
+             \frac{1}{8} &\frac{1}{8} & \frac{3}{16} & \frac{1}{4} & \frac{3}{16}& \frac{1}{8} \\
+             \frac{1}{8} &\frac{1}{8} &\frac{1}{8} & \frac{3}{16} & \frac{1}{4} & \frac{3}{16} 
+        \end{bmatrix}\]
+    \end{solution}
+
+    \item Consider a Markov chain with states $S = \{0, \dots, N\}$ and transition probabilities $p(i, i+1) = p$, $p(i, i-1) = q$, for $1 \leq i \leq N-1$, where $p+q = 1$, $0 < p < 1$. Assume $p(0,1) = p(N, N-1) = 1$.
+    \begin{enumerate}
+        \item Draw a transition diagram for this chain.
+        \begin{solution}
+        In the following diagram, if you the probability  is above, then it is going to the right:
+            \begin{center}
+\begin{tikzpicture}[scale=1.2, every node/.style={draw, circle, inner sep=1pt}]
+    \node (A) at (-4,0) {0};
+    \node (B) at (-2,0) {1};
+    \node (C) at (0,0) {$\cdots$}
+    \node (D) at (2,0) {$N-1$};
+    \node (E) at (4, 0) {$N$};
+
+    \draw[->] (A) -- (B) node[midway, above] {\textcolor{red}{$1$}};
+    \draw[->] (B) -- (A) node[midway, below] {\textcolor{red}{$q$}};
+    \draw[->] (B) -- (C) node[midway, above] {\textcolor{red}{$p$}};
+    \draw[->] (C) -- (B) node[midway, below] {\textcolor{red}{$q$}};
+    \draw[->] (C) -- (D) node[midway, above] {\textcolor{red}{$p$}};
+    \draw[->] (D) -- (C) node[midway, below] {\textcolor{red}{$q$}};
+    \draw[->] (D) -- (E) node[midway, above] {\textcolor{red}{$p$}};
+    \draw[->] (E) -- (D) node[midway, below] {\textcolor{red}{$1$}};
+\end{tikzpicture}
+\end{center}            
+        \end{solution}
+        \item Is the Markov chain irreducible? 
+        \begin{solution}
+Let $i,j \in [N],$ then we claim that $i \leftrightarrow j.$ Without loss of generality, suppose that $i < j.$ Suppose $j-i = N.$ Then $p(i,j)\geq p^N >0$ and $p(j,i) \geq q^N >0.$
+        \end{solution}
+        \item What is the period of this chain? 
+        \begin{solution}
+            The period has to be $2.$
+        \end{solution}
+    \end{enumerate}
+
+    \item A taxicab driver moves between the airport $A$ and two hotels $B$ and $C$ according to the following rules. If he is at the airport, he will be at one of the two hotels next with equal probability. If at a hotel, then he returns to the airport with probability $\frac{3}{4}$ and goes to the other hotel with probability $\frac{1}{4}$.
+    \begin{enumerate}
+        \item Find the transition matrix for the chain.
+        \item Suppose the driver begins at the airport at time 0. Find the probability for each of his three possible locations at time 2 and the probability he is at hotel $B$ at time 3.
+    \end{enumerate}
+
+    \item At time $n = 0$, two ladybirds are placed at vertices $i$ and $j$ of a regular hexagon, whose vertices are labeled $1, \dots, 6$. At time $n = 1$, each of them moves, independently of the other, to one of the two adjacent vertices with probability $\frac{1}{2}$, and so on at each time $n = 2, 3, \dots$.
+    \begin{enumerate}
+        \item Denote $X_n$ the distance between the two ladybirds at time $n \geq 0$, i.e., the minimum number of edges between them. Find the transition matrix for $\{X_n\}$.
+        \item Identify the communication classes. Are they recurrent or transient?
+    \end{enumerate}
+
+    \item Find the invariant (stationary) distributions for the following Markov chains with given transition matrices:
+    \[
+    \begin{bmatrix}
+        \frac{1}{2} & \frac{2}{5} & \frac{1}{10} \\
+        \frac{1}{5} & \frac{1}{2} & \frac{3}{10} \\
+        \frac{1}{10} & \frac{3}{10} & \frac{3}{5}
+    \end{bmatrix}.
+    \]
+    \begin{solution}
+        We must find a solution vector to $\pi P = \pi \iff P^T \pi^T = \pi^T$ Then 
+        \[P^T = 
+        \frac{1}{10}\begin{bmatrix}
+            5 & 2 & 1\\
+            4 & 5 & 3\\
+            1 & 3 & 6
+        \end{bmatrix}\] and call $\pi^T = \textbf{v}.$ Then 
+        the eigenvalue for $\lambda = 10$ is given by 
+        \[\ker(A - 10I)  = \ker(\begin{bmatrix}
+            -5 & 2 & 1\\
+            4 & -5 & 3\\
+            1 & 3 & -4
+        \end{bmatrix})\] The RREF of this matrix is given by 
+        \[
+            \begin{bmatrix}
+                1 &  0 & 0\\
+                0 & 1 & 0\\
+                0 & 0 & 1
+            \end{bmatrix}\]
+        So then 
+        \[v_1 = 
+        \frac{1}{10}\begin{bmatrix}
+            \frac{11}{17}\\
+            \frac{19}{17}\\
+            1
+        \end{bmatrix}\]
+    \end{solution}
+    (a)
+    \[
+    \begin{bmatrix}
+        \frac{1}{2} & \frac{2}{5} & \frac{1}{10} \\
+        \frac{3}{10} & \frac{2}{5} & \frac{3}{10} \\
+        \frac{1}{5} & \frac{1}{5} & \frac{3}{5}
+    \end{bmatrix}.
+    \]
+    (b)
+\end{enumerate}
 \end{document}

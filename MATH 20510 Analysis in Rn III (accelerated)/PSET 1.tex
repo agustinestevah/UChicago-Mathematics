@@ -138,7 +138,7 @@ if $0 < b \leq 1$. Show that this gives an additive set function $\phi$ on $\mat
     \[\phi(A \cup B) =\phi\left( \bigcup_{i=1}^\infty (e_i, d_i)\right) = \sum_{n=1}^\infty \phi((e_i, d_i)) = \sum_{n=1}^\infty \phi(a_i, b_i) + \sum_{n=1}^\infty \phi(c_i, d_i) = \phi(A) + \phi(B)\]
     Suppose $A$ contains an interval $(a_k,b_k)$ such that $a_k = 0.$ Then since $A$ and $B$ are disjoint, it is clear that $B$ cannot also contain some interval $(c_{k'}, d_{k'})$ such that $c_{k'} = 0,$ as then the sets would not be disjoint. But then the above formula still holds, noting that we can separate the infinite sum by singling out the $(a_k, b_k)$ interval and adding $1$ on both sides. 
 
-    (Not Regular) Suppose $\phi$ were regular. Let $A = (0, 1].$ Then $A \in \cal R$ and $\phi(A) = 1 + 1 = 2.$ Let $\epsilon = \frac{1}{2}$ Since $\phi$ is regular, there exists some closed $F \in \cal R$ such that $F \subset A$ and $\phi(A) \leq \phi(F) + \frac{1}{2}.$ However, since $F$ is closed and $F\subset A,$ then $F$ cannot contain an interval of the form $(0,b)$ or $(0,b],$ as otherwise, it would not be closed. So then $\phi(F) \leq \phi((\frac{1}{n}, 1]) = 1-\frac{1}{n}$ for any $n,$ and we arrive at a contradiction, since $\phi(F) + \frac{1}{2} < 1.5 < 2 = \phi(A).$  
+    (Not Regular) Suppose $\phi$ were regular. Let $A = (0, 1].$ Then $A \in \cal R$ and $\phi(A) = 1 + 1 = 2.$ Let $\epsilon = \frac{1}{2}$ Since $\phi$ is regular, there exists some closed $F \in \cal R$ such that $F \subset A$ and \[\phi(A) \leq \phi(F) + \frac{1}{2}.\] However, since $F$ is closed and $F\subset A,$ then $F$ cannot contain an interval of the form $(0,b)$ or $(0,b],$ as otherwise, it would not be closed. So then $\phi(F) \leq \phi((\frac{1}{n}, 1]) = 1-\frac{1}{n}$ for any $n,$ and we arrive at a contradiction, since \[\phi(F) + \frac{1}{2} \leq 1.5 < 2 = \phi(A).\]
 
     (Not countably additive) Suppose that $\phi$ is countably additive, then consider that 
     \[(0,1] = \bigcup_{n=1}^\infty (\frac{1}{2^n},\frac{1}{2^{n-1}}].\] We know that $\phi(0,1] = 2,$ but 
@@ -176,20 +176,20 @@ if $0 < b \leq 1$. Show that this gives an additive set function $\phi$ on $\mat
         \end{lemma}
         \begin{proof}
             It is easy to show that 
-            \[A \setminus B = A \cap B^c.\] Thus, since $B$ is measurable, then $B^c$ is measurable. Since $\mathcal{M}(m)$ is closed under finite (indeed countable ) intersections, and $A$ is measurable, then $A \cap B^c \in \mathcal{M}(m).$ 
+            \[A \setminus B = A \cap B^c.\] Thus, since $B$ is measurable, then $B^c$ is measurable. Since $\mathcal{M}(m)$ is closed under finite (indeed countable) intersections, and $A$ is measurable, then $A \cap B^c \in \mathcal{M}(m).$ 
         \end{proof}
     \begin{lemma}
         Suppose $G$ and $A$ are measurable, then 
         \[m(G) - m(A) = m(G\setminus A).\]
     \end{lemma}
     \begin{proof}
-        We have that $G\setminus A$ is measurable by lemma 1. We can write
+        We have that $G\setminus A$ is measurable by Lemma 1. We can write
         \[G = (G\setminus A) \cup A.\] Since the decomposition is disjoint and $m$ is countably additive, then 
         \[m(G) = m(G\setminus A) + m(A),\] and we are done.
     \end{proof}
-        Since $E \in \mathcal{M}(m),$ then $m(E) = m^*(E).$ There exist $\{E_n\}$ countable open cover of elementary sets such that 
-        \[E \subset \bigcup_{n=1}^\infty E_n, \qquad \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon.\] Define $G = \bigcup E_n,$ then since $m^* = m$ on elementary sets and $m$ is countably additive and $G$ is an open set and thus measurable by part (a), we have that
-        \[m(G) = m(\bigcup_{n=1}^\infty E_n) = \sum_{n=1}^\infty m(E_n) = \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon = m(E) + \epsilon.\] By the previous lemma, we have that subtracting the $m(E)$ from the right hand side,
+        Since $E \in \mathcal{M}(m),$ then $m(E) = m^*(E).$ There exist $\{E_n\}$ countable open cover of elementary sets such that\footnote{Here we recall that if $E\in \cal E,$ then $m^*(E) = \Vol(E)$} 
+        \[E \subset \bigcup_{n=1}^\infty E_n, \qquad \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon.\] Define $G = \bigcup E_n,$ then since $m^* = m$ on elementary sets and $G$ is an open set and thus measurable by part (a), we have that
+        \[m(G) = m(\bigcup_{n=1}^\infty E_n) \leq \sum_{n=1}^\infty m(E_n) = \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon = m(E) + \epsilon.\] By the previous lemma, we have that subtracting the $m(E)$ from the right hand side,
         \[m(G \setminus A) = m(G) - m(A) < \epsilon.\]
 
         Since $E \in \mathcal{M}(m),$ then $E^c \in \mathcal{M}(m),$ and thus by the above, there exists some open $G\supset E^c$ such that $m(G \setminus E^c) < \epsilon.$ Because $G^c$ is closed and clearly $G^c \subset E,$ it suffices to show that $m(E \setminus G^c) < \epsilon.$ Clearly, $E\setminus G^c = G\setminus E^c$ and so $m(E\sm G^c) = m(G \sm E^c) < \epsilon.$ Call $F = G^c$ and you are done.
@@ -200,21 +200,22 @@ if $0 < b \leq 1$. Show that this gives an additive set function $\phi$ on $\mat
         Suppose $A \in \cal B,$ then $A$ is made up of countable unions, intersection, and/or complements of open sets. But since open sets are measurable by part (a) and $\mathcal{M}(m)$ is closed under all of these operations, then $A \in \mathcal{M}(m).$ 
     \end{solution}
     \item  Suppose $E \in \mathcal{M}(m),$ then there exist $F,G \in \cal B$ such that $F \subset E \subset G.$
-    \[m(G\sm B) = m(B\sm F)\]
+    \[m(G\sm B) = m(B\sm F) = 0\]
     \begin{solution}
         Let $E \in \mathcal{M}(m),$ let $n \in \bbN.$ By part (b), there exists an open $G_n\supset E$ such that \[m(G_n \sm E) < \frac{1}{n}.\] Since $G_n$ is open, then $G_n \in \cal B.$ Define $G: = \bigcap_{n=1}^\infty G_n.$ Since $\cal B$ is a $\sigma-$algebra, then $G \in \cal B.$ Moreover, we have that for any $n,$ since $G \in \mathcal{B} \subset \mathcal{M}(m)$
         \[G \sm E \subseteq G_n \sm E \implies m(G \sm E) \leq m(G_n \sm E)< \frac{1}{n},\] and so $m(G \sm E) = 0.$ 
 
         We have that $E^c \in \mathcal{M}(m),$ and so there exists some $G\in \cal B$ containing $E^c$ such that $m(G\sm E^c) = 0.$ But then $G\sm E^c = E\sm G^c.$ $G^c \in \cal B,$ so call $F = G^c,$ and we get that $m(E \sm F) = 0.$
     \end{solution}
-    \item Let $\mathcal{N}(m) = \{A \in \mathcal{M}(m) \mid m(A) = 0\}.$ Then $\mathcal{N}(m)$ is a $\sigma-$algebra.
+    \item Let $\mathcal{N}(m) = \{A \in \mathcal{M}(m) \mid m^*(A) = 0\}.$ Then $\mathcal{N}(m)$ is a $\sigma-$algebra.
     \begin{solution}
-        Since $m(\emptyset) = 0,$ then $\emptyset \in \mathcal{N}(m).$
+        Since $m^*(\emptyset) = 0,$ then $\emptyset \in \mathcal{N}(m).$
 
-        Suppose $A_1, \dots \in \mathcal{N}(m).$ Then since $m$ is countably additive, 
-        \[m(\bigcup_{n=1}^\infty A_n) = \sum_{n=1}^\infty m(A_n) = 0,\] and so $\bigcup_{n=1}^\infty A_n \in \mathcal{N}(m).$
+        Suppose $A_1, \dots \in \mathcal{N}(m).$ Then since $m^*$ is countably subadditive, 
+        \[m(\bigcup_{n=1}^\infty A_n) \leq \sum_{n=1}^\infty m(A_n) = 0,\] and so $\bigcup_{n=1}^\infty A_n \in \mathcal{N}(m).$
 
-        Suppose $A \in \mathcal{N}(m),$ then $A^c = \bbR^d \setminus A$ 
+        Suppose $A,B \in \mathcal{N}(m),$ then $A\sm B \subset A$ and thus by monotonicity of $m^*,$ we have that 
+        \[m^*(A \sm B) \leq m^*(A) = 0,\] and so $m^*(A\sm B) =  0$ and thus $A\sm B \in \mathcal{N}(m)$
     \end{solution}
     \end{enumerate}
 
@@ -235,14 +236,15 @@ where $x + A = \{x + y \mid y \in A\}$. Prove that, if $A \in \mathcal{M}(\mathb
     Let $X$ be a metric space and $A \subset X$ be open. Let $x\in X.$ Then $x + A$ is open.
     \end{lemma}
     \begin{proof}
-        Let $z \in x + A.$ Then $z = x + a$ for some $a \in A.$ Since $a \in A$ and $A$ is open, there exists some $r>0$ such that $B_r(a)\subset A.$ We claim that $x + B_r(a) \subset x + A.$ Indeed, since $x + B_r(a) = B_r(a + x) = B_r(z),$ then it suffices to show that $x + B_r(a) \subset x + A.$ Let $z' \in x + B_r(a),$ then $z' = x + a'$ for some $a' \in B_r(a) \subset A,$ and so $z' \in x + A.$ Thus, we have found some $r>0$ such that $B_r(z)\subset x + A,$ and thus $x + A$ is open.
+        Let $z \in x + A.$ Then $z = x + a$ for some $a \in A.$ Since $a \in A$ and $A$ is open, there exists some $r>0$ such that $B_r(a)\subset A.$ We claim that $x + B_r(a) \subset x + A.$ Indeed, it is not hard to see that $x + B_r(a) = B_r(a + x) = B_r(z),$ so then it suffices to show that $x + B_r(a) \subset x + A.$ Let $z' \in x + B_r(a),$ then $z' = x + a'$ for some $a' \in B_r(a) \subset A,$ and so $z' \in x + A.$ Thus, we have found some $r>0$ such that $B_r(z)\subset x + A,$ and thus $x + A$ is open.
     \end{proof}
     \begin{lemma}
         Let $\{A_n\}_{n =1}^\infty$ be a countable open cover of $A \subset X,$ where $X$ is a topological space. If $x \in X,$ then $\{x + A_n\}$ is a countable open cover of $x + A.$
     \end{lemma}
     \begin{proof}
-        Let $z \in x + A.$ Then $z = x + a$ for some $a\in A$ and thus there exists some $k \in \bbN$ such that $A_k \in \{A_n\}$ and $a \in A_k.$ Thus, $z\in x + A_k.$ By Lemma 1, we know that $x + A_k$ is open, and thus $\{x + A_n\}_{n =1}^\infty$ is a countable open cover of $x + A.$
+        Let $z \in x + A.$ Then $z = x + a$ for some $a\in A$ and thus there exists some $k \in \bbN$ such that $A_k \in \{A_n\}$ and $a \in A_k.$ Thus, $z\in x + A_k.$ By Lemma 4, we know that $x + A_k$ is open, and thus $\{x + A_n\}_{n =1}^\infty$ is a countable open cover of $x + A.$
     \end{proof}
+    Note that the converse holds as well by identical logic.
     \begin{lemma}
      Suppose $E \in \cal E,$ and $E \subset \bbR^n.$ Then for any $x\in \bbR^n,$ $x + E \in \cal E.$
     \end{lemma}
@@ -257,7 +259,7 @@ where $x + A = \{x + y \mid y \in A\}$. Prove that, if $A \in \mathcal{M}(\mathb
         Suppose $E \in \cal E,$ and $E \subset \bbR^n.$ Then for any $x\in \bbR^n,$ we have that $\Vol(E) = \Vol(x + E).$ 
     \end{lemma}
     \begin{proof}
-        First, we know that $\Vol(x + E)$ is well defined since by Lemma 3, $x + E \in \cal E.$ By work in class, we know that we can decompose $E$ into $E = \bigsqcup_{k=1}^N I_k,$ where each the $I_k$ are disjoint intervals. By work done in the Lemma 3, we know that $x + E = \bigsqcup_{k=1}^N (x + I_k),$ where again, $(x + I_k)$ are disjoint nonempty intervals made of points such that $\textbf{x} \in (x + I_k)$ if and only if 
+        First, we know that $\Vol(x + E)$ is well defined since by Lemma 6, $x + E \in \cal E.$ By work in class, we know that we can decompose $E$ into $E = \bigsqcup_{k=1}^N I_k,$ where each the $I_k$ are disjoint intervals. By work done in the Lemma 6, we know that $x + E = \bigsqcup_{k=1}^N (x + I_k),$ where again, $(x + I_k)$ are disjoint nonempty intervals made of points such that $\textbf{x} \in (x + I_k)$ if and only if 
         \[a_i  + x \leq x_i \leq b_i + x,\] where $(a_i, b_i)$ are the endpoints of the edges of each $I_i.$ Thus, we have that 
         \begin{align*}
             \Vol(E) &= \Vol(\bigsqcup_{k=1}^N I_k)\\
@@ -270,8 +272,8 @@ where $x + A = \{x + y \mid y \in A\}$. Prove that, if $A \in \mathcal{M}(\mathb
         \end{align*}
     \end{proof}
 Finally, we are ready to prove the statement. Let $\epsilon>0.$ Let $\{A_n\}_{n=1}^\infty$ be a countable open cover of $A$ such that each $A_n \in \cal E$ and 
-\[\sum_{n=1}^\infty \Vol(A_n) \leq m^*(A) + \epsilon.\] By Lemma 4, we have that 
-\[\sum_{n=1}^\infty \Vol(A_n) = \sum_{n=1}^\infty\Vol(x + A_n).\] By Lemma 2, we know that $\{x + A_n\}_{n=1}^\infty$ is a countably open cover of $x + A.$ By Lemma 3, $x + A_n \in \cal E$ for all $n.$ Thus, 
+\[\sum_{n=1}^\infty \Vol(A_n) \leq m^*(A) + \epsilon.\] By Lemma 7, we have that 
+\[\sum_{n=1}^\infty \Vol(A_n) = \sum_{n=1}^\infty\Vol(x + A_n).\] By Lemma 5, we know that $\{x + A_n\}_{n=1}^\infty$ is a countably open cover of $x + A.$ By Lemma 6, $x + A_n \in \cal E$ for all $n.$ Thus, 
 \[m^*(x + A) \leq\sum_{n=1}^\infty\Vol(x + A_n) =\sum_{n=1}^\infty \Vol(A_n) \leq m^*(A) + \epsilon,\] and so because this holds for any $\epsilon>0,$ we have that.
 \begin{align}
     m^*(x + A) \leq m^*(A)
@@ -296,7 +298,7 @@ Putting together (1) and (2), we see that $m^*(A) = m^*(x + A).$
     \[m^*\big[(x + A)\triangle (x + B)\big] = m^*(x + A\triangle B) = m^*(A\triangle B).\]
 \end{proof}
 
-Suppose $A \in \mathcal{M}(m),$ then there exists some $(A_n)\in \mathcal{M}_F(m)$ such that $A = \bigcup_{n=1}^\infty A_n$. We claim that $x + A = \bigcup_{n=1}^\infty (x + A_n)$ where $x + A_n \in \mathcal{M}_F(m).$ To see the second claim, consider that since $A_n \in \mathcal{M}_F(m),$ then for each $n,$ there exists a sequence $(E^{(n)}_k) \in \cal E$ such that $E^{(n)}_k \to A_n$ (in exterior measure) as $k\to \infty.$ Thus, for every $n,$ we have by lemma 8 that for large $k,$ 
+Suppose $A \in \mathcal{M}(m),$ then there exists some $(A_n)\in \mathcal{M}_F(m)$ such that $A = \bigcup_{n=1}^\infty A_n$. We claim that (1) $x + A = \bigcup_{n=1}^\infty (x + A_n)$ where (2) $x + A_n \in \mathcal{M}_F(m).$ To see the second claim, consider that since $A_n \in \mathcal{M}_F(m),$ then for each $n,$ there exists a sequence $(E^{(n)}_k) \in \cal E$ such that $E^{(n)}_k \to A_n$ (in exterior measure) as $k\to \infty.$ Thus, for every $n,$ we have by Lemma 8 that for large $k,$ 
 \[m^*(E^{(n)}_k \triangle A_n) = m^*\big[(x + E^{(n)}_k) \triangle (x + A_n)\big] < \epsilon\]
 
 By lemma 6, we know that $x + E_k^{(n)} \in \cal E,$ so then $x + A_n \in \mathcal{M}_F(m)$ for every $n.$ It remains to show that 
@@ -322,7 +324,7 @@ m^*(X) \leq \sum_{n=1}^\infty m^*(X_n)
 Let $\epsilon>0.$ For each $n,$ define 
 \[E_\epsilon^n = \{(x,y) \in \bbR^2 \mid x \in (-n, n), y \in (-\frac{\epsilon}{2^n \cdot 4n}, \frac{\epsilon}{2^n \cdot 4n})\}.\] Clearly, we know that 
 \begin{enumerate}
-    \item $X_n \subset E_\epsilon^n$ for any $n,$ for any $\epsilon>0.$ Thus, $E_\epsilon^n$ is an open cover of $X_n,$ and so 
+    \item $X_n \subset E_\epsilon^n$ for any $n,$ for any $\epsilon>0.$ Thus, $E_\epsilon^n$ is an open cover of $X_n,$ and so since $E_\epsilon^n$ is an interval,
     \begin{align}
         m^*(X_n) \leq \Vol(E_\epsilon^n), \qquad \forall \;n \in \bbN
     \end{align}
