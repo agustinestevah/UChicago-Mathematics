@@ -1,0 +1,242 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{208}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 1}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{\today}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    A function $f: \bbC \to \bbC$ is said to satisfy the mean value property if and only for every $z_0 \in \bbC$ and $r>0,$ we have that 
+    \[f(z_0) = \frac{1}{2\pi}\int_0^{2\pi}f(z_0 + r\cos(\theta) + i r \sin(\theta))d\theta.\]
+
+    Show that if $f(z) = z^2,$ then $f$ satisfies the mean value property.
+\end{problem}
+\begin{solution}
+    Note that since $f(z) = z^2,$ we have that for any $z_0 \in \bbC,$
+    \begin{align*}
+    f(z_0 + r\cos(\theta) + i r\sin(\theta)) &= f(z_0 + re^{i \theta})\\ &= z_0^2 + 2z_0e^{i\theta}+ r^2e^{2i\theta}\\
+    \end{align*}
+    \begin{lemma}
+        For any $n \geq 0,$ we have that \[e^{i2\pi n} = 1\]
+    \end{lemma}
+    \begin{proof}
+        \[e^{i2\pi n} = \cos(2\pi n) + i \sin(2\pi n) = 1\]
+    \end{proof}
+    Evaluating the integral:
+    \begin{align*}
+        \int_0^{2\pi}(z_0^2 + 2z_0e^{i\theta}+ r^2e^{2i\theta}) d\theta &= z_0^2\int_0^{2\pi}d\theta + 2z_0\int_0^{2\pi}e^{i\theta}d\theta+ r^2\int_0^{2\pi}e^{2i\theta} d\theta\\
+        &= 2\pi z_0^2 + 2z_0 \frac{1}{i}[e^{i2\pi} - 1] + r^2 \frac{1}{2i}[e^{4i\pi} - 1]\\
+        &= 2\pi z_0^2 + 2z_0 \frac{1}{i}[1 - 1] + r^2 \frac{1}{2i}[1 - 1]\\
+        &= 2\pi z_0^2
+    \end{align*}
+    Thus, dividing by $2\pi$ yields the result.
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Let $f(z) = z^3,$ and let 
+    \[u(x,y) = \Re{f(x + iy)}, \quad v(x,y) = \Im{f(x + iy)}.\] Prove that, for all $x,y \in \bbR,$ 
+    \[\triangle u(x,y) = \triangle v(x,y) = 0,\] where $\triangle$ is the Laplacian operator
+    \[\nabla = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}\]
+\end{problem}
+
+\begin{solution}
+    Let $x,y \in \bbR,$ then
+    \begin{align*}
+    f(x + iy) &= (x + iy)^3\\ &= (x^2 + 2ixy  -y^2)(x + iy)\\ &= x^3  + 2ix^2 y - xy^2 +ix^2y - 2xy^2 - iy^3\\ &= x^3 - 3xy^2  + i(3x^2 y - y^3)    
+    \end{align*}
+    We then have that 
+    \[u(x,y) = x^3 - 3xy^2, \qquad v(x,y) = 3x^2y - y^3.\]
+    Computing the Laplacian:
+    \begin{align*}
+        \triangle u(x,y) &= \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}\\
+        &= 6x + (-6x)\\
+        &= 0
+    \end{align*}
+    and
+    \begin{align*}
+        \triangle v(x,y) &= \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2}\\
+        &= 6y + (-6y)\\
+        &= 0
+    \end{align*}
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Suppose $\Omega \subset \bbC$ is an open connected set (a region) and $u: \Omega \to \bbR$ such that 
+    \[\frac{\partial u}{\partial x} =\frac{\partial u}{\partial y} = 0.\] Prove that $u$ must be constant on $\Omega.$
+\end{problem}
+\begin{solution}
+We assume that $\Omega \neq \emptyset$ as otherwise the statement is vacuously true. Let $z_0 \in \Omega.$ 
+
+Since $\Omega$ is connected, then it is polygonally connected. Let $z \in \Omega.$ There exists some polygonal path $\gamma$ that connects $z$ and $z_0.$ Since $\frac{\partial u}{\partial x}: \Re{\Omega} \to \bbR$ is constantly zero, then it is continuous. Similarly, $\frac{\partial u}{\partial y}: \Im{\Omega} \to \bbR$ is continuous. Thus, \[D[u(z)] = \begin{bmatrix}
+    \frac{\partial u(z)}{\partial x} &  \frac{\partial u(z)}{\partial y}
+\end{bmatrix}: \Omega \to \bbR\] (the total derivative) is continuous on $\Omega.$ Note that $Du$ has a primitive, $u$ on $\Omega,$ since $u' = Du.$ Thus, we have that
+\[\int_\gamma D[u(z)] dz = u(z_0) - u(z). \] But we have that $D[u(z)] = 0$ along any path in $\Omega$ since all the components are $0,$ and thus the path integral along $\gamma$ must be $0$ and so
+\[u(z_0) = u(z).\] Because $z$ was arbitrary, then $u$ must be constant on $\Omega.$
+\end{solution}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Suppose that $u: \overline{D_r(z_0)}\subseteq \bbC \to \bbR$ is a continuous function which attains its maximum at $z_0.$ Suppose further that $u$ satisfies 
+    \[u(z_0) = \frac{1}{2\pi}\int_0^{2\pi}u(z_0 + r\cos \theta + ir\sin\theta)d\theta.\] Prove that if $z\in \overline{D_r(z_0)}$ such that $|z - z_0| = r,$ then $u(z) = u(z_0).$
+\end{problem}
+\begin{solution}
+\begin{lemma}
+Let $S_r(z_0)$ denote the sphere of radius $r$ around $z_0.$ We claim that
+    \[S_r(z_0) = \{z_0 + re^{i\theta} \mid \theta \in [0, 2\pi)\}\]
+\end{lemma}
+\begin{proof}
+    Let $z \in S_r(z_0).$ Without much loss in generality from a translation, we can assume that $z \in S_r(0).$ Then $z = x + iy.$ Letting $\theta = \tan^{-1}(\frac{y}{x}),$ we see that $x = r\cos\theta$ and $y = r\sin\theta.$ Thus, $x + iy = re^{i\theta}.$  
+
+    Let $z \in \{z_0 + re^{i\theta} \mid \theta \in [0, 2\pi)\},$ then there exists some $\theta_0 \in [0,2\pi)$ such that $z = z_0  + re^{i\theta}.$ Thus, 
+    \[|z - z_0| = |re^{i\theta}| = r|e^{i\theta}| = r,\] and so $z_0 \in S_r(z_0).$
+\end{proof}
+Suppose not. That is, for all $z\in S_r(z_0),$ we have that $u(z) \neq u(z_0).$
+Since $z_0$ is the maximum of $u$ on the disk, then we immediately have that 
+    \[u(z) < u(z_0).\] By Lemma 2, for any $z\in S_r(z_0),$ there exists some $\theta \in (0, 2\pi]$ such that $z = z_0 + re^{i\theta}.$  Then 
+    \[u(z_0) =\frac{1}{2\pi}\int_0^{2\pi} u(z_0 + re^{i\theta})d\theta = \frac{1}{2\pi}\int_0^{2\pi}u(z(\theta))d\theta < 
+    u(z_0) \frac{1}{2\pi}\int_0^{2\pi}d\theta = u(z_0)\] But then $u(z_0) < u(z_0),$ a contradiction!
+\end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Suppose $u: \overline{\Omega} \to \bbR$ is a continuous function on the closure of a bounded region $\Omega \subset \bbC.$ Suppose that $u$ has the mean value property in $\Omega.$ That is, whenever $\overline{D_r(z_0)}\subseteq \Omega,$
+    \[u(z_0) = \frac{1}{2\pi}\int_0^{2\pi} u(z_0 + re^{i\theta})d\theta.\] Prove that if $u$ takes a maximum value inside of $\Omega,$ then $u$ must be constant.
+\end{problem}
+\begin{solution}
+Since $\overline{\Omega}$ is bounded and closed, then it is compact. Since $u$ is a continuous function over $\overline{\Omega},$ then it achieves its maximum at some $z_0 \in \overline{\Omega}.$ Suppose that $z_0 \in \Omega.$ Define 
+    \[A:= \{z \in \Omega \mid u(z) = u(z_0)\}.\] We aim to show that $A$ is clopen,
+    since $\Omega$ is a region, then it is an open connected subset, and so the only clopen subsets it contains are itself and the emptyset. But since $z_0 \in A,$ then $A \neq \emptyset,$ and so if we show that $A$ is clopen, then it must necessarily be $\Omega.$
+
+    Let $z \in A$ and $\epsilon>0.$ By continuity of $u,$ there exists some $\delta>0$ such that if $|z - z'| < \delta,$ then $|u(z) - u(z')| < \epsilon.$ Since $\Omega$ is open, then there exists some $r'>0$ such that if $|z - z'| < r',$ then $z' \in \Omega.$ Take $R = \min\{\delta, r'\}.$ Let $z' \in D_R(z).$ There is some $r>0$ with $r \leq R$ such that $z' \in S_r(z').$ By the previous problem, since $u|_{D_r(z)}: D_r(z)\subseteq \overline{\Omega} \to \bbR$ attains its maximum at $z$ and $|z' - z| = r$ and 
+    \[u(z) = \frac{1}{2\pi}\int_0^{2\pi}u(z_0  + re^{i\theta})d\theta,\] then $u(z) = u(z').$ Therefore, $z' \in A$ and so we have found an $R>0$ such that if $z' \in D_R(z),$ then $z' \in A.$ Then $A$ is open.
+
+    Let $(z_n) \in A$ with $z_n \to z.$ We claim that $z\in A.$ Since $u$ is continuous, then $u(z_n) \to u(z),$ but since $u(z_n) = u(z_0)$ for all $n$ since each $z_n \in A,$ then $u(z) = u(z_0),$ and thus $z \in A.$ Then we have that $A$ is closed.
+
+    Thus, since $A$ is both closed and open and since $A\neq \emptyset,$ then $A  = \Omega.$ Thus, for all $z\in \Omega,$ $u(z)= u(z_0).$ It remains to see that $u$ is constant on $\partial \Omega.$ 
+
+    Let $z \in \partial \Omega,$ then there exists some $(z_n) \in \Omega$ such that $z_n \to z.$ By continuity of $u,$ we have that $u(z_n) \to u(z),$ but since $u$ is constant in $\Omega,$ we get that $u(z_n) = u(z_0),$ and thus $u(z) = u(z_0),$ and so $u$ is indeed constant on the boundary as well.
+\end{solution}
+
+\end{document}

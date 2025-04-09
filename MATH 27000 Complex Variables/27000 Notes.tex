@@ -27,8 +27,8 @@
 
 
 
-\title{UChicago Markov Chains, Martingales, and Brownian Motion Analysis Notes: 23500}
-\author{Notes by Agustín Esteva, Lectures by Stephen Yearwood, Books by }
+\title{UChicago Complex Analysis Notes: 27000}
+\author{Notes by Agustín Esteva, Lectures by Robert Fefferman, Book by Stein and Shakarchi}
 \date{Academic Year 2024-2025}
 
 \begin{document}
@@ -173,7 +173,7 @@ Continuity in $\bbC$ is identical to continuity in $\bbR^2,$ since they are iden
 \end{exmp}
 
 \newpage
-\subsection{Tuesday, Apr 1: }
+\subsection{Tuesday, Apr 1: The Complex Integral}
 Suppose $f: [a,b] \to \bbC.$ Then, if the limit exists,
 \[f'(t) = \lim_{h\to 0}\frac{f(t+  h) - f(t)}{h}.\] All the normal quotient, product, and chain rules apply.
 
@@ -258,5 +258,158 @@ Suppose $f: [a,b] \to \bbC$ and $f'$ is continuous on $[a,b].$ Then
         \[\text{length}(\gamma) = \int_0^{2\pi} \gamma' = r\int_0^{2\pi} |\sin(\theta) + i\cos(\theta)| = 2\pi |r|\]
     \end{enumerate}
 \end{exmp}
+
+\newpage
+\subsection*{Thursday, Apr 3: Properties of the Integral}
+
+\begin{thm}
+Suppose $(f_n)$ are continuous functions on open $O \subseteq \bbC.$ Assume that for some path $\gamma$ in $O,$ (a path being in $O$ means that $\gamma([a,b]) \subseteq O$). Assume that $f_n(z) \to f$ uniformly on $\{\gamma(t) \mid t \in [a,b]\}.$ Then 
+\[\int_\gamma f_n(z)dz  \to \int_\gamma f(z)dz\]
+
+\end{thm}
+\begin{proof}
+Since $f_n \to f$ uniformly, $\sup_{z}|f_n(z) - f(z)| < \frac{\epsilon}{\text{length}(\gamma)  + 1}$ for large $n.$ 
+\begin{align*}
+\left|\int_\gamma f_n(z)dz - \int_\gamma f(z)\right| &= \left|\int_\gamma f_n(z) - f(z)\right|\\
+&\leq \sup_{t\in [a,b]}|f_n(\gamma(t) - f(\gamma(t)))|\text{length}(\gamma)\\
+&< \epsilon
+\end{align*}
+
+\end{proof}
+
+\begin{thm}
+Suppose $f$ is continuous on open $O\subseteq \bbC$ and $f: O \to \bbC.$ Let $\gamma$ be a path in $O.$ If $f$ has a primitive on $O$ (i.e. there is some $F(t)$ in $O$ such that $F'(z) = f(z)$ for all $z\in O$), then \[\int_\gamma f(z)dz= F(\gamma(b)) - F(\gamma(a))\]
+\end{thm}
+
+With these conditions, these immediately implies path independence, as long as the paths start and end at the same time, and that this also implies that a line integral yields $0$ along a closed loop.
+\begin{proof}
+    Suppose $\gamma'$ is continuous. Then 
+    \[\int_\gamma f(z)dz = \int_a^b f(\gamma(t))\gamma'(t)dt = \int_a^b F'(\gamma(t))\gamma'(t)dt = \int_a^b (F\circ \gamma)'(t)dt = F(\gamma(b)) - F(\gamma(a))\]
+
+    For the general case, we only know that $\gamma'$ is piecewise continuous. Partition $[a,b]$ into $a = t_0 < t_1 < \dots < t_n = b$ such that $\gamma'$ is continuous on each subinterval $\{[t_{i-1},t_i ]\}_{i \in [n]}.$ Then we use the degenerate case above for each subinterval
+    \[\int_\gamma f(z)dz = \int_a^b F'(\gamma(t))\gamma'(t)dt = \sum_{i = 1}^n \int_{t_{i-1}}^{t_i}F'(\gamma(t))\gamma'(t) = \sum_{i=1}^n \left[F(\gamma(t_i)) - F(\gamma(t_{i-1}))\right] = F(\gamma(b)) -F(\gamma(a))\]
+\end{proof}
+
+What happens when we have the same path, $\gamma,$ but the parametrization of $\gamma$ changes? That is, what if there is another parameterization of the same path? 
+
+\begin{thm}
+    Suppose $\gamma: [a,b] \to O,$ where $O\subseteq \bbC$ is open, and suppose $f: O \to \bbC$ is continuous. Suppose further that $\phi: [c,d] \to [a,b]$ such that $\tilde{\gamma}(t) = \gamma(\phi(t))$ for $t\in [c,d].$ If $\phi'$ is continuous and $\phi$ is a bijection and $\phi' >0$ ($\phi$ and $\gamma$ have the same orientation), then 
+    \[\int_{\tilde{\gamma}} f(z)dz = \int_\gamma f(z)dz\]
+\end{thm}
+
+\begin{proof}
+Recall the standard change of variables formula from analysis, if
+\[\int_{[c,d]} f(\phi(x))|\phi'(x)|dx = \int_{\phi([c,d])}f(y)dy\]
+    By definition
+    \begin{align*}
+        \int_{\tilde{\gamma}} f(z)dz &= \int_c^d f(\tilde{\gamma}(t))\tilde{\gamma}'(t) dt\\
+        &= \int_c^d f(\gamma(\phi(t)))\tilde{\gamma}'(t)dt\\
+        &= \int_c^d f(\gamma(\phi(t)))\gamma'(\phi(t))\phi'(t)dt\\
+        &= \int_c^d f(\gamma(\phi(t)))\gamma'(\phi(t))|\phi'(t)|dt\\
+        &= \int_a^b f(\gamma(s))\gamma'(s)ds\\
+        &= \int_\gamma f(z)dz
+    \end{align*}
+If $\phi' < 0,$ then we must compensate where we put in $|\phi'(t)|$ by putting in a negative sign in front of the integral, and thus when the orientation of the parameterization is opposite, the integrals are opposite.
+\end{proof}
+
+
+\begin{rem}
+    Consider the function $f: \bbR \to \bbR$ defined by 
+    \[f(x) = \begin{cases}
+        e^\frac{-1}{x^2}, \qquad x >0\\
+        0, \qquad \quad x\leq 0
+    \end{cases}.\] It is not hard to show that, although $f(x)$ is smooth (infinitely differentiable), it is not analytical! That is, there does not exist a converging power series at every $x\in \bbR$ that equals $f(x).$ The converse clearly holds for $\bbR.$
+
+    We will show that if $O \subset \bbC$ is open, and there is a holomorphic function on $O,$ then if there is a disk around any point $z_0 \in O,$ then the function is analytical!
+\end{rem}
+
+\begin{prop}
+    Let $f(z) = \sum_{n=1}^\infty a_n z^n.$ Then there exists some $\rho \in [0, \infty]$ called the \textbf{radius of convergence},  such that if $|z| < \rho,$ then the series absolutely converges. If $|z| > \rho,$ then $\{a_nz^n\}$ is unbounded.
+\end{prop}
+\begin{exmp}
+    \begin{itemize}
+        \item Consider 
+        \[f(z) = \sum_{n=1  }^\infty z^n,\] then $\rho = 1$ since it is a geometric series if $z < 1$ and obviously diverges if $|z|\geq 1.$ When $|z| = 1,$ try to see for yourself why $z = i$ diverges. 
+        \item The classic 
+        \[f(z) = \sum_{n=1}^\infty \frac{z^n}{n!},\] which converges everywhere! That is. $\rho = \infty.$
+    \end{itemize}
+\end{exmp}
+
+\newpage
+\subsection{Tuesday, Apr 8: Power Series}
+We recalled Theorem 6 and 7 from the previous class.
+
+\begin{rem}
+    Consider the following change of variable: 
+    \[\varphi: [a,b]\to [a,b], \quad \varphi(t) = a + b - t,\] then note that $\varphi$ makes $\gamma$ run in reverse
+\end{rem}
+
+\begin{rem}
+    A general power series, centered at some $z_0 \in O \subset \bbC,$ is defined to be the formal sum
+    \[\sum_{n=1}^\infty a_n(z - z_0)^n.\] We will usually just take $z_0 = 0.$ 
+\end{rem}
+
+\begin{prop}
+    For any power series $ \sum_{n=1}^\infty a_n z^n,$ the radius of convergence is 
+    \[\rho = \sup\{|z| \mid (a_nz^n) \text{ is bounded}\}\]
+\end{prop}
+\begin{proof}
+    If $|z_0| > \rho,$ then $(a_n z_0^n)$ is unbounded, and thus the series cannot converge, since the terms do not go to zero.
+
+    If $|z_0| < \rho,$ then let $\epsilon >0$ such that $|z_0| = \rho - \epsilon.$ Consider that since $|a_n|(\rho - \frac{\epsilon}{2})^n$ is bounded by some $M$ since it is less than $\rho.$
+    \begin{align*}
+        \sum_{n=1}^\infty |a_n||z_0|^n &= \sum_{n=1}^\infty(|a_n|( \rho - \frac{\epsilon}{2}))^n \frac{|z_0|^n}{(\rho - \frac{\epsilon}{2})^n}\\
+        &\leq M\sum_{n=1}^\infty \left(\frac{|z_0|}{(\rho - \frac{\epsilon}{2})}\right)^n\\
+        &< \infty,
+    \end{align*}
+    The series converges geometrically since $\frac{|z_0|}{(\rho - \frac{\epsilon}{2})} < 1.$
+\end{proof}
+
+\begin{lemma}
+    We claim that 
+    \[\frac{w^n - w^n}{z - w} = z^{n-1} + z^{n-2}w + \dots w^{n-1}\]
+\end{lemma}
+\begin{proof}
+   Note that 
+    \[(z-w)\left(z^{n-1} + z^{n-2}w + \dots w^{n-1}\right) = z^n - w^n\]
+\end{proof}
+
+\begin{thm}
+    If $|z| < \rho,$ and 
+    \[f(z) = \sum_{n=0}^\infty a_n z^n,\] then $f$ is differentiable at $z$ and 
+    \[f'(z) = \sum_{n=0}^\infty n a_n z^{n-1}\]
+\end{thm}
+\begin{proof}
+Let $|z_0| = \rho - \epsilon$
+    The difference quotient is given by 
+    \begin{align*}
+        \frac{f(z_0 + h) - f(z_0)}{h} &= \frac{\sum_{n=1}^\infty a_n (z_0 + h)^n - \sum_{n=1}^\infty a_nz_0^n}{h}
+    \end{align*}
+Note since the terms $a_n z_0^{n-1}$ are geometric, then the series 
+\[\sum_{n=1}^{\infty} n a_n z_0^{n-1}\] converges (one can check this with the ratio test).
+    Thus, consider that 
+\begin{align*}
+    &\left|\frac{\sum_{n=0}^\infty a_n (z_0 + h)^n - \sum_{n=1}^\infty a_nz_0^n}{h} - \sum_{n=0}^\infty na_n z_0^{n-1}\right| =\\ &= \left|\sum_{n=0}^N a_n\frac{ (z_0 + h)^n - z_0^n}{h} + \sum_{N + 1}^\infty \frac{ (z_0 + h)^n - z_0^n}{h} - \sum_{n=0}^\infty na_n z_0^{n-1} - \sum_{N+1}^\infty  na_n z_0^{n-1}\right|\\
+    &\leq \left|\sum_{n=0}^N a_n\frac{ (z_0 + h)^n - z_0^n}{h} - na_nz_0^{n-1}\right| + \left|\sum_{N+1}^\infty a_n\frac{ (z_0 + h)^n - z_0^n}{h}\right| + \left|na_nz_0^{n-1} \right| \\
+    &\xrightarrow{h\to 0} \left|\sum_{n=0}^N na_nz_0^{n-1} - na_nz_0^{n-1}\right| + \left|\sum_{N+1}^\infty a_n\frac{ (z_0 + h)^n - z_0^n}{h}\right| + \left|na_nz_0^{n-1} \right|\\
+    &= \left|\sum_{N+1}^\infty a_n\frac{ (z_0 + h)^n - z_0^n}{h}\right| + \left|\sum_{N+1}^\infty na_nz_0^{n-1} \right|
+\end{align*}
+Since $\sum_{N+1}^\infty na_nz_0^{n-1} $ converges geometrically, then the sum goes to zero as $N \to \infty.$ Using Lemma 1, we note that if $h < \frac{\epsilon}{2}$ and $|z_0| = \rho - \epsilon,$ then 
+\[|z_0  + h| \leq |z_0| + |h| < \rho - \frac{\epsilon}{2}\]
+\[\left|\sum_{N+1}^\infty a_n\frac{ (z_0 + h)^n - z_0^n}{h}\right| = \sum_{N+1}^\infty |a_n|\left|\frac{ (z_0 + h)^n - z_0^n}{(z_0 + h) - z_0}\right| \leq \sum_{N+1}^\infty |a_n|\sum_{k=0}^{n-1} |(z_0 + h)|^k |z_0|^{n-1-k}  < \sum_{N+1}^\infty n|a_n|  (\rho - \frac{\epsilon}{2})^{n-1} \xrightarrow[N\to \infty]{} 0\] since it converges geometrically again
+\end{proof}
+
+\begin{cor}
+    $f(z) = \sum_{n=0}^\infty a_n z^n$ is infinitely differentiable for all $z$ such that $|z| < \rho.$ Moreover, 
+    \[a_n = \frac{1}{n!}f^{(n)}(0)\]
+\end{cor}
+\begin{proof}
+    By Theorem 8, we have that for all $|z| < \rho$
+    \[f'(z) = \sum_{n=0}^\infty n a_n z^{n-1}.\] Note that $f'(z)$ has a bigger radius of convergence than $f(z)$ since $na_n z^{n-1}$ is still bounded and is still geometrically 'small.' Thus, we apply Theorem 8 again to $f'(z),$ then 
+    \[f''(z) = \sum_{n=0}^\infty n(n-1)a_n z^{n-2}.\] For the second claim, 
+    \[f(z) = a_0 + a_1z + \dots +  a_nz^n + \cdots\] Then $f(0) = a_0.$ Also, $f'(z) = a_1 
+ + \dots na_n z^{n-1}$ and so $f'(0) = a_1.$ Also, 
+ \[f''(z) = 2a_2z + \dots  + n(n-1)z^{n-2} + \cdots,\] and so $f''(0) = 2a_2.$ Inducting yields the result.
+\end{proof}
 
 \end{document}

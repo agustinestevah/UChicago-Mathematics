@@ -154,14 +154,21 @@ if $0 < b \leq 1$. Show that this gives an additive set function $\phi$ on $\mat
         \item If $A$ is open, then $A \in \mathcal{M}(m).$ If $B$ is closed, then $B \in \mathcal{M}(m).$
         \begin{solution}
             \begin{lemma}
-                Suppose $U\subset \bbR^d$ is open. Then it can be uniquely expressed as a countable union of disjoint open intervals, where the endpoints of the intervals don't belong to $U.$ 
+                Suppose $U\subset \bbR^d$ is open. Then it can be uniquely expressed as a countable union of open intervals, where the endpoints of the intervals don't belong to $U.$ 
             \end{lemma} 
             \begin{proof}
-            (We were shown this proof in Honors Analysis 1, so it might resemble the one found in Pugh's Real Analysis). 
+         We will first show the result for $\bbR.$ 
                 Let $x\in U.$ Define then 
                 \[a_x = \inf\{a \mid (a,x) \subseteq U\}, \qquad b_x = \sup\{b \mid (x,b)\subseteq U\}, \qquad I_x = (a_x, b_x).\]  Suppose, for the sake of contradiction, that $b_x \in U.$ There exists some open $J_x \subseteq U$ such that $J \ni b_x$ (by the above construction), so then $A_x = J_x \cup I_x$ is an open interval containing $b_x$ and $x.$ Since $A_x$ is open, then $b_x \in B_r(b_x) \subseteq A_x,$ and thus there exists some $b' >b_x$ such that $b' \in A_x \subset U,$ and so $b_x \neq \sup\{b \mid (x,b) \subseteq U\}.$ Thus, neither $b_x$ nor $a_x$ are in $U.$ Let $y\in U.$ Either $I_x, I_y$ are disjoint, or by the above argument, since $I_x \cup I_y$ is an open interval containing $x,$ and $y,$ $I_x = I_y.$ Let $q_x \in I_x$ for each disjoint interval in $U,$ where $q_x \in \bbQ,$ then we can count the $I_x$ by the rationals within them. 
 
+        
+
                 As a side note, it is valid for $a_x = -\infty$ and $b_x = \infty.$
+
+        Consider that since $A$ is open, then for any $x\in A,$ there exists some open cube containing $x$ of side length $\frac{1}{2^N}$ where $N$ is large such that the cube is entirely contained in $A.$
+        
+        For a general $\bbR^n$ with $n \geq 2,$ consider the grid of cubes formed by the integer lattice $\bbZ^n.$ We know that $A \subset \bigcup_{i=1}^k Q_k,$ where $Q_k$ are open cubes of side length $1$ and volume $1.$ Refine $\{Q_k\}$ to be just $\{Q^{\text{good}, 1}_k\} \cup \{Q_k^{\text{1}}\}.$ where $Q_k^\text{good, 1}\subset A$ and $Q_k^{{1}} \cap A \neq \emptyset$ and $Q_k^{1} \cap A^c \neq \emptyset.$ Throw out all other $Q_k.$ Refine $\{Q_k^1\}$ dividing each $Q_k^1$ into  open cubes of side length $\frac{1}{2}.$ Repeat the process of accepting these new cubes into $\{Q_k^{\text{good  }, 2}\}$ and $\{Q_k^2\},$ and divide the $Q_k^2$ and repeat indefinitely. Because every $x\in A$ is contained in one of these $Q_k^{\text{good}, N},$ then 
+        \[A \subset \bigcup_{i, k=1}^\infty Q_k^{\text{good}, i}\]
             \end{proof}
             By the above lemma, $A = \bigcup_{k=1}^\infty I_k,$ where each $I_k$ is a disjoint open interval. 
             We have shown in class that if $I_k \in \cal E,$ then $I_k \in \mathcal{M}(m).$ Since $\mathcal{M}(m)$ is a $\sigma-$algebra, then it is closed under countable unions, and thus $U \in \mathcal{M}(m).$ 
@@ -187,11 +194,15 @@ if $0 < b \leq 1$. Show that this gives an additive set function $\phi$ on $\mat
         \[G = (G\setminus A) \cup A.\] Since the decomposition is disjoint and $m$ is countably additive, then 
         \[m(G) = m(G\setminus A) + m(A),\] and we are done.
     \end{proof}
-        Since $E \in \mathcal{M}(m),$ then $m(E) = m^*(E).$ There exist $\{E_n\}$ countable open cover of elementary sets such that\footnote{Here we recall that if $E\in \cal E,$ then $m^*(E) = \Vol(E)$} 
+        Suppose $E \in \mathcal{M}_F(m),$ then $m(E) = m^*(E)< \infty.$ There exist $\{E_n\}$ countable open cover of elementary sets such that\footnote{Here we recall that if $E\in \cal E,$ then $m^*(E) = \Vol(E)$} 
         \[E \subset \bigcup_{n=1}^\infty E_n, \qquad \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon.\] Define $G = \bigcup E_n,$ then since $m^* = m$ on elementary sets and $G$ is an open set and thus measurable by part (a), we have that
         \[m(G) = m(\bigcup_{n=1}^\infty E_n) \leq \sum_{n=1}^\infty m(E_n) = \sum_{n=1}^\infty m^*(E_n) \leq m^*(E) + \epsilon = m(E) + \epsilon.\] By the previous lemma, we have that subtracting the $m(E)$ from the right hand side,
         \[m(G \setminus A) = m(G) - m(A) < \epsilon.\]
 
+        For the general case, let $E \in \mathcal{M}(m).$ Then there exist $(E_n) \in \mathcal{M}_F(m)$ such that 
+        \[E = \bigcup_{n=1  }^\infty E_n.\] For each $E_n,$ we have showed that there exists some open $G_n$ such that 
+        \[m(G_n\sm E_n)<\frac{\epsilon}{2^n}.\] Take $G = \bigcup_{n=1}^\infty G_n,$ which is open. Then $E \subset G$ and
+        \[m(G\sm E) = m(\bigcup_{n=1}^\infty G_n\sm E_n) \leq \sum_{n=1}^\infty m (G_n \sm E_n)< \sum_{n=1}^\infty \frac{\epsilon}{2^n}  = \epsilon\]
         Since $E \in \mathcal{M}(m),$ then $E^c \in \mathcal{M}(m),$ and thus by the above, there exists some open $G\supset E^c$ such that $m(G \setminus E^c) < \epsilon.$ Because $G^c$ is closed and clearly $G^c \subset E,$ it suffices to show that $m(E \setminus G^c) < \epsilon.$ Clearly, $E\setminus G^c = G\setminus E^c$ and so $m(E\sm G^c) = m(G \sm E^c) < \epsilon.$ Call $F = G^c$ and you are done.
     \end{solution}
     \item 
@@ -358,8 +369,8 @@ m^*(A \cup B) = m^*(A) + m^*(B).
     \begin{align}
     \sum_{n=1}^\infty \Vol(X_n) \leq m^*(A \cup B) + \epsilon.    
     \end{align}
-    Each $X_n \in \cal E,$ so we can subdivide the $X_n$ into $\tilde{X}_n$ so that each $\title{X}_n$ has diameter less than $\frac{d}{2}$ and each $\tilde{X}_n$ intersects at least one $A$ or $B$ (we can throw out the ones that don't without any consequence). Thus, there exists some index set $I$ such that if $i \in I,$ then $X_i \cap B = \emptyset.$ Since $\text{diam}(X_n) <\frac{d}{2},$ then  there exists if $j \in I^c,$ then $X_j \cap A = \emptyset.$ Thus, $\{X_i\}_{i \in I}$ is a countable open cover of $A$ disjoint completely from $\{X_j\}_{j \in I^c},$ which is a countable open cover of $B.$ Thus by (6), 
-    \[m^*(A) + m^*(B) \leq \sum_{i \in I} \Vol(X_i) + \sum_{j \in I^c} \Vol(X_i) \leq \sum_{n=1}^\infty \Vol(X_n) \leq m^*(A \cup B) + \epsilon.\] Because this holds for any $\epsilon>0,$ we are done.
+    Each $X_n \in \cal E,$ so we can subdivide the $X_n$ into $\tilde{X}_n$ so that each $\title{X}_n$ has diameter less than $\frac{d}{2}.$ Then each $\tilde{X}_n$ intersects at least one $A$ or $B$ (we can throw out the ones that don't without any consequence). Thus, there exists some index set $I$ such that if $i \in I,$ then $\tilde{X}_i \cap B = \emptyset.$ Since $\text{diam}(\tilde{X}_n) <\frac{d}{2},$ then  there exists if $j \in I^c,$ then $\tilde{X}_j \cap A = \emptyset.$ Thus, $\{\tilde{X}_i\}_{i \in I}$ is a countable open cover of $A$ disjoint completely from $\{\tilde{X}_j\}_{j \in I^c},$ which is a countable open cover of $B$ (for a more precise proof, see my proof for problem 2, (a)). Thus by (6), 
+    \[m^*(A) + m^*(B) \leq \sum_{i \in I} \Vol(\tilde{X}_i) + \sum_{j \in I^c} \Vol(\tilde{X}_i) \leq \sum_{n=1}^\infty \Vol(X_n) \leq m^*(A \cup B) + \epsilon.\] Because this holds for any $\epsilon>0,$ we are done.
 \end{solution}
 
 \newpage
@@ -380,9 +391,9 @@ m^*(A \cup B) = m^*(A) + m^*(B).
     
     Call $E^{(n)}_K = \bigcup_{i \in [K]} E_i^{(n)}$ the union of all such boxes. Note that again, $E^{(n)}_K \in \cal E$ since it is the finite union of intervals.
     
-    Since $A^n \subset E_K^{(n)}$ by the construction of $E_K^{(n)},$ we have that $E_K^{(n)} \triangle A_n = A_n.$ Therefore, using the finite additivity of $m^*,$ we see that by telescoping the sum:
+    Since $A^n \subset E_K^{(n)}$ by the construction of $E_K^{(n)},$ we have that $E_K^{(n)} \triangle A_n = E_K^{(n)}\sm A_n.$ Therefore, using the finite additivity of $m^*,$ we see that by telescoping the sum:
     \begin{align*}
-      m^*(E_K^{(n)} \triangle A_n) &= m^*(A_n) \leq m^*(E_K^{(n)})\\ 
+      m^*(E_K^{(n)} \triangle A_n) &\leq m^*(E_K^{(n)})\\ 
       &= m^*\left(\bigcup_{i\in [K]} E_i^{(n)}\right)\\
       &= \sum_{i =1}^{K}m^*(E_i^{(n)})\\
       &= \sum_{i=1}^K (t_{i} - t_{i-1}) \cdot \frac{\epsilon}{2^{n+1}}\\ 
@@ -391,7 +402,7 @@ m^*(A \cup B) = m^*(A) + m^*(B).
       &< \epsilon
     \end{align*}
     Thus, we see that $A_n \in \mathcal{M}_F(m),$ and since $G(f) = \bigcup_{n=1}^\infty A_n,$ then $G(f)$ is measurable. Using the countable additivity of the Lebesgue measure, and the above calculation:
-    \[m(G(f)) = \sum_{n=1}^\infty m(A_n) < \sum_{n=1}^\infty \frac{\epsilon}{2^n} = \epsilon.\] Because this holds for any $\epsilon>0,$ we see that $m(G(f)) = 0.$
+    \[m(G(f)) = \sum_{n=1}^\infty m(A_n) < \sum_{n=1}^\infty m(E_K^n) =\sum_{n=1}^\infty \frac{\epsilon}{2^n} = \epsilon.\] Because this holds for any $\epsilon>0,$ we see that $m(G(f)) = 0.$
 \end{solution}
 
 

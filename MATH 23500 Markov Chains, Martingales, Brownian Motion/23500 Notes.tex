@@ -286,8 +286,8 @@ Suppose $\pi$ is a limiting probability vector. That is, for any initial distrib
     \[\sum_{x\in S}\tilde{\pi}_x p(x,y) = \sum_{x\in S}\sum_{n = 0}^\infty \bbP\{X_n = x, \tau >n\} p(x,y) = \sum_{n = 0}^\infty \sum_{x\in S} \bbP\{X_n = x, T >n X_{n + 1}  = y\} = \sum_{n = 0}^\infty \bbP\{\tau >{n + 1}X_{n + 1} = y\} = \tilde{\pi}_y\]
     In order to find a stationary probability distribution, we need that 
     \[\sum_{x\in S} \frac{\tilde{\pi}_x}{\mathbb{E}[\tau]} = 1.\] But then 
-    \[\tilde{pi}_x = \sum_{n = 0}^\infty \bbP\{X_n = x , \tau >n\} = \sum_{n = 0}^\infty \bbP\{\tau > n, X_n = x \mid X_n = x\}.\] SO then 
-    \[\tilde{\pi}_x  = \sum_{n  = 0}^\infty \sum_{x\in S}\bbP\{\tau > n  \mid X_n = x\}\bbP\{\tau  > n \mid X_n  = x\}\bbP\{X_n = x\} = \sum_{n = 0}^\infty \bbP\{\tau >n\} = \mathbbE[\tau]\]
+    \[\tilde{pi}_x = \sum_{n = 0}^\infty \bbP\{X_n = x , \tau >n\} = \sum_{n = 0}^\infty \bbP\{\tau > n, X_n = x \mid X_n = x\}.\] So then 
+    \[\tilde{\pi}_x  = \sum_{n  = 0}^\infty \sum_{x\in S}\bbP\{\tau > n  \mid X_n = x\}\bbP\{\tau  > n \mid X_n  = x\}\bbP\{X_n = x\} = \sum_{n = 0}^\infty \bbP\{\tau >n\} = \bbE[\tau]\]
 \end{proof}
 
 \begin{exmp}
@@ -297,17 +297,120 @@ Suppose $\pi$ is a limiting probability vector. That is, for any initial distrib
         \frac{1}{2} & 0 & \frac{1}{2}\\
         \frac{1}{5} & \frac{1}{5} & \frac{3}{5}
     \end{pmatrix}.\] $\{X_n\}$ is clearly aperiodic and irreducible. To compute $\pi,$ we solve the system $\pi P  = \pi,$ with $\pi_1 + \pi_2  + \pi_3 = 1.$ 
-    \[(\pi_1 , \pi_2 ,\pi_3) P  = \pi \iff \frac{1}{3}\pi_1 + \frac{1}{2}\pi_2 + \frac{1}{5}\pi_3 = \pi_1,\quad  \frac{1}{3}\pi_1 + \frac{1}{5}\pi_3  = \pi_2, \quad  \frac{1}{3}\pi_1 + \frac{1}{2}\pi_2 + \frac{3}{5}\pi_3\]
-    Thus, we find that solving for the RREF
-    \[\begin{bmatrix}
-        \frac{1}{3} & \frac{1}{3} & \frac{1}{5} & | & 1\\
-        \frac{1}{3} & 0 & \frac{1}{5}& | & 1\\
-        \frac{1}{3} & \frac{1}{2} & \frac{3}{5}& | & 1\\
-        1 & 1 & 1 & | & 1
-    \end{bmatrix}\]
-    Thus, 
+    \[(\pi_1 , \pi_2 ,\pi_3) P  = \pi \iff \frac{1}{3}\pi_1 + \frac{1}{2}\pi_2 + \frac{1}{5}\pi_3 = \pi_1,\quad  \frac{1}{3}\pi_1 + \frac{1}{5}\pi_3  = \pi_2, \quad  \frac{1}{3}\pi_1 + \frac{1}{2}\pi_2 + \frac{3}{5}\pi_3.\] Alternatively, we know that 
+    \[\pi P = \pi \iff P^T \pi^T=\pi,\] and so we solve for the eigenvectors of $P^T$ corresponding to $\lambda = 1$ and then normalizing so that $\pi_1 + \pi_2 + \pi_3 = 1.$
+    Solving, 
     \[\pi = (\frac{3}{10}, \frac{1}{5}, \frac{1}{2})\]
 \end{exmp}
+
+
+\newpage
+\subsection{Wednesday, Apr 2: Uniqueness of Stationary Distributions}
+\begin{thm}
+    If $\pi$ is a stationary distribution for $\{X_n\},$ then for any $x,y \in S,$  then $\lim_{n\to \infty}\{\bbP\{X_n = y \mid X_0= x\}\} = \pi_y.$ Then $\pi$ is unique.
+\end{thm}
+\begin{proof}
+    Let $\{X_n\}$ and $\{Y_n\}$ be two Markov chains starting at $x$ and $y,$ respectively. Consider the Markov chain $(X_n, Y_n)$ in $S\times S$ with transition probability \[\overline{p}((x,y), (x',y')) = \begin{cases}
+        p(x,x')p(y,y'), \quad x\neq y\\
+        p(x,x'), \qquad \qquad x' = y'\\
+        0, \qquad \qquad \qquad \;\;x' \neq y'
+    \end{cases}\]
+    Note that $\bbP\{X_1 = x' \mid X_0 = x, Y_0 = y\} = \sum_{y \in S}p(x,x')p(y,y') = p(x,x').$ Then $\{X_n\}$ and $\{Y_n\}$ have the same as our original Markov chain. Let 
+    \[\tau = \min\{n \mid X_n = Y_n\}.\] We claim that $\bbP\{\tau < \infty \mid X_0 = x, Y_0 = y\} = 1.$ We prove this on the homework. 
+
+    Consider $(X_n, Y_n)$ where where $X_0 = x$ and $Y_0 = \pi,$ then $Y_n$ has distance $\pi$ for all $n,$ and for large $n,$ $X_n = Y_n.$ FOr any $y,$ 
+    \[\lim_{n\to \infty}\bbP\{X_n = y \mid X_0 = x\} -\pi_ y = \lim_{n\to \infty}\left(\bbP\{X_n = y\} - \bbP\{Y_n - y\}\right) = 0.\]  Thus, if $\pi, \tilde{\pi}$ are two stationary distributions, then 
+    \[\pi_y = \lim_{n\to \infty}\bbP\{X_n = y \mid X_0 = x\}= \tilde{\pi}_y\]
+\end{proof}
+
+\begin{prop}
+    Let $\pi$ be a stationary distribution for $\{X_n\}$ and let $T_x:= \min\{n \geq 1 \mid X_n = x\}.$ Then 
+    \[\pi_x = \frac{1}{\bbE[T_x \mid X_0 = x]}\]
+\end{prop}
+\begin{proof}
+    Assume $X_0 =x.$ Then the stationary distribution is given by
+    \[\pi_y = \frac{1}{\bbE[T_x]}\bbE[|\{n \in [T_x - 1] \mid X_n = y|].\] By definition, 
+    \[|n \in \{0,1, \dots, T_x -1\}\mid X_n = x| = 1\] so then we are done.
+\end{proof}
+
+\begin{exmp}
+    Let $G = (V,E)$ be a finite connected, non-bipartite graph. Then $\{X_n\}$ is irreducible and aperiodic. It is not hard to show that the sum of all the degrees is $2|E|$ since you need to count each edge twice. The stationary distribution for $\{X_n\}$ is 
+    \[\pi_X = \frac{\deg x}{2|E|}.\] Note that $\pi$ is indeed a valid probability distribution since
+    \[\sum_{x\in V} \pi_x = \sum_{x\in V}\frac{\deg x}{2 |E|} = \frac{2 |E|}{2 |E|} = 1.\] If $p(x,y) = \frac{1}{\deg x}$ and $x\sim y$ when they are joined by an edge and $0$ else, then for any $y \in V,$ 
+    \[\sum_{x \in V}\pi_x p(x,y) = \sum_{x \mid x\sim y} \frac{1}{\deg x}\frac{\deg x}{ 2  |E|} = \frac{\deg y}{2 |E|} = \pi_y\]
+\end{exmp}
+
+\begin{exmp}
+    Consider the Knight's Tour, where a knight chooses a legal move randomly on an $8 \times 8$ chessboard. What is expected time to return to the bottom left corner. The degrees are given by:
+    \[\begin{bmatrix}
+        2 & 3 & 4 & 4 & 4 & 4& 3 & 2\\
+        3 & 4 & 6 & 6 & 6 & 6 & 4 & 3\\
+        4 & 6 & 8 & 8 & 8 & 8 & 6 & 4\\
+        \vdots\\
+        2 & 3 & 4 & 4 & 4 & 4 & 3 & 2
+    \end{bmatrix}\]
+    Where the sum of degrees is $336,$ and so the expected time to return to $(1,1)$ is $\frac{336}{2}= 168.$
+\end{exmp}
+
+\begin{exmp}
+    (King's) Tour
+    \begin{exmp}
+        \[\begin{bmatrix}
+            3 & 5 & 5 & 5 & 5 & 5 & 5 & 3\\
+            5 & 8 & 8 & 8 & 8 & 8 &8 &5\\
+            \vdots\\
+            3 & 5 & 5 & 5 & 5 & 5 & 5 & 3
+        \end{bmatrix}\]
+    \end{exmp}
+    So then the expected number of moves till return is $140.$
+\end{exmp}
+
+\newpage
+\subsection{Friday, Apr 4: First Step Analysis}
+Our goal is to calculate the expected duration (that is, the hitting probability) conditioned on a first step. Let's illustrate using an example! Before, we do a little aside to talk about a useful technique that comes up naturally:
+\begin{rem}
+    Suppose $f$ satisfies
+    \[f(n) = a f(n-1)+ bf(n+1), \qquad 0 \leq n \leq N,\] where $f(0)$ and $f(N)$ are known. Guess the solution to be 
+    \[f(n) = \alpha^n,\] then 
+    \[\alpha^n = a\alpha^{n-1} + b\alpha^{n+1} \implies \alpha = a + b\alpha^{2}\implies \alpha = \frac{1 \pm \sqrt{1 - 4ab}}{2b}.\] Thus the general solution is 
+    \[f(n) = \lambda_1 \alpha_+^n + \lambda_2 \alpha_-^n\]
+\end{rem}
+\begin{exmp}
+    Consider the Gambler's Ruin where $S = \{0, 1,2, \dots, N-1, N\}$ with transition probabilities
+    \[p(x, x+1) = p, \qquad p(x, x-1) = q, \quad x\notin \{0,N\}\]
+    \[p(0,0) = p(N,N) = 1.\]
+    That is, we have two absorbing boundaries and so we have three communication classes:
+    \[C_1 = \{0\}, \quad C_2 = \{1,2,\dots, N-1\}, \quad C_3 = \{N\}.\] Note that $C_1$ and $C_3$ are recurring and $C_2$ is transient. Define
+    \[\tau_k := \min\{n >0 : X_n\in C_1 \cup C_3 \mid X_0 = k\}, \quad P_k = \bbP\{X_{\tau_k} = N\}.\] We defined $P_k$ to be the probability that the gambler wins starting with $k$ dollars. Clearly, $P_0 = 0,$ $P_N = 1.$ Using the law of total probability
+    \[P_k  =\bbP\{X_{\tau_k} = N\} = \bbP\{X_{\tau_k}  = N\mid X_1 = k+1\}\} \bbP\{X_1 = k+1\} + \bbP\{X_{\tau_k}  = N\mid X_1 = k-1\}\} \bbP\{X_1 = k-1\} = pP_{k+1} + qP_{k-1}.\]
+    Using the above remark we see that 
+    \[\alpha_+ = 1, \quad \alpha_- = \frac{1-p}{p}\]
+    so 
+    \[P_n = \lambda_1 + \lambda_2(\frac{1-p}{p})^n \implies P_0 = \lambda_1 + \lambda_2 = 0, \quad P_1 = \lambda_1 + \lambda_2\frac{1-p}{p} = 1\]
+    Solving:
+    \[\lambda_1 = \]
+\end{exmp}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -398,52 +501,129 @@ Let $i,j \in [N],$ then we claim that $i \leftrightarrow j.$ Without loss of gen
     \item A taxicab driver moves between the airport $A$ and two hotels $B$ and $C$ according to the following rules. If he is at the airport, he will be at one of the two hotels next with equal probability. If at a hotel, then he returns to the airport with probability $\frac{3}{4}$ and goes to the other hotel with probability $\frac{1}{4}$.
     \begin{enumerate}
         \item Find the transition matrix for the chain.
+        \begin{solution}
+        \[
+            P = \begin{bmatrix}
+                0 & \frac{1}{2} & \frac{1}{2}\\
+                \frac{3}{4} & 0 & \frac{1}{4}\\
+                \frac{3}{4} & \frac{1}{4} & 0
+            \end{bmatrix}\]
+        \end{solution}
         \item Suppose the driver begins at the airport at time 0. Find the probability for each of his three possible locations at time 2 and the probability he is at hotel $B$ at time 3.
+        \begin{solution}
+        Squaring the matrix gives
+                \[P^2 = \begin{bmatrix}
+                    \frac{3}{4} & \frac{1}{8} & \frac{1}{8}\\
+                    \frac{3}{16} & \frac{7}{16} & \frac{6}{16}\\
+                    \frac{3}{16} & \frac{6}{16} & \frac{7}{16}
+                \end{bmatrix}\]
+                and so 
+                \[p^2(A,A) = \frac{3}{4}, \quad p^2(B,A) = \frac{3}{16}, \quad p^2(C,A) = \frac{3}{16}\]
+            Similarly, 
+            \[p^3(B,A) = \frac{13}{32}\]
+        \end{solution}
     \end{enumerate}
 
     \item At time $n = 0$, two ladybirds are placed at vertices $i$ and $j$ of a regular hexagon, whose vertices are labeled $1, \dots, 6$. At time $n = 1$, each of them moves, independently of the other, to one of the two adjacent vertices with probability $\frac{1}{2}$, and so on at each time $n = 2, 3, \dots$.
     \begin{enumerate}
         \item Denote $X_n$ the distance between the two ladybirds at time $n \geq 0$, i.e., the minimum number of edges between them. Find the transition matrix for $\{X_n\}$.
+        \begin{solution}
+            $S = \{0, 1, 2, 3\}$
+            \[P = \begin{bmatrix}
+                \frac{1}{2} & 0 & \frac{1}{2} & 0\\
+                0 & \frac{3}{4} & 0 & \frac{1}{4}\\
+                \frac{1}{4}& 0 & \frac{3}{4} & 0\\
+                0 & \frac{1}{2} & 0 & \frac{1}{2}
+            \end{bmatrix}\]
+        \end{solution}
         \item Identify the communication classes. Are they recurrent or transient?
+        \[C_1 = \{0,2\}, \quad C_2 = \{1,3\}.\] Both are recurrent.
     \end{enumerate}
 
     \item Find the invariant (stationary) distributions for the following Markov chains with given transition matrices:
-    \[
-    \begin{bmatrix}
-        \frac{1}{2} & \frac{2}{5} & \frac{1}{10} \\
-        \frac{1}{5} & \frac{1}{2} & \frac{3}{10} \\
+    (a)
+    \[\begin{bmatrix}
+        \frac{1}{2} & \frac{2}{5} & \frac{1}{10}\\
+        \frac{1}{5} & \frac{1}{2} & \frac{3}{10}\\
         \frac{1}{10} & \frac{3}{10} & \frac{3}{5}
-    \end{bmatrix}.
-    \]
+    \end{bmatrix}\]
     \begin{solution}
-        We must find a solution vector to $\pi P = \pi \iff P^T \pi^T = \pi^T$ Then 
-        \[P^T = 
-        \frac{1}{10}\begin{bmatrix}
+        This will be the only time I type out a full solution to this. 
+        We need to solve for the normalized eigenvector of $P^T$ corresponding to $\lambda = 1.$ It suffices to find $\pi^T$ such that 
+        \[10 P^T - 10\pi^T = 0\] That is, we need to find the eigen basis of
+        \begin{align*}
+            E_{10}(10P^T) &= 
+            \begin{pmatrix}
             5 & 2 & 1\\
             4 & 5 & 3\\
             1 & 3 & 6
-        \end{bmatrix}\] and call $\pi^T = \textbf{v}.$ Then 
-        the eigenvalue for $\lambda = 10$ is given by 
-        \[\ker(A - 10I)  = \ker(\begin{bmatrix}
+            \end{pmatrix} - 10I\\
+        &= \begin{pmatrix}
             -5 & 2 & 1\\
             4 & -5 & 3\\
             1 & 3 & -4
-        \end{bmatrix})\] The RREF of this matrix is given by 
-        \[
-            \begin{bmatrix}
-                1 &  0 & 0\\
-                0 & 1 & 0\\
-                0 & 0 & 1
-            \end{bmatrix}\]
+            \end{pmatrix}\\
+            &\simeq 
+            \begin{pmatrix}
+            -20 & 8 & 4\\
+            20 & -25 & 15\\
+            20 & 60 & -80
+            \end{pmatrix}\\
+            &\simeq
+            \begin{pmatrix}
+            -20 & 8 & 4\\
+            0 & -17 & 19\\
+            0 & 68 & -76
+            \end{pmatrix}\\
+            &\simeq
+            \begin{pmatrix}
+            1 & -\frac{2}{5} & - \frac{1}{5}\\
+            0 & 1 & -\frac{19}{17}\\
+            0 & -68 & 76
+            \end{pmatrix}\\
+            &\simeq
+            \begin{pmatrix}
+            1 & -\frac{2}{5} & - \frac{1}{5}\\
+            0 & 1 & -\frac{19}{17}\\
+            0 & -68 & 76
+            \end{pmatrix}\\
+            &\simeq
+            \begin{pmatrix}
+            1 & 0 & - \frac{11}{17}\\
+            0 & 1 & -\frac{19}{17}\\
+            0 & 0 & 0
+            \end{pmatrix}
+        \end{align*}
+        Thus, 
+        \[\pi_1^T = \frac{11}{17}\pi_3^T, \qquad \pi_2^T = \frac{19}{17}\pi_3^T, \qquad \pi_1^T + \pi_2^T + \pi_3^T = 1\] Solving:
+        \begin{align*}
+            \left[\begin{array}{ccc | c}
+               1  & 0 &-\frac{11}{17} & 0 \\
+               0  & 1 &-\frac{19}{17} & 0\\
+               1 & 1 & 1 & 1
+            \end{array}\right] &\simeq
+            \left[\begin{array}{ccc | c}
+               1  & 0 &-\frac{11}{17} & 0 \\
+               0  & 1 &-\frac{19}{17} & 0\\
+               0 & 0 & \frac{28}{17} & 1
+            \end{array}\right]\\
+            &\simeq
+            \left[\begin{array}{ccc | c}
+               17  & 0 &-11 & 0 \\
+               0  & 17 &-19 & 0\\
+               0 & 0 & 28 & 47
+            \end{array}\right]\\
+            &\simeq
+            \left[\begin{array}{ccc | c}
+               1  & 0 &0 & \frac{11}{47} \\
+               0  & 1 &0 & \frac{19}{47 }\\
+               0 & 0 & 1 & \frac{17}{47}
+            \end{array}\right]
+        \end{align*}
         So then 
-        \[v_1 = 
-        \frac{1}{10}\begin{bmatrix}
-            \frac{11}{17}\\
-            \frac{19}{17}\\
-            1
-        \end{bmatrix}\]
+        \[\pi = (\frac{11}{47}, \frac{19}{47}, \frac{17}{47})\]
     \end{solution}
-    (a)
+    (b)
     \[
     \begin{bmatrix}
         \frac{1}{2} & \frac{2}{5} & \frac{1}{10} \\
@@ -451,6 +631,125 @@ Let $i,j \in [N],$ then we claim that $i \leftrightarrow j.$ Without loss of gen
         \frac{1}{5} & \frac{1}{5} & \frac{3}{5}
     \end{bmatrix}.
     \]
-    (b)
+    \begin{solution}
+        \pi = (\frac{1}{3}, \frac{1}{3}, \frac{1}{3})
+    \end{solution}
 \end{enumerate}
+
+\newpage
+\subsection{Monday, Apr 7: Problem Session 2}
+\begin{enumerate}
+    \item A queen can move any number of squares horizontally, vertically, or diagonally on an $8 \times 8$ chessboard. Let $\{X_n\}$ be the sequence of squares that results if we pick one of the queen’s legal moves uniformly at random. Find
+        \begin{enumerate}
+            \item the stationary distribution and
+    \begin{solution}
+        We use Example 1.12. First, consider that the following 4x4 grid of the degrees for each positions on the upper left of the board:
+        \begin{bmatrix}
+            21 & 21 & 21 & 21\\
+            21 & 23 & 23 & 23\\
+            21 & 23 & 25 & 25\\
+            21 & 23 & 25 & 27
+        \end{bmatrix}
+        Thus, 
+        \[\pi_{(0,0)} = \frac{\deg (1,1)}{2|E|} = \frac{21}{1456}\]
+    \end{solution}
+            \item the expected number of moves needed to return to the bottom left corner when we start there.
+        \begin{solution}
+            If we define 
+            \[T_{i,j} = \inf[n : X_n = (i,j) \mid X_0 = (i,j)],\]
+            then by Example 1.12, 
+            \[\bbE[T_{0,0}] = \frac{1}{\pi_{0,0}} = \frac{1456}{21}\]
+        \end{solution}
+        \end{enumerate}
+
+    \item Let $\{X_n\}$ be the random walk on $\{-10, -9, \ldots, 9, 10\}$ with reflected boundary, i.e., the Markov chain with transition probabilities
+        $$
+        p(x, x+1) = p(x, x-1) = \frac{1}{2}, \quad \forall x \in \{-9, \ldots, 9\}, \quad p(-10, -9) = p(10, 9) = 1.
+        $$
+        Assume that $X_0 = 0$ and let
+        $$
+        T = \min \{ n \geq 1 : X_n = 1 \}.
+        $$
+        Find the expected number of times that the walk hits 0 before time $T$, i.e., compute
+        $$
+        \mathbb{E}\left[ \#\{n \in \{0, \ldots, T\} : X_n = 0\} \right].
+        $$
+        (Hint: use the strong Markov property applied at the times for which $X_n = 0$).
+    \begin{solution}
+        Call 
+        \[T_1 = \inf\{n  : X_n = 1 \mid X_0 = 0\}\] Call
+        \[K(i, j) = \sum_{n=1}^j \mathbbm{1}_{X_n = 1}\]
+        Then using the law of total expectation:
+        \begin{align*}
+            \bbE[K(0, T_1)] &= \bbE[\bbE[K(0,T_1) \mid X_1]]\\
+            &= \frac{1}{2}(\bbE[K(0, T_1)\mid X_1 = -1] + 1) + \frac{1}{2}(\bbE[K(0,T_1) \mid X_1 = 1] +1)\\
+            &\text{By definition:}\\
+            &= \frac{1}{2}(\bbE[K(0, T_1)\mid X_1 = -1] + 1) + \frac{1}{2}(0 +1)\\
+            &\text{Strong Markov Property:}\\
+            &= \frac{1}{2}(\bbE[K(T_0, T_1)] + 1) + \frac{1}{2}(0 +1)\\
+            &= \frac{1}{2} + \frac{1}{2}(\bbE[K(0, T_1)] +1)
+        \end{align*}
+        Solving:
+        \[\bbE[K(0, T_1)] = 2.\] 
+    \end{solution}
+
+    \item Consider the numbers $\{1, 2, 3, \ldots, 12\}$ written around a ring as they usually are on a clock. Consider a Markov chain $\{X_n\}$ that at any point jumps with equal probability to the two adjacent numbers.
+        \begin{enumerate}
+            \item What is the expected number of steps that $\{X_n\}$ will take to return to its starting position?
+            \begin{solution}
+            Suppose WLOG $X_n = 12.$ Then
+                $2|E| = 24$ and $\deg 12 = 2.$ Thus, if 
+                \[T_{12} = \inf\{n>0 : X_n = 12 \mid X_0 = 12\},\] then
+                \[\bbE[T_{12}] = \frac{1}{\pi_{12}} = \frac{2|E|}{\deg(12)} = \frac{24}{2} = 2.\]
+            \end{solution}
+            \item What is the probability that $\{X_n\}$ will visit all the other states before returning to its starting position?
+            \begin{solution}
+                We will use the law of total probability. Again, WLOG, assume $X_0 = 12.$ Define 
+                \[E_{12} = \text{running through everything before returning to 12}\]
+                \[\bbP\{E_{12}\} = 2(\bbP\{E_{12} \mid X_1 = 1\}\bbP\{X_1 = 1\})\]
+                Thus, we can make 
+                $\bbP\{E_{12} \mid X_1 = 1\}$ a gambler's ruin problem! 
+\begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.5\linewidth]{Images/MarkovProof.png}
+                    \caption{Gambling With a Clock}
+                \end{figure}
+                                
+                the probability of reaching 12 on the left is given by $1 - P_{11} = 1 - \frac{11}{12} = \frac{1}{12}$
+            \end{solution}
+        \end{enumerate}
+
+    \item Before you are six light bulbs (all off), numbered $\{1, 2, \ldots, 6\}$. At each time $n \geq 1$, you roll a fair six-sided die and flip the switch of the bulb corresponding to the number you have rolled, turning it on if it is off, and off if it is on. What is the expected number of rolls needed until every light bulb is turned on?
+    
+
+    \item Find the probability that, in the process of repeatedly flipping a fair coin, one will encounter a run of 5 heads in a row before one encounters a run of 2 tails in a row.
+    \begin{solution}
+        
+    \end{solution}
+
+    \item In a game similar to three card monte, the dealer places three cards on the table: the queen of spades and two red cards. The cards are placed in a row, and the queen starts in the center; the card configuration is thus $RQR$. The dealer proceeds to move. With each move, the dealer randomly switches the center card with one of the two edge cards (so the configuration after the first move is either $RRQ$ or $QRR$). What is the probability that, after 2025 moves, the center card is the queen?
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

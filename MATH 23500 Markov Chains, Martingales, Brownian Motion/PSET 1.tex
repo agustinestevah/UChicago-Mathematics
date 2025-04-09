@@ -132,8 +132,10 @@
         \bbP\{I_j | S_i^c\} &= \frac{\bbP\{I_j \cap S_i^c\}}{\bbP\{S_i^c\}}\\
         &= \frac{\bbP\{S_i^c | I_j\}\bbP\{I_j\}}{1 - \bbP\{S_i\}}\\
         &= \frac{(1-\bbP\{S_i | I_j\})\bbP\{I_j\}}{1 - \sum_{k=1}^n\bbP\{S_i | I_k\}\bbP\{I_k\}}\\
-        &= \frac{1 \cdot P_j}{1 - \alpha_iP_i}\\
-        &= \frac{P_j}{1 - \alpha_iP_i}
+        &= \boxed{\begin{cases}
+            \frac{(1 - \alpha_i) P_i}{1-\alpha_iP_i}, \qquad i=j\\
+            \frac{P_j}{1 - \alpha_iP_i}, \qquad \quad i\neq j
+        \end{cases}}
     \end{align*}
     The second to last equality comes from the fact that the probability of succesfully finding the ball in a box where the ball is not is obviously $0.$
 \end{solution}
@@ -144,12 +146,23 @@
     Given some fixed integer \( n \geq 1 \), consider the set of all possible permutations of the list \( (1, 2, \ldots, n) \). Suppose that one permutation \( (i_1, i_2, \ldots, i_n) \) is chosen at random from the set, with \( i_k \in \{1, 2, \ldots, n\} \) for every \( k \). Assuming that all permutations are equally likely to occur, i.e., each permutation is chosen with probability \( \frac{1}{n!} \), compute the probability \( p_m \) that exactly \( m \) of the numbers from the chosen permutation appear in their own positions (i.e., in the same positions in which they appear in the list \( (1, 2, \ldots, n) \)). What is the limit of these probabilities as \( n \) goes to infinity (\( m \) fixed)?
 \end{problem}
 \begin{solution}
-    Fix $n.$ We induct on $m.$ 
-    \begin{enumerate}
-        \item Suppose that $m = 1,$ then 
-        \[\]
-    \end{enumerate}
+The total number of possibilities is $n!.$ To calculate the favorable outcomes, we first need to fix $m$ items $\{1,2,\dots, n\}.$ There are $\binom{n}{m}$ ways of doing this. Once the $m$ numbers are fixed, we need to calculate the permutations of the $n-m$ elements of a set in which no element appears in its original position. This is called a derangement and is equal to 
+\[!(n-m) = (n-m)! \sum_{k=0}^{n-m} \frac{(-1)^k}{k!}\]
+
+Thus, if we call $E_{m,n}$ the event that $m$ numbers from a list of length $n$ are in their exact positions, 
+\[\boxed{\bbP\{E_{m,n}\} = \frac{\binom{n}{m}\cdot !(n-m)}{n!} = \frac{\frac{n!}{(n-m)! m!} \cdot (n-m)! \sum_{k=0}^{n-m} \frac{(-1)^k}{k!}}{n!} = \frac{\sum_{k=0}^{n-m} \frac{(-1)^k}{k!}    }{m!}}\]
+Using the Taylor series expansion of 
+\[e^x = \sum_{k=0}^\infty \frac{x^k}{k!},\] we see that 
+\[\boxed{\lim_{n\to \infty}\bbP\{E_{n,m}\} = \frac{1}{m!}e^{-1}}\]
+
 \end{solution}
+
+\newpage
+\section*{Problem 3}
+
+\begin{problem}
+    
+\end{problem}
 
 
 \newpage
@@ -164,7 +177,7 @@ be the number of \( 1 \)'s in the \( (n-1)^{\text{th}} \) and \( n^{\text{th}} \
 \begin{solution}
     No. Consider 
     \[\bbP\{X_3 = 2 \mid X_1 = 1, X_2 = 1\} = 0\]
-    \[\bbP\{X_3 = 2 \mid X_2 = 1\} = \frac{\bbP\{X_2 = 1 | X_3 = 2\}\bbP\{X_2 = 1\}}{\bbP\{X_2 = 1\}} = \frac{1}{2},\] since if $X_3 = 2,$ then necessarily, $Y_3 = 1$ and $Y_2 = 1,$ and thus either $X_2 = 1$ or $X_2 = 2.$ Thus, $\{X_n\}$ is not a Markov chain.
+    \[\bbP\{X_3 = 2 \mid X_2 = 1\} = \frac{\bbP\{X_2 = 1 | X_3 = 2\}\bbP\{X_2 = 1\}}{\bbP\{X_2 = 1\}} = \frac{1}{2},\] since if $X_3 = 2,$ then necessarily, $Y_3 = 1$ and $Y_2 = 1,$ and thus either $X_2 = 1$ or $X_2 = 2.$ Thus, $\{X_n\}$ is \textbf{not} a Markov chain.
 \end{solution}
 
 \newpage
@@ -201,7 +214,7 @@ be the number of \( 1 \)'s in the \( (n-1)^{\text{th}} \) and \( n^{\text{th}} \
     \end{solution}
     \item[(b)] Find the state space and transition matrix for this Markov chain.
     \begin{solution}
-        Clearly, $S = \{0,1,2,3,4,5\},$ since at any point, there could be anywhere from $0$ to $5$ white balls in the left urn. 
+        Clearly, \[\boxed{S = \{0,1,2,3,4,5\}},\] since at any point, there could be anywhere from $0$ to $5$ white balls in the left urn. 
 
         \[P = \begin{pmatrix}
             p(0,0) &p(0,1) & p(0,2) & p(0,3) & p(0,4) & p(0,5)\\
@@ -211,14 +224,14 @@ be the number of \( 1 \)'s in the \( (n-1)^{\text{th}} \) and \( n^{\text{th}} \
             p(4,0) & p(4,1) & p(4,2) & p(4,3) & p(4,4) & p(4,5)\\
             p(5,0) & p(5,1) & p(5,2) & p(5,3) & p(5,4) & p(5,5)
         \end{pmatrix} = 
-            \begin{pmatrix}
+            \boxed{\begin{pmatrix}
             0 &1 & 0 & 0 & 0 & 0\\
             \frac{1}{25} & \frac{8}{25}& \frac{16}{25} & 0 & 0 & 0\\
             0 & \frac{4}{25}  & \frac{12}{25} & \frac{9}{25} & 0 & 0\\
             0 & 0 & \frac{9}{25} & \frac{12}{25} & \frac{4}{25} &0\\
             0 & 0 & 0 & \frac{16}{25} & \frac{8}{25} & \frac{1}{25}\\
             0 & 0 & 0 & 0 & 1 & 0
-        \end{pmatrix}\]
+        \end{pmatrix}}\]
     \end{solution}
 \end{enumerate}
 
@@ -366,96 +379,91 @@ Thus, for every $i,j \in S,$ there exists some $n,m>0$ such that $p^n(i,j) >0$ a
 \frac{1}{4} & \frac{1}{8} & \frac{3}{8} & \frac{1}{4}
 \end{pmatrix}
 \] and thus 
-\[\boxed{p^3(C, B)} = \frac{1}{4}\]
+\[\boxed{p^3(B, C) = \frac{3}{8}}\]
 
 \end{solution}
     \item[(c)] Under the same assumption as in the previous part, what is the probability that \( X_3 = C \), \( X_4 = A \), and \( X_6 = B \) all occur?
 \begin{solution}
-    \[P^4 = 
-\begin{pmatrix}
-\frac{3}{8} & \frac{5}{32} & \frac{5}{16} & \frac{5}{32} \\
-\frac{3}{8} & \frac{3}{16} & \frac{5}{16} & \frac{1}{8} \\
-\frac{1}{4} & \frac{3}{16} & \frac{3}{8} & \frac{3}{16} \\
-\frac{3}{8} & \frac{1}{8} & \frac{5}{16} & \frac{3}{16}
-\end{pmatrix}
-\]
-and so 
-\[\boxed{p^4(A, B) = \frac{5}{32}}.\]
-\[P^6 = \begin{pmatrix}
-\frac{11}{32} & \frac{21}{128} & \frac{21}{64} & \frac{21}{128} \\
-\frac{11}{32} & \frac{11}{64} & \frac{21}{64} & \frac{5}{32} \\
-\frac{5}{16} & \frac{11}{64} & \frac{11}{32} & \frac{11}{64} \\
-\frac{11}{32} & \frac{5}{32} & \frac{21}{64} & \frac{11}{64}
-\end{pmatrix}
-\]
-and so 
-\[\boxed{p^6(B,B) = \frac{11}{64}}\]
+We use the Markov property and the transition matrices above:
+\begin{align*}
+ \bbP\{X_3 = C, X_4 = A, X_6 = B \mid X_0 = B\} &= \bbP\{X_4 = A, X_6= B\mid X_3 = C\}\bbP\{X_3 = C \mid X_0 = B\}   \\
+ &= \bbP\{X_6 = B \mid X_4 = A\}\bbP\{X_4 = A \mid X_3 = C\}\bbP\{X_3 = C \mid X_0 = B\}\\
+ &= p^3(B,C)p(C,A)p^2(A.B)\\
+ &= \frac{3}{64}
+\end{align*}
+We compute the first term above, $P(C,A) =1$ is given by $P$ and the last term is given by $P^2$ (not shown).
 \end{solution}
     \item[(d)] Compute the invariant probability vector for this Markov chain.
 \begin{solution}
     We need to find some $\pi = (\pi_1, \pi_2, \pi_3, \pi_4)$ probability vector such that 
-    \[\pi P  = \pi \iff P^T\pi^T = \pi^T \iff (P^T - I)\pi^T = 0\iff (4P^T - 4I)\pi^T = 0\] Thus, we need to find $N(4P^T - 4I):$
+    \[\pi P  = \pi \iff P^T\pi^T = \pi^T \iff (P^T - I)\pi^T = 0\iff (4P^T - 4I)\pi^T = 0\] 
+    We know that 
+    \[P = \begin{pmatrix}
+0 & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\
+0 & \frac{1}{2} & \frac{1}{2} & 0 \\
+1 & 0 & 0 & 0 \\
+0 & 0 & \frac{1}{2} & \frac{1}{2}
+\end{pmatrix} \implies 4P^T = \begin{pmatrix}
+    0 &0 &4 &0\\
+    1 & 2 & 0 &0 \\
+    2 & 2 & 0 & 2\\
+    1 & 0 & 0 & 2
+\end{pmatrix}\]
+    
+    Thus, we need to find $N(4P^T - 4I):$
     \begin{align*}
         N(4P^T - 4I) &= 
-        \left[\begin{array}{cccc|c}
-            -4 & 1 & 2 & 1 & 0\\
-            0 & -2 & 2 & 0 & 0 \\
-            4 & 0 & -4 & 0 & 0\\
-            0 & 0 & 2 & -2 & 0
-        \end{array}\right]\\
-        &\sim
-        \left[\begin{array}{cccc|c}
-            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
-            0 & -2 & 2 & 0 & 0 \\
-            0 & 1 & -2 & 1 & 0\\
-            0 & 0 & 2 & -2 & 0
-        \end{array}\right]\\
-        &\sim
-        \left[\begin{array}{cccc|c}
-            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
-            0 & 1 & -1 & 0 & 0 \\
-            0 & 1 & -2 & 1 & 0\\
-            0 & 0 & 2 & -2 & 0
-        \end{array}\right]\\
-        &\sim 
-        \left[\begin{array}{cccc|c}
-            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
-            0 & 1 & -1 & 0 & 0 \\
-            0 & -1 & 2 & -1 & 0\\
-            0 & 0 & 2 & -2 & 0
-        \end{array}\right]\\
-        &\sim
-        \left[\begin{array}{cccc|c}
-            1 & -\frac{1}{4} & -\frac{1}{2} & -\frac{1}{4} & 0\\
-            0 & 1 & -1 & 0 & 0 \\
-            0 & 0 & 1 & -1 & 0\\
-            0 & 0 & 0 & 0 & 0
-        \end{array}\right]\\
+        \begin{pmatrix}
+    -4 &0 &4 &0\\
+    1 & -2 & 0 &0 \\
+    2 & 2 & -4 & 2\\
+    1 & 0 & 0 & -2
+\end{pmatrix}\\
+        &\simeq
+        \begin{pmatrix}
+    -1 &0 &1 &0\\
+    1 & -2 & 0 &0 \\
+    1 & 1 & -2 & 1\\
+    1 & 0 & 0 & -2
+\end{pmatrix}\\
+&\simeq
+        \begin{pmatrix}
+    -1 &0 &1 &0\\
+    0 & -2 & 1 &0 \\
+    0 & 1 & -1 & 1\\
+    0 & 0 & 1 & -2
+\end{pmatrix}\\
+&\simeq
+        \begin{pmatrix}
+    1 &0 &0 &-2\\
+    0 & 1 & 0 & -1\\
+    0 & 0 & 1 &-2 \\
+    0 & 0 & 0 & 0
+\end{pmatrix}\\
     \end{align*}
     Call $\pi^T = x$ for simplification. We get the following four equations:
     \begin{align}
-        x_1 - \frac{1}{4}x_2 - \frac{1}{2}x_2 - \frac{1}{4}x_4 = 0
+        x_1 = 2x_4
     \end{align}
     \begin{align}
-        x_2 = x_3
+        x_2 = x_4
     \end{align}
     \begin{align}
-        x_3 = x_4
+        x_3 = 2x_4
     \end{align}
     \begin{align}
         x_1 + x_2 + x_3 + x_4 = 1
     \end{align}
-Plugging (2) and (3) into (1):
-\begin{align}
-    x_1 = x_2 = x_3 = x_4
-\end{align}
-By (4), we see that 
+Solving:
 \[x = \begin{pmatrix}
-    \frac{1}{4}\\
-    \frac{1}{4}\\
-    \frac{1}{4}\\
-    \frac{1}{4}
-\end{pmatrix}\] and thus $\pi = (\frac{1}{4}, \frac{1}{4}, \frac{1}{4}, \frac{1}{4})$ is our invariant probability vector. 
+    \frac{1}{3}\\
+    \frac{1}{6}\\
+    \frac{1}{3}\\
+    \frac{1}{6}
+\end{pmatrix}\] and thus \[\boxed{\pi = (\frac{1}{3},
+    \frac{1}{6},
+    \frac{1}{3},
+    \frac{1}{6})}\] is our invariant probability vector. 
 
 \end{solution}
     \item[(e)] Let \( J_n \) denote the probability that at time \( n \) the system has been in state \( C \) exactly the same number of times it has been in state \( A \). Find
@@ -464,10 +472,18 @@ By (4), we see that
     \] Here again suppose that $X_0 = B$
 \end{enumerate}
 \begin{solution}
-    Since $\{X_n\}$ is irreducible and aperiodic, we have that 
-    \[\lim_{n\to \infty}p^n(C,B) = \pi_C, \qquad \lim_{n\to \infty}p^n(A,B) = \pi_A,\] where 
-    \[\pi_C = \pi_A = \frac{1}{4}\] Thus, if 
-    \[J_n = \bbP\{\sum_{k=1}^n \mathbbm{1}_{X_i = C}=  \sum_{k=1}^n \mathbbm{1}_{X_i = A}\}\]
+
+
+Define 
+\[N_C = |\{X_k = C \mid k\leq N\}|\]
+\[N_A = |\{X_k = A\mid k\leq N\}|\] Note that 
+\[N_A = \begin{cases}
+    1 + N_C, \qquad X_N = C\\
+    N_C, \quad \;\;\qquad X_N \neq C
+\end{cases}\]
+Thus, 
+\[J_N = \{N_C = N_A\} = \{X_N \neq C\}.\] Thus, 
+\[\lim_{N\to \infty}\bbP\{J_N\} = \lim_{N\to \infty}\bbP\{X_N \neq C\}= 1-\pi_C = 1- \frac{1}{3} = \boxed{\frac{2}{3}}\]
 \end{solution}
 \end{problem}
 
@@ -488,28 +504,46 @@ p(x, y) = \begin{cases}
 
 (a) Show that for any possible starting points \( X_0  = x_0\) and \( Y_0= y_0 \), with probability 1, there exists \( n \) such that \( X_n = Y_n \).
 \begin{solution}
-Denote \[p^n_X(i,j) =\bbP\{X_n = i \mid X_0 = j\}, \qquad P^n_Y(i,j)=\bbP\{Y_n = i \mid Y_0 = j\}.\] Fix some $j \in V(G).$ 
-Enumerate the vertices of the graph by $V(G) = \{1,2,\dots, N\},$ and fix $j \in [N].$
-    Since $G$ is connected, then it is clearly recurrent, and so $n_z = p_Y^{n_z}(z,y_0) >0$ for any $z\in V(G).$ Since $V(G)$ is finite, we know that $n := \max\{n_z \mid z\in V(G)\}$ exists. 
-    
-    We know that $p_X^n(j,j) > \frac{1}{2^n}.$ Let $\tau = \min\{k>0 \mid X_k = j\}.$ We know that $\bbP(\tau < \infty) = 1$ since $\{X_n\}$ is recurrent. By the strong Markov property, we lose no generality in assuming that $X_0 = j.$ Let $Y_0 = i.$ 
+Enumerate the vertices of $G(V,E)$ by $V(G) = \{1,2,\dots, N\}.$
+Consider the process $Z_n =(X_n, Y_n)$ taking place in the state space $V(G)\times V(G).$ We claim that $\{Z_n\}$ is a Markov process. First, notice that 
+\[p_Z(v,v') = p_Z((x,y), (x', y')) = \bbP\{X_1 = x', Y_1' = y' \mid X_0 = x, Y_0= y  = \begin{cases}
+    p(x,x')p(y,y'). \quad x\neq y\\
+    p(x,x'), \qquad \quad \;\:\;\: x = y
+\end{cases}\}\] Thus, $\{Z_n\}$ acts like $\{X_n\}$ once the chains couple up. We claim that if $\tau = \min\{n \geq 0\mid X_n = Y_n\} = \min\{n \geq 0 \mid Z_n = (z,z). z\in V(G)\},$ then
+\[\bbP\{\tau < \infty \mid Z_0 = (x_0, y_0)\} = 1.\] To do this, it suffices to show that $Z_n$ is an irreducible and recurrent Markov chain, since they hit all the states in $S$ with probability $1.$ 
 
-    
-    
-    Let $E_k := \{X_i = j\; \forall \; i \in \{nk-n, \dots, nk\} \}.$ Thus, $E_k$ is the event that $\{X_n\}$ stays at $j$ for $n$ turns, starting at turn $k.$ We know that, by the strong Markov property assumed above and the normal Markov property and time homogeneity, for any $s_0, \dots, s_{nk}\in V(G)$
-    \[\bbP\{E_{k+1} \mid X_0 = s_0, \dots, X_{nk}= s_{n_k}\} = \bbP\{E_1 \mid X_0 = j\} > \frac{1}{2^n}.\] Thus, for any $M>0,$ we have that 
-    \begin{align*}
-        \bbP\{\text{not $E_k$ for any $k \in [M]$}\} &= \bbP\{\bigcap_{k=1}^M E_k^c\}\\
-        &= \bbP\{E_M^c \mid \bigcap_{k=1}^{M-1} E_k^c \}\bbP\{\bigcap_{k=1}^{M-1} E_k^c\}\\
-        &\leq (1-\frac{1}{2^n})\bbP\{\bigcap_{k=1}^{M-1} E_k^c\}\\
-        &\leq (1-\frac{1}{2^n})^M\xrightarrow[M\to \infty]{} 0
-    \end{align*}
-    Thus, with probability $1,$ there exists some time interval of length $n$ such that $X = j$ for the entire interval.
-    
-    Let $F_k$ denote the probability that $Y$ hits $j$ at some point during the interval $nk - n.$ We know by a theorem in class that with probability $1,$ $F_k$ happens for some $M \in \bbN.$ 
+(Markov Chain) Let $v_0, v_1, \dots, v_n \in V(G) \times V(G).$ then by definition,
+\begin{align*}
+\bbP\{Z_n = v_n \mid Z_0 = v_0, \dots, Z_{n-1 } = v_{n-1}\} &= \bbP\{(X_n, Y_n) = (x_n, y_n) \mid (X_0, Y_0) = (x_0, y_0), \dots, (X_{n-1  }, Y_{n-1}) = (x_{n-1}, y_{n-1})\}\\
+&= \bbP\{X_n = x_n \mid X_0 = x_0, \dots, X_{n-1} = x_{n-1}\} \bbP\{Y_n = u_n \mid Y_0 = y_0, \dots, Y_{n-1} = y_{n-1}\}\\
+&= \bbP\{X_n = x_n \mid X_{n-1} = x_{n-1}\} \bbP\{Y_n = u_n \mid Y_{n-1} = y_{n-1}\}\\
+&= \bbP\{(X_n, Y_n) = (x_n, y_n) \mid (X_{n-1   }, Y_{n-1}) = (x_{n-1}, y_{n-1})\}\\
+&= \bbP\{Z_n = v_n \mid Z_{n-1} = v_{n-1}\}
+\end{align*}
 
-    Since $Y$ and $X$ are independent, we get that 
-    \[\bbP(E_M \cap F_M) = \bbP(E_M)\bbP(F_M) \xrightarrow[M\to \infty]{}1\]
+(Irreducible) It suffices to show that for any $v, w \in S \times S,$ there exists some $n >0$ such that $p^n(v,w) >0.$ But if $v =(x,y)$ and $w = (x', y'),$ then since $X_n$ is irreducible (since the graph is connected), there exists some $n_x>0$ such that $p^{n_x}(x,x')>0$ and similarly $p^{n_y}(y,y')>0.$ Let $n = \max\{n_x, n_y\},$ then 
+\[p^n((x, y), (x', y')) = p^n(x,x') p^n(y,y') \geq p^{n_x}(x,x') p^{n_y}(y,y') >0.\] Since $S \times S$ is irreducible, then it is recurrent. Note the importance that $X_n$ and $Y_n$ are lazy, since this guarantees that 
+\[p^n(v,v) >0.\]
+Thus, by a theorem done in class, since $S\times S$ is finite and $\{Z_n\}$ is recurrent and $(x,x) \in S \times S,$ then with probability one, $\bbP\{Z_n = (x,x)\}.$ Thus, $X_n = x$ and $Y_n = x$ for some $n$ with probability one.
+
+
+
+
+Here is another proof which works in the degenerate case when $G(V,E)$ is a circle.
+ Consider the process $\{Z_n\},$ which is defined as
+\[Z_n := \text{min \# edges between $X_n$ and $Y_n$}\]
+Since $G(V,E)$ is finite and connected, the state space of $Z_n$ is $S_Z = \{0, 1, \dots, K\},$ where $K\leq \frac{N(N-1)}{2}.$ We claim that $\{Z_n\}$ is a Markov chain with a single communication class that is recurrent and aperiodic. 
+
+To see that $\{Z_n\}$ is a Markov chain, note that $Z_{n+1}$ depends only on $X_{n}$ and $Y_{n}.$ By independence, $\{X_n\}$ is independent of $Y_{n-1}.$  Similarly, $Y_{n}$ is independent of $X_{n-1}.$ Since both are Markov chains, then $X_n$ is independent of $X_{n-1}$ and $Y_n$ is independent of $Y_{n-1}.$ Thus, since $X_n$ and $Y_n$ completely determine $Z_n,$ then $Z_{n + 1}$ depends only on $Z_n$ and is independent of $Z_{n-1}.$ 
+
+TO see that $\{Z_n\}$ has one communication class, we suppose otherwise. That is, for some $i,j \in S,$ and for all $n>0,$ $p^n(i,j)  =  0.$ Without loss of generality, suppose $i<j$ and let $k = j-i$ We know that 
+$p^n(i,j) \geq p^{n-1}(i,{j-1})p(i,j-1) \geq \dots \geq p^{n-k}(i,i)p(i,i + 1)\cdots p(i,j-1).$ It suffices to show that each terms is positive. We know that, for any $i,$
+$p(i, i + 1) >0$ since there is a chance $X_n$ stays at some $x \in S$ and $Y_n$ leaves, resulting in an edge of $1.$ Similarly, $p^{n-k}(i,i) \geq \frac{1}{2^{n-k +1}}.$ Thus, there exists some $n \in \bbN$ such that $p^n(i,j) >0$ for all $i,j.$ This also shows that $\{Z_n\}$ is recurrent.
+
+$\{Z_n\}$ is aperiodic since $p(i,i) >0.$ 
+
+By a theorem in class, we have that for any $s \in S$
+\[\lim_{n\to \infty }\bbP\{Z_n = 0 \text{ i.o. }\mid s\} = 1\] Thus, with probability $1,$ there exists some $M>0$ large such that $Z_n = 0$ and thus $X_M = Y_M.$
 \end{solution}
 
 (b) Give an example of a graph \( G \) for which the conclusion of part (a) fails if \( X_n \) and \( Y_n \) are ordinary random walks rather than lazy random walks (i.e., \( X_{n+1} \) is never equal to \( X_n \) and \( Y_{n+1} \) is never equal to \( Y_n \).
@@ -526,6 +560,12 @@ Consider the following graph $G:$
 And consider when $X_0 = 1$ and $Y_0 = y.$ Then since $X_n = S\setminus\{Y_n\},$ the Markov chains will never be the same.
 \end{solution}
 
+\end{problem}
+
+\newpage
+\section*{Problem 10}
+\begin{problem}
+    Let $P$ be irreducible and aperiodic, 
 \end{problem}
 
 \end{document}

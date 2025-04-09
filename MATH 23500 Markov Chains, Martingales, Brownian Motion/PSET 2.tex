@@ -1,0 +1,465 @@
+\documentclass[11pt]{article}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{23500}
+\newcommand{\subject}{Markov Chains, Martingales, and Brownian Motion}
+\newcommand{\instructors}{Stephen Yearwood}
+\newcommand{\assignment}{Problem Set 2}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{04/11/2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    Let $X_1, X_2, \ldots$ be independent random variables with the uniform distribution on $\{0, 1, 2, 3\}$, i.e., $\mathbb{P}[X_n = i] = 1/4$ for each $i \in \{0,1,2,3\}$. Let 
+\[
+Y_n = (X_1 + \cdots + X_n) \mod 5 \quad \text{(so $Y_n \in \{0,1,2,3,4\}$)}
+\]
+and let 
+\[
+M_n = \max\{X_1, \ldots, X_n\}.
+\]
+\end{problem}
+
+\begin{enumerate}
+    \item[(a)] Explain why each of $\{Y_n\}$ and $\{M_n\}$ are Markov chains, $\{Y_n\}$ is irreducible and aperiodic, and $\{M_n\}$ is not irreducible.
+\begin{solution}
+    To see that $Y_n$ is a Markov chain, it suffices to show that $Y_{n+1}$ is dependent only on $Y_n.$ Note that 
+    \begin{align*}
+        Y_{n+1} &= (X_1 + \dots + X_n + X_{n+1}) \text{ mod } 5\\
+        &=(X_1 + \dots + X_n)\text{ mod } 5  + X_{n+1}\text{ mod } 5\\
+        &= Y_n+ X_{n+1}\text{ mod } 5
+    \end{align*}
+    Thus, the distribution of $Y_{n+1}$ is dependent only on $Y_n$ and $X_{n+1}.$ Since $X_{n+1}$ is independent from $X_{i}$ for all $i< n+1,$ then $X_{n+1}$ does not depend on anything before $n-1.$ 
+
+    To see that $Y_n$ is irreducible, consider the transition probability
+    \[P = \begin{pmatrix}
+        \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0\\
+        0 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4}\\
+        \frac{1}{4} & 0 & \frac{1}{4} & \frac{1}{4} & \frac{1}{4}\\
+        \frac{1}{4} & \frac{1}{4} & 0 &\frac{1}{4} & \frac{1}{4}\\
+        \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \frac{1}{4}
+    \end{pmatrix}\]
+    So then it is clear that you can get to any state from any state in at most two steps. 
+
+    Since $p(0,0) > 0$ and $\{Y_n\}$ is irreducible and has a single communication class, then $\{Y_n\}$ is aperiodic. 
+
+    To see why $M_n$ is a Markov chain, consider that 
+    \begin{align*}
+        M_{n+1} &= \max\{X_1, \dots, X_{n}, X_{n+1}\}\\
+        &= \max\{(X_1, \dots, X_{n}), X_{n+1}\}\\
+        &= \max\{M_n, X_{n+1}\}.
+    \end{align*}
+    Thus, the distribution of $M_{n+1}$ is dependent only on $M_n$ and $M_{n+1}.$ Since $M_{n+1}$ is independent from $M_{i}$ for all $i< n+1,$ then $M_{n+1}$ does not depend on anything before $n-1.$ 
+    
+\end{solution}
+
+    \item[(b)] Find the stationary distribution for $Y_n$. Does $M_n$ have a stationary distribution? If so, find it.
+\begin{solution}
+    Since $\{Y_n\}$ is irreducible and aperiodic, then $\pi$ exists and is unique. Thus, 
+    \[\pi P = \pi \iff P \pi^T = \pi^T \iff P\pi^T - \pi^T = 0 \iff (P - I)\pi^T = 0 \iff (4P - 4I)\pi^T\]
+    so then 
+    \[\pi_1 = \pi_2 = \pi_3 = \pi_4 = \pi_5 \implies \pi = \begin{pmatrix}
+        \frac{1}{5}\\
+        \frac{1}{5}\\  
+        \frac{1}{5}\\
+        \frac{1}{5}\\
+        \frac{1}{5}
+    \end{pmatrix}\]
+
+    Consider that the transition matrix of $M_n$ is 
+    \[P = \begin{pmatrix}
+        \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4}\\
+        0 & \frac{1}{2} & \frac{1}{4} & \frac{1}{4}\\
+        0 & 0 & \frac{3}{4} & \frac{1}{4}\\
+        0 & 0 & 0  & 1
+    \end{pmatrix} \implies 4P^T =\begin{pmatrix}
+        1 & 0 & 0 & 0\\
+        1 & 2 & 0 & 0\\
+        1 & 1 & 3 & 0\\
+        1 & 1 & 1 & 4
+    \end{pmatrix}\] Solving for the eigenvector with $\lambda = 4:$
+    Then $\pi = \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ 1
+    \end{pmatrix}$
+\end{solution}
+
+    \item[(c)] Find $\mathbb{E}[\min\{n \geq 1 : Y_n = 0\} \mid Y_0 = 0]$.
+\begin{solution}
+    We have that 
+    \[\mathbb{E}[\min\{n \geq 1 : Y_n = 0\} \mid Y_0 = 0] = \frac{1}{\pi_0} = 5\]
+\end{solution}
+
+    \item[(d)] Find $\mathbb{E}[\min\{n \geq 1 : M_n = 3\} \mid M_0 = 0]$.
+
+\begin{solution}
+    Let 
+    \[T_{3} = \min\{n \geq 1 : M_n = 3 \mid M_0 = 0\},\] then using the the law of total expectation
+    \begin{align*}
+        \bbE[T_3] &= \bbE[\bbE[T_3 \mid M_1]]\\
+        &= \frac{1}{4}(\bbE[T_3 \mid X_1 =0] + 1) + \frac{1}{4}(\bbE[T_3 \mid X_1= 1] + 1)+ \frac{1}{4}(\bbE[T_3 \mid X_1 =2] + 1) + \frac{1}{4}(\bbE[T_3 \mid X_1 =3] + 1)\\
+        &= \frac{1}{4}(\bbE[T_3 \mid X_1 =0] + 1) + \frac{1}{4}(\bbE[T_3 \mid X_1= 1] + 1)+ \frac{1}{4}(\bbE[T_3 \mid X_1 =2] + 1) + \frac{1}{4}\\
+        &= \frac{1}{4}(a_0 + 1) + \frac{1}{4}(a_1 + 1) + \frac{1}{4}(a_2 + 1) + \frac{1}{4}\\
+        &= \frac{1}{4}a_0 + \frac{1}{4}a_1 + \frac{1}{4}a_2 + 1
+    \end{align*}
+Where we define 
+\[a_i := \bbE[T_3 \mid X_1 = i],\]
+then 
+For $a_1,$ we have that 
+\begin{align*}
+a_1 &= 0[\bbE[T_3 \mid X_2 = 0] + 1] + \frac{1}{2}(\bbE[T_3 \mid X_2 = 1] + 1) + \frac{1}{4}(\bbE[T_3 \mid X_2 = 2] + 1) + \frac{1}{4}(\bbE[T_3 \mid X_3 = 3  ] + 1)\\
+&= \frac{1}{2}(a_1 + 1) + \frac{1}{4}(a_2 + 1) + \frac{1}{4}(0 + 1)\\
+&= \frac{1}{2}a_1 + \frac{1}{4}a_2 +  1
+\end{align*}
+For $a_2,$ we have that 
+\begin{align*}
+    a_2&= \frac{3}{4}(a_2 + 1) + \frac{1}{4}\\
+    &= \frac{3}{4}a_2 + 1
+\end{align*}
+Solving:
+\[a_0 = a_1 = a_2 = a_3 =4\] and thus 
+\[\bbE[T_3] = 4\]
+\end{solution}
+\end{enumerate}
+
+
+\newpage
+\section*{Problem 2}
+
+
+Two urns contain a total of \( N \) balls. At each time \( n \geq 1 \), one of the \( N \) balls is picked uniformly at random and moved to the other urn. Let \( X_n \) denote the number of balls in the left urn after the \( n \)-th draw. It is stated that \( \{X_n\}_{n \geq 0} \) is a Markov chain.
+
+\begin{enumerate}
+    \item[(a)] Write down the transition probabilities for this chain, and draw a transition diagram.
+\begin{solution}
+The state space is the number of balls in the left urn, that is 
+\[S = \{0, 1, 2, \dots, N\}.\] Thus,
+\[P = \begin{pmatrix}
+    0 & 1 & 0  & 0 & \cdots & 0 & 0&0 & 0\\
+    \frac{1}{N} & 0 & \frac{N-1}{N} & 0 & \cdots & 0 & 0&0 & 0\\
+    0 & \frac{2}{N} & 0 & \frac{N-2}{N} & \cdots & 0 & 0&0 & 0\\
+    \vdots&\vdots &\vdots & \vdots &\ddots & \vdots & \vdots & \vdots & \vdots\\
+    0 & 0 &  0 & 0 & \cdots & \frac{N-2}{N} &  0 & \frac{2}{N} & 0 \\
+    0 & 0 &  0 & 0 & \cdots & 0 &  \frac{N-1}{N} & 0 & \frac{1}{N} \\
+    0 & 0 &  0 & 0 & \cdots & 0 &0 & 1 & 0
+\end{pmatrix}\]
+Thus 
+\[p(n, n-1) = \frac{n}{N}, \quad p(n, n+1) = \frac{N-n}{N}\]
+\begin{center}
+\scalebox{0.75}{
+\begin{tikzpicture}[->, >=stealth, auto, node distance=3cm, semithick]
+
+  % States
+  \node[state] (0) {$0$};
+  \node[state] (1) [right of=0] {$1$};
+  \node[state] (2) [right of=1] {$2$};
+  \node[state] (A) [right of=2] {$\cdots$}
+  \node[state] (N-2)[right of=A] {$N-2$}
+  \node[state] (N-1)[right of=N-2] {$N-1$}
+  \node[state] (N)[right of=N-1] {$N$}
+
+  % Transitions
+  \path (0) edge [bend left] node {$1$} (1)
+        (1) edge [bend left] node {$\frac{1}{N}$} (0)
+        (1) edge [bend left] node {$\frac{N-1}{N}$} (2)
+        (2) edge [bend left] node {$\frac{2}{N}$} (1)
+        (2) edge [bend left] node {} (A)
+        (A) edge [bend left] node {} (2)
+        (A) edge [bend left] node {} (N-2)
+        (N-2) edge [bend left] node {} (A)
+        (N-2) edge [bend left] node {$\frac{2}{N}$} (N-1)
+        (N-1) edge [bend left] node {$\frac{N-1}{N}$} (N-2)
+        (N-1) edge [bend left] node {$\frac{1}{N}$} (N)
+        (N) edge [bend left] node {$1$} (N-1);
+\end{tikzpicture}}
+\end{center}
+
+
+
+\end{solution}
+    \item[(b)] Compute the stationary distribution.
+\begin{solution}
+\[\pi_0 = \frac{1}{N}\pi_1\]
+\[\pi_1= \pi_0 + \frac{2}{N}\pi_2\]
+\[\pi_2 = \frac{N-1}{N}\pi_1 + \frac{3}{N}\pi_3\]
+\[\pi_3 = \frac{N-2}{N}\pi_2 + \frac{4}{N}\pi_4\]
+\[\vdots\]
+\[\pi_k = \frac{N-(k-1)}{N}\pi_{k-1}\]
+\[\vdots\]
+\[\sum_{n=0}^N \pi_n = 1\]
+We claim that, before normalizing, 
+\[\pi_k = \binom{N}{k}\pi_0\]
+
+Rewriting the system of equations.
+\[\pi_1 = N\pi_0\]
+\[\pi_2 = \frac{N}{2}(\pi_1- \pi_0) = \frac{N}{2}(N-1)\pi_0\]
+\[\pi_3 = \frac{N}{6}(N-1)(N-2)\pi_0\]
+\[\pi_4 = \frac{N}{24}(N-1)(N-2)(N-3)\pi_0\]
+\[\vdots\]
+We proceed by induction.
+\[\pi_k = \binom{N}{k}\pi_0\]
+Thus,
+\[1 = \sum_{k=0}^N \pi_k = \sum_{k=0}^N \binom{N}{k}\pi_0 = 2^N\pi_0,\] and thus 
+\[\pi = (\pi_0, \pi_1, \dots, \pi_N), \quad \pi_k = \binom{N}{k} \frac{1}{2^N}\pi_0\]
+
+\end{solution}
+    \item[(c)] What is the number of steps it takes on average for the right urn to become empty given that it was initially empty?
+\begin{solution}
+    If we define 
+    \[T_0 = \inf \{n >0 : X_n = 0 \mid X_0 = 0\},\] then we have seen in class that
+    \[\bbE[T_0] = \frac{1}{\pi_0} = 2^N.\]
+\end{solution}
+    \item[(d)] Let \( \mu_n := \mathbb{E}[X_n | X_0 = x] \). Show that
+    \[
+    \mu_{n+1} = 1 + \left( 1 - \frac{2}{N} \right) \mu_n.
+    \]
+    \begin{solution}
+
+Consider that for any $n \in \bbN:$
+\begin{align*}
+    \bbE[X_{k + 1}\mid X_k] &= \frac{X_k}{N}(X_k -1)+ \frac{N-X_k}{N}(X_k + 1)\\
+    &= X_k + 1 - \frac{2}{N}X_k\\
+    &= 1 + (1 - \frac{2}{N})X_k.
+\end{align*}
+Thus, we see that using this property found in Greg Lawler's textbook: 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/conditional expectation.png}
+    \caption{C.E. Property}
+\end{figure}
+\[\bbE[X_k \mid X_0 = x] = \bbE[\bbE[X_k \mid X_k] \mid X_0 = x] = \bbE\left[1 + (1 - \frac{2}{N})X_k \mid X_0 = x\right] = 1 + (1-\frac{2}{N})\mu_k\]
+
+    \end{solution}
+    \item[(e)] Use the previous part to show that
+    \[
+    \mu_n = \frac{N}{2} + \left( x - \frac{N}{2} \right) \left( 1 - \frac{2}{N} \right)^n,
+    \]
+    and hence conclude that \( \mu_n \) converges exponentially rapidly to the equilibrium value of \( \frac{N}{2} \) as \( n \to \infty \).
+\begin{solution}
+    We induct:
+    \begin{enumerate}
+        \item For $n = 1,$ we have that 
+        \begin{align*}
+            \frac{N}{2} + (x- \frac{N}{2})(1 - \frac{2}{N})
+            &= \frac{N}{2} + (x - \frac{2}{N}x - \frac{N}{2} + 1)\\
+            &= 1 + (1 - \frac{2}{N})x\\
+            &= \mu_1.
+        \end{align*}
+        \item Assume this is true for $n = k$
+        \item For $n = k+1,$ we have that by our inductive hypothesis
+        \begin{align*}
+            \mu_{k+1} &= 1+  (1 - \frac{2}{N})\mu_{k}\\
+            &= 1 + (1- \frac{2}{N})\left(\frac{N}{2} + (x - \frac{N}{2})(1 - \frac{2}{N})^k\right)\\
+            &= 1 + \frac{N}{2} - 1 + (x- \frac{N}{2})(1-\frac{2}{N})^{k+1}\\
+            &= \frac{N}{2} + (x- \frac{N}{2})(1-\frac{2}{N})^{k+1}
+        \end{align*}
+    \end{enumerate}
+
+Thus, 
+\begin{align*}
+\mu_n &= \frac{N}{2} + (x - \frac{N}{2})(1- \frac{2}{N})^n\\
+&= \frac{N}{2} + (x - \frac{N}{2})\exp\{n \ln(1 - \frac{2}{N}).\} 
+\end{align*}
+For $N > 2,$ we have that $0 <1- \frac{2}{N}  < 1,$ and thus 
+$\ln(1 - \frac{2}{N}) < 0$, and so 
+as $n\to \infty,$ $e^{-nc}\to 0,$ and so 
+\[\mu_n \to \frac{N}{2}.\]
+
+\end{solution}
+\end{enumerate}
+
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+A sequence of integers is written on a board starting with the number 12. Each subsequent integer that is written is chosen uniformly randomly from the set of positive divisors of the previous integer (including the possibility of the integer itself). Integers are written until the integer 1 first appears, in which case the process ends. One such sequence is: 12, 6, 6, 3, 3, 3, 1. What is the expected value of the number of terms in the written sequence.
+\end{problem}
+\begin{solution}
+    Define 
+    
+    \[X_n := \{\text{term on $n$th spot of sequence}\}, \quad
+    N_i := \{\text{number of terms in the sequence starting from $i$}\}.\] By assumption, $\bbE[N_1] = 1.$
+    
+    Then using the law of total expectation: 
+\begin{align*}
+    \bbE[N_{12}] &= \bbE[\bbE[N_{12} \mid X_1]]\\
+    &= 6 + \frac{1}{6}\bbE[N_{12}] + \frac{1}{6}\bbE[N_6] + \frac{1}{6}\bbE[N_4] + \frac{1}{6}\bbE[N_3] + \frac{1}{6}\bbE[N_2] + \frac{1}{6}\bbE[N_1]\\
+    &= 6 + \frac{1}{6}\bbE[N_{12}] + \frac{1}{6}\bbE[N_6] + \frac{1}{6}\bbE[N_4] + \frac{1}{6}\bbE[N_3] + \frac{1}{6}\bbE[N_2] + \frac{1}{6}
+\end{align*}
+We have that 
+\[\bbE[N_2] = 1 + \frac{1}{2}\bbE[N_2] + \frac{1}{2}\bbE[N_1] = \frac{3}{2} + \frac{1}{2}\bbE[N_2] \implies \bbE[N_2] = 3\]
+For $N_3,$
+\begin{align*}
+    \bbE[N_3] = 1 + \frac{1}{2}\bbE[N_2] + \frac{1}{2}\bbE[N_1]\\
+    &= \frac{3}{2} + \frac{3}{2}\\
+    &= 3
+\end{align*}
+For $N_4$ we have that
+\begin{align*}
+    \bbE[N_4] &= 1 + \frac{1}{3}\bbE[N_4] + \frac{1}{3}\bbE[N_2] + \frac{1}{3}\bbE[N_1]\\
+    &= 1 + \frac{1}{3}\bbE[N_4] + 1 + \frac{1}{3}\\
+    &= \frac{7}{3} + \frac{1}{3}\bbE[N_4]\\
+    &= \frac{7}{2} = 3.5
+\end{align*}
+For $N_6$ we have that 
+\begin{align*}
+    \bbE[N_6] &= 1 + \frac{1}{4}\bbE[N_6] + \frac{1}{4}\bbE[N_3]+ \frac{1}{4}\bbE[N_2] + \frac{1}{4}\bbE[N_1]\\
+    &= 1 + \frac{1}{4}\bbE[N_6] + \frac{3}{4} + \frac{3}{4} + \frac{1}{4}\\
+    &= \frac{11}{4} + \frac{1}{4}\bbE[N_6]\\
+    &= \frac{11}{3}
+\end{align*}
+Thus, we solve and find that
+\[\bbE[N_{12}]= \frac{121}{30}\]
+
+\end{solution}
+
+\newpage
+\section*{Problem 4}
+
+Let \( E_k \) be the expected number of flips of a fair coin needed to observe a run of \( k \) heads in a row for the first time.
+
+\begin{enumerate}
+    \item[(a)] Explain why \( E_1 = 2 \).
+    \begin{solution}
+The number of tails before we hit a head if modeled by a geometric variable 
+\[Y \sim \text{Geometric}(\frac{1}{2}).\] It is a known fact that if $Y$ is geometric with probability $p,$ then $\bbE[Y] = \frac{1}{p}.$ Thus
+        \[E_1 = \bbE[Y] = 2.\]
+    \end{solution}
+    \item[(b)] Explain why the following recursive equation holds.
+    \[
+    E_{k+1} = 1 + E_k + \frac{1}{2} E_{k+1}
+    \]
+\begin{solution}
+If we flip a heads on the first flip, then we have added a flip to the total number to get to $k+1$ in a row, but now we only need to get $k$ in a row, which is expected to take $E_{k}.$ Meanwhile, if we flip a tails, we essentially have gone nowhere but have just wasted a flip. That is:
+\[E_{k+1} = \bbE[E_{k+1} \mid X_1] = \frac{1}{2}(E_k + 1) + \frac{1}{2}(E_{k+1} + 1) = 1 + \frac{1}{2}E_k + \frac{1}{2}E_{k+1}\]
+\end{solution}
+    \item[(c)] Use the recursive relationship from the previous part to find the formula for \( E_k \) for all \( k \).
+\begin{solution}
+We claim that $E_{k} = 2k-1.$
+    We have from the above that 
+    \[E_{k+1} = 2 + E_k.\] Inducting over $k,$ we see that 
+    \begin{enumerate}
+        \item For $k = 1,$ we have calculated that $E_1 = 2 = 2 + E_0.$
+        \item Assume the result holds for $E_n.$ 
+        \item For $k = n+1,$ we have that 
+        \[E_{n+1} = 2 + E_{n} = 2 + (2n -1) = 2(n+1) - 1\]
+    \end{enumerate}
+\end{solution}
+\end{enumerate}
+
+
+\end{document}
+
