@@ -203,7 +203,8 @@ We can write $X^+ = \displaystyle\bigcup_\bbN X_n^+.$ Then
     \end{cases}\\ &= \begin{cases}
         \int_\frac{1}{2}^1 dx\\
         \int_0^\frac{1}{2} dx
-    \end{cases}\\ &= \frac{1}{2}    
+    \end{cases}\\ &=m([0,\frac{1}{2}])  \\
+    &= \frac{1}{2}
     \end{align*}
 Comparing with $(77),$ we indeed see that if $\liminf_{n\to \infty}f_n = f = 0$ as shown above, then 
 \[\int_0^1 f(x) dx = 0 \leq \frac{1}{2} = \liminf_{n\to \infty}\int_0^1 f_n(x) dx,\] as per Fatou's lemma.
@@ -229,8 +230,10 @@ Comparing with $(77),$ we indeed see that if $\liminf_{n\to \infty}f_n = f = 0$ 
     \[|f_n(x) - 0| = |\frac{1}{n}| < \epsilon.\] Thus, 
     $f_n{\rightrightarrows} \;0.$ However, 
     for any $n \in \bbN,$ 
-    \[F_n = \int_{-n}^n f_n(x) = 2\int_0^n \frac{1}{n}dx = 2\] and so 
-    \[\int_\bbR f_n dx = \lim_{n\to \infty}F_n = 2\]
+    \[F_n = \int_{-n}^n f_n(x) = 2\int_0^n \frac{1}{n}dx = 2\frac{1}{n}m([0,n]) = 2\] and so 
+    \[\int_\bbR f_n dx = \lim_{n\to \infty}F_n = 2.\]
+
+    The dominated convergence theorem fails because for any function $g$ that dominates $f_n,$ its integral is not finite over $\bbR.$ 
 \end{solution}
 
 
@@ -341,41 +344,28 @@ To prove (b), not that if $f$ is measurable, then $f^+$ and $f^-$ are non-negati
     \end{enumerate}
 \end{problem}
 \begin{solution}
-    \begin{lemma}
-        Suppose $f \geq 0$ and $f \in \mathcal{L}(m),$ then for any $E\in \cal M,$ there exists a sequence $(\varphi_n)$ of simple functions such that
-        \[\int_E f dm= \lim_{n\to \infty}\int_E\varphi_ndm.\] 
-    \end{lemma}
-    \begin{proof}
-        Since $f \in \mathcal{L}(m),$ then $f$ is measurable by Rudin's definition. By the previous problem, since $f \geq 0,$ there exists a sequence of measurable simple functions $(\varphi_n)$ such that $0 \leq \varphi_{n-1} \leq \varphi_n \leq f$ for any $n.$ Clearly, the sequence 
-        \[\int_E \varphi_n dm = I_E(\varphi_n)\] is monotonically increasing (a proof of this is nevertheless shown in the following lemma) with $n.$ Thus, 
-        \[I_E(\varphi_n)\uparrow \sup_{g} I_E(g) = \int_E f dm,\] where the supremum is taken over measurable simple functions such that $0 \leq g \leq f.$ 
-    \end{proof}
-
-\rule{\linewidth}{0.4pt}
-    
 \begin{lemma}
     Suppose $\varphi, \psi$ are measurable simple functions such that $ 0 \leq \varphi \leq \psi.$ Then  for any $E \in \cal M,$ 
     \[\int_E \varphi  \leq \int_E \psi.\]
 \end{lemma}
 \begin{proof}
-   We claim that simple functions are closed under function addition. Consider that if $\varphi$ and $\psi$ are simple, then each has finite range. Thus, any linear combination of the two must also have finite range. Thus, $\psi - \varphi$ is a simple function. Then by linearity and then by definition,
-   \[\int_E \psi - \varphi = I_E(\psi - \varphi) = \sum_{k=1}^K c_k m(E_k \cap E).\] Since $\psi - \varphi \geq 0,$ then $c_k \geq 0$ for all $k,$ and thus 
-   \[0 \leq \int_E \psi - \varphi = \int_E \psi - \int_E \varphi\] by linearity. Thus, $\int_E \varphi \leq \int_E \psi.$ 
+   We claim that simple functions are closed under function addition. Consider that if $\varphi$ and $\psi$ are simple, then each has finite range. Thus, any linear combination of the two must also have finite range. Thus, $\psi - \varphi$ is a simple function. By a result proven in class,
+   \[\int_E \psi - \varphi = I_E(\psi - \varphi) = \sum_{k=1}^K c_k m(E_k \cap E).\] Since $\psi - \varphi \geq 0,$ then $c_k \geq 0$ for all $k,$ and thus by linearity 
+   \[0 \leq \int_E \psi - \varphi = \int_E \psi - \int_E \varphi.\]  Thus, $\int_E \varphi \leq \int_E \psi.$ 
 \end{proof}
 
 \rule{\linewidth}{0.4pt}
 
-(c) Suppose $f \leq g$ where both are Lebesgue integrable. With some loss of generality, assume that $ f\geq 0.$ If $\varphi_n \uparrow f$ and $\psi_n \uparrow g,$ then for large $n,$ we must have that $\varphi_n \leq \psi_n.$ By Lemma 2, we have that for large $n,$
-\[\int_E \varphi_n \leq \int_E \psi_n\implies \lim_{n\to \infty}\int_E \varphi_n \leq \lim_{n\to \infty} \int_E \psi_n.\] By Lemma 1, this in turn shows that 
-\[\int_E f \leq \int_E g.\] For the general case, we know that 
+(c) Suppose $f \leq g$ where both are Lebesgue integrable. Assume first that $ f\geq 0.$ For any simple $0\leq \varphi\leq f$
+\[\int_E \varphi \leq \sup_{0\leq \psi \leq g}\int_E \psi = \int_E g \implies \int_E f = \sup_{0 \leq \varphi \leq f}\int_E\varphi \leq \int_E g\] 
 \[f^+ - f^- \leq g^+ - g^-\] and so $f^+ \leq g^+$ and $f^- \geq g^-.$ Since both are nonnegative, then 
 \[\int_E f^+dm \leq \int_E g^+dm, \qquad \int_E f^-dm \geq \int_E g^- dm,\] proving that (we exclude the $dm$ differential on each integral for readability):
 \[\int_E f = \int_E f^+ - \int_E f^- \leq \int_E g^+ - \int_E g^- = \int_E g.\]
 
 \rule{\linewidth}{0.4pt}
 
-(a) Suppose $f$ is measurable and bounded on $E$ and $m(E) < \infty.$ First, assume $f\geq .$ Since $f$ is bounded on $E,$ there exists some $M >0$ such that $f(x) \leq M$ for all $x\in E.$ Let $(\varphi_n)$ be the sequence of simple measurable functions such that $\varphi_n \uparrow f.$ By part (c) above, if we define $g = M \chi_{E},$ then $g$ is a simple measurable function and so since $ \varphi_n, g \in \mathcal{L}(m)$ for all $n$ and $\varphi_n \leq g$ for all $n,$ then for all $n,$ we have by Lemma 1 that
-\[\int_E \varphi_n \leq \int_E g \implies \lim_{n\to \infty}\int_E \varphi_n \leq \int_g = \int_E f \leq M m(E \cap E) = Mm(E) < \infty.\] Thus, $\int_E f < \infty$ and so $f \in \mathcal{L}(m).$ For the general case, we don't assume $f$ to be nonnegative. Then $f = f^+ - f^-,$ where both $f^+$ and $f^-$ are measurable and nonnegative, and thus $f^+, f^- \in \mathcal{L}(m)$ by what we just proved, and so both integrals are finite, proving that $f \in \mathcal{L}(m).$
+(a) Suppose $f$ is measurable and bounded on $E$ and $m(E) < \infty.$ First, assume $f\geq 0.$ Since $f$ is bounded on $E,$ there exists some $M >0$ such that $f(x) \leq M$ for all $x\in E.$ Let $\varphi$ be a simple measurable function such that $0\leq \varphi \leq f.$ By part (c) above, if we define $g = M \chi_{E},$ then $g$ is a simple measurable function and so since $ \varphi, g \in \mathcal{L}(m)$  and $\varphi \leq g$ for all $n,$ then for all $n,$ we have by (c) that
+\[\int_E \varphi \leq \int_E g \implies \sup_{0 \leq \varphi \leq f}\int_E \varphi \leq \int_Eg \implies \int_E f \leq M m(E \cap E) = Mm(E) < \infty.\] Thus, $\int_E f < \infty$ and so $f \in \mathcal{L}(m).$ For the general case, we don't assume $f$ to be nonnegative. Then $f = f^+ - f^-,$ where both $f^+$ and $f^-$ are measurable and nonnegative, and thus $f^+, f^- \in \mathcal{L}(m)$ by what we just proved, and so both integrals are finite, proving that $f \in \mathcal{L}(m).$
 
 \rule{\linewidth}{0.4pt}
 
@@ -384,40 +374,41 @@ To prove (b), not that if $f$ is measurable, then $f^+$ and $f^-$ are non-negati
 
 \rule{\linewidth}{0.4pt}
 
-(d) Suppose first that $f, c \geq 0.$ Since $f \in \mathcal{L}(m),$ then $f$ is measurable and nonnegative. Thus by Lemma 1 we get our sequence of measurable simple functions $\varphi_n \uparrow f$ such that 
-\[\lim_{n\to \infty} \int_E \varphi_n = \int_E f.\] We claim that: 
+(d) Suppose first that $f, c \geq 0.$ Since $f \in \mathcal{L}(m),$ then $f$ is measurable and nonnegative. We claim that: 
 \begin{enumerate}
     \item [(1)] If $\varphi$ is a simple measurable function, then $c \varphi$ is a simple measurable function. To see this, let $\varphi = \sum_{k=1}^n a_k \chi_{E_k}.$ Then $c \varphi = \sum_{k=1}^n ca_k \chi_{E_k}.$ Since each $E_k$ is measurable since $\varphi$ is measurable, then $c\varphi$ is a simple measurable function.
     \item [(2)] If $\varphi$ is a simple measurable function, then 
     \[\int_E c \varphi = c \int_E \varphi.\] First, we have that $c \varphi \in \mathcal{L}(m)$ since by the above claim it is a simple measurable function. Moreover, 
     \[\int_E c\varphi = \sum_{k=1}^n ca_k m(E \cap E_k) = c\sum_{k=1}^n a_k m(E \cap E_k) = c\int_E \varphi.\]
-    \item [(3)] Since $\varphi_n \uparrow f,$ then $c\varphi_n \uparrow cf.$ The claim is pretty obvious. 
+    \item [(3)] If $0\leq \varphi\leq f$ is simple, then $0\leq c\varphi \leq cf$ is simple as well. The claim is pretty obvious by what we have showed. 
 \end{enumerate}
-By the above claims, we have that for each $n,$ $c\varphi_n \in \mathcal{L}(m)$ and thus $cf \in \mathcal{L}(m).$ Moreover,
-\[\int_E c\varphi_n = c\int_E \varphi_n \implies \int_E cf  =  \lim_{n\to \infty} \int_E c\varphi_n  = c\lim_{n\to \infty}\int_E \varphi_n  = c\int_E f.\]
+By the above claims, we have that for any such simple $\varphi,$ $c\varphi \in \mathcal{L}(m)$ and thus $cf \in \mathcal{L}(m)$ is measurable Moreover,
+\[\int_E c\varphi = c\int_E \varphi \implies \sup_{\varphi}\int_E c\varphi  =  c\sup_{\varphi} \int_E \varphi  \implies \int_E cf  = c\int_E f.\]
 
 
 Now suppose $f\geq 0$ and $c \leq 0.$ By what we just showed,  we have that $-c \geq 0$ and so $-cf \in \mathcal{L}(m)$ with 
 \[\int_E -cf = -c\int_E f.\] It suffices to show that \[-\int_E f = \int_E -f.\] To see this, it suffices to show it for simple functions. Let $\varphi$ be a simple measurable function, then $\varphi$ is bounded on $E$ and so $-\varphi$ is bounded on $E.$ Then we get by (a) that $-\varphi \in \mathcal{L}(m).$ Then we claim that $\int_E -\varphi = -\int_E \varphi.$ Consider that 
-\[\int_E -\varphi = I_E(-\varphi ) = \sum_{k=1}^n -c_k m(E_k \cap E) = -\sum_{k=1}^n c_k m(E_k \cap E) = -I_E(\varphi) = -\int_E \varphi.\] Thus, we see that 
-\[\int_E -f = \lim_{n\to \infty}\int_E -\varphi_n = -\lim_{n\to \infty}\int_E \varphi_n = - \int_E f.\] Thus, since 
-\[\int_E -cf = -c \int_E f \implies -\int_E -cf = \int_E (-)-cf = \int_E cf = c\int_E f\]
+\[\int_E -\varphi = I_E(-\varphi ) = \sum_{k=1}^n -c_k m(E_k \cap E) = -\sum_{k=1}^n c_k m(E_k \cap E) = -I_E(\varphi) = -\int_E \varphi.\] Thus, taking supremums over the simple functions yields the required result. Thus, since 
+\[\int_E -cf = -c \int_E f \implies c\int_E f = (-)(-c)\int_E f = -\int_E -cf = \int_E (-)-cf = \int_E cf \]
+
+For any $f \in \cal L,$ take $f = f^+ - f^-$ and $c\in \bbR$ Then by linearity and everything we have shown above:
+\[c\int_E f = c(\int_E f^+ - \int_E f^+) = \int_E cf^+ - \int_E cf^- = \int_E c(f^+ - f^-) = \int_E cf\]
 
 \rule{\linewidth}{0.4pt}
 
-(e) Suppose first that $f\geq 0.$ Then 
-\[\int_E f = \lim_{n\to \infty} I_E(\varphi_n),\] where $\varphi_n \uparrow f$ are all simple and measurable and nonnegative. Consider that for any $n,$
-\[I_E(\varphi_n) = \sum_{k=1}^{N_n}c^{(n)}_k m(E \cap E_k^{(n)}) \leq \sum_{k=1}^{N_n}c^{(n)}_k m(E) = 0.\] And thus 
-\[\lim_{n\to \infty} I_E(\varphi_n) = \int_E f = 0\]
+(e) Suppose first that $f\geq 0.$ for any simple $0 \leq \varphi \leq f,$ we have that
+\[I_E(\varphi) = \sum_{k=1}^{N}c_k m(E \cap E_k) \leq \sum_{k=1}^{N}c_k m(E) = 0.\] And thus 
+\[\sup_{0 \leq \varphi\leq f}I_E(\varphi) = \int_E f = 0\]
+
+For any $f$ measurable, take $f = f^+ - f^-.$ Then by what we just showed, $\int_E f^+ = 0$ and $\int_E f^- = 0.$
 
 \rule{\linewidth}{0.4pt}
 
 (f) We prove the result first for simple functions and then for non-negative functions. Let $\varphi = \sum_{k=1}^N c_k \chi_{E_k}$ be a simple non-negative measurable function on $E$ and $A\in \cal M$ with $A\subset E.$ Then since for any $k$ we have that $E_k \cap A \subset E_k \cap E,$ then
-\[\int_E \varphi = I_A(\varphi) = \sum_{k=1}^N c_k m(E_k \cap A) \leq \sum_{k=1}^N c_k m(E_k \cap E) = I_E(\varphi) = \int_E \varphi,\] and so $\int_E \varphi$ is finite and thus $\varphi \in \mathcal{L}(m)$ on $A.$ 
+\[\int_A \varphi = I_A(\varphi) = \sum_{k=1}^N c_k m(E_k \cap A) \leq \sum_{k=1}^N c_k m(E_k \cap E) = I_E(\varphi) = \int_E \varphi < \infty,\] and so $\int_A \varphi$ is finite and thus $\varphi \in \mathcal{L}(m)$ on $A.$ 
 
-Let $f \geq 0$ be Lebesgue integrable. Then there exists $\varphi_n \uparrow f$ sequence of simple, non-negative, measurable functions such that 
-\[\int_E f = \lim_{n\to \infty}\int_E \varphi_n.\] By the above case, we have that for each $n,$ 
-\[\int_A \varphi_n \leq \int_E \varphi_n \implies \int_A f = \lim_{n\to \infty}\int_E \varphi_n \leq \lim_{n\to \infty}\int_E \varphi_n = \int_E f,\] and so $\int_A f < \infty$ and thus $f \in \mathcal{L}(m)$ on $A.$
+Let $f \geq 0$ be Lebesgue integrable. Then take some simple $0\leq \varphi \leq f.$ By the above case, we have that
+\[\int_A \varphi \leq \int_E \varphi \implies \int_A f = \sup_\varphi\int_A \varphi \leq \sup_\varphi\int_E \varphi = \int_E f< \infty,\] and so $\int_A f < \infty$ and thus $f \in \mathcal{L}(m)$ on $A.$
 
 Let $f \in \mathcal{L}(m)$ on $E.$ Then split it up into $f^+$ and $f^-.$ Both are integrals over $A$ are finite by the above case, and so $f \in \mathcal{L}(m)$ on $A.$
 \end{solution}

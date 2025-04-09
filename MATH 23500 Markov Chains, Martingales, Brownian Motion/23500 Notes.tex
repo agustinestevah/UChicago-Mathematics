@@ -391,9 +391,84 @@ Our goal is to calculate the expected duration (that is, the hitting probability
     \[\lambda_1 = \]
 \end{exmp}
 
+\newpage
 
+\subsection{Wednesday, Apr 9: Queuing and Stationary Distributions for Countable State Spaces}
+\begin{exmp}
+    Let's continue the queue example from last class. Let $\{X_n\}$ be the number of people at time $n.$ If $p(0,1) = 0$ and $p(0,0) = 1-p$ and
+    \[p(x,x-1) = q(1-p), \quad p(x,x+1) = p(1-q), \quad p(x,x) = pq + (1-q) + (1-p).\] Thus, $p$ is probability a person enters the line and $q$ is the probability a person leaves (or is served). 
+    \begin{prop}
+        The queue is recurrent if and only if $q \geq p.$ 
+    \end{prop}
+    \begin{proof}
+        Let $\tau_k$ be the $k$th time for which $X_n \neq X_{n-1}.$ For $x \geq 1,$ 
+        \begin{align*}
+        \bbP\{X_{\tau_k} = x + 1 \mid X_{\tau_{k-1}}= x\} &= \bbP\{X_{\tau_k} = x + 1 \mid X_{\tau_k -1} = x\}\\ &= \bbP\{X_1 = x + 1 \mid X_0 = x, X_1 \neq X_0\}\\ &= \frac{p(x,x+1)}{1 - p(x,x)}\\ &= \frac{p(1-q)}{q(1-p) + p(1-q)}    
+        \end{align*}
+        and by the same logic, 
+        \[\bbP\{X_{\tau_k} = x-1 \mid X_{\tau_{k-1}} = x\} = 1- \frac{p(1-q)}{q(1-p) + p(1-q)}\]
+        Thus, $\{X_{\tau_k}\}_{k\geq 0}$ is a biased random walk with parameter $\frac{p(1-q)}{q(1-p) + p(1-q)}.$ Thus, $\{X_{\tau_k}\}$ hits $0$ with probability 1 if and only if $\{X_n\}$ started from $x\geq 1$ hit $0$ with probability $1.$ From last class, happens if and only if 
+        \[\frac{p(1-q)}{q(1-p) + p(1-q)} \leq \frac{1}{2} \iff p(1-q) \leq q(1-p) \iff p \leq q\]
+    \end{proof}
+\end{exmp}
 
+\begin{rem}
+    By the Brower fixed point theorem, we have the existence of a stationary distribution in finite space spaces. 
+\end{rem}
 
+Recall that if $S$ is finite, then for an irreducible, aperiodic Markov chain, there exists a unique stationary distribution $\pi$ that satisfies 
+\[\sum_{x\ in S} \pi_x = 1 , \qquad \pi P = \pi \iff \sum_{x\in S} \pi_x p(x,y) = \pi_y.\]
+
+In the countably infinite space, we note that a transient state space cannot yield a stationary distribution since the expected return times are all $\infty.$
+\begin{defn}
+    Suppose $\{X_n\}$ is irreducible and recurrent. We say that $\{X_n\}$ is \textbf{null recurrent} if 
+    \[\lim_{n\to \infty}p^n(x,y)= 0, \quad \forall\; x,y \in S.\] Otherwise, $\{X_n\}$ is \textbf{positive recurrent}.
+\end{defn}
+\begin{rem}
+    Clearly, null recurrent Markov chains also have infinite return times, and thus have no stationary distribution.
+\end{rem}
+\begin{prop}
+    Suppose $\{X_n\}$ is irreducible. The following are equivalent:
+    \begin{enumerate}
+        \item $\{X_n\}$ is positive recurrent;
+        \item $\{X_n\}$ has a stationary distribution;
+        \item For any $x,y \in S,$ 
+        \[\limsup_{n\to \infty} p^n(x,y) > 0.\]
+        \item If $T_x = \min\{n \geq 1 \mid X_n = x\},$ then 
+        \[\bbE[T_x \mid X_0 = x] < \infty\] for any $x \in S.$
+    \end{enumerate}
+    Furthermore, if $\{X_n\}$ is aperiodic and positive recurrent, then $\pi$ is unique and for any $x\in S,$
+    \[\pi_x = \frac{1}{\bbE[T_x \mid X_0 = x]}\]
+\end{prop}
+
+\begin{rem}
+    By condition 3, checking that a recurrent Markov chain is null recurrent amount to checking that $\lim_{n\to \infty}p^n(x,y) = 0$ for some states $x,y \in S.$
+\end{rem}
+\begin{exmp}
+    Consider the biased random walk on $\{0,1, \dots\}$ with partially reflecting boundary: 
+    \[p(x,x-1) = q= 1-p, \quad p(x,x+1) = p, \quad p(0,0) = q, \quad p(0,1) =p.\]
+    Is this positive recurrent?
+
+    We know that $\{X_n\}$ is transient for $p > \frac{1}{2}.$ For some $\pi$ to possibly exist, we need $p < \frac{1}{2}.$ The stationary distribution must satisfy:
+    \[\pi(x) = p\pi(x-1) + q\pi(x+1), \quad \forall x\geq 1.\] Moreover, 
+    \[\pi(0) = q\pi(0) + q\pi(1).\] This is because 
+    \[\pi P = \pi \begin{pmatrix}
+        q & p & 0 & 0 & \cdots\\
+        q & 0 & p & 0 & \cdots \\
+        0 & q & 0 & p& \cdots\\
+        \vdots&\vdots& \vdots & \vdots &\ddots
+    \end{pmatrix} = \begin{pmatrix}
+        \pi_0\\ \pi_1 \\
+        \vdots
+    \end{pmatrix}\] For $p < \frac{1}{2},$ the solution takes the form 
+    \[\pi(x) = \lambda_1 + \lambda_2 (\frac{p}{1-p})^x\] We need 
+    \[\sum_{x = 0}^\infty \pi(x) = 1 \implies \lambda_1 = 0.\] After some algebra, we find that $\lambda_1 = 1- \frac{p}{1-p},$ and thus 
+    \[\pi(x) = (1- \frac{p}{1-p})(\frac{p}{1-p})^x.\] Thus, for $p< \frac{1}{2},$ $\{X_n\}$ is positive recurrent. 
+    
+    For $p = \frac{1}{2},$ the general solution is 
+    \[\pi(x) = \lambda_1 + \lambda_2 x.\] But
+    \[\sum_{n=0}^\infty \pi(x) < \infty \implies \lambda_1 = \lambda_2 = 0,\] and thus $\{X_n\}$ is null recurrent. 
+\end{exmp}
 
 
 
