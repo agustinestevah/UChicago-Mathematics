@@ -164,6 +164,9 @@ M_n = \max\{X_1, \ldots, X_n\}.
         &= \max\{M_n, X_{n+1}\}.
     \end{align*}
     Thus, the distribution of $M_{n+1}$ is dependent only on $M_n$ and $M_{n+1}.$ Since $M_{n+1}$ is independent from $M_{i}$ for all $i< n+1,$ then $M_{n+1}$ does not depend on anything before $n-1.$ 
+
+    We will show that $M_n$ is not irreducible by claiming that $0 \to 1$ but $1\not \to 0.$ As shown below, $p(0,1) = \frac{1}{4}.$ However, once you are at $1,$ even if you draw $0$ from $S,$ the chain will still show $1,$ since it takes the maximum. Indeed, 
+    \[1\to 2\to 3\to 4,\] but there are no backwards arrows. Thus, there is more than one communication class.
     
 \end{solution}
 
@@ -172,13 +175,13 @@ M_n = \max\{X_1, \ldots, X_n\}.
     Since $\{Y_n\}$ is irreducible and aperiodic, then $\pi$ exists and is unique. Thus, 
     \[\pi P = \pi \iff P \pi^T = \pi^T \iff P\pi^T - \pi^T = 0 \iff (P - I)\pi^T = 0 \iff (4P - 4I)\pi^T\]
     so then 
-    \[\pi_1 = \pi_2 = \pi_3 = \pi_4 = \pi_5 \implies \pi = \begin{pmatrix}
+    \[\pi_1 = \pi_2 = \pi_3 = \pi_4 = \pi_5 \implies \boxed{\pi_Y = \begin{pmatrix}
         \frac{1}{5}\\
         \frac{1}{5}\\  
         \frac{1}{5}\\
         \frac{1}{5}\\
         \frac{1}{5}
-    \end{pmatrix}\]
+    \end{pmatrix}}\]
 
     Consider that the transition matrix of $M_n$ is 
     \[P = \begin{pmatrix}
@@ -192,15 +195,15 @@ M_n = \max\{X_1, \ldots, X_n\}.
         1 & 1 & 3 & 0\\
         1 & 1 & 1 & 4
     \end{pmatrix}\] Solving for the eigenvector with $\lambda = 4:$
-    Then $\pi = \begin{pmatrix}
+    Then \[\boxed{\pi_M = \begin{pmatrix}
         0 \\ 0 \\ 0 \\ 1
-    \end{pmatrix}$
+    \end{pmatrix}}\]
 \end{solution}
 
     \item[(c)] Find $\mathbb{E}[\min\{n \geq 1 : Y_n = 0\} \mid Y_0 = 0]$.
 \begin{solution}
-    We have that 
-    \[\mathbb{E}[\min\{n \geq 1 : Y_n = 0\} \mid Y_0 = 0] = \frac{1}{\pi_0} = 5\]
+    We have that by  a formula in class,
+    \[\boxed{\mathbb{E}[\min\{n \geq 1 : Y_n = 0\} \mid Y_0 = 0] = \frac{1}{\pi_0} = 5}\]
 \end{solution}
 
     \item[(d)] Find $\mathbb{E}[\min\{n \geq 1 : M_n = 3\} \mid M_0 = 0]$.
@@ -231,7 +234,7 @@ For $a_2,$ we have that
 \end{align*}
 Solving:
 \[a_0 = a_1 = a_2 = a_3 =4\] and thus 
-\[\bbE[T_3] = 4\]
+\[\boxed{\bbE[T_3] = 4}\]
 \end{solution}
 \end{enumerate}
 
@@ -313,14 +316,14 @@ We proceed by induction.
 \[\pi_k = \binom{N}{k}\pi_0\]
 Thus,
 \[1 = \sum_{k=0}^N \pi_k = \sum_{k=0}^N \binom{N}{k}\pi_0 = 2^N\pi_0,\] and thus 
-\[\pi = (\pi_0, \pi_1, \dots, \pi_N), \quad \pi_k = \binom{N}{k} \frac{1}{2^N}\pi_0\]
+\[\boxed{\pi = (\pi_0, \pi_1, \dots, \pi_N), \quad \pi_k = \binom{N}{k} \frac{1}{2^N}}\]
 
 \end{solution}
     \item[(c)] What is the number of steps it takes on average for the right urn to become empty given that it was initially empty?
 \begin{solution}
     If we define 
     \[T_0 = \inf \{n >0 : X_n = 0 \mid X_0 = 0\},\] then we have seen in class that
-    \[\bbE[T_0] = \frac{1}{\pi_0} = 2^N.\]
+    \[\boxed{\bbE[T_0] = \frac{1}{\pi_0} = 2^N}.\]
 \end{solution}
     \item[(d)] Let \( \mu_n := \mathbb{E}[X_n | X_0 = x] \). Show that
     \[
@@ -422,7 +425,7 @@ For $N_6$ we have that
     &= \frac{11}{3}
 \end{align*}
 Thus, we solve and find that
-\[\bbE[N_{12}]= \frac{121}{30}\]
+\[\boxed{\bbE[N_{12}]= \frac{121}{30}}\]
 
 \end{solution}
 
@@ -443,22 +446,139 @@ The number of tails before we hit a head if modeled by a geometric variable
     E_{k+1} = 1 + E_k + \frac{1}{2} E_{k+1}
     \]
 \begin{solution}
-If we flip a heads on the first flip, then we have added a flip to the total number to get to $k+1$ in a row, but now we only need to get $k$ in a row, which is expected to take $E_{k}.$ Meanwhile, if we flip a tails, we essentially have gone nowhere but have just wasted a flip. That is:
-\[E_{k+1} = \bbE[E_{k+1} \mid X_1] = \frac{1}{2}(E_k + 1) + \frac{1}{2}(E_{k+1} + 1) = 1 + \frac{1}{2}E_k + \frac{1}{2}E_{k+1}\]
+Suppose we have flipped $k$ heads. It has taken us an expected time of $E_k$ to get here. Thus, our next move is either a tail (in which case it will take us a whole nother $E_{k+1}$ to get to $k+1$ heads again, \textit{plus} the move we just did), or a head, in which case we are done. Thus, we have $\frac{1}{2}(1) + \frac{1}{2}(E_{k+1} + 1) = 1 + \frac{1}{2}E_{k+1}$ as our exhaustive expected value of flips given what will happen in the next move, and obviously need to add the $E_k$ time it took to get here. Thus, in total, 
+\[E_{k+1} = 1 + E_k + \frac{1}{2}E_{k+1}\]
 \end{solution}
     \item[(c)] Use the recursive relationship from the previous part to find the formula for \( E_k \) for all \( k \).
 \begin{solution}
-We claim that $E_{k} = 2k-1.$
+We claim that $E_{k} = 2^{k+1} -2.$
     We have from the above that 
-    \[E_{k+1} = 2 + E_k.\] Inducting over $k,$ we see that 
+    \[E_{k+1} = 1 + E_k + \frac{1}{2}E_{k+1} \implies E_{k+1} = 2 + 2E_k\] Inducting over $k,$ we see that 
     \begin{enumerate}
-        \item For $k = 1,$ we have calculated that $E_1 = 2 = 2 + E_0.$
+        \item For $k = 1,$ we have calculated that $E_1 = 2 = 2^2 -2$ since $E_0$ is clearly $0.$ 
         \item Assume the result holds for $E_n.$ 
-        \item For $k = n+1,$ we have that 
-        \[E_{n+1} = 2 + E_{n} = 2 + (2n -1) = 2(n+1) - 1\]
+        \item For $k = n+1,$ we have that using our inductive hypothesis, 
+        \[E_{n+1} = 2 + 2E_{n} = 2 + 2(2^{n+1} -2) = 2 + 2^{n+2} - 4 = 2^{n+2} -2\]
     \end{enumerate}
+Note that in order to find the formula, we solved the non-homogeneous equation $E_{k+1} = 2 + 2E_k.$ To do this, we first consider the homogenized version, which is a simple geometric sequence
+\[E'_{k} = 2E_{k-1} \implies E'_{k} = E_1\cdot2^{k} = 2^{k+1}.\] Then we add it back into the non-homogeneous sequence by assuming that $E''_{k} = a$ for any $k.$ Then 
+\[a = 2 + 2a \implies a = -2.\] Then we solve by 
+\[E_k = E_k' + E_k'' = 2^{k+1} - 2\]
 \end{solution}
 \end{enumerate}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    
+Recall a stochastic matrix is one in which the row sums all equal 1. We call a stochastic matrix \textit{doubly stochastic} if the columns add up to 1 as well. Suppose \( P \) is the transition matrix for an irreducible, aperiodic Markov chain and that \( P \) is doubly stochastic.
+\end{problem}
+
+\begin{enumerate}
+    \item[(a)] Show that the invariant distribution is uniform.
+\begin{solution}
+    First, since $\{X_n\}$ is irreducible and aperiodic, then there is exists some unique $\pi$ stationary distribution. Thus, it suffices to find a solution satisfying 
+    \begin{align}
+        \pi P = \pi
+    \end{align} and that will prove to be the only solution. We offer the candidate solution of 
+    \[\pi_0 = \pi_1 = \dots = \pi_N.\]
+    Since $P$ is doubly stochastic, we have that for any column $0\leq k\leq N$
+\[\sum_{n=0}^N \pi_n p(n,k) = \sum_{n=0}^N \pi_0p(n,k)= \pi_0\sum_{n=0}^N p(n,k) = \pi_0 = \pi_k.\] Thus, this candidate $\pi$ satisfies (1). Thus, the requirement that $\pi$ is a probability vector forces 
+\[\sum_{n=0}^N \pi_n = n\pi_0 = 1,\] and thus 
+\[\pi = \begin{pmatrix}
+    \frac{1}{N} & \frac{1}{N} & \cdots & \frac{1}{N}
+\end{pmatrix}\]
+\end{solution}
+    \item[(b)] Consider the following Markov chain on shuffles, that is, on orderings of a standard 52-card deck of cards where the transitions are: at each time a random card is chosen from the deck (with all 52 cards equally likely to be chosen) and is put on the top of the deck.
+    \begin{enumerate}
+        \item[(i)] Show that this is irreducible, aperiodic, and has a doubly stochastic transition matrix.
+    \begin{solution}
+        The state space is the 
+        \[S = \sigma\{1,2,3,\dots, 51,52\},\] where $\sigma$ represents all the possible permutations of $\{1,2,3,\dots, 52\}$ Then $P \in \mathcal{M}_{52! \times 52!}.$ If $n \in S,$ then since there is a $\frac{1}{52}$ chance of choosing the top card (the only card in which the ordering won't be impacted), then $p(n,n) = \frac{1}{52}.$ Thus the Markov chain is aperiodic. 
+        Suppose $X_0 = i.$ Then $X_1 = j,$ where $j$ is a permutation of $i$ with exactly one number different.  Clearly, $p(i,j) = \frac{1}{52}.$  We claim that there are $51$ permutations that differ by one move. To see this, it suffices to show that 
+        $\{1,2,3,\dots, 52\}$ has $52$ moves. It has the trivial move, that is, the one where $1$ is chosen. Then there is 
+        \[\sigma_1\{1,2,3\dots, 52\} = \begin{cases}
+            \{1,2,3\dots, 52\}\\
+            \{2,1, 3\dots, 52\}\\
+            \{3,1,2\dots, 52\}\\
+            \vdots\\
+            \{52,1,2\dots, 52\}
+        \end{cases}.\] There is nothing special about the permutation that we chose, so then each permutation can go to $52$ others with uniform probability of $\frac{1}{52}.$ Thus, each permutation can come from exactly $52$ different permutations This shows that $\{X_n\}$ is a doubly stochastic matrix since 
+        \[\sum_{n=1}^{52!}p(n, 1) = \sum_{\text{permutations that go to $\{1,2,3,\dots, 52\}$}}\frac{1}{52} = 52\cdot 52 = 1.\]
+
+        It remains to see that $\{X_n\}$ is irreducible.  If $i,j \in S$ differ from each other by $n$ spots. Let $I = \{i_1, \dots, i_n\}$ be the spots the permutation differ. We will show that we can permute $i\to j.$ There is a $\frac{1}{52}$ chance the $i_n$ spot is chosen from $i$. Note that the card on this spot in $j$ will necessarily be before $i_n.$ Thus, we have a $\frac{1}{52}$ chance of choosing the card at this spot until both cards are the same. Thus, 
+        \[\bbP\{I = \{i_1, \dots, i_{n-1}\}\} >\frac{1}{52^{52 - i_n}}\] One can keep going like this to show that $\bbP\{I = \emptyset\} >0.$ Thus, we have showed that $i \to j.$ But there was nothing special about starting with $i.$ In fact, because $I = J,$ where $J$ is the spots where $j$ differs from $i,$ then 
+        \[\bbP\{J = \emptyset\} = \bbP\{I = \emptyset\} >0.\] Thus, $j\to i.$
+    \end{solution}
+        \item[(ii)] Suppose we start the chain with a perfectly ordered deck and we do this “shuffle” until the deck returns to being perfectly ordered. If we make one move every second, what is the expected number of years until this happens?
+    \begin{solution}
+        Let $\sigma_1  = \{1,2,3,\dots, 52\}.$ Define
+        \[T_{\sigma_1} = \{n >0 \mid X_n = \sigma_1\}.\] From the previous problem and part (a), we know that 
+        \[\pi_{\sigma_i} = \frac{1}{52!}, \quad \sigma_i \in \sigma\{1,2,3,\dots, 52\}.\] Thus, 
+        \[\bbE[T_{\sigma_1}] = \frac{1}{\pi_{\sigma_1}} = 52!.\] Thus, it will take
+        \[52! \text{ sec} \cdot \frac{1\text{ min}}{60 \text{ sec}}\cdot \frac{1 \text{ hr}}{60\text{ min}}\cdot \frac{1 \text{ day}}{24 \text{hr}}\cdot \frac{1 \text{ year}}{365 \text{ days}}\approx \boxed{2.558 \times 10^{60}\text{ years}}\]
+    \end{solution}
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+ Let \(\{X_n\}\) be a Markov chain on a countable space \(S\), with transition probabilities \(p(x,y)\). A function \(\pi : S \to [0,1]\) with \(\sum_{x \in S} \pi_x = 1\) is called a reversible distribution for \(\{X_n\}\) if:
+\[
+\pi_x p(x,y) = \pi_y p(y,x), \quad \forall x, y \in S.
+\]
+
+\begin{enumerate}
+    \item[(a)] Show that a reversible distribution is also a stationary distribution.
+\begin{solution}
+    First off, if $\pi$ is a reversible distribution then it is a valid probability distribution since $\sum_{x\in S}\pi_x = s.$ First note that since the transition probabilities add up to $1$ for each 'row,' we have that for any $k \in \bbN,$ 
+    \[\sum_{n=1}^\infty \pi_n p(n,k)= \sum_{n=1}^\infty \pi_k p(k,n) = \pi_k \sum_{n=1}^\infty p(k,n) = \pi_k.\] Thus, if $P$ is the countably infinite transition matrix, we have that $\pi P  = \pi.$ 
+\end{solution}
+    \item[(b)] Give an example of a Markov chain \(\{X_n\}\) and a stationary distribution for \(\{X_n\}\) which is not reversible.
+\begin{solution}
+    Consider a Markov chain $\{X_n\}$ in $S = \{1,2,3\}.$ Then if 
+    \[P = \begin{pmatrix}
+        0 & 1 & 0 \\
+        0 & 0 & 1\\
+        1 & 0 & 0
+    \end{pmatrix},\] it is not hard to show that 
+    \[\pi = \begin{pmatrix}
+        \frac{1}{3}\\
+        \frac{1}{3}\\
+        \frac{1}{3}
+    \end{pmatrix}.\] However, we have that 
+    \[\pi_1 p(1,3) = 0\neq \pi_3p(3,1) =\frac{1}{3}.\] Thus $\{X_n\}$ is not reversible. 
+\end{solution}
+    \item[(c)] Show that if \(\pi\) is a reversible distribution and \(X_0\) has the distribution \(\pi\) (i.e., \(P[X_0 = x] = \pi_x\) for each \(x \in S\)), then for any \(n\), \((X_n, X_{n-1}, \ldots, X_0)\) has the same distribution as \((X_0, X_1, \ldots, X_n)\). 
+    \begin{itemize}
+        \item[\textbf{Hint:}] Consider states \(x_0, \ldots, x_n \in S\) and show that:
+        \[
+        P[X_0 = x_0, X_1 = x_1, \ldots, X_n = x_n] = P[X_n = x_0, X_{n-1} = x_1, \ldots, X_0 = x_n].
+        \]
+    \end{itemize}
+    \begin{solution}
+    We assume, as always, that $\{X_n\}$ is a time homogeneous process. 
+        Let $x_0, \dots, x_n \in S.$ We claim that the distribution of $\{X_n\}$ starting at $x_0$ and ending at $x_n$ is the same as if it started at $x_n$ and ended at $x_0.$ 
+        \[\bbP\{X_0 = x_0, X_1 = x_1, \ldots, X_n = x_n\}\] To see this, consider that by the Markov property and Bayes' rule and finally the time-homogeneity, (and the redoing all of that)
+        \begin{align*}
+            \bbP\{X_n = x_n, \dots,X_0 = x_0\} &= \bbP\{X_n  = x_n \mid X_{n-1}  = x_{n-1}, \dots, X_0 = x_0\} \bbP\{X_{n-1}  = x_{n-1}, \dots, X_0 = x_0\}\\
+            &= \bbP\{X_n = x_n \mid X_{n-1} = x_{n-1}\}\bbP\{X_{n-1}  = x_{n-1}, \dots, X_0 = x_0\}\\
+            &= \dots\\
+            &= \bbP\{X_n = x_n \mid X_{n-1} = x_{n-1}\}\bbP\{X_{n-1} = x_{n-1}\mid X_{n-2} = x_{n-2}\}\cdots \bbP\{X_1 = x_1 \mid X_0 = x_0\}\bbP\{X_0 = x_0\}\\
+            &= p(x_{n-1}, x_n)p(x_{n-2}, x_{n-1})\cdots p(x_0, x_1)\bbP\{X_0 = x_0\}\\
+            &= \pi_{x_0} p(x_0, x_1)\cdots p(x_{n-1}, x_{n-2})p(x_{n-1},x_n)\\
+            &= \pi_{x_1}p(x_1, x_0) p(x_1, x_2)\cdots p(x_{n-1}, x_{n-2})p(x_{n-1},x_n)\\
+            &= p(x_1, x_0)\pi_{x_2}p(x_2, x_1)\cdots p(x_{n-1}, x_{n-2})p(x_{n-1},x_n)\\
+            &= \dots\\
+            &= p(x_1, x_0)p(x_2, x_1)\cdots p(x_{n-2}, x_{n-1})\pi_{n-1}p(x_{n-1},x_n)\\
+            &= p(x_1, x_0)p(x_2, x_1)\cdots p(x_{n-2}, x_{n-1})p(x_n, x_{n-1})\pi_{x_n}\\
+            &= \bbP\{X_0 = x_n\}\bbP\{X_1 = x_{n-1} \mid X_0 = x_{n}\}\cdots \bbP\{X_n = x_0 \mid X_{n-1} = x_1\}\\
+            &= \bbP\{X_0 = x_n, X_1 = x_{n-1}, \dots, X_n = x_0\}
+        \end{align*}
+    \end{solution}
+\end{enumerate}
+\end{problem}
 
 
 \end{document}

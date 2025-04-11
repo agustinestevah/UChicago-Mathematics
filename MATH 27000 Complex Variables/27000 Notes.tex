@@ -13,6 +13,7 @@
 \newcommand{\Cdot}{\boldsymbol{\cdot}}
 \newcommand{\scA}{\mathscr{A}}
 \newcommand{\curl}{\text{curl}}
+\newcommand{\sm}{\setminus}
 
 \theoremstyle{definition}
 \newtheorem{exmp}{Example}[section]
@@ -411,5 +412,110 @@ Since $\sum_{N+1}^\infty na_nz_0^{n-1} $ converges geometrically, then the sum g
  + \dots na_n z^{n-1}$ and so $f'(0) = a_1.$ Also, 
  \[f''(z) = 2a_2z + \dots  + n(n-1)z^{n-2} + \cdots,\] and so $f''(0) = 2a_2.$ Inducting yields the result.
 \end{proof}
+
+\newpage
+\subsection{Thursday, Apr 10: }
+\begin{rem}
+    We begin with defining some famous functions in $\bbC$:
+    \[e^z = \sum_{n=0}^\infty \frac{z^n}{n}\]
+    \[\cos z = 1 - \frac{z^2}{2!} + \frac{z^4}{4!} + \cdots\]
+    \[\sin z = z - \frac{z^3}{3!} + \frac{z^5}{5!} + \cdots\]
+\end{rem}
+\begin{prop}
+    Suppose that if the functions are as defined in Remark 9, then 
+    \begin{align}
+        e^{iz} = \cos z + i\sin z
+    \end{align}
+\end{prop}
+\begin{proof}
+    This is in the Homework for this week.
+\end{proof}
+\begin{lemma}
+    If $\Omega\subseteq \bbC$ is a region (a connected open set), then if $f: \Omega \to \bbR$ is holomorphic with $f'(z) = 0$ for all $z\in \Omega,$ then $f$ is constant.
+\end{lemma}
+\begin{proof}
+    If $f'(z) = 0,$ then $0$ has $f$ as a primitive. Thus, using the fundamental theorem of path integrals (Theorem 6), then for any path $\gamma$ on $\Omega,$ if $z_1,$ $z_2$ are the endpoints of $\gamma,$ then
+    \[f(z_2) - f(z_1) = \int_\gamma 0 dz = 0 \implies f(z_2) = f(z_1).\]
+\end{proof}
+\begin{lemma}
+    Let $z \in \bbC.$ Then $e^z \neq 0.$
+\end{lemma}
+\begin{proof}
+Consider that for any $z\in \bbC,$ we have that
+    \[\frac{\partial}{\partial z}e^ze^{-z} = e^ze^{-z} - e^ze^{-z} = 0.\] By Lemma 2, we have that $e^ze^{-z}$ is constant. Thus, for any $z\in \bbC,$
+    \[e^ze^{-z} = e^0 e^{-0} = 1 \cdot 1 = 1.\] But then $e^z \neq 0$ and $e^{-z}\neq 0.$ 
+\end{proof}
+\begin{prop}
+Let $z,w \in \bbC,$ then
+    \[e^{z + w} = e^z e^w\]
+\end{prop}
+\begin{proof}
+    Fix $w\in \bbC,$ then $e^{z + w}: z\mapsto e^{z + w}.$ We claim that 
+    \[f(z)= \frac{e^{z + w}}{e^ze^w}= 1.\] Note that by Lemma 3, we are able to divide by $e^ze^w.$ Differentiating with respect to only $z$ 
+    \[\frac{\partial f}{\partial z} = (\frac{e^{z + w}}{e^ze^w})' = \frac{e^ze^w(e^{z + w})' - e^{z + w}(e^{z}e^w)'}{(e^z e^w)^2} = \frac{e^ze^w(e^{z + w}) - e^{z + w}(e^{z}e^w)}{(e^z e^w)^2} = 0.\] By Lemma 2, $f(z)$ is a constant. Then 
+    \[f(0) = \frac{e^w}{e^w} = 1.\] 
+\end{proof}
+
+\begin{prop}
+    For any $z\in \bbC,$ $e^z$ is periodic with period $2\pi i.$ That is, $e^{z + 2\pi i}=  e^z.$
+\end{prop}
+\begin{proof}
+    By Proposition 7, $e^{z + 2\pi i} = e^z e^{2\pi i},$ so it suffices to show that $e^{2\pi i}  = 1.$ But by Proposition 6,
+    \[e^{2\pi i} = \cos {2\pi} + i\sin{2\pi} = 1 + 0 = 1.\]
+\end{proof}
+
+\begin{prop}
+    If $e^{z + w} = e^w$ for some $z,w,$ then $z = 0 + 2n\pi i$ for any $n \in \bbN.$ 
+\end{prop}
+\begin{proof}
+    By Proposition 7, $e^{z + w} = e^ze^w,$ so it suffices to show that $e^z  = 1.$ Call $z = x + i y.$ Then 
+    \[e^{x+ iy} = 1 \implies |e^{x + iy}| = |1|,\] but since $|e^{iy}| = \cos^2 x + \sin^2 y =  1,$ then 
+    $|e^{x + iy}| = |e^x||e^{iy}| = e^x.$ Thus, $e^x = 1,$ and so $x = 0.$ Thus, $z = iy.$ But 
+    \[e^{iy} = 1 \implies \cos y + i\sin y = 1 \implies \cos y = 1, \sin y = 0 \implies y = 2\pi n\]
+    
+    By Proposition 8, $y = 2\pi n$ for some $n \geq 0.$ 
+\end{proof}
+\begin{defn}
+    We define $\log: \bbC \to \bbR$ by 
+    \[e^{\log z} = z\]
+\end{defn}
+\begin{prop}
+    The derivative of $\log z$ is $\frac{1}{z}.$
+\end{prop}
+\begin{proof}
+    \[\frac{\partial}{\partial z} e^{\log z} = (z)' = 1\] Thus, 
+    \[z = (e^{\log z})' z = z\log z .\]
+\end{proof}
+
+\begin{rem}
+    Let $\gamma(\theta) = \cos \theta + i\sin \theta = e^{i\theta}.$ Then 
+    \[0 \neq \int_\gamma \frac{1}{z}dz.\]
+\begin{proof}
+    \[\int_\gamma \frac{1}{z}dz = \int_0^{2\pi}\frac{1}{\gamma(\theta)}\gamma'(\theta)d\theta = \int_0^{2\pi}\frac{1}{e^{i\theta}}ie^{i\theta}d\theta = 2\pi i \neq 0.\]
+\end{proof}
+What is going on here? $\gamma$ is a closed curve! Well, $\frac{1}{z}$ does not have a primitive on $\bbC \sm \{0\}.$
+\end{rem}
+\begin{prop}
+    We claim that $e^z$ is bijective from $\Im{z} \in (-\pi, \pi) =: S$ to $\bbC\sm\{\text{negative real axis}\}$
+\end{prop}
+\begin{proof}
+    Suppose $z_1, z_2 \in S$ such that $e^{z_1} = e^{z_2}.$ We have that 
+    \[e^{x_1 + iy_1} = e^{x_2 + iy_2} \implies |e^{x_1}|e^{iy_1}| = |e^{x_2}|e^{iy_2}|.\] But $|e^{iy_1}| = 1$ and $|e^{iy_2}| = 1,$ and so 
+    \[e^{x_1} = e^{x_2} \implies x_1 = x_2.\] Then dividing by $e^{x_1},$ we have that 
+    \[e^{iy_1} = e^{i y_2} \implies \frac{e^{i y_1}}{e^{i y_2}} =e^{i(y_1 - y_2)} = 1,\] so then since $y_1 - y_2 \in (0, 2\pi),$ then
+    \[\cos(y_1 - y_2) + i \sin (y_1 - y_2) = 1 \implies \cos(y_1 - y_2) = 1, i\sin(y_1 - y_2) = 0 \implies y_1 - y_2 = 0 \implies y_1 = y_2.\] Thus, $z_1 = z_2$ and so the function is injective. 
+
+    Let $z \in \bbC\sm\{\text{negative real axis}\}.$ Then 
+\end{proof}
+
+
+
+
+
+
+
+
+
+
 
 \end{document}

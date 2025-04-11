@@ -3,12 +3,12 @@
 % NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
 \newcommand{\name}{Agustín Esteva}
 \newcommand{\email}{aesteva@uchicago.edu}
-\newcommand{\classnum}{208}
-\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
-\newcommand{\instructors}{Don Stull}
+\newcommand{\classnum}{270}
+\newcommand{\subject}{Complex Variables}
+\newcommand{\instructors}{Robert Fefferman}
 \newcommand{\assignment}{Problem Set 1}
 \newcommand{\semester}{Spring 2025}
-\newcommand{\duedate}{\today}
+\newcommand{\duedate}{4-10-2025}
 \newcommand{\bA}{\mathbf{A}}
 \newcommand{\bB}{\mathbf{B}}
 \newcommand{\bC}{\mathbf{C}}
@@ -28,7 +28,7 @@
 \newcommand{\bQ}{\mathbf{Q}}
 \newcommand{\bR}{\mathbf{R}}
 \newcommand{\bS}{\mathbf{S}}
-\newcommand{\bT}{\mathbf{T}}
+\newcommand{\0bT}{\mathbf{T}}
 \newcommand{\bU}{\mathbf{U}}
 \newcommand{\bV}{\mathbf{V}}
 \newcommand{\bW}{\mathbf{W}}
@@ -211,11 +211,23 @@ Let $S_r(z_0)$ denote the sphere of radius $r$ around $z_0.$ We claim that
     Let $z \in \{z_0 + re^{i\theta} \mid \theta \in [0, 2\pi)\},$ then there exists some $\theta_0 \in [0,2\pi)$ such that $z = z_0  + re^{i\theta}.$ Thus, 
     \[|z - z_0| = |re^{i\theta}| = r|e^{i\theta}| = r,\] and so $z_0 \in S_r(z_0).$
 \end{proof}
-Suppose not. That is, for all $z\in S_r(z_0),$ we have that $u(z) \neq u(z_0).$
-Since $z_0$ is the maximum of $u$ on the disk, then we immediately have that 
-    \[u(z) < u(z_0).\] By Lemma 2, for any $z\in S_r(z_0),$ there exists some $\theta \in (0, 2\pi]$ such that $z = z_0 + re^{i\theta}.$  Then 
-    \[u(z_0) =\frac{1}{2\pi}\int_0^{2\pi} u(z_0 + re^{i\theta})d\theta = \frac{1}{2\pi}\int_0^{2\pi}u(z(\theta))d\theta < 
-    u(z_0) \frac{1}{2\pi}\int_0^{2\pi}d\theta = u(z_0)\] But then $u(z_0) < u(z_0),$ a contradiction!
+Suppose not. That is, there is some $z'\in S_r(z_0),$ such that $u(z') < u(z_0).$ Let $\epsilon= {u(z_0) - u(z')}.$ 
+
+Then by continuity of $u,$ there exists some $\delta>0$ such that if $z \in \overline{D_r(z_0)}$ with $|z - z'|< \delta,$ then $0\leq |u(z) - u(z')| <\frac{\epsilon}{2}.$ Take $X = S_r(z_0) \cap (z'- \delta, z' + \delta).$ That is, $X$ are the points on the circle which are less than $u(z_0)$ by at least $\frac{\epsilon}{2}.$ That is
+\begin{align}
+    u(z) < u(z_0) - \frac{\epsilon}{2} \quad \forall z\in X.
+\end{align}
+Then using (1) in the fourth line and Lemma 2 in the third line, we see that if $|X|$ denotes the area of $X,$ then 
+\begin{align*}
+    u(z_0) &= \frac{1}{{2\pi}}\int_0^{2\pi} u(z_0 + re^{i\theta})d\theta \\
+    &= \frac{1}{{2\pi}}\int_{[0, 2\pi]\sm X} u(z_0 + re^{i\theta})d\theta  + \frac{1}{2\pi}\int_{X} u(z_0 + re^{i\theta}) d\theta\\
+    &= \frac{1}{{2\pi}}\int_{[0, 2\pi]\sm X} u(z_0 + re^{i\theta})d\theta  + \frac{1}{2\pi}\int_{X} u(z) d\theta\\
+    &< \frac{1}{{2\pi}}\int_{[0, 2\pi]\sm X} u(z_0 + re^{i\theta})d\theta  + \frac{1}{2\pi}\int_{X} (u(z_0) - \frac{\epsilon}{2}) d\theta\\
+    &= \frac{1}{2\pi}\int_0^{2\pi}u(z_0 + re^{i\theta})d\theta - \frac{1}{2\pi}\int_X\frac{\epsilon}{2}d\theta\\
+    &= u(z_0) - \frac{1}{2\pi}\epsilon|X|
+\end{align*}
+But then $u(z_0) < u(z_0),$ a contradiction! Thus, we must have that $u(z) \geq u(z_0)$ for all $z \in S_r(z_0).$ However, since $z_0$ is a maximum on the disk, we have that $u(z) = u(z_0).$
+
 \end{solution}
 
 \newpage

@@ -470,8 +470,35 @@ In the countably infinite space, we note that a transient state space cannot yie
     \[\sum_{n=0}^\infty \pi(x) < \infty \implies \lambda_1 = \lambda_2 = 0,\] and thus $\{X_n\}$ is null recurrent. 
 \end{exmp}
 
+\newpage
+\subsection*{Friday, Apr 11: Random Walks on $\bbZ^d$}
+Consider $\bbZ^d$ as a graph with edges joining each $x,y \in \bbZ^d$ such that $\|z-y\|_1 = 1.$ Then the random walk $\bbZ^d$ is a Markov chain moving distance $1$ in any of the $2d$ possible directions at each step.
+\begin{rem}
+    (Stirling's Approximation) For $n$ large, 
+    \[n! \sim \sqrt{2\pi n}(\frac{n}{e})^n\]
+\end{rem}
+\begin{prop}
+    The random walk is recurrent for $d = 1,2$ and transient for $d\geq 3$
+\end{prop}
+\begin{proof}
+    For $d = 1,$ we can graph the random walk by every time we go to the right, we take a step up, and every time we go left, we take a step down. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/Drunkard's Walk.png}
+    \caption{From My REU Paper}
+\end{figure}
+We wish to show that $\sum_{n=1}^\infty p^n(0,0) = \infty.$ Since the parity of $n$ must be even, it suffices to show that $\sum_{n=1}^\infty p^{2n}(0,0).$ After a bit of thought, and by using Stirling's Formula above,
+\[p^{2n}(0,0) = \bbP\{X_{2n} = 0 \mid X_0 = 0\} = \frac{\binom{2n}{n}}{2^{2n}} \sim \frac{\sqrt{4\pi n}(\frac{2n}{e})^{2n}}{2\pi n (\frac{n}{e})^{2n}}2^{-2n} = \frac{1}{\sqrt{\pi n}}.\] Hence, the infinite series diverges and so the random walk on $\bbZ$ is recurrent. Indeed, it is null recurrent. 
+
+For $d = 2,$ we want to do something similar. Fix $j.$ There must be $j$ steps to the right and $j$ steps to the left in order to get back to the origin. Thus, there must be $n-j$ steps up and $n-j$ steps down. Thus, there are 
+\[\frac{2n!}{j!^2(n-j)!^2}\] of such combinations.
+\[p^{2n}(0,0) = \frac{\sum_{j=0}^{n}\frac{(2n)!}{(j!)^2 (n-j)!^2}}{4^{2n}} = \frac{1}{4^{2n}}\frac{(2n)!}{n!^2}\sum_{j=0}^n \left(\frac{n!}{j! (n-j)!}\right)^2 = \frac{1}{4^{2n}}\binom{2n}{n}\sum_{j=0}^n \binom{n }{j}\binom{n}{n-j} = \frac{1}{4^{2n}} \binom{2n}{n}^2\] By Stirling's approximation,
+\[p^{2n}(0,0)   = \frac{1}{4^{2n}} \binom{2n}{n}^2\approx \frac{1}{\pi n} \implies \sum_{n=0}^\infty p^{2n}(0,0) = \infty,\] and thus the random walk is null recurrent.
 
 
+For $d\geq 3,$ it can be shown that $p^{2n} = \left(\frac{1}{\sqrt{\frac{2\pi n}{d}}}\right)^d$
+
+\end{proof}
 
 
 
