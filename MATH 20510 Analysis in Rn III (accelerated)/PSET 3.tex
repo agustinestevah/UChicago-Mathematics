@@ -1,0 +1,306 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{208}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 2}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{04-09-2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    Suppose $f \in \mathcal{L}(m)$ on $E$ and $g$ is measurable and bounded. Then $fg \in \mathcal{L}(m).$
+\end{problem}
+\begin{solution}
+Since $f,g$ are measurable then $fg$ is measurable. Since $f \in \mathcal{L}(m),$ then $|f| \in \mathcal{L}(m).$
+    Since $g$ is bounded, then $|g(E)| \leq C$ for some $C>0.$ Decompose $fg$ into 
+    \[fg = (fg)^+ - (fg)^-.\] It suffices to show that both terms are integrable. For all $x\in E,$ we have that 
+    \[|(fg)(E)|  =  |f(E)||g(E)| \leq C|f(E)|.\] Thus, since $(fg)^+, (fg)^- \leq |fg|,$ then by a remark proved in the previous homework, since $C|f|\in \mathcal{L}(m)$ 
+    \[(fg)^+ \leq |fg| \leq C|f| \implies \int_E (fg)^+ \leq C\int |f| < \infty.\] Similarly, 
+    \[(fg)^- \leq |fg|\leq C|f| \implies \int_E (fg)^- \leq C\int |f| < \infty.\]
+    Thus, $fg \in \mathcal{L}(m).$
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem} (Egorov)
+    Let $E\subseteq \bbR$ be measurable with $m(E) < \infty.$ Let $(f_n)$ be measurable such that $f_n : E\to \bbR$ for all $n$ and $f_n \to f$ pointwise to some function $f: E\to \bbR.$ Then, for all $\epsilon>0,$ there exists a closed $F\subset E$ such that 
+    \[f_n(x)\uconv f(x) \quad \forall x\in F, \quad m(E\sm F) < \epsilon\]
+\end{problem}
+\begin{enumerate}
+    \item 
+    \begin{problem}
+        Show that, under these assumptions, for every $\eta >0$ and $\delta>0,$ there is a measurable subset $A\subset E$ and $N \in \bbN$ such that 
+        \[|f_n(x) - f(x)| < \eta \quad \text{for all $x\in A$ and $n \geq N$ and} \quad m(E\sm A) < \delta.\]
+    \end{problem}
+    \begin{solution}
+        Let $\delta >0,$ let $\eta = \frac{1}{k}.$ For any $k \in \bbN,$ define for each $N \in \bbN:$
+        \[A_N^{(k)} := \{x \in E \mid |f_n(x) - f(x)| < \frac{1}{k}, \quad \forall n \geq N\}.\] Since $\lim_{n\to \infty}f_n(x) = f(x)$ for each $x\in E,$ then $f$ is measurable, and thus $A_N^{(k)}$ is measurable for each $N$ and each $k.$ 
+
+        We claim that 
+        \begin{align}
+        \lim_{N\to \infty}m(A_N^{(k)}) = m(E)    
+        \end{align}
+        To see this, it suffices to show that
+        \begin{enumerate}
+            \item $A_{N}^{k}$ is ascending with respect to $N;$
+            \item $\bigcup_{N=1}^\infty E_N^{(k)} = E.$
+        \end{enumerate}
+        To see (i), let $x\in A_N^{(k)}.$ By definition, since $N+1 \geq N,$ then $|f_{N+1}(x) - f(x)| < \frac{1}{k}.$ Thus, $x\in A_{N+1}^{(k)}.$ One inclusion of (ii) is obvious. To see the other, let $x\in E.$ Since $f_n(x) \to f(x),$ then there exists some $N_x \in \bbN$ such that if $n\geq N,$ then $|f_n(x) - f(x)| < \frac{1}{k}.$ Thus, $x\in E^k_{N_x}$ (and in fact, $x\in A_n^{(k)}$) for each $n \geq N_x$) and so $E\subseteq \bigcup_{N=1}^\infty A_N^{(k)}.$  
+
+        By (i) and (ii), and the fact that each $A_N^{(k)}$ is measurable, we have (1) by a theorem in class; so for each $k\in \bbN,$ there is some $N_{k}  \in \bbN$ such that
+        \[m(E\sm A_{N_{k}}^{(k)}) < \frac{1}{2^k}.\] Define 
+        \[A:= \bigcap_{k \geq K} A_{N_k}^{(k)},\] where $K \in \bbN$ is chosen such that 
+        \[\sum_{i = K}^\infty \frac{1}{2^i} < \frac{\delta}{2}.\] Since each $A_{N_k}^{(k)}$ has already been shown to be measurable and this is a countable intersection, $A$ is measurable.
+        Let $\eta >0$ and $x\in A.$ There is some $k>0$ such that $\frac{1}{k}< \eta.$ Thus, since $x\in A,$ then by definition, $x \in A_{N_k}^{(k)},$ and thus if $n\geq N_k,$ we have that 
+        \[|f_n(x) - f(x)| < \frac{1}{k}< \eta.\] It suffices to show that $m(E \sm A) < \delta.$ 
+
+        \begin{align*}
+            m(E\sm A) &= m\left(E\sm \bigcap_{k\geq K}A_{N_k}^{(k)}\right)\\
+            &= m\left(E \cap \left(\bigcap_{k\geq K}A_{N_k}^{(k)}\right)^c\right)\\
+            &= m\left(E \cap \bigcup_{k\geq K}(A_{N_k}^{(k)})^c\right)\\
+            &= m\left(\bigcup_{k\geq K}E \cap (A_{N_k}^{(k)})^c \right)\\
+            &= m\left(\bigcup_{k\geq K} E\sm A_{N_k}^{(k)}\right)\\
+            &\leq \sum_{k\geq K} m(A_{N_k}^{(k)})\\
+            &= \sum_{k\geq K} \frac{1}{2^k}\\
+            &< \delta
+        \end{align*}
+    \end{solution}
+    \item Prove Egorov's theorem.
+    \begin{solution}
+        Let $\epsilon>0.$ By part (a), there exists some $A\subset E$ such that  $f_n \uconv f$ on $A$ and $m(E\sm A) < \frac{\epsilon}{2}.$ Since $A$ is measurable, we have proved that there is a closed $F \subset A\subset E$ such that $m(A\sm F) < \frac{\epsilon}{2}.$ Thus, 
+        \[m(E\sm F)= m\big((E \sm A) \cup (A \sm F)\big) \leq m(E\sm A) + m(A\sm F) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.\] 
+
+        Since $F\subset A,$ and the convergence on $A$ is uniform, then the convergence on $F$ must be uniform, since we can just use the $N \in \bbN$ from $A$ for any $x\in F.$
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    (Luzin) Let $f: E \to \bbR$ be a measurable function with $E \in \cal M$ such that $m(E) < \infty.$ For every $\epsilon>0,$ there exists a closed set $F\subseteq E$ with $m(E\sm F) < \epsilon$ such that $f|_F$ is continuous.
+\end{problem}
+\begin{enumerate}
+    \item Prove this when $f$ is a simple function on $E.$
+    \begin{solution}
+        Let $\epsilon>0.$ Let $\varphi$ be a simple function on $E,$ we claim there exists some $F\subseteq E$ closed with $m(E\sm F) < \epsilon$ such that $\varphi|_F$ is continuous. Note that since $E$ is measurable, then $\varphi$ is a measurable simple function.
+        
+        There exists some $n \in \bbN$ such that $\frac{1}{n} < \frac{\epsilon}{2}.$ Since $\varphi$ is simple on $E,$ then we can take it, without loss of generality, to be defined as 
+        \[\varphi = \sum_{k=1}^N c_k \chi_{E_k}, \quad \bigsqcup_{k=1}^N E_k. = E,\] where each $E_k$ is a measurable interval. Choose $x_k:=\sup E_k$ for $k \in \{1,2,\dots N-1\}.$  Define 
+        \[X_k = [x_k - \frac{1}{2Nn}, x_k + \frac{1}{2N n}] \cap E, \quad X = \bigcup_{k=1}^N X_k.\] 
+        Note that each $X_k$ is an interval (and thus measurable) with $m(X_k) = \frac{1}{Nn}$ for each $k.$ Moreover, note that $X$ is measurable since it is the countable union of measurable sets. We claim that 
+        \begin{enumerate}
+            \item $\varphi$ is continuous on $X^c \cap E$
+            \item $m(X) \leq \frac{1}{n}.$
+        \end{enumerate}
+        To see (i), let $x\in X^c \cap E,$ let $\eta >0.$ Then $x \in E_k \sm X$ for some $k$ and $\varphi(x) = c_k.$ Choose $\delta = \frac{1}{2N n}.$ If $y\in (x - \delta, x + \delta),$ then by definition, $y \in E_k \sm X,$ and so $\varphi(y) = c_k.$ Thus, \[|\varphi(y) - \varphi(x)| = 0 < \eta.\] 
+        To see (ii), consider that 
+        \[m(X) = m\left(\bigcup_{k=1}^N X_k\right) \leq \sum_{k=1}^N m(X_k) = \sum_{k=1}^N \frac{1}{Nn} = \frac{1}{n}< \epsilon\]
+
+        Thus, since $m(E) < \infty,$ we have that since $X,$ $E$ are measurable, then $X^c$ is measurable. Then
+        \begin{align*}
+            m\big(E \sm (X^c\cap E)\big) &= m\big(E \cap (X^c \cap E)^c\big)\\
+            &= m\big(E \cap (X \cup E^c)\big)\\
+            &= m(E\cap X)\\
+            &\leq m(X)\\
+            & = \frac{1}{n}\\
+            &< \frac{\epsilon}{2}
+        \end{align*}
+        Define $A = X^c \cap E.$ There exists some closed $F\subseteq A$ such that $m(A\sm F) < \frac{\epsilon}{2}.$ Since $\varphi$ is continuous on $A$ and $F\subset A,$ then $\varphi$ is continuous on $F.$ That is, $\varphi|_F$ is continuous. Moreover, 
+                \[m(E\sm F)= m\big((E \sm A) \cup (A \sm F)\big) \leq m(E\sm A) + m(A\sm F) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.\] 
+    \end{solution}
+    \item Prove Luzin's Theorem.
+    \begin{solution}
+        Let $f$ be a measurable function and let $\epsilon>0$. By a theorem proved in the previous problem set, there exists a sequence $(\varphi_n): E\to \bbR$ of measurable simple functions such that $\varphi_n \to f$ pointwise. By Egorov's theorem in the previous problem, there exists a closed $A\subseteq E$ such that $\varphi_n \uconv f$ on $A$ and $m(E\sm A)< \frac{\epsilon}{3}.$ By the above problem for each $n,$ there exists some closed $F_n\subset E$ such that $\varphi_n|_{F_n}$ is continuous and $m(E\sm F_n) < \frac{1}{2^n}.$ There exists some $N >0$ such that
+        \[\sum_{n\geq N}\frac{1}{2^n} < \frac{\epsilon}{3}.\]
+
+        Define 
+        \[F':= A \sm \left(\bigcup_{n\geq N}(F_n^c \cap E)\right)\] Since $F'\subset A,$ then $\varphi_n \uconv f$ on $F'.$ We claim that $\varphi_n$ is continuous on $A$ for any $n\geq N.$ To see this, suppose not, then $\varphi_n$ is discontinuous for some $x\in A.$ Thus, $x\in F_n^c$ due to how the $F_n$s were defined in the above problem which is a contradiction. Then we see that since continuous functions uniformly converge to continuous functions, $f$ is continuous on $F'.$ Moreover, note that 
+        \begin{align*}
+            m(E\sm F') &= m\bigg(E \sm \left(A \sm \left(\bigcup_{n\geq N}(F_n^c \cap E)\right)\right)\bigg)\\
+            &= m\left(E\sm \left(A \cap \left(\bigcup_{n\geq N}(F_n^c \cap E)\right)^c\right)\right)\\
+            &= m\left(E \sm \left(A \cap \bigcap_{n\geq N}F_n\right)\right)\\
+            &= m\left(E \cap \left(A \cap \bigcap_{n\geq N}F_n\right)^c\right)\\
+            &= m\left(E \cap \bigg(A^c \cup \bigcup_{n\geq N} F_n^c\bigg)\right)\\
+            &= m\left((E\sm A) \cup (E \cap \bigcup_{n\geq N}F_n ^c) \right)\\
+            &= m\left((E\sm A) \cup \bigcup_{n\geq N}(F_n ^c \cap E)\right)\\
+            &\leq m(E\sm A) + m(\bigcup_{n\geq N}F_n ^c \cap E)\\
+            &< \frac{\epsilon}{3} + \sum_{n=N}^\infty \frac{1}{2^n}\\
+            &< \frac{2\epsilon}{3},
+        \end{align*}
+    where the second to last inequality is from work on the previous part. Thus, we have found a set $F'$ such that $m(E\sm F') < \frac{2\epsilon}{3}$ and $f$ is continuous on $F'.$ There exists some closed set $F\subseteq F' \subseteq E$ such that $m(F' \sm F) < \frac{\epsilon}{3}.$ Then since $F \subseteq F'$ and $f$ is continuous on $F',$ then $f$ is continuous on $F.$ We conclude by noting that 
+    \[m(E\sm F) = m\big(E\sm F') \sqcup (F'\sm F)\big) \leq m(E\sm F') + m(F'\sm F) < \frac{2\epsilon}{3} + \frac{\epsilon}{3}= \epsilon\]
+    \end{solution}
+\end{enumerate}
+
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Use Fatou's Lemma to prove the Monotone Convergence Theorem.
+\end{problem}
+\begin{solution}
+    Let $E\in \cal M,$ let $(f_n): E\to \bbR$ be a sequence of non-negative measurable functions such that $f_n \uparrow f$ pointwise. We claim that 
+    \[\lim_{n\to \infty} \int_E f_n = \int_E f.\] 
+    Since each $f_n$ is measurable, then $\displaystyle\lim_{n\to \infty}f_n = f$ is measurable. Moreover, since $\displaystyle\liminf_{n\to \infty}f_n = f,$ and each $f_n$ is non-negative, then Fatou's lemma states that 
+    \begin{align}
+    \int_E f dm \leq \liminf_{n\to \infty} \int_E f_n    dm
+    \end{align}
+    
+    
+    
+    Define 
+    \[g_n(x):= f(x)- f_n(x), \quad x\in E\] Then $g_n \geq 0$ for each $n$ and $g_n \to 0$ pointwise, and thus \[\liminf_{n\to \infty} g_n = 0\]  and then it follows that $g_n$ is measurable. By Fatou's lemma, we have that 
+    \begin{align}
+    \int_E 0dm \leq \liminf_{n\to \infty}\int_E g_n = \liminf_{n\to \infty}\int_E f - f_n dm \implies \limsup_{n\to \infty}\int_E f_n dm \leq \int_Ef dm    
+    \end{align}
+
+    (2) and (3) prove the MCT.    
+\end{solution}
+
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Suppose that $E\subseteq \bbR^n$ is measurable. Let $(f_n)$ be a sequence of non-negative functions such that $0 \leq f_1(x)$ for almost every $x\in E,$ and for $n\geq 1,$ $f_n(x) \leq f_{n + 1}(x)$ for almost every $x\in E.$ Prove that 
+    \[\lim_{n\to \infty} \int_E f_ndm = \int_E f dm,\] where, for every $x,$ we have that
+    \[f(x):= \begin{cases}
+        \displaystyle\lim_{n\to \infty}f_n(x), \quad \text{if the limit exists}\\
+        0, \qquad\quad\quad\;\;\: \text{else}
+    \end{cases}\]
+\end{problem}
+\begin{solution}
+    For every $n,$ define
+    \[X_1 := \{x \in E \mid f_1(x) < 0\}, \quad X_n:=\{x\in E \mid f_n(x) < f_{n+1}(x)\} \quad n >1.\] Let $X = \bigcup_{\bbN}X_n,$ then by the assumption of the problem and sub-additivity (and the fact that each $X_n$ is measurable since $f_n$ is measurable),
+    \[m(X)\leq \sum_{n=1}^\infty m(X_n) = 0.\] Thus, $m(X) = 0.$ Take 
+    \[g_n:= f_n \chi_{E\sm X}.\] Let $x\in E.$ Either $x\in X \cap E$ or $x\in X^c \cap E.$ If $x\in X\cap E,$ then $g_n(x) = 0$ for any $n,$ and thus 
+    \[0 \leq g_1(x) \leq g_2(x)\cdots.\] If $x\in X^c\cap E,$ then $g_n = f_n$ and thus
+    \[0 \leq g_1(x) \leq g_2(x) \leq \cdots.\] Either way since we are in the extended reals and the sequence is monotonic, the limit function $g(x) = \displaystyle\lim_{n\to \infty} g_n(x)$ exists for every $x\in E.$ By the normal monotone convergence theorem, we have that 
+    \[\lim_{n\to \infty}\int_E g_n dm = \int_E g dm.\] Which by definition implies that 
+    \[\lim_{n\to \infty} \int_E f_n \chi_{E\sm X}dm = \int_E f_n \chi_{E\sm X} dm = \int_{E\sm X},\] which in turn directly implies that 
+    \[\lim_{n\to \infty} \int_{E\sm X} f_n dm = \int_{E\sm X} f_n dm.\] Since $E = (E\sm X) \sqcup X$ and $m(X) = 0,$ we have that since the integrals are countably additive, then 
+    \begin{align*}
+        \lim_{n\to \infty}\int_E f_n dm &= \lim_{n\to \infty} \left(\int_{E\sm X} f_n dm + \int_X f dm\right)\\
+        &= \lim_{n\to \infty} \int_{E\sm X}f_n dm\\
+        &=\int_{E\sm X} f dm\\
+        &= \int_{E\sm X} f dm + \int_X fdm\\
+        &= \int_E fdm
+    \end{align*}
+\end{solution}
+
+
+
+\end{document}

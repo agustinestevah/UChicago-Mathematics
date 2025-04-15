@@ -128,13 +128,23 @@ In this assignment, you may assume that holomorphic functions are infinitely dif
 \end{problem}
 \begin{solution}
 Since $f$ is differentiable at $z_0,$ then it's partial's exist. 
-    By definition,
+    By the hint,
     \begin{align*}
-        \frac{\partial u}{\partial x}(x_0, y_0) &= \lim_{h\to 0}\frac{u(x_0 + h, y_0) - u(x_0, y_0)}{h}\\
-        
-        &= \lim_{h\to 0} \frac{v(x_0, y_0 + h) - v(x_0, y_0)}{h}\\
-        &= \frac{\partial v}{\partial y}(x_0, y_0)
+f'(z_0) &= f'(x_0, y_0)\\
+&= \lim_{h\to 0}\frac{[u(x_0 + h, y_0) + iv(x_0 + h, y_0)] - [u(x_0, y_0) - iv(x_0, y_0)]}{h}\\
+&= \lim_{h\to 0}\frac{u(x_0 + h, y_0) - u(x_0, y_0)}{h} + i\lim_{h\to 0}\frac{v(x_0 + h, y_0) - v(x_0, y_0)}{h}\\
+&= \frac{\partial u}{\partial x}(x_0, y_0) + i \frac{\partial v}{\partial x}(x_0, y_0)
     \end{align*}
+and 
+\begin{align*}
+    f'(z_0) &= f'(x_0, y_0)\\
+    &= \lim_{h\to 0}\frac{[u(x_0, y_0 + h) + iv(x_0, y_0 + h)] - [u(x_0, y_0) - iv(x_0, y_0)]}{ih}\\
+    &= \frac{\partial v}{\partial y}(x_0, y_0)+ \frac{1}{i}\frac{\partial u}{\partial y}(x_0, y_0)\\
+    &= \frac{\partial v}{\partial y}(x_0, y_0)- i\frac{\partial u}{\partial y}(x_0, y_0)
+\end{align*}
+Thus, we have that 
+\[\Re{f'(z_0)} = \frac{\partial u}{\partial x}(z_0), \quad \Re{f'(z_0)} = \frac{\partial v}{\partial y}(z_0) \implies \frac{\partial u}{\partial x}(z_0) = \frac{\partial v}{\partial y}(z_0).\] Similarly, 
+\[\frac{\partial v}{\partial x}(x_0, y_0)= -\frac{\partial u}{\partial y}(x_0, y_0)\]
 \end{solution}
 
 \newpage

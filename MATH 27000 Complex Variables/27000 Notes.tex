@@ -13,6 +13,9 @@
 \newcommand{\Cdot}{\boldsymbol{\cdot}}
 \newcommand{\scA}{\mathscr{A}}
 \newcommand{\curl}{\text{curl}}
+\newcommand{\Ind}{\text{Ind}}
+\newcommand{\Log}{\text{Log}}
+
 \newcommand{\sm}{\setminus}
 
 \theoremstyle{definition}
@@ -261,7 +264,7 @@ Suppose $f: [a,b] \to \bbC$ and $f'$ is continuous on $[a,b].$ Then
 \end{exmp}
 
 \newpage
-\subsection*{Thursday, Apr 3: Properties of the Integral}
+\subsection{Thursday, Apr 3: Properties of the Integral}
 
 \begin{thm}
 Suppose $(f_n)$ are continuous functions on open $O \subseteq \bbC.$ Assume that for some path $\gamma$ in $O,$ (a path being in $O$ means that $\gamma([a,b]) \subseteq O$). Assume that $f_n(z) \to f$ uniformly on $\{\gamma(t) \mid t \in [a,b]\}.$ Then 
@@ -414,7 +417,7 @@ Since $\sum_{N+1}^\infty na_nz_0^{n-1} $ converges geometrically, then the sum g
 \end{proof}
 
 \newpage
-\subsection{Thursday, Apr 10: }
+\subsection{Thursday, Apr 10: The Complex Exponential}
 \begin{rem}
     We begin with defining some famous functions in $\bbC$:
     \[e^z = \sum_{n=0}^\infty \frac{z^n}{n}\]
@@ -503,13 +506,61 @@ What is going on here? $\gamma$ is a closed curve! Well, $\frac{1}{z}$ does not 
     \[e^{x_1 + iy_1} = e^{x_2 + iy_2} \implies |e^{x_1}|e^{iy_1}| = |e^{x_2}|e^{iy_2}|.\] But $|e^{iy_1}| = 1$ and $|e^{iy_2}| = 1,$ and so 
     \[e^{x_1} = e^{x_2} \implies x_1 = x_2.\] Then dividing by $e^{x_1},$ we have that 
     \[e^{iy_1} = e^{i y_2} \implies \frac{e^{i y_1}}{e^{i y_2}} =e^{i(y_1 - y_2)} = 1,\] so then since $y_1 - y_2 \in (0, 2\pi),$ then
-    \[\cos(y_1 - y_2) + i \sin (y_1 - y_2) = 1 \implies \cos(y_1 - y_2) = 1, i\sin(y_1 - y_2) = 0 \implies y_1 - y_2 = 0 \implies y_1 = y_2.\] Thus, $z_1 = z_2$ and so the function is injective. 
-
-    Let $z \in \bbC\sm\{\text{negative real axis}\}.$ Then 
+    \[\cos(y_1 - y_2) + i \sin (y_1 - y_2) = 1 \implies \cos(y_1 - y_2) = 1, i\sin(y_1 - y_2) = 0 \implies y_1 - y_2 = 0 \implies y_1 = y_2.\] Thus, $z_1 = z_2$ and so the function is injective.  
 \end{proof}
 
 
+\newpage
+\subsection{Tuesday, Apr 15: $\Log$ and the Winding Number}
+Recall the final proposition from last class that stated that $e^z$ is bijective from $\Im{z} \in (-\pi, \pi) =: S$ to $\bbC\sm\{\text{negative real axis}\}.$ We showed it was injective last class. 
+\begin{proof}
+    We claim that $e^z$ is surjective as well. Let $w \in \bbC\sm\{\text{negative real axis}\}.$ Since $0 \in S,$ then $|w| >0,$ and so $\frac{w}{|w|}$ is on the unit circle. Thus, there exists some $\theta$ such that 
+    \[\frac{w}{|w|} = \cos \theta + i \sin \theta = e^{i\theta} \implies w = |w|e^{i\theta}.\] We claim that $\log w = \log |w| + i\theta.$ Using proposition 7, we see that 
+    \[e^{\log |w| + i\theta} = e^{\log |w|}e^{i\theta} = |w|e^{i\theta},\] and since $\theta \in S,$ we are done.
+\end{proof}
 
+\begin{rem}
+    Since there is a bijection from $S \to \bbC\sm\{\text{negative real axis}\},$ we define $\text{Log}(z)$ to be the inverse function of $S.$ Note that by definition
+    \[\left(e^{\text{Log}z}\right)' = z' = 1.\] But by the chain rule,
+    \[\left(e^{\text{Log}z}\right)' = z \cdot {\text{Log}z}'.\] Thus, 
+    \[{\text{Log}z}' = \frac{1}{z}.\]
+\end{rem}
+\begin{rem}
+    We try to derive the power series of $\text{Log}(1-z).$ Let $|z| < 1.$ Then 
+    \[\Re{1-z}  = 1 - \Re{z} \geq 1 - |z| >0 .\] Thus, $1-z$ is in the right half plane of $\bbC.$ Thus, $\text{Log}$ is well defined for $1-z$ when $|z| < 1.$ To get the power series of $\text{Log}(1-z),$ we will want to find the coefficients of the Taylor series by Corollary 1. By the chain rule, 
+    \[[\text{Log}(1-z)]' = - \frac{1}{1-z} = -\sum_{n=0}^\infty z^n.\] Then one can see by integrating both sides that
+    \[\text{Log}(1-z) = - \sum_{n=1}^\infty \frac{1}{n}z^n  + C.\] Plugging in $z = 0,$ we see that $C = 0. $
+\end{rem}
+\begin{defn}
+    Let $\gamma$ be a closed path on $\bbC.$ Suppose $z_0 \notin \gamma.$ Then we define the \textbf{winding number} of $\gamma$ at $z_0$ to be the number of times $\gamma$ winds around $z_0.$ That is,
+    \[\Ind_\gamma(z_0) = \frac{1}{2\pi i}\int_\gamma\frac{1}{\zeta - z_0}d\zeta.\] Suppose $\gamma,$ is a closed path. We call the \textbf{complement of  $\gamma$} to be $\gamma^c,$ the set of points not bounded by $\gamma.$
+
+\end{defn}
+\begin{exmp}
+    Informally! Consider $\gamma = e^{i\theta},$ for $\theta \in [0,2\pi]$ to be the counterclockwise path around $0.$ It should be the case that  
+    \[\frac{1}{2\pi i } \int_\gamma \frac{1}{\zeta}d\zeta = 1.\] We have showed this in Remark 10. Moreover, we know by a question on our PSET that if $\Omega$ is open and connected and $\Ind$ has a derivative of $0$ within $\Omega,$ then $\Ind$ is constant. Let $z \neq 1.$ Then 
+    \begin{align*}
+        \frac{\partial}{\partial z}\left(\frac{1}{2\pi i }\int_\gamma \frac{1}{\zeta - z}d\zeta\right)
+        &= \frac{1}{2\pi i}\int_{\gamma} \frac{\partial}{\partial z} \frac{1}{\zeta - z}d\zeta\\
+        &= \frac{1}{2\pi i} \int_\gamma -\frac{1}{(\zeta - z)^2}d\zeta\\
+        &= 0
+    \end{align*}
+    Since the function has a primitive. Thus, it suffices to show that the first equality is valid. That is, 
+    \begin{align*}
+        \left|\frac{1}{h}\left[\int_\gamma \frac{1}{\zeta - (z + h)}d\zeta - \int_\gamma \frac{1}{\zeta - z}d\zeta\right] - \int_\gamma \frac{1}{(\zeta - z)^2}\right|
+        &= 
+        \left|\frac{1}{h}\left[\int_\gamma \frac{h}{(\zeta - z)(\zeta - (z + h))}d\zeta\right] - \int_\gamma \frac{1}{(\zeta - z)^2}d\zeta\right|\\
+        &= \left|\int_\gamma \frac{1}{(\zeta - z)(\zeta - (z + h))}d\zeta - \int_\gamma \frac{1}{(\zeta - z)^2}d\zeta\right|\\
+        &= h\left|\int_\gamma \frac{1}{(\zeta - z)^2(\zeta - (z + h))}d\zeta\right|\\
+        &\leq h \max_{t\in [0,2\pi]} |\frac{1}{(\gamma(t) - z)^2(\gamma(t) - (z + h))}| 2\pi\\
+        &\to 0
+    \end{align*}
+\end{exmp}
+So it suffices to show that the denominator is bounded below. Since $\gamma$ is closed, then it is compact. Thus, we are able to bound the denominator below since the distance is achieved and positive for any $z < 1.$
+
+\begin{thm}
+    For any $\gamma$ in an open connected subset of $\gamma^c,$ the winding number is constant. 
+\end{thm}
 
 
 

@@ -386,10 +386,46 @@ Our goal is to calculate the expected duration (that is, the hitting probability
     Using the above remark we see that 
     \[\alpha_+ = 1, \quad \alpha_- = \frac{1-p}{p}\]
     so 
-    \[P_n = \lambda_1 + \lambda_2(\frac{1-p}{p})^n \implies P_0 = \lambda_1 + \lambda_2 = 0, \quad P_1 = \lambda_1 + \lambda_2\frac{1-p}{p} = 1\]
+    \[P_n = \lambda_1 + \lambda_2(\frac{1-p}{p})^n \implies P_0 = \lambda_1 + \lambda_2 = 0, \quad P_N = \lambda_1 + \lambda_2(\frac{1-p}{p})^N = 1\]
     Solving:
-    \[\lambda_1 = \]
+    \[P_n = \frac{1 - (\frac{1-p}{p})^n}{1 - (\frac{1-p}{p})^N}, \quad p \neq \frac{1}{2},\]
+    \[P_n=  \frac{n}{N}, \quad p = \frac{1}{2}\]
 \end{exmp}
+\newpage
+\subsection{Monday, Apr 7: Countable State Space}
+Suppose the state space $S$ is countably infinite.
+\begin{defn}
+     We say a Markov Chain $\{X_n\}$ is \textbf{irreducible} if for all $x,y \in S,$ there exists some $n \in \bbN$ such that $p^n(x,y) >0$
+\end{defn}
+\begin{defn}
+    We say $\{X_n\}$ is \textbf{recurrent} if 
+    \[\bbP\{X_n = x \text{ i.o.}\mid X_0 = x\} = 1.\] We say $\{X_n\}$ is \textbf{transient} if it is not recurrent.
+\end{defn}
+\begin{prop}
+    Suppose $\{X_n\}$ is irreducible. Then either every state is recurrent or every state is transient.
+\end{prop}
+\begin{proof}
+    Suppose $x$ is a recurrent state. Without loss of generality, let $X_0 = x.$ Let $\tau_1, \tau_2,\dots$ be times to successive visits to $x.$ Note that $\tau_k < \infty$ since $x$ is recurrent. Note also that $\{X_{\tau_k}, \dots, X_{\tau_{k+1}}\}_{k\geq 0}$ are all i.i.d by the strong Markov property. Let $y \in S.$ There is some $n \in \bbN$ such that $p^n(x,y)>0$ by the irreducibility of $\{X_n\}.$ Thus, there is some $k$ such that \[q:=\bbP\{y \in \{X_{\tau_k}, \dots, X_{\tau_{k+1}}\}\}>0.\] Since the increments are identical, each increment has probability $q$ of containing $y.$ Thus, there is a probability $1$ that infinitely many of them contain $y.$ That is, if $\sigma = \min\{n\geq 0 \mid X_n = y\},$ then 
+    \[\bbP\{\sigma < \infty \mid X_0 = x\} = 1.\] By the strong Markov property, $\{X_{\sigma + j}\}$ has the same distribution as $X_n$ started at $y.$ But we know that $\{X_{\sigma + j}\}$ visits $y$ infinitely many times starting at $x,$ and so $\{X_n\}$ will visit $y$ infinitely many times starting at $y.$
+\end{proof}
+
+\begin{prop}
+    A state $x\in S$ is recurrent if and only if $\displaystyle\sum_{n=0}^\infty p^n(x,x)  = \infty.$
+\end{prop}
+\begin{proof}
+We will prove the contrapositive of the forward direction.
+    Define the total number of visits to $x$ by 
+    \[R_x := \sum_{n=0}^\infty \mathbbm{1}_{X_n = x}.\] Then using linearity of expectation we fine that 
+    \begin{align*}
+        \bbE[R_x] &= \sum_{n=0}^\infty \bbE[\mathbbm{1}_{X_n = x}]\\
+        &= \sum_{n=0}^\infty p^n(x,x)\\
+        &< \infty.
+    \end{align*}
+   Since $\bbE[R_x] < \infty,$ then $R_x < \infty$ almost surely, and thus $x$ is transient.  
+
+   Suppose $x$ is transient. Define $\tau_1, \tau_2, \dots$ as successive visits to $x.$ By transience, with probability $1,$ there is some $k$ such that $\tau_k = \infty.$ Let $q = \bbP\{\tau_k = \infty\}$ By the strong Markov property, $\tau_{k} - \tau_{k-1}$ are i.i.d. Thus, each increment has probability $q$ of being infinite. Then $R_x$ is the smallest $k$ such that $\tau_{k+1} = \infty.$ Then $R_x \sim \text{Geometric}(q)$ with the 'success' of $\tau_{k+1} = \infty.$ Thus, $\bbE[R_x] = \frac{1}{q}< \infty$ and we are done since 
+   \[\sum_{n=0}^\infty p^n(x,x) = \bbE[R_x \mid X_0 = x] = \frac{1}{q} < \infty\]
+\end{proof}
 
 \newpage
 
@@ -501,10 +537,60 @@ For $d\geq 3,$ it can be shown that $p^{2n} = \left(\frac{1}{\sqrt{\frac{2\pi n}
 \end{proof}
 
 
+\newpage
+\subsection{Monday, Apr 14: Branching Processes}
+Let $\{X_n\}$ denote the size of the population at time $n.$ Independent of the rest, each individual produces some number of offspring according to an offspring distribution $\{p_k\}.$ We remark that 
+$\{p_k\}_{k\geq 0}$ satisfies $p_k \geq 0$ for all $k$ and $\sum_{k=0}^\infty p_k = 1.$ Informally, $p_k$ represents the probability of an individual producing $k$ children. Then if each $n$ represents a new generation where each previous generation dies of, then 
+\[X_{n+1} = \sum_{j=1}^{X_n} \xi_j,\] where the $\xi_j$ are conditionally independent given $X_n$ with 
+\[\bbP\{\xi_j  =k \mid X_n = x\} = p_k.\] Thus, $\xi_j$ is how many offspring individual $j$ produces. We are interested in the extinction probability, which is formally denoted by 
+\[a:= \bbP\{\exists n\geq 1 \text{ s.t. } X_n = 0 \mid X_0 = 1\}.\] Denote the mean of the offspring distribution of each individual by 
+\[\mu:= \sum_{k=0}^\infty kp_k.\] Note that 
+\[\bbE[X_{n+1} \mid X_n = m] = \sum_{j=1}^m \bbE[\xi_j] = \mu m.\] Then using the law of total expectation, \[\bbE[X_{n+1}] = \sum_{m=0}^\infty\bbE[X_{n+1} \mid X_n]\bbP\{X_n = m\} = \mu \sum_{m=0}^\infty m\bbP\{X_n = m\} = \mu \bbE[X_n],\] and so $\bbE[X_n] = \mu^n \bbE[X_0].$
 
+\begin{prop}
+    If $\mu < 1,$ then $a = 1.$ 
+\end{prop}
+\begin{proof}
+    Since $\bbE[X_n] \leq \mu^n \to 0$ as $n\to \infty,$ then $\bbE[X_n] \to 0.$ Consider that by Markov's inequality
+    \[\bbP\{X_n \neq 0\} = \bbP\{X_n \geq 1\} \leq \bbE[X_n]\to 0,\] and so $\bbP\{X_n = 0\} \to 1$ as $n\to \infty.$ 
+\end{proof}
 
+\begin{rem}
+    If $X_1 = k,$ then by independence, $\bbP\{\text{extinction} \mid X_1 = k\} = a^k.$ Thus, 
+    \[a = \bbP\{\text{extinction} \mid X_0 = 1\} = \sum_{k=0}^\infty \bbP\{X_1 = k\}\bbP\{\text{extinction} \mid X_1 = k\} = \sum_{k=0}^\infty p_k a^k.\]
+\end{rem}
 
+\begin{defn}
+    Let $Y$ be a random variable taking values in $\{0,1,2,\dots\}.$ Then the \textbf{generating function} for $Y$ is given by 
+    \[\phi : [0, \infty) \to [0,\infty), \quad \phi(s) = \phi_Y(s) = \bbE[s^y] := \sum_{k=0}^\infty \bbP\{Y = k\}s^k\]
+\end{defn}
+\begin{rem}
+    (Basic Properties of $\phi$):
+    \begin{enumerate}
+        \item We allow $\phi(s) = \infty,$ but we have that $\phi(s) < \infty$ for $s\in [0,1]$ since it is bounded above by a converging geometric series. 
+        \item $\phi (1) = 1$ and $\phi(0) = p_0.$ 
+        \item The derivative has meaning:
+        \[\phi'(s) = \sum_{k=1}^\infty \bbP\{Y = k\} k s^{k-1} \implies \phi'(1) = \bbE[Y].\]
+        \item If $Y_1, \dots Y_m$ are independent random variables, then 
+        \[\phi_{Y_1 + \dots + Y_m}(s) = \bbE[S^{Y_1 + \dots + Y_m}] = \prod_{j=1}^m \phi_{Y_j}(s)\]
+    \end{enumerate}
+    \end{rem}
 
+\begin{prop}
+    Let $\phi$ be the generating function for $p_k.$ Let $\phi^{(n)} = \phi \circ \phi \dots \circ \phi$ ($n$ times). Then
+    \[\phi_{X_n}(s) = \phi^{(n)}(s)\]
+\end{prop}
+\begin{proof}
+    It suffices to show that $\phi_{X_{n+1}}(s) = \phi_{X_{n}}(\phi(s)).$ By definition, 
+    \begin{align*}
+        \phi_{X_{n+1}}(s) &= \sum_{k=0}^\infty \bbP\{X_{n+1} = k\}s^k\\
+        &= \sum_{k=0}^\infty \sum_{j=0}^\infty \bbP\{X_{n+1} = k \mid X_n = j\}\bbP\{X_n = j\} s^k\\
+        &= \sum_{j=0}^\infty \bbP\{X_n = j\}\sum_{k=0}^\infty \bbP\{X_{n+1} = k \mid X_n = j\}s^k\\
+        &= \sum_{j=0}^\infty \bbP\{X_n = j\} \phi(s)^j\\
+        &= \sum_{j=0}^\infty \bbP\{X_n = j\} \phi(s)^j\\
+        &= \phi_{X_n}(\phi(s))
+    \end{align*}
+\end{proof}
 
 
 
