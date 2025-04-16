@@ -6,9 +6,9 @@
 \newcommand{\classnum}{208}
 \newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
 \newcommand{\instructors}{Don Stull}
-\newcommand{\assignment}{Problem Set 2}
+\newcommand{\assignment}{Problem Set 3}
 \newcommand{\semester}{Spring 2025}
-\newcommand{\duedate}{04-09-2025}
+\newcommand{\duedate}{04-16-2025}
 \newcommand{\bA}{\mathbf{A}}
 \newcommand{\bB}{\mathbf{B}}
 \newcommand{\bC}{\mathbf{C}}
@@ -196,34 +196,43 @@ Since $f,g$ are measurable then $fg$ is measurable. Since $f \in \mathcal{L}(m),
 \begin{enumerate}
     \item Prove this when $f$ is a simple function on $E.$
     \begin{solution}
+\begin{lemma}
+    Let $E$ be measurable with $m(E) < \infty.$ For all $\epsilon>0,$ there exists some $K \subseteq E$ compact such that $m(E\sm K) < \epsilon.$
+\end{lemma}
+\begin{proof}
+Let $\epsilon>0.$
+    By the regularity of $m,$ there exists a closed set $F\subseteq E$ such that $m(E\sm F)< \frac{\epsilon}{2}.$ Let $K_n  = F \cap \overline{B_n(0)}.$ Then since $K_n$ is closed and bounded in $\bbR^n,$ $K_n$ is compact. Clearly
+    \[E\sm K_n \downarrow E\sm F \implies m(E\sm F) = \lim_{n\to \infty}m(E\sm K_n).\] Thus, there exists some $N$ large such that $m(E\sm K_N) < \epsilon.$ 
+\end{proof}
+\rule{\linewidth}{0.4pt}
         Let $\epsilon>0.$ Let $\varphi$ be a simple function on $E,$ we claim there exists some $F\subseteq E$ closed with $m(E\sm F) < \epsilon$ such that $\varphi|_F$ is continuous. Note that since $E$ is measurable, then $\varphi$ is a measurable simple function.
         
         There exists some $n \in \bbN$ such that $\frac{1}{n} < \frac{\epsilon}{2}.$ Since $\varphi$ is simple on $E,$ then we can take it, without loss of generality, to be defined as 
-        \[\varphi = \sum_{k=1}^N c_k \chi_{E_k}, \quad \bigsqcup_{k=1}^N E_k. = E,\] where each $E_k$ is a measurable interval. Choose $x_k:=\sup E_k$ for $k \in \{1,2,\dots N-1\}.$  Define 
-        \[X_k = [x_k - \frac{1}{2Nn}, x_k + \frac{1}{2N n}] \cap E, \quad X = \bigcup_{k=1}^N X_k.\] 
-        Note that each $X_k$ is an interval (and thus measurable) with $m(X_k) = \frac{1}{Nn}$ for each $k.$ Moreover, note that $X$ is measurable since it is the countable union of measurable sets. We claim that 
+        \[\varphi = \sum_{k=1}^N c_k \chi_{E_k}, \quad \bigsqcup_{k=1}^N E_k. = E,\] where each $E_k$ is measurable. By the lemma above, for each $E_k,$ there exists a compact set $X_k \subseteq E_k$ such that 
+        \[m(E_k \sm X_k) < \frac{1}{N n}\] Each $X_k$ is measurable and since it is a subset of disjoint sets, then the $X_k$ are pairwise disjoint. Define
+        \[X = \bigsqcup_{k=1}^N X_k.\] 
+        Moreover, note that $X$ is measurable since it is the countable union of measurable sets. We claim that 
         \begin{enumerate}
-            \item $\varphi$ is continuous on $X^c \cap E$
-            \item $m(X) \leq \frac{1}{n}.$
+            \item $\varphi$ is continuous on $X$
+            \item $m(E\sm X) \leq \frac{1}{n}.$
         \end{enumerate}
-        To see (i), let $x\in X^c \cap E,$ let $\eta >0.$ Then $x \in E_k \sm X$ for some $k$ and $\varphi(x) = c_k.$ Choose $\delta = \frac{1}{2N n}.$ If $y\in (x - \delta, x + \delta),$ then by definition, $y \in E_k \sm X,$ and so $\varphi(y) = c_k.$ Thus, \[|\varphi(y) - \varphi(x)| = 0 < \eta.\] 
+        To see (i), let $x\in X$ let $\eta >0.$ Then $x \in X_k$ for some $k$ and $\varphi(x) = c_k.$ Since the $X_k$ are compact and disjoint, 
+        \[d(X_k, X_{k+1}) =: r_k >0\] is achieved and is positive for each $k.$ Thus, we take $\delta< \min\{r_k\}_k$ If $y\in (x - \delta, x + \delta),$ then, $y \in X_k,$ and so $\varphi(y) = c_k.$ Thus, \[|\varphi(y) - \varphi(x)| = 0 < \eta.\] Thus, $\varphi|_{X}$ is continuous.
         To see (ii), consider that 
-        \[m(X) = m\left(\bigcup_{k=1}^N X_k\right) \leq \sum_{k=1}^N m(X_k) = \sum_{k=1}^N \frac{1}{Nn} = \frac{1}{n}< \epsilon\]
-
-        Thus, since $m(E) < \infty,$ we have that since $X,$ $E$ are measurable, then $X^c$ is measurable. Then
         \begin{align*}
-            m\big(E \sm (X^c\cap E)\big) &= m\big(E \cap (X^c \cap E)^c\big)\\
-            &= m\big(E \cap (X \cup E^c)\big)\\
-            &= m(E\cap X)\\
-            &\leq m(X)\\
-            & = \frac{1}{n}\\
-            &< \frac{\epsilon}{2}
+            m(E\sm X) &= m(E\sm \bigsqcup_{k=1}^NX_k)\\
+            &= m(\bigsqcup_{k=1}^N E_k \sm \bigsqcup_{k=1}^N X_k)\\
+            &= m(\bigsqcup_{k=1}^N E_k \sm X_k)\\
+            &= \sum_{k=1}^N m(E_k \sm X_k)\\
+            &< \sum_{k=1}^N \frac{1}{Nn}\\
+            &= \frac{1}{n}\\
+            &< \epsilon
         \end{align*}
-        Define $A = X^c \cap E.$ There exists some closed $F\subseteq A$ such that $m(A\sm F) < \frac{\epsilon}{2}.$ Since $\varphi$ is continuous on $A$ and $F\subset A,$ then $\varphi$ is continuous on $F.$ That is, $\varphi|_F$ is continuous. Moreover, 
-                \[m(E\sm F)= m\big((E \sm A) \cup (A \sm F)\big) \leq m(E\sm A) + m(A\sm F) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.\] 
+Since $X$ is the finite union of closed sets, then $X$ is closed. We use the lemma provided in the PSET to conclude that since $\varphi$ is continuous on the closed $X,$ then $\varphi$ has a continuous extension $g$ on $\bbR$ such that $\varphi = g$ on $X.$ 
     \end{solution}
     \item Prove Luzin's Theorem.
     \begin{solution}
+
         Let $f$ be a measurable function and let $\epsilon>0$. By a theorem proved in the previous problem set, there exists a sequence $(\varphi_n): E\to \bbR$ of measurable simple functions such that $\varphi_n \to f$ pointwise. By Egorov's theorem in the previous problem, there exists a closed $A\subseteq E$ such that $\varphi_n \uconv f$ on $A$ and $m(E\sm A)< \frac{\epsilon}{3}.$ By the above problem for each $n,$ there exists some closed $F_n\subset E$ such that $\varphi_n|_{F_n}$ is continuous and $m(E\sm F_n) < \frac{1}{2^n}.$ There exists some $N >0$ such that
         \[\sum_{n\geq N}\frac{1}{2^n} < \frac{\epsilon}{3}.\]
 
@@ -242,7 +251,9 @@ Since $f,g$ are measurable then $fg$ is measurable. Since $f \in \mathcal{L}(m),
             &< \frac{2\epsilon}{3},
         \end{align*}
     where the second to last inequality is from work on the previous part. Thus, we have found a set $F'$ such that $m(E\sm F') < \frac{2\epsilon}{3}$ and $f$ is continuous on $F'.$ There exists some closed set $F\subseteq F' \subseteq E$ such that $m(F' \sm F) < \frac{\epsilon}{3}.$ Then since $F \subseteq F'$ and $f$ is continuous on $F',$ then $f$ is continuous on $F.$ We conclude by noting that 
-    \[m(E\sm F) = m\big(E\sm F') \sqcup (F'\sm F)\big) \leq m(E\sm F') + m(F'\sm F) < \frac{2\epsilon}{3} + \frac{\epsilon}{3}= \epsilon\]
+    \[m(E\sm F) = m\big(E\sm F') \sqcup (F'\sm F)\big) \leq m(E\sm F') + m(F'\sm F) < \frac{2\epsilon}{3} + \frac{\epsilon}{3}= \epsilon.\]
+
+    Conclude by using the lemma provided to get the continuous extension on $\bbR,$ $g$ such that $f = g$ on $F.$
     \end{solution}
 \end{enumerate}
 

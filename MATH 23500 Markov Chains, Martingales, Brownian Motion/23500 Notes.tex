@@ -391,6 +391,7 @@ Our goal is to calculate the expected duration (that is, the hitting probability
     \[P_n = \frac{1 - (\frac{1-p}{p})^n}{1 - (\frac{1-p}{p})^N}, \quad p \neq \frac{1}{2},\]
     \[P_n=  \frac{n}{N}, \quad p = \frac{1}{2}\]
 \end{exmp}
+
 \newpage
 \subsection{Monday, Apr 7: Countable State Space}
 Suppose the state space $S$ is countably infinite.
@@ -426,13 +427,22 @@ We will prove the contrapositive of the forward direction.
    Suppose $x$ is transient. Define $\tau_1, \tau_2, \dots$ as successive visits to $x.$ By transience, with probability $1,$ there is some $k$ such that $\tau_k = \infty.$ Let $q = \bbP\{\tau_k = \infty\}$ By the strong Markov property, $\tau_{k} - \tau_{k-1}$ are i.i.d. Thus, each increment has probability $q$ of being infinite. Then $R_x$ is the smallest $k$ such that $\tau_{k+1} = \infty.$ Then $R_x \sim \text{Geometric}(q)$ with the 'success' of $\tau_{k+1} = \infty.$ Thus, $\bbE[R_x] = \frac{1}{q}< \infty$ and we are done since 
    \[\sum_{n=0}^\infty p^n(x,x) = \bbE[R_x \mid X_0 = x] = \frac{1}{q} < \infty\]
 \end{proof}
+\begin{exmp}
+    Consider the Markov Chain $\{X_n\}$ with $S = \{0,1,2,\dots\}.$ Then if the transition probabilities are given by 
+    \[p(x,0) = \frac{1}{x + 2}, \quad p(x,x + 1) = 1 - \frac{1}{x + 2},\] we claim that $p^n$ is recurrent. To see this, it suffices to see that the series of $p^n(0,0)$ diverges. 
+\end{exmp}
+
 
 \newpage
 
 \subsection{Wednesday, Apr 9: Queuing and Stationary Distributions for Countable State Spaces}
 \begin{exmp}
-    Let's continue the queue example from last class. Let $\{X_n\}$ be the number of people at time $n.$ If $p(0,1) = 0$ and $p(0,0) = 1-p$ and
-    \[p(x,x-1) = q(1-p), \quad p(x,x+1) = p(1-q), \quad p(x,x) = pq + (1-q) + (1-p).\] Thus, $p$ is probability a person enters the line and $q$ is the probability a person leaves (or is served). 
+    Let's continue the queue example from last class.
+    
+    Let $\{X_n\}$ be the number of people at time $n.$ Let $p \in (0,1)$ be the probability each person arrives and $q \in (0,1)$ be the probability each person leaves the queue. 
+    
+    If $p(0,1) = 0$ and $p(0,0) = 1-p$ and
+    \[p(x,x-1) = q(1-p), \quad p(x,x+1) = p(1-q), \quad p(x,x) = pq + (1-q)(1-p).\] Thus, $p$ is probability a person enters the line and $q$ is the probability a person leaves (or is served). 
     \begin{prop}
         The queue is recurrent if and only if $q \geq p.$ 
     \end{prop}
@@ -592,7 +602,52 @@ $\{p_k\}_{k\geq 0}$ satisfies $p_k \geq 0$ for all $k$ and $\sum_{k=0}^\infty p_
     \end{align*}
 \end{proof}
 
+\newpage
+\subsection{Wednesday, Apr 16: Extinction Probabilities}
+Recall the generating function 
+\[\phi_X (s) = \sum_{k=0}^\infty p_k s^k\]
+\begin{prop}
+    The extinction probability is the smallest positive solution for which $\phi(s) = s$ given that $0 < p_0 < 1.$
+\end{prop}
+\begin{proof}
+    Since the set $\{s: \phi(s) = s\}$ is closed by continuity, then since $p_0 = \phi(0) = 0,$ then $0 \notin S.$ Thus, the set has a smallest positive element $s_0.$ Since $\phi(1) = 1,$ then $s_0 \leq 1.$ We claim that 
+    \[\phi_{X_n}(0) < s_0,\quad  n\geq 0\] This is clear for $n=0$ since $\phi_{X_0}(0) = 0.$ If this is true for $n,$ that $\phi_{X_n}(0) < s_0,$ then by our proposition 14, and the fact that $\phi$ is strictly increasing (the derivative is strictly increasing) we have that 
+    \[\phi_{X_{n+1}}(0) = \phi(\phi_{X_n}(0)) < \phi(s_0) = s_0.\] Note that since $\phi_{X_n}(0) = \bbP\{X_n = 0\},$ then 
+    \[a = \lim_{n\to \infty}\phi_{X_n}(0) \leq s_0.\] Since $\phi(a) = a,$ then $a = s_0.$
+\end{proof}
+\begin{prop}
+    If $\mu >1,$ then $a<1.$ If $\mu \leq 1$ and $p_0 \neq 0,$ then $a = 1.$ In particular, the population will die with probability $1$ if, and only if, $\mu \leq 1$ and $p_0 \neq 0.$
+\end{prop}
+\begin{proof}
+    Suppose $\mu = 1$ and $p_0 \neq 0.$ Note that 
+    \[\phi''(s) = \sum_{k=2}^\infty k(k-1)p_k s^{k-2}.\] If $p_0 \neq 0$ and $\mu = 1,$ then we claim that $p_k >0$ for some $k \geq 2.$ If not, then $\mu = p_1 < 1.$ Then $\phi''(s) >0.$ Recall that $\phi(1) = 1$ and $\phi'(1) = \mu.$ Thus, $\phi'(s) < \mu$ for all $s\in [0,1).$ If $\mu = 1,$ then 
+    \[1 - \phi(s) = \int_s^1 \phi'(t)dt < \int_s^1 \mu dt  = 1-s.\] Thus, $\phi(s) >s$ for all $s\in [0,1).$ Thus, $a = 1. $ 
 
+    If $\mu >1,$ then $\phi'(1) >1,$ $\phi(1) = 1.$ Then there exists $s<1$ such that $\phi(s) < s.$ Since $\phi(0) >0,$ the continuity of $t \mapsto \phi(t)-t$ implies by the IVT there is a $t\in (0,1)$ such that $\phi(t) = t.$ Hence, $a<1. $
+\end{proof}
+
+\begin{defn}
+    We say that a branching process is \textbf{subcritical} if $\mu <1,$ \textbf{critical} if $\mu  = 1,$ and \textbf{supercritical} if $\mu >1.$ 
+\end{defn}
+
+\begin{exmp}
+    Suppose $p_0 = \frac{1}{10},$ $p_1 = \frac{3}{5},$ and $p_2 = \frac{3}{10},$ then 
+    \[\mu = \frac{1}{10} + \frac{3}{5} + \frac{6}{10} = \frac{12}{10} >1.\] Note that 
+    \[\phi(s) = \sum_{k=0}^3 p_ks^k = \frac{1}{10} + \frac{3}{5}s + \frac{3}{10}s^2.\] We want the smallest positive solution to $\phi(s) = s.$ Solving gives $ a = \frac{1}{3}. $
+\end{exmp}
+
+\begin{exmp}
+    Bacteria reproduce by cell division. In one unit of time, bacterium will either die (w.p. $\frac{1}{4}$,) stay the same (w.p. $\frac{1}{4}$), or split in 2 (w.p. $\frac{1}{2}$). At time $n = 0,$ the population starts with $100$ bacteria. 
+
+    We can interpret this as the following: If a bacteria dies, then it produces three offspring?
+    Then 
+    \[\phi(s) = \sum_{k = 0}^\infty p_k s^k,\] where 
+    \[p_1 = \frac{1}{4}, p_2  = \frac{1}{4}, p_3 = \frac{1}{2}\]
+    \[\phi(s)= \frac{1}{4} + \frac{1}{4}s + \frac{1}{2} s^2, \quad Y_1, \dots, Y_{100}, \quad \phi_{Y_1 + \cdots Y_{100}} = (\tilde{\phi})^{100}.\] Then 
+    \[\mu = \frac{1}{4} + 1 >1.\] Thus, we need to solve 
+    \[\phi(s) - s = 0 \implies s = \frac{1}{2}\] for each one. Thus, by independence,
+    \[ a = \frac{1}{2^{100}}\]
+\end{exmp}
 
 
 
@@ -918,6 +973,98 @@ Let $i,j \in [N],$ then we claim that $i \leftrightarrow j.$ Without loss of gen
     \item In a game similar to three card monte, the dealer places three cards on the table: the queen of spades and two red cards. The cards are placed in a row, and the queen starts in the center; the card configuration is thus $RQR$. The dealer proceeds to move. With each move, the dealer randomly switches the center card with one of the two edge cards (so the configuration after the first move is either $RRQ$ or $QRR$). What is the probability that, after 2025 moves, the center card is the queen?
 \end{enumerate}
 
+
+
+\newpage
+\subsection{Monday, Apr 14: Problem Session 3}
+\begin{enumerate}
+\item
+Let \(\{X_n\}\) be a Markov chain with state space \(S=\{0,1,2,\ldots\}\). For each of the following transition probabilities, state whether the chain is positive recurrent, null recurrent, or transient. If it is positive recurrent, give the stationary distribution.
+
+\begin{enumerate}[(a)]
+    \item \(p(x,x+1)=\frac{5}{7}\), \(p(x,0)=\frac{2}{7}\).
+\begin{solution}
+    We claim that $\{X_n\}$ is positive recurrent. Indeed, we can see that the stationary distribution must satisfy
+    \[\pi_0 = \frac{2}{7}(\sum_{n=0}^\infty \pi_n), \pi_1 = \frac{5}{7}\pi_0, \quad \dots, \pi_n = (\frac{5}{7})^n \pi_0, \quad \sum_{n=0}^\infty \pi_n = 1.\]
+    Then 
+    \[\pi_n = \left(\frac{5}{7}\right)^n \frac{2}{7}\] is a valid stationary distribution.
+
+\end{solution}
+    
+    \item \(p(x,0)=\frac{x+1}{x+2}\), \(p(x,x+1)=\frac{1}{x+2}\).
+\begin{solution}
+    Let $\tau_0 := \{n >0 | X_n = 0 \}.$ Then 
+    \[\bbP\{\tau_0  = \infty \mid X_0 = 0\} \geq \prod_{k=1}^\infty \frac{1}{(k+2)} = \lim_{n\to \infty}\frac{1}{(n+2)!} = 0.\] Thus, $\{X_n\}$ is recurrent. Let's check for a stationary distribution!
+    
+\end{solution}
+    \item \(p(x,x+1)=\frac{x+1}{x+2}\), \(p(x,0)=\frac{1}{x+2}\).
+    
+    \item \(p(x,0)=\frac{1}{x^2+2}\), \(p(x,x+1)=\frac{x^2+1}{x^2+2}\).
+\end{enumerate}
+
+\item
+Let \(\{X_n\}\) be a biased random walk on \(\mathbb{Z}\) with probability \(p>1/2\) to move to the right, i.e., the transition probabilities are
+\[
+p(x,x-1)=1-p, \quad p(x,x+1)=p, \quad \forall x\in\mathbb{Z}.
+\]
+Assume that \(X_0=0\).
+
+\begin{enumerate}[(a)]
+    \item Find \(\mathbb{P}[X_n=0]\). \textbf{(Hint:} \(X_n=0\) if and only if we have the same number of \(+1\) steps as \(-1\) steps before time \(n\).)
+\begin{solution}
+    \[p^{2n}(0,0) = \binom{2n}{n}p^n (1-p)^n\]
+\end{solution}
+    
+    \item For \(K\geq 1\), let \(T_K=\min\{n\geq 1:X_n=K\}\). Find \(\mathbb{P}[X_n\geq 0,\,\forall n=0,\ldots,T_K]\).
+\begin{solution}
+    This is a shifted gambler's ruin. We can think of it as shifting it by $1$ to the right and the probability of winning $K+1$ dollars before losing it all (starting with one dollar). We have found that 
+    \[P_1 = \frac{1 - (\frac{1-p}{p})}{1 - (\frac{1-p}{p})^{K+1}}\]
+\end{solution}
+    
+    \item Find the probability that \(X_n\) returns to 0 after time \(T_K\).
+\begin{solution}
+    Let $A = \{\exists n >T_K \mid X_n = 0\}.$ Then by the strong Markov property and the law of total probability, if we call
+    \[\alpha(k):= \bbP\{A \mid X_0 = k\},\] then
+\begin{align*}
+   \alpha(k) &= \alpha(k-1)\bbP\{X_1 = K-1\} + \alpha(k+1)\bbP\{X_1 = K+1\}\\
+   &= \alpha(k-1)(1-p) + \alpha(k+1)p
+\end{align*}
+Solving gives 
+\[\alpha = \frac{1 \pm \sqrt{1 - 4p(1-p)}}{2p} = \frac{1 \pm (1 - 2p)}{2p} \in \{1, \frac{1-p}{p}\}.\] Thus, 
+\[\alpha(n) = \lambda_1 + \lambda_2(\frac{1-p}{p})^n.\] We know that $\alpha(0) = 1.$ Thus, 
+\[\lambda_1 + \lambda_2 = 1\] Moreover, we know that 
+\[\lim_{n\to \infty}\alpha(n) = 0 = \lambda_1.\] Thus, $\lambda_2 = 1$ and so 
+\[\alpha(K) = (\frac{1-p}{p})^K.\]
+\end{solution}
+    
+    \item Find the probability that \(X_n\geq 0\) for all \(n=0,\ldots,T_K\) and \(X_n\) returns to 0 after time \(T_K\).
+\begin{solution}
+    By the strong Markov Property, these are independent, so simply multiply the results from (ii) and (iii)
+\end{solution}
+\end{enumerate}
+
+\item
+Consider the Markov chain with state space \(\mathbb{Z}\) whose transition probabilities are given by \(p(x,x-1)=2/3\) and \(p(x,x+2)=1/3\) (\(p(x,y)=0\) for all other \(y\)). Determine whether this Markov chain is positive recurrent, null recurrent, or transient. \textbf{(Hint:} use a calculation with the binomial distribution similar to what we did for random walk on \(\mathbb{Z}\).)
+\begin{solution}
+\begin{align*}
+p^{3k}(0,0) &= \binom{3k}{k}(\frac{1}{3})^k(\frac{2}{3})^{2k}\\  &= \frac{(3k)!}{(k)! (2k)!}(\frac{1}{3})^k(\frac{2}{3})^{2k}     \\
+&\sim \frac{\sqrt{6\pi k} (\frac{3k}{e})^{3k}}{\sqrt{2\pi k}(\frac{k}{e})^k \sqrt{4\pi k}(\frac{2k}{e})^{2k}}(\frac{1}{3})^k(\frac{2}{3})^{2k} \\
+&= \frac{\sqrt{6\pi k} (\frac{3k}{e})^{3k}}{\sqrt{2\pi k}(\frac{k}{e})^k \sqrt{4\pi k}(\frac{2k}{e})^{2k}}(\frac{1}{3})^k(\frac{2}{3})^{2k}\\
+&= \sqrt{\frac{3}{4\pi k}}
+\end{align*}
+We have that 
+\[\sum_{k=0}^\infty p^{3k}(0,0)  = \infty,\] and so the process is recurrent. It is null recurrent since $p^n(0,0) \to 0.$
+
+\end{solution}
+
+\item
+The \emph{infinite binary tree} is the graph \(T\) whose vertex set \(V(T)\) consists of the empty sequence \(\emptyset\) together with all \(k\)-tuples of the form \((a_1,a_2,\ldots,a_k)\), where \(k\in\mathbb{N}\) and \(a_j\in\{0,1\}\) for \(j\in\{1,\ldots,k\}\). There are edges joining \(\emptyset\) to (0) and (1) and edges joining \((a_1,\ldots,a_k)\) to \((a_1,\ldots,a_k,0)\) and \((a_1,\ldots,a_k,1)\) for each \((a_1,\ldots,a_k)\), see the figure below. Let \(\{X_n\}\) be the random walk on \(T\). Compute
+\[
+\mathbb{P}[X_n=\emptyset\text{ for some }n\geq 1\,|\,X_0=\emptyset],
+\]
+and conclude that \(\{X_n\}\) is transient. \textbf{(Hint:} let \(H_n\) be the "height" for \(X_n\), i.e., if \(X_n=\emptyset\) then \(H_n=0\) and if \(X_n=(a_1,\ldots,a_k)\) then \(H_n=k\). Relate \(H_n\) to a biased random walk.)
+
+\end{enumerate}
 
 
 
