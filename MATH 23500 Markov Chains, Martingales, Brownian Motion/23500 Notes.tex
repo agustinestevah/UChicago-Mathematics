@@ -10,6 +10,7 @@
 \newcommand{\bbP}{\mathbb{P}}
 \newcommand{\bbN}{\mathbb{N}}
 \newcommand{\bbE}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
 \newcommand{\bbQ}{\mathbb{Q}}
 \newcommand{\Cdot}{\boldsymbol{\cdot}}
 \newcommand{\scA}{\mathscr{A}}
@@ -648,10 +649,61 @@ Recall the generating function
     \[\phi(s) - s = 0 \implies s = \frac{1}{2}\] for each one. Thus, by independence,
     \[ a = \frac{1}{2^{100}}\]
 \end{exmp}
+\newpage
 
+\subsection{Friday, Apr 18: Poisson Processes}
 
+\begin{defn}
+    A random variable $Y$ is \textbf{Poisson} with parameter $\lambda$ if for all $k\geq 0,$ we have that 
+    \[\bbP\{Y  = k\} = e^{-\lambda}\frac{\lambda^k}{k!}\]
+\end{defn}
+\begin{rem}
+    Recall that $\bbE[Y] = \Var[Y] = \lambda.$ 
+\end{rem}
+\begin{prop}
+    Suppose $Y_1,Y_2$ are independent Poisson random variables with parameters $\lambda_1, \lambda_2,$ respectively. Then $Y_1 + Y_2 \sim \text{Poisson}(\lambda_1 + \lambda_2).$
+\end{prop}
 
+We motivate the Poisson process with an example:
+\begin{exmp}
+    Suppose that in a phone line, calls occur at the same rate $\lambda$ at all hours in a day. The number of calls during disjoint time intervals are independent. Let $X_t$ be the number of calls at (or before) time $t.$  
+\end{exmp}
 
+\begin{defn}
+    The \textbf{Poisson process} with rate $\lambda$ is the continuous time stochastic process $\{X_t\}_{t\geq 0}$ such that:
+    \begin{itemize}
+        \item $X_0 = 0;$
+        \item For any times $0 \leq s_1 \leq t_1 \leq s_2 \leq \cdots \leq s_k \leq t_k,$ the random increments 
+        \[X_{t_j} - X_{s_j} \sim \text{Poisson}(\lambda (t_j - s_j))\] are independent
+    \end{itemize}
+\end{defn}
+
+\begin{defn}
+    A random variable $T \in [0, \infty)$ has the exponential distribution with parameter $\lambda$ if 
+    \[\bbP\{T \geq t\} = e^{-\lambda}\]
+\end{defn}
+Recall that $\bbE[T] = \frac{1}{\lambda}$ and $\Var[T] = \frac{1}{\lambda^2}.$
+
+\begin{rem}
+    We could alternatively describe a Poisson process in terms of arrival times. Let $\tau_0 = 0$ and let $\tau_j = \inf\{t \geq 0 \mid X_t = j\}$ be the time of the $j$th call. Then $X_t = \max\{j \mid \tau_j \leq t\}$ is the number of calls before time $t.$ 
+\end{rem}
+
+\begin{prop}
+    The arrival times $\tau_j - \tau_{j-1}$ for $j = 1,2,3,\dots$ are i.i.d. and each has exponential distribution with parameter $\lambda.$
+\end{prop}
+\begin{proof}
+    Note that $\tau_0 = 0,$ and 
+    \begin{align*}
+        \bbP\{\tau_1 > t\} = \bbP\{X_t = 0\} = \frac{e^{-\lambda }\lambda^k}{k!} = e^{-\lambda}.
+    \end{align*}
+    Then $\tau_1 \sim \text{Exp}(\lambda).$ Note that $\tau_1$ is a stopping time for $\{X_t\}$ and $\{T_{s + t} - X_t\}_{s\geq0}$ is a Poisson process independent of $\{X_s\}_{s\leq t}.$ By the strong Markov property, 
+    \[\{X_{s + \tau_1} - X_{\tau_1}\}_{s\geq 0}\] is Poisson and independent of $\{X_{s}\}_{s\leq \tau_1}.$ In particular, $\tau_2 - \tau_1$ is independent of $\tau_1$ and has the same distribution.
+\end{proof}
+
+\begin{exmp}
+    Suppose $\{X_t\}_{t\geq 0}$ is a Poisson process with rate $\lambda.$ Then 
+    \[\bbE[X_2 \mid X_1] = X_1 + \lambda\]
+\end{exmp}
 
 
 

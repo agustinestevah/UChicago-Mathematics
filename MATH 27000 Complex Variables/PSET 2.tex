@@ -174,7 +174,7 @@ Consider that for any $z\in O,$ $f(z) = u(z).$ Thus, $f = u$ and $v = 0.$
         &= \frac{\partial}{\partial x}(\frac{\partial v}{\partial y}) + \frac{\partial}{\partial y}(-\frac{\partial v}{\partial x})\\
         &= \frac{\partial}{\partial x}(\frac{\partial v}{\partial y}) - \frac{\partial}{\partial y}(\frac{\partial v}{\partial x})\\
         &= \frac{\partial^2 v}{\partial x \partial y} - \frac{\partial^2 v}{\partial y\partial x}\\
-        \frac{\partial^2 v}{\partial x \partial y} - \frac{\partial^2 v}{\partial x\partial y}\\
+        &= \frac{\partial^2 v}{\partial x \partial y} - \frac{\partial^2 v}{\partial x\partial y}\\
         &= 0
     \end{align*}
     Similarly,
@@ -202,11 +202,11 @@ Let
 
 Note that $A\neq \emptyset$ since $z_0 \in A$ since $f(z_0) = f^{(0)}(z_0) =0.$
 
-Let $z'\in A.$ Since $O$ is open, there exists some $r>0$ such that $D_r(z')\subseteq O.$ Thus, $\overline{D_{\frac{r}{2}}(z')}\subset O.$ Let $z\in \overline{D_{\frac{r}{2}}(z')},$ then since $f\in H(O)$, 
+Let $z'\in A.$ Since $O$ is open, there exists some $r>0$ such that $D_r(z')\subseteq O.$ Thus, $\overline{D_{\frac{r}{2}}(z')}\subset O.$ Let $z\in D_{\frac{r}{2}}(z'),$ then since $f\in H(O)$, 
 \[f(z) = \sum_{n=0}^\infty \frac{f^{(n)}(z')}{n!}(z - z')^n = f(z') + f'(z')(z - z') + \frac{1}{2}f''(z')(z-z')^2 + \dots + \frac{1}{n!}f^{(n)}(z')(z - z')^n.\]
 We know that since $z' \in A,$ then $f(z') = f'(z') = \dots = f^{(n)}(z') = 0,$ and thus $f(z) = 0.$ Then we have that $z \in A$ and so $A$ is open. 
 
-Let $(z_n) \in A$ such that $z_n \to z.$ Since $z_n \in A,$ then $f(z_n) = 0$ for each $n.$ Since $f$ is differentiable, then it absolutely must be continuous, and so $f(z_n) \to f(z),$ and thus $f(z) = 0.$ We have showed that $A$ is closed.
+Let $(z_n) \in A$ such that $z_n \to z.$ Since $z_n \in A,$ then $f(z_n) = 0$ for each $n.$ Since $f$ is differentiable, then it must be continuous, and so $f(z_n) \to f(z),$ and thus $f(z) = 0.$ We have showed that $A$ is closed.
 
 Since $A$ is nonempty, open, and closed, and $O\supset A$ is connected, then $A = O.$\footnote{To see a proof of this, see previous PSET}. 
 \end{solution}
@@ -262,19 +262,20 @@ To see that $F$ is well defined, let $\gamma$ and $\beta$ be two paths that star
 \[\int_{\gamma \circ \beta} f(z)dz = 0\] but 
 \[\int_{\gamma \circ \beta} f(z)dz= \int_\gamma f(z)dz - \int_\beta f(z)dz  =0 \implies \int_\gamma f(z)dz =\int_\beta f(z)dz.\] Thus, $F$ is indeed well defined.
 
-Moreover, we claim that if $\eta(t) = t(z+h) + (1-t)z$ is the straight path from $z$ to $z+h,$ then for small enough $h,$
-\[F(z+h) - F(z) = \int_\eta f(\zeta)d\zeta.\] To see this, we can, by the path independence shown above, take $\gamma(z), \gamma(z + h)$ to be the polygonal paths. For $h< r,$ where $r>0$ such that the convex set $D_r(z)\subseteq O$ by openness, we can take $\eta$ to be the straight line from $z$ to $z +h.$ Thus, since $\gamma(z)\circ \eta$ is a path from $z_0$ to $z + h,$ then 
-\[F(z+h) = F(z) + \int_\eta f(\zeta)d\zeta.\]
+Moreover, we claim that if $[z, z + h]$ is the straight path from $z$ to $z+h,$ then for small enough $h$ such that $z + h \in O,$ we claim that 
+\[F(z+h) - F(z) = \int_{[z, z + h]} f(\zeta)d\zeta.\] To see this, we can, by the path independence shown above, take $\gamma(z), \gamma(z + h)$ to be the polygonal paths. For $h< r,$ where $r>0$ such that the convex set $D_r(z)\subseteq O$ by openness, we can take $[z,z + h]$ to be the straight line from $z$ to $z +h.$ Thus, since $\gamma(z)\circ [z,z +h] \circ (-\gamma(z + h))$ is the closed path starting and ending at $z_0,$ we know that 
+\[0 = \int_{\gamma(z)\circ [z,z +h] \circ (-\gamma(z + h))}f(\zeta)d\zeta = F(z) + \int_{[z, z + h]}f(\zeta)d\zeta - F(z + h).\] Thus, 
+\[F(z + h) - F(z) = \int_{[z, z + h]}f(\zeta)d\zeta\]
     
     
-    We claim that on $O$ we have that $F'(z) = f(z).$ Let $\epsilon>0.$ Then since $f$ is continuous at $z$, then there exists some $\delta>0$ such that if $|z - \zeta| < \delta,$ then $|f(z) - f(\zeta)|< \epsilon.$ Take $h<\min\{\delta, r\},$ where $r>0$ such that $D_r(z)\subseteq O$ by the openness of $O.$ Then $\max_{\zeta \in [z, z+ h]}|f(\zeta) - f(z)| < \epsilon.$ Thus, since $\text{length}|\eta| = |h|,$ we have that
+    We claim that on $O,$ we have that $F'(z) = f(z).$ Let $\epsilon>0.$ Then since $f$ is continuous at $z$, then there exists some $\delta>0$ such that if $|z - \zeta| < \delta,$ then $|f(z) - f(\zeta)|< \epsilon.$ Take $h<\min\{\delta, r\},$ where $r>0$ such that $D_r(z)\subseteq O$ by the openness of $O.$ Then $\max_{\zeta \in [z, z+ h]}|f(\zeta) - f(z)| < \epsilon.$ Thus, since $\text{length}|\eta| = |h|,$ we have that
 \begin{align*}
     \left|\frac{F(z + h) - F(z)}{h} - f(z)\right| &= \left| \frac{\int_{\gamma(z +h)}f(\zeta)d\zeta - \int_{\gamma(z)} f(\zeta)d\zeta}{h} - f(z)\right|\\
-    &= \left| \frac{1}{h} \left[ \int_{z}^{z+h}f(\zeta)d\zeta - f(z)h \right]\right|\\
-    &= \left|\frac{1}{h}\left[\int_z^{z + h}f(\zeta)d\zeta - f(z)\int_{z}^{z + h} d\zeta\right]\right|\\
-    &= \left|\frac{1}{h}\int_z^{z + h}f(\zeta) - f(z)d\zeta\right|\\
+    &= \left| \frac{1}{h} \left[ \int_{[z, z + h]}f(\zeta)d\zeta - f(z)h \right]\right|\\
+    &= \left|\frac{1}{h}\left[\int_{[z, z + h]}f(\zeta)d\zeta - f(z)\int_{[z, z + h]} d\zeta\right]\right|\\
+    &= \left|\frac{1}{h}\int_{[z, z + h]}f(\zeta) - f(z)d\zeta\right|\\
     &\leq \max_{\zeta \in [z, z+ h]}|f(\zeta) - f(z)| |h|\\
-    &< \frac{1}{|h|}\frac{\epsilon}{h} |h|\\
+    &< \frac{1}{|h|}\epsilon |h|\\
     &= \epsilon
 \end{align*}
 

@@ -145,7 +145,7 @@ So then after some algebra and using the general formula that
 We have two boundary conditions:
 \[\alpha(0) = 1, \qquad \lim_{n \to \infty}\alpha(n) = 0\] From the first, we see that $\lambda_1 + \lambda_2 = 1.$ From the second, we see that since $q<p,$ then 
 \[q< p \iff q - qp < p - qp \iff q(1-p) < p(1-q) \iff \frac{q(1-p)}{p(1-q)} <1 \implies \left(\frac{q(1-p)}{p(1-q)}\right)^n \to0,\] and so $\lambda_1 = 0.$ Thus, $\lambda_2 = 1$ and so 
-\[\alpha(x) = \left(\frac{q(1-p)}{p(1-q)}\right)^x\]
+\[\boxed{\alpha(x) = \left(\frac{q(1-p)}{p(1-q)}\right)^x}\]
 \end{solution}
     
     \item For which values of \(p,q\) is the chain null/positive recurrent? In the positive recurrent case, give the stationary distribution.
@@ -160,15 +160,20 @@ We have two boundary conditions:
     \[1 = \sum_{n=0}^\infty \pi_n = \sum_{n=1}^\infty \lambda_1 + \lambda_2\left(\frac{p(1-q)}{q(1-p)}\right)^n \implies \lambda_1 = 0.\] Thus, we see that 
     \[\lambda_2\sum_{n=0}^\infty \left(\frac{p(1-q)}{q(1-p)}\right)^n < \infty \iff p < q.\] Thus, the chain is null recurrent if, and only if, $p = q.$ It is positive recurrent if $p<q.$ From the above, we see that if $p<q,$ then the series is geometric and thus 
     \[1 = \lambda_2\sum_{n=0}^\infty \left(\frac{p(1-q)}{q(1-p)}\right)^n = \frac{\lambda_2}{1 - (\frac{p(1-q)}{q(1-p)})} \implies \lambda_2 = 1 - \frac{p(1-q)}{q(1-p)}.\] Thus, 
-    \[\pi_n = (1 - \frac{p(1-q)}{q(1-p)})\left(\frac{p(1-q)}{q(1-p)}\right)^n\]
+    \[\boxed{\pi_n = (1 - \frac{p(1-q)}{q(1-p)})\left(\frac{p(1-q)}{q(1-p)}\right)^n}\]
 \end{solution}
     
     \item What is the average length of the queue in equilibrium (i.e., the long-run average length of the queue)?
     \begin{solution}
-        Clearly, if $q\geq p,$ then the average length is infinity. If $q<p,$ then we see that 
+        Clearly, if $q> p,$ then the average length is infinity. If $q<p,$ then we see that 
 \begin{align*}
-\bbE[\pi] &= \sum_{n=0}^\infty n\pi_n\\ &= (1 - \frac{p(1-q)}{q(1-p)})\sum_{n=0}^\infty n\left(\frac{p(1-q)}{q(1-p)}\right)^n\\ &= (1 - \frac{p(1-q)}{q(1-p)})\left(\frac{\frac{p(1-q)}{q(1-p)}}{(1 - \frac{p(1-q)}{q(1-p)})^2}\right)\\ &= \frac{\frac{p(1-q)}{q(1-p)}}{1 - \frac{p(1-q)}{q(1-p)}}\\ &= \frac{p(1-q)}{q-p}    
+\bbE[\pi] &= \sum_{n=0}^\infty n\pi_n\\ &= (1 - \frac{p(1-q)}{q(1-p)})\sum_{n=0}^\infty n\left(\frac{p(1-q)}{q(1-p)}\right)^n\\ &= (1 - \frac{p(1-q)}{q(1-p)})\left(\frac{\frac{p(1-q)}{q(1-p)}}{(1 - \frac{p(1-q)}{q(1-p)})^2}\right)\\ &= \frac{\frac{p(1-q)}{q(1-p)}}{1 - \frac{p(1-q)}{q(1-p)}}\\ &= \boxed{\frac{p(1-q)}{q-p}}    
 \end{align*}
+
+Finally, if $q = p,$ then we claim that the average length is also infinite. By the previous problem, this is the case when the queue is null recurrent. Suppose not, that as $n\to \infty,$ the queue reaches an equilibrium. That is, 
+\[\lim_{n\to \infty} X_n = x.\] But then if we define 
+\[T_x = \min\{n \geq 1 \mid X_n = x \mid X_0 = x\},\] then clearly, $\bbP\{T_x < \infty\} = 1,$ and so 
+\[\bbE[T_x \mid X_0 = x] < \infty.\]
 
     \end{solution}
 \end{enumerate}
@@ -176,28 +181,30 @@ We have two boundary conditions:
 
 \newpage
 \section*{Problem 2}
-Consider the following Markov chain with state space \(S=\{0,1,\ldots\}\). A sequence of positive numbers \(p_{1},p_{2},\ldots\) is given with \(\sum_{i=1}^{\infty}p_{i}=1\). Whenever the chain reaches state 0 it chooses a new state according to the \(p_{i}\). Whenever the chain is at a state other than 0 it proceeds deterministically, one step at a time, toward 0. In other words, the chain has transition probability
+\begin{problem}
+    Consider a Markov chain $\{X_n\}$ with state space \( S = \{0, 1, 2, \ldots\} \). A sequence of positive numbers \( p_1, p_2, \ldots \) is given such that
 \[
-p(x,x-1)=1,\quad x>0, \quad p(0,x)=p_{x},\quad x>0.
+\sum_{i=1}^{\infty} p_i = 1.
 \]
-This is a recurrent chain since the chain keeps returning to 0. Under what conditions on the \(p_{x}\) is the chain positive recurrent? In this case, what is the limiting probability distribution \(\pi\)? \textit{[Hint: it may be easier to compute \(\mathbb{E}(T)\) directly where \(T\) is the time of first return to 0 starting at 0.]}
+The transition probabilities are defined as follows:
+\[
+p(x, x-1) = 1, \quad \text{for } x > 0,
+\]
+\[
+p(0, x) = p_x, \quad \text{for } x > 0.
+\]
+That is, whenever the chain reaches state 0, it jumps to a new state \( x > 0 \) with probability \( p_x \). From any state \( x > 0 \), it moves deterministically to \( x-1 \) in the next step. This chain is recurrent because it keeps returning to state 0.
+\\
+We want to determine the conditions necessary on the $p_x$ so that this is positive recurrent. 
+\end{problem}
 \begin{solution}
 Let $x\in S,$ then define
-    \[T_x:= \min\{n\geq 1 :X_n = x \mid X_0 = x\}.\] Clearly, since the first move doesn't matter (unless $x = 0$), we have that $\bbE[T_x] = 1 + \bbE[\bbE[T_x \mid X_2]].$ Evidently, $\bbE[T_x \mid X_2 = x] = 2.$ But since the chain resets every two moves, then by the markov property
-    \[\bbE[T_x \mid X_2 = y] = \bbE[T_x \mid X_2 = z] = \bbE[T_x \mid X_0 = x], \quad y\neq z\neq x.\] Thus, for any $x\in S$ such that $x\neq 0,$ we have that
-    \begin{align*}
-        \bbE[T_x] &= 1 + \bbE[\bbE[T_x \mid X_2]]\\
-        &= 1 + (1 + \bbE[T_x \mid X_2 = 1])p_1  + \dots + (1 + \bbE[T_x \mid X_2 = x-1])p_{x-1} + (1)p_x + (1 + \bbE[T_x \mid X_2 =x+1])p_{x+1} + \cdots\\
-        &= 1 + \sum_{n=1}^\infty p_n + \bbE[T_x \mid X_0 = x]\sum_{n\neq x} p_n\\
-        &= 2 + \bbE[T_x \mid X_0 = x](1-p_x)
-    \end{align*}
-    Thus, \[\bbE[T_x \mid X_0 = x] = \frac{2}{p_x}\]
-    Which is finite as long as $p_x >0.$ For $x = 0,$ we have that 
-    \[\bbE[T_0 \mid X_0 = 0] = 2.\] Thus, $\bbE[T_x \mid X_0 = x] < \infty$ as long as $p_x < \infty$ for all $x\in S.$ Thus, if this condition is met, then 
-    \[\pi_x = \begin{cases}
-        \frac{p_x}{2}, \quad x\geq 1\\
-        \frac{1}{2}, \quad \:\:x = 1
-    \end{cases}\]
+    \[T:= \min\{n\geq 1 :X_n = 0 \mid X_0 = 0\}.\] Using the law of total expectation, we find that 
+\[\bbE[T] = 2p_1 + 3p_2 + \cdots = \sum_{x=1}^\infty (x + 1)p_x = 1 + \sum_{x=0}^\infty x p_x.\] Thus, the chain is positive recurrent if, and only if, 
+\[\boxed{\sum_{x= 0}^\infty x p_x < \infty.}\] In this case, we have that 
+\[\boxed{\pi_0 = \frac{1}{\bbE[T]} = \frac{1}{1 + \sum_{x=1}^\infty xp_x}.}\] A stationary distribution must satisfy 
+\[\pi_{n+1} = \pi_n - p_n \pi_0 = (\pi_{n-1} - p_{n-1}\pi_0) - p_n\pi_0 = \pi_0(1 - p_1 - p_2 - \cdots - p_n) = \pi_0(1 - \sum_{x=1}^{n}p_x)\] Thus, 
+\[\boxed{\pi_n = \frac{1 - \sum_{x=1}^{n-1}p_x}{1 + \sum_{x=1}^\infty xp_x}, \quad n\geq 1}\]
 \end{solution}
 
 \section*{Problem 3 (Optional)}
@@ -219,27 +226,52 @@ A \textit{diagonal lattice path} is a "curve" in the plane made up of line segme
     \end{enumerate}
 \end{enumerate}
 
-\section*{Problem 4 (20 points)}
+\newpage
+\section*{Problem 4}
 For each of the following Markov chains, determine whether the chain is positive recurrent, null recurrent, or transient. In the positive recurrent case, find the stationary distribution.
 
 \begin{enumerate}[label=(\alph*)]
     \item For \(x\in\mathbb{Z}\) with \(x\geq 0\), \(p(x,0)=(x+1)/(x+2)\) and \(p(x,x+1)=1/(x+2)\) (\(p(x,y)=0\) for all other \(y\)).
 \begin{solution}
 We claim that this process is positive recurrent. It suffices to find a stationary distribution. The stationary distribution must satisfy
-\[\pi_0 = \sum_{n=0}^\infty \frac{n+1}{n+2}\pi_n, \quad \pi_n = \frac{1}{(n+1)!}\pi_0, \quad \sum_{n=0}^\infty \pi_n = 1.\] From the second and third, we see that 
+\[\pi_0 = \sum_{n=0}^\infty \frac{n+1}{n+2}\pi_n, \quad \pi_n = \frac{1}{(n+1)!}\pi_0, \quad \sum_{n=0}^\infty \pi_n = 1.\] From the second and third equations, we see that 
 \begin{align*}
     1 &= \sum_{n=0}^\infty \pi_n\\
     &= \sum_{n=0}^\infty \frac{1}{(n+1)!}\pi_0\\
     &= \pi_0(e-1)
 \end{align*}
 and so $\pi_0 = (e-2)!.$ Thus, 
-\[\pi_n = \frac{1}{(n+1)!}\frac{1}{(e-1)}\]
+\[\boxed{\pi_n = \frac{1}{(n+1)!}\frac{1}{(e-1)}, \text{ positive recurrent}}\]
 \end{solution}
     
     \item For \(x\in\mathbb{Z}\) with \(x\geq 0\), \(p(x,0)=1/(x+2)^{2}\) and \(p(x,x+1)=1-1/(x+2)^{2}\) (\(p(x,y)=0\) for all other \(y\)).
+\begin{solution}
+    Consider that if 
+    \[T = \min\{n >0 : X_n = 0 \mid X_0 = 0\},\] then 
+\begin{align*}
+\bbP\{T = \infty\} &= \lim_{n\to \infty} \bbP\{T >n\}\\
+&= \lim_{n\to \infty} \prod_{k=0}^{n-1} (1 - \frac{1}{(k + 2)^2})\\
+&= L\\
+&\implies \ln(L)\\
+&= \lim_{n\to \infty} \ln\left(\prod_{k=0}^{n-1} (1 - \frac{1}{(k + 2)^2})\right)\\
+&= \lim_{n\to \infty}\sum_{k=0}^{n-1}\ln(1 - \frac{1}{(k+2)^2})\\
+&\sim \sum_{k=0}^\infty \ln\left(\frac{(k+2)^2-1}{(k+2)^2}\right)\\
+&= \sum_{k=0}^\infty \ln(k^2 + 4k + 3) - \ln((k+2)^2)\\
+&= \sum_{k=0}^\infty \ln(k+3)  + \ln(k+1) - 2\ln(k+2)\\
+&= \sum_{n=3}^\infty \ln(n) + \sum_{n=1}^\infty \ln(n) -2 \sum_{n=2}^\infty\ln(n)\\
+&= \ln(1) - \ln(2)\\
+&= \ln(\frac{1}{2})\\
+&\implies L = \frac{1}{2}.
+\end{align*}
+Thus, 
+\[\boxed{\bbP\{T = \infty\} = \frac{1}{2}>0, \text{ transient}}\]
+
+\end{solution}
 \end{enumerate}
 
-\section*{Problem 5 (20 points)}
+\newpage
+
+\section*{Problem 5}
 Consider the Markov chain with state space \(S=\{0,1,2,\cdots\}\) with transition probabilities
 \[
 p(0,0)=\frac{2}{3},\quad p(0,1)=\frac{1}{3},
@@ -257,7 +289,7 @@ A stationary probability satisfies the recursive relation
 Thus, 
 \[\pi_n = \lambda_1 + \lambda_2\frac{1}{2^n}.\] We have that 
 \[1 = \sum_{n=0}^\infty \pi_n = \sum_{n=0}^\infty \lambda_1 + \lambda_2\sum_{n=0}^\infty \frac{1}{2^n}\implies \lambda_1 = 0, \lambda_2 = \frac{1}{2}.\] Thus, 
-\[\pi_n = \frac{1}{2^{n+1}}.\]
+\[\boxed{\pi_n = \frac{1}{2^{n+1}}}.\]
     \end{solution}
     
     \item For \(x>0\), let \(E_{x}\) denote the expected number of steps in the chain until it reaches the origin assuming that \(X_{0}=x\). Find \(E_{1}\). \textit{(Hint: first consider the expected return time starting at the origin and write \(E_{1}\) in terms of this.)}
@@ -265,13 +297,20 @@ Thus,
     From above, since $\pi_0 = \frac{1}{2},$ then 
     \[E_0 = 2.\] However, we can also write 
     \[E_0 = \bbE[n >0: X_n = 0 \mid X_0 = x] = \bbE[\bbE[n>0 : X_n = 0 \mid X_1]] = (1 + 0)\frac{2}{3} + (1 + E_1)\frac{1}{3} = 1 + \frac{1}{3}E_1.\] Thus, 
-    \[1 + \frac{1}{3}E_1 = 2 \implies E_1 = 3.\]
+    \[1 + \frac{1}{3}E_1 = 2 \implies \boxed{E_1 = 3}.\]
 \end{solution}
     
     \item Find \(E_{x}\) for all \(x>0\).
 \begin{solution}
-    \[3 = E_1 = 1  + \frac{1}{3}E_{2} \implies E_2 = 6.\] In general, for $x \geq 2,$ 
-    \[E_2 = 1 + \frac{2}{3}E_{1} + \frac{1}{3}E_{x+1}\implies 3E_n - 3 - 2E_{n-1} = E_{n+1}\]
+We claim that $\boxed{E_x = 3x}$ for all $x>0.$ To see this, note that by the law of total expectation, they satisfy the recursive relation
+\begin{align}
+E_x = 1 + \frac{2}{3}E_{x-1} + \frac{1}{3}E_{x+1}    
+\end{align} We induct. 
+For $n= 1,$ we have that by the previous part,
+\[E_1= 3 = 3(1).\] Suppose (1) holds for a general $n.$ Then 
+\[E_{n} = 1 + \frac{2}{3} E_{n-1} + \frac{1}{3}E_{n+1} \implies 3n -1 - \frac{2}{3}3(n-1) = \frac{1}{3}E_{n+1}.\]
+Solving, 
+\[E_{n+1} = 9n - 3 - 6n +6 = 3n + 3 =3(n+1).\]
 \end{solution}
     
     \item Suppose we modify the chain so that
@@ -279,12 +318,63 @@ Thus,
     p(0,1)=\frac{1}{4},\quad p(0,2)=\frac{1}{4},\quad p(0,3)=\frac{1}{4},\quad p(0,4)=\frac{1}{4}.
     \]
     The transitions for \(x>0\) are the same as before. Let \(\pi\) denote the invariant probability for this new chain. Find \(\pi(0)\).
+\begin{solution}
+    For $x\geq 1,$ the transition probability is unaffected. Thus, $E_x$ remains unchaged for every $x\neq 0.$ We know that using the law of total expectation:
+    \[E_0 = \frac{1}{4}E_1 + \frac{1}{4}E_2 + \frac{1}{4}E_3 + \frac{1}{4}E_4 +1= \frac{1}{4}3 + \frac{1}{4}6 
++ \frac{1}{4}9 + \frac{1}{4}12 +1= 8.5.\] Thus, 
+\[\bbE[n : X_n  = 0 \mid X_0 = 0] = 8.5 \implies \boxed{\pi(0) = \frac{1}{8.5}= \frac{2}{17}}.\]
+\end{solution}
     
     \item Find \(\pi(1)\) for this new chain.
+    \begin{solution}
+        From the transition probabilities we have that 
+        \[\pi_0 = \frac{2}{3}\pi_1 \implies \boxed{\pi_1 = \frac{3}{2}\frac{2}{17} = \frac{3}{17}}\]
+    \end{solution}
 \end{enumerate}
 
-\section*{Problem 6 (10 points)}
+\newpage
+
+\section*{Problem 6}
 Let $\{Y_j\}_{j\in\bbN}$ be independent, identically distributed integer-valued random variables which are not identically equal to zero. For a given value of \(X_{0}\in\mathbb{Z}\), let \(X_{n}=X_{0}+\sum_{j=1}^{n}Y_{j}\) for each \(n\geq 1\). We view \(\{X_{n}\}\) as a Markov chain taking values in \(\mathbb{Z}\). Show that \(\{X_{n}\}\) does not have a stationary distribution. Conclude that \(\{X_{n}\}\) is either null recurrent or transient, not positive recurrent. \textit{(Hint: assume for contradiction that there is a stationary distribution \(\pi\), and look at a value of \(n\in\mathbb{Z}\) such that \(\pi(n)\) is maximal).}
+
+\begin{solution}
+    Let $\pi$ be a stationary distribution. Let $N \in \bbZ$ such that $\pi_N \geq \pi_n$ for all $n \in \bbZ$. Note that such a $\pi_N$ must exist. To show this, suppose it doesn't exist. Consider $\pi_{n_0}.$ Either $\pi_{n_0} = 0$ or $\pi_{n_0} >0.$ If the former, we know that $\pi_{n_0}$ is not maximal, and so there exists some $n_1$ such that $\pi_{n_1} > \pi_{n_0}.$ Thus, take $\pi_{n_0} >0$ without loss of generality. Let $\epsilon = \frac{\pi_{n_0}}{2}.$ There exists some $n_1$ such that $\pi_{n_1} >\pi_{n_0}.$ Since $\pi_{n_1}$ isn't maximal, there exists some $\pi_{n_2} >\pi_{n_1} > \epsilon.$ Thus, since $\pi_x \geq 0$ for all $x\in \bbZ,$ we have that  
+    \[1 = \sum_{x \in \bbZ}\pi_x \geq \sum_{i = 1}^\infty \pi_{n_i} > \sum_{i=1}^\infty \epsilon  = \infty,\] which is clearly a contradiction. Thus, we can let $\pi_N$ be maximal.
+
+    By definition,
+    \begin{align*}
+        \pi_N &= \sum_{x\in \bbZ} \pi_x p(x,N)\\
+        &= \sum_{x \in \bbZ} \pi_x\bbP\{X_1 = N \mid X_0 = x\}\\
+        &= \sum_{x \in \bbZ} \pi_x\bbP\{X_0 + Y_1 = N \mid X_0 = x\}\\
+        &= \sum_{x\in \bbZ}\pi_x \bbP\{Y_1 = N-x\}\\
+        &\leq \pi_N \sum_{x\in \bbZ}\bbP\{Y_1 = N-x\}\\
+        &= \pi_N
+    \end{align*}
+We claim that 
+\begin{align}
+    \pi_x = \pi_N \quad \text{ whenever }\quad  \bbP\{Y_1 = N -x\} >0.
+\end{align}
+ Suppose not. Let $x'$ such that $\pi_{x'} < \pi_N$ and $\bbP\{Y_1 = N - x'\} >0.$ But then 
+\[\pi_N = \sum_{x\in \bbZ} \pi_x \bbP\{Y_1 = N - x\} < \sum_{x\in \bbZ}\pi_N \bbP\{Y_1 = 
+ N-x\} = \pi_N.\] 
+
+ We claim now that $\pi_N >0.$ Suppose now, that $\pi_N = 0,$ but then $\pi_x \leq \pi_N = 0$ for all $x\in N$ and thus 
+ \[\sum_{x\in \bbZ}\pi_x = 0,\] which is a contradiction. 
+
+ Suppose that for all $x\in \bbZ,$ $\pi_x < \pi_N.$ Then by what we showed above, $\bbP\{Y_1 = N-x\} = 0.$ Thus, 
+ \[\pi_N = \sum_{x\in \bbZ}\pi_x \bbP\{Y_1 = N-x\} \implies \bbP\{Y_1 = N-N\} = 1,\] which contradicts the fact that $Y_1$ is not identically $0.$ Let $\pi_{i_1}= \pi_N.$ We claim that $\pi_{2N - i} = \pi_{N}.$ 
+ 
+\begin{align*}
+    \pi_{i_1} &= \pi_{N}\bbP\{i_1 - N\} + \pi_{i_1}\bbP\{i_1-i_1\} \implies \bbP\{i_1-N\} >0.
+\end{align*}
+But then since $i- N = N - (2N - i_1),$ we by (2) that $\pi_{2N - i_1}  = \pi_N.$ Call $i_2 := 2N-i_1.$ Using this process, we find $\{i_1, i_2, \dots\}$ such that 
+\[\pi_{i_n}= \pi_N, \quad \forall \;n >0.\] Thus, 
+\[1 = \sum_{x\in \bbZ}\pi_x \geq \sum_{n=1}^\infty \pi_{i_n} = \sum_{n=1}^\infty \pi_n = \infty,\] which is a contradiction. 
+
+Thus, there does not exist a stationary distribution, implying that this Markov chain is either null recurrent or transient. 
+\end{solution}
+
+\newpage
 
 \section*{Problem 7 (Optional)}
 In this exercise, we will establish Stirling's formula. Let \(X_{1},X_{2},\ldots\) be independent Poisson random variables with mean 1 and let \(Y_{n}=X_{1}+\cdots+X_{n}\), which is a Poisson random variable with mean \(n\). Let
@@ -297,12 +387,21 @@ p(n,k)=\mathbb{P}\{Y_{n}=k\}=e^{-n}\frac{n^{k}}{k!}.
     \[
     \lim_{n\to\infty}\sum_{n\leq k<n+a\sqrt{n}}p(n,k)=\int_{0}^{a}\frac{1}{\sqrt{2\pi}}e^{-x^{2}/2}\,dx.
     \]
+\begin{solution}
+    We have that 
+    \[\sum_{n \leq k \leq n + a \sqrt{n}}p(n,k) = \bbP\{n \leq Y_n \leq n + a\sqrt{n}\} = \bbP\{\frac{Y_n - n}{\sqrt{n}} \leq a\}.\] By the CLT, since $\bbE[Y_n] = n$ and $\bbV[Y_n] = n,$ then in the limit,
+    \[\frac{Y_n - n}{\sqrt{n}}\sim N(0,1),\] and so
+    \[\lim_{n\to \infty} \bbP\{\frac{Y_n - n}{\sqrt{n}} \leq a\} = \int_0^a \frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^2}\]
+\end{solution}
     
     \item Show that if \(a>0\), \(n\) is a positive integer, and \(n\leq k<n+a\sqrt{n}\), then
     \[
     e^{-a^{2}}p(n,n)\leq p(n,k)\leq p(n,n).
     \]
-    
+\begin{solution}
+    Since $p(n,k) = e^{-n}\frac{n^k}{k!},$ we have that since $n\leq k,$ then
+    \[p(n,n) = e^{-n}\frac{n^k}{n!} \geq p(n,k)\]
+\end{solution}
     \item Use (a) and (b) to conclude that
     \[
     p(n,n)\sim\frac{1}{\sqrt{2\pi n}}.

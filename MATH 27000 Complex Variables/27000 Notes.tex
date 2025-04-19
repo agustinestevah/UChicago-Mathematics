@@ -563,7 +563,67 @@ So it suffices to show that the denominator is bounded below. Since $\gamma$ is 
 \end{thm}
 
 
+\newpage
+\subsection{Thursday, Apr 17: Cauchy's Theorem}
+\begin{thm}
+    (Cauchy-Goursat) Suppose $O\subseteq \bbC$ is open, and $\triangle \subseteq O$ is a solid closed triangle. Then for $f\in H(O),$ we have that 
+    \[\int_{\partial \triangle} f(z)dz = 0.\]
+\end{thm}
+\begin{proof}
+    Suppose not, that 
+    \[\int_{\partial \triangle}f(z)dz  = \ell \neq 0\] Take the midpoints of the triangle, and we get four sub triangles with specific orientation, $\triangle_i,$ for $i\in \{1,2,3,4\}$ as follows: 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Images/Goursat.png}
+        \caption{Goursat's Triangle}
+    \end{figure}
+    (Note that $T^{(i)} = \triangle_i$ in the picture.) It is clear that 
+    \[\int_{\partial \triangle} f(z)dz = \sum_{k=1}^4 \int_{\partial \triangle_k}f(z)dz.\] Using the triangle inequality, we see that at least $k \in \{1,2,3,4\}$
+    \[\left|\int_{\partial \triangle_k}f(z)dz\right| \geq \frac{|\ell|}{2}.\] For this triangle, define
+    \[\triangle_{(1)}:= \triangle_k.\] Split up $\triangle_{(1)}$ into four sub-triangles with the same process as before. We can induct on this process to find a sequence such that
+    \[\triangle_{(1)}\supset \triangle_{(2)}\supset \cdots , \qquad \left|\int_{\partial \triangle_{(n)}}f(z)dz\right| \geq \frac{|\ell|}{4^n}, \qquad \text{diam}(\triangle_{(n)}) \leq \text{arclength}(\partial \triangle_{(n)}) = \frac{1}{2^n}\text{arclength}(\partial \triangle).\] Since $\bbC$ is complete, we can use Cantor's nested set theorem to find some $z_0 \in \bigcap \triangle_{(n)}.$ Let $\epsilon>0.$ Since $f$ is holomorphic at $z_0,$ we have that if $|z - z_0| < \delta,$ then 
+    \[|f(z) - [f(z_0) + f'(z)(z-z_0)|< \epsilon|z - z_0|\] If we define the error function $\varepsilon(z)$ as the LHS of the above, then 
+    \[|\varepsilon(z)|< \epsilon |z - z_0|.\] Then we can use the fact that $f(z_0)$ and  $f'(z_0)(\zeta - z_0)$ are linear functions with primitives to calculate
+    \begin{align*}
+    \int_{\partial \triangle_{(n)}}f(z)dz &= \int_{\partial \triangle_{(n)}} [f(z_0) + f'(z_0)(\zeta - z_0)] + \varepsilon(\zeta) d\zeta \\
+    &= 0 + \int_{\partial \triangle_{(n)}}\varepsilon(\zeta)d\zeta\\
+    &= \int_{\partial \triangle_{(n)}}\varepsilon(\zeta)d\zeta
+    \end{align*}
+    
+    
+    
+    We can estimate that 
+    \begin{align*}
+    \left|\int_{\partial \triangle_{(n)}}f(z)dz\right| &= \int_{\partial \triangle_{(n)}}\varepsilon(\zeta)d\zeta\\ &\leq \text{arclength}(\triangle_{(n)})\max_{z\in \partial \triangle_n} |\varepsilon(z)|\\ &\leq \frac{1}{2^n}\text{arclength}(\partial \triangle) \epsilon \max_{\zeta \in \partial \triangle_{(n)}}|\zeta - z_0| \\&
+    \leq   \frac{\epsilon}{2^n}\text{arclength}(\partial \triangle)  \text{diam}(\triangle_{(n)})\\
+    &\leq \frac{\epsilon}{4^n}\text{arclength}(\partial \triangle) ^2\\
+    & \to 0
+    \end{align*}
+     Which is a contradiction to the fact that the integral is bounded above. 
+    
+\end{proof}
 
+\begin{thm}
+    (Cauchy) Suppose $O\subseteq \bbC$ is an open, convex set, and $f\in H(O).$ Then for every closed path $\gamma$ in $O,$ 
+    \[\int_\gamma f(z)dz = 0\]
+\end{thm}
+
+\begin{proof}
+    It suffices to show that $f$ has a primitive. Fix $z_0 \in O.$ Let $z\in O.$ Let $[z_0, z]$ be the straight line from $z_0$ to $z.$ Define
+    \[F(z) = \int_{[z_0, z]}f(\zeta)d\zeta.\] To see that $F' = f,$ consider that $F(z)$ integrates from $[z_0, z],$ $F(z + h)$ integrates from $[z_0, z + h],$ and we claim that $F(z + h) - F(z)$ integrates from $[z,z + h].$ Note that if we show this, then we formed a triangle, \triangle. To show this, 
+    consider that by Goursat,
+    \[\int_{\partial \triangle} f(\zeta)d\zeta = \int_{[z_0, z]} f(\zeta)d\zeta + \int_{[z, z + h]} f(\zeta)d\zeta + \int_{[z + h, z_0]} f(\zeta)d\zeta = 0,\] and thus 
+    \[\int_{[z_0, z]} f(\zeta)d\zeta + \int_{[z, z + h]} f(\zeta)d\zeta - \int_{[z_0, z + h]} f(\zeta)d\zeta = 0 \implies F(z + h)- F(z)= \int_{z, z + h}f(\zeta)d\zeta\]
+    Thus, since $f$ is continuous at $z$, then for any $\epsilon>0,$ if $|\zeta - z|< \delta,$ then $|f(\zeta) - f(z)|< \epsilon.$ Take $h< \frac{1}{2}\delta,$ then 
+    \begin{align*}
+    F(z + h) - F(z) &= \int_{[z, z + h]}f(\zeta)d\zeta\\
+        \left|\frac{F(z + h) - F(z)}{h} - f(z)\right| &= \left|\frac{1}{h}\int_{[z, z + h]}f(\zeta)d\zeta - \frac{1}{h}\int_{[z,z + h]}f(z)\right|\\
+        &= \frac{1}{|h|}\left|\int_{z, z + h} f(\zeta) - f(z)d\zeta\right|\\
+        &\leq \frac{1}{|h|}\text{length}(z, z + h) \max_{\zeta\in [z, z + h]}|f(\zeta) - f(z)|\\
+        &= \max_{\zeta \in [z, z + h]}|f(\zeta) - f(z)|\\
+        &< \epsilon
+    \end{align*}
+\end{proof}
 
 
 
