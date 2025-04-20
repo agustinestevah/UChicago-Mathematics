@@ -1,0 +1,212 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{20510}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 4}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{04-23-2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+Let \( f: \mathbb{R} \to \mathbb{R} \) be a nonnegative measurable function such that \( 0 \leq f(x) \leq 1 \) for every \( x \in \mathbb{R} \). Suppose that 
+$
+\int_{\mathbb{R}} f \, dm < \infty.$
+Prove that 
+\[
+\lim_{k \to \infty} \int_{\mathbb{R}} (f(x))^k \, dm = m(f^{-1}(1)).
+\]
+\begin{solution}
+    Define 
+    \[A:= \{x \in \bbR \mid f(x) = 1\}.\] $A$ is measurable since $f$ is measurable. Define the measurable simple function
+    \[g = f\chi_A = \begin{cases}
+        1, \quad f(x) = 1\\
+        0, \quad f(x) <1
+    \end{cases}.\] 
+    Define the sequence $f_k(x) = (f(x))^k.$
+    
+    Let $x\in \bbR.$ If $x\in A,$ then $f_k(x) = 1 = g(x)$ for each $k.$ If $x\notin A,$ then $0<f(x)<1,$ and thus $f_k(x) \to 0 = g(x).$ Thus, $f \to g$ pointwise. Moreover, $|f_k(x)| \leq 1,$ for all $x,$ and so by the dominated convergence theorem, 
+    \[\lim_{k\to \infty}\int_\bbR f_n dm = \int_\bbR g dm = m(A) = m(f^{-1}(\{1\})\]
+\end{solution}
+
+
+\newpage
+\section*{Problem 2}
+Let 
+\[
+f(x) = \frac{1}{\sqrt{x}} \quad \text{for } x \in (0,1], \quad f(0) = 0.
+\]
+Prove that 
+\[
+\int_{0}^{1} f \, dm = 2.
+\]
+(Hint: Use the Monotone Convergence Theorem.)
+\begin{solution}
+    Define the sequence of functions
+    \[f_n(x) = \begin{cases}
+        \sqrt{\frac{2^n}{i}}, \quad x\in (\frac{i-1}{2^n}, \frac{i}{2^n}], \quad \forall i\in \{1,2,\dots, 2^n\}\\
+        0, \quad x = 0
+        \end{cases}\]
+Clearly, $f_n$ is monotonically increasing with $0\leq f_0 \leq f_1 \leq\cdots.$ We claim that $f_n \uparrow f$ pointwise. Suppose we proved this, then then by the monotone convergence theorem, 
+\[\int_0^1 f \,dm = \lim_{n\to \infty}\int_0^1 f_n \,dm .\] Note that for any $n \in \bbN,$ we have that 
+\[\int_0^1 f_n \, dm = \sum_{i=1}^{2^n} \sqrt{\frac{2^n}{i}}m((\frac{i-1}{2^n}, \frac{i}{2^n}]) = \sum_{i=1}^{2^n} \frac{2^{\frac{1}{2}n}}{\sqrt{i}}\frac{1}{2^n} = \frac{1}{\sqrt{2^n}}\sum_{i=1}^{2^n}\frac{1}{\sqrt{i}}\]
+\end{solution}
+
+
+\newpage
+
+\section*{Problem 3}
+Let 
+\[
+f(x) = \frac{1}{1 + x^2}.
+\]
+Prove that 
+\[
+\int_{\mathbb{R}} f \, dm = \pi.
+\]
+
+\begin{solution}
+    
+\end{solution}
+
+\section*{Problem 4}
+Suppose \( f \in L^1 \) on \( E \). Prove that, for every \( \epsilon > 0 \), there exists a simple function \( g \) such that 
+\[
+\int_{E} |f - g| \, dm < \epsilon.
+\]
+Prove that, if \( f \in L^1 \) on \( E \subseteq \mathbb{R} \), then, for every \( \epsilon > 0 \), there exists a step function \( s \) such that 
+\[
+\int_{E} |f - s| \, dm < \epsilon.
+\]
+Recall that a step function \( s \) is a simple function such that, for every \( c \in \text{range}(s) \), \( s^{-1}(c) \) is an interval.
+
+\section*{Problem 5}
+Prove that, if \( f: \mathbb{R} \to \mathbb{R} \), and \( f \in L^1 \), then
+\[
+\lim_{n \to \infty} \int_{-1}^{1} f(x) \cos(nx) \, dm = 0.
+\]
+(Hint: First prove this when \( f \) is simple.)
+
+\section*{Problem 6}
+Suppose that \( f: \mathbb{R}^d \to \mathbb{R} \) is measurable and nonnegative, and, for every \( n, k \in \mathbb{N} \), define
+\[
+E_{n,k} = \{x \mid m - f(x) < n + 1\}.
+\]
+Show that, as \( n \to \infty \),
+\[
+\sum_{k=1}^{\infty} m(E_{n,k}) \to \int_{\mathbb{R}^d} f \, dm.
+\]
+
+\end{document}

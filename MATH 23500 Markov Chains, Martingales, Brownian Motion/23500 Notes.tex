@@ -117,7 +117,7 @@ That is, if we start at $x,$ what is the probability that the $n$th step is $y$?
 We illustrate the stuff from last class with a simple example:
 \begin{exmp}
     Consider the two state Markov chain with $S = \{0,1\}$ and 
-    \[p(1,0) = \frac{1}{3}, \quad p(1,0) = \frac{1}{2},\] then 
+    \[p(0,1) = \frac{1}{3}, \quad p(1,0) = \frac{1}{2},\] then 
     \[P = \begin{pmatrix}
         p(0,0) & p(0,1)\\
         p(1,0) & p(1,1) 
@@ -148,7 +148,7 @@ In other words, if $C$ is recurrent, then the chain never leaves. If it is trans
     Consider a Markov chain with $S  = \{1,2,3,4,5\}$ and 
     \[P = \begin{pmatrix}
         \frac{1}{5} & \frac{1}{5} & 0 & 0 & \frac{3}{5}\\
-        0 & 0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 & 1\\
         0 & 0 & \frac{1}{2} & \frac{1}{2} & 0\\
         0 & 0 & \frac{1}{4} & \frac{3}{4} & 0\\
         \frac{1}{2} & \frac{1}{4} & \frac{1}{4} & 0 & 0
@@ -201,18 +201,19 @@ In other words, if $C$ is recurrent, then the chain never leaves. If it is trans
     (Strong Markov Property) Let $\tau$ be a stopping time for $\{X_n\}.$ Let $n \geq 0,$ $m\geq 1,$ $x_n \dots, x_n \in S$ such that 
     \[\bbP\{X_0 = x_0, \dots, X_\tau = X_n\} >0,\] and 
     let $y_1, \dots, y_m \in S.$ Then 
-    \[\bbP\{X_{\tau + 1} = y, \dots, X_{\tau + m} = y_m\mid X_0 = x_0, \dots, X-\tau = x_n\} =\bbP\{X_{\tau + 1} = y, \dots, X_{\tau + m} = y_m\mid X_0 = x_n\}\]
+    \[\bbP\{X_{\tau + 1} = y, \dots, X_{\tau + m} = y_m\mid X_0 = x_0, \dots, X_\tau = x_n\} =\bbP\{X_{1} = y, \dots, X_{ m} = y_m\mid X_0 = x_n\}\]
 \end{thm}
 \begin{proof}
     The event $\{X_0 = x_0, \dots, X_\tau = x_n\}$ is the same as the event $\{X_0 = x_0, \dots, X_n = x_n\}$ and $\{\tau = n\}.$ Since $\tau$ is a stopping time determined where the event $\{\tau = n\}$ by $\{X_0, \dots, X_n\}.$ Thus, we get that the events $\{X_0 = x_0, \dots, X_\tau = x_n\} = \{X_0 = x_0, \dots, X_n = n\}\cap \{\tau = n\},$ then 
     \begin{align*}
         \bbP\{X_{\tau + 1} = y_1, \dots, X_{\tau  + m} = y_m \mid X_0 = x_0, \dots, X_\tau = x_n\} &= \bbP\{X_{n + 1} = y_1, \dots, X_{n  + m} = y_m \mid X_0 = x_0, \dots, X_n = x_n\}\\
-        &= \bbP\{X_{n + 1} = y_1, \dots, X_{n  + m} = y_m \mid X_n = x_n\}
-    \end{align*} and conclude with the regular markov property and $n-$step invariance.
+        &= \bbP\{X_{n + 1} = y_1, \dots, X_{n  + m} = y_m \mid X_n = x_n\}\\
+        &= \bbP\{X_{1} = y_1, \dots, X_{ m} = y_m \mid X_0 = x_n\}
+    \end{align*} and conclude with the regular Markov property and $n-$step invariance.
 \end{proof}
 
 \begin{exmp}
-    Let $x\in S$ with $S$ finite and let $\tau = \min\{n \geq 0 \mid X_n = x\}.$ Assume that $\bbP\{\tau < \infty\} = 1.$ For any $x_0, \dotss, x_n \in S$ such that 
+    Let $x\in S$ with $S$ finite and let $\tau = \min\{n \geq 0 \mid X_n = x\}.$ Assume that $\bbP\{\tau < \infty\} = 1.$ For any $x_0, \dots, x_n \in S$ such that 
     $\bbP\{X_0 = x_0, \dots, X_\tau = x_n\} >0,$ we have $x_n = x,$ and so the conditional distribution of $\{X_{\tau + j}\}_{j \geq 0}$ given everything up to $\tau$ is the same as the original chain starting at $x.$ 
 
     Thus, the Strong Markov property essentially guarantees that the Markov chain resets after hitting $\tau$!
@@ -371,10 +372,12 @@ Suppose $\pi$ is a limiting probability vector. That is, for any initial distrib
 Our goal is to calculate the expected duration (that is, the hitting probability) conditioned on a first step. Let's illustrate using an example! Before, we do a little aside to talk about a useful technique that comes up naturally:
 \begin{rem}
     Suppose $f$ satisfies
-    \[f(n) = a f(n-1)+ bf(n+1), \qquad 0 \leq n \leq N,\] where $f(0)$ and $f(N)$ are known. Guess the solution to be 
+    \[f(n) = a f(n-1)+ bf(n+1), \qquad 0 \leq n \leq N,\] where $f(0)$ and $f(N)$ are known. Suppose $a\neq b$, then guess the solution to be 
     \[f(n) = \alpha^n,\] then 
     \[\alpha^n = a\alpha^{n-1} + b\alpha^{n+1} \implies \alpha = a + b\alpha^{2}\implies \alpha = \frac{1 \pm \sqrt{1 - 4ab}}{2b}.\] Thus the general solution is 
     \[f(n) = \lambda_1 \alpha_+^n + \lambda_2 \alpha_-^n\]
+If $a = b,$ then 
+\[f(n) = \lambda_1 n + \lambda_2,\] since we are left with a simple linear system.
 \end{rem}
 \begin{exmp}
     Consider the Gambler's Ruin where $S = \{0, 1,2, \dots, N-1, N\}$ with transition probabilities
