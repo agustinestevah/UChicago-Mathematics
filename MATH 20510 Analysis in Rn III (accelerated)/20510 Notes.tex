@@ -1,0 +1,472 @@
+\documentclass[10pt, oneside]{article} 
+\usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry, esint, float}
+
+
+\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}  
+
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbZ}{\mathbb{Z}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\Cdot}{\boldsymbol{\cdot}}
+\newcommand{\scA}{\mathscr{A}}
+\newcommand{\curl}{\text{curl}}
+\newcommand{\Ind}{\text{Ind}}
+\newcommand{\Log}{\text{Log}}
+\newcommand{\Vol}{\text{Vol}}
+
+
+\newcommand{\sm}{\setminus}
+
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}[section]
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{prop}{Proposition}
+\newtheorem{conv}{Convention}
+\newtheorem{rem}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+\input{paolo-pset.tex}
+
+
+
+\title{UChicago Real Analysis III Notes: 20510}
+\author{Notes by Agustín Esteva, Lectures by Donald Stull, Books by Rudin, Stein and Shakarchi}
+\date{Academic Year 2024-2025}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\vspace{.25in}
+
+
+\newpage
+\section{Lectures}
+
+\subsection{Monday, Mar 24: Motivation for the Lebesgue Measure}
+\begin{defn}
+    A family of sets $\mathcal{A}$ is called a \textbf{ring} if it is closed under finite unions and under set complements. 
+\end{defn}
+\begin{defn}
+    A ring is called a \textbf{$\sigma-$ring} if it is closed under countable unions.
+\end{defn}
+\begin{rem}
+    I will most often refer to $\sigma-$rings as $\sigma-$algebra. The only difference if $\mathcal{F}$ is a $\sigma-$algebra, then if $A \in \cal F,$ then $A^c \in \cal F.$ Meanwhile, if $A\in \cal A,$ then $A^c$ might not necessarily be in the ring. Instead, if $B \in \cal A,$ then $B\sm A \in \cal A.$  
+\end{rem}
+Using DeMorgan's Law, a $\cal F$ is closed under countable intersections as well. 
+\begin{defn}
+    A \textbf{set function} $\phi$ on an algebra $\cal F$ satisfies that for all $A \in \cal F,$ $\phi(A) \in \bbR \cup \{\pm \infty\}$ (but not both at the same time).
+\end{defn}
+\begin{defn}
+A set function $\phi$ is \textbf{additive} if for all $A,B$ disjoint, we have that 
+\[\phi(A\sqcup B) = \phi(A) + \phi(B).\]
+\end{defn}
+\begin{defn}
+    We say that $\phi$ is \textbf{countably additive} if for any $A_1, A_2, \dots$ mutually disjoint, we have that 
+    \[\phi\left(\bigsqcup_{n=1}^\infty A_i\right) = \sum_{n=1}^\infty \phi(A_i)\]
+\end{defn}
+\begin{rem}
+    Let $\phi$ be an additive set function on $\cal F$. Then 
+    \begin{enumerate}
+        \item $\phi(\emptyset) = 0.$ Let $A\in \cal F$ with $\phi(A) < \infty.$ Then $A = A \sqcup \emptyset$ and so $\phi(A) = \phi(A)+ \phi(\emptyset).$
+        \item Let $N < \infty,$ then for $A_1, \dots, A_N$ mutually disjoint, 
+        \[\phi\left(\bigsqcup_{n=1}^N A_i\right) = \phi\left(A_1 \sqcup \bigsqcup_{n=2}^N A_i\right) = \phi(A_1) + \phi\left(\bigsqcup_{n=2}^N A_i\right) = \cdots = \sum_{n=1}^N \phi(A_i).\]
+        \item We have that for any $A,B \in \cal F,$ 
+        \[\phi(A\cup B) + \phi(A\cap B) \phi(A)+ \phi(B)\]
+        \item If $\phi$ is positive real valued, then if $A \subset B,$ then 
+        \[\phi(A) \leq \phi(B).\] Notice that 
+        \[\phi(B) = \phi(A \sqcup (B\sm A)) = \phi(A) + \phi(B\sm A) \geq \phi(A).\]
+        \item If $A\subseteq B$ and $\phi(A) < \infty,$ then 
+        \[\phi(B\sm A) = \phi(A) - \phi(B).\]
+    \end{enumerate}
+\end{rem}
+
+\begin{thm}
+    Let $\phi$ be a countably additive set function on $\cal F.$ Suppose $(A_n) \in \cal F$ such that $A_1 \subseteq A_2 \subseteq \cdots $ and 
+    \[\bigcup_{n=1}^\infty A_i = A.\] Then $\phi(A_n) \to \phi(A).$
+\end{thm}
+\begin{proof}
+    Define 
+    \[B_1:= A_1, \quad B_2 := A_2 \sm A_1, \quad B_3:= A_3 \sm A_2, \cdots \] Then $(B_n)$ is a collection of disjoint sets such that $\bigsqcup_{n=1}^\infty B_i = A.$ Then since $\phi$ is countably additive, we have that
+    \[\phi(A_n) = \phi(\bigsqcup_{i=1}^n B_i) = \sum_{i=1}^n \phi(B_i)\to \sum_{i=1}^\infty\phi(B_i) = \phi(\bigsqcup_{i=1}^\infty B_i)= \phi(A).\]
+\end{proof}
+
+\begin{defn}
+    An \textbf{interval} $I = \{a_i, b_i\}_{i=1}^n \subseteq \bbR^n$ is a set of points $x = (x_1, \dots, x_n)$ such 
+    \[a_i \leq x_i \leq b_i,\] where the $\leq$ can be replaced with $<.$
+\end{defn}
+
+\begin{defn}
+    We say that $A$ is \textbf{elementary} if $A$ is a union of finitely many intervals. 
+\end{defn}
+
+\begin{rem}
+    We call the set of elementary sets $\cal E.$
+\end{rem}
+\begin{defn}
+    Suppose $I$ is an interval of $\bbR^n.$ Then the \textbf{volume} of $I$ is 
+    \[\Vol(I) = \prod_{i=1}^n (b_i - a_i).\]
+\end{defn}
+\begin{rem}
+    Let $A \in \cal E.$ Then $A = \bigcup I_i.$ Then 
+    \[\Vol(A) = \sum_{i=1}^n \Vol(I_i)\]
+\end{rem}
+
+\newpage
+\subsection{Wednesday, Mar 26: The Lebesgue Outer Measure}
+\begin{rem}
+    \begin{enumerate}
+        \item $\cal E$ is a ring, but not a $\sigma-$ring.
+        \item If $A\in \cal E,$ then $A$ can be decomposed into a finite union of disjoint intervals.
+        \item If $A\in \cal E,$ then $\Vol(A)$ is well defined. 
+    \end{enumerate}
+\end{rem}
+
+\begin{defn}
+    A non-negative set function on $\cal E$ is called \textbf{regular} if for all $A\in \cal E,$ for all $\epsilon>0,$ there exists  open $O  \in \cal E$ and closed $F \in \cal E$ such that $F\subseteq A \subseteq O$ and 
+    \[\phi(G) \leq \phi(A) + \epsilon, \quad \phi(A) \leq \phi(F)  + \epsilon.\]
+\end{defn}
+Note that $\Vol$ is regular. 
+\begin{defn}
+    The \textbf{Lebesgue Outer Measure} of $E\subseteq \bbR^n$ is defined by
+    \[m^*(E) = \inf\left(\sum_{n=1}^\infty \Vol(A_i)\right),\] where the infemum is taken over all the countable open covers of $E.$ 
+\end{defn}
+
+\begin{rem}
+Let $E\in \bbR^n.$ Then
+    \begin{enumerate}
+        \item $m^*(E)$ is well defined.
+        \item If $E_1\subseteq E_2 \subseteq\bbR^n.$ Then 
+        \[m^*(E_1) \leq m^*(E_2).\]
+        \item The outer measure is non-negative.
+    \end{enumerate}
+\end{rem}
+
+\begin{thm}
+    If $A\in \cal E,$ then $\Vol(A) = m^*(A).$ Moreover, if $E = \bigcup_{i=1}^\infty E_i,$ then $m^*(E) \leq \sum_{i=1}^\infty m^*(E_i)$
+\end{thm}
+
+\begin{proof}
+    Let $\epsilon>0.$ Since $\Vol$ is regular, then there exists some open $O \supseteq A$ such that $\Vol(O) \leq \Vol(A) + \epsilon.$ Since $O$ is an open cover, we have that $m^*(A) \leq \Vol(O) \leq \Vol(A) + \epsilon.$ Thus, $m^*(A) \leq \Vol(A) + \epsilon.$ Let $F \subseteq A$ closed such that $\Vol(A) \leq \Vol(F) + \frac{\epsilon}{2}.$ Then since $F$ is closed and bounded in $\bbR^n,$ it is compact. Let $\{A_n\}_{n=1}^\infty$ be an open cover of $A$ such that 
+    \[\sum_{n=1}^\infty \Vol(A_i) \leq   m^*(A) + \frac{\epsilon}{2}\]
+    Then there exists $\{A_n\}_{n=1}^N$ finite open cover of $F$ by compactness. By the finite sub-additivity of $F,$ we have that 
+    \[\Vol(A) \leq \Vol(F) + \frac{\epsilon}{2} \leq \sum_{n=1}^N \Vol(A_n) + \frac{\epsilon}{2} \leq \sum_{n=1}^\infty \Vol(A_n) + \frac{\epsilon}{2} \leq m^*(A) + \epsilon.\] Thus, $\Vol(A) \leq m^*(A).$
+
+    Suppose $m^*(E_n) < \infty$ for all $n.$ Let $\epsilon>0.$ For each $n,$ there exists a countable open cover such that 
+    \[\sum_{i=1}^\infty \Vol(A_i^{(n)}) \leq m^*(E_n) + \frac{\epsilon}{2^n}.\] Since $E\subseteq \bigcup_{n=1}^\infty \bigcup_{i=1}^\infty A_i^{(n)},$ then 
+    \[m^*(E) \leq \sum_{n=1}^\infty \sum_{i=1}^\infty \Vol(A_i^{(n)}) \leq \sum_{n=1}^\infty m^*(E_n) + \frac{\epsilon}{2^n} \leq \sum_{n=1}^\infty m^*(E_n)  + \epsilon\]
+\end{proof}
+
+\newpage
+\subsection{Friday, Mar 28: The Lebesgue Measure}
+\begin{defn}
+    Let $A, B \subseteq \bbR^n.$ The \textbf{symmetric difference} of $A$ and $B$ is 
+    \[A\triangle B = (A\sm B) \cup (B\sm A)\]
+\end{defn}
+\begin{defn}
+    The \textbf{distance} between $A$ and $B$ is defined as
+    \[d(A,B) = m^*(A\triangle B).\]
+\end{defn}
+\begin{defn}
+    Let $(A_n) \in \bbR^n.$ We say that $A_n$  \textbf{converges in (outer) measure} if $d(A_n, A) \to 0.$
+\end{defn}
+\begin{defn}
+    If there exists a sequence $(A_n) \in \cal E$ such that $A_n \to A,$ then $A$ is \textbf{finitely-measurable}. We say that $A \in \mathcal{M}_F(m).$
+\end{defn}
+\begin{defn}
+    We say that $E \in \mathcal{M}(m)$ if 
+    \[E = \bigcup_{n=1}^\infty A_n,\] where each $A_n \in \mathcal{M}_F(m).$
+\end{defn}
+\begin{thm}
+    (Caratheodory) $\cal M$ is a $\sigma-$family, and $m^*$ is countably additive on $\cal M.$
+\end{thm}
+\begin{defn}
+    The \textbf{Lebesgue Measure} is the set function 
+    \[m: \mathcal{M}(m) \to [0, \infty], \quad m(A) = m^*(A).\]
+\end{defn}
+\begin{rem}
+    As a small review we recap our set-functions so far:
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|cl}
+             Set Function&   Domain&Properties\\
+             $\Vol$& 
+         $\cal E$&Non-negative, Finitely Additive, Regular\\
+ $m^*$& $\bbR^n$&Non-negative, Countably-sub-additive, $m|_{\cal E} = \Vol$\\
+ m& $\cal M$&Non-negative, Countably-additive, $m|_{\cal M} = m^*$\\\end{tabular}
+        \caption{Set Functions}
+
+    \end{table}
+\end{rem}
+\begin{exmp}
+\begin{enumerate}
+    \item If $A \in \cal E,$ then $ A \in \cal M.$ 
+    \item Since $\bbR^d = \bigcup_{n=1}^\infty [-n, n]^d,$ then $\bbR^d \in \cal M.$
+    \item If $A \in \cal M,$ then $A^c \in \cal M$.
+    \item For all $x\in \bbR^n,$ $x\in \cal M.$ This is because
+    \[x = \bigcap_{n=1}^\infty (x- \frac{1}{n}, x + \frac{1}{n}).\] Moreover, $m(\{x\}) = 0.$ 
+    \item $m(\bbQ) = 0.$
+\end{enumerate}
+\end{exmp}
+
+\newpage
+\subsection{Monday, Mar 31: Measurable Functions}
+\begin{defn}
+    We say that $f: \bbR^n \to \bbR$ is \textbf{(Lebesgue) measurable} if, for every $a\in \bbR^n,$ $\{x \in \bbR^n \mid f(x) >a\}$ is measurable.
+\end{defn}
+\begin{rem}
+    If $f$ is continuous, then $f^{-1}\big((a, \infty)\big)$ is open, and thus measurable. Then $f$ is measurable.
+\end{rem}
+\begin{prop}
+    Equivalently, $f$ is measurable if the following are measurable:
+    \begin{itemize}
+        \item $\{x \in \bbR^n \mid f(x) > a\}$ 
+        \item $\{x \in \bbR^n \mid f(x) \geq a\}$ 
+        \item $\{x \in \bbR^n \mid f(x) < a\}$ 
+        \item $\{x \in \bbR^n \mid f(x) \leq a\}$ 
+    \end{itemize}
+\end{prop}
+\begin{proof}
+    Suppose $f$ is measurable. We can write 
+    \[\{x \in \bbR^n \mid f(x) \geq a\} = \bigcap_{n=1}^\infty \{x \in \bbR^n \mid f(x) > a + \frac{1}{n}\}.\] 
+    \[\{x \in \bbR^n \mid f(x) \leq a\} = \{x \in \bbR^n \mid f(x) > a\}^c\]
+    \[\{x \in \bbR^n \mid f(x) < a\} = \{x \in \bbR^n \mid f(x) \geq a\}^c.\] By Caratheodory's theorem (Theorem 3), we are done. 
+\end{proof}
+
+\begin{thm}
+    Suppose $f$ is measurable. Then $|f|$ is measurable.
+\end{thm}
+\begin{proof}
+    Let $a\in \bbR^n.$ Then we can write
+    \[\{x \in \bbR^n \mid |f(x)| < a\} = \{x \in \bbR^n \mid -a<f(x) < a\} = \{x \in \bbR^n \mid f(x) < a\} \cap \{x \in \bbR^n \mid f(x) >- a\}.\]
+\end{proof}
+\begin{thm}
+    Suppose $(f_n)$ are measurable and $g = \sup f_n$ and $h = \limsup f_n.$ Then $g$ and $h$ are measurable.
+\end{thm}
+\begin{proof}
+    Let $a\in \bbR^n.$ Then 
+    \[\{x \in \bbR^n \mid g(x) > a\} = \bigcup_{n=1}^\infty \{x \in \bbR^n \mid f_n(x) >a\},\] and 
+    \[\{x \in \bbR^n \mid h(x) > a\} = \bigcap_{n=1}^\infty\bigcup_{n=m}^\infty \{x \in \bbR^n \mid f_m(x) >a\}.\]
+\end{proof}
+
+\begin{cor}
+\begin{enumerate}
+    \item If $f,g$ are measurable, then so are $\max\{f,g\}$ and $\min\{f,g\}.$
+    \item Suppose $f$ is measurable. We can write $f = f^+ - f^-,$ where $f^+ = \max\{f,0\}$ and $f^- = -\min\{f,0\}.$ Both $f^+$ and $f^-$ are measurable.
+\end{enumerate}
+\end{cor}
+
+\begin{thm}
+    Suppose $f,g: \bbR^n t\o \bbR$ are measurable. If $F: \bbR^2 \to \bbR$ is continuous, then $h(x) = F(f(x), g(x)).$ Then $h$ is measurable. 
+\end{thm}
+Thus, $f + g,$ $fg,$ and all the rest are measurable if the components are measurable.
+
+\begin{defn}
+    A function $\varphi: \bbR^n \to \bbR$ is a \textbf{simple function} if $R(\varphi) < \infty.$
+\end{defn}
+\begin{rem}
+    Equivalently, if $\varphi$ is simple, then 
+    \[\varphi = \sum_{k=1}^n c_k \chi_{E_k},\] where $R(\varphi)= \{c_1, \dots, c_n\}$ and $E_k  = \{x \in \bbR^n \mid \varphi(x)  = c_k\}.$
+\end{rem}
+Note that $E$ is measurable iff $\chi_E$ is measurable.
+\begin{cor}
+    Suppose $\vaprhi$ is a simple function. Then $\varphi$ is measurable if and only if each $E_k$ is measurable
+\end{cor}
+
+
+\newpage
+\subsection{Wednesday, Apr 2: The Lebesgue Integral}
+\begin{thm}
+    Suppose $f: \bbR^n \to \bbR.$ There exists a sequence of $(\varphi_n)$ simple functions such that $\varphi_n \to f$ pointwise. Moreover, if $f\geq 0,$ then one can choose the sequence such that $0\leq \varphi_n \uparrow f.$ If $f$ is measurable, one can choose the $\varphi_n$ to be measurable.
+\end{thm}
+The proof can be found in the second PSET.
+\begin{defn}
+    Suppose $\varphi$ is a simple non-negative measurable function. Let $E\in \cal M.$ We define the \textbf{integral of a simple function} to be 
+    \[I_E(\varphi) = \sum_{k=1}^n c_k m(E_k \cap E).\]
+\end{defn}
+\begin{defn}
+    Suppose $f\geq 0$ is measurable. If $E\in \cal M,$ the define the \textbf{Lebesgue Integral} to be 
+    \[\int_E f \, dm = \sup_{0 \leq\varphi \leq f, \; \varphi \text{ simple}} I_E(\varphi).\]
+\end{defn}
+
+\begin{defn}
+    Suppose $f$ is measurable. We define the \textbf{Lebesgue integral of $f$} over $E \in \cal E$ to be
+    \[\int_E f \, dm = \int_E f^+ \, dm -\int_E f^-\, dm.\] If either is finite, then we write that $f\in \cal L$ and say that $f$ is \textbf{Lebesgue integrable}.
+\end{defn}
+\begin{rem}
+    \begin{itemize}
+        \item The Lebesgue integral is well defined.
+        \item The Lebesgue integral can be infinity.
+        \item If $\varphi$ is non-negative and simple and measurable, then $\int_E \varphi = I_E(\varphi).$
+    \end{itemize}
+\end{rem}
+
+
+\newpage
+\subsection{Friday, Apr 4: Properties of the Lebesgue Integral}
+\begin{rem}
+Let $f$ be measurable.
+\begin{enumerate}
+    \item If $a\leq f(x) \leq b$ for all $x\in E \in \cal M,$ then 
+    \[a \,m(E) \leq \int_E f\, dm \leq b\,m(E).\]
+    \item Suppose $f$ is bounded and $E \in \cal M$ with $m(E) < \infty.$ Then $f\in \mathcal L(E).$
+    \item If $f,g \in \mathcal L(E)$ and $f \leq g$ on $E,$ then 
+    \[\int_E f\, dm \leq \int_E g\,dm\]
+    \item If $f \in \mathcal L(E)$ and $c\in \bbR^n,$ then $cf \in \mathcal{L}(E)$ and 
+    \[\int_E c f\,dm = c\int_E f \, dm.\]
+    \item If $m(E) = 0,$ then 
+    \[\int_E f\, dm = 0.\]
+    \item If $f\in \mathcal L(A)$ and $A \in \cal M$ and $E\subseteq A,$ then $f\in \mathcal L(E).$
+    \item If $f\in \mathcal{R}([a,b]),$ then $f \in \mathcal{L}([a,b])$ and the Riemann integrals and Lebesgue integrals are equivalent. 
+\end{enumerate}
+\end{rem}
+\begin{thm}
+    Suppose $f\geq 0$ is measurable. For all $A\in \cal M,$ define the set function 
+    \[\phi(A) = \int_A f\, dm.\] Then $\phi$ is countably additive.
+\end{thm}
+\begin{proof}
+Suppose $(A_n) \in \cal M.$
+\begin{itemize}
+    \item Suppose $f$ is a characteristic function. That is, $f = \chi_E$ for some $E\in \cal M.$ Then 
+    \[\phi(\bigsqcup_{n=1}^\infty A_n) = \int_{\bigsqcup_{n=1}^\infty A_n} f = m(E \cap \bigsqcup_{n=1}^\infty A_n) = m(\bigsqcup_{n=1}^\infty E \cap A_n) = \sum_{n=1}^\infty m(E \cap A_n) = \sum_{n=1}^\infty \phi(A_n)\]
+    \item Suppose $f$ is simple function. That is, $f = \sum_{k=1}^N c_k E_k.$ Then 
+    \begin{align*}
+    \phi(\bigsqcup_{n=1}^\infty A_n) &= \int_{\bigsqcup A_n}f \, dm\\ &= \int_{\bigsqcup A_n} \sum_{k=1}^N c_k \chi_{E_k}\, dm\\ &= \sum_{k=1}^N c_k \phi(\bigsqcup_{n=1}^\infty \chi_{E_k})\\ &= \sum_{k=1}^N c_k \sum_{n=1}^\infty \phi(\chi_{E_k})\\ &= \sum_{n=1}^\infty \sum_{k=1}^N c_k m(E_k \cap A_n)\\ &= \sum_{n=1}^\infty\int_{A_n} f\\ &= \sum_{n=1}^\infty \phi(A_n)    
+    \end{align*}
+    \item Suppose $f \geq 0.$ Let $0\leq\varphi \leq f$ be measurable. Then we know that 
+    \[\int_{\bigsqcup A_n} \varphi \leq \sum_{n=1}^\infty \int_{A_n} \varphi\, dm \leq \sum_{n=1}^\infty \int_{A_n} f \, dm = \sum_{n=1}^\infty\phi(A_n).\]
+    Let $\epsilon>0.$ By definition, there exists a simple function $\varphi$ such that 
+    \[\int_{A_n} \varphi \geq \int_{A_n} f - \frac{\epsilon}{2^n}.\] Then 
+    \[\phi(\bigsqcup_{n=1}^k A_n) \geq \int_{\bigsqcup_{n=1}^k A_n}\varphi \, dm \geq \sum_{n=1}^k \phi(A_n) - \frac{\epsilon}{2^n} \to \sum_{n=1}^\infty \phi(A_n) - \epsilon.\]
+\end{itemize}
+\end{proof}
+
+\begin{cor}
+    Suppose $A, B \in \cal M$ with $B \subseteq A$ such that $m(A\sm B) = 0.$ Then for all $f\in \mathcal{L}(A),$ we have that 
+    \[\int_A f \, dm = \int_B f\, dm\]
+\end{cor}
+\begin{proof}
+    Write $A = B \sqcup A\sm B$ and conclude using the previous theorem and remark 11.
+\end{proof}
+
+
+\newpage
+\subsection{Monday, Apr 7: Lebesgue's Monotone Convergence Theorem}
+\begin{thm}
+    Suppose $f \in \mathcal{L}(E).$ Then $|f| \in \mathcal{L}(E)$ and 
+    \[\left|\int_E f\, dm\right| \leq \int_E |f|\, dm\]
+\end{thm}
+
+\begin{proof}
+   Let \[A:= \{x \in E \mid f(x) \geq 0\}, \quad B:= \{x \in E \mid f(x) < 0\}.\] Then $E = A\sqcup B$ and so 
+   \[\int_E |f|\, dm = \int_A |f|\, dm + \int_B |f|\, dm = \int_A f^+ \, dm + \int_B f^- \, dm < \infty.\] Thus, $|f| \in \mathcal{L}(E).$ Since $f\leq |f|$ and $-f \leq |f|,$ we have that 
+   \[\int_E f \, dm \leq \int_E |f|\, dm, \quad -\int_E f \, dm \leq \int_E |f|\, dm.\]
+\end{proof}
+
+\begin{thm}
+    (Monotone Convergence Theorem) Suppose $f_n$ is a sequence of non-negative measurable functions with $f_1(x) \leq f_2(x) \leq \cdots $ for al $x$ and with 
+    \[\lim_{n\to \infty}f_n(x) = f(x)\] for all $x.$ Then $\int f_n \, dm = \int f\, dm$
+\end{thm}
+\begin{proof}
+    $\int f_n$ is an increasing sequence of real numbers. Denote the limit by $L$ Note that $L \leq \int f.$ Let $ 0 \leq \varphi = \sum_{k=1}^N c_k \chi_{E_k} \leq f.$ Let $c \in (0,1)$ and define 
+    \[A_n:= \{x \in E\mid f_n(x) \geq c\varphi(x)\}.\] Note that $A_n \uparrow E$ since $c\in (0,1).$ Thus, 
+    \begin{align*}
+        L \geq \int_E f_n &\geq \int_{A_n} f_n \geq c\int_{A_n} \varphi = \sum_{k=1}^N c\,c_k m(E_k \cap A_n) \xrightarrow[n\to \infty]{}\sum_{k=1}^N c\, c_k m(E_k \cap A) = c\int_E \varphi.
+    \end{align*}
+    Thus, since $c$ is arbitrary, $L \geq \int_E \varphi.$ Taking the supremum over all such $\varphi,$ we get that $L \geq \int_E f.$
+\end{proof}
+
+
+\newpage
+
+\begin{thm}
+    If $f,g$ are non-negative and measurable, then if $E\in \cal M$ with $m(E) < \infty,$ we have that
+    \[\int_E (f + g)\, dm = \int_E f \, dm  + \int_E g\, dm.\] 
+\end{thm}
+\begin{proof}
+    If $f$ and $g$ are simple functions, the result is obvious. Let $f, g \geq 0.$ By Theorem 7, there exist $f_n, g_n$ simple, non-negative, and measurable such that $f_n \uparrow f$ and $g_n \uparrow g.$ Then by the monotone convergence theorem, since $(f_n + g_n) \uparrow (f + g)$
+    \begin{align*}
+        \int_{E}(f  + g) = \lim_{n\to \infty} \int_E (f_n + g_n) = \lim_{n\to \infty} (\int_E f_n +\int_E g_n) = \int_E f + \int_E g.  
+    \end{align*}
+    Suppose now $f,g$ are integrable. Then by the above
+    \[\int_E |f + g|  \leq \int_E |f| + |g|  = \int_E |f| + \int_E |g| < \infty,\] and thus $|f+ g|$ is integrable and so $f + g$ is integrable. Write 
+    \[(f + g) = (f + g)^+ - (f + g)^- = f^+ + g^+ - f^- - g^-,\] then 
+    \[(f + g)^+ + f^- + g^- = f^+ + g^+ + (f + g)^-.\] Thus, we use the above to show that 
+    \[\int_E(f + g)^+ + \int_Ef^- + \int_Eg^- = \int_Ef^+ + \int_Eg^+ + \int_E(f + g)^-.\] After rearranging we achieve out solution.
+ \end{proof}
+
+ \newpage
+ \subsection{Wednesday, Apr 9: Fatou's Lemma and Dominated Convergence Theorem}
+ \begin{thm}
+ (Fatou's Lemma)
+     Suppose $(f_n)$ is a sequence of non-negative measurable functions. Then if $E \in \cal M$,
+     \[\int_E \liminf_{n\to \infty} f_n \leq \liminf_{n\to \infty} \int_E f_n.\]
+ \end{thm}
+ \begin{proof}
+ Define $f := \displaystyle\liminf_{n\to \infty}f_n.$
+Define $g_n := \inf_{k\geq n}f_k.$ We have that $g_n$ is measurable for each $n,$ and $g_n \leq f_n.$ Thus, for each $n,$ we have that
+     \[\int_E g_n \leq \int_E f_n \implies \int_Eg_n \leq \inf_{k \geq n}\int f_k\]
+     By the MCT, since $g_n \uparrow f,$ we have that
+     \[\lim_{n\to \infty} \int_E g_n =\int_E f \leq \liminf_{n \to \infty}\int_E f_n \]
+ \end{proof}
+
+ \begin{thm}
+     (Dominated Convergence Theorem) Suppose $(f_n)$ are measurable such that $f_n \to f$ pointwise and $|f_n| \leq g$ for all $n.$ Then if $g \in \cal L,$ we have that 
+     \[\lim_{n\to \infty }\int_E f_n = \int_E f.\]
+ \end{thm}
+ \begin{proof}
+     Note that $f_n + g \geq 0,$ and thus by Fatou's Lemma, we have that 
+     \[\int_E f + g \leq \liminf_{n\to \infty}\int_E f_n + g \implies \int_E f \leq \liminf_{n\to \infty} \int_E f_n.\] Similarly, we have that $g - f_n \geq 0,$ and so by Fatou's lemma, 
+     \[\int_E g - f_n \leq \liminf_{n\to \infty} \int_E g - f_n \implies -\int_Ef_n \leq -\limsup_{n\to \infty} \int_E f_n.\]
+ \end{proof}
+
+\newpage
+\subsection*{Friday, Apr 11: A Non-Measurable Set}
+\begin{thm}
+    There exists some set $V \subseteq \bbR$ that is not measurable.
+\end{thm}
+\begin{proof}
+Define the equivalence relation $x\sim y$ if $x - y \in \bbQ,$ where $x,y \in [0,1]$ For each equivalence class, choose a representative using the axiom of choice. Let $V$ be the collection of such elements. Assume $V$ is measurable. Let $a\in (V + q) \cap (V + q')$ where $q, q' \in \bbQ.$ Then $a = x + q = x' + q',$ for $x \in [x]$ and $x' \in [x']$ and so $a - x = q$ and $a - x' = q'.$ Then $x - x' = (a-x') - (a-x) = q' -q \in \bbQ,$ and so $x \in [x'],$ which is a contradiction to the way we chose the representatives. Note that $m(V + q) = m(V)$ and 
+\[[0,1] \subseteq \bigcup_{q\in [-1,1]\bigcap \bbQ} (V + q)\] and thus 
+\[1 \leq \sum_{q\in [-1,1]\bigcap \bbQ} m(V) \implies m(V) >0.\] But we know that 
+\[\bigcup_{q\in [-1,1]\bigcap \bbQ} (V + q)\subseteq [-1,2] \implies \sum_{q\in [-1,1]\bigcap \bbQ} m(V) \leq 3 \implies m(V) = 0\]
+A contradiction!
+    
+\end{proof}
+
+
+
+\newpage
+\subsection{Monday, Apr 21: Parsaval's Theorem}
+\begin{rem}
+    Recall that:
+\begin{itemize}
+    \item We defined $\cal R$ is the set of $2\pi-$periodic (Riemann) integrable functions
+    \item The inner product on $\cal R$ was defined as 
+    \[(f,g)= \frac{1}{2\pi}\int_0^{2\pi} f(x)\overline{g(x)}dx\]
+    \item If we called $e_n = e^{inx},$ then $(f,e_n) = \hat{f}(n),$ and the $\{e_n\}$ are orthonormal, so 
+    \[(f - S_N(f)) \perp e_m, \quad \forall\, |m| \leq N.\]
+\end{itemize}
+\begin{cor}
+    For every sequence $\{c_n\}_{-N}^N,$ we have that 
+    \[( f- S_n(f))\perp \sum_{-N}^N c_n e_n.\]
+\end{cor}
+\begin{cor}
+The consequences of Remark 12 and Corollary 4 are 
+    \begin{enumerate}
+        \item We can write $f = f - S_N(f) + S_N(f)$ and thus
+        \[\|f\|^2 = \|f - S_N(f)\|^2 + \|S_N(f)\|^2\]
+    \end{enumerate}
+\end{cor}
+    
+
+\end{rem}
+
+
+
+\end{document}

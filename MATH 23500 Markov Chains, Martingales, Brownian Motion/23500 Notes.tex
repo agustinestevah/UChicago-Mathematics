@@ -708,7 +708,62 @@ Recall that $\bbE[T] = \frac{1}{\lambda}$ and $\Var[T] = \frac{1}{\lambda^2}.$
     \[\bbE[X_2 \mid X_1] = X_1 + \lambda\]
 \end{exmp}
 
+\newpage
+\subsection*{Monday, Apr 21: Continuous Time Markov Process}
+\begin{prop}
+    (Minimum Property) Suppose $T_1, \dots, T_n$ are independent exponential r.v. with parameters $\lambda_1, \dots, \lambda_n$ (respectively). Then $\min\{T_1, \dots, T_n\}$ is an exponential random variable with parameter $\lambda_1 + \cdots + \lambda_n.$ Moreover, for any $j  = 1,2,3\dots, n,$ we have that
+    \[\bbP\{T_j = \min\{T_1, \dots, T_n\}\} = \frac{\lambda_j}{\lambda_1 + \dots + \lambda_n}\]
+\end{prop} 
+\begin{proof}
+    We have that 
+    \begin{align*}
+        \bbP\{T_{(1)}\geq t\} &= \bbP\{T_1, \geq t, T_2 \geq t, \dots , T_n \geq t\}\\
+        &= \bbP\{T_1 \geq t\}\cdots \bbP\{T_n \geq t\}\\
+        &= e^{-\lambda_1 t}\cdots e^{-\lambda_n t}\\
+        &= e^{-(\lambda_1 + \cdots + \lambda_n)t}.
+    \end{align*}
+    For the second claim, we have that if $j=1,$ then 
+    \begin{align*}
+        \bbP\{T_1 = T_{(1)}\} &= \bbP\{T_j \geq T_1, \;\forall j = 1,2,\dots, n\}\\
+        &= \bbE[\bbP\{T_j \geq T_1, \;\forall j = 1,2,\dots, n \mid T_1\}]\\
+        &=  \bbE[e^{-(\lambda_1 + \dots, \lambda_n)T_1}]\\
+        &= \lambda_1\int_{0}^\infty e^{-(\lambda_1 + \dots, \lambda_n)t}dt\\
+        &= \frac{\lambda_1}{\sum_{j=1}^n\lambda_j}
+    \end{align*}
+    
+\end{proof}
 
+Suppose $S$ is a finite state space. We wish to define a stochastic process $\{X_t\}_{t\geq 0}$ taking values in $x.$ For distinct $x,y \in S,$ there exists some rates $\alpha(x,y) \geq 0 $ that specify how frequently we jump from $x$ to $y$.
+\begin{rem}
+    For $y \in S$ with $\alpha(x,y) \neq 0,$ let $T_1$ be an exponential r.v. with parameter $\alpha(x,y).$  Let $T = \min_y T_y.$ By the minimum property, $T\sim \exp(\alpha(x)),$ where $\alpha(x) = \sum_{y \in S\sm \{x\}}\alpha(x,y).$ Moreover, we have that 
+    \[\bbP\{X_T = y\} = \frac{\alpha(x,y)}{\alpha(x)}\]
+\end{rem}
+
+\begin{prop}
+(The Markov Property)
+    Let $t \geq 0$ and $x\in S.$ The conditional distribution of $\{X_{t + s}\}_{s\geq 0 }$ given $\{X_t = x\}$ (and everything before time $t$), is the same as the distribution of $\{X_s\}$ started from $x.$ 
+\end{prop}
+
+Now, we aim to write down a transition matrix for this process. 
+\begin{defn}
+    Define the \textbf{$t-$time transition probabilities} to be 
+    \[p_t(x,y) = \bbP\{X_t = y  \mid X_0 = x\}\] and label $S = \{1,2,\dots, N\}$ and define the \textbf{$t-$time transition matrix} as 
+    \[P_t = \begin{pmatrix}
+        p_t(x,y)
+    \end{pmatrix}_{x,y = 1,2,\dots, N}\]
+\end{defn}
+\begin{rem}
+For $x\neq y,$ we know that by the Markov Property, 
+\[\bbP\{X_{t  + \epsilon} = y \mid X_t = x\} = \bbP\{X_\epsilon = y \mid X_0 = x\} \approx \bbP\{T_y < \epsilon\} = 1 - e^{\alpha(x,y)\epsilon}  = \alpha(x,y)\epsilon + O(\epsilon^2).\] Thus, 
+\[\bbP\{X_{t + \epsilon} \neq x \mid X_t = x\} = \sum_{y \sm \{x\}}\alpha(x,y)\epsilon  + O(\epsilon^2) = \alpha(x)\epsilon + O(\epsilon^2).\]
+
+Informally, \[\frac{d}{dt}p_t(x,y) = \lim_{\epsilon \to 0} \frac{1}{\epsilon}\left(\bbP\{X_{t + \epsilon }  = y \mid X_0 = x\} - \bbP\{X_t = y \mid X_0 = x\}\right) = \cdots = \sum_{z\in S\sm \{y\}}\alpha(x,y)p_t(x,z) - \alpha(y)p_t(x,y)\]
+
+In matrix form, 
+\[\frac{d}{dt}P_t = P_tA,\] where $A$ is the $N\times N$ whose $x,y$ entry is $\alpha(x,y)$ if $x\neq y$ and $-\alpha(x)$ if $x = y.$ Note that $p_0 (x,x) = 1$ and $p_0(x,y) =0.$ Thus, $P_0 = I.$ The solution to this ODE gives 
+\[P_t = e^{tA}\]
+
+\end{rem}
 
 
 

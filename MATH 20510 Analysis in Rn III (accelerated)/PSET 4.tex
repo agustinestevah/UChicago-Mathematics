@@ -155,13 +155,9 @@ Prove that
 (Hint: Use the Monotone Convergence Theorem.)
 \begin{solution}
     Define the sequence of functions
-    \[f_n(x) = \begin{cases}
-        \sqrt{\frac{2^n}{i}}, \quad x\in (\frac{i-1}{2^n}, \frac{i}{2^n}], \quad \forall i\in \{1,2,\dots, 2^n\}\\
-        0, \quad x = 0
-        \end{cases}\]
-Clearly, $f_n$ is monotonically increasing with $0\leq f_0 \leq f_1 \leq\cdots.$ We claim that $f_n \uparrow f$ pointwise. Suppose we proved this, then then by the monotone convergence theorem, 
-\[\int_0^1 f \,dm = \lim_{n\to \infty}\int_0^1 f_n \,dm .\] Note that for any $n \in \bbN,$ we have that 
-\[\int_0^1 f_n \, dm = \sum_{i=1}^{2^n} \sqrt{\frac{2^n}{i}}m((\frac{i-1}{2^n}, \frac{i}{2^n}]) = \sum_{i=1}^{2^n} \frac{2^{\frac{1}{2}n}}{\sqrt{i}}\frac{1}{2^n} = \frac{1}{\sqrt{2^n}}\sum_{i=1}^{2^n}\frac{1}{\sqrt{i}}\]
+    \[f_n(x) = f(x)\chi_{[\frac{1}{n}, 1]}.\] We know that $f_n$ is Riemann integrable on $[\frac{1}{n}, 1]$ for each $n,$ and so 
+    \[\int_{[0,1]} f_n \, dm = \int_\frac{1}{n}^1 f \, dm = \int_\frac{1}{n}^1 \frac{1}{\sqrt{x}}\,dx =  2\sqrt{x}\bigg|_\frac{1}{n}^1 = 2  - \sqrt{\frac{1}{n}} \to 2.\] But by the monotone convergence theorem, we have that since $f_n \uparrow f$ pointwise, then 
+    \[\int_{[0,1]} f \, dm = \lim_{n\to \infty}\int_{[0,1]} {f_n}\]
 \end{solution}
 
 
@@ -178,8 +174,12 @@ Prove that
 \]
 
 \begin{solution}
-    
+    Define $f_n := f(x)\chi_{[-n, n]}.$ Then $f_n \uparrow f.$ By the MCT:
+    \[\int_\bbR f\, dm= \lim_{n\to \infty} \int_\bbR f_n \, dm= \lim_{n\to \infty} \int_{[-n,n]} f \, dm = \lim_{n\to \infty} \int_{[-n, n]}  \frac{1}{1 + x^2} \, dm = \lim_{n\to \infty} \int_{[-n, n]}  \frac{1}{1 + x^2} \, dx.\] We compute the Riemann integral:
+    \[\int_{[-n, n]}  \frac{1}{1 + x^2} \, dx = \arctan(\theta)\bigg|_{-n}^n= 2 \arctan(n) \to 2\frac{\pi}{2} = \pi.\]
 \end{solution}
+
+\newpage
 
 \section*{Problem 4}
 Suppose \( f \in L^1 \) on \( E \). Prove that, for every \( \epsilon > 0 \), there exists a simple function \( g \) such that 
@@ -191,22 +191,71 @@ Prove that, if \( f \in L^1 \) on \( E \subseteq \mathbb{R} \), then, for every 
 \int_{E} |f - s| \, dm < \epsilon.
 \]
 Recall that a step function \( s \) is a simple function such that, for every \( c \in \text{range}(s) \), \( s^{-1}(c) \) is an interval.
+\begin{solution}
+     Let $\epsilon>0.$ Since $f\in \mathcal{L}^1(E),$ we have that $\int_E |f|< \infty.$ Let $A = \{x \in E \mid f(x) \geq 0\}$ and $B = \{x \in E \mid f(x) < 0\}.$ Then 
+    \[\infty >\int_E |f(x)|  = \int_A |f(x)| + \int_B |f(x)| = \int_E f^+ + \int_E f^-.\] Thus, $\int_E f^+, \int_E f^- < \infty.$ By definition, there exists a simple function $\varphi^+, \varphi^-$ such that 
+    \[I_E(\varphi^+) > \int_E f^+ -\frac{\epsilon}{2}, \quad I_E(\varphi^-) > \int_E f^- - \frac{\epsilon}{2}.\]
+    Thus, 
+    \[\int_E f^+ - \varphi^+ < \frac{\epsilon}{2}, \quad \int_E f^-  - \varphi^- < \frac{\epsilon}{2}.\] Define $\varphi = \varphi^+ - \varphi^-.$ Then
+    \begin{align*}
+        \int_E |f  - \varphi| &= \int_A |f - \varphi| +  \int_B |f - \varphi|\\
+        &= \int_A f^+ - \varphi^+ + \int_B f^- - \varphi^-\\
+        &< \epsilon.
+    \end{align*}
 
+    For the second part, it suffices to show that we can approximate $f= \chi_E$ with step functions and then use dominated convergence theorem.
+\end{solution}
+
+
+\newpage
 \section*{Problem 5}
-Prove that, if \( f: \mathbb{R} \to \mathbb{R} \), and \( f \in L^1 \), then
+Prove that, if \( f: \mathbb{R} \to \mathbb{R} \), and \( f \in \cal L \), then
 \[
-\lim_{n \to \infty} \int_{-1}^{1} f(x) \cos(nx) \, dm = 0.
+\lim_{n \to \infty} \int_{0}^{2\pi} f(x) \cos(nx) \, dm = 0.
 \]
 (Hint: First prove this when \( f \) is simple.)
+\begin{solution}
+By the previous problem, we can approximate $f$ by step functions. Suppose first $f$ is a step function. That is, we can write 
+\[f = \sum_{k= 1}^N c_k \chi_{R_k},\] where each $R_k$ is a disjoint interval. Then for any $n,$ we have that
+\begin{align*}
+    \int_{0}^{2\pi} f(x)\cos(nx) \, dm &= \int_{0}^{2\pi} \sum_{k=1}^N c_k \chi_{R_k}\cos(nx) \, dm\\
+    &= \sum_{k=1}^N c_k\int_{R_k} \cos(nx)\, dm\\
+    &= \sum_{k=1}^N c_k \bigg[\frac{1}{n}\sin(nx)\bigg]_{a_k}^{b_k}\\
+    &\leq 2 Nc_{(N)} \frac{1}{n}\\
+    &\to 0,
+\end{align*}
+where $c_{(N)} = \max\{c_1, \dots, c_N\}.$ 
 
+For a general $f,$ we use the previous problem. There exists a simple function $g$ such that 
+\[\int_{0}^{2\pi} |f - g|\, dm < \epsilon.\] Then 
+\[\left|\int_0^{2\pi} (f - g)\cos(nx)\, dm\right| \leq \int_0^{2\pi} |f - g||\cos(nx)| \leq \int_0^{2\pi} |f-g| < \epsilon.\] And so because this is true for any $\epsilon,$ then
+\begin{align*}
+\epsilon &>\left|\int_0^{2\pi} (f - g)\cos(nx)\, dm\right|\\
+& \geq \int_0^{2\pi} (f - g)\cos(nx)\\
+&= \int_0^{2\pi} f \cos(nx)\, dm - \int_0^{2\pi} g \cos(nx)\, dm,
+\end{align*}
+and so \[\int_0^{2\pi} g \cos(nx)\, dm = \int_0^{2\pi} f \cos(nx)\, dm.\] Thus, by what we just showed, as $n\to \infty,$ we have that 
+\[\int_0^{2\pi} f \cos(nx)\, dm \to 0.\]
+
+
+    
+\end{solution}
+
+
+\newpage
 \section*{Problem 6}
 Suppose that \( f: \mathbb{R}^d \to \mathbb{R} \) is measurable and nonnegative, and, for every \( n, k \in \mathbb{N} \), define
 \[
-E_{n,k} = \{x \mid m - f(x) < n + 1\}.
+E_{n,k} = \{x \mid \frac{k}{2^n} \leq f(x) < \frac{k+1}{2^n}\}.
 \]
 Show that, as \( n \to \infty \),
 \[
-\sum_{k=1}^{\infty} m(E_{n,k}) \to \int_{\mathbb{R}^d} f \, dm.
+\sum_{k=1}^{\infty} \frac{k}{2^n}m(E_{n,k}) \to \int_{\mathbb{R}^d} f \, dm.
 \]
+\begin{solution}
+    Define the simple function $f_{n}(x) = \sum_{k=1}^\infty \frac{k}{2^n}\chi_{E_{n,k}}.$ Note that $f_n \uparrow f.$ By the MCT, we have that
+    \[\lim_{n\to \infty}\int_{\bbR^d} f_n \, dm = \int_{\bbR^d} f \, dm,\] where 
+    \[\int_{\bbR^d} f_{n} \, dm = \sum_{k=1}^\infty \frac{k}{2^n}m(E_{n,k} \cap \bbR^d) = \sum_{k=1}^\infty \frac{k}{2^n}m(E_{n,k}) \]
+\end{solution}
 
 \end{document}
