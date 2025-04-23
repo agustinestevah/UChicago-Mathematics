@@ -610,7 +610,7 @@ So it suffices to show that the denominator is bounded below. Since $\gamma$ is 
 
 \begin{proof}
     It suffices to show that $f$ has a primitive. Fix $z_0 \in O.$ Let $z\in O.$ Let $[z_0, z]$ be the straight line from $z_0$ to $z.$ Define
-    \[F(z) = \int_{[z_0, z]}f(\zeta)d\zeta.\] To see that $F' = f,$ consider that $F(z)$ integrates from $[z_0, z],$ $F(z + h)$ integrates from $[z_0, z + h],$ and we claim that $F(z + h) - F(z)$ integrates from $[z,z + h].$ Note that if we show this, then we formed a triangle, \triangle. To show this, 
+    \[F(z) = \int_{[z_0, z]}f(\zeta)d\zeta.\] To see that $F' = f,$ consider that $F(z)$ integrates from $[z_0, z],$ $F(z + h)$ integrates from $[z_0, z + h],$ and we claim that $F(z + h) - F(z)$ integrates from $[z,z + h].$ Note that if we show this, then we formed a triangle, $\triangle$. To show this, 
     consider that by Goursat,
     \[\int_{\partial \triangle} f(\zeta)d\zeta = \int_{[z_0, z]} f(\zeta)d\zeta + \int_{[z, z + h]} f(\zeta)d\zeta + \int_{[z + h, z_0]} f(\zeta)d\zeta = 0,\] and thus 
     \[\int_{[z_0, z]} f(\zeta)d\zeta + \int_{[z, z + h]} f(\zeta)d\zeta - \int_{[z_0, z + h]} f(\zeta)d\zeta = 0 \implies F(z + h)- F(z)= \int_{z, z + h}f(\zeta)d\zeta\]
@@ -623,6 +623,92 @@ So it suffices to show that the denominator is bounded below. Since $\gamma$ is 
         &= \max_{\zeta \in [z, z + h]}|f(\zeta) - f(z)|\\
         &< \epsilon
     \end{align*}
+\end{proof}
+
+\newpage
+\subsection{Tuesday, Apr 22: Goursat's Theorem and the Cauchy Integral Formula}
+\begin{thm}
+    (Goursat) Let $O \subseteq \bbC$ is an open set and $f\in H(O \sm \{z\}),$ where $f$ is merely continuous at $z.$ Then if $\triangle \subseteq \bbC$ is closed,
+    \[\int_{\triangle} f(\zeta)d\zeta = 0.\]
+\end{thm}
+\begin{proof}
+We first sketch the proof.
+    If $z \notin \triangle,$ then by Cauchy-Goursat's Theorem, we are done. Thus, assume $z\in \triangle.$ Make three triangles, $\triangle_1, \triangle_2, \triangle_3,$ where $\triangle_i \subseteq \triangle$ and $\bigcap \triangle_k = z,$ and the orientation of the triangles cancel out on the inside.  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.25\linewidth]{Images/Goursat2.png}
+        \caption{$z$ is the middle point}
+    \end{figure}
+    If $z_0$ is on the vertex, we can make another three triangles, as follows: 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.25\linewidth]{Gorusat3.png}
+        \caption{$z_0$ is the blue point}
+    \end{figure}
+    We can make the top triangle as small as we wish. Thus, we can bound the line integral using Proposition 3, namely we can make it be $0.$ 
+\end{proof}
+\begin{thm}
+(Cauchy Integral Formula)
+    Suppose $O \subseteq \bbC$ is open and $\overline{D_r(z_0)} \subseteq O.$ Suppose that $f\in H(O).$ Then if $z\in D_r(z_0),$ we have that 
+    \[f(z) = \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z}d\zeta,\] where $C_r(z_0)$ is the circle of radius $r$ centered at $z_0. $
+\end{thm}
+\begin{exmp}
+    We have that $C_r(z_0) (\theta) = z_0 + re^{i\theta}$
+\end{exmp}
+\begin{proof}
+    Define $F(\zeta) = \begin{cases}
+        \frac{f(\zeta) - f(z)}{\zeta - z}, \quad \zeta \neq z\\
+        f'(z), \qquad \;\, \zeta = z
+    \end{cases}.$ It is not hard to show $F$ is continuous. For all $\zeta \neq z,$ $F$ is holomorphic. Goursat theorem tells us we can forgive $F$ for its blunder at $z,$ and thus Cauchy's Theorem, 
+    \[\int_{C_r(z_0)}F(\zeta) d\zeta = 0 \implies \frac{1}{2\pi i }\int_{C_r(z_0)}F(\zeta) d\zeta.\] For small enough $r,$ we have that 
+    \[\frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta) - f(z)}{\zeta - z} d\zeta = 0.\] Thus, 
+    \begin{align*}
+        0 & =\frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta) - f(z)}{\zeta - z} d\zeta\\
+        &= \frac{1}{2\pi i} \int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z} d\zeta - \frac{1}{2\pi i} \int_{C_r(z_0)}\frac{f(z)}{\zeta - z} d\zeta\\
+        &= \frac{1}{2\pi i} \int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z} d\zeta - \frac{f(z)}{2\pi i} \int_{C_r(z_0)}\frac{1}{\zeta - z} d\zeta\\
+        &= \frac{1}{2\pi i} \int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z} d\zeta - f(z)\Ind_{C_r(z_0)}(z)\\
+        &=\frac{1}{2\pi i} \int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z} d\zeta - f(z)
+    \end{align*}
+\end{proof}
+\begin{rem}
+    With the same assumptions as the above, we have that 
+    \begin{align*}
+    f(z) &= \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z}d\zeta\\
+    &= \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z_0 - (z - z_0)}d\zeta\\
+    &= \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)} \frac{1}{1 - \frac{z-z_0}{\zeta - z_0}}d\zeta \\
+    &= \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)} \frac{1}{1 - a}d\zeta\\
+    &=\frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)} \sum_{n=0}^\infty \frac{(z - z_0)^n}{(\zeta - z_0)^n}d\zeta
+    \end{align*}
+Recall the Weierstrass M-test. If $G_N(s) = \sum_{k=1}^N g_k(s),$ where $|g_k(s)| \leq M_k$ for all $k,$ and $\sum_{k=1}^\infty M_k < \infty,$ then $G_n$ converges uniformly. We have that 
+\[\left|G_n(s) - G_m(s)\right|  = |\sum_{m+1}^n g_k| \leq |\sum_{m+1}^n |g_k| \leq \sum_{m+1}^n M_k < \epsilon,\] and thus $G_n$ is a Cauchy sequence of real numbers. Thus, by completeness, we have that $\|G(s) - G_n(s)\|_{\sup (s)} < \epsilon.$ Thus, since the $F_N$ converge uniformly to $F_\infty,$ then we have that 
+\[\lim_{n\to \infty} \int F_n = \int F,\] and thus 
+\begin{align*}
+    \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)} \sum_{n=0}^\infty \frac{(z - z_0)^n}{(\zeta - z_0)^n}d\zeta &= \lim_{N \to \infty} \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)} \sum_{n=0}^N\frac{(z - z_0)^n}{(\zeta - z_0)^n}d\zeta\\
+    &= \lim_{N\to \infty} \sum_{n=0}^N\frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)}  \frac{(z - z_0)^n}{(\zeta - z_0)^n}d\zeta\\
+    &= \sum_{n=0}^\infty \left[\frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\right]  (z - z_0)^nd\zeta
+\end{align*}
+Thus, $f(z)$ is equal to a convergent power series inside of a disk. In particular, $f(z)$ is infinitely differentiable since power series are infinitely differentiable!!!!! (See Corollary 1).
+\end{rem}
+We summarize this remark with the following theorem.
+\begin{thm}
+    Suppose $\overline{D_r(z_0)} \subseteq O,$ where $O$ is open and $f\in H(O).$ Then $f$ is infinitely differentiable. 
+\end{thm}
+\begin{rem}
+    Consider the special case of the Cauchy integral formula:
+    \begin{align*}
+    f(z_0) &= \frac{1}{2\pi i}\int_{C_r(z_0)} \frac{f(\zeta)}{\zeta - z_0}d\zeta\\
+    &= \frac{1}{2\pi i} \int_0^{2\pi} \frac{f(z_0 + re^{i\theta})}{z_0 + re^{i\theta} - z_0}ir e^{i \theta}d\theta\\
+    &= \frac{1}{2\pi } \int_0^{2\pi} f(z_0 + re^{i\theta})d\theta
+    \end{align*}
+    We recognize this as the mean value property from PSET 1.
+\end{rem}
+
+\begin{cor}
+    
+\end{cor}
+\begin{proof}
+    Since $f(z) = \sum_{n=0}^\infty a_n(z - z_0)^n,$ where $a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(\zeta)}{(\zeta - z_0)}d\zeta.$ By a previous theorem, we know also that 
+    \[a_n = \frac{f^{(n)}(z_0)}{n!}\]
 \end{proof}
 
 

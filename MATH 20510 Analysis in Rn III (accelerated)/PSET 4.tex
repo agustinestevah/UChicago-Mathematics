@@ -253,9 +253,11 @@ Show that, as \( n \to \infty \),
 \sum_{k=1}^{\infty} \frac{k}{2^n}m(E_{n,k}) \to \int_{\mathbb{R}^d} f \, dm.
 \]
 \begin{solution}
-    Define the simple function $f_{n}(x) = \sum_{k=1}^\infty \frac{k}{2^n}\chi_{E_{n,k}}.$ Note that $f_n \uparrow f.$ By the MCT, we have that
+    Define the function $f_{n}(x) = \sum_{k=1}^\infty \frac{k}{2^n}\chi_{E_{n,k}}.$ Note that $f_n \uparrow f.$ By the MCT, we have that
     \[\lim_{n\to \infty}\int_{\bbR^d} f_n \, dm = \int_{\bbR^d} f \, dm,\] where 
     \[\int_{\bbR^d} f_{n} \, dm = \sum_{k=1}^\infty \frac{k}{2^n}m(E_{n,k} \cap \bbR^d) = \sum_{k=1}^\infty \frac{k}{2^n}m(E_{n,k}) \]
 \end{solution}
+
+
 
 \end{document}

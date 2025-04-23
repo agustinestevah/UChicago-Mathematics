@@ -77,12 +77,12 @@ A set function $\phi$ is \textbf{additive} if for all $A,B$ disjoint, we have th
         \item Let $N < \infty,$ then for $A_1, \dots, A_N$ mutually disjoint, 
         \[\phi\left(\bigsqcup_{n=1}^N A_i\right) = \phi\left(A_1 \sqcup \bigsqcup_{n=2}^N A_i\right) = \phi(A_1) + \phi\left(\bigsqcup_{n=2}^N A_i\right) = \cdots = \sum_{n=1}^N \phi(A_i).\]
         \item We have that for any $A,B \in \cal F,$ 
-        \[\phi(A\cup B) + \phi(A\cap B) \phi(A)+ \phi(B)\]
+        \[\phi(A\cup B) + \phi(A\cap B) =  \phi(A)+ \phi(B)\]
         \item If $\phi$ is positive real valued, then if $A \subset B,$ then 
         \[\phi(A) \leq \phi(B).\] Notice that 
         \[\phi(B) = \phi(A \sqcup (B\sm A)) = \phi(A) + \phi(B\sm A) \geq \phi(A).\]
-        \item If $A\subseteq B$ and $\phi(A) < \infty,$ then 
-        \[\phi(B\sm A) = \phi(A) - \phi(B).\]
+        \item If $A\subseteq B$ and $\phi(B) < \infty,$ then 
+        \[\phi(B\sm A) = \phi(B) - \phi(A).\]
     \end{enumerate}
 \end{rem}
 
@@ -113,7 +113,7 @@ A set function $\phi$ is \textbf{additive} if for all $A,B$ disjoint, we have th
     \[\Vol(I) = \prod_{i=1}^n (b_i - a_i).\]
 \end{defn}
 \begin{rem}
-    Let $A \in \cal E.$ Then $A = \bigcup I_i.$ Then 
+    Let $A \in \cal E.$ Then $A = \bigcup_{i=1}^n I_i.$ Then 
     \[\Vol(A) = \sum_{i=1}^n \Vol(I_i)\]
 \end{rem}
 
@@ -442,7 +442,7 @@ A contradiction!
 
 
 \newpage
-\subsection{Monday, Apr 21: Parsaval's Theorem}
+\subsection{Monday, Apr 21: Parseval's Theorem}
 \begin{rem}
     Recall that:
 \begin{itemize}
@@ -452,20 +452,60 @@ A contradiction!
     \item If we called $e_n = e^{inx},$ then $(f,e_n) = \hat{f}(n),$ and the $\{e_n\}$ are orthonormal, so 
     \[(f - S_N(f)) \perp e_m, \quad \forall\, |m| \leq N.\]
 \end{itemize}
+\end{rem}
+
 \begin{cor}
     For every sequence $\{c_n\}_{-N}^N,$ we have that 
     \[( f- S_n(f))\perp \sum_{-N}^N c_n e_n.\]
 \end{cor}
-\begin{cor}
+\begin{rem}
 The consequences of Remark 12 and Corollary 4 are 
     \begin{enumerate}
         \item We can write $f = f - S_N(f) + S_N(f)$ and thus
         \[\|f\|^2 = \|f - S_N(f)\|^2 + \|S_N(f)\|^2\]
     \end{enumerate}
+    By orthogonality, 
+    \[\|S_N(f)\|^2 = \sum_{-N}^N \|\hat{f}(n)e_n\|^2 = \sum_{-N}^N \|\hat{f}(n)\|^2.\] Plugging into the above, we see that
+    \[\|f\|^2 = \|f - S_N(f)\|^2 + \sum_{-N}^N \|\hat{f}(n)\|^2\]
+\end{rem}
+\begin{lem}
+    (Best approximation) If $f\in \cal R,$ then 
+    \[\|f - S_N(f)\| \leq \|f - \sum_{-N}^N c_n e_n\|\] for any complex numbers $\{c_n\}_{-N}^N.$
+\end{lem}
+
+\begin{thm}
+    If $f\in \cal R,$  then 
+    \[\lim_{N\to \infty}\int_0^{2\pi} |f - S_N(f)|^2\, dx = 0.\] That is, in the mean squared norm, 
+    \[S_N(f) \to f.\]
+\end{thm}
+\begin{proof}
+    Let $f\in \cal R$ be continuous. Let $\epsilon>0,$ by the Stone-Weierstrass Theorem, there exists some trigonometric polynomial $P$ such that for all $x\in [0, 2\pi],$ we have
+    \[|f(x) - P(x)|< \epsilon.\] We know that 
+    \[\|f - P\| = \left(\frac{1}{2\pi}\int_0^{2\pi} |f(x) - P(x)|\, dx\right)^{\frac{1}{2}} < \left(\frac{1}{2\pi}\int_0^{2\pi} \epsilon^2 \, dx\right)^\frac{1}{2}  = \epsilon.\] Suppose $P = \sum_{-M}^M c_ne_n.$ By the best approximation lemma, for all $N\geq M,$ we have that 
+    \[\|f - S_N(f)\| \leq \|f - P\|  < \epsilon.\]
+
+    For a general $f\in \cal R,$ we let $\epsilon>0.$ Since continuous functions are dense in the set of Riemann integrable functions, then exists some continuous function $g$ such that 
+    \[\|g(x)\|_{\sup} \leq \|f(x)\|_{\sup} = B\] and 
+    \[\int_0^{2\pi} |f(x) - g(x)|\, dx  < \epsilon^2.\] Note that by definition,
+    \[\|f - g\| = \left(\frac{1}{2\pi}\int_0^{2\pi} |f(x) - g(x)|^2\, dx\right)^\frac{1}{2} \leq  \left(\frac{B}{\pi}\epsilon^2\right)^\frac{1}{2}  = \sqrt{\frac{B}{\pi}}\,\epsilon.\] We use part 1 to see that 
+    \[\|f - S_N(f)\| \leq \|f  - g\| + \|g - S_N(f)\| < \epsilon\]
+\end{proof}
+\begin{cor}
+    (Parseval's Identity) If $f\in \cal R,$ then 
+    \[\sum_{-\infty}^\infty |\hat{f}(n)|^2 = \|f\|^2\]
+\end{cor}
+\begin{proof}
+    We use Remark 13, which states that (Bessel's Inequality)
+    \[\|f\|^2 \geq \sum_{-N}^N \|\hat{f}(n)\|^2.\] By the previous theorem we have that for all $\epsilon>0,$
+    \[\|f - S_N(f)\|< \epsilon\] and so 
+    \[\sum_{-N}^N \|\hat{f}(n)\|^2 \geq \|f\|^2 - \epsilon\]
+\end{proof}
+\begin{cor}
+    (Riemann-Lebesgue) If $f\in \cal R,$ then 
+    \[\lim_{n\to \infty}|\hat{f}(n)|  = 0.\]
 \end{cor}
     
 
-\end{rem}
 
 
 
