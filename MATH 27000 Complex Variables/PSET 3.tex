@@ -10,6 +10,8 @@
 \newcommand{\semester}{Spring 2025}
 \newcommand{\duedate}{4-24-2025}
 \newcommand{\bA}{\mathbf{A}}
+\newcommand{\Ind}{\text{Ind}}
+
 \newcommand{\bB}{\mathbf{B}}
 \newcommand{\bC}{\mathbf{C}}
 \newcommand{\bD}{\mathbf{D}}
@@ -120,6 +122,15 @@
 	% Use the \psetheader command at the beginning of a pset. 
 	\psetheader
 \section*{Problem 1}
+\begin{problem}
+    Let $O\subseteq \bbC$ be open and connected and let $f\in H(O).$ If $\{z \in O \mid f(z) = 0\}$ has a limit point, then $f(z) = 0$ for all $z\in O.$
+\end{problem}
+\begin{solution}
+Note that since $f\in H(O),$ $f$ is infinitely differentiable. Suppose, for the sake of contradiction, that $f(z') >0$ for some $z' \in O.$ Then by a problem on a previous PSET, we have that for any $z\in O,$ there exists some $n_z  \in \bbN$ such that $f^{(n_z)}(z) \neq 0.$ Let $z_0 \in O$ such that $z_0$ is a limit point of the vanishing set. Then by Cauchy's theorem, there is some $r>0$ such that if $z \in D_r(z_0),$ then 
+\[f(z) = \sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(z_0) (z - z_0)^n = \sum_{n=1}^\infty a_n (z - z_0)^n.\] Let $k$ be the smallest derivative such that $f^{k}(z_0) = a_k \neq 0.$ Then we have that 
+\[f(z) = a_k(z - z_0)^k + \sum_{k+1}^\infty a_n (z - z_0)^n = a_k(z - z_0)^k + O((z - z_0)^{k+1}).\] Note that the second term goes to $0$ as $z \to z_0.$ Let $(z_n) \in \{z \in O \mid f(z)  = 0\}$ such that $z_n \to z_0.$ Without loss of generality, we can take $z_n \neq z_0,$ and thus since $|z_0 - z_n| < r$ for large $n,$ we have that 
+\[|f(z_n)| = |a_k||(z_n - z_0)|^k \neq 0,\] which is a contradiction to the fact that $f(z_n) = 0.$ Thus, we must have that $f(z) = 0$ for all $z \in O.$
+\end{solution}
 
 \newpage
 \section*{Problem 2}
@@ -133,7 +144,7 @@
     \[A = \sum_{k=1}^\infty |a_k| < \infty, \quad B = \sum_{j=1}^\infty |b_j| < \infty.\] Then 
     \[\sum_{n=2}^N |c_n| = \sum_{k=1}^{N-1}\sum_{j=1}^{N-k}|a_k||b_j| = \sum_{k=1}^N|a_k| \sum_{j=1}^{N-k}|b_j| \to \sum_{k=1}^\infty |a_k| \sum_{j=1}^\infty |b_k| = AB < \infty.\]
      
-     Thus, 
+     Thus, $\sum |c_n|$ converges. Moreover, we have that
     \begin{align*}
     \left|\sum_{k=1}^{\lfloor\frac{N}{2}\rfloor}a_k \sum_{j=1}^{\lfloor\frac{N}{2}\rfloor}b_j - \sum_{n=2}^N c_n\right| &= 
     \left|\sum_{k=1}^{\lfloor\frac{N}{2}\rfloor}a_k \sum_{j=1}^{\lfloor\frac{N}{2}\rfloor}b_j - \sum_{n=2}^N \sum_{j + k  = n} a_kb_j\right|\\
@@ -147,6 +158,8 @@
     &< A\frac{\epsilon}{2A} + B\frac{\epsilon}{2B}\\
     &= \epsilon
     \end{align*}
+where the second to last inequality holds because both series absolutely converge and thus their tail ends can be arbitrarily small. Thus, for $N$ large, 
+\[\sum_{n=2}^N c_n = \sum_{k=1}^{\lfloor \frac{N}{2}\rfloor} a_k\sum_{j=1}^{\lfloor \frac{N}{2}\rfloor}b_k \to \sum_{n=2}^\infty c_n = \sum_{k=1}^{\infty} a_k\sum_{j=1}^{\infty}b_k\]
 \end{solution}
 
 \newpage
@@ -156,16 +169,13 @@
     \[e^{w + z} = e^{w} e^{z}.\]
 \end{problem}
 \begin{solution}
-For $n\geq 2,$ define 
-\[c_n := \sum_{k + j = n}\frac{1}{(n)!}\binom{n}{k}w^k z^{j} = \sum_{k=1}^{n}\frac{1}{(n)!}\binom{n}{k}w^k z^{n-j} = \frac{1}{(n)!}(w + z)^{n}.\] Then note that 
+For $n\geq 1,$ define
+\[c_n := \sum_{k + j = n}\frac{1}{(n)!}\binom{n}{k}w^k z^{j} = \sum_{k=0}^{n}\frac{1}{(n)!}\binom{n}{k}w^k z^{n-j} = \frac{1}{(n)!}(w + z)^{n}.\] Then note that 
 \[\frac{1}{n!}\binom{n}{k} = \frac{1}{n!}\frac{n!}{(n-k)! (k)!} = \frac{1}{(j)! (k)!}.\] Thus, define 
 \[a_k := \frac{1}{k!}w^k, \quad b_k := \frac{1}{j!}z^j,\] then 
 \[c_n = \sum_{k +j = n} a_k b_j.\] By the previous problem, we have that 
-\begin{align*}
-e^{w + z} &= \sum_{n=0}^\infty \frac{1}{n!}(w + z)^n\\ &= \sum_{n=0}^\infty \sum_{k=0}^{n} \frac{1}{n!}\binom{n}{k} w^n z^{n-k}\\ &= \sum_{n=0}^\infty c_n\\ &= \sum_{k=0}^\infty a_k \sum_{j=0}^\infty b_j\\
-&= \sum_{k=0}^\infty \frac{1}{k!}w^k \sum_{j=0}^\infty \frac{1}{j!}z^j\\
-&= e^we^z
-\end{align*}
+
+\[e^{z + w} = \sum_{n=0}^\infty \frac{1}{n!}(w + z)^n =  \sum_{n=0}^\infty c_n = \sum_{k=0}^\infty a_n \sum_{j=0}^\infty b_n = \sum_{k=0}^\infty\frac{w^k}{k!}  \sum_{j=0}^\infty \frac{z^j}{j!} = e^w e^z\]
 
 \end{solution}
 \newpage
@@ -180,6 +190,166 @@ e^{w + z} &= \sum_{n=0}^\infty \frac{1}{n!}(w + z)^n\\ &= \sum_{n=0}^\infty \sum
 \end{solution}
 
 \newpage
+\section*{Problem 5}
+\begin{enumerate}
+    \item 
+\begin{problem}
+Suppose $\gamma$ is a closed path in $\bbC.$ Let $O$ be the open, unbounded complement of $\gamma.$ Prove the winding number is $0$ for any $z\in O.$
+\end{problem}
+
+\begin{solution}
+Without loss of generality up to a translation, we can assume that $z = 0.$ Also assume $\gamma(t): [a,b] \to O.$ Then because we are in $\bbC,$ we can write
+\[\gamma(t) = \rho(t)e^{i\phi(t)},\] where $\rho(t) = |\gamma(t) - 0|$ and $\phi(t)$ is the angle between $0$ and $\varphi(t).$ Note that since $\gamma (t)$ is piecewise differentiable by assumption, then so are $\rho(t)$ and $\phi(t).$
+Thus, 
+\begin{align*}
+    \int_\gamma \frac{d\zeta}{\zeta - 0}d\zeta &= \int_a^b \frac{\gamma'(t)}{\gamma(t) }dt\\
+    &= \int_a^b \frac{\rho'(t)e^{i\phi(t)} + i\rho(t)\phi'(t)e^{i\phi (t)}}{\rho(t)e^{i\phi(t)}}dt\\
+    &= \int_a^b \frac{\rho'(t)}{\rho(t)} dt + i \int_a^b\phi'(t)dt
+\end{align*}
+Since both have primitives, we can evaluate them using FTC. Moreover, we know that since $\gamma$ is closed, we must necessarily have $\rho(a) = \rho (b)$ and $\phi(a) = \phi(b)+2\pi n$ for some $n \in \bbZ$ Thus, 
+\[\int_\gamma \frac{d\zeta}{\zeta - 0}d\zeta = \log(\rho(t))\bigg|_a^b + i\phi(t)\bigg|_a^b = i2\pi n.\] Thus, 
+\[\Ind_\gamma (0) = n.\] Because it is clearly invariant over a translation, we have that 
+\[\Ind_\gamma(z) = n.\] By problem 2 on PSET 2, since $\Ind_\gamma(z) \in \bbZ$ for all $z \in O,$ we have that $\Ind_\gamma$ is constant over $O.$ It suffices to show that $n = 0.$ To see this, we note that as $O$ is unbounded, we can see that 
+\[\lim_{z\to \infty} \Ind_\gamma(z) = \lim_{z\to \infty}\int_\gamma \frac{d\zeta}{\zeta - z}  d\zeta = \lim_{z\to \infty} \int_a^b \frac{\gamma'(t)}{\gamma(t) - z}dt = \int_a^b \lim_{z\to \infty} \frac{\gamma'(t)}{\gamma(t) - z} =  0.\] Note that we can exchange limits because of the uniform convergence to $0$ of the function within the integrand. Thus, $\Ind_\gamma$ is constant over $O,$ we have that  
+\[\Ind_\gamma(z) = 0, \quad \forall\, z\in O.\]
+\end{solution}
+\item
+
+\begin{problem}
+Let $\gamma_{d}$ be the path as pictured below. 
+\[
+    \begin{tikzpicture}[scale=1.5]
+    % Axis
+    \draw[->] (-2.2,0) -- (2.2,0) node[right] {$\Re$};
+    \draw[->] (0,-1.6) -- (0,1.6) node[above] {$\Im$};
+
+    % Points on real axis
+    \filldraw (-2,0) circle (0.03) node[below] {$-R$};
+    \filldraw (2,0) circle (0.03) node[below] {$R$};
+
+    % Semicircle in lower half-plane
+    \draw[thick,->] (2,0) arc (0:-180:2);
+    
+    % Arrow on the line segment
+    \draw[thick,<-] (-0.5,0) -- (-0.49,0);
+
+    % Label and dot for i
+    \filldraw (0,1) circle (0.03);
+    \node at (0.25,1.05) {$i$};
+
+\end{tikzpicture}
+\]
+What is $\Ind_\gamma(i).$
+\end{problem}
+\begin{solution}
+    Clearly, $i \in O,$ where $O$ is the unbounded connected complement of $\gamma.$ By part (a), we know that $\Ind_{\gamma_d}(i) = 0.$
+\end{solution}
+\item 
+\begin{problem}
+Let $R>1$ and define $\gamma_u$ as pictured below. 
+\[
+\begin{tikzpicture}[scale=1.5]
+    % Axis
+    \draw[->] (-2.2,0) -- (2.2,0) node[right] {$\Re$};
+    \draw[->] (0,-1.6) -- (0,1.6) node[above] {$\Im$};
+
+    % Points on real axis
+    \filldraw (-2,0) circle (0.03) node[below] {$-R$};
+    \filldraw (2,0) circle (0.03) node[below] {$R$};
+
+    % Semicircle in upper half-plane (counterclockwise)
+    \draw[thick,->] (-2,0) arc (180:0:2);
+
+    % Arrow on the real axis segment
+    \draw[thick,->] (0.5,0) -- (0.51,0);
+
+    % Label and dot for i
+    \filldraw (0,1) circle (0.03);
+    \node at (0.25,1.05) {$i$};
+
+\end{tikzpicture}\]
+What is $\gamma_u(i)$?
+\end{problem}
+\begin{solution}
+    Consider that since the orientations cancel out the middle interval, we have that $\gamma_d + \gamma_u$ is the closed circle around $0$ of radius $R.$ We have seen in class that $\Ind_{C_R}(0) = 1,$ where $C_R = \gamma_d + \gamma_u$ is the circle of radius $R$ around $0.$ By a corollary of what we proved in the proof of part (a), we know that the winding number is also constant in the bounded complement of $C_R,$ and since $i$ is in this connected open bounded complement, then 
+    \[1 = \Ind_{C_r}(i) = \Ind_{\gamma_u}(i) + \Ind_{\gamma_d}(i) = \Ind_{\gamma_u}(i)\]
+\end{solution}
+
+\end{enumerate}
+
+\newpage
+\section*{Problem 6}
+ \begin{enumerate}
+            \item[(a)] Prove that
+    \[
+        \lim_{z \to i} \left( \frac{1}{z^2 + 1} - \frac{1}{2i(z - i)} \right)
+    \]
+    exists.
+\begin{solution}
+    Since $z^2 + 1 = (z -i)(z + i),$ we can write 
+    \[\lim_{z \to i} \left( \frac{1}{z^2 + 1} - \frac{1}{2i(z - i)} \right) = \lim_{z\to i}\left[\frac{1}{z-i} \left( \frac{1}{z + i} - \frac{1}{2i}\right) \right] = \lim_{z\to i}\frac{\frac{1}{z + i}- \frac{1}{2i}}{z-i} \to \frac{0}{0}.\] We apply L'Hopital's rule:
+    \begin{align*}
+        \lim_{z \to i} \left( \frac{1}{z^2 + 1} - \frac{1}{2i(z - i)} \right) &= \lim_{z\to i}  \frac{\left(\frac{1}{z + i}- \frac{1}{2i}\right)'}{(z-i)'}\\ &= \lim_{z\to i} \frac{-\frac{1}{(z + i)^2}}{1}\\ &= \frac{1}{4}
+    \end{align*}
+\end{solution}
+
+    \item[(b)] Call this limit \( L \). Then, define
+    \[
+    f(z) = 
+    \begin{cases}
+        \frac{1}{z^2 + 1} - \frac{1}{2i(z - i)}, & z \neq i \\
+        L, & z = i
+    \end{cases}
+    \]
+    What is 
+    \[
+    \int_{\gamma_\text{up}} f(z)\,dz?
+    \]
+    \begin{solution}
+        Note that $\gamma_u$ is a closed path in $O: =D_{R + 1}(0) \subseteq \bbC,$ which is open and convex in $\bbC.$ Also observe that $f \in H(O)$ except for one point, $z = i.$ Note that by part (a), $f(z)$ is continuous at $z = i.$
+        
+        We use Goursat's and Cauchy's theorem,  which forgive functions which are holmorphic at all but one point, at which they are continuous, that states that since $\gamma_u$ is closed in an open and convex set, 
+        then 
+        \[\int_{\gamma_u}f(\zeta)d\zeta= 0\]
+    \end{solution}
+
+    \item[(c)] Taking the limit of the integral in part (b) as \( R \to \infty \), evaluate
+    \[
+    \int_{-\infty}^\infty \frac{1}{1 + x^2} \, dx.
+    \]
+    \begin{solution}
+We have that 
+\[\int_{-R}^R \frac{1}{1 + x^2}dx = \int_{-R}^R f(x) + \frac{1}{2i(x - i)}dx = \int_{-R}^R f(x)dx + \int_{-R}^R \frac{1}{2i(x-i)}dx\]
+Denote the top arc of the half circle by $\gamma_{\text{arc}}.$ Then we have by part (a) that
+\[0 = \int_{\gamma_u}f(\zeta)d\zeta = \int_{[-R, R]} f(\zeta)d\zeta + \int_{\gamma_{\text{arc}}}f(\zeta)d\zeta = \int_{-R}^R f(x)dx \implies \int_{-R}^R f(x)dx= - \int_{\gamma_{\text{arc}}}f(\zeta)d\zeta\]
+But we know that 
+\begin{align*}
+    \left|\int_{\gamma_{\text{arc}}}f(\zeta)d\zeta\right| &\leq \text{arclength}(\gamma_{\text{arc}})\max_{z \in \gamma_{arc}}(|\frac{1}{z^2  + 1} - \frac{1}{2i(z-i)}|)\\
+    &\leq \pi R (\frac{1}{R^2 + 1} + \frac{1}{|2(R -1)|})\\
+    &\to 0
+\end{align*}
+as $R\to \infty.$ Thus, it suffices to compute 
+\[\frac{1}{2i}\int_{-R}^R \frac{1}{(x-i)}dx.\] To do this, we will use Cauchy's residue formula, which states that 
+\[\int_{-R}^R \frac{1}{(x-i)}dx = 2\pi i \,\text{res}_i(f) = 2\pi i\, \lim_{z\to i}\left[(x-i)\frac{1}{x-i}\right] = 2\pi i.\] Thus, 
+\[\int_{-R}^R \frac{1}{1 + x^2}dx = \int_{-R}^R \frac{1}{2i(x-i)}dx = 2\pi i \frac{1}{2i } = \pi.\]
+    \end{solution}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}

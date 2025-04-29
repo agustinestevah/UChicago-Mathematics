@@ -642,7 +642,7 @@ We first sketch the proof.
     If $z_0$ is on the vertex, we can make another three triangles, as follows: 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.25\linewidth]{Gorusat3.png}
+        \includegraphics[width=0.25\linewidth]{Images/Gorusat3.png}
         \caption{$z_0$ is the blue point}
     \end{figure}
     We can make the top triangle as small as we wish. Thus, we can bound the line integral using Proposition 3, namely we can make it be $0.$ 
@@ -698,7 +698,7 @@ We summarize this remark with the following theorem.
     \begin{align*}
     f(z_0) &= \frac{1}{2\pi i}\int_{C_r(z_0)} \frac{f(\zeta)}{\zeta - z_0}d\zeta\\
     &= \frac{1}{2\pi i} \int_0^{2\pi} \frac{f(z_0 + re^{i\theta})}{z_0 + re^{i\theta} - z_0}ir e^{i \theta}d\theta\\
-    &= \frac{1}{2\pi } \int_0^{2\pi} f(z_0 + re^{i\theta})d\theta
+    &= \frac{1}{2\pi i} \int_0^{2\pi} f(z_0 + re^{i\theta})d\theta
     \end{align*}
     We recognize this as the mean value property from PSET 1.
 \end{rem}
@@ -707,12 +707,84 @@ We summarize this remark with the following theorem.
     
 \end{cor}
 \begin{proof}
-    Since $f(z) = \sum_{n=0}^\infty a_n(z - z_0)^n,$ where $a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(\zeta)}{(\zeta - z_0)}d\zeta.$ By a previous theorem, we know also that 
+    Since $f(z) = \sum_{n=0}^\infty a_n(z - z_0)^n,$ where $a_n = \frac{1}{2\pi i} \int_{C_r(z_0)} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}d\zeta.$ By a previous theorem, we know also that 
     \[a_n = \frac{f^{(n)}(z_0)}{n!}\]
 \end{proof}
 
+\newpage
+\subsection{Thursday, Apr 24: Louisville's Theorem}
+
+Today he proved everything he did last class again, so you can look at last classes note's for that. 
+\begin{thm}
+    (Louisville) If $f \in H(\bbC)$ and $|f(z)| \leq M$ for all $z\in \bbC,$ then $f$ is constant.
+\end{thm}
+\begin{proof}
+By Corollary $2$ in the previous class, we have that 
+\[f'(z_0) = \frac{1}{2\pi i} \int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta - z_0)^2}d\zeta,\] and thus 
+\[|f'(z_0)| \leq  |\frac{1}{2\pi i}|\text{length}(C_r(z_0)) \max_{\zeta \in C_z(r)} \left|\frac{f(\zeta)}{(\zeta - z_0)^2}\right| \leq \frac{1}{2\pi }2\pi r  \frac{M}{r^2} = \frac{M}{r }.\] But since $f$ is holomorphic over all of $\bbC,$ we can take $r \to \infty,$ and thus $|f'(z_0)| \leq 0,$ and so because $z_0$ was arbitrary in $\bbC,$ $f$ is constant.
+\end{proof}
+
+\begin{rem}
+    Let $P$ be a non-constant polynomial Suppose that $P(z) \neq 0$ for any $z,$ then as $z\to \infty,$ 
+    \[|P(z)| \to \infty.\] Then $\frac{1}{|P(z)|} \to 0$ and since $\frac{1}{P(z)}$ is bounded and holomorphic, then it is constant, and thus $P(z)$ is constant. Thus, we have the fundamental theorem of algebra.
+\end{rem}
+
+\newpage
+\subsection{Tuesday, Apr 29: Fundamental Theorem of Algebra}
+\begin{rem}
+    Recall that 
+    \[f(z) = \frac{1}{2\pi i }\int_{C_r(z_0)}\frac{f(\zeta)}{\zeta - z}d\zeta = \sum_{n=0}^\infty a_n (z- z_0)^n.\] Then
+    \[a_n = \frac{1}{2\pi i}\int_{C_{r}(z_0)}\frac{f(\zeta)}{(\zeta - z_0)^{n+1}}d\zeta = \frac{1}{n!}f^{(n)}(z_0)\]
+Thus, for $n = 1,$ we have that 
+\[f'(z_0) = \frac{1}{2\pi i} \int_{C_r(z_0)}\frac{f(\zeta)}{(\zeta- z_0)^2}d\zeta,\] and so the rate of change is dependent on the size of the function, hence why Louisville's theorem makes sense.
+\end{rem}
+\begin{thm}
+    Suppose $f$ is an entire function that is bounded. Then $f$ is constant.
+\end{thm}
+\begin{proof}
+Since $f$ is bounded, we have that $|f(\zeta)| \leq M$ for all $\zeta\in M.$
+    By the remark above, we know that 
+    \begin{align*}
+        |f(z_0)| &\leq \frac{1}{2\pi }\big|\text{arclength}\big[C_r(z_0)\big]\big| \max_{\zeta \in C_r(z_0)} |\frac{f(\zeta)}{(\zeta - z_0)^2}|\\
+        &= \frac{1}{2\pi }2\pi r   \max_{\zeta \in C_r(z_0)} \frac{|f(\zeta)|}{(\zeta - z_0)^2}\\
+        &\leq \frac{M}{2\pi }2\pi  r  \max_{\zeta \in C_r(z_0)} \frac{1}{(\zeta - z_0)^2}\\
+        &= \frac{M}{2\pi }2\pi r \frac{1}{r^2}\\
+        &= \frac{M}{r}
+    \end{align*}
+    But $f \in H(O),$ and so we can let $r\to \infty,$ implying that $f(z_0) = 0$ for all $z_0 \in \bbC.$
+\end{proof}
+
+\begin{thm}
+    (Fundamental Theorem of Algebra) If $P(z)$ is a polynomial with degree of more than zero, then $P(z_0) = 0$ for some $z_0 \in \bbC.$
+\end{thm}
+\begin{proof}
+    Suppose $P(z) \neq 0$ for all $z \in \bbC.$ Let 
+    \[f(z) = \frac{1}{P(z)}.\] Note that $f \in H(\bbC).$ 
+
+    Note that 
+    \[|P(z)| = |a_nz^n + a_{n-1}z^{n-1} + \cdots + a_0| = |z^n|\left|(a_n + \frac{a_{n-1}}{z} + \cdots + \frac{a_0}{z^n})\right| \xrightarrow[z\to \infty]{} \infty\] Thus,, we have that 
+    \[f(z) = \frac{1}{|P(z)|}\to 0.\] Thus, there exists some closed $D_r(0)$ such that for all $z\notin D_r(0),$ we have that $|f(z)| < \epsilon.$ Since $f$ is continuous on the compact disk, we have that $f$ is bounded by the extreme value theorem. Thus, $|f(z)| < M$ for all $z\in \bbC.$ Thus, by Louisville's theorem, $f(z) = \frac{1}{P(z)}$ is constant, and thus $P(z)$ is constant, which is a contradiction.
+\end{proof}
+
+\begin{defn}
+Let $f\in H(O)$ and $z\in O.$ The \textbf{Laurent Series} of $f$ is the series
+    \[f(z) = \sum_{n=-\infty}^\infty a_n (z - z_0)^n\]
+\end{defn}
+\begin{exmp}
+    Consider $C = D_1(0)\sm \{0\}$ to be the punctured disk and consider $f(z) = \frac{1}{z}.$
+\end{exmp}
+\begin{defn}
+Let $\gamma:[0,1] \to O$ be a path.
+    We define a \textbf{homotopy} in $O \subset \bbC$ to be a function $\Gamma(t,s) : [0,1] \times [0,1] \to O$ such that $\gamma_s(t) = \Gamma(t,s)$ and
+    \begin{enumerate}
+        \item $\Gamma$ is continuous from $[0,1]\times [0,1].$
+        \item For all $s\in [0,1],$ $\Gamma(0,s) = \gamma_s(0) = z_1$ and $\Gamma(1,s) = \gamma_s(1) = z_2.$
+        \item For each $s\in [0,1],$ $\gamma_s(t)$ is a path and for each $t\in [0,1],$ the map $s\mapsto \gamma_s(t)$ is piecewise continuously differentiable as a function of $s.$
+    \end{enumerate}
+\end{defn}
+
+We will next show the invariancy of line integrals about homotopies, and use that for the Laurent series. 
 
 
-
-
+E117
 \end{document}

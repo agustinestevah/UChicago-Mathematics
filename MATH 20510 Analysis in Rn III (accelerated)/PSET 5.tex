@@ -1,0 +1,409 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{20510}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 5}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{04-30-2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+\section*{Problem 1}
+\begin{problem}
+    Let $f \in \cal R$ be $2-\pi$ periodic. 
+    \begin{enumerate}
+        \item Show that the Fourier Series of $f$ can be written as 
+        \[\hat{f}(0) + \sum_{n=1}^\infty (\hat{f}(n) + \hat{f}(-n))\cos(nx) + i(\hat{f}(n) - \hat{f}(-n))\sin(nx) \]
+        \begin{solution}
+        By definition, we have that for any $N \in \bbN,$
+\begin{align*}
+    S_N(f) &= \sum_{-N}^N (f,e_n)e_n\\
+    &= \sum_{-N}^N \hat{f}(n)e_n\\
+    &= \sum_{-N}^N\hat{f}(n)e^{inx}\\
+    &= \sum_{-N}^N \hat{f}(n)(\cos(nx) + i\sin(nx))\\
+    &= \hat{f}(0) + \sum_{n=1}^N \hat{f}(n)\cos(nx) + i\hat{f}(n)\sin(nx) + \sum_{n= -N}^{-1}\hat{f}(n)\cos(nx) + i\hat{f}(n)\sin(nx)\\
+    &= \hat{f}(0) + \sum_{n=1}^N \hat{f}(n)\cos(nx) + i\hat{f}(n)\sin(nx) + \sum_{n= 1}^{N}\hat{f}(-n)\cos(-nx) + i\hat{f}(-n)\sin(-nx)\\
+    &= \hat{f}(0) + \sum_{n=1}^N \hat{f}(n)\cos(nx) + i\hat{f}(n)\sin(nx) + \sum_{n= 1}^{N}\hat{f}(-n)\cos(nx) - i\hat{f}(-n)\sin(nx)\\
+    &=\hat{f}(0) + \sum_{n=1}^N (\hat{f}(n) + \hat{f}(-n))\cos(nx) + i(\hat{f} (n) - \hat{f}(-n)\sin(nx)\\
+\end{align*}
+        \end{solution}
+    \item Prove that if $f$ is even, then $\hat{f}(n) = \hat{f}(-n)$ and we get a cosine series.
+    \begin{solution}
+        Let $f$ be even so that $f(x) = f(-x).$ Then 
+        \begin{align*}
+    \hat{f}(-n) &= (f,e_{-n})\\
+    &= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)e^{-i(-n)x}\,dx\\
+    &= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)e^{inx}\,dx\\
+    &= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(-x)e^{inx}\,dx\\
+    &= -\frac{1}{2\pi}\int_{\pi}^{-\pi} f(u)e^{-inu}\,du\\
+    &= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(u)e^{-inu}\,du\\
+    &= (f,e_n)\\
+    &= \hat{f}(n)
+        \end{align*}
+Moreover, we use the identity derived in part (a) to notice that
+\begin{align*}
+    S_N(f) &= \hat{f}(0) + \sum_{n=1}^N (\hat{f}(n) + \hat{f}(-n))\cos(nx) + i(\hat{f} (n) - \hat{f}(-n)\sin(nx)\\
+    &= \hat{f}(0) +\sum_{n=1}^N (\hat{f}(n) + \hat{f}(n))\cos(nx) + i(\hat{f} (n) - \hat{f}(n)\sin(nx)\\
+    &= \hat{f}(0) +2\sum_{n=1}^N \hat{f}(n)\cos(nx)
+\end{align*}
+as desired. 
+    \end{solution}
+\item Prove that if $f$ is odd, then $\hat{f}(n) = -\hat{f}(-n)$ and we get a sine series.
+\begin{solution}
+    Let $f$ be odd such that $f(x)  = -f(-x).$ Then 
+    \begin{align*}
+        -\hat{f}(-n) &= -(f,e_{-n})\\
+        &= - \frac{1}{2\pi}\int_0^{2\pi} f(x)e^{inx}\,dx\\
+        &= \frac{1}{2\pi}\int_0^{2\pi} -f(x)e^{inx}dx\\
+        &= \frac{1}{2\pi}\int_0^{-2\pi} -(-f(-u)e^{-inu})\,du\\
+        &= -\frac{1}{2\pi}\int_0^{-2\pi}f(u)e^{-inu}\,du\\
+        &= \frac{1}{2\pi}\int_0^{2\pi}f(u)e^{-inu}\,du\\
+        &= (f,e_n)\\
+        &= \hat{f}(n).
+    \end{align*}
+Moreover, we use the identity derived in part (a) to show that 
+\begin{align*}
+    S_N(f) &= \hat{f}(0) + \sum_{n=1}^N (\hat{f}(n) + \hat{f}(-n))\cos(nx) + i(\hat{f} (n) - \hat{f}(-n)\sin(nx)\\
+    &= \hat{f}(0) + \sum_{n=1}^N (-\hat{f}(-n) + \hat{f}(-n))\cos(nx) + i(\hat{f} (n) + \hat{f}(n)\sin(nx)\\
+    &= \hat{f}(0) + \sum_{n=1}^N i(2\hat{f} (n))\sin(nx)\\
+    &= \hat{f}(0) + 2i\sum_{n=1}^N \hat{f} (n)\sin(nx)
+\end{align*}
+as desired
+\end{solution}
+\item
+Suppose that $f(x + \pi) = f(x)$ for all $x\in \bbR.$ Show that $\hat{f}(n) = 0$ for all odd $n.$
+\begin{solution}
+    Let $n$ be odd, then 
+    \begin{align*}
+        \hat{f}(n) &= (f,e_{n})\\
+        &= \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)e^{-inx}dx\\
+        &= \frac{1}{2\pi}\left[\int_{-\pi}^0 f(x)e^{-inx}\,dx + \int_0^{\pi} f(x)e^{-inx}\, dx\right]\\
+        &= \frac{1}{2\pi}\left[\int_{-\pi}^0 f(x)e^{-inx}\,dx + \int_{-\pi}^{0} f(u+\pi)e^{-in(u + \pi)}\,dx\right]\\
+        &= \frac{1}{2\pi}\left[\int_{-\pi}^0 f(x)e^{-inx}\,dx + \int_{-\pi}^{0} f(u)\frac{e^{-inu}}{e^{in\pi}}\,dx\right]
+    \end{align*}
+Since we have that $n$ is odd, then
+\begin{align*}
+    e^{in\pi} = \cos(n\pi) + i\sin(n\pi)
+    = -1 + 0 = -1,
+\end{align*}
+then 
+\[\hat{f}(n) = \frac{1}{2\pi}\left[\int_{-\pi}^0 f(x)e^{-inx}\,dx - \int_{-\pi}^{0} f(u)e^{-inu}\,dx\right] = 0.\]
+\end{solution}
+\item 
+Show that $f$ is real valued if, and only if, $\overline{\hat{f}(n)} = \hat{f}(-n)$ for all $n \in \bbN.$
+\begin{solution}
+    ($\implies$) Suppose $f$ is real valued. Then $\overline{f(x)} = f(x)$ for all $x\in \bbR.$ Thus, we note that since the conjugate of the integral is the integral of the conjugate and similarly for products, we can compute
+    \begin{align*}
+        \overline{\hat{f}(n)} &= \overline{\frac{1}{2\pi}\int_0^{2\pi}f(x)e^{-inx}\,dx}\\
+        &=  \frac{1}{2\pi}\int_0^{2\pi}\overline{f(x)}\,\overline{e^{-inx}}\,dx\\
+        &= \frac{1}{2\pi}\int_0^{2\pi}f(x)e^{inx}\,dx\\
+        &= \frac{1}{2\pi}\int_0^{2\pi}f(x)e^{-i(-n)x}\,dx\\
+        &= \hat{f}(-n)
+    \end{align*}
+\end{solution}
+    \end{enumerate}
+\end{problem}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Let $f(x) = |x|$ be defined on $[-\pi, \pi].$
+    \begin{enumerate}
+        \item Calculate $\hat{f}(0).$
+        \begin{solution}
+            \item We have that 
+            \[\hat{f}(0) = (f,e_0)= \frac{1}{2\pi}\int_{-\pi}^\pi |x|\,dx = \frac{1}{\pi}\int_0^\pi x \, dx = \frac{\pi}{2}\]
+        \end{solution}
+        \item Calculate $\hat{f}(n)$ when $n \neq 0.$
+        \begin{solution}
+    We integrate by parts
+\begin{align*}
+    \hat{f}(n) &= (f,e_n)\\
+    &= \frac{1}{2\pi}\int_{-\pi}^\pi |x|e^{-inx}\,dx\\
+    &= \frac{1}{2\pi}\left[\int_0^\pi x e^{-inx}\,dx - \int_{-\pi}^0 x e^{-inx}\, dx\right].
+\end{align*}
+First term:
+\begin{align*}
+    \int_0^\pi x e^{-inx}\,dx &= \frac{-1}{in}e^{-inx}x\bigg|_0^{\pi} + \frac{1}{in}\int_0^\pi e^{-inx}\,dx\\
+    &=\frac{-1}{in}e^{-i\pi n}\pi + \frac{1}{in}\frac{-1}{in}\left[e^{-in\pi} - 1\right]\\
+    &= \frac{-e^{-i\pi n}\pi}{in} + \frac{e^{-in \pi} -1}{n^2}\\
+    &= \frac{e^{-i\pi n} i \pi n}{n^2} + \frac{e^{-in \pi} -1}{n^2}\\
+    &= \frac{-1 + e^{-i\pi n}(1 + i\pi n)}{n^2}
+\end{align*}
+With similar algebra, we see that 
+\[\int_{-\pi}^0 x e^{-inx} = \frac{1 + e^{i\pi n}(-1 + i\pi n)}{n^2}\]
+
+Thus, 
+\begin{align*}
+    \hat{f}(n) &= \frac{1}{2\pi}\left[\int_0^\pi x e^{-inx}\,dx - \int_{-\pi}^0 x e^{-inx}\, dx\right].\\
+    &= \frac{1}{2\pi}\left[\frac{-1 + e^{-i\pi n}(1 + i\pi n)}{n^2} - \frac{1 + e^{i\pi n}(-1 + i\pi n)}{n^2}\, dx\right]\\
+    &= \frac{1}{2\pi}\left[\frac{-2 + e^{-i\pi n}(1 + i\pi n) - e^{i\pi n}(-1 + i\pi n)}{n^2}\right]\\
+    &= \frac{1}{2\pi}\left[\frac{-2 + (e^{-i\pi n} + e^{ i\pi n}) + i\pi n(e^{-i\pi n} - e^{i\pi n})}{n^2}\right]
+\end{align*}
+        \end{solution}
+\item Calculate the Fourier Series in terms of sines and cosines.
+\begin{solution}
+    By the first question, since $|x|$ is even, we will have a Fourier series of the form 
+    \[S_N(f) = \hat{f}(0) + 2\sum_{n=1}^N \hat{f}(n)\cos(nx).\] From part (b), we have that for $n \neq 0,$
+    \begin{align*}
+        \hat{f}(n) &= \frac{1}{2\pi}\left[\frac{-2 + (e^{-i\pi n} + e^{ i\pi n}) + i\pi n(e^{-i\pi n} - e^{i\pi n})}{n^2}\right]
+    \end{align*}
+    We have that using properties of $\sin$ and $\cos,$ 
+    \begin{align*}
+       e^{-i\pi n} + e^{ i\pi n} = \cos(-\pi n) + i\sin(-\pi n) +  \cos(\pi n) + i\sin(\pi n) = 2\cos(\pi n) 
+    \end{align*}
+    \begin{align*}
+        e^{-i\pi n} - e^{ i\pi n} = \cos(-\pi n) + i\sin(-\pi n) - \cos(\pi n) - i\sin(\pi n) = -2i\sin(\pi n) = 0
+    \end{align*}
+    Plugging back in:
+        \begin{align*}
+        \hat{f}(n) &= \frac{1}{2\pi}\left[\frac{-2 + (e^{-i\pi n} + e^{ i\pi n}) + i\pi n(e^{-i\pi n} - e^{i\pi n})}{n^2}\right]\\
+        \ &= \frac{1}{2\pi}\left[\frac{-2 + 2\cos(\pi n)}{n^2}\right]\\
+        &= \frac{-1 + \cos(\pi n)}{\pi n^2}
+    \end{align*}
+    Thus, 
+\begin{align*}
+    S_N(f) &= \hat{f}(0) + 2\sum_{n=1}^N \hat{f}(n)\cos(nx)\\
+    &= \frac{\pi}{2} + 2\sum_{n=1}^N\frac{-1 + \cos(\pi n)}{\pi n^2} \cos(nx)
+\end{align*}
+\end{solution}
+\item 
+Deduce that $\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}$
+   \begin{solution}
+       \begin{lemma}
+
+    Suppose that for $t\in (-\delta, \delta),$ there exists a $C\in \bbR$ such that $|f(x-t) - f(x)|\leq C(t),$ (locally Lipshitz), then $S_n(x)\to f(x).$
+\end{lemma}
+\begin{proof}
+    Define 
+    \[g(t) = \frac{f(x-t) - f(x)}{\sin(\frac{t}{2})},\] and define
+    \[D_N(x) = \sum_{-N}^N e^{inx} = \frac{\sin(N + \frac{1}{2})x}{\sin(\frac{x}{2})}.\]
+
+    Then 
+     \begin{align*}
+     S_N(f,x) &= \sum_{-N}^N \frac{1}{2\pi}\int_{-\pi}^\pi f e^{-int} e^{inx}\,dt\\
+     &= \frac{1}{2\pi0}f(t)\sum_{-N}^N e^{in(x-t)}dt\\
+     &= \frac{1}{2\pi}\int_{-\pi}^\pi f(t)D_N(x-t)dt\\
+     &= \frac{1}{2\pi}\int_{-\pi}^\pi f(x-t)D_N(t)dt\\
+     &= \frac{1}{2\pi}(f \ast D_N)(t)
+ \end{align*}
+Thus,
+    \begin{align*}
+        |S_n(x) - f(x)| &= \frac{1}{2\pi}\int_{-\pi}^\pi (f(x-t) - f(x))D_N(t)dt\\
+        &= \frac{1}{2\pi}\int_{-\pi}^\pi g(t)\sin(Nt + \frac{t}{2})dt\\
+        &= \frac{1}{2\pi}\int_{-\pi}^\pi g(t)\cos(\frac{t}{2})\sin(Nt)dt + \frac{1}{2\pi}\int_{-\pi}^\pi g(t)\sin(\frac{t}{2})\cos(Nt)dt\\
+        &\to 0.
+    \end{align*}
+    The last equality holds because $g(t)$ is bounded and because $|\hat{f}(n)|\to 0$ by Bessel's inequality and thus both the real and imaginary components of $\hat{f}(n)$ go to $0.$
+\end{proof}
+\rule{\linewidth}{0.4pt}
+We first show that $|x|$ is locally Lipshitz around $x = 0.$ Let $t\in (-\delta, \delta),$ then 
+\[|f(0 - t) - f(0)| = |t|  = C(t).\]Thus, by our lemma, $S_N(f,0)\to f(0) = 0,$ thus, 
+\begin{align*}
+0 &= \frac{\pi}{2} + 2\sum_{n=1}^\infty \frac{-1 + \cos(\pi n)}{\pi n^2}\cos(n (0))\\
+&= \frac{\pi}{2} + \frac{2}{\pi}\sum_{n=1}^\infty \frac{-1 + (-1)^n}{n^2}\\
+&= \frac{\pi}{2} - \frac{4}{\pi}\sum_{n \text{ odd}}^\infty \frac{1}{n^2}
+\end{align*}
+Thus, \[\sum_{n \text{ odd}}^\infty \frac{1}{n^2} = \frac{\pi^2}{8}.\] Thus, 
+\[\sum_{n=1}^\infty \frac{1}{n^2}= \sum_{n=1}^\infty \frac{1}{(2n)^2} + \frac{\pi^2}{8} = \frac{1}{4}\sum_{n=1}^\infty \frac{1}{n^2} + \frac{\pi^2}{8},\] and thus 
+\[\frac{3}{4}\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{8} \implies \sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}.\]
+   \end{solution}   
+\begin{reflection}
+    In this problem, we actually have stronger convergence. In fact, we have that $S_N(f)\uconv f.$ To see this, it suffices to note that $f$ is continous, $2\pi-$periodic on $[-\pi, \pi],$ and $S_N(f)$ converges absolutely since 
+    \[\|S_N(f)\| \leq \frac{\pi}{2} + 2\sum_{n=1}^N \frac{2}{\pi n^2} < \infty\]
+\end{reflection}
+    \end{enumerate}
+\end{problem}
+
+
+
+\newpage
+\section*{Problem 3}
+\begin{problem}
+    Show that in $\cal R,$ the space of $2\pi-$integrable functions, the Pythagorean theorem, the C-S inequality, and the triangle inequality all hold.
+\end{problem}
+\begin{solution}
+    (Pythagorean Theorem) Let $f,g \in \cal R$ such that $f \perp g.$  Then 
+    \begin{align*}
+        \|f + g\|^2 &= (f + g, f + g)\\
+        &= (f,f + g) + (g, f + g)\\
+        &= (f,f) + (f,g) + (g,f) + (g,g)\\
+        &= \|f\|^2 + 0 + 0 + \|g\|^2\\
+        &= \|f\|^2 + \|g\|^2
+    \end{align*}
+
+
+    (H\"older's Inequality). Let $p,q \in \bbR$ such that $\frac{1}{p} + \frac{1}{q} = 1.$ Consider the degenerate case when 
+    \[\int_{-\pi}^\pi |f|^p = \int_{-\pi}^\pi |g|^q = 1.\] Note that for any $x\in [-\pi, \pi],$ we have that by properties of the logarithm and by its convexity,
+    \[\log(|f(x)| |g(x)|) = \frac{1}{p}\log(f(x)^p) + \frac{1}{q}\log(g(x)^q) \leq \log\left(\frac{1}{p}f(x)^p + \frac{1}{q}g(x)^q\right).\] Since the logarithm function is monotonically increasing, we have that since the integral is monotonic,
+    \[|f(x)||g(x)| \leq \frac{1}{p}|f(x)|^p + \frac{1}{q}|g(x)|^q \implies \int_{-\pi}^\pi |f||g| \leq \frac{1}{p}\int_{-\pi}^\pi f^p + \frac{1}{q}\int_{-\pi}^\pi g^q = \frac{1}{p} + \frac{1}{q} = 1.\] Thus, in the degenerate case,
+    \begin{align}
+        \int_{-\pi}^\pi |f||g| \leq 1. 
+    \end{align}
+    Now for the general case. Define 
+    \[f^*:= \frac{f}{\left(\int_{-\pi}^\pi |f|^p\right)^{\frac{1}{p}}} \implies \int_{-\pi}^\pi |f^*|^p = \int_{-\pi}^\pi \frac{|f|^p}{\bigg(\left(\int_{-\pi}^\pi |f|^p\right)^\frac{1}{p}\bigg)^p} = 1\]
+    \[g^*:=\frac{g}{\int_{-\pi}^\pi |g|^q} \implies \int_{-\pi}^\pi |g^*|^q = 1.\] By our degenerate case, we know that 
+    \begin{align*}
+        1 &\geq \int_{-\pi}^\pi |f^*||g^*|\\
+        &= \int_{-\pi}^\pi \frac{|f|\cdot |g|}{\left(\int_{-\pi}^\pi |f|^p\right)^\frac{1}{p} \cdot \left(\int_{-\pi}^\pi |g|^p\right)^\frac{1}{q}},
+    \end{align*}
+and so 
+\[\int_{-\pi}^\pi|f|\cdot|g| \leq \left(\int_{-\pi}^\pi |f|^p\right)^\frac{1}{p}\left(\int_{-\pi}^\pi |g|^p\right)^\frac{1}{q}.\] Thus, letting $p = q = 2,$ we have that 
+\begin{align*}
+    |(f,g)| &= \left|\int_{-\pi}^\pi f \cdot \overline{g}\right| \\
+    &\leq \int_{-\pi}^\pi |f|\cdot |\overline{g}|\\
+    &=\int_{-\pi}^\pi |f|\cdot |g|\\
+    &\leq \left(\int_{-\pi}^\pi |f|^2\right)^\frac{1}{2}\left(\int_{-\pi}^\pi |g|^2\right)^\frac{1}{2}\\
+    &= \|f|| \cdot \|g\|
+\end{align*}
+
+(Triangle Inequality) 
+We have that for any $f,g,h \in \cal R,$
+\begin{align*}
+    \|f - g\| &= \int_{-\pi}^\pi |f - g|\\
+    &= \int_{-\pi}^\pi |(f - h) + (h -g)|\\
+    &\leq \int_{-\pi}^\pi |f - h| + |h - g|\\
+    &= \int_{-\pi}^\pi |f - h| + \int_{-\pi}^\pi |h-g|\\
+    &= \|f - h\| + \|h - g\|
+\end{align*}
+A more general proof:
+\begin{align*}
+\|f + g\|^2 &= (f + g, f + g)\\ &= (f,f) + (f,g)+ (g,f) + (g,g)\\ &\leq \|f\|^2 + \|g\|^2 + 2|(f,g)|\\ &\leq \|f\|^2 + \|g\|^2  + 2\|f\|    \|g\|\\
+&= (\|f\| + \|g\|)^2.
+\end{align*}
+Take square roots of both sides and conclude.
+
+\end{solution}
+
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Find the values of 
+    \[\sum_{n=1}^\infty \frac{1}{(2n + 1)^4}, \qquad \sum_{n=1}^\infty \frac{1}{n^4}\]
+\end{problem}
+\begin{solution}
+Parseval's Theorem states that 
+\[\lim_{n\to \infty}(S_n(f))^2 = \frac{1}{2\pi}\int_{-\pi}^\pi |f|^2.\] Using Problem (1), we see that since 
+\[(S_n(f))^2 = \frac{\pi^2}{4} + \frac{8}{\pi^2}\sum_{n=1}^\infty \frac{1}{(2n + 1)^4} \] and 
+\[\frac{1}{2\pi}\int_{-\pi}^\pi |x|^2 \,dx = \frac{1}{2\pi}\int_{-\pi}^\pi x^2  = \frac{\pi^2}{3}\] Thus, we have that 
+\[\frac{\pi^2}{3} = \frac{\pi^2}{4} + \frac{8}{\pi^2}\sum_{n=1}^\infty \frac{1}{(2n + 1)^4} \iff \frac{\pi^2}{96} = \sum_{n=1}^\infty \frac{1}{(2n + 1)^4}.\]
+
+Moreover, we know that 
+\[\sum_{n=1}^\infty \frac{1}{n^4} = \sum_{n=1}^\infty \frac{1}{(2n)^4} + \sum_{n=1}^\infty \frac{1}{(2n + 1)^4} = \frac{1}{16}\sum_{n=1}^\infty + \frac{\pi^2}{96}\] and so 
+\[\frac{15}{16}\sum_{n=1}^\infty \frac{1}{n^4} = \frac{\pi^2}{96} \implies \sum_{n=1}^\infty \frac{1}{n^4} = \frac{\pi^2}{90}\]
+\end{solution}
+
+\end{document}

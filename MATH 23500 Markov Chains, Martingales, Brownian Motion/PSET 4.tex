@@ -1,0 +1,343 @@
+\documentclass[11pt]{article}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{23500}
+\newcommand{\subject}{Markov Chains, Martingales, and Brownian Motion}
+\newcommand{\instructors}{Stephen Yearwood}
+\newcommand{\assignment}{Problem Set 4}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{05/02/2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+\section*{Problem 1}
+\begin{problem}
+    Consider the following variant of the branching process. At each time \( n \), each individual produces offspring independently with offspring distribution \(\{p_j\}_{j \geq 0}\), then dies with probability \( q \in (0,1) \). So, each individual reproduces \( k \) times where \( k \) is its lifetime (\( k \) is a random positive integer). Note that \( q = 1 \) for the version of the branching process discussed in class. Assuming that \( X_0 = 1 \), show that if \( \phi(t) = \sum_{j=0}^\infty t^j p_j \) is the generating function, then the extinction probability is the smallest positive solution to
+\[
+q\phi(t) + (1-q)t\phi(t) = t.
+\]
+
+\end{problem}
+\begin{solution}
+Conditioning, we use the markov property and independence:
+\begin{align*}
+  a &= \bbP\{\text{extinction} \mid X_0 = 1\}\\ &= \sum_{k=1}^\infty \bbP\{X_1 = k\}\bbP\{\text{extinction} \mid X_1 = k \} \\
+  &=  \sum_{k=1}^\infty \bbP\{X_1 = k\}\bigg(\bbP\{\text{extinction} \mid X_1 = k  \mid \text{dies}\}\bbP\{\text{dies}\} + \bbP\{\text{extinction} \mid X_1 = k  \mid \text{lives}\}\bbP\{\text{lives}\}  \bigg) \\
+  &=\sum_{k=1}^\infty p_k \big(a^{k} q + a^{k+1}(1-q)\big)\\
+  &= q\sum_{k=1}^\infty p_k a^k + (1-q)\sum_{k=1}^\infty p_ka^{k+1}\\
+  &= q\phi(a) + (1-q)a \phi(a)
+\end{align*}
+
+\end{solution}
+
+
+
+\newpage
+\section*{Problem 3}
+Let \(\{X_t\}\) and \(\{Y_t\}\) be independent Poisson processes with rates \(\lambda_1\) and \(\lambda_2\), respectively. We imagine that \(\{X_t\}\) and \(\{Y_t\}\) count the number of calls on two different phone lines, with the time \(t\) measured in hours.
+
+\begin{enumerate}
+    \item[(a)] Find the probability that there were 5 calls on line 1 between times 0 and 1 and 5 calls on line 1 between times 1 and 2.
+    \begin{solution}
+    We are asked to find $\bbP\{X_1 - X_0 = 5, X_2 - X_1 = 5\}.$ By the memorylessness of the Poisson-Process, these events are independent and are both distributed Poisson with parameter $\lambda_1.$ Thus
+    \[\bbP\{X_1 - X_0 = 5, X_2 - X_1 = 5\}= \bbP\{X_1 = 5\}\bbP\{X_2 - X_1 = 5\} = (\frac{e^{\lambda_1}\lambda_1^5}{5!})^2\]
+    \end{solution}
+    \item[(b)] Given that there were 10 total calls (on both lines) between time 1 and time 2, find the conditional probability that all 10 calls were on line 1.
+    \begin{solution}
+        We use the formula derived in problem session to see that 
+        \begin{align*}
+        \bbP\{X_2 - X_1 = 10 \mid (X_2 - X_1) + (Y_2 - Y_1) = 10\}& = \bbP\{X_1 = 10 \mid X_1 + Y_1 = 10\}\\ &= \binom{10}{10}(\frac{\lambda_1}{\lambda_1 + \lambda_2})^{10}(\frac{\lambda_2}{\lambda_1 + \lambda_2})^{0}\\ &= (\frac{\lambda_1}{\lambda_1 + \lambda_2})^{10}    
+        \end{align*}
+        
+    \end{solution}
+    \item[(c)] Let \(T_1\) (resp. \(T_2\)) be the time of the first call on line 1 (resp. line 2). Find \(\mathbb{E}[\min\{T_1, T_2\}]\).
+    \begin{solution}
+        From class, we know that if 
+        \[\tau := \min\{T_1, T_2\},\] then since $T_1 \sim \exp{\lambda_1}$ and $T_2 \sim \exp{\lambda_2},$ then $\tau \sim \exp{\lambda_1 + \lambda_2},$ and thus 
+        \[\bbE[\tau] = \frac{1}{\lambda_1 + \lambda_2}\]
+    \end{solution}
+    \item[(d)] Find the distribution of the number of calls on line 1 before time \(T_2\) (i.e., find \(\mathbb{P}[X_{T_2} = k]\) for each \(k\)).
+    \begin{solution}
+\[\bbP\{X_{T_2} = k\} = \bbP\{X_t = k \mid Y_t = 0\} = \binom{}{}\]
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Suppose that traffic on a road follows a Poisson process with rate \(\lambda > 0\) cars per minute. A chicken needs a (time) gap of length at least \(c\) minutes in the traffic to cross the road. In this problem, we wish to compute the time the chicken will have to wait to cross the road. To that end, we let \(\tau_j\) be the arrival time of the \(j\)-th car, and let 
+\[
+J := \min \{ j : \tau_j - \tau_{j-1} > c \}.
+\]
+Ideally, the chicken will start to cross the road at time \(\tau_{J-1}\) and complete its journey at time \(\tau_{J-1} + c\).
+
+\begin{enumerate}
+    \item[(a)] Suppose \(T\) is exponentially distributed with rate \(\lambda > 0\). Compute \(\mathbb{E}[T \mid T < c]\).
+    \begin{solution}
+        Using Bayes rule, we have that 
+        \begin{align*}
+            \bbE[T \mid T< c] &= \int_0^c t f_{T}(t \mid t< c)\, dt\\
+             &=\int_0^\infty t \frac{\bbP\{t ,t< c\}}{\bbP\{t< c\}}\, dt\\
+             &= \int_0^c t\frac{\bbP\{t\}}{\bbP\{t < c\}}\,dt\\
+             &= \int_0^c t \frac{f_T(t)}{F_T(t)}\, dt\\
+             &= \int_0^c t \frac{\lambda e^{-\lambda t}}{1- e^{-\lambda c}}\, dt\\
+             &= \frac{1}{1- e^{-\lambda c}}\int_0^c t\lambda e^{-\lambda t}\, dt\\
+             &= \frac{1}{1- e^{-\lambda c}} \frac{1 - e^{-c\lambda}(c\lambda + 1)}{\lambda}\\
+             &= \frac{1}{\lambda} - \frac{ce^{-\lambda c}}{1- e^{-\lambda c}}
+        \end{align*}
+    \end{solution}
+    \item[(b)] Use part (a) to find \(\mathbb{E}[\tau_{J-1} + c]\).
+\begin{solution}
+    By definition, 
+    \begin{align*}
+        \bbE[\tau_{J-1} + c] &= \bbE[\tau_{J-1}] + c\\
+        &= \frac{\bbE[J] - 1}{\lambda} + c\\
+        &= \bbE[\min\{\}]
+    \end{align*}
+\end{solution}
+\end{enumerate}
+
+\end{problem}
+
+
+
+
+
+\newpage
+\section*{Problem 5}
+Consider the continuous-time Markov chain \(\{X_t\}_{t \geq 0}\) with state space \(\{1, 2, 3\}\) and infinitesimal generator matrix:
+\[
+A = \begin{pmatrix}
+-1 & 1 & 0 \\
+4 & -5 & 1 \\
+0 & 4 & -4
+\end{pmatrix}
+\]
+
+\begin{enumerate}
+    \item[(a)] If we start in state 1, what is the expected time that we move to a different state?
+    \begin{solution}
+        The rate of leaving state $1$ is given by $A_{1,2} + A_{1,3} = 1,$ and thus if $T$ denotes the time when we leave, we have that \[T \sim \exp{1} \implies \bbE[T] = 1\]
+    \end{solution}
+    \item[(b)] If we start in state 2, what is the expected time that we move to a different state?
+\begin{solution}
+    Similarly to above, $\bbE[T] = \frac{1}{5}$
+\end{solution}
+    \item[(c)] Explain why this Markov chain is irreducible and find the stationary distribution \(\pi\).
+\begin{solution}
+    \begin{align*}
+         0 &= \det(A - \lambda I)\\
+         &= \det(\begin{pmatrix}
+             -1 - \lambda & 1 & 0\\
+             4 & -5 - \lambda & 1\\
+             0 & 4 & -4 - \lambda
+         \end{pmatrix})\\
+         &= -\lambda^3 - 10\lambda^2 - 21\lambda \\
+         &= \lambda(\lambda + 7)(\lambda +3)
+    \end{align*}
+    Solving for the null spaces we find that 
+    \[v_1 = \begin{pmatrix}
+        1\\1\\1
+    \end{pmatrix}, \quad v_2 = \begin{pmatrix}
+        \frac{1}{8} \\
+        \frac{-3}{4}\\
+        1
+    \end{pmatrix}, \quad v_3 = \begin{pmatrix}
+        -\frac{1}{8}\\
+        \frac{1}{4}\\
+        1
+    \end{pmatrix},\] and so 
+    \begin{align*}
+        P_t &= e^{tA}\\
+        &= \sum_{n=0}^\infty \frac{(tA)^n}{n!}\\
+        &= \begin{pmatrix}
+            1 & \frac{1}{8} & \frac{-1}{8}\\
+            1 & \frac{-3}{4} & \frac{1}{4}\\
+            1 & 1 & 1
+        \end{pmatrix}\left(\sum_{n=1}^\infty \frac{1}{n!}\begin{pmatrix}
+            0 & 0 & 0\\
+            0 & -7t & 0\\
+            0 & 0 &-3t
+        \end{pmatrix}^n\right) \begin{pmatrix}
+            1 & \frac{1}{8} & \frac{-1}{8}\\
+            1 & \frac{-3}{4} & \frac{1}{4}\\
+            1 & 1 & 1
+        \end{pmatrix}^{-1}\\
+        &= \begin{pmatrix}
+            1 & \frac{1}{8} & \frac{-1}{8}\\
+            1 & \frac{-3}{4} & \frac{1}{4}\\
+            1 & 1 & 1
+        \end{pmatrix}\begin{pmatrix}
+            1 & 0 & 0\\
+            0 & e^{-7t} & 0\\
+            0 & 0 &e^{-3t}
+        \end{pmatrix}\begin{pmatrix}
+            1 & \frac{1}{8} & \frac{-1}{8}\\
+            1 & \frac{-3}{4} & \frac{1}{4}\\
+            1 & 1 & 1
+        \end{pmatrix}^{-1}\\
+        &= \frac{e^{-7t}}{84}
+\begin{pmatrix}
+2\left(7 e^{4t} + 32 e^{7t} + 3\right) & -7 e^{4t} + 16 e^{7t} - 9 & -7 e^{4t} + 4 e^{7t} + 3 \\
+-4\left(7 e^{4t} - 16 e^{7t} + 9\right) & 2\left(7 e^{4t} + 8 e^{7t} + 27\right) & -2\left(-7 e^{4t} - 2 e^{7t} + 9\right) \\
+16\left(-7 e^{4t} + 4 e^{7t} + 3\right) & -8\left(-7 e^{4t} - 2 e^{7t} + 9\right) & 4\left(14 e^{4t} + e^{7t} + 6\right)
+\end{pmatrix}
+    \end{align*}
+    Thus, the Markov chain is irreducible because $p_t(x,y) >0$ for any $x,y \in S.$ Finding the stationary distribution, we send $t\to \infty$ in $P_t$ above, noting that any term with a power less than $7t$ is going to get obliterated:
+\begin{align*}
+    \lim_{t\to \infty}P_t &= \lim_{t\to \infty} \frac{e^{-7t}}{84}
+\begin{pmatrix} 
+2\left(32 e^{7t}\right) & 16 e^{7t}& 4e^{7t} \\
+-4\left( - 16 e^{7t}\right) & 2\left(8 e^{7t} \right) & -2\left(- 2 e^{7t} \right) \\
+16\left(4 e^{7t}\right) & -8\left(- 2 e^{7t} \right) & 4\left( e^{7t}\right)
+\end{pmatrix}\\
+&= \begin{pmatrix}
+    \frac{64}{84} & \frac{16}{84} & \frac{4}{84}\\
+    \frac{64}{84} & \frac{16}{84} & \frac{4}{84}\\
+    \frac{64}{84} & \frac{16}{84} & \frac{4}{84}\\
+\end{pmatrix}\\
+&\implies \pi = \begin{pmatrix}
+    \frac{16}{21} & \frac{4}{21} & \frac{1}{21}
+\end{pmatrix}
+\end{align*}
+\end{solution}
+    \item[(d)] Find \(p_t(1,3)\) for each \(t > 0\).
+    \begin{solution}
+        From the above, one can see that 
+        \[p_t (1,3) = \frac{e^{-7t}}{84}(-7 e^{4t} + 4 e^{7t} + 3 )\]
+    \end{solution}
+    \item[(e)] Let \(\tau_1, \tau_2, \ldots\) be the times of the successive jumps of \(\{X_t\}_{t \geq 0}\). Let \(\tilde{X}_n = X_{\tau_n}\). Find the transition matrix for the discrete-time Markov chain \(\{\tilde{X}_n\}\).
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

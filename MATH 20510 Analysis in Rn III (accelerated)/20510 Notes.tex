@@ -505,8 +505,134 @@ The consequences of Remark 12 and Corollary 4 are
     \[\lim_{n\to \infty}|\hat{f}(n)|  = 0.\]
 \end{cor}
     
+\newpage
+\subsection{Friday, Apr 25: Introduction to Differential Forms}
+\begin{rem} (Recall)
+    Let $f: E\to \bbR$ and $E\subseteq \bbR^n$ be open. Then the partial $D_1 f, \dots, D_n f$ are linear transformations from $\bbR^n$ to $\bbR.$ If the partials are all differentiable, then the second order derivatives of $f$ are defined by 
+    \[D_{ij}f = D_i D_j f, \quad i,j \in \{1,2, \dots, n\}.\] If these second order partials are continuous in $E,$ then we say $f$ is $C^2.$ 
+\begin{thm} (Symmetry of the Hessian)
+    If $f \in C^2(E),$ then $D_{ij}f = D_{ji}f.$ 
+\end{thm} Suppose now $f: E\to \bbR^n$ and $f$ is differentiable for some $x\in E.$ The determinant of the linear operator $(Df)(x)$ is called the \textbf{Jacobian of $f$ at $x$} and is defined by 
+\[J_f(x) = \det ((Df)(x)) = \frac{\partial (y_1, \dots, y_n)}{\partial(x_1, \dots, x_n)}, \quad f(x_i) = y_i.\]
+\end{rem}
 
+\begin{defn}
+    Let $k \in \bbN.$ A \textbf{k-cell} in $\bbR^k$ is the set of points $I^k\ni x = (x_1, \dots, x_k)$ such that $a_i \leq x \leq b_i$ for all $i  = 1, 2,\dots, k.$
+\end{defn}
+Note that a $k-$cell is simply a closed rectangle in $\bbR^k.$ 
+\begin{rem}
+    Suppose $I^k$ is a $k-$cell in $\bbR^k,$ $f: I^k \to \bbR$ is continuous. For every $j \leq k,$ let $I^j$ be the restriction of $I^k$ to the first $j$ components. Define 
+    \[g_k: I^k \to \bbR, \quad g_k := f\]
+    \[g_{k-1}: I^{k-1} \to \bbR, \quad g_{k-1}(x_1, \dots, x_{k-1}) :=  \int_{a_k}^{b_k} g_k(x_1, \dots, x_k) dx_k.\] Since $g_k$ is uniformly continuous on $I^k,$ we know that $g_{k-1}$ is (unif) continuous on $I^k.$ Define
+    \[g_{k-2}: I^{k-2} \to \bbR, \quad g_{k-2}(x_1, \dots, x_{k-2}) :=  \int_{a_{k-1}}^{b_{k-1}} g_k(x_1, \dots, x_{k-1}) dx_{k-1}.\] Again, $g_{k-2}$ is (unif) continuous. We can repeat this process until $k= 0,$ at which point  we arrive at a number
+    \[g_0:= \int_{a_1}^{b_1} g_1(x_1) dx_1.\]
+\end{rem}
+\begin{defn}
+    Using the notation from the above remark, we say that \textbf{$g_0$ is the iterated integral of $f$ over $I^k,$} and write 
+    \[\int_{I^k}f(x)dx = g_0\]
+\end{defn}
+\begin{exmp}
+    Let $I^2 = [1,2] \times [0,1].$ Define $f: I^2 \to \bbR$ as $f(x_1, x_2) = 2x_1 x_2^2.$ Then 
+    \[g_1(x_1) = \int_0^1 g_2(x_1, x_2)dx_2 = \int_0^1 2x_1x_2^2 dx_2 = 2x_1 \int_0^1 x_2^2 dx_2= \frac{2}{3}x_1\]
+    \[g_0 = \int_1^2 g_1(x_1)dx_1 = \int_1^2 \frac{2}{3}x^1 dx_1= 1\]
+    Clearly, 
+    \[\int_{I^2}fdx = \int_1^2 \left(\int_0^1 2x_1 x_2^2\right)dx_1\]
+\end{exmp}
+\begin{prop}
+    The iterated integral is the same as the multivariate integral. That is, 
+    \[\int_{I^k} fdx,\]
+\end{prop}
+The result is important, and shows the order of the iterated integral does not matter by Fubini's theorem.
 
+\begin{defn}
+    Suppose $f: \bbR^k \to \bbR.$ The \textbf{support} of $f$ defined to be \[\text{supp}(f) = \overline{\{x \in \bbR^k \mid f(x) \neq 0\}}.\] 
+\end{defn}
+\begin{defn}
+    If $f: \bbR^k \to \bbR$ is continuous with compact support. Let $I^k$ be a $k-$cell containing $\text{supp}(f).$ Then we define 
+    \[\int_{\bbR^k} fdx := \int_{I^k}f dx.\]
+\end{defn}
+
+\begin{thm}
+    (Change of Variables) Let $T \in C^1(E, \bbR^n)$ be bijective and has nonzero Jacobian everywhere on $E$, where $E \subseteq \bbR^n$ is open. If $f: \bbR^n \to \bbR^n$ is continuous on $\bbR^n$ and has compact support and contained in $T(E),$ then 
+    \[\int_{\bbR^n} f(x)dx = \int_{\bbR^n} f(T(x)) |J_T(x)|dx \]
+\end{thm}
+
+\newpage
+\subsection{Monday, Apr 28: Differential $1-$forms}
+\begin{rem}
+    A \textit{differential $1-$form} in $\bbR^n$ is:
+    \begin{enumerate}
+        \item any object which can be integrated on any curve in $\bbR^n.$ 
+        \item A rule assigning a real number to every orientated line segment in $\bbR^n$ in a suitable way
+    \end{enumerate}
+\end{rem}
+\begin{defn}
+    Let $p \in \bbR^n.$ The \textbf{tangent space} to $\bbR^n$ at $p$ is the set $T_p\bbR^n: \{(p,v) \mid v\in \bbR^n\}$ 
+\end{defn}
+\begin{rem}
+    If $\alpha$ is a $1-$form and $p \in \bbR^n,$ then we write $\alpha_p$ to denote the restriction of $\alpha$ to $T_p\bbR^n$. Thus, $\alpha_p(v)$ is the value $\alpha$ assigns to the oriented line segment from $p$ to $p + v.$ 
+
+    Moreover, we require that $\alpha_p$ is a linear functional for all $p \in \bbR^n$. That is 
+    \begin{enumerate}
+        \item $\alpha_p(tv) = t\alpha_p()v$.
+        \item $\alpha_p(v + w) = \alpha_p(v) + \alpha_p(w)$
+    \end{enumerate}
+
+    With differential forms, we denote that projection maps in $\bbR^n$ by $dx_1, \dots, dx_m,$ where 
+    \[dx_1(v) = dx_i(v_1, \dots, v_n) = v_i\]
+
+    These form a basis for the set of linear functional, and so for any $1-$form $\alpha,$ its restriction $\alpha_p$ can be written as 
+    \[\alpha_p = A_1dx_1 + A_2 dx_2 + \cdots + A_ndx_n = A_1(p)dx_1 + \dots + A_n(p)dx_n,\] where the $A_i(p)$ must be sufficiently continuous w.r.t. $p.$
+\end{rem}
+\begin{defn}
+    A \textbf{differential $1-$form} $\alpha$ on $\bbR^n$ is a map from every tangent vector $(p,v)$ in $\bbR^n$ which can be expressed in the form 
+    \[\alpha = f_1 dx_1 + f_2 dx_2 + \cdots  + f_ndx_n,\] where $f_i\in C^2(\bbR^n, \bbR)$
+\end{defn}
+
+\begin{exmp}
+    Suppose $\alpha = y\,dx + dz = y\, dx_1 + dx_3$ on $\bbR^3$ with $p = \begin{pmatrix}
+        1 \\ 2 \\ 3
+    \end{pmatrix}$ and $v = \begin{pmatrix}
+        4\\5\\6
+    \end{pmatrix}$ and 
+    \[\alpha_p(v) = f_1(p)dx_1(v) + f_2(p)dx_2(v) + f_2(p)dx_3(v) = 2\cdot 4 + 0 + 1 \cdot 6 = 14\]
+\end{exmp}
+
+\begin{rem}
+    A \textbf{curve} (1-surface) in $\bbR^n$ is a $C^1-$mapping $\gamma: [a,b] \to \bbR^n.$ 
+\end{rem}
+\begin{exmp}
+    Suppose we want to integrate a $2-$form $\alpha = f_1dx_1 + f_2dx_2$ over a curve, $\gamma:[0,1]\to \bbR^2.$ Partition $[0,1]$ by $0 = t_0 < t_1 < t_2 < t_3 = 1.$ Define
+    \[L_i := \gamma'(t_{i-1})(t_i - t_{i-1}).\] By Taylor's Theorem, $L_i \approx \gamma(t_i) - \gamma(t_{i-1})$
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Images/1-form.png}
+        \caption{Visualizing $L_i$}
+    \end{figure}
+    Then for $k$ large,
+    \begin{align*}
+    \sum_{i=1}^k \alpha(L_i) &= \sum_{i=1}^k\alpha_{\gamma(t_{i-1})}\big(\gamma'(t_{i-1})(t_i - t_{i-1})\big)\\ 
+    &= \sum_{i=1}^k f_1(\gamma(t_{i-1}))\gamma_1'(t_{i-1})(t_i - t_{i-1})  + f_2(\gamma(t_{i-1}))\gamma'_2(t_{i-1})(t_i - t_{i-1}) \\
+    &\to \int_0^1 (f_1(\gamma(t)\gamma_1'(t) + f_2(\gamma(t))\gamma_2'(t))\,dt
+    \end{align*}
+    
+\end{exmp}
+
+\begin{defn}
+    Let $\alpha = f_1dx_1+\dots + f_ndx_n$ be a $1-$form in $\bbR^n,$ let $\gamma: [a,b]\tp \bbR^n$ be $C^1.$ Then we define the integral of $\alpha$ over $\gamma$ to be 
+    \[\int_\gamma \alpha = \int_a^b \left(f_1(\gamma(t))\gamma'_1(t) + \cdots + f_n(\gamma(t))\gamma'_n(t)\right) \, dt\]
+\end{defn}
+\begin{exmp}
+    Let $\alpha = x^2 dx_1 + dx_2$ on $\bbR^2$ and $\gamma: [0,1]\to \bbR^2$ be $\gamma(t,t^2).$ Then 
+    \[\gamma'_1(t) = 1, \quad \gamma'_2(t) = 2t.\]
+    Thus, 
+    \begin{align*}
+        \int_\gamma \alpha &= \int_0^1 \bigg(f_1 (\gamma(t))\gamma'_1(t) + f_2(\gamma(t))\gamma'_t(t)\bigg)\,dt\\
+        &= \int_0^1 \bigg(t^2 + t^2\cdot 2t\bigg)\,dt\\
+        &= \int_0^1 t^2 \, dt + 2\int_0^1 t^3 \, dt\\
+        &= \frac{4}{3}
+    \end{align*}
+\end{exmp}
 
 
 \end{document}
