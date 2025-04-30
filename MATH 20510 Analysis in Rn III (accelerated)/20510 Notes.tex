@@ -560,7 +560,7 @@ The result is important, and shows the order of the iterated integral does not m
 \newpage
 \subsection{Monday, Apr 28: Differential $1-$forms}
 \begin{rem}
-    A \textit{differential $1-$form} in $\bbR^n$ is:
+    A \textit{$1-$form} in $\bbR^n$ is:
     \begin{enumerate}
         \item any object which can be integrated on any curve in $\bbR^n.$ 
         \item A rule assigning a real number to every orientated line segment in $\bbR^n$ in a suitable way
@@ -574,7 +574,7 @@ The result is important, and shows the order of the iterated integral does not m
 
     Moreover, we require that $\alpha_p$ is a linear functional for all $p \in \bbR^n$. That is 
     \begin{enumerate}
-        \item $\alpha_p(tv) = t\alpha_p()v$.
+        \item $\alpha_p(tv) = t\alpha_p(v)$.
         \item $\alpha_p(v + w) = \alpha_p(v) + \alpha_p(w)$
     \end{enumerate}
 
@@ -634,5 +634,78 @@ The result is important, and shows the order of the iterated integral does not m
     \end{align*}
 \end{exmp}
 
+
+\newpage
+\subsection*{Wednesday, Apr 30: Differential $2-$forms}
+A $2-$surface is a $C^1-$map $\gamma: I^2 \to \bbR^n.$
+\begin{rem}
+    Informally a \textit{$2-$form} is
+    \begin{enumerate}
+        \item an object which can be integrated over any $2-$surface.
+        \item a rule which assigns a real number to every orientate parallelogram in $\bbR^n$ in a suitable way. 
+    \end{enumerate}
+Note that we specify any orientate parallelogram in $\bbR^n$ based at some $p \in \bbR^n$ by giving an ordered pair $(v,w).$ A $2-$form, $\omega,$ should satisfy:
+\begin{enumerate}
+    \item (Bilinear) $\omega_p(tv_1, v_2) = t\omega_p(v_1, v_2) = \omega_p(v_1, tv_2).$
+    \item (Bilinear) \[\omega_p(v_1, v_2 + v_3) = \omega_p(v_1, v_2) + \omega_p(v_1, v_3)\] and 
+    \[\omega_p(v_1 + v_2, v_3) = \omega_p(v_1, v_2 + v_3)\]
+    \item (Asymmetric)
+    \[\omega_p(v_1, v_2) = -\omega_p(v_2, v_1)\]
+\end{enumerate}
+Note that (c) implies that $\omega_p(v,v) = 0.$
+\end{rem}
+\begin{defn}
+    For any $v,w \in \bbR^n,$ we denote a \textbf{basic $2-$form} by 
+    \[(dx_i \wedge dx_j)(v, w) = \det\begin{pmatrix}
+        v_i & w_i\\
+        v_j & w_j
+    \end{pmatrix}\]
+\end{defn}
+Intuitively, a $2-$form is the orientated area of the parallelogram's shadow on the $(i,j)$ plane!
+\begin{rem}
+    If $\omega_p$ satisfies (a,b,c), then $\omega_p$ can be expressed as 
+    \[\omega_p = \sum_{i,j}A_{i,j}(p)(dx_i \wedge dx_j)\]
+\end{rem}
+
+\begin{defn}
+    A \textbf{differential $2$-form} in $\bbR^n$ is a rule assigning a real number to each oriented parallelogram in $\bbR^n$ that can be written as 
+    \[\omega = \sum_{i,j}f_{i,j}(dx_1\wedge dx_j),\] where $f_{i,j} \in C^2(\bbR^n, \bbR).$ Thus, for any $p \in \bbR^n,$ $v,w \in \bbR^n,$
+    \[\omega_p(v,w) = \sum_{i,h}f_{i,j}(p)(dx_i \wedge dx_j)(v,w)\]
+\end{defn}
+
+\begin{exmp}
+    Let $\omega$ be a two form in $\bbR^3.$ Then 
+    \begin{align*}
+    \omega &= f_{1,1}(dx_1 \wedge dx_1) + f_{1,2}(dx_1 \wedge dx_2) + f_{2,1}(dx_2 \wedge dx_1) + f_{2,2}(fx_2 \wedge dx_2)\\
+    &= f_{1,2}(dx_1 \wedge dx_2) + f_{2,1}(dx_2 \wedge dx_1)\\
+    &= (f_{1,2} - f_{2,1})(dx_1 \wedge dx_2)
+    \end{align*}
+    Thus, any $\omega$ $2-$form in $\bbR^2$ can be written as $\omega = f(dx_1 \wedge dx_2).$
+\end{exmp}
+\begin{exmp}
+    Let $\omega$ be a two form in $\bbR^3,$ then 
+    \[\omega = f_1 (dx_1 \wedge dx_2) + f_2(dx_1 \wedge dx_3) + f_3(dx_2 \wedge dx_3)\]
+\end{exmp}
+
+\begin{defn}
+    Let $\gamma$ be a $C^1$ $2-$surface in $\bbR^3,$ and $\omega$ be a $2-$form in $\bbR^3.$ Then the integral of $\omega$ over $\gamma$ is 
+    \begin{align*}
+        \int_\gamma \omega &= \int_{I^2} \omega_{\gamma(z)} (\frac{\partial \gamma}{\partial x_1}(z), \frac{\partial \gamma}{\partial x_2}(z))\, dz \\
+        &= \int_{I^2} \omega_{\gamma(z)} \left(\begin{pmatrix}
+            D_1\gamma_1(z)\\
+            D_1\gamma_2(z)\\
+            D_1\gamma_3(z)
+        \end{pmatrix}, \begin{pmatrix}
+            D_2\gamma_1(z)\\
+            D_2\gamma_2(z)\\
+            D_2\gamma_3(z)
+        \end{pmatrix}\right)\, dz \\
+        &= \int_{I^2} f_1(\gamma(z))(dx_1\wedge dx_2) \left(\frac{\partial \gamma}{\partial x_1}(z), \frac{\partial \gamma}{\partial x_2}(z)\right) + f_2(\gamma(z))(dx_1\wedge dx_3) \left(\frac{\partial \gamma}{\partial x_1}(z), \frac{\partial \gamma}{\partial x_2}(z)\right) + f_3(\gamma(z))(dx_2\wedge dx_3) \left(\frac{\partial \gamma}{\partial x_1}(z), \frac{\partial \gamma}{\partial x_2}(z)\right) \, dz\\
+        &= \int_{I^2}f_1(\gamma(z)) \det\begin{pmatrix}
+            D_1\gamma_1(z) & D_2\gamma_1(z)\\
+            D_1\gamma_2(z) & D_2\gamma_2(z)
+        \end{pmatrix} + \dots \,dz
+    \end{align*}
+\end{defn}
 
 \end{document}

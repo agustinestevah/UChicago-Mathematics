@@ -923,9 +923,101 @@ We note that the natural filtration of $X_0, \dots, X_n$ is the information cont
 \end{exmp}
 
 
+\newpage
+\subsection{Wednesday, Apr 30: Martingales}
+\begin{defn}
+    Let $\{X_t\}$ be a stochastic process. The \textbf{natural filtration} of $X_t$ is defined to be 
+    \[\mathcal{F}_n = (X_1, \dots, X_n)\]
+\end{defn}
+
+\begin{defn}
+    A stochastic process $\{M_n\}$ is called a martingale w.r.t. $\{\mathcal{F}_n\}$ if:
+    \begin{enumerate}
+        \item Each $M_n$ is $\mathcal{F}_n$ measurable.
+        \item $\bbE[|M_n|] < \infty$ for all $n.$
+        \item For each $m < n,$
+        \[\bbE[M_n \mid \mathcal{F}_m] = M_m.\]
+    \end{enumerate}
+\end{defn}
+\begin{rem}
+    In particular, we can rewrite the Martingale Property to be $\bbE[M_n - M_m \mid \mathcal{F}_m] = 0.$ By the tower property, 
+
+    \[\bbE[M_n] = \bbE[\bbE[M_n \mid \mathcal{F}_0]] = \bbE[M_0].\]
+\end{rem}
+
+\begin{prop}
+    To prove $\bbE[M_n \mid F_m] = M_m$, it suffices to show that $\bbE[M_n \mid \mathcal{F}_{n-1}] = M_{n-1}$
+\end{prop}
+\begin{proof}
+\[\bbE[M_n \mid \mathcal{F}_{n-2}] = \bbE[\bbE[M_n \mid \mathcal{F}_{n-1}]\mid \mathcal{F}_{n-2}] = \bbE[M_{n-1}\mid \mathcal{F}_{n-2}]= M_{n-2}\]
+\end{proof}
+
+\begin{exmp}
+    Let $X_1, X_2, \dots$ be i.id. with mean $\mu,$ and let $\mathcal{F}_n$ be the natural filtration of $X_n.$ Let $S_0 = 0$ and $S_n = X_1 + \dots + X_n.$ Let $M_n = S_n - n\mu.$ 
+
+    \begin{enumerate}
+        \item The first property is inmediate.
+        \item For any $n,$
+        \[\bbE[|M_n|] \leq \bbE[|S_n|] + \mu n < \infty.\]
+        \item For any $n,$
+    \begin{align*}
+        \bbE[M_n \mid \mathcal{F}_{n-1}] &= \bbE[(X_1 + \dots + X_n) - n\mu \mid \mathcal{F}_{n-1}]\\&= \bbE[M_{n-1} + (X_n - \mu) \mid \mathcal{F}_{n-1}]\\& = \bbE[M_{n-1} \mid \mathcal{F}_{n-1}] + \bbE[X_n - \mu \mid \mathcal{F}_{n-1}]\\& = M_{n-1}
+    \end{align*}
+    \end{enumerate}
+\end{exmp}
+
+\begin{exmp}
+    Let $X_1, X_2, \dots$ be i.i.d. with mean $0$ and variance $\sigma^2.$ Let $\mathcal{F}_n$ be the natural filtration of $X_n.$ Let $M_n:= S_n^2 - n\sigma^2.$
+    \begin{enumerate}
+        \item Again, the first property is clear.
+        \item For any $n,$
+\[\bbE[|M_n|] \leq \bbE[S_n^2] + n\sigma^2 = \Var[S_n] - \bbE[S_n]^2 + n\sigma^2 = n\sigma^2 + n\sigma^2 < \infty\]
+\item For any $n,$ we have (from Example 1.27)
+\begin{align*}
+    \bbE[M_n \mid \mathcal{F}_{n-1}] &= \bbE[S_n^2 - n\sigma^2 \mid \mathcal{F}_{n-1}]\\
+    &= \bbE[S_n^2\mid \mathcal{F}_{n-1}] - n\sigma^2\\
+    &= S_{n-1}^2 + \sigma^2 - \sigma^2 n\\
+    &= M_{n-1}
+\end{align*}
+    \end{enumerate}
+\end{exmp}
+
+\begin{exmp}
+    Let $Y_0, Y_1, \dots$ be a sequence of random variables and let $\mathcal{F}_n$ be the natural filtration. Let $X$ be a random variable such that $\bbE[|X|] < \infty,$ and let 
+    \[M_n = \bbE[X \mid \mathcal{F}_n]\]
+    \begin{enumerate}
+        \item Clealry, $M_n$ is $\mathcal{F}_n$ measurable.
+        \item For any $n,$
+    \[\bbE[|M_n|] \leq \bbE[\bbE[|X| \mid \mathcal{F}_n]] = \bbE[|X|] < \infty.\]
+    \item By the tower property,
+\begin{align*}
+    \bbE[M_n \mid \mathcal{F}_{n-1}] &= \bbE[\bbE[X \mid \mathcal{F}_{n}] \mid \mathcal{F}_{n-1}]\\
+    &= \bbE[X \mid \mathcal{F}_{n-1}]\\
+    &= M_{n-1}
+\end{align*}
+    \end{enumerate}
+\end{exmp}
 
 
+We know $\bbE[M_n] = \bbE[M_0]$ for any $n.$ Is this still true for a random time $\tau.$ 
 
+\begin{rem}
+    Let $\tau$ be a stopping time for $\{\mathcal{F}_n\}.$ Doob's Optional Stopping Theorem states that, under certain conditions, 
+    \[\bbE[M_\tau] = \bbE[M_0]\]
+\end{rem}
+\begin{exmp}
+(Gambler's ruin)
+    Let $X_1, X_2, \dots$ be i.i.d with $\bbP\{X_i = 1\} = \bbP\{X_i = -1\} = \frac{1}{2}.$ Then $S_n = X_1 + \dots X_n$ is  a martingale by Example 1.28. Let $\tau := \min\{n \geq 0 \mid S_n = a \text{ or } S_n = -b\}.$
+    DOST tells us that 
+    \[\bbE[S_\tau] = \bbE[S_0] = 0,\] and thus 
+    \begin{align*}
+        0 &= \bbE[S_\tau]\\ &= a\bbP\{S_n = a\}  + (-b)\bbP\{S_n = -b\}\\
+        &= a p_W - b p_L\\
+        &= ap_W - b(1-p_W)
+    \end{align*}
+    and thus 
+    \[p_W = \frac{b}{a + b}\]
+\end{exmp}
 
 
 

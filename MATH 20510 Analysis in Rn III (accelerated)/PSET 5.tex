@@ -212,6 +212,16 @@ Show that $f$ is real valued if, and only if, $\overline{\hat{f}(n)} = \hat{f}(-
         &= \frac{1}{2\pi}\int_0^{2\pi}f(x)e^{-i(-n)x}\,dx\\
         &= \hat{f}(-n)
     \end{align*}
+
+($\impliedby$) Suppose $f$ is continuous and $\overline{\hat{f}(n)} = \hat{f}(-n).$ To see that $f$ is real value, it suffices to show that $\overline{f(x)} = f(x)$ for any $x\in \bbR.$ By a corollary in class, it suffices to show that the Fourier coefficients of $\overline{f}$ and $\hat{f}(n)$ are equal.
+\begin{align*}(\overline{f}, e_n) &= \frac{1}{2\pi}\int_{-\pi}^\pi \overline{f(x)} e^{-inx} \, dx\\
+&= \frac{1}{2\pi}\int_{-\pi}^\pi \overline{f(x)e^{inx}}\, dx\\
+&= \overline{\frac{1}{2\pi}\int_{-\pi}^\pi {f(x)e^{inx}}\, dx}\\
+&= \overline{(f,e_{-n})}\\
+&= \overline{\hat{f}(-n)}\\
+&= \overline{\overline{\hat{f}(n)}}\\
+&= \hat{f}(n)
+\end{align*}
 \end{solution}
     \end{enumerate}
 \end{problem}
