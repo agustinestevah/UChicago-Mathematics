@@ -130,17 +130,36 @@ q\phi(t) + (1-q)t\phi(t) = t.
 
 \end{problem}
 \begin{solution}
-Conditioning, we use the markov property and independence:
+Conditioning, 
 \begin{align*}
-  a &= \bbP\{\text{extinction} \mid X_0 = 1\}\\ &= \sum_{k=1}^\infty \bbP\{X_1 = k\}\bbP\{\text{extinction} \mid X_1 = k \} \\
-  &=  \sum_{k=1}^\infty \bbP\{X_1 = k\}\bigg(\bbP\{\text{extinction} \mid X_1 = k  \mid \text{dies}\}\bbP\{\text{dies}\} + \bbP\{\text{extinction} \mid X_1 = k  \mid \text{lives}\}\bbP\{\text{lives}\}  \bigg) \\
-  &=\sum_{k=1}^\infty p_k \big(a^{k} q + a^{k+1}(1-q)\big)\\
-  &= q\sum_{k=1}^\infty p_k a^k + (1-q)\sum_{k=1}^\infty p_ka^{k+1}\\
-  &= q\phi(a) + (1-q)a \phi(a)
+  a &= \bbP\{\text{extinction} \mid X_0 = 1\}\\ &= \sum_{k=1}^\infty \bbP\{X_1 = k\}\bbP\{\text{extinction} \mid X_1 = k \}  \\
+  &= \sum_{k=1}^\infty \bbP\{X_1 = k \mid \text{fucking dies}\}\bbP\{\text{fucking dies}\} + \bbP\{X_1 = k \mid \text{lives}\}\bbP\{\text{lives}\})a^k\\
+  &= \sum_{k=1}^\infty (p_kq + p_{k-1}(1-q))a^k\\
+  &= \sum_{k=1}^\infty p_k qa^k + \sum_{k=2}^\infty (1-q)p_{k-1}a^k\\
+  &= \sum_{k=1}^\infty p_k qa^k + \sum_{k=1}^\infty (1-q)p_{k}a^{k+1}\\
+  &= q\phi(a) + (1-q) a \phi(a)
 \end{align*}
+Let $\varphi(a) = q\phi(a) + (1-q) a \phi(a).$ We claim that the extinction probability is the smallest possible solution to $\varphi(a) = a.$ 
+\end{solution} 
 
+
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Let $\{X_n\}$ be a branching process with offspring distribution $\{p_j\}_{j \geq 0}$ and let $\phi(a)$ be the generating function $\sum_{j=0}^\infty p_ka^k.$ We let $\phi^{(n)} = \phi \circ \phi \circ \cdots \circ \phi$ composed $n$ times. Show that for $n\geq 1,$ 
+    \[\bbP\{X_n = 0 \mid X_{n-1} \neq 0\} = \frac{\phi^{(n-1)}(p_0) - \phi^{(n-1)}(0)}{1 - \phi^{(n-1)}(0)}.\]
+\end{problem}
+\begin{solution}
+    We use Bayes rule:
+    \begin{align*}
+        \bbP\{X_n = 0 \mid X_{n-1} \neq 0\} &= \frac{\bbP\{X_n = 0, X_{n-1} \neq 0\}}{\bbP\{X_{n-1} \neq 0\}}\\
+        &= \frac{\bbP\{X_n = 0, X_{n-1} \neq 0, X_0 = 1\}}{1 - \bbP\{X_{n-1} = 0\}}\\
+        &= \frac{\bbP\{X_n = 0\mid  X_{n-1} \neq 0\}\{X_{n-1} \neq 0\}}{1 - \bbP\{X_{n-1} = 0\}}\\
+        &= \frac{\bbP\{X_n = 0\mid  X_{n-1} \neq 0\}(1 - \bbP\{X_{n-1} = 0\})}{1 - \bbP\{X_{n-1} = 0\}}\\
+        &= \frac{\bbP\{X_n = 0\mid  X_{n-1} \neq 0\}(1 - \bbP\{X_{n-1} = 0\})}{1 - \phi^{(n-1)}(0)}
+    \end{align*}
 \end{solution}
-
 
 
 \newpage
@@ -199,12 +218,24 @@ Ideally, the chicken will start to cross the road at time \(\tau_{J-1}\) and com
     \end{solution}
     \item[(b)] Use part (a) to find \(\mathbb{E}[\tau_{J-1} + c]\).
 \begin{solution}
-    By definition, 
+Consider that $J \sim \text{Geometric}$ since we need to 'fail' $J-1$ times, that is, the first $J-1$ cars must come within $c$ of each other, and succeed once, the $J$th car will be $>c$ time from the last. Using various properties of the Poisson process, such as memorylessness and independence of arrival times, then
+\begin{align*}
+\bbP\{J = j\} &= \bbP\{\tau_{j-1} - \tau_{j-2} \leq  c, \tau_{j-2} - \tau_{j-3} \leq c, \dots, \tau_{1}\leq  c\} \bbP\{\tau_{j} - \tau_{j-1} >c\}\\
+&\leq \bbP\{\tau_{1} \leq c\}^{j-1} \bbP\{\tau_{1} >c\}\\
+&= (1-e^{-\lambda c})^{j-1}(e^{-\lambda c})
+\end{align*}
+Using the fact that the arrival times are independent, wenote that
     \begin{align*}
         \bbE[\tau_{J-1} + c] &= \bbE[\tau_{J-1}] + c\\
-        &= \frac{\bbE[J] - 1}{\lambda} + c\\
-        &= \bbE[\min\{\}]
+        &= \bbE[\bbE[\tau_{j-1} \mid J = j]]+ c\\
+        &= c + \sum_{j=0}^\infty \bbE[\tau_{j-1} \mid J = j] \bbP\{J = j\}\\
+        &= c + \sum_{j=0}^\infty \bbP\{J = j\}\left( \bbE[\tau_{j-1} - \tau_{j-2} \mid J = j] + \bbE[\tau_{j-2} - \tau_{j-3} \mid J = j] + \cdots + \bbE[\tau_{1} - \tau_{0} \mid J = j]\right)\\
+        &= c + \sum_{j=0}^\infty \bbP\{J = j\}\left( \bbE[\tau_{j-1} - \tau_{j-2} \mid \tau_{j-1} - \tau_{j-2} <c] + \cdots + \bbE[\tau_{1} - \tau_{0} \mid \tau_{1} - \tau_{0} <c]\right)\\
+        &= c +  \sum_{j=0}^\infty \bbP\{J = j\}\left( (j-1)\bbE[\tau_{1}\mid \tau_{1}<c]\right)\\
+        &= c + \sum_{j=0}^\infty (1-e^{-\lambda c})^{j-1}(e^{-\lambda c}) \left((j-1)\left(\frac{1}{\lambda} - \frac{ce^{-\lambda c}}{1- e^{-\lambda c}}\right)\right)\\
+        &= c + \sum_{j=0}^\infty (j-1)\left(\frac{1-e^{-\lambda c})^{j-1}(e^{-\lambda c})}{\lambda}- (1 - e^{-\lambda c})^{j-2}ce^{-2\lambda c}\right)
     \end{align*}
+    the fuck is this chicken doing bro
 \end{solution}
 \end{enumerate}
 
@@ -323,7 +354,49 @@ A = \begin{pmatrix}
 
 
 
-
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Let $G$ be a finite connected graph. The continuous random walk on $G$ with state space $V(G)$ is given by rates $\alpha(x,y) = 1$ if $x$ and $y$ share an edge and zero else. Find the stationary distribution.
+\end{problem}
+\begin{solution}
+    Suppose $V(G) = \{1,2,\dots, N\}.$ Then 
+    \[A = \begin{pmatrix}
+        \alpha(1,1) & \alpha(1,2) & \cdots & \alpha(1,N)\\
+        \alpha(2,1) & \alpha(2,2) & \cdots & \alpha(2,N)\\
+    \vdots & \vdots &\ddots & \vdots\\
+    \alpha(N,1) & \alpha(N,2) & \cdots & \alpha(N,N)
+    \end{pmatrix} = \begin{pmatrix}
+        -\deg(1) & \alpha(1,2) & \cdots & \alpha(1,N)\\
+        \alpha(2,1) & -\deg(2) & \cdots & \alpha(2,N)\\
+    \vdots & \vdots &\ddots & \vdots\\
+    \alpha(N,1) & \alpha(N,2) & \cdots & -\deg(N)
+    \end{pmatrix}.\] But since sharing edges is an equivalence class, then $\alpha(i,j) = \alpha(j,i),$ and thus 
+    \[A = \begin{pmatrix}
+        -\deg(1) & \alpha(1,2) & \cdots & \alpha(1,N)\\
+        \alpha(1,2) & -\deg(2) & \cdots & \alpha(2,N)\\
+    \vdots & \vdots &\ddots & \vdots\\
+    \alpha(1,N) & \alpha(2,N) & \cdots & -\deg(N)
+    \end{pmatrix}.\]
+    
+    Since the graph is finite and connected, the Markov chain is clearly irreducible, and so the unique stationary distribution will satisfy $\pi A = 0.$ That is,
+    \begin{align*}
+        -\deg(1)\pi_1 + \alpha(2,1)\pi_2 + \dots + \alpha(N,1)\pi_N &= 0\\
+        \alpha(1,2)\pi_1 -\deg(2)\pi_2 + \dots + \alpha(N,2)\pi_N &= 0\\
+        &\vdots\\
+        \alpha(1,N)\pi_1 + \alpha(2,N)\pi_2 + \dots -\deg(N)\pi_N &= 0\\
+        \pi_1 + \pi_2 + \cdots +\pi_N &=1
+    \end{align*}
+    Consider the candidate distribution 
+    \[\pi_1 = \pi_2 = \cdots = \pi_N.\] Then
+    \begin{align*}
+        -\deg(1)\pi_1 + \alpha(2,1)\pi_1 + \dots + \alpha(N,1)\pi_N = -\deg(1)\pi_1 + \deg(1)\pi_1&=  0\\
+        &\vdots\\
+        \alpha(1,N)\pi_N + \alpha(2,N)\pi_N + \dots -\deg(N)\pi_N  = \deg(N)\pi_N - \deg(N)\pi_N&= 0
+    \end{align*}
+    and thus plugging into the final constraint, we see that 
+    \[\boxed{\pi_i = \frac{1}{N}}\] for all $i = 1,2,\dots N$
+\end{solution}
 
 
 
