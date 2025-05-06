@@ -132,14 +132,16 @@ q\phi(t) + (1-q)t\phi(t) = t.
 \begin{solution}
 Conditioning, 
 \begin{align*}
-  a &= \bbP\{\text{extinction} \mid X_0 = 1\}\\ &= \sum_{k=1}^\infty \bbP\{X_1 = k\}\bbP\{\text{extinction} \mid X_1 = k \}  \\
-  &= \sum_{k=1}^\infty \bbP\{X_1 = k \mid \text{fucking dies}\}\bbP\{\text{fucking dies}\} + \bbP\{X_1 = k \mid \text{lives}\}\bbP\{\text{lives}\})a^k\\
-  &= \sum_{k=1}^\infty (p_kq + p_{k-1}(1-q))a^k\\
-  &= \sum_{k=1}^\infty p_k qa^k + \sum_{k=2}^\infty (1-q)p_{k-1}a^k\\
-  &= \sum_{k=1}^\infty p_k qa^k + \sum_{k=1}^\infty (1-q)p_{k}a^{k+1}\\
+  a &= \bbP\{\text{extinction} \mid X_0 = 1\}\\ &= \sum_{k=0}^\infty \bbP\{X_1 = k\}\bbP\{\text{extinction} \mid X_1 = k \}  \\
+  &= \sum_{k=0}^\infty \bbP\{X_1 = k \mid \text{fucking dies}\}\bbP\{\text{fucking dies}\} + \bbP\{X_1 = k \mid \text{lives}\}\bbP\{\text{lives}\})a^k\\
+  &= qp_0 + \sum_{k=1}^\infty (p_kq + p_{k-1}(1-q))a^k\\
+  &= \sum_{k=0}^\infty (p_kq + p_{k-1}(1-q))a^k\\
+  &= \sum_{k=1}^\infty p_k qa^k + \sum_{k=1}^\infty (1-q)p_{k-1}a^k\\
+  &= \sum_{k=1}^\infty p_k qa^k + \sum_{k=0}^\infty (1-q)p_{k}a^{k+1}\\
   &= q\phi(a) + (1-q) a \phi(a)
-\end{align*}
-Let $\varphi(a) = q\phi(a) + (1-q) a \phi(a).$ We claim that the extinction probability is the smallest possible solution to $\varphi(a) = a.$ 
+\end{align*} We claim that the extinction probability is the smallest possible solution to $\varphi(a) = a.$ We note  by the fourth line above that the generating function is
+\[\varphi(a) = qp_0 + \sum_{k=1}^\infty (p_kq + p_{k-1}(1-q))a^k,\] and so by a result in class, the extinction probability is given by the smallest positive solution to 
+$a=  \varphi(a) = \cdots = q\phi(a) + (1-q)a\phi(a)$
 \end{solution} 
 
 
@@ -151,14 +153,19 @@ Let $\varphi(a) = q\phi(a) + (1-q) a \phi(a).$ We claim that the extinction prob
     \[\bbP\{X_n = 0 \mid X_{n-1} \neq 0\} = \frac{\phi^{(n-1)}(p_0) - \phi^{(n-1)}(0)}{1 - \phi^{(n-1)}(0)}.\]
 \end{problem}
 \begin{solution}
-    We use Bayes rule:
+By the law of total probability, we have that 
+\[\bbP\{X_n = 0\} = \bbP\{X_n = 0, X_{n-1} = 0\} + \bbP\{X_{n} = 0, X_{n-1} \neq 0\}\]
+    So we use Bayes rule:
     \begin{align*}
         \bbP\{X_n = 0 \mid X_{n-1} \neq 0\} &= \frac{\bbP\{X_n = 0, X_{n-1} \neq 0\}}{\bbP\{X_{n-1} \neq 0\}}\\
-        &= \frac{\bbP\{X_n = 0, X_{n-1} \neq 0, X_0 = 1\}}{1 - \bbP\{X_{n-1} = 0\}}\\
-        &= \frac{\bbP\{X_n = 0\mid  X_{n-1} \neq 0\}\{X_{n-1} \neq 0\}}{1 - \bbP\{X_{n-1} = 0\}}\\
-        &= \frac{\bbP\{X_n = 0\mid  X_{n-1} \neq 0\}(1 - \bbP\{X_{n-1} = 0\})}{1 - \bbP\{X_{n-1} = 0\}}\\
-        &= \frac{\bbP\{X_n = 0\mid  X_{n-1} \neq 0\}(1 - \bbP\{X_{n-1} = 0\})}{1 - \phi^{(n-1)}(0)}
+        &= \frac{\bbP\{X_n = 0, X_{n-1} \neq 0\}}{1 - \bbP\{X_{n-1} = 0\}}\\
+        &= \frac{\bbP\{X_n = 0\} - \bbP\{X_n = 0, X_{n-1} = 0\}}{1 - \bbP\{X_{n-1} = 0\}}\\
+        &=\frac{\bbP\{X_n = 0\} - \bbP\{ X_{n-1} = 0\}}{1 - \bbP\{X_{n-1} = 0\}}\\
+        &= \frac{\phi^{(n)}(0) - \phi^{(n-1)}(0)}{1 - \phi^{(n-1)}(0)},
     \end{align*}
+    and by a result in class
+    \[\phi^{(n)}(0) = \phi^{(n-1)}(\phi(0)) = \phi^{(n-1)}(p_0),\] and so we are done.
+    
 \end{solution}
 
 
@@ -170,13 +177,13 @@ Let \(\{X_t\}\) and \(\{Y_t\}\) be independent Poisson processes with rates \(\l
     \item[(a)] Find the probability that there were 5 calls on line 1 between times 0 and 1 and 5 calls on line 1 between times 1 and 2.
     \begin{solution}
     We are asked to find $\bbP\{X_1 - X_0 = 5, X_2 - X_1 = 5\}.$ By the memorylessness of the Poisson-Process, these events are independent and are both distributed Poisson with parameter $\lambda_1.$ Thus
-    \[\bbP\{X_1 - X_0 = 5, X_2 - X_1 = 5\}= \bbP\{X_1 = 5\}\bbP\{X_2 - X_1 = 5\} = (\frac{e^{\lambda_1}\lambda_1^5}{5!})^2\]
+    \[\bbP\{X_1 - X_0 = 5, X_2 - X_1 = 5\}= \bbP\{X_1 = 5\}\bbP\{X_2 - X_1 = 5\} = \boxed{(\frac{e^{\lambda_1}\lambda_1^5}{5!})^2}\]
     \end{solution}
     \item[(b)] Given that there were 10 total calls (on both lines) between time 1 and time 2, find the conditional probability that all 10 calls were on line 1.
     \begin{solution}
         We use the formula derived in problem session to see that 
         \begin{align*}
-        \bbP\{X_2 - X_1 = 10 \mid (X_2 - X_1) + (Y_2 - Y_1) = 10\}& = \bbP\{X_1 = 10 \mid X_1 + Y_1 = 10\}\\ &= \binom{10}{10}(\frac{\lambda_1}{\lambda_1 + \lambda_2})^{10}(\frac{\lambda_2}{\lambda_1 + \lambda_2})^{0}\\ &= (\frac{\lambda_1}{\lambda_1 + \lambda_2})^{10}    
+        \bbP\{X_2 - X_1 = 10 \mid (X_2 - X_1) + (Y_2 - Y_1) = 10\}& = \bbP\{X_1 = 10 \mid X_1 + Y_1 = 10\}\\ &= \binom{10}{10}(\frac{\lambda_1}{\lambda_1 + \lambda_2})^{10}(\frac{\lambda_2}{\lambda_1 + \lambda_2})^{0}\\ &= \boxed{(\frac{\lambda_1}{\lambda_1 + \lambda_2})^{10}    }
         \end{align*}
         
     \end{solution}
@@ -184,11 +191,23 @@ Let \(\{X_t\}\) and \(\{Y_t\}\) be independent Poisson processes with rates \(\l
     \begin{solution}
         From class, we know that if 
         \[\tau := \min\{T_1, T_2\},\] then since $T_1 \sim \exp{\lambda_1}$ and $T_2 \sim \exp{\lambda_2},$ then $\tau \sim \exp{\lambda_1 + \lambda_2},$ and thus 
-        \[\bbE[\tau] = \frac{1}{\lambda_1 + \lambda_2}\]
+        \[\bbE[\tau] = \boxed{\frac{1}{\lambda_1 + \lambda_2}}\]
     \end{solution}
     \item[(d)] Find the distribution of the number of calls on line 1 before time \(T_2\) (i.e., find \(\mathbb{P}[X_{T_2} = k]\) for each \(k\)).
     \begin{solution}
-\[\bbP\{X_{T_2} = k\} = \bbP\{X_t = k \mid Y_t = 0\} = \binom{}{}\]
+We use the Gamma function,
+\begin{align*}
+    \bbP\{X_{T_2} = k\} &= \int_0^\infty \bbP\{X_t = k \mid T_2 = t\}\bbP\{T_2 = t\}\, dt\\
+    &= \int_0^\infty \bbP\{X_t = k \mid T_2 = t\}(\lambda_2e^{-\lambda_2 t})\, dt\\
+    &= \int_0^\infty \frac{e^{-\lambda_1 t}(\lambda_1t)^k}{k!}\lambda_2 e^{-\lambda_2 t}\, dt\\
+    &= \frac{\lambda_2}{k!}\int_0^\infty (\lambda_1 t)^k e^{-(\lambda_1 + \lambda_2)t}\, dt\\
+    &= \frac{\lambda_2 \lambda_1^k}{k!}\int_0^\infty  t^k e^{-(\lambda_1 + \lambda_2)t}\, dt\\
+    &= \frac{\lambda_2 \lambda_1^k}{(\lambda_1 + \lambda_2)k!}\int_0^\infty (\frac{u}{\lambda_1 + \lambda_2})^k e^{-u}\, du\\
+    &= \frac{\lambda_2 \lambda_1^k}{k!(\lambda_1 + \lambda_2)^{k+1}}\Gamma(k + 1)\\
+    &= \frac{k!}{k!} \frac{\lambda_2}{\lambda_1 + \lambda_2} \left(\frac{\lambda_1}{\lambda_1 + \lambda_2}\right)^k
+\end{align*}
+Thus, 
+\[\boxed{X_{T_2} \sim \text{Geometric}( \frac{\lambda_2}{\lambda_1 + \lambda_2})}\]
     \end{solution}
 \end{enumerate}
 
@@ -204,16 +223,18 @@ Ideally, the chicken will start to cross the road at time \(\tau_{J-1}\) and com
 \begin{enumerate}
     \item[(a)] Suppose \(T\) is exponentially distributed with rate \(\lambda > 0\). Compute \(\mathbb{E}[T \mid T < c]\).
     \begin{solution}
-        Using Bayes rule, we have that 
+    First, note that 
+    \[\bbP\{T < c\} = \int_0^c \bbP\{T = t\}\, dt\]
+        Using Bayes rule and the law of total expectation, we have that 
         \begin{align*}
-            \bbE[T \mid T< c] &= \int_0^c t f_{T}(t \mid t< c)\, dt\\
-             &=\int_0^\infty t \frac{\bbP\{t ,t< c\}}{\bbP\{t< c\}}\, dt\\
-             &= \int_0^c t\frac{\bbP\{t\}}{\bbP\{t < c\}}\,dt\\
+            \bbE[T \mid T< c] &= \int_0^\infty t \bbP\{T = t\mid T<c\}\, dt\\
+             &=\int_0^\infty t \frac{\bbP\{T = t ,T< c\}}{\bbP\{T< c\}}\, dt\\
+             &= \int_0^c t\frac{\bbP\{T = t\}}{\bbP\{T < c\}}\,dt\\
              &= \int_0^c t \frac{f_T(t)}{F_T(t)}\, dt\\
              &= \int_0^c t \frac{\lambda e^{-\lambda t}}{1- e^{-\lambda c}}\, dt\\
              &= \frac{1}{1- e^{-\lambda c}}\int_0^c t\lambda e^{-\lambda t}\, dt\\
              &= \frac{1}{1- e^{-\lambda c}} \frac{1 - e^{-c\lambda}(c\lambda + 1)}{\lambda}\\
-             &= \frac{1}{\lambda} - \frac{ce^{-\lambda c}}{1- e^{-\lambda c}}
+             &= \boxed{\frac{1}{\lambda} - \frac{c}{1- e^{-\lambda c}}}
         \end{align*}
     \end{solution}
     \item[(b)] Use part (a) to find \(\mathbb{E}[\tau_{J-1} + c]\).
@@ -221,21 +242,23 @@ Ideally, the chicken will start to cross the road at time \(\tau_{J-1}\) and com
 Consider that $J \sim \text{Geometric}$ since we need to 'fail' $J-1$ times, that is, the first $J-1$ cars must come within $c$ of each other, and succeed once, the $J$th car will be $>c$ time from the last. Using various properties of the Poisson process, such as memorylessness and independence of arrival times, then
 \begin{align*}
 \bbP\{J = j\} &= \bbP\{\tau_{j-1} - \tau_{j-2} \leq  c, \tau_{j-2} - \tau_{j-3} \leq c, \dots, \tau_{1}\leq  c\} \bbP\{\tau_{j} - \tau_{j-1} >c\}\\
-&\leq \bbP\{\tau_{1} \leq c\}^{j-1} \bbP\{\tau_{1} >c\}\\
+&= \bbP\{\tau_{1} \leq c\}^{j-1} \bbP\{\tau_{1} >c\}\\
 &= (1-e^{-\lambda c})^{j-1}(e^{-\lambda c})
 \end{align*}
+and so 
+\[\bbE[J - 1] = \frac{1- e^{-\lambda c}}{e^{-\lambda c}}\]
 Using the fact that the arrival times are independent, wenote that
     \begin{align*}
         \bbE[\tau_{J-1} + c] &= \bbE[\tau_{J-1}] + c\\
         &= \bbE[\bbE[\tau_{j-1} \mid J = j]]+ c\\
-        &= c + \sum_{j=0}^\infty \bbE[\tau_{j-1} \mid J = j] \bbP\{J = j\}\\
-        &= c + \sum_{j=0}^\infty \bbP\{J = j\}\left( \bbE[\tau_{j-1} - \tau_{j-2} \mid J = j] + \bbE[\tau_{j-2} - \tau_{j-3} \mid J = j] + \cdots + \bbE[\tau_{1} - \tau_{0} \mid J = j]\right)\\
-        &= c + \sum_{j=0}^\infty \bbP\{J = j\}\left( \bbE[\tau_{j-1} - \tau_{j-2} \mid \tau_{j-1} - \tau_{j-2} <c] + \cdots + \bbE[\tau_{1} - \tau_{0} \mid \tau_{1} - \tau_{0} <c]\right)\\
-        &= c +  \sum_{j=0}^\infty \bbP\{J = j\}\left( (j-1)\bbE[\tau_{1}\mid \tau_{1}<c]\right)\\
-        &= c + \sum_{j=0}^\infty (1-e^{-\lambda c})^{j-1}(e^{-\lambda c}) \left((j-1)\left(\frac{1}{\lambda} - \frac{ce^{-\lambda c}}{1- e^{-\lambda c}}\right)\right)\\
-        &= c + \sum_{j=0}^\infty (j-1)\left(\frac{1-e^{-\lambda c})^{j-1}(e^{-\lambda c})}{\lambda}- (1 - e^{-\lambda c})^{j-2}ce^{-2\lambda c}\right)
+        &= c + \sum_{j=1}^\infty \bbE[\tau_{j-1} \mid J = j] \bbP\{J = j\}\\
+        &= c + \sum_{j=1}^\infty \bbP\{J = j\}\left( \bbE[\tau_{j-1} - \tau_{j-2} \mid J = j] + \bbE[\tau_{j-2} - \tau_{j-3} \mid J = j] + \cdots + \bbE[\tau_{1} - \tau_{0} \mid J = j]\right)\\
+        &= c + \sum_{j=1}^\infty \bbP\{J = j\}\left( \bbE[\tau_{j-1} - \tau_{j-2} \mid \tau_{j-1} - \tau_{j-2} <c] + \cdots + \bbE[\tau_{1} - \tau_{0} \mid \tau_{1} - \tau_{0} <c]\right)\\
+        &= c +  \sum_{j=1}^\infty \bbP\{J = j\}\left( (j-1)\bbE[\tau_{1}\mid \tau_{1}<c]\right)\\
+        &= c + \bbE[\tau_{1}\mid \tau_{1}<c]\sum_{j=1}^\infty \bbP\{J-1 = j-1\} (j-1)\\
+        &= c +\bbE[\tau_{1}\mid \tau_{1}<c] \bbE[J-1]\\
+        &=\boxed{ c + \frac{1- e^{-\lambda c}}{e^{-\lambda c}} (\frac{1}{\lambda}- \frac{c}{1- e^{-\lambda c}})}
     \end{align*}
-    the fuck is this chicken doing bro
 \end{solution}
 \end{enumerate}
 
@@ -259,11 +282,11 @@ A = \begin{pmatrix}
 \begin{enumerate}
     \item[(a)] If we start in state 1, what is the expected time that we move to a different state?
     \begin{solution}
-        The rate of leaving state $1$ is given by $A_{1,2} + A_{1,3} = 1,$ and thus if $T$ denotes the time when we leave, we have that \[T \sim \exp{1} \implies \bbE[T] = 1\]
+        The rate of leaving state $1$ is given by $A_{1,2} + A_{1,3} = 1,$ and thus if $T$ denotes the time when we leave, we have that $T\sim \exp{\alpha(1)}$ and thus \[T \sim \exp{1} \implies \boxed{\bbE[T] = 1}\]
     \end{solution}
     \item[(b)] If we start in state 2, what is the expected time that we move to a different state?
 \begin{solution}
-    Similarly to above, $\bbE[T] = \frac{1}{5}$
+    Similarly to above, if we define $T$ as leaving state two, then $T\sim \exp{\alpha(2)},$ and so  \[\boxed{\bbE[T] = \frac{1}{5}}\]
 \end{solution}
     \item[(c)] Explain why this Markov chain is irreducible and find the stationary distribution \(\pi\).
 \begin{solution}
@@ -338,17 +361,45 @@ A = \begin{pmatrix}
     \frac{64}{84} & \frac{16}{84} & \frac{4}{84}\\
     \frac{64}{84} & \frac{16}{84} & \frac{4}{84}\\
 \end{pmatrix}\\
-&\implies \pi = \begin{pmatrix}
+&\implies \boxed{\pi = \begin{pmatrix}
     \frac{16}{21} & \frac{4}{21} & \frac{1}{21}
-\end{pmatrix}
+\end{pmatrix}}
 \end{align*}
 \end{solution}
     \item[(d)] Find \(p_t(1,3)\) for each \(t > 0\).
     \begin{solution}
         From the above, one can see that 
-        \[p_t (1,3) = \frac{e^{-7t}}{84}(-7 e^{4t} + 4 e^{7t} + 3 )\]
+        \[\boxed{p_t (1,3) = \frac{e^{-7t}}{84}(-7 e^{4t} + 4 e^{7t} + 3 )}\]
     \end{solution}
     \item[(e)] Let \(\tau_1, \tau_2, \ldots\) be the times of the successive jumps of \(\{X_t\}_{t \geq 0}\). Let \(\tilde{X}_n = X_{\tau_n}\). Find the transition matrix for the discrete-time Markov chain \(\{\tilde{X}_n\}\).
+\begin{solution}
+    We have that the state space is given by $S = \{1,2,3\},$ but since $\{\tilde{X}_n\}$ is antsy, then $p(i,i) = 0$ for $i = 1,2,3.$ From $A,$ we note that $\alpha(1,3) = \alpha(3,1),$ and so $p(3,1) = p(1,3) = 0,$ since the rate at which $X_n$ traverses both is $0.$ Thus, 
+    \[P = \begin{pmatrix}
+        0 & \cdot & 0\\
+        \cdot & 0 & \cdot\\
+        0 & \cdot & 0 
+    \end{pmatrix} \implies P = \begin{pmatrix}
+        0 & 1 & 0\\
+        \cdot & 0 & \cdot\\
+        0 & 1 & 0
+    \end{pmatrix}\]
+    Note that 
+    \[\bbP\{\tilde{X}_1 = 1 \mid \tilde{X}_0 = 2\} = \bbP\{\tau(2,1) < \tau(2,3)\},\] where 
+    \[\tau(i,j):= \min\{t \geq 0 : X_\tau = j \mid X_{0} = i \}.\] That is, the probability our antsy Markov chain makes it to $1$ is the probability that it switches to $1$ before it switches to $3.$  Since $\tau(2,1) \sim \exp\{4\}$ and $\tau(2,3)\sim \exp{1}.$ Thus, we see that since both of these r.v. are independent, then
+    \begin{align*}
+        \bbP\{\tau(2,1) < \tau(2,3)\} &= \int_0^\infty \bbP\{\tau(2,1) = t, \tau(2,3) >t\}\, dt\\
+        &= \int_0^\infty \bbP\{\tau(2,1) = t\}\bbP\{\tau(2,3) > t\}\,dt\\
+        &= \int_0^\infty 4e^{-4 t}e^{-t}\, dt\\
+        &= 4 \int_0^\infty  e^{-5t}\, dt\\
+        &= \frac{4}{5}
+    \end{align*}
+    Thus, 
+    \[\boxed{P = \begin{pmatrix}
+        0 & 1 & 0\\
+        \frac{4}{5} & 0 & \frac{1}{5}\\
+        0 & 1 & 0
+    \end{pmatrix}}\]
+\end{solution}
 \end{enumerate}
 
 

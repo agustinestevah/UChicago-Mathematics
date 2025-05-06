@@ -1,0 +1,515 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{20510}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 5}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{04-30-2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+
+
+\section*{Problem 1}
+Let \(\omega = x_2^2\,dx_1 + x_1\,dx_2\) be a 1-form and let \(\Phi(u) = (\cos u, \sin u)\) for \(0 \leq u \leq 1\).
+
+Compute
+\[
+\int_{\Phi} \omega.
+\]
+
+\begin{solution}
+We have that 
+\[f_1 = x_2^2, \quad f_2= x_1, \quad \Phi'(u) = \begin{pmatrix}
+        -\sin u & \cos u
+    \end{pmatrix}\]
+    Thus, 
+    \begin{align*}
+        \int_\Phi \omega &= \int_0^1 f_1(\Phi(u))\Phi'_1(u) + f_2(\Phi(u))\Phi'_2(u)\, du\\
+        &=\int_0^1 \sin^2(u)(-\sin (u))\, du + \int_0^1\cos (u) \cos(u)\, du\\
+        &= \frac{1}{4} (2 + \sin(2)) - \frac{4}{3} \sin^4\left(\frac{1}{2}\right)(2 + \cos(1)) 
+    \end{align*}
+
+
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+Let \(\omega = y\,dz \wedge dx\) be a 2-form in \(\mathbb{R}^3\), and \(\Phi : [0, 1]^2 \to \mathbb{R}^3\) be the 2-surface defined by
+\[
+\Phi(\phi, \theta) = (\sin(\pi\phi) \cos(2\pi\theta), \sin(\pi\phi) \sin(2\pi\theta), \cos(\pi\phi)).
+\]
+
+Compute
+\[
+\int_{\Phi} \omega.
+\]
+
+\begin{solution}
+    The Jacobian of $\Phi(\phi, \theta)$ is given by 
+    \[J(\Phi) = \begin{pmatrix}
+        \pi \cos(\pi \phi)\cos(2\pi \theta) & -2\pi \sin(\pi \phi)\sin(2\pi \theta)\\
+        \pi \cos(\pi \phi)\sin(2\pi \theta) & 2\pi\sin(\pi \phi) \cos(2\pi \theta)\\
+        -\pi\sin(\pi \phi) & 0
+    \end{pmatrix}\]
+    Thus, 
+    \begin{align*}
+        \int_\Phi \omega &= \int_0^1 \left( \int_0^1 \sin(\pi\phi) \sin(2\pi\theta) dz \wedge dx J(\Phi(\phi, \theta))\, d\phi\right) d\theta\\
+        &= \int_0^1 \left( \int_0^1 \sin(\pi\phi) \sin(2\pi\theta) \det \begin{pmatrix}
+            -\pi \sin(\pi \phi) & 0\\
+            \pi \cos(\pi \phi)\cos(2\pi \theta) & -2\pi \sin(\pi \phi)\sin(2\pi \theta)
+        \end{pmatrix}\, d\phi\right) d\theta\\
+        &=  \int_0^1 \left( \int_0^1 \sin(\pi\phi) \sin(2\pi\theta) 2\pi^2 \sin^2(\pi \phi)\sin(2\pi \theta)\, d\phi\right) d\theta\\
+        &= 2\pi ^2\int_0^1 \sin^2(2\pi\theta)  \left( \int_0^1 \sin^3(\pi \phi)\, d\phi\right) d\theta\\
+        &= \frac{4\pi }{3}
+    \end{align*}
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+Let \(\omega\) be the 1-form given by
+\[
+\omega = \frac{-y\,dx + x\,dy}{x^2 + y^2},
+\]
+which is defined on \(\mathbb{R}^2 \setminus \{(0, 0)\}\).
+
+\begin{enumerate}
+    \item[(a)] Show that \(d\omega = 0\).
+    \begin{solution}
+Define 
+\[r = x^2 + y^2 \implies dr = 2x \,dx + 2y\,dy\]
+        We compute the exterior derivative of $\omega$ using its linearity
+\begin{align*}
+    d\omega &= d\left(\frac{-y\,dx + x\,dy}{x^2 + y^2}\right)\\
+    &= -d\left(\frac{y}{x^2+ y^2}dx\right) + d\left(\frac{x}{x^2 + y^2} dy\right)\\
+    &:=-d\left(\frac{y}{r}dx\right) + d\left(\frac{x}{r} dy\right)\\ 
+    &= -\frac{dy \,r - y\,dr}{r^2} \wedge dx + \frac{dx\, r - x \,dr}{r^2}\wedge dy\\
+    &= \frac{-(r)\,dy \wedge dx + (2xy \,dx \wedge dx + 2y^2\, dy \wedge dx) + (r)\, dx \wedge dy - (2x^2 \,dx \wedge dy + 2xy\, dy \wedge dy)}{r^2}\\
+    &= \frac{(r)\,dx \wedge dy -2y^2\, dx \wedge dy + (r)\, dx \wedge dy - 2x^2 \,dx \wedge dy }{r^2}\\
+    &= \frac{2(r)\, dx \wedge dy - 2(r)\, dx \wedge dy}{r^2}\\
+    &= 0
+\end{align*}
+    \end{solution}
+
+
+    
+    \item[(b)] Let \(\gamma_k : [0, 1] \to \mathbb{R}^2\) be the curve \(\gamma_k(t) = (\cos(2k\pi t), \sin(2k\pi t))\). Compute
+    \[
+    \int_{\gamma_k} \omega.
+    \]
+    What is the “meaning” of this integral?
+    \begin{solution}
+        \[\gamma'_k(t) = \begin{pmatrix}
+            -2k \pi \sin(2k \pi t) & 2k\pi\cos(2k\pi t)
+        \end{pmatrix}\]
+        And so 
+        \begin{align*}
+            \int_{\gamma_k}\omega &= \int_0^1 \frac{2k\pi \sin^2(2k \pi t)}{\cos^2(2k\pi t) + \sin^2(2k\pi t)}dt + \int_0^1\frac{2k \pi \cos^2(2k\pi t)}{\cos^2(2k\pi t) + \sin^2(2k\pi t)}dt\\
+            &= \int_0^1 2k\pi \,dt\\
+            &= 2k \pi
+        \end{align*}
+        $\gamma_k$ is a circular path about the origin that circles $k$ times. $\omega$ measures the rotation, so the integral is the total angle the path winded about the origin. 
+    \end{solution}
+\end{enumerate}
+
+\newpage
+\section*{Problem 4}
+The \(k\)-form \(\omega_k = dx_1 \wedge \dots \wedge dx_k\) is called the volume form in \(\mathbb{R}^k\).
+
+\begin{enumerate}
+    \item[(a)] Define a 2-surface \(\Phi : [0, 1]^2 \to \mathbb{R}^2\) so that
+    \[
+    \int_{\Phi} \omega_k
+    \]
+    explains this terminology.
+    \begin{solution}
+        Consider $\Phi: [0,1] \times [0,1] \to \bbR^2$ defined by 
+        \[\Phi(x_1, x_2) = \begin{pmatrix}
+            x_1\cos(2\pi x_2) & x_1\sin(2\pi x_2)
+        \end{pmatrix}\] to be the unit disk 2-surface. Then
+        \begin{align*}
+            \int_\Phi \omega_k &= \int_0^1\int_0^1 dx_1 \wedge dx_2 \begin{pmatrix}
+                \cos(2\pi x_2) & -2\pi x_1\sin(2\pi x_2)\\
+                \sin(2\pi x_2) & 2\pi x_1 \cos(2\pi x_2)
+            \end{pmatrix} dx_1 \, dx_2\\
+            &= \int_0^1\int_0^1 2\pi x_1\cos^2(2\pi x_2) + 2\pi x_1 \sin^2(2\pi x_2)\, dx_1\, dx_2\\
+            &= \int_0^1 \int_0^1 2\pi x_1 dx_1 \, dx_2\\
+            &= \pi
+        \end{align*}
+        Thus, the volume of the unit disk is $\pi.$ Yay!
+    \end{solution}
+    
+    \item[(b)] Define a 3-surface \(\Phi : [0, 1]^3 \to \mathbb{R}^3\) so that
+    \[
+    \int_{\Phi} \omega_k
+    \]
+    explains this terminology.
+\begin{solution}
+   Consider  \(\Phi : [0, 1]^3 \to \mathbb{R}^3\) be the 2-surface unit ball defined by
+\[
+\Phi(x_1, x_2, x_3) =  \left(
+    x_3\sin( \pi x_1) \cos(2\pi x_2),\;
+    x_3\sin( \pi x_1) \sin(2\pi x_2),\;
+    x_3\cos(\pi x_1)
+\right)
+\]
+Then 
+\begin{align*}
+    \int_{\Phi}\omega_k &= \int_0^1 \int_0^1 \int_0^1 dx_1 \wedge dx_2 \wedge dx_3 \begin{pmatrix}
+        \pi x_3 \cos \pi x_1 \cos 2\pi x_2 & -2\pi x_3 \sin \pi x_1 \sin 2\pi x_2 & \sin \pi x_1 \cos 2\pi x_2\\
+        \pi x_3 \cos \pi x_1 \sin 2\pi x_2 & 2\pi x_3 \sin \pi x_1 \cos 2\pi x_2 & \sin \pi x_1 \sin 2\pi x_2\\
+        -\pi x_3\sin \pi x_1 & 0 & \cos \pi x_1
+    \end{pmatrix}\\
+    &= \int_{[0,1]^3} (-\pi x_3 \sin(\pi x_1))
+\begin{vmatrix}
+-2\pi x_3 \sin(\pi x_1) \sin(2\pi x_2) & \sin(\pi x_1) \cos(2\pi x_2) \\
+2\pi x_3 \sin(\pi x_1) \cos(2\pi x_2) & \sin(\pi x_1) \sin(2\pi x_2)
+\end{vmatrix} \\
+&\quad - \cos(\pi x_1)
+\begin{vmatrix}
+\pi x_3 \cos(\pi x_1) \cos(2\pi x_2) & -2\pi x_3 \sin(\pi x_1) \sin(2\pi x_2) \\
+\pi x_3 \cos(\pi x_1) \sin(2\pi x_2) & 2\pi x_3 \sin(\pi x_1) \cos(2\pi x_2)
+\end{vmatrix} dx_1dx_2 dx_3\\
+&= 2\pi^2\int_{[0,1]^3}x_3^2 \sin \pi x_1 dx_1 dx_2 dx_3\\
+&= \frac{2}{3}\pi ^2 \frac{2}{\pi}\\
+&= \frac{4}{3}\pi
+\end{align*}
+Which is the volume of a sphere. Yay!
+\end{solution}
+
+    \textit{In parts (a) and (b) choose non-trivial surfaces (i.e., not just the identity function). Please compute both integrals.}
+\end{enumerate}
+
+\newpage
+\section*{Problem 5}
+In this exercise, you will see that differential forms are closely related to vector fields. Let \(F(x, y, z) = (P(x, y, z), Q(x, y, z), R(x, y, z))\) be a \(C^1\) vector field in \(\mathbb{R}^3\), i.e., \(P,Q,R : \mathbb{R}^3 \to \mathbb{R}\) are \(C^1\) functions. We can define differential forms from a vector field as follows:
+
+\begin{itemize}
+    \item \(\omega^1_F = P(x, y, z)\,dx + Q(x, y, z)\,dy + R(x, y, z)\,dz\)
+    \item \(\omega^2_F = P(x, y, z)\,dy \wedge dz + Q(x, y, z)\,dz \wedge dx + R(x, y, z)\,dx \wedge dy\)
+\end{itemize}
+
+Recall the definitions:
+\begin{itemize}
+    \item \(\nabla f(x, y, z) = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right)\)
+    \item \((\nabla \times F)(x, y, z) = \left( \frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}, \frac{\partial P}{\partial z} - \frac{\partial R}{\partial x}, \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right)\)
+    \item \((\nabla \cdot F)(x, y, z) = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\)
+\end{itemize}
+
+\begin{enumerate}
+    \item[(a)] Suppose that \(f : \mathbb{R}^3 \to \mathbb{R}\) is a \(C^2\) function and \(F : \mathbb{R}^3 \to \mathbb{R}^3\) is a \(C^2\) vector field. Show that:
+    \begin{enumerate}
+        \item \(df = \omega^1_{\nabla f}\)
+    \begin{solution}
+        This one is a straight up definition:
+        \begin{align*}
+            df &= \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy + \frac{\partial f}{\partial z} dz \\
+            &= \omega^1_{\nabla f}
+        \end{align*}
+    \end{solution}
+        \item \(d\omega^1_F = \omega^2_{\nabla \times F}\)
+        \begin{solution}
+            
+    \begin{align*}
+        d\omega_F^1 &= d\left(P(x, y, z)\,dx + Q(x, y, z)\,dy + R(x, y, z)\,dz\right)\\
+        &= \left(\frac{\partial P}{\partial x} dx + \frac{\partial P}{\partial y} dy + \frac{\partial P}{\partial z} dz\right)\wedge dx + \left(\frac{\partial Q}{\partial x} dx + \frac{\partial Q}{\partial y} dy + \frac{\partial Q}{\partial z} dz\right)\wedge dy\\
+        &\qquad+ \left(\frac{\partial R}{\partial x} dx + \frac{\partial R}{\partial y} dy + \frac{\partial R}{\partial z} dz\right)\wedge dz\\
+        &= \frac{\partial P}{\partial y} dy\wedge dx + \frac{\partial P}{\partial z} dz\wedge dx + \frac{\partial Q}{\partial x} dx \wedge dy+ \frac{\partial Q}{\partial z} dz\wedge dy + \frac{\partial R}{\partial x} dx\wedge dz + \frac{\partial R}{\partial y} dy \wedge dz\\
+        &= -\frac{\partial P}{\partial y} dx\wedge dy + \frac{\partial P}{\partial z} dz\wedge dx + \frac{\partial Q}{\partial x} dx \wedge dy- \frac{\partial Q}{\partial z} dy\wedge dz - \frac{\partial R}{\partial x} dz\wedge dx + \frac{\partial R}{\partial y} dy \wedge dz\\\
+        &= (\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z})dy \wedge dz + (\frac{\partial P}{\partial z} - \frac{\partial R}{\partial x})dz \wedge dx + (\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y})dx \wedge dy\\
+        &= \omega_{\nabla \times F}^2
+    \end{align*}
+            \end{solution}
+
+        \item \(d\omega^2_F = (\nabla \cdot F)\,dx \wedge dy \wedge dz\)
+        \begin{solution}
+            \begin{align*}
+                d w^2_F &= d\left(P(x, y, z)\,dy \wedge dz + Q(x, y, z)\,dz \wedge dx + R(x, y, z)\,dx \wedge dy\right)\\
+                &= \left(\frac{\partial P}{\partial x} dx + \frac{\partial P}{\partial y} dy + \frac{\partial P}{\partial z} dz\right)\wedge dy \wedge dz + d(Q \,dz\wedge dx) + d(R \, dx \wedge dy)\\
+                &= \frac{\partial P}{ \partial x}dx \wedge dy \wedge dz+ d(Q \,dz\wedge dx) + d(R \, dx \wedge dy)\\
+                &= \cdots\\
+                &= \frac{\partial P}{ \partial x}dx \wedge dy \wedge dz+ \frac{\partial Q}{dy} dy \wedge dz\wedge dx + \frac{\partial R}{\partial z}dz \wedge dx \wedge dy\\
+                &= \frac{\partial P}{ \partial x}dx \wedge dy \wedge dz+ \frac{\partial Q}{dy} dx \wedge dy\wedge dz + \frac{\partial R}{\partial z}dx \wedge dy \wedge dz\\
+                &= (\nabla \cdot F)dx \wedge dy \wedge dz
+            \end{align*}
+            Where the second to last inequality holds because the wedges were interchanged an even number of times.
+        \end{solution}
+    \end{enumerate}
+    
+    \item[(b)] Use \(d^2\omega = 0\) to prove that \(\nabla \times (\nabla f) = 0\) and \(\nabla \cdot (\nabla \times F) = 0\).
+    \begin{solution}
+            Consider that since $f$ is a zero form, then 
+    \[df = D_1fdx + D_2fdy + D_3f dz\] is a one form. Note that we have by (a, i) that 
+    \[df = \omega^1_{\nabla f}.\] By a theorem in class, we have that the two form
+    \[ddf = 0,\] and by (a, ii) we have that 
+    \[ddf = d\omega^1_{\nabla f} = \omega^2_{\nabla \times \nabla f} = 0.\] Note that this happens if and only if $\nabla \times \nabla f = \begin{bmatrix}
+        0\\0\\0
+    \end{bmatrix}.$
+
+        Consider the one form defined by $F,$ which is
+    \[\omega^1_F = F_1dx + F_2dy + F_3dz.\] We have by (a) that 
+    \[d\omega^1_F = \omega^2_{\nabla \times F},\] and thus by the same logic as before we have that by (a, iii):
+    \[dd\omega^1_F = 0\implies dd\omega^1_F = d\omega^2_{\nabla \times F} = (\nabla \cdot ({\nabla \times F}))dx\wedge dy\wedge dz = 0.\]
+    Thus, we have that $\nabla \cdot ({\nabla \times F}) = 0.$
+    \end{solution}
+\end{enumerate}
+
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    Let $H$ be the parallelogram in $\bbR^2$ whose vertices are $(1,1), (3,2), (4,5), (2,4).$ Find the affine map $T$ which sends 
+    \begin{align}
+        T((0,0))&= (1,1)\\
+        T((1,0)) &= (3,2)\\
+        T((0,1)) &= (2,4)
+    \end{align} Show that $\mathcal{J}(T) = 5$. Use $T$ to convert the integral 
+    \[\alpha = \int_H e^{x-y}\, dx\,dy\] into an integral over $I^2$ and thus compute $\alpha$
+\end{problem}
+\begin{solution}
+    In order to find the affine map $T: \bbR^2 \to \bbR^2,$ we need to find a linear map $L: \bbR^2 \to \bbR^2$ and $(v_1, v_2)\in \bbR^2$ such that for any $(x,y) \in \bbR^2$
+    \[T((x,y)) = L((x,y)) + (v_1, v_2).\] (1) tells us that $v_1 = 1$ and $v_2 = 1.$ Without loss of generality, we take 
+    \[L(x,y) = A(x,y) = \begin{pmatrix}
+         a& b\\
+         c& d
+    \end{pmatrix}\begin{pmatrix}
+        x\\ y
+    \end{pmatrix},\] Giving us two equations, each stemming from (2) and (3) respectively:
+    \[T((1,0)) = L((1,0)) + (1,1) = \begin{pmatrix}
+        a & b\\
+        c & d
+    \end{pmatrix}\begin{pmatrix}
+        1\\0
+    \end{pmatrix} + \begin{pmatrix}
+        1\\ 1
+    \end{pmatrix} = \begin{pmatrix}
+        a +1\\
+        c +1
+    \end{pmatrix} = \begin{pmatrix}
+        3\\2
+    \end{pmatrix}\] and so $c = 1$ and $a = 2.$ From (3)
+    \[T((0,1)) = \begin{pmatrix}
+        1 & b\\
+        4 & d
+    \end{pmatrix} \begin{pmatrix}
+        0\\ 1
+    \end{pmatrix} + \begin{pmatrix}
+        1\\1
+    \end{pmatrix} = \begin{pmatrix}
+        b+1\\
+        d+1
+    \end{pmatrix} = \begin{pmatrix}
+        2\\4
+    \end{pmatrix},\] and so 
+    $b = 1$ and $d = 3.$ Thusm 
+    \[T((x,y)) = \begin{pmatrix}
+        2 & 1\\
+        1 & 3
+    \end{pmatrix}\begin{pmatrix}
+        x\\y
+    \end{pmatrix} + \begin{pmatrix}
+        1\\1
+    \end{pmatrix}= \begin{pmatrix}
+        2x + y + 1\\
+        x + 3y + 1
+    \end{pmatrix}.\]
+
+    To calculate the Jacobian, we need to take a few partials: 
+    \[\mathcal{J}(T) = \det \begin{pmatrix}
+        D_1 A_1 & D_2 A_1\\
+        D_2 A_1 & D_2 A_2
+    \end{pmatrix}  =\det \begin{pmatrix}
+        2 & 1\\
+        1 & 3
+    \end{pmatrix} = 6 - 1 = 5,\] as required.
+
+    Since $T((1,1)) = \begin{pmatrix}
+        4\\ 5
+    \end{pmatrix},$ we have that $T(I^2) = H.$ Thus, we use the change of variables formula which states that since $e^{x-y}$ is integrable and $T$ is a $C^1$ diffeomorphism since it is linear,  then 
+    \begin{align*}
+        \alpha &= \int_H e^{x-y}\,dx\,dy\\
+        &= \int_{I^2}e^{2x + y + 1 - x- 3y - 1}\,dx\,dy\\
+        &= \int_0^1\int_0^1 e^{x - 2y}|\mathcal{J}(T)|\,dx\,dy\\
+        &= 5\int_0^1e^x\, dx \int_0^1 e^{-2y}\,dy\\
+        &= 5(e-1)(-\frac{1}{2e^2} + \frac{1}{2})\\
+        &= \frac{5}{2}(e-1)(1 - e^{-2})
+    \end{align*}
+\end{solution}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    Let $I^k$ be the set of all $\textbf{u} = (u_1, \dots, u_k)\in \bbR^k$ with $0\leq u_i \leq 1$ for all $i.$ Let $Q^k$ be the set of all $\textbf{x} = (x_1, \dots, x_k)\in \bbR^k$ with $x_i \geq 0$ and $\sum x_i \leq 1.$ Define $\textbf{x} = T(\textbf{u})$ by 
+    \[x_1 = u_1\]
+    \[x_2 = (1-u_1)u_2\]
+    \[\cdots\]
+    \[x_k = (1-u_1)\cdots (1-u_{k-1})u_k\]
+
+    Show that 
+    \[\sum_{i=1}^k x_i = 1 - \prod_{i=1}^k (1-u_i).\] Show that $T$ maps $I^k$ onto $Q^k$ and that $T$ is 1-1 in the interior of $I^k.$ Show that its inverse $S$ is defined in the interior of $Q^k$ by $u_1 = x_1$ and 
+    \begin{align}
+    u_i = \frac{x_i}{1 - x_1 - \cdots - x_{i-1}}    
+    \end{align}
+    Show that 
+    \[\mathcal{J}_T(u) = (1-u_1)^{k-1}(1-u_2)^{k-2}\cdots (1-u_{k-1})\] and that 
+    \[\mathcal{J}_S(x) = \left[(1-x_1)(1-x_1 - x_2)\cdots (1-x_1 - \cdots - x_{k-1})\right]^{-1}\]
+\end{problem}
+\begin{solution}
+We induct on $k.$ Suppose $k = 1,$ then clearly this relation ship is true. Now suppose the relation holds for $k = n-1.$ Then 
+\begin{align*}
+    \sum_{i=1}^n x_i &= \sum_{i=1}^{n-1}x_i + x_n\\
+    &= 1 - \prod_{i=1}^{n-1}(1-u_i) + x_n\\
+    &= 1 - \prod_{i=1}^{n-1}(1-u_i) + u_n\prod_{i=1}^{n-1} (1-u_i)\\
+    &= 1- (1-u_1)(1-u_2)(1-u_3)\cdots(1-u_{n-1}) + u_n(1-u_1)(1-u_2)(1-u_3)\cdots(1-u_{n-1})\\
+    &= 1 - \prod_{i=1}^n (1-u_i)
+\end{align*}
+To prove that $T: I^k \to Q^k$ is surjective, let $\textbf{x}\in Q^k.$ Then $\sum x_i \leq 1.$ Suppose first that $\sum x_i < 1$ so that we can use  (4). Then $u_1 = x_1.$ 
+\end{solution}
+
+\newpage
+\section*{Problem 8}
+\begin{problem}
+    If $\omega$ and $\lambda$ are $k$ and $m$ forms, prove that 
+    \[\omega \wedge \lambda = (-1)^{km}(\lambda \wedge \omega)\]
+\end{problem}
+\begin{solution}
+    We can write 
+    \[\omega = \sum_{0 \leq i_1 \leq i_2 \leq \cdots \leq i_k} a_{i_1, \dots, i_k}dx_{i_1}\wedge \cdots \wedge dx_{i_k} = \sum _I a_I dx_I\]
+    \[\lambda = \sum_{0 \leq j_1 \leq j_2 \leq \cdots \leq j_m} b_{j_1, \dots, j_m}dx_{j_1}\wedge \cdots \wedge dx_{j_k} = \sum_J b_J dx_J\] Thus, we have that 
+    \[\omega \wedge \lambda = \sum_{I,J} b_I c_J (dx_{i_1}\wedge \cdots \wedge dx_{i_k} \wedge dx_{j_1}\wedge \cdots dx_{j_m}) = \sum_{[I,J]}(-1)^\alpha d_{[I,J]}(dx_{[I,J]}).\] Thus, we claim it suffices to show it for $[I,J] = (i_1, i_2, \dots, i_k, i_{k+1}, \dots, i_{k+m}).$ Thus, we have that 
+    \begin{align*}
+        \omega \wedge \lambda &= \sum_{[I,J]} d_{[I,J]}(dx_{i_1}\wedge \dots\wedge dx_{i_k}\wedge dx_{i_{k+1}}\wedge \dots\wedge dx_{i_{k+m}})\\
+        &= \sum_{[I,J]} d_{[I,J]}(-1)^k(dx_{i_k}\wedge dx_{i_1}\wedge \dots\wedge dx_{i_{k}}\wedge dx_{i_{k+2}}\wedge \dots\wedge dx_{i_{k+m}})\\
+        &= \sum_{[I,J]} d_{[I,J]}(-1)^k(-1)^k(dx_{i_k}\wedge dx_{i_{k+2}}\wedge dx_{i_1}\wedge \dots\wedge dx_{i_{k}}\wedge dx_{i_{k+3}}\wedge \dots\wedge dx_{i_{k+m}})\\
+        &\cdots\\
+        &= \sum_{[I,J]}d_{[I,J]} ((-1)^k)^m (dx_{i_{k+1}}\wedge dx_{i_{k+2}}\wedge \cdots \wedge dx_{i_{k+m}} \wedge dx_{i_{1}}\wedge \cdots  \wedge dx_{i_k})\\
+        &= (-1)^{km}\sum_{[I,J]} d_{[I,J]}dx_{[J,I]}\\
+        &= (-1)^{km} (\lambda \wedge \omega)
+    \end{align*}
+    Now for a general $\omega$ and $\lambda$ that are not in standard presentation, we have that 
+    \begin{align*}
+    \omega \wedge \lambda& = \sum_{I,J} b_I c_J(dx_I \wedge dx_J)\\&= \sum_{[I,J]}d_{[I,J]}(-1)^\alpha (dx_{[I,J]})\\ &= \sum_{[I,J]} d_{[I,J]}(-1)^{\alpha + km}dx_{[J,I]}\\& = (-1)^{km}\sum_{I,J}c_J b_I \,dx_J dx_I\\& = (-1)^{km}(\lambda \wedge \omega)    
+    \end{align*}
+    
+\end{solution}
+
+
+
+
+
+
+
+
+
+\end{document}

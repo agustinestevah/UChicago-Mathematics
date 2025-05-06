@@ -1,0 +1,404 @@
+\documentclass[11pt]{article}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{23500}
+\newcommand{\subject}{Markov Chains, Martingales, and Brownian Motion}
+\newcommand{\instructors}{Stephen Yearwood}
+\newcommand{\assignment}{Problem Set 5}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{05/09/2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+\section*{Problem 1 (5 points)}
+Show that if \(X\) and \(Y\) are random variables such that \(\mathbb{E}[Y \mid X] = \mathbb{E}[Y]\), then it holds that
+\[
+\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y],
+\]
+but the reverse implication does not hold.
+
+\begin{solution}
+    We use the law of total expectation to note that 
+    \[\bbE[XY] = \bbE[\bbE[XY \mid X]].\] $X$ is trivially $X-$measurable, so then it acts as a constant 
+    \[\bbE[\bbE[XY \mid X]] = \bbE[X \bbE[Y \mid X]] = \bbE[X \bbE[Y]].\] $\bbE[Y]$ is just a constant, not a random variable, and so 
+    \[\bbE[X \bbE[Y]] = \bbE[Y]\bbE[X],\] as desired. 
+\end{solution}
+
+\newpage
+
+\section*{Problem 2 (10 points)}
+Suppose \(X \sim \text{Poi}(\lambda)\).
+\begin{itemize}
+    \item[(a)] Compute the expected value of \(X\) given its parity (i.e., find \(\mathbb{E}[X \mid X \text{ is odd}]\) and \(\mathbb{E}[X \mid X \text{ is even}]\)).
+    \begin{solution}
+    Since $X$ takes values in $\bbN_0,$ then definition of conditional expectation, 
+    \begin{align*}
+        \bbE[X \mid X \text{ odd}] &= \frac{\displaystyle\sum_{n = 0}^\infty n \bbP\{X= n, X \text{ odd}\}}{\displaystyle\sum_{n=0}^\infty  \bbP\{X = n, X \text{ odd}\}}\\
+        &= \frac{\displaystyle\sum_{n = 0}^\infty n \bbP\{X \text{ odd } \mid X = n\}\bbP\{X= n\}}{\displaystyle\sum_{n=0}^\infty  \bbP\{X \text{ odd } \mid X = n\}\bbP\{X= n\}}\\
+        &= \frac{\displaystyle\sum_{n = 0}^\infty (2n+1) \bbP\{X= 2n+1\}}{\displaystyle\sum_{n=0}^\infty  \bbP\{X= 2n+1\}}\\
+        &= \frac{\displaystyle\sum_{n = 0}^\infty (2n+1) \frac{e^{-\lambda}\lambda^{2n +1}}{(2n+1)!}}{\displaystyle\sum_{n=0}^\infty  \frac{e^{-\lambda}\lambda^{2n +1}}{(2n+1)!}}\\
+        &= \frac{\displaystyle\sum_{n=0}^\infty \frac{\lambda^{2n +1}}{(2n)!}}{\displaystyle\sum_{n=0}^\infty \frac{\lambda^{2n +1}}{(2n+1)!}}\\
+        &= \frac{\lambda \cosh{\lambda}}{\sinh{\lambda}}\\
+        &= \lambda \coth{\lambda}
+    \end{align*}
+    Using similar logic, one can see that 
+    \[\bbE[X \mid X\text{ even}]=  \lambda \tanh{\lambda}\]
+    \end{solution}
+    \item[(b)] Suppose we buy \(X\) raffle tickets, each of which has a chance \(p \in (0, 1)\) of winning independently of others. Let \(Y\) be the number of prizes given out. Compute \(\mathbb{E}[Y \mid X]\) and \(\mathbb{E}[Y]\).
+    \begin{solution}
+$Y \mid X = k$ is binomial with probability of success $p$ and $k$ trials. Thus, $\bbE[Y \mid X = k] = k p,$ and so $\bbE[Y \mid X] = kX.$ We then use the law of total expectation to note that
+\[\bbE[Y] = \bbE[\bbE[Y \mid X]] = \bbE[kX] = k\bbE[X] = k\lambda.\]
+
+    \end{solution}
+\end{itemize}
+
+\newpage
+
+\section*{Problem 3 (10 points)}
+Let \(X_1, X_2, \ldots\) be i.i.d. random variables with \(\mathbb{P}\{X_i = 1\} = \mathbb{P}\{X_i = -1\} = \frac{1}{2}\). Let \(S_0 = 0\), and \(S_n = X_1 + X_2 + \cdots + X_n\) define a simple symmetric random walk on \(\mathbb{Z}\). As shown in class, \(S_n\) is a martingale with respect to \(\mathcal{F}_n = \sigma(X_1, \ldots, X_n)\).
+
+\begin{itemize}
+    \item[(a)] Find a deterministic sequence \(a_n \in \mathbb{R}\) such that \(M_n := S_n^3 + a_n S_n\) is a martingale with respect to \(\mathcal{F}_n\).
+    \begin{solution}
+
+Using linearity and a few other facts, we see that
+\begin{align*}
+    \bbE[M_n \mid \mathcal{F}_{n-1}] &= \bbE[S_{n}^3 + a_n S_n \mid \mathcal{F}_{n-1}]\\
+    &= \bbE[(S_{n-1} + X_n)^3 + a_nS_{n} \mid \mathcal{F}_{n-1}]\\
+    &= \bbE[S_{n-1}^3 + 3S_{n-1}^2 X_n + 3S_{n-1}X_n^2+X_n^3 + a_n S_{n} \mid \mathcal{F}_{n-1}]\\
+    &= S^3_{n-1} + 3S^2_{n-1}\bbE[X_n \mid \mathcal{F}_{n-1}] + 3S_{n-1}\bbE[X_n^2 \mid \mathcal{F}_{n-1}] + \bbE[X_n^3 \mid \mathcal{F}_{n-1}] + a_n S_{n-1}\\
+    &= S^3_{n-1} + 3S^2_{n-1}\bbE[X_n] + 3S_{n-1}\bbE[X_n^2 ] + \bbE[X_n^3 ] + a_n S_{n-1}\\
+    &= S^3_{n-1} + 3S_{n-1} + a_nS_{n-1}
+\end{align*}
+and so $M_n$ is a martingale if and only if
+\[S^3_{n-1} + 3S_{n-1} + a_nS_{n-1} = M_{n-1} = S_{n-1}^3 + a_{n-1}S_{n-1}\] and thus 
+\[a_n = a_{n-1} - 3 \implies a_n = a_0 - 3n.\] 
+
+    \end{solution}
+    \item[(b)] Find deterministic sequences \(b_n, c_n \in \mathbb{R}\) such that \(Z_n := X_n^4 + b_n X_n^2 + c_n\) is a martingale with respect to \(\mathcal{F}_n\).
+\begin{solution}
+    We use independence to note that 
+    \begin{align*}
+        \bbE[Z_n \mid \mathcal{F}_{n-1}] &= \bbE[X_n^4 + b_nX_n^2 + c_n \mid \mathcal{F}_{n-1}]\\
+        &= 1 + b_n + c_n
+    \end{align*}
+    But $Z_n$ is a martingale if and only if 
+    \[1 + b_n + c_n = Z_{n-1} = 1 + b_{n-1} + c_{n-1},\] and thus our sequences must satisfy 
+    \[b_n + c_n = b_{n-1} + c_{n-1}\] for all $n.$
+\end{solution}
+\end{itemize}
+
+\newpage
+
+\section*{Problem 4 (20 points)}
+Let \(\{X_n\}\) be a biased random walk on the integers with probability \(p \in (0, 1/2)\) to move to the right and probability \(1 - p \in (1/2, 1)\) to move to the left.
+
+\begin{itemize}
+    \item[(a)] Show that \(M_n = \left(\frac{1 - p}{p}\right)^{X_n}\) is a martingale with respect to \(\mathcal{F}_n = \sigma(X_0, \ldots, X_n)\).
+\begin{solution}
+    Since $M_n$ depends only on $X_i$ for $i \leq n$, then clearly $M_n$ is $\mathcal{F}_n$ measurable.
+
+    We can bound $|X_n|$ by $n$ since that is the furthest it can get in $n$ steps. Thus, since $\frac{1-p}{p} >1,$ we have that 
+    \[\bbE[|M_n|]  = \bbE\left[\left|\left(\frac{1 - p}{p}\right)^{X_n}\right|\right] = \bbE\left[\left(\frac{1 - p}{p}\right)^{|X_n|}\right] \leq \bbE\left[\left(\frac{1 - p}{p}\right)^{n}\right] < \infty\]
+
+    Finally, we have that since we can write $X_n = \sum_{i=1}^n \xi_i,$ where $\xi_i$ are i.i.d. such that
+    \[\bbP\{\xi_i = 1\} = p, \quad \bbP\{\xi_i = -1\} = 1-p.\] Then
+    \begin{align*}
+        \bbE[M_n \mid \mathcal{F}_{n-1}] &= \bbE\left[\left(\frac{1-p}{p}\right)^{X_n} \mid \mathcal{F}_{n-1}\right]\\
+        &= \bbE\left[\left(\frac{1-p}{p}\right)^{X_{n-1}}\left(\frac{1-p}{p}\right)^{\xi_{n}} \mid \mathcal{F}_{n-1}\right]\\
+        &= \left(\frac{1-p}{p}\right)^{X_{n-1}}\bbE\left[\left(\frac{1-p}{p}\right)^{\xi_{n}}\right]\\
+        &=\left(\frac{1-p}{p}\right)^{X_{n-1}} (p\left(\frac{1-p}{p}\right)^{1} + (1-p)\left(\frac{1-p}{p}\right)^{-1}) \\
+        &= \left(\frac{1-p}{p}\right)^{X_{n-1}}\\
+        &= M_{n-1}
+    \end{align*}
+\end{solution}
+    \item[(b)] Use the optional stopping theorem to compute, for any \(x \in \{0, \ldots, N\}\), the probability that the walk reaches 0 before \(N\) if \(X_0 = x\).
+    \begin{solution}
+        Define
+        \[\tau:= \min\{ n \geq 0 : X_n \in \{0, N\} \mid X_0 = x\}\] be the first time $X_n$ reaches $0$ or $N$ given that it begins at $X_0 = x.$ Assuming we can use the OST, we have that 
+        \[\bbE[M_\tau] = \bbE[M_0] = \left(\frac{1-p}{p}\right)^x\] and thus if we call $p_L$ the probability we 'lose' (reach $0$) and $p_W = 1-p_L$ the probability we 'win' (reach $N$), we see that
+        \[\left(\frac{1-p}{p}\right)^x = \bbE[M_\tau] = p_L (1) + p_W\left(\frac{1-p}{p}\right)^N \implies p_W = \frac{1 - \left(\frac{1-p}{p}\right)^x}{1 - \left(\frac{1-p}{p}\right)^N},\] and $p_L = 1-p_W.$ 
+
+        Thus, it suffices to notice that $M_n$ satisfies the conditions for the OST:
+        \begin{enumerate}
+            \item The state $\{1,2,\dots, N-1\}$ is transient, and thus since $\tau$ is the first time we leave the state, then a result from Markov chains states that
+            \[\bbP\{\tau  < \infty\} =1 \]
+            \item We can bound the expectation by 
+            \[\bbE[|M_n|] \leq \left( \frac{1-p}{p}\right)^N < \infty\]
+            \item We have by a result in class that
+            \[\bbE[M_n \mathbbm{1}_{\tau > n}] \leq (\frac{1-p}{p})^ne^{-cn} \to 0.\]
+        \end{enumerate}
+    \end{solution}
+    \item[(c)] Show that \(\widetilde{M}_n = X_n + (1 - 2p)n\) is a martingale with respect to \(\mathcal{F}_n\).
+    \begin{solution}
+        $\widetilde{M}_n$ is clearly $\mathcal{F}_n$ measurable.
+
+        Again, we bound $|X_n|$ by $n$ and so 
+        \[\bbE[|\widetilde{M}_n|] \leq n + (1-2p)n < \infty\]
+
+        \begin{align*}
+            \bbE[\widetilde{M}_n \mid \mathcal{F}_{n-1}]&= \bbE[X_n + (1-2p)n \mid \mathcal{F}_{n-1}]\\
+            &= \bbE[X_n\mid \mathcal{F}_{n-1}] + (1-2p)n\\
+            &= p(X_{n-1} +1) + (1-p)(X_{n-1} - 1) + (1-2p)n\\
+            &= pX_{n-1} + (1-p)X_{n-1} + p - (1-p) + (1-2p)n\\
+            &= X_{n-1} -(1 - 2p) + (1-2p)n\\
+            &= X_{n-1} + (1-2p)(n-1)\\
+            &= \widetilde{M}_{n-1}
+        \end{align*}
+    \end{solution}
+    \item[(d)] Use the optional stopping theorem to compute, for any \(x \in \{0, \ldots, N\}\), the expectation of the first time that \(X_n \in \{0, N\}\) if \(X_0 = x\).
+    \begin{solution}
+        Define
+        \[\tau:= \min\{ n \geq 0 : X_n \in \{0, N\} \mid X_0 = x\}\] be the first time $X_n$ reaches $0$ or $N$ given that it begins at $X_0 = x.$ Assuming we can use the OST, we have that 
+        \[\bbE[\widetilde{M}_\tau] = \bbE[\widetilde{M}_0] = x\] and 
+        \[\bbE[\widetilde{M}_\tau] = \bbE[X_\tau + (1-2p)\tau] = \bbE[X_\tau]+ (1-2p)\bbE[\tau] = p_L(0) + p_W(N) + (1-2p)\bbE[\tau].\]
+        Thus, 
+        \[\bbE[\tau] = \frac{x- Np_W}{1-2p}\]
+    \end{solution}
+\end{itemize}
+
+\newpage
+
+\section*{Problem 5 (10 points)}
+Let \(\{M_n\}_{n \geq 0}\) be a martingale. Suppose that \(M_0 = 0\) and \(\mathbb{P}[|M_n| \leq 1] = 1\) for every \(n \geq 1\).
+
+\begin{itemize}
+    \item[(a)] Let \(\tau\) be a stopping time for \(\{M_n\}_{n \geq 0}\) such that \(\mathbb{P}[\tau < \infty] = 1\). Explain why \(\mathbb{E}[M_\tau] = 0\).
+    \begin{solution}
+        Since $M_n$ is almost surely bounded, then 
+        \begin{align*}
+            \bbE[|M_n|\mathbbm{1}_{\tau >n}] &=\bbE[\bbE[|M_n|\mathbbm{1}_{\tau >n} \mid |M_n|]]\\
+            &= \bbE[|M_n| \mathbbm{1}_{\tau>n} \mid |M_n| >1]\bbP\{|M_n| >1 \} + \bbE[|M_n|\mathbbm{1}_{\tau>n} \mid |M_n| \leq 1]\bbP\{|M_n| \leq 1 \}]\\
+            &= \bbE[|M_n|\mathbbm{1}_{\tau>n} \mid |M_n| \leq 1]\\
+            &\leq \bbE[\mathbbm{1}_{\tau >n}]\\
+            &= \bbP\{\tau >n\}\\
+            &= 1- \bbP\{\tau \leq n\}\\
+            &\to 1- \bbP\{\tau < \infty\}\\
+            &= 0
+        \end{align*}
+        Also we have that since $\tau = n$ for some $n \in \bbN,$
+        \[\bbE[|M_\tau|] \leq 1.\] Thus, we can apply the optional stopping theorem and say that 
+        \[\bbE[M_\tau]= \bbE[M_0] = 0\]
+    \end{solution}
+    \item[(b)] Show that for each \(r \in (0, 1]\),
+    \[
+    \mathbb{P}[M_n \leq r, \forall n \geq 0] > 0.
+    \]
+    \begin{solution}
+        Suppose not, that for some $r \in (0,1],$ we have that 
+        \[\bbP\{M_n \leq r, \,\forall  n \geq 0\} = 0.\] Let $\tau:= \min\{n \geq 0 : M_n >r\}.$ By our contradiction, we have that $\bbP\{\tau < \infty\} = 1.$ By the optional stopping theorem, we have that 
+        \[0 = \bbE[M_\tau],\] but by definition, 
+        \[\bbE[M_\tau] > r \bbP\{\tau < \infty\} = r,\] which is a contradiction.
+    \end{solution}
+\end{itemize}
+
+\newpage
+
+\section*{Problem 6 (10 points)}
+Let \(X_n\) be a Markov chain on the two-dimensional integer lattice \(\mathbb{Z}^2\) with the following transition probabilities:
+\[
+\mathbb{P}(X_{n+1} = (i \pm 1, j) \mid X_n = (i, j)) = \frac{1}{8}, \quad
+\mathbb{P}(X_{n+1} = (i, j \pm 1) \mid X_n = (i, j)) = \frac{1}{8},
+\]
+\[
+\mathbb{P}(X_{n+1} = (i \pm 1, j \pm 1) \mid X_n = (i, j)) = \frac{1}{8}.
+\]
+
+\begin{itemize}
+    \item[(a)] Prove that \(M_n := |X_n|^2 - \frac{3}{2}n\) is a martingale with respect to the natural filtration of the process. (We denote by \(|x|\) the Euclidean norm of \(x \in \mathbb{Z}^2\).)
+    \begin{solution}
+It is clear that $M_n$ is $\mathcal{F}_n$ measurable. We can bound the expectation by the fact that $|X_n|^2 \leq 2n^2$ (since the farthest $X_n$ can travel is diagonally all the way, which is $n\sqrt{2}$ distance from the origin)
+\[\bbE[|M_n|] \leq  \bbE[|X_n|^2 + \frac{3}{2}n] = \bbE[|X_n|^2] + \frac{3}{2} = 2n^2 + \frac{3}{2} <\infty\] For the martingale property, we note that $X_n = \sum_{i=1}^n \xi_i,$ where $\xi_i$ is the $8-$sided die that determines what the next step of the random walk is. Then 
+\begin{align*}
+    \bbE[M_n \mid \mathcal{F}_{n-1}] &= \bbE[|X_n|^2 \mid \mathcal{F}_{n-1}] - \frac{3}{2}n\\
+    &= \bbE[|X_n - X_{n-1} + X_{n-1}|^2 \mid \mathcal{F}_n] - \frac{3}{2}n\\
+    &= \bbE[|\xi_n + X_{n-1}|^2\mid \mathcal{F}_n] - \frac{3}{2}n\\
+    &= \bbE[|\xi_n|^2 + |X_{n-1}|^2 + 2\langle\xi_n, X_{n-1}\rangle \mid \mathcal{F}_{n-1}] - \frac{3}{2}n\\
+     &= \bbE[|\xi_n|^2] + |X_{n-1}|^2 + 2\bbE[\langle \xi_n, X_{n-1}\rangle \mid \mathcal{F}_{n-1]}]- \frac{3}{2}n\\
+     &= |X_{n-1}|^2 + \frac{3}{2} - \frac{3}{2}n + 2\bbE[\langle \xi_n, X_{n-1}\rangle\mid \mathcal{F}_{n-1]}]\\
+     &= |X_{n-1}|^2 - \frac{3}{2}(n-1) + 2\bbE[\langle \xi_n, X_{n-1}\rangle \mid \mathcal{F}_{n-1]}].
+\end{align*}
+
+Moreover, we note that by linearity and symmetry, we have that 
+\[\bbE[\langle \xi_n, X_{n-1} \rangle  \mid \mathcal{F}_{n-1]}]= \langle \bbE[\xi_n\mid \mathcal{F}_{n-1]}], \bbE[X_{n-1}\mid \mathcal{F}_{n-1]}]\rangle = \langle \bbE[\xi_n], X_{n-1}\rangle = \langle 0, X_{n-1}\rangle = 0,\]and so we are done.
+    \end{solution}
+
+
+    
+    \item[(b)] For \(R \in \mathbb{R}_+\), define the stopping time
+    \[
+    T_R := \inf\{n \geq 0 : |X_n|^2 \geq R^2\}.
+    \]
+    Give sharp lower and upper bounds for \(\mathbb{E}[T_R \mid X_0 = (0, 0)]\).
+\begin{solution}
+    We apply the OST to $M_n,$ and thus 
+    \[\bbE[M_{T_R}] = \bbE[M_0] = 0,\] but we also have that 
+    \[\bbE[M_{T_R}] = (\bbE[|X_{T_R}|^2]-\frac{3}{2}\bbE[T_R])\bbP\{T_R < \infty\} = (\bbE[|X_{T_R}|^2]-\frac{3}{2}\bbE[T_R])\]
+\end{solution}
+\end{itemize}
+
+\newpage
+
+\section*{Problem 7 (15 points)}
+Let \(G\) be a connected graph. We allow \(G\) to be infinite, but we assume that every vertex of \(G\) has finite degree. Let \(\{X_n\}_{n \geq 0}\) be the simple random walk on \(G\). A function \(f : V(G) \to \mathbb{R}\) is called harmonic at a vertex \(x \in V(G)\) if
+\[
+\frac{1}{\deg x} \sum_{y \sim x} f(y) = f(x),
+\]
+where \(\deg x\) denotes the number of neighbors of \(x\), and \(y \sim x\) means there is an edge from \(y\) to \(x\).
+
+\begin{itemize}
+    \item[(a)] Fix \(x_0 \in V(G)\) and assume that \(X_0 = x_0\). Show that if \(f\) is harmonic, then \(\{f(X_n)\}_{n \geq 0}\) is a martingale with respect to \(\sigma(X_1, \ldots, X_n)\).
+    \item[(b)] Show using the martingale convergence theorem that if \(\{X_n\}_{n \geq 0}\) is recurrent, then every non-negative harmonic function on \(G\) is constant.
+    \item[(c)] Show that if \(\{X_n\}_{n \in \mathbb{N}}\) is transient (in which case \(V(G)\) is infinite), then for any vertex \(x_0 \in V(G)\) there is a non-constant function on \(G\) which takes values in \([0, 1]\) and is harmonic at every vertex of \(G\) except for \(x_0\).
+\end{itemize}
+
+\newpage
+
+\section*{Problem 8 (Optional)}
+We model a sequence of gamblings as follows. Let \(\xi_1, \xi_2, \ldots\) be i.i.d. random variables with \(\mathbb{P}\{\xi_n = +1\} = p\), \(\mathbb{P}\{\xi_n = -1\} = q\), where \(p = 1 - q > \frac{1}{2}\). Define the entropy of this distribution by
+\[
+\alpha = p \ln\left(\frac{p}{1/2}\right) + q \ln\left(\frac{q}{1/2}\right) = p \ln p + q \ln q + \ln 2.
+\]
+A gambler starts playing with initial fortune \(Y_0 > 0\), and her fortune after round \(n\) is
+\[
+Y_n = Y_{n-1} + C_n \xi_n,
+\]
+where \(C_n\) is the amount she bets in this round. The bet \(C_n\) may depend on the values \(\xi_1, \xi_2, \ldots, \xi_{n-1}\), and satisfies \(0 \leq C_n < Y_{n-1}\).
+
+The expected rate of winnings up to time \(n\) is
+\[
+r_n := \mathbb{E} \left[\ln\left(\frac{Y_n}{Y_0}\right)\right],
+\]
+which the gambler wishes to maximize.
+
+\begin{itemize}
+    \item[(a)] Prove that no matter what strategy \(C\) the gambler chooses,
+    \[
+    X_n := \ln Y_n - n\alpha
+    \]
+    is a supermartingale (i.e., \(\mathbb{E}[X_n \mid \mathcal{F}_{n-1}] \leq X_{n-1}\)), hence her expected average winning rate \(r_n / n \leq \alpha\).
+    \item[(b)] Find a gambling strategy that makes the above \(X_n\) a martingale, thus achieving the expected average winning rate \(\alpha\).
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

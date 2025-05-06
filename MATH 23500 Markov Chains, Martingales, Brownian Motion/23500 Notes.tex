@@ -853,7 +853,7 @@ In matrix form,
     \begin{enumerate}
         \item $\bbE[X \mid Y]$ is a function of $Y.$
         \item If $F(y)$ is a function of $y$ taking values in $\bbR$ and $\bbE[ |F(y) | ] < \infty,$ then 
-        \[\bbE[X \mid F(Y)] = \bbE[\bbE[X \mid Y] \mid F(y)]\]
+        \[\bbE[X \, F(Y)] = \bbE[\bbE[X \mid Y]  F(Y)]\]
     \end{enumerate}
 \end{defn}
 
@@ -872,7 +872,7 @@ We note that the natural filtration of $X_0, \dots, X_n$ is the information cont
      $\bbE[X \mid \mathcal{F}_n]$ is the unique real valued random variable satisfying the following:
      \begin{enumerate}
          \item $\bbE[X \mid \mathcal{F}_n]$ is $\mathcal{F}_n$ measurable.
-         \item $\bbE[X \mid Z] = \bbE[\bbE[X \mid \mathcal{F}_n] \mid Z]$
+         \item $\bbE[X  Z] = \bbE[\bbE[X \mid \mathcal{F}_n]  Z]$
      \end{enumerate}
  \end{prop}
 
@@ -880,13 +880,13 @@ We note that the natural filtration of $X_0, \dots, X_n$ is the information cont
 \[\bbE[aX_1 + bX_2 \mid \mathcal{F}_n] =  a\bbE[X _1 \mid \mathcal{F}_n] +  b\bbE[ X_2 | \mathcal{F}_n]\]
 \end{prop}
 \begin{proof}
-    If $Z$ is $\mathcal{F}_n-$measurable, then  $\bbE[aX_1 + bX_2 \mid Z] = \bbE[\bbE[aX_1 + bX_2 \mid \mathcal{F}_n] \mid Z].$ Let
+    If $Z$ is $\mathcal{F}_n-$measurable, then  $\bbE[(aX_1 + bX_2 ) Z] = \bbE[\bbE[aX_1 + bX_2 \mid \mathcal{F}_n] Z].$ Let
     \[W:= a\bbE[X_1 \mid \mathcal{F}_n] + b\bbE[X_2 \mid \mathcal{F}_n]\] Then 
     \begin{align*}
-        \bbE[W \mid Z] &= \bbE[a \bbE[X_1 \mid \mathcal{F}_n] + b\bbE[X_2 \mid \mathcal{F}_n] \mid Z]\\
-        &= \bbE[a \bbE[X_1 \mid \mathcal{F}_n]\mid Z] + \bbE[b\bbE[X_2 \mid \mathcal{F}_n]\mid Z]\\
-        &= a\bbE[X_1 \mid Z] + b\bbE[X_2 \mid Z]\\
-        &= \bbE[aX_1 + bX_2 \mid Z].
+        \bbE[W Z] &= \bbE[(a \bbE[X_1 \mid \mathcal{F}_n] + b\bbE[X_2 \mid \mathcal{F}_n])  Z]\\
+        &= \bbE[a \bbE[X_1 \mid \mathcal{F}_n] Z] + \bbE[b\bbE[X_2 \mid \mathcal{F}_n] Z]\\
+        &= a\bbE[X_1  Z] + b\bbE[X_2  Z]\\
+        &= \bbE[(aX_1 + bX_2)  Z].
     \end{align*}
     Because conditional expectation is unique, we are done.
 \end{proof}
@@ -900,6 +900,10 @@ We note that the natural filtration of $X_0, \dots, X_n$ is the information cont
 \begin{prop}
     If $Z$ is $\mathcal{F}_n-$measurable, then 
     $\bbE[ZX \mid \mathcal{F}_n] = Z\bbE[X \mid \mathcal{F}_n].$
+\end{prop}
+\begin{prop}
+    If $m\leq n,$ then 
+    \[\bbE[\bbE[X \mid \mathcal{F}_n] \mid \mathcal{F}_m]= \bbE[X \mid \mathcal{F}_m]\]
 \end{prop}
 \begin{exmp}
     Let $X_1, X_2,\dots$ be i.i.d r.vs with mean $\mu.$ Then if $m\geq n,$ 
@@ -1018,6 +1022,103 @@ We know $\bbE[M_n] = \bbE[M_0]$ for any $n.$ Is this still true for a random tim
     and thus 
     \[p_W = \frac{b}{a + b}\]
 \end{exmp}
+
+\newpage
+\subsection*{Friday, May 2: Optional Stopping Theorem}
+\begin{thm}
+(OST I)
+    Suppose $\{M_n\}$ is a Martingale with respect to some filtration $\{\mathcal{F}_n\},$ and let $\tau$ be a stopping time such that $\bbP\{\tau < K\} = 1$ for some constant $K.$ Then $\bbE[M_\tau] = \bbE[M_0].$
+\end{thm}
+\begin{proof}
+    Note that $M_\tau = \sum_{n=0}^K M_n \mathbbm{1}_{\tau = n}.$ Then conditioning,
+    \begin{align*}
+        \bbE[M_\tau \mid \mathcal{F}_{K-1}] &= \bbE\left[\sum_{n=0}^K M_n \mathbbm{1}_{\tau = n} \mid \mathcal{F}_{K-1}\right]\\
+        &= \sum_{n=0}^K \bbE\left[M_n \mathbbm{1}_{\tau = n}\mid \mathcal{F}_{K-1}\right]\\
+        &= \sum_{n=0}^{K-1}\bbE\left[M_n \mathbbm{1}_{\tau = n}\mid \mathcal{F}_{K-1}\right] + \bbE\left[M_K \mathbbm{1}_{\tau = K}\mid \mathcal{F}_{K-1}\right]\\
+        &= \sum_{n=0}^{K-1}M_n \mathbbm{1}_{\tau = n} + \bbE[\mathbbm{1}_{\tau = K}] \bbE[M_K \mid \mathcal{F}_{K-1}]\\
+        &= \sum_{n=0}^{K-1}M_n \mathbbm{1}_{\tau = n} + \bbE[\mathbbm{1}_{\tau > K}] M_{K-1}\\
+        &= \sum_{0}^{K-2}M_n \mathbbm{1}_{\tau = n} + M_{K-1}\mathbbm{1}_{K >K-2}
+    \end{align*}
+    Similarly, 
+    \[\bbE[M_\tau \mid \mathcal{F}_{K-2}] = \sum_{0}^{K-3}M_n \mathbbm{1}_{\tau = n} + M_{K-3}\mathbbm{1}_{K >K-3}\] and so on until 
+    \[\bbE[M_\tau \mid \mathcal{F}_0] = M_0\mathbbm{1}_{\tau \geq 1} = M_0.\] Using the tower property, 
+    \[\bbE[M_\tau] = \bbE[\bbE[M_\tau \mid \mathcal{F}_0]] = \bbE[M_0]\]
+\end{proof}
+
+\begin{rem}
+    Let $\{X_n\}$ be a simple random walk started at $0.$ We know $X_n$ is a martingale by Example 1.28. Let $\tau:= \min\{n \geq 1 \mid X_n = 1\}.$ Then $\bbP\{\tau < \infty\} = 1,$ but $\tau$ is not bounded. Note that $\bbE[X_\tau]= 1 \neq 0 = \bbE[X_0].$
+    
+    Recall that $\tau \wedge n = \min\{\tau ,n\}.$ Since $\tau\wedge n $ is a bounded stopping time, then by the optional stopping theorem, \[\bbE[M_0] = \bbE[M_{\tau \wedge n}] = \bbE[M_\tau \mathbbm{1}_{\tau \leq n}] + \bbE[M_n \mathbbm{1}_{\tau >n}].\] We would like to show that in the limit, the second term dies. 
+
+    Since $\tau$ is finite, then $\mathbm{1}_{\tau >n} \to 0$ and $\mathbbm{1}_{\tau \leq n} \to 1$ and so $M_{\tau \wedge n}\to M_{\tau}.$ If $\bbE[|M_\tau|] < \infty$ and $\bbP\{\tau < \infty\} = 1,$ then we apply the Dominated convergence theorem with $X_n = M_\tau \mathbbm{1}_{\tau \leq n}$ and $Y = M_\tau.$ We know $Y$ dominates the $X_n$ and that $\mathbbm{1}_{\tau \leq n} \to 1$ and by the DCT, 
+    \[\bbE[M_\tau\mathbbm{1}_{\tau \leq n}] \to \bbE[M_\tau].\] Similarly, $\bbE[M_n \mathbbm{1}_{\tau > n}] \to 0$
+\end{rem}
+This remark leads to the following result:
+\begin{thm}
+    (OST II) Let $\tau$ be a stopping time and assume that 
+    \begin{enumerate}
+        \item $\bbP\{\tau < \infty\} = 1.$
+        \item $\bbE[|M_\tau|] < \infty$
+        \item $\bbE[M_n\mathbbm{1}_{\tau > n}] \to 0.$
+    \end{enumerate}
+    Then $\bbE[M_\tau] = \bbE[M_0].$
+\end{thm}
+
+\begin{rem}
+    If $M_n$ is bounded, i.e, there exists a $c$ such that $|M_n| < c$ for all $n,$ then by Jensen's inequality
+    \begin{align*}
+        \bbE[M_n\mathbbm{1}_{\tau > n}] \leq c\bbP\{\tau >n\} \to 0
+    \end{align*}
+\end{rem}
+
+\begin{exmp}
+    We are going to formally provide the solution to the Gambler's ruin model in example 1.31. Let $X_n$ be the martingale modeling the random walk started at $0$, and $\tau := \min\{n \geq 0 \mid X_n = a \text{ or } S_n = b\}.$ Since the random walk is recurrent, we have that $\bbP\{\tau < \infty\} = 1.$ Also, we have that $\bbE[|X_\tau|] < \infty$ since $X_\tau$ is either $a$ or $b$. Then 
+    \begin{align*}
+        \bbE[|X_n|\mathbbm{1}_{\tau >n}] \leq \max\{a,b\}\bbP\{\tau >n\} \to 0.
+    \end{align*}
+    Now and only now can we proceed as in Example 1.31.
+\end{exmp}
+
+
+
+\newpage
+\subsection*{Monday, May 5: Applications of the OST}
+\begin{exmp}
+    Let $\{X_n\}$ be a symmetric random walk on $\bbZ,$ and let $\tau := \min\{n >0 : X_n = a \text{ or }X_n = b \mid X_0 = 0\}.$ Then let $M_n := X_n^2 - n.$ Recall from Example 1.29 that $M_n$ is a martingale (noting that $\sigma^2 = 1$) with respect to $\mathcal{F}_n.$ 
+
+    We claim that $\bbP\{\tau > n\} \leq e^{-cn}$ for some $c>0.$ To see this, note that the random walk stopped when we hit $a$ or $-b$ is a Markov chain on $S = \{-b, -b + 1, \dots, a-1, a\}$ with absorbing ends. Then $\{-b + 1, \dots, a-1\}$ is a transient communication class. It is a simple consequence of Proposition 5 that the probability that we stay in $\{-b +1, \dots, a-1\}$ is bounded above by $e^{-cn}$ for some $c>0.$ Using this bound, we have that 
+    \[\bbE[\tau] = \sum_{n=0}^\infty \bbP\{\tau \geq n\}\leq \sum_{n=0}^\infty e^{-cn} < \infty\] and thus
+    \[\bbE[|X_\tau|] \leq \bbE[X_\tau^2] + \bbE[\tau] \leq \max\{a^2, b^2\} + \bbE[\tau] < \infty\]
+    Moreover, 
+    \[\bbE[|M_n|\mathbbm{1}_{\tau >n}] \leq (\max\{a,b\}^2 + n)e^{-cn} \to 0. \] We can now apply the optional stopping theorem (ii), we have that 
+    \[ 0= \bbE[M_0] = \bbE[M_\tau] = \bbE[X_\tau^2] - \bbE[\tau] = \bbP\{X_\tau = a\}a^2+ \bbP\{X_\tau = -b\}b^2 - \bbE[\tau].\] From Example 1.31,
+    \[0 = \frac{a^2 b  + b^2 a}{a + b} - \bbE[T] = ab - \bbE[T] \implies \bbE[T] = ab.\]
+\end{exmp}
+
+
+\begin{exmp}
+    At each toss of a coin, you win $\$1$ if $T$ and lose a buck if $H$. Let $X_n$ be the winnings on round $n.$ Then 
+    \[\bbP\{X_n = 1\} = \bbP\{X_n= -1\} = \frac{1}{2}.\] Then if $Y_n = \sum_{i=1}^n X_i,$ we have shown in Example 1.28 that $Y_n$ is a martingale. By OST, we know that if $\tau:= \min\{n >0 \mid X_n = T\},$ then
+    \[0 = \bbE[Y_0] = \bbE[Y_\tau] = \bbE[\sum_{n=0}^\tau X_n] = \bbE[(-1)(\tau-1) + 1] \implies \bbE[\tau] = 2.\]
+
+    Note that if the coin were biased with $\bbP\{H\} = p,$ then for every $\$1$ bet you make, you are compensate $\$(1 - 2p).$
+\end{exmp}
+
+\begin{exmp}
+    I am a monkey at a typewriter with only capital letters. How long will it take for me, the monkey, to type out 
+    \begin{center}
+        ABRACADABRA
+    \end{center}
+    Some rich assholes bet on my typing such that just before time $n,$ a new gambler arrives and bets $\$1$ that the $n$th letter will be A. If he loses, he dies. If he wins, he wins $\$26$ and bets all of it that the $n+1$th letter will be B. Repeat with the rest of the letters in ABRACADABRA. Denote the winnings of the $j$th better out of $n$ after $n$ rounds by $M_n^j.$ This is a martingale since 
+    \[\bbE[M_n^j \mid \mathcal{F}_{n-1}] = \begin{cases}
+        0, \quad \text{if he loses sometime before $n$}\\
+        26^n \frac{1}{26} + 0 \frac{25}{26} = 26^{n-1}
+    \end{cases} = M_{n-1}^j.\] Let $M_n = \sum_{j=1}^n M_n^j$ be total winnings on all the betters before round $n+1.$ We will see on a PSET that $M_n$ is a martingale and that we can apply the OST. Thus, if $\tau = \min\{n >0 \mid \text{ we see ABRACADABRA}\},$ then 
+    \[\bbE[M_0] = 0 = \bbE[M_\tau] = \bbE[\sum_{j=1}^\tau M_n^j]= \bbE[(26^{11} - 1) + (26^4) + (26 -1) + (-1)(\tau - 3).]\] Thus, 
+    \[\bbE[\tau] = 26^{11} + 26^4 + 26\]
+\end{exmp}
+
+
 
 
 
