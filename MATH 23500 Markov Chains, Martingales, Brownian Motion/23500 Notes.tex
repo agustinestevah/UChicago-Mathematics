@@ -1120,11 +1120,75 @@ This remark leads to the following result:
 
 
 
+\newpage
+\subsection{Wednesday, May 7: Martingale Convergence Theorem}
+\begin{exmp}
+    Let $\mathcal{F}_n$ be a filtration, and $X$ be a r.v. with $\bbE[|X|]< \infty.$ Define 
+    \[M_n:= \bbE[X \mid \mathcal{F}_n].\] We've shown that $M_n$ is a martingale. The MCT will tell us that $M_n$ converges as $n\to \infty$
+\end{exmp}
 
+\begin{prop}
+    Let $M_n$ be a martingale with respect to $\mathcal{F}_n,$ let $\tau$ be a stopping time. Then $M_{n\wedge \tau}$ is a Martingale.
+\end{prop}
 
+\begin{proof}
+    \begin{itemize}
+        \item To show $M_{n\wedge \tau}$ is $\mathcal{F}_{n}$ measurable, noe that 
+        \[M_{n\wedge \tau} = M_n\mathbbm{1}_{n < \tau} + \sum_{k=0}^n M_k \mathbbm{1}_{\tau = k}\] is clearly $\mathcal{F}_{n}$ measurable.
+        \item We have 
+        \[|M_{n\wedge t}| \leq |M_n| + \sum_{k=0}^n |M_k|,\] and the result follows from taking expectation.
+        \item 
+        \begin{align*}
+            \bbE[M_{n \wedge \tau} \mid \mathcal{F}_{n-1}] &= \bbE[M_{n\wedge \tau}\mathbbm{1}_{\tau >n} \mid \mathcal{F}_{n-1}] + \bbE[M_{n} \wedge \tau \mathbbm{1}_{\tau \leq n} \mid \mathcal{F}_{n-1}]\\
+            &= \bbE[M_n \mathbbm{1}_{\tau >n} \mid \mathcal{F}_{n-1}] + \bbE[M_\tau \mathbbm{1}_{\tau \leq n} \mid \mathcal{F}_{n-1}]\\
+            &= \bbE[M_n \mid \mathcal{F}_{n-1}] \mathbbm{1}_{\tau >n} + M_\tau \mathbbm{1}_{\tau \leq n}\\
+            &= M_{n-1} \mathbbm{1}_{\tau >n} +M_\tau \mathbbm{1}_{\tau \leq n}\\
+            &= M__{n-1\wedge \tau}
+        \end{align*}
+    \end{itemize}
+\end{proof}
+\begin{thm}
+(Martingale Convergence Theorem) Let $M_n$ be a martingale and suppose there exists some $C>0$ such that $\bbE[|M_n|] \leq C$ for all $n>0.$ Then with probability $1,$ there exists a random variable $M_\infty$ such that 
+\[\lim_{n\to \infty} M_n = M_\infty\]
+\end{thm}
 
+\begin{rem}
+Consider the following assumptions:
+    If $M_n \geq -k$ for all $n,$ then 
+    \begin{align*}
+        \bbE[|M_n|] &= \bbE[M_n \mathbbm{1}_{M_n \geq 0}] +\bbE[M_n \mathbbm{1}_{M_n < 0}] \\
+        &\leq \bbE[M_n \mathbbm{1}_{M_n \geq 0}] + k\\
+        &\leq \bbE[M_n + k] + k\\
+        &\leq \bbE[M_0] + 2k
+    \end{align*}
+    If $M_n \in L_2,$ then 
+    \[\bbE[|M_n|] = \bbE[M_n \cdot 1] \leq \left(\bbE[|M_n|^2]\right)^\frac{1}{2}\left(\bbE[1]\right)^\frac{1}{2} \leq C^\frac{1}{2}\]
 
+    The limit $M_\infty$ is a random variable: Let $X_n$ be a random walk on $\bbZ,$ and let $\tau := \inf \{x \mid X_n \in \{a, b\}\}.$ Then by Proposition 29, $X_{n\wedge \tau}$ is a martingale that is uniformly bounded. Clearly, \[\lim_{n\to \infty} X_{n\wedge \tau} = X_\tau =\begin{cases}
+        -a, \quad \text{w.p.} \frac{1}{2}\\
+        b, \quad \text{w.p.} \frac{1}{2}
+    \end{cases}.\] 
+    
+    While we might expect that $\bbE[M_\infty] = M_0$ by the optional stopping theorem, this is usually not the case. To see this, let $X_n$ be a random walk on $\bbZ$ and $\tau = \inf\{n : X_n= 1 \mid X_0 = 0\}.$ Then 
+    \[\bbE[\lim_{n\to \infty} X_{n\wedge \tau}] = \bbE[X_\tau] = 1 \neq \bbE[X_0] = 0.\]
 
+    Why do we need the assumption of boundedness? Let $X_n$ be a random walk on $\bbZ.$ We know that $X_n$ is a martingale, but clearly $\bbE[|X_n|]$ is unbounded. In particular, 
+    $\displaystyle\lim_{n\to \infty} X_n$ does not exist.
+\end{rem}
+
+\begin{exmp}
+    Recall that $\sum \frac{1}{n} = \infty$ and $\sum \frac{(-1)^n}{n}$ converges. Suppose $Y_n$ is a random variable such that $Y_n \in \{-1, 1\}$ w.p. $\frac{1}{2}.$ What is $\sum \frac{Y_n}{n}.$ It is not hard to see that 
+    \[M_n = \sum_{k=0}^n \frac{Y_k}{k}\] is a martingale. To apply MCT, we saw in Remark 21 that it suffices to show that $M_n \in L_2.$ Note that 
+    \[\bbE[|M_n|^2] = \sum_{k=0}^n \sum_{j=0}^n \bbE[Y_k Y_j] \frac{1}{kj} = \sum_{k=0}^n \bbE[Y_k^2]\frac{1}{k^2} < \infty.\] Thus, we apply MCT to note that $M_n \to M_\infty = \displaystyle\sum_{k=0}^\infty \frac{Y_k}{k}$ and so the series converges.
+\end{exmp}
+
+\begin{exmp}
+    (Polya's Urn) We have an urn with red and green balls, starting with a single red and a single green ball. A time $n,$ we pick a ball, put it back, and add another of the same color. Let $X_n = \#\{\text{red balls}\}.$ Note that are $N + 2$ balls at time $N.$ Thus,
+    \[\bbP\{X_{n + 1} = x+1 \mid X_n = x\} = \frac{x}{n+2}, \quad \bbP\{X_{n+ 1} = x \mid X_n = x\} = \frac{n + 2 - x}{n+2}\] Define 
+    \[M_n = \frac{X_n}{n+2}\] to be the proportion of red bals in the urn. We claim that this is a martingale since 
+    \[\bbE[M_{n+1]} \mid \mathcal{F}_n] = \frac{X_n}{n+2}\frac{X_n + 1}{n+3} + \frac{n+2 - x}{n+2}\frac{X_n}{n+3} = \frac{X_n}{n+2} = M_n.\] Since this martingale is bounded by $1,$ then 
+    \[\lim_{n\to \infty} M_n = M_\infty \sim U([0,1]).\]
+\end{exmp}
 
 
 \newpage

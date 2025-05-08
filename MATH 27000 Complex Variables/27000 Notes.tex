@@ -787,7 +787,7 @@ We will next show the invariancy of line integrals about homotopies, and use tha
 
 
 \newpage
-\subsection*{Tuesday, May 6: }
+\subsection{Tuesday, May 6: Homotopic Defomations}
 Let $A$ be an annulus around $z_0.$ Clearly, if $f \in H(A),$ then we cannot express $f(z)$ as a convergent power series, since then $f$ would be holomorphic within the disk. The following few lectures will talk about how useful Laurent series are in expressing functions like this. First we discuss homotopies in detail.
 
 \begin{defn}
@@ -808,10 +808,143 @@ Intuitively, $s$ measures how far along the deformation has gone on, the line fr
 
     Partition $[0,1]^2$ into squares, $S_k,$ of equal diameter which is less that $\delta.$ Thus, $\Gamma(S_k)\subseteq D_{\frac{\epsilon}{2}}(z)$ for some $z \in O.$ Consider the path, $\gamma_{S_k}$,  formed by traversing each $S_k$  by the four time intervals (the sides of the square). Then $\gamma_{S_k}\subseteq D_{\frac{\epsilon}{2}}(z),$ and so by Cauchy's theorem, since $f\in H(O),$ we have that 
     \[\int_{\gamma_{S_k}}f(z)\, dz = 0\] Then 
-    \[\sum_k \int_{\gamma_{S_k}}f(z)\, dz = 0,\] but since we can make it so the orientations cancel each other out, then  
-    \[ \int_{I^2}f(z)\, dz= \sum_k \int_{\gamma_{S_k}}f(z)\, dz = 0\]
-
-    
+    \[\sum_k \int_{\gamma_{S_k}}f(z)\, dz = 0,\] but since we can make it so the orientations cancel each other out, then you end up with the path over the boundary of $[0,1]^2.$ Since the left and right vertical boundary lines are simply constant $z_1$ and $z_2,$ then
+    \[ \int_{\gamma_0}f(z)\, dz - \int_{\gamma_1} f(z)\, dz= \sum_k \int_{\gamma_{S_k}}f(z)\, dz = 0\] and so
+    \[\int_{\gamma_0} f(z)\, dz = \int_{\gamma_1} f(z)\,dz\]
 \end{rem}
+\begin{thm}
+    Let $O\subset \bbC$ be open, and suppose that $\gamma_1$ and $\gamma_2$ are homotopically deformable paths. Then if $f\in H(O),$ 
+    \[\int_{\gamma_0} f(z)\, dz = \int_{\gamma_1} f(z)\,dz\]
+\end{thm}
+\begin{proof}
+    The proof follows from Remark 17
+\end{proof}
+
+\begin{defn}
+    We say that a region $O \subset \bbC$ is \textbf{simply connected} if every closed path $\gamma$ is homotopically  deformable to a point path
+\end{defn}
+
+\begin{thm}
+    Suppose $O\subseteq \bbC$ is simply connected and $f\in H(O).$ Then for any path $\gamma$ in $O,$ 
+    \[\int_\gamma f(z)\, dz = 0\]
+\end{thm}
+\begin{proof}
+    We can apply Theorem 18 to establish the equivalence between a point path and our path $\gamma.$
+\end{proof}
+
+\begin{thm}
+    Let $A$ be an annulus. Let $f \in H(A)$ and fix $z\in A$ between $\gamma_i$ and $\gamma_0,$ where $\gamma_i$ is a circle around the inner disk of $A$ and $\gamma_0$ is a large circle around $\gamma_i.$ Then 
+    \[\int_{\gamma_i}f(z)\, dz = \int_{\gamma_0}f(z)\, dz.\]
+\end{thm}
+\begin{proof}
+    Consider the function 
+    \[F(\zeta) = \begin{cases}
+        \frac{f(\zeta) - f(z)}{\zeta - z}, \qquad \zeta \neq z\\
+        f'(z)
+    \end{cases}.\] Then $F$ is holomorphic and so 
+    \[\frac{1}{2\pi i}\int_{\gamma_i}F(\zeta)d\zeta = \frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z) \int_{\gamma_i} \frac{d\zeta}{\zeta - z} = \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z) \int_{\gamma_0} \frac{d\zeta}{\zeta - z}\] But clearly, 
+    \begin{align*}
+        \frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{\zeta - z}\,d\zeta &= \frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z) \int_{\gamma_i} \frac{d\zeta}{\zeta - z}\\ &= \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z) \int_{\gamma_0} \frac{d\zeta}{\zeta - z}\\
+        &= \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z) 
+    \end{align*} and thus 
+    \[f(z) = \frac{1}{2\pi i}\int_{\gamma_0} \frac{f(\zeta)}{\zeta - z}\, d\zeta + \frac{1}{2\pi i}\int_{\gamma_i} \frac{f(\zeta)}{z - \zeta}d\zeta\]
+\end{proof}
+
+
+\newpage
+\subsection{Thursday, May 8: }
+We begin by redoing the derivation of the formula for the Laurent series from last class. 
+\[\begin{tikzpicture}[scale=1]
+      % define center
+      \coordinate (O) at (0,0);
+      % shade the annulus
+      \fill[blue!10, even odd rule]
+        (O) circle (2cm)
+        (O) circle (1cm);
+
+      % draw outer circle gamma_0 with arrow
+      \draw[thick, ->] 
+        (2,0) arc (0:360:2cm) 
+        node[midway, right] {$\gamma_0$};
+
+      % draw inner circle gamma_i with arrow (opposite orientation if desired)
+      \draw[thick, ->] 
+        (1,0) arc (0:360:1cm)
+        node[midway, left] {$\gamma_i$};
+
+      % mark and label the center z_0
+      \fill (O) circle (1.5pt) node[below left] {$z_0$};
+
+      % place and label the point z
+      \coordinate (Z) at (1.25,0.7);
+      \fill (Z) circle (1.5pt) node[above right] {$z$};
+    \end{tikzpicture}\]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/anus.png}
+    \caption{The Annulus and the Paths}
+\end{figure}
+Call 
+\[F(\zeta) = \begin{cases}
+    \frac{f(\zeta) - z }{\zeta - z}, \quad \zeta\neq z\\
+    f'(z), \quad \zeta = z
+\end{cases}\] to be a holomorphic function. While $\gamma_0$ and $\gamma_1$ are not homotopically equivalent, then can be made that by a single line going out and in of the inner and out circle, but those line integrals cancel out. Thus, by Theorem 18, 
+\[\int_{\gamma_1}F(\zeta)\,d\zeta = \int_{\gamma_0}F(\zeta)\,d\zeta\]
+\[\frac{1}{2\pi i}\int_{\gamma_1}F(\zeta)\,d\zeta =\frac{1}{2\pi i} \int_{\gamma_0}F(\zeta)\,d\zeta\]
+\[ \frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z) \int_{\gamma_i} \frac{d\zeta}{\zeta - z} = \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z) \int_{\gamma_0} \frac{d\zeta}{\zeta - z}\]
+The winding number of the left side is $0,$ while the winding number of the right side is $1.$ Hence, 
+\[\frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{\zeta - z}\,d\zeta  = \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{\zeta - z}\,d\zeta - f(z)\]
+And we then compute:
+\begin{align*}
+    f(z) &= \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{\zeta - z}\,d\zeta  - \frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{\zeta - z}\,d\zeta\\
+    &= \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{\zeta - z}\,d\zeta  + \frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{z - \zeta}\,d\zeta\\
+    &= \frac{1}{2\pi i}\int_{\gamma_0}\frac{f(\zeta)}{(\zeta - z_0) - (z - z_0)}\,d\zeta  + \frac{1}{2\pi i}\int_{\gamma_i}\frac{f(\zeta)}{(z -z_0) - (\zeta -  z_0)}\,d\zeta\\
+    &= \frac{1}{2\pi i}\int_{\gamma_0}\frac{1}{1 - \frac{(z - z_0)}{(\zeta - z_0)}} \frac{f(\zeta)}{\zeta - z_0}\,d\zeta  + \frac{1}{2\pi i}\int_{\gamma_i}\frac{1}{1 - \frac{\zeta - z_0}{z - z_0}} \frac{f(\zeta)}{z - z_0}\,d\zeta\\
+    &=  \frac{1}{2\pi i}\int_{\gamma_0}\sum_{n=0}^\infty \left(\frac{z - z_0}{\zeta - z_0}\right)^n \frac{f(\zeta)}{\zeta - z_0}\,d\zeta  + \frac{1}{2\pi i}\int_{\gamma_i}\sum_{n=0}^\infty \left(\frac{\zeta - z_0}{z - z_0}\right)^n\frac{f(\zeta)}{z - z_0}\,d\zeta\\
+    &= \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma_0} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} (z - z_0)^n + \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma_i} (\zeta - z_0)^n f(\zeta)(z - z_0)^{-(n+1)}\\
+    &= \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma_0} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} (z - z_0)^n + \sum_{n=-\infty}^{-1} \frac{1}{2\pi i}\int_{\gamma_i} (\zeta - z_0)^{-(n+1)}f(\zeta)(z - z_0)^{n}\\
+    &= \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma_0} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} (z - z_0)^n + \sum_{n=-\infty}^{-1} \frac{1}{2\pi i}\int_{\gamma_i} \frac{f(\zeta)}{(\zeta - z_0)^{-(n+1)}}(z - z_0)^{n}\\
+    &= \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} (z - z_0)^n + \sum_{-\infty}^{-1} \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^{(n+1)}}(z - z_0)^{n}\\
+    &= \sum_{n=-\infty}^{\infty} \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^{n}}(z - z_0)^{n}
+\end{align*}
+
+\begin{thm}
+    (Riemann) Suppose $f \in H(D_{\epsilon}(z_0) \sm \{z_0\})$ and $|f(z)| \leq M$ for all $z \in D_{\epsilon}(z_0) \sm \{z_0\}.$ Then we can define $f(z_0)$ such that $f \in D_\epsilon(z_0).$
+\end{thm}
+\begin{proof}
+    Let $r>0,$ and let $\gamma_r$ be a circle of radius $r$ about $z_0.$ 
+    \[|a_{-n}| = \left|\frac{1}{2\pi i}\int_{\gamma_r} f(\zeta)(\zeta - z_0)^n\right| \leq r M r ^n = Mr^{n+1}\] Thus, $a_{-n} = 0$ for any $n >0.$ Thus, as $r \to 0,$ we have that $f(z_0)$ is an absolutely convergent power series.
+\end{proof}
+
+\begin{thm}
+    (Weierstrass-Casserati) Suppose $f\in H(D_\epsilon(z_0)\sm \{z_0\}).$ Then either:
+    \begin{enumerate}
+        \item $f$ has a removable singularity at $z_0;$
+        \item $f$ has a pole at $z_0,$ i.e, 
+        \[\lim_{z\to z_0}|f(z)| = \infty;\]
+        \item $f$ has an essential isolated singularity if it is neither (a) or (b). Then the image of $f$ when we consider the domain $D_\delta(z_0) \sm \{z_0\}$ for $0 < \delta < \epsilon$ is dense in $\bbC.$
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}
+    If $f$ has no negative terms in the Laurent series, then $f$ can be expressed as a convergent power series. If $f$ is bounded, then it clearly a removable singularity. If $f$ has at most finitely many negative powers in the Laurent expansion, then for $z$ such that $0 < |z - z_0| < \epsilon,$ take $n_k$ to be the highest negative power
+    \begin{align*}
+    |f(z)| &= \frac{a_{n_k}}{(z - z_0)^{n_k}} + \frac{a_{n_{k=1}}}{(z - z_0)^{n_{k-1}}} + \cdots+ \sum_{n=0}^\infty a_n (z - z_0)^n\\ &=  \frac{1}{(z - z_0)^{n_k}}\left(a_{n_k}+ a_{n_{k-1}}(z - z_0)^{m_k} + \cdots + a_{n_1}(z - z_0)^{m_1} \right) + \sum_{n=0}^\infty a_n (z - z_0)^n \\
+    &\to \infty
+    \end{align*}
+    
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}

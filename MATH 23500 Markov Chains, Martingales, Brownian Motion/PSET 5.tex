@@ -344,7 +344,9 @@ Moreover, we note that by linearity and symmetry, we have that
 \begin{solution}
     We apply the OST to $M_n,$ and thus 
     \[\bbE[M_{T_R}] = \bbE[M_0] = 0,\] but we also have that 
-    \[\bbE[M_{T_R}] = (\bbE[|X_{T_R}|^2]-\frac{3}{2}\bbE[T_R])\bbP\{T_R < \infty\} = (\bbE[|X_{T_R}|^2]-\frac{3}{2}\bbE[T_R])\]
+    \[\bbE[M_{T_R}] = (\bbE[|X_{T_R}|^2]-\frac{3}{2}\bbE[T_R])\bbP\{T_R < \infty\} = (\bbE[|X_{T_R}|^2]-\frac{3}{2}\bbE[T_R]).\] We know first off that $|X_{T_R}|^2 \geq R^2.$ But we can bound it from above by $R^2 + 2,$ since the martingale can be at most one diagonal step from $R^2.$ Thus, 
+    \[R^2 + 2 - \frac{3}{2}\bbE[T_R]) \geq 0 = (\bbE[|X_{T_R}|^2]-\frac{3}{2}\bbE[T_R])  = 0\geq R^2 - \frac{3}{2}\bbE[T_R])\] Thus, 
+    \[\frac{2}{3}R^2 \leq \bbE[T_R] \leq \frac{2}{3}R^2 + \frac{4}{3}\]
 \end{solution}
 \end{itemize}
 
@@ -359,6 +361,20 @@ where \(\deg x\) denotes the number of neighbors of \(x\), and \(y \sim x\) mean
 
 \begin{itemize}
     \item[(a)] Fix \(x_0 \in V(G)\) and assume that \(X_0 = x_0\). Show that if \(f\) is harmonic, then \(\{f(X_n)\}_{n \geq 0}\) is a martingale with respect to \(\sigma(X_1, \ldots, X_n)\).
+\begin{solution}
+Note that 
+\[\bbE[f(X_n)] = f(X_n)\]
+    To show that $f(X_n)$ is $\sigma(X_1, \dots, X_n)$ measurable, 
+
+    \[\bbE[|f(X_n)|] = \bbE[\frac{1}{\deg X_n} \sum_{y\sim X_n}f(y)]\]
+
+    For the martingale property, note that 
+    \begin{align*}
+        \bbE[f(X_n) \mid \mathcal{F_{n-1}}]
+        &= \bbE[\bbE[f(X_n) \mid \mathcal{F}_n] \mid \mathcal{F}_{n-1}]\\
+        &= 
+    \end{align*}
+\end{solution}
     \item[(b)] Show using the martingale convergence theorem that if \(\{X_n\}_{n \geq 0}\) is recurrent, then every non-negative harmonic function on \(G\) is constant.
     \item[(c)] Show that if \(\{X_n\}_{n \in \mathbb{N}}\) is transient (in which case \(V(G)\) is infinite), then for any vertex \(x_0 \in V(G)\) there is a non-constant function on \(G\) which takes values in \([0, 1]\) and is harmonic at every vertex of \(G\) except for \(x_0\).
 \end{itemize}

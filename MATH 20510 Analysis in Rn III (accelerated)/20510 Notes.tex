@@ -793,7 +793,7 @@ Let $I = (i_1, \dots, i_k)$ be a multi-index in $\bbR^n.$
 
 
 \newpage
-\subsection*{Monday, May 5: }
+\subsection*{Monday, May 5: The Wedge Product}
 
 \begin{defn}
     Suppose $I = (i_1, \dots, i_k)$ is a multi-index such that $i_1 < i_2< \cdots < i_k.$ We call $I$ an \textbf{increasing multi-index} and say that 
@@ -862,4 +862,43 @@ Let $I = (i_1, \dots, i_k)$ be a multi-index in $\bbR^n.$
     Let $\pi_i: \bbR^n \to \bbR$ be the projection map of the $i^$th component. Then 
     \[d\pi_i = D_1\pi_1dx_1 + \cdots  + D_n\pi_n dx_n = dx_i.\]
 \end{exmp}
+
+\newpage
+\subsection{Wednesday, May 7: Properties of the Exterior Derivative}
+\begin{thm}
+\begin{enumerate}
+    \item (Graded Product Rule) Let $\omega \in \Delta^k(\bbR^n)$ and let $\lambda \in \Delta^m(\bbR^m)$ both of class $C^1.$ Then 
+    \[d(\omega \wedge \lambda)=d\omega \wedge \lambda + (-1)^k (\omega \wedge d\lambda)\]
+    \item Let $\omega \in \Delta^k(\bbR^n)$ of class $C^2,$ then $d(d\omega) = 0.$
+\end{enumerate}
+\end{thm}
+\begin{proof}
+    (a) By the distributive properties of the exterior derivative, it is enough to show this for $\omega = f dx_I$ and $\lambda = dx_J,$ where $f,g \in C^1.$ Then recall that $\omega \wedge \lambda = fg\, dx_I \wedge dx_J.$ Recall as well that $d(fg) = g\,df + f\, dg$ 
+    
+    If $I$ and $J$ have any common indices, then the result trivially holds. Thus, take $I$ disjoint from $J.$ Computing, noting the fifth equality comes from an identity in the homework,
+    \begin{align*}
+        d(\omega \wedge \lambda) &= d\left(fg \, dx_I \wedge dx_J\right)\\
+        &= (-1)^\alpha d(fg \, dx_{[I,J]})\\
+        &= (-1)^\alpha \left(f\,dg + g\,df\right)\wedge dx_{[I,J]}\\
+        &= (f\,dg + g\, df)\wedge dx_I\wedge dx_J\\
+        &= (-1)^kf \wedge dx_I \wedge dg \wedge dx_J + df\wedge dx_I \wedge g\wedge \,dx_J\\
+        &= (-1)^kf  dx_I \wedge dg \wedge dx_J + df\wedge dx_I \wedge g \,dx_J\\
+        &= (-1)^k (\omega d\lambda) + (d\omega \wedge \lambda)
+    \end{align*}
+
+    (b) We note that $d(d x_I) = 0$ since  by (a) we have $d(1\cdot dx_I) = d(1)\wedge dx_I = 0.$ Thus, let $f\in C^2(\bbR^n).$ We have that \[d^2(f) = d\left( \sum_{i=1}^n (D_i(f))dx_i\right) = d\left(D_1(f)dx_1 + \dots + D_n(f)dx_n\right)= \sum_{i=1}^n \left(\sum_{j=1}^n D_{ij}(f)dx_j\right) \wedge dx_i = 0.\] Thus, we see that by part (a), 
+    \[d(f \wedge dx_I) = df \wedge dx_I + (-1) fd(dx_I) = 0\]
+\end{proof}
+
+\begin{defn}
+    We say that $\omega \in \Delta^k(\bbR^n)$ is \textbf{closed} if $d\omega = 0.$ We say that $\omega$ is \textbf{exact} if there exists some $\alpha\in \Delta^{k-1}(\bbR^n)$ such that $d\alpha = \omega$
+\end{defn}
+\begin{rem}
+Suppose $\omega \in \Delta^k(\bbR^n)$
+    \begin{enumerate}
+        \item Since $d(d(\omega)) = 0,$ then $d\omega$ is an exact form. Thus, every exact form is closed. 
+        \item Not every closed form is exact. This is shown in PSET 6 question 3.
+    \end{enumerate}
+\end{rem}
+
 \end{document}
