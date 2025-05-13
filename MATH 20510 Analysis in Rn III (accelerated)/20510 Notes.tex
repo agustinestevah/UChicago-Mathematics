@@ -901,4 +901,146 @@ Suppose $\omega \in \Delta^k(\bbR^n)$
     \end{enumerate}
 \end{rem}
 
+\newpage
+\subsection{Friday, May 9:  Pullbacks}
+For this class, we let $E\subset \bbR^n$ and $F\subset\bbR^m$ be open, and $T: E\to F$ be $C^1.$ Let $\omega \in \Delta^k(F),$ such that 
+\[\omega = \sum_{I}f_I(y) \,dy_I\] If $T(x) = (t_1(x), \dots, t_m(x)) = (y_1, \dots, y_m) = \textbf{y},$ then 
+\[dt_i = \sum_{j=1}^n(D_j t_i)\, dx_j\] is a one form on $E.$ Thus, $T$ transforms $\omega$ by pulling it back to $E.$ 
+\begin{defn}
+    The \textbf{pullback form} of $\omega$ is 
+    \[\omega_T(x) = \sum_{I}f_I(T(x))\,dt_{I}\]
+\end{defn}
+\begin{exmp}
+    Let $T: \bbR^n \to \bbR^n$ be the identity mapping. Let $\omega = \sum_I f_I \,dx_I$. Then $t_i(x) = x_i,$ 
+    \[dt_i = D_1 x_i \,dx_1 + \dots + D_n x_i \, dx_n =   dx_i,\] and so 
+    \[\omega_T(x) = \sum_I f_I(x)\, dx_I\]
+\end{exmp}
+\begin{exmp}
+    Let $T: \bbR^2 \to \bbR^3$ such that 
+    \[(x_1, x_2)\mapsto (x_2, x_1^2, x_1 + x_2) = (t_1, t_2, t_3).\] Let $\omega \in \Delta^2(\bbR^3)$ such that 
+    \[\omega(y_1, y_2, y_3) = y_1\,dy_2 \wedge dy_3.\] Computing, we see that 
+    \[dt_1 = dx_2, \quad dt_2 = 2x_1\,dx_1, \quad dt_3 = dx_1 + dx_2,\] and so 
+    \begin{align*}
+        \omega_T(x_1, x_2) &= f_{2,3}(T(x_1, x_2)) \,(dt_2 \wedge dt_3)\\
+        &= f_{2,3}(x_2, x_1^2, x_1 + x_2) \,(2x_1\,dx_1) \wedge (dx_1 + dx_2)\\
+        &= (2x_1x_2)\,(dx_1 \wedge dx_1 + dx_1 \wedge dx_2)\\
+        &= 2x_1x_2\, dx_1 \wedge dx_2
+    \end{align*}
+\end{exmp}
+\begin{lemma}
+    Let $f\in C^1(F, \bbR).$ Then if we call $f_T = f\circ T,$ 
+    \[d(f_T) = (df)_T.\]
+\end{lemma}
+\begin{proof}
+    Follow your nose and use change of variable
+    \begin{align*}
+        d(f_T) &= \sum_{j=1}^n D_j f_T\,dx_j\\
+        &= \sum_{j=1}^n D_j (f\circ T)dx_j\\
+        &= \sum_{i=1}^m \sum_{j=1}^n (D_if_i)(T)\cdot D_jt_i\,dx_j\\
+        &= \sum_{i=1}^m (D_if)(T)dt_i\\
+        &= (df)_T
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    Let $\omega\in \Delta^k(F)$ and $\lambda\in \Delta^l(F).$ If $T: E\to F$ is $C^1,$ then 
+    \begin{enumerate}
+        \item if $k = l,$ $(\omega + \lambda)_T = \omega_T + \lambda_T$
+        \item $(\omega\wedge\lambda)_T = \omega_T\wedge\lambda_T$
+        \item $d(\omega_T) = (d\omega)_T$ if $T\in C^2(E,F)$
+    \end{enumerate}
+    \begin{proof}
+        (i) Let $\omega = \sum_I f_I dy_I$ and $\lambda = \sum_I g_I dy_I.$ Then 
+        \begin{align*}
+            (\omega + \lambda)_T &= \left(\sum_I (f_I + g_I)\,dy_I\right)_T\\
+            &= \sum_I (f_I + g_I)(T)\, dt_I\\
+            &= \omega_T + \lambda_T
+        \end{align*}
+        The proof for (ii) is on PSET 7.
+
+        (iii) Suppose $T\in C^2(E,F).$ First consider the case when 
+        \[\omega = dy_{i_1} \wedge \dots \wedge dy_{i_k}, \quad \omega_T = dt_{i_1} \wedge \dots \wedge dt_{i_k}.\] We use the graded product rule to easily conclude that 
+        \[d\omega =0 = d(\omega_T),\] and so $(d\omega)_T = 0.$ For the general case, use the previous lemma.
+    \end{proof}
+\end{thm}
+
+
+\newpage
+\subsection{Monday, May 12: Change of Variables}
+For this class, we let $E\subset \bbR^n$ and $F\subset\bbR^m$ be open.
+\begin{thm}
+    If $T \in C^1(E, F),$ and $S\in C^1(F, G),$ where $G \subseteq \bbR^\ell,$ and $\omega\in \Delta^k(G).$   Then 
+    \[(\omega_S)_T = \omega_{S\circ T}\]
+\end{thm}
+\begin{rem}
+    As a remark, note that $\omega_S \in \Delta^k(G)$ and $(\omega_S)_T, \omega_{S\circ T} \in \Delta^k(E).$
+\end{rem}
+\begin{thm}
+    Suppose $\omega\in \Delta^k(E),$ and $\phi$ is a $k-$surface in $E$ with parameter domain $D\subseteq \bbR^k.$ If $\Delta$ is the trivial $k-$surface, $\Delta: D\to \bbR^k,$ where $\Delta(u) = u,$ then 
+    \[\int_\phi \omega = \int_\Delta \omega_\phi\]
+\end{thm}
+\begin{proof}
+    It suffices to show this for the case when 
+    \[\omega = f\,dx_I = f\,dx_{i_1}\wedge \dots \wedge dx_{i_k}.\] Let $\phi_i, \dots, \phi_n$ denote the components of $\phi.$ Then 
+    \[\omega_\phi = \sum_{I} f_I(\phi)\,d\phi_I = f(\phi)\,d\phi_{i_1}\wedge \dots \wedge d\phi_{i_k}.\] It suffices to show that
+    \begin{align}
+    d\phi_{i_1}\wedge \dots \wedge d\phi_{i_k} = J (u) \,du_1\wedge \dots \wedge du_k, 
+    \end{align}
+     where $J(u) = \frac{\partial (x_1, \dots, x_{i_k})}{\partial (u_1, \dots, u_k)}.$ Assuming (1), 
+     \begin{align*}
+         \int_\Delta \omega_\phi &= \int_\Delta f(\phi)\,d\phi_{i_1}\wedge \dots \wedge d\phi_{i_k}\\
+         &= \int_\Delta f(\phi) J(u) \,du_1\wedge \dots \wedge du_k\\
+         &= \int_D f(\phi (u))J(u)du\\
+         &= \int_\phi \omega.
+     \end{align*}
+     To prove (1), let $[A]$ be the $k\times k$ matrix with entries
+     \[\alpha(p,q) = (D_q\phi_p)(u)\] for all $p,q = 1,\dots, k.$ Note that $\det A = J(u).$ Since 
+     \[d\phi_{i_p} = \sum_{q}\alpha(p,q)\,du_{q}\] Thus, 
+     \[d\phi_{i_1}\wedge \dots \wedge d\phi_{i_k} = \sum \alpha(1,q_1)\cdots \alpha(k,q_k) \,du_{q_1}\wedge \dots \wedge du_{q_k},\] where the sum ranges over all the $q_1, \dots, q_k \in \{1,\dots, k\}.$ In order to get the wedge product into standard presentation, we rearrange 
+     $du_{q_1}\wedge \dots \wedge du_{q_k}$ to get 
+     \[d\phi_{i_1}\wedge \dots \wedge d\phi_{i_k} = (\det A)\, du_1 \wedge \dots \wedge du_k = J(u)\,du_1 \wedge \dots \wedge du_k\]
+ \end{proof}
+\begin{exmp}
+    Consider when $k = 2.$
+\[ A = \begin{bmatrix}
+     \alpha(1,1) & \alpha(1,2)\\
+     \alpha(2,1) & \alpha()2,2
+ \end{bmatrix}\]
+ Then 
+ \begin{align*}
+ d\phi_{i_1}\wedge d\phi_{i_2} &= \alpha(1,1)\alpha(2,1)\, du_{1}\wedge du_{1} + \alpha(1,1)\alpha(2,2)\,du_{1}\wedge du_{2} \\
+ &+ \alpha(1,2)\alpha(2,1)\,du_2 \wedge du_1 + \alpha(2,2)\alpha(1,2)\,du_2\wedge du_2\\
+ &= (\alpha(1,1)\alpha(2,2) - \alpha(1,2)\alpha(2,1))\,du_1\wedge du_{2}\\
+ &= \det(A)\,du_1 \wedge du_2
+ \end{align*}
+ 
+\end{exmp}
+
+\begin{thm} (Change of Variables)
+    Suppose $T\in C^1(E,F)$ and $\phi$ is a $k-$surface in $E.$ If $\omega\in \Delta^k(F),$ then 
+    \[\int_{T\circ \phi} \omega = \int_\phi \omega_T\]
+\end{thm}
+\begin{proof}
+    Let $D$ be the parameter domain of $\phi$ (and thus of $T\circ \phi$).  Let $\Delta: D \to D$ be the identity map on $D$ such that $\Delta(u) = u.$ Then by Theorem 21 and Theorem 20 and Theorem 21 again,
+    \[\int_{T\circ \phi} \omega = \int_\Delta \omega_{T\circ \phi} = \int_\Delta (\omega_T)_\phi  = \int_\phi \omega_T\]
+\end{proof}
+
+\begin{defn}
+    A map $f: X\to Y,$ where $X,Y$ are vector spaces, is called \textbf{affine} if $f - f(0)$ is linear.
+\end{defn}
+\begin{rem}
+    In other words, $f$ is affine if 
+    \[f(x) = f(0) + Ax,\quad A:X\to Y \text{ is linear}.\] An affine map from $\bbR^k \to \bbR^n$ is determined by $f(0)$ and its value for each $f(e_i).$
+\end{rem}
+
+\begin{defn}
+    The \textbf{$k-$simplex} in $\bbR^k$ is $Q^k \subseteq \bbR^k$ such that 
+    \[Q^k:= \{x = (x_1, \dots, x_k)\mid x_i \geq 0, \,\sum_{i=1}^k x_i \leq 1\}\]
+\end{defn}
+\begin{rem}
+    The one simplex is $[0,1].$ The two-simplex is the right triangle with endpoints $(0,0), (0,1), (1,0).$ 
+\end{rem}
+
+
+
 \end{document}

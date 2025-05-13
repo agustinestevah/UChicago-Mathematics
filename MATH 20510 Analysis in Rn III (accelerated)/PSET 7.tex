@@ -1,0 +1,298 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{20510}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 6}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{05-07-2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+    
+    
+    \section*{Problem 1}
+
+Give a rigorous proof of Theorem 10.22(b) in Rudin.
+
+\newpage
+
+\section*{Problem 2}
+
+Let $\omega$ be a 1-form on $\mathbb{R}^n$ and let $\gamma : [a, b] \to \mathbb{R}^n$ be a $C^1$ curve. Let $\Delta : [a, b] \to [a, b]$ be the identity function (which is a curve in $\mathbb{R}^1$). Prove that
+
+\[
+\int_{\gamma} \omega = \int_{\Delta} \omega_{\gamma}.
+\]
+
+Do not just apply Theorem 10.24 or 10.25, please give a direct proof.
+
+\newpage
+
+\section*{Problem 3}
+
+Define the forms
+
+\begin{align*}
+\omega_1 &= x \, dx - y \, dy \\
+\omega_2 &= z \, dx \wedge dy + x \, dy \wedge dz \\
+\omega_3 &= z \, dy.
+\end{align*}
+
+Compute $\omega_1 \wedge \omega_2$, $\omega_1 \wedge \omega_3$ and $\omega_2 \wedge \omega_3$. Write all forms in standard presentation.
+\begin{solution}
+    \begin{itemize}
+        \item To compute $\omega_1 \wedge \omega_2,$ we see that 
+\begin{align*}
+    \omega_1 \wedge \omega_2 &= (x \, dx - y \, dy )\wedge ( z \, dx \wedge dy + x \, dy \wedge dz)\\
+    &= xz\, dx \wedge dx \wedge dy+ x^2 \, dx \wedge dy\wedge dz - yz \,dy \wedge dx \wedge dy - yx \, dy \wedge dy\wedge dz\\
+    &= \boxed{x^2 \,dx\wedge dy\wedge dz}
+\end{align*}
+\item For $\omega_1 \wedge \omega_3,$ we compute
+\begin{align*}
+    \omega_1 \wedge \omega_3 &= (x\, dx - y \, dy) \wedge z\, dy\\
+    &= xz \, dx \wedge dy - yz\, dy \wedge dy\\
+    &= \boxed{xz \, dx \wedge dy}
+\end{align*}
+\item For $\omega_2 \wedge \omega_3,$ we compute
+\begin{align*}
+    \omega_2 \wedge \omega_4 &= (z\, dx \wedge dy  + x\,dy \wedge dz) \wedge z\,dy\\
+    &= z^2\, dx \wedge dy\wedge dy + xy\, dy \wedge dz \wedge dy\\
+    &= \boxed{0}
+\end{align*}
+    \end{itemize}
+\end{solution}
+
+
+
+\newpage
+
+\section*{Problem 4}
+
+Let $\omega = xy \, dx \wedge dz + z \, dx \wedge dy$ be a 2-form in $\mathbb{R}^3$. Compute $d\omega$.
+\begin{solution}
+    Computing, 
+    \begin{align*}
+        d(\omega) &= d\left(xy \, dx \wedge dz + z \,dx \wedge dy\right)\\
+        &= y\,dx \wedge dx\wedge dz + 0 + x\,dy\wedge dx\wedge dz + 0 + \,dz \wedge dx \wedge dy\\
+        &= -x \,dx \wedge dy \wedge dz + dx \wedge dy \wedge dz\\
+        &= (1-x)\,dx \wedge dy \wedge dz
+    \end{align*}
+\end{solution}
+\newpage
+
+\section*{Problem 5}
+
+Let $T : \mathbb{R}^3 \to \mathbb{R}^3$ be the function defined by $T (x, y, z) = (xy, xz, yz)$. Find the following forms:
+
+(a) $(dx)^T$, $(dy)^T$ and $(dz)^T$.
+
+(b) $(dx \wedge dy)^T$
+
+(c) $(dx \wedge dy \wedge dz)^T$.
+
+Write all forms in standard presentation.
+\begin{solution}
+    \begin{enumerate}
+        \item For (a), we compute the pull back
+        \begin{align*}
+            (dx)^T &= d(T_x) = y\, dx + x\,dy\\
+            (dy)^T &= (dT_y) = z\,dx + x\,dz\\
+            (dz)^T &= (dT_z) = z\,dy + y\,dz
+        \end{align*}
+        \item The pullback is distributive, so
+        \[(dx \wedge dy)^T = (dx)^T \wedge (dy)^T = (y\, dx + x\,dy) \wedge (z\,dx + x\,dz) = -xz \,dx \wedge dy + xy\, dx\wedge dz + x^2 \, dy\wedge dz\]
+        \item Similarly to (b) but just more annoying
+        \begin{align*}
+            (dx \wedge dy \wedge dz)^T &= (dx \wedge dy )^T\wedge (dz)^T\\
+            &= (-xz \,dx \wedge dy + xy\, dx\wedge dz + x^2 \, dy\wedge dz)\wedge z\,dy + y\,dz\\
+            &= -xyz\,dx \wedge dy\wedge dz - xyz\, dx\wedge dy\wedge dz\\
+            &= -2xyz\, dx\wedge dy\wedge dz
+        \end{align*}
+    \end{enumerate}
+\end{solution}
+
+\newpage
+
+\section*{Problem 6}
+
+Let $T (r, \theta, \phi) = (r \cos \theta \sin\phi, r \sin \theta \sin\phi, r \cos\phi)$ (this function gives the spherical coordinates of $\mathbb{R}^3$). Calculate $\omega^T$ for each of the following forms $\omega$:
+
+$dx$, $dy$, $dz$, $dx \wedge dy$, $dx \wedge dz$, $dy \wedge dz$, $dx \wedge dy \wedge dz$.
+\begin{solution}
+    Holy moly. It is a lot easier if we just look at the Jacobian, which is given by 
+    \[J_T = \begin{pmatrix}
+    \cos \theta \sin\phi & -r\sin \theta \sin \phi & r\cos \theta \cos \phi\\\sin \theta \sin \phi & r\cos \theta \sin \phi & r\sin \theta \cos \phi\\\cos \phi & 0 & -r\sin \phi
+    \end{pmatrix}\]
+    \begin{align*}
+        (dx)^T &= d(T_x) = \cos \theta \sin\phi \,dr -r\sin \theta \sin\phi \,d\theta + r\cos \theta \cos \phi \, d\phi\\
+        (dy)^T &= d(T_y) = \sin \theta \sin \phi \,d\theta +r\cos \theta \sin \phi\,d\theta + r\sin \theta \cos \phi\,d\theta\\
+        (dz)^T &= d(T_z) = \cos \phi \,dr - r\sin \phi \, d\phi\\
+        (dx \wedge dy)^T &= (dx)^T \wedge (dy)^T = r^2\sin^2 \phi \, dr \wedge d\theta \\
+        (dx \wedge dz)^T &= (dx)^T \wedge (dz)^T = -r\cos\theta\, dr\wedge d\phi\\
+        (dy \wedge dz)^T &= (dy)^T \wedge (dz)^T = -r\sin\theta \, dr\wedge d\phi\\
+        (dx \wedge dy \wedge dz)^T &= (dx\wedge dy)^T \wedge dz 
+    \end{align*}
+\end{solution}
+\newpage
+
+\section*{Problem 7}
+
+Consider the 2-form $dx \wedge dy$ in $\mathbb{R}^2$. Find all linear maps $T : \mathbb{R}^2 \to \mathbb{R}^2$ such that $\omega^T = \omega$.
+\begin{solution}
+    Since $T: \bbR^2 \to \bbR^2$ is linear, then 
+    \[T= \begin{pmatrix}
+        a & b\\ c & d
+    \end{pmatrix} = \begin{pmatrix}
+        ax + by\\
+        cx + dy
+    \end{pmatrix}\] Pulling back,
+    \begin{align*}
+    (dx\wedge dy)^T &= d(T_x) \wedge d(T_y)\\&= (a\,dx + b\,dy)\wedge (c\,dx + d\,dy)\\
+    &= (ad)\,dx\wedge dy + (cb)\,dy \wedge dx\\
+    &= (ad -bc)\,dx\wedge dy\\
+    &= dx\wedge dy
+    \end{align*}
+    Thus, the only linear map $T$ is one such that $ad - bc  =1.$
+\end{solution}
+
+\newpage
+
+\section*{Problem 8}
+
+Let $f : \mathbb{R}^n \to \mathbb{R}$ be $C^1$, and let $df$ be the 1-form which is the derivative of the 0-form $f$. For any curve $\gamma : [a, b] \to \mathbb{R}^n$, prove that
+
+\[
+\int_{\gamma} df = f(\gamma(b)) - f(\gamma(a)).
+\]
+
+\newpage
+
+\section*{Problem 9}
+
+Let $\omega$ be the 1-form on $\mathbb{R}^2 \setminus \{0\}$ given by
+
+\[
+\omega = \frac{y \, dx - x \, dy}{x^2 + 4y^2}
+\]
+
+Let $\gamma : [0, 1] \to \mathbb{R}^2$ be the curve defined by $\gamma(t) = (2 \cos(2\pi t), \sin(2\pi t))$.
+
+(a) Compute $d\omega$.
+
+(b) Compute $\int_{\gamma} \omega$.
+
+(c) Is $\omega$ closed? Is it exact? (Hint: For exactness, use the previous Problem.)
+
+
+\end{document}

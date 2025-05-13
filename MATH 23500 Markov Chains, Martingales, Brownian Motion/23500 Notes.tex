@@ -1151,6 +1151,32 @@ This remark leads to the following result:
 (Martingale Convergence Theorem) Let $M_n$ be a martingale and suppose there exists some $C>0$ such that $\bbE[|M_n|] \leq C$ for all $n>0.$ Then with probability $1,$ there exists a random variable $M_\infty$ such that 
 \[\lim_{n\to \infty} M_n = M_\infty\]
 \end{thm}
+\begin{proof}
+    Suppose $M_n$ doesn't converge. By necessity, it must be true that 
+    \[\liminf_{n\to \infty}M_n < \liminf_{n\to \infty}M_n.\] Take $a,b \in \bbR$ such that there exist times $m_1 < n_1 < m_2 < n_2 < \dots< $ so that 
+    \[M_{m_j} \leq a, \quad M_{n_j} \geq b \qquad \forall j \in \bbN.\] We say that an \textbf{upcrossing} of $[a,b]$ is an interval $\{m, \dots, n\}$ such that $M_{m} \leq a$ and $M_n \geq b$ and $M_k \in (a,b)$ for all $k$ in the uncrossing. Note that since $M_n$ doesn't converge, we must have that $M_n$ has an infinite number of upcrossings for some interval $[a,b].$
+    
+    Define $B_0:=1,$ and
+    \[B_n:= \begin{cases}
+        1 \qquad B_{n-1} = 0, \quad M_{n-1}\leq a\\
+        0, \qquad B_{n-1} = 1, \quad M_{n-1} \geq b\\
+        B_{n-1}
+    \end{cases}\] to be the betting strategy where you buy, to the best of your ability, a `stock' when $M_n$ is less than $a$ and sell a `stock' when  $M_n$ is greater than $b.$ Then we can define $W_n$ to be our total winnings at time $n$ by 
+    \[W_n = \sum_{k=0}^n B_k (M_k - M_{k-1}).\] $W_n$ is a \textbf{discrete stochastic integral} and is clearly $\mathcal{F}_n-$measurable with $\bbE[|W_n|] < \infty.$ Moreover, we can say that because $B_n$ is $\mathcal{F}_{n-1}-$measurable, 
+    \begin{align*}
+        \bbE[W_n \mid \mathcal{F}_{n-1}] &= \bbE\left[\sum_{k=0}^n B_k(M_{k} - M_{k-1})\mid \mathcal{F}_{n-1}\right]\\
+        &= \sum_{k=0}^{n-1} B_k(M_{k} - M_{k-1}) + \bbE[B_n (M_n - M_{n-1})\mid \mathcal{F}_{n-1}]\\
+        &= W_{n-1} + B_n\bbE[ (M_n - M_{n-1})\mid \mathcal{F}_{n-1}]\\
+        &= W_{n-1} + B_n\bbE[M_n\mid \mathcal{F}_{n-1}] - B_n M_{n-1}\\
+        &= W_{n-1}
+    \end{align*}
+    Thus, $W_n$ is a martingale. Let $U_n$ be the number of upcrossings by time $n.$ Each $U_n$ results in a profit of at least $(b-a),$ and so 
+    \[W_n \geq (b-a) U_n + (M_n - a),\] where the last term represents the loss of holding on to the asset at the present. Thus, 
+    \[0 =\bbE[W_0]= \bbE[W_n] \geq (b-a)\bbE[U_n] + \bbE[M_n]- a.\] Rearranging,
+    \[\bbE[U_n] \leq \frac{a - \bbE[M_n]}{b-a} \leq \frac{|a| + \bbE[|M_n|]}{b-a} < \frac{|a|  + C}{b-a}.\] Because this holds for al $n,$ then 
+    \[\lim_{n\to \infty}\bbE[U_n] < K\] for some $K.$ Since for any $n,$ $U_n \geq 0$ and $U_{n-1} \leq U_n,$ then 
+    \[\lim_{n\to \infty}\bbE[U_n] = \bbE[\lim_{n \to \infty} U_n] < K.\] But this in turn implies that $\lim_{n\to \infty}U_n < \infty,$ which is a contradiction. 
+\end{proof}
 
 \begin{rem}
 Consider the following assumptions:
@@ -1189,6 +1215,63 @@ Consider the following assumptions:
     \[\bbE[M_{n+1]} \mid \mathcal{F}_n] = \frac{X_n}{n+2}\frac{X_n + 1}{n+3} + \frac{n+2 - x}{n+2}\frac{X_n}{n+3} = \frac{X_n}{n+2} = M_n.\] Since this martingale is bounded by $1,$ then 
     \[\lim_{n\to \infty} M_n = M_\infty \sim U([0,1]).\]
 \end{exmp}
+
+\newpage
+\subsection{Monday, May 12: Introduction to Brownian Motion}
+Informally, a Brownian motion $\{B_t\}_{t\geq 0}$ is a random function indexed by continuous time taking values in continuous space. 
+\begin{defn}
+    A \textbf{Brownian motion} is a a random function $B: [0,\infty) \to \bbR$ that satisfies:
+    \begin{enumerate}
+        \item $B_0 = 0;$
+        \item (Stationary increments) For every $0< s< t,$ $B_t - B_s$ has the same distribution as $B_{t-s};$
+        \item (Independent increments) For every $s_1 \leq t_1 \dots s_k \leq t_k,$ the increments $B_{t_j} - B_{s_j}$ are independent for $j = 1,2,\dots, k;$
+        \item (Continuity) $t\mapsto B_t$ is continuous. 
+    \end{enumerate}
+\end{defn}
+\begin{thm}
+    Let $B: [0, \infty) \to \bbR$ be a random continuous function with independent, stationary increments and $B_0 = 0.$ Then there exists some $\mu \in \bbR$ and $\sigma^2 >0$ such that $B_t \sim N(\mu t, \sigma^2 t),$ where $\mu$ and $\sigma^2$ uniquely characterize the distribution of $\{B_t\}_{t\geq 0}$
+\end{thm}
+\begin{rem}
+There are two way of building $B_t:$
+
+   (i) Suppose $X_n$ is our coin flip random variable and $S_n = \sum X_i.$ Then by the CLT, if $\Phi$ is the CDF of the standard normal,
+    \[\lim_{n\to \infty}\bbP\{a < \frac{S_n}{\sqrt{n}} < b\} = \Phi(b) - \Phi(a).\]
+
+    Now let 
+    \[B_n^{(t)} := \frac{S_{\lfloor nt\rfloor}}{\sqrt{nt}}.\] A theorem by Donsker states that $B_n^{(t)}\xrightarrow[n\to \infty]{}B_t.$
+
+    (ii) Levy's Construction is done by linearly interpolating a family of Normal r.v.'s indexed by a countably dense subset of $[0,1].$
+\end{rem}
+\begin{defn}
+    \textbf{(Standard) Brownian motion} is the process $\{B_t\}_{t\geq 0}$ with $B_0 = 0$ satisfying:
+    \begin{enumerate}
+        \item $B$ is continuous
+        \item For each $s<t,$ $B_t - B_s$ has the normal distribution with mean $0$ and variance $t - s.$
+        \item For every $s_1 \leq t_1 \leq \dots s_k \leq t_k,$ the increments $B_{t_j} - B_{s_j}$ are independent.
+    \end{enumerate}
+\end{defn}
+\begin{exmp}
+    Suppose $B$ is a standard Brownian Motion. Then 
+    \[\bbP\{B_1 \geq 1, B_3 \geq B_1 + 1\} = \bbP\{B_1 \geq 1, B_3 - B_1 \geq 1\}\] By (c) and then (b), 
+    \[\bbP\{B_1 \geq 1, B_3 - B_1 \geq 1\} = \bbP\{B_1 \geq 1\} \bbP\{B_3 - B_1 \geq 1\} = \int_1^\infty \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}\, dx\int_1^\infty \frac{1}{2\sqrt{\pi }}e^{-\frac{x^2}{4}}\,dx\]
+\end{exmp}
+\begin{prop}
+    Let $B_t$ be a standard Brownian motion and let $c >0.$ Then $\frac{1}{\sqrt{c}}B_{ct}$ is a standard Brownian motion. 
+    \end{prop}
+    \begin{proof}
+    Clearly, the new motion is continuous and has independent increments. For any $s\leq t,$ we have that 
+    \[B_{ct} - B_{cs} \sim N(0, c(t-s)) \implies \frac{1}{\sqrt{c}}(B_{ct} - B_{cs})\sim N(0,t-s)\]
+\end{proof}
+\begin{prop}
+    For each fixed $t\geq 0,$ it holds w.p. $1$ that $B$ is not differentiable at $t.$
+\end{prop}
+\begin{proof}
+    Let $\epsilon>0,$ we have by the previous proposition that $\frac{1}{\sqrt{\epsilon}}(B_{t + \epsilon } - B_t)\sim N(0,1),$ and so 
+    \[\frac{B_{t + \epsilon} - B_t}{\epsilon} \sim \frac{1}{\sqrt{\epsilon}} Z,\] where $Z\sim N(0,1).$ Thus, 
+    \[\bbP\{\frac{|B_{t + \epsilon} - B_t|}{\epsilon} \geq c\} = \bbP\{|Z| \geq \epsilon^\frac{1}{2}c\} \to 1,\] and so 
+    \[\limsup_{n\to \infty}\frac{B_{t + \epsilon} - B_t}{\epsilon} = \infty.\]
+\end{proof}
+
 
 
 \newpage

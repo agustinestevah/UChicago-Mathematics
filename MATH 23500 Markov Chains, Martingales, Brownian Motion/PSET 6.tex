@@ -1,0 +1,394 @@
+\documentclass[11pt]{article}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{23500}
+\newcommand{\subject}{Markov Chains, Martingales, and Brownian Motion}
+\newcommand{\instructors}{Stephen Yearwood}
+\newcommand{\assignment}{Problem Set 5}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{05/09/2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+\section*{Problem 1}
+Let \(\{X_n\}\) be a branching process started with a single individual, so that \(X_0 = 1\) and \(X_n\) is the number of individuals in generation \(n\). Let \(\{p_k\}_{k \geq 0}\) be the offspring distribution. Assume \(p_0 > 0\) and let \(\mu = \sum_{k=0}^\infty k p_k\) be the mean of the offspring distribution.
+
+(a) Show that \(M_n = \mu^{-n} X_n\) is a martingale with respect to \(\mathcal{F}_n = \sigma(X_0, \ldots, X_n)\).
+\begin{solution}
+Note that $M_n$ is only well defined when $p_0 <1,$ so we will assume this. 
+
+    $M_n$ is trivially $\mathcal{F}_n$ measurable. 
+
+    Since $X_n \geq 0$ for any $n,$ we have that by a result in class about branching processes,
+    \[\bbE[|M_n|] = \frac{1}{\mu^n}\bbE[|X_n|] =\frac{1}{\mu^n}\bbE[X_n]= \frac{1}{\mu^n}\mu^n \bbE[X_0] = 1  \]
+
+    For the Martingale property, we let $\xi_i$ be the number of offspring produced by  individual $i$. We know that $\xi_i$ is independent of $X_n$ and we also infer that $X_{n} = \sum_{i=1}^{X_n}\xi_i = \sum_{i=1}^{X_n}\xi = X_n\xi.$ Thus, since $X_{n-1}$ is $\mathcal{F}_{n-1}$ measurable
+    \begin{align*}
+        \bbE[M_n \mid \mathcal{F}_{n-1}] &= \frac{1}{\mu^n}\bbE[X_n \mid \mathcal{F}_{n-1}]\\
+        &= \frac{1}{\mu^n}\bbE[\sum_{i=1}^{X_n}\xi_i \mid \mathcal{F_{n-1}}]\\
+        &=\frac{1}{\mu^n}\sum_{i=1}^{X_n}\bbE[\xi_i \mid \mathcal{F_{n-1}}]\\
+        &= \frac{1}{\mu^n}X_{n-1} \bbE[\xi]\\
+        &= \frac{1}{\mu^n}X_{n-1} \mu\\
+        &= M_{n-1}
+    \end{align*}
+\end{solution}
+
+(b) Suppose that \(\mu = 1\). For each \(K \in \mathbb{N}\), use the optional stopping theorem applied to the stopping time
+\[
+T_K = \min\{n \geq 1 : X_n = 0 \text{ or } X_n \geq K\}
+\]
+to show that the probability that the population reaches at least \(K\) individuals before going extinct is at most \(1/K\).
+\begin{solution}
+    Assumption of the OST:
+    \begin{itemize}
+        \item Since $\mu = 1$ and $p_0 \neq 0,$ we have by a result in class that with probability $1,$ the population will go extinct. Thus, $X_n = 0$ for some large $n,$ and so  
+        \[\bbP\{T_K < \infty\} = 1.\]
+        \item Since $X_n$ is non-negative for all $n$ and $\mu = 1,$
+        \[\bbE[|M_{T_K}|] = \bbE[M_{T_K}] = \bbE[X_{T_K}]  \leq \sum_{i=1}^R \bbE[\xi_i] = R\mu = R\] 
+        WRONG
+        \item By the above work, we have that 
+        \[\bbE[M_n \mathbbm{1}_{T_K \geq n}] \leq C \bbP\{T_K\ \geq n\} \to 0\] since the population must go extinct at some point.
+    \end{itemize}
+    By the OST, we have that 
+    \[\bbE[M_{T_k}] = \bbE[M_0] = 1.\] But since $\mu = 1,$
+    \[1 =\bbE[M_{T_K}] \geq 0P_L + KP_W \implies P_W \leq \frac{1}{K},\] where $P_W$ is the probability that we get to $K$ before $0$ and $P_L$ is the other one.
+\end{solution}
+
+(c) Use part (b) to show that the extinction probability is 1 if \(\mu = 1\).
+\begin{solution}
+Since $P_L = 1-P_W,$ where 
+\[P_L = \bbP\{X_n= 0 \text{ before }X_n = K\} = a = 1-P_W \geq 1-\frac{1}{K},\] then as $K\to \infty,$ 
+\[1 \geq P_L \geq 1 \implies a = 1.\]
+\end{solution}
+
+\newpage
+
+\section*{Problem 2}
+Let \(\{M_n\}\) be a martingale with respect to its natural filtration \(\{F_n\}\), and let \(\tau\) be a stopping time for \(M_n\) with \(\mathbb{E}[\tau] < \infty\). Suppose that there exists a constant \(K > 0\) such that \(|M_{n+1} - M_n| \leq K\) for all \(n\). Show that \(\mathbb{E}[M_\tau] = \mathbb{E}[M_0]\).
+\begin{solution}
+    It suffices to show we can apply the OST.
+    \begin{itemize}
+    \item Since $\bbE[\tau] < \infty$ and 
+    \[\bbE[\tau] = \sum_{n=1}^\infty \bbP\{\tau \geq n\} < \infty,\] then the tail end of the sum must go to zero and thus $\bbP\{\tau \geq n\} \to 0,$ and so $\bbP\{\tau = \infty\} = 0$ (another way to see this is Markov's inequality)
+    \item Using the triangle inequality, we have that 
+    \begin{align*}
+        \bbE[|M_\tau|] &= \bbE[|M_\tau - M_{\tau -1} + M_{\tau - 1} - M_{\tau - 2} + \dots M_0|]\\
+        &\leq \bbE[|M_\tau -M_{\tau -1}| + |M_{\tau - 1} - M_{\tau - 2}| + \dots + |M_1 - M_0|]\\
+        &\leq K\bbE[\tau] < \infty
+    \end{align*} 
+    \item By the first bullet point and similar logic to the second one, we have that 
+    \[\bbE[M_n \mathbbm{1}_{\tau \geq n}] \leq nK\bbP\{\tau \geq n\}\to 0\]
+    \end{itemize}
+\end{solution}
+
+\newpage
+
+\section*{Problem 3 (Optional)}
+Let \(N\) be a fixed positive integer, and let \(A\) be an arbitrary alphabet of size \(N\), which we view as a collection of characters \(\{s_i\}_{i \in \{1, \ldots, N\}}\). A string of length \(l \in \mathbb{N}\) is a concatenation of elements of \(A\), written as
+\[
+s_{j_1} s_{j_2} \ldots s_{j_l},
+\]
+where the indices \(j_k\) may or may not be distinct. Suppose each character \(s_i\) has probability \(p_i\) of being selected, and let \(S\) be an arbitrary (finite) string. We wish to compute the expected time until the string \(S\) is first observed, if we repeatedly sample according to the probabilities \(p_i\). To that end, let \(\{X_n\}_{n \in \mathbb{N}}\) denote the characters sampled up to time \(n\), and let
+
+\[
+T := \min\{n \geq 0 : X_{n-|S|+1} X_{n-|S|+2} \ldots X_n = S\}.
+\]
+
+Let \(L_n(S)\) be the first \(n\) (leftmost) characters of \(S\), and let \(R_n(S)\) be the last \(n\) (rightmost) characters of \(S\). Show that
+\[
+\mathbb{E}[T] = \sum_{i=1}^{|S|} \left(\prod_{j=1}^i p_j \right)^{-1} \mathbbm{1}_{\{R_i(S) = L_i(S)\}}.
+\]
+
+Give the analogous formula in the case of uniform sampling, and give a condition for a string \(S\) to maximize this expected time.
+
+\newpage
+
+\section*{Problem 4}
+Suppose \(X_1, X_2, \ldots\) are independent random variables with distribution
+\[
+\mathbb{P}(X_j = 3) = 1 - \mathbb{P}\left(X_j = \frac{1}{3}\right) = \frac{1}{4}.
+\]
+
+Let \(M_0 = 1\) and for \(n \geq 1\),
+\[
+M_n = \prod_{j=1}^n X_j.
+\]
+
+(a) Show that \(M_n\) is a martingale with respect to \(F_n = \sigma(X_1, \ldots, X_n)\).
+\begin{solution}
+\begin{itemize}
+    \item We see that $M_n$ is $\mathcal{F}_n-$measurable.
+    \item Since the $X_i$s are independent, we can distribute the expectation over the product and see that  since everything is non-negative,
+    \begin{align*}
+        \bbE[|M_n|] &= \bbE[M_n]\\
+        &= \bbE\left[\prod_{j=1}^n X_j\right]\\
+        &= \prod_{j=1}^n\bbE[X_j]\\
+        &= (\bbE[X])^n\\
+        &= 1
+    \end{align*} where we use the fact that $\bbE[X_j] = \bbE[X] = 1$ for any $j.$ 
+    \item For the Martingale property, 
+    \begin{align*}
+        \bbE[M_n \mid \mathcal{F}_{n-1}]
+        &= \bbE\left[\prod_{j=1}^{n-1}X_{j}\cdot  X_n\mid \mathcal{F}_{n-1}\right]\\
+        &= \prod_{j=1}^{n-1}X_j \cdot \bbE[X_n \mid \mathcal{F}_{n-1]}]\\
+        &= M_{n-1}\bbE[X_n]\\
+        &= M_{n-1},
+    \end{align*}
+    where we use the fact that $X_i$ are $\mathcal{F}_{n-1}$ measurable for $i\leq n-1$ and that $X_n$ is independent of $X_i$ for $i< n.$
+\end{itemize}
+
+
+
+\end{solution}
+
+(b) Use the optional stopping theorem to show that the probability that the value of \(M_n\) ever gets as high as $3^6$ equals \(3^{-6}\).
+\begin{solution}
+    Define $T_m = \min\{j : M_j = 3^6 \text{ or } M_j = 3^{-m}\}.$ We see that $T_m$ is a stopping time for $M_n.$ 
+    \begin{itemize}
+        \item We can reach $3^6$ in $6$ steps, and so 
+        \[\bbP\{T_m  \geq 6\} \leq \frac{1}{4^6}\implies \bbP\{T_m \geq 6(2k)\}\leq \frac{1}{4^{6(2k)}} \implies \bbP\{T_m \geq k\} \leq \frac{1}{4^k},\] where we are bounding the probability by the event where $M_n$ keeps bouncing  between $1$ and $\frac{1}{3}$ $2k$ times until it decides to go $6$ times to $3^6$ and so as $k\to \infty,$ we find that 
+        \[\bbP\{T_m \geq mk\} \to 0 = \bbP\{T_m = \infty\}.\]
+        \item We see that by the previous bullet point
+        \[\bbE[T_m] =  \sum_{k=1}^\infty \bbP\{T_m \geq k\} \leq \sum_{k=1}^\infty \frac{1}{4^k} < \infty\]
+        \item We can bound
+        \[\bbE[M_n \mathbbm{1}_{T_m \geq n}] \leq 3^6 \bbP\{T_m \geq n\} \to 0\]
+    \end{itemize}
+    Thus, we use the optional the optional stopping theorem that states that 
+    \[\bbE[M_{T_m}] = \bbE[M_0] = 1.\] But
+    \[1 = \bbE[M_{T_m}]= 3^6 P_{3^6} + 3^{-m}P_{3^{-m}},\] where 
+    \[P_{3^6} = \bbP\{M_n = 3^6 \text{ before }M_n = 3^{-m}\}.\] Taking $m\to \infty,$ we see that 
+    \[P_{3^6} = \frac{1}{3^6}.\]
+\end{solution}
+
+(c) Show that there exists \(M_\infty\) such that, with probability one, \(M_n \to M_\infty\).
+\begin{solution}
+    It suffices to show that $M_n$ satisfies the conditions of the Martingale Convergence Theorem. However, we showed in the very first step that $\bbE[|M_n|] = 1,$ and so we are done by the MCT.
+\end{solution}
+
+(d) Does there exist a \(C < \infty\) such that for all \(n\), \(\mathbb{E}[M_n^2] \leq C\)?
+\begin{solution}
+    \textbf{No.}
+    \begin{align*}
+        \bbE[M_n^2] &= \bbE\left[\prod_{j=1}^n X_j^2\right]\\
+        &= \prod_{j=1}^n\bbE[X]\\
+        &= \bbE[X]^n\\
+        &>1^n\\
+        &\to \infty
+    \end{align*}
+\end{solution}
+
+\newpage
+
+\section*{Problem 5}
+Define random variables \(\{X_n\}\) recursively by \(X_0 = 1\) and for \(n \geq 1\), \(X_n\) is sampled uniformly from \((0, X_{n-1})\).
+
+(a) Show that \(M_n := 2^n X_n\) is a martingale.
+\begin{solution}
+    \begin{itemize}
+        \item I feel like I get tired of saying `trivial' or `clearly,' or `evidently'. `Obviously' is lowkey condescending. It is left as an exercise to the grader that $M_n$ is $\mathcal{F}_n-$measurable
+        \item We claim that 
+        \[\bbE[X_n] = \frac{1}{2^n}.\] For $n=1,$ we have that $X_1 \sim U([0,X_0]) = U([0,1]),$ and so $\bbE[X_1] = \frac{1}{2}.$ Supose this holds for a general $n=k.$ For $n = k+1,$ we see that 
+        \[\bbE[X_{k+1}] = \frac{\bbE[X_k]}{2} = \frac{1}{2^{k+1}}\]
+        
+        Thus, 
+        \[\bbE[|M_n|] = 2^n\bbE[X_n] = 1.\]
+        \item For the martingale property, 
+        \begin{align*}
+            \bbE[M_n \mid \mathcal{F}_{n-1}] &= \bbE[2^n X_n \mid \mathcal{F}_{n-1}]\\
+            &= 2^n \bbE[X_{n} \mid {X}_{n-1}]\\
+            &= 2^n \frac{X_{n-1}}{n}\\
+            &= 2^{n-1}X_{n-1}
+        \end{align*}
+    \end{itemize}
+\end{solution}
+
+(b) Show that there exists \(M_\infty\) such that, with probability one, \(M_n \to M_\infty\).
+\begin{solution}
+    We showed above that $\bbE[M_n] = 1$ for all $n,$ and so by the MCT we are done.
+\end{solution}
+
+(c) Find \(M_\infty\). (Hint: Consider \(\log M_n\).)
+\begin{solution}
+    We have that 
+    \[\log M_n = n \log 2  +\log X_n\to \infty - \infty =0 \] what 
+\end{solution}
+
+\newpage
+
+\section*{Problem 6}
+Suppose \(X\) is a standard normal random variable, i.e., \(X \sim \mathcal{N}(0,1)\).
+
+(a) Let \(\Phi(x) := \mathbb{P}(X \leq x)\). Compute \(\mathbb{E}[X \Phi(X)]\).
+
+(b) Let \(Y = |X| + X\). Compute \(\mathbb{E}[Y^3]\).
+
+(c) Show that \(\text{Var}(\sin X) > \text{Var}(\cos X)\).
+
+\newpage
+
+\section*{Problem 7}
+Consider the infinite series
+
+\[
+\zeta(2k) = \sum_{n=1}^\infty \frac{1}{n^{2k}}, \qquad S(2k) = \sum_{n=0}^\infty \frac{1}{(2n + 1)^{2k}}.
+\]
+
+(a) Show that \(\zeta(2k) = \frac{2^{2k}}{2^{2k} - 1} S(2k)\).
+
+\begin{solution}
+Computing,
+\begin{align*}
+\zeta(2k) &= \sum_{n\text{ odd}} \frac{1}{n^{2k}} + \sum_{n \text{ even}} \frac{1}{n^{2k}}\\ &= \sum_{n=0} \frac{1}{(2n + 1)^{2k}} + \sum_{n=0}\frac{1}{(2n)^{2k}}  \\
+&= S(2k) + \frac{1}{2^{2k}}\zeta(2k)
+\end{align*}
+and so rearranging
+\[\zeta(2k) = \frac{1}{1-\frac{1}{2^{2k}}}S(2k) = \frac{2^{2k}}{2^{2k} - 1}S(2k)\]
+
+\end{solution}
+
+
+(b) Suppose \(X\) and \(Y\) are continuous, non-negative, independent random variables with densities \(f_X(x)\) and \(f_Y(y)\). Let \(Z = \frac{Y}{X}\). Show that the density of \(Z\) is given by
+\[
+f_Z(z) = \int_0^\infty x f_Y(zx) f_X(x) \, dx.
+\]
+
+(c) Assume that the random variables \(X\) and \(Y\) obey the Cauchy distribution, i.e.,
+
+\[
+f_X(x) = \frac{2}{\pi (1 + x^2)}, \qquad x \geq 0.
+\]
+
+Show that
+
+\[
+f_Z(z) = \frac{4 \log(z)}{\pi^2 (z^2 - 1)}.
+\]
+
+(d) Show that
+\[
+\int_0^1 \frac{\log z}{z^2 - 1} \, dz = \frac{\pi^2}{8}.
+\]
+
+(e) Use the previous part to deduce that \(S(2) = \frac{\pi^2}{8}\).
+
+(f) Conclude that
+\[
+\zeta(2) = \sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}.
+\]
+
+
+
+
+
+\end{document}
