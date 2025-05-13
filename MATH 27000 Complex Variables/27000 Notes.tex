@@ -852,7 +852,7 @@ Intuitively, $s$ measures how far along the deformation has gone on, the line fr
 
 
 \newpage
-\subsection{Thursday, May 8: }
+\subsection{Thursday, May 8: Riemann's Theorem and the Weierstrass Casserati Theorem}
 We begin by redoing the derivation of the formula for the Laurent series from last class. 
 \[\begin{tikzpicture}[scale=1]
       % define center
@@ -905,11 +905,11 @@ And we then compute:
     &= \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma_0} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} (z - z_0)^n + \sum_{n=-\infty}^{-1} \frac{1}{2\pi i}\int_{\gamma_i} (\zeta - z_0)^{-(n+1)}f(\zeta)(z - z_0)^{n}\\
     &= \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma_0} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} (z - z_0)^n + \sum_{n=-\infty}^{-1} \frac{1}{2\pi i}\int_{\gamma_i} \frac{f(\zeta)}{(\zeta - z_0)^{-(n+1)}}(z - z_0)^{n}\\
     &= \sum_{n=0}^\infty \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}} (z - z_0)^n + \sum_{-\infty}^{-1} \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^{(n+1)}}(z - z_0)^{n}\\
-    &= \sum_{n=-\infty}^{\infty} \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^{n}}(z - z_0)^{n}
+    &= \sum_{n=-\infty}^{\infty} \frac{1}{2\pi i}\int_{\gamma} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}(z - z_0)^{n}
 \end{align*}
 
 \begin{thm}
-    (Riemann) Suppose $f \in H(D_{\epsilon}(z_0) \sm \{z_0\})$ and $|f(z)| \leq M$ for all $z \in D_{\epsilon}(z_0) \sm \{z_0\}.$ Then we can define $f(z_0)$ such that $f \in D_\epsilon(z_0).$
+    (Riemann) Suppose $f \in H(D_{\epsilon}(z_0) \sm \{z_0\})$ and $|f(z)| \leq M$ for all $z \in D_{\epsilon}(z_0) \sm \{z_0\}.$ Then we can define $f(z_0)$ such that $f \in H(D_\epsilon(z_0)).$
 \end{thm}
 \begin{proof}
     Let $r>0,$ and let $\gamma_r$ be a circle of radius $r$ about $z_0.$ 
@@ -926,21 +926,60 @@ And we then compute:
     \end{enumerate}
 \end{thm}
 
-\begin{thm}
+\begin{proof}
     If $f$ has no negative terms in the Laurent series, then $f$ can be expressed as a convergent power series. If $f$ is bounded, then it clearly a removable singularity. If $f$ has at most finitely many negative powers in the Laurent expansion, then for $z$ such that $0 < |z - z_0| < \epsilon,$ take $n_k$ to be the highest negative power
     \begin{align*}
     |f(z)| &= \frac{a_{n_k}}{(z - z_0)^{n_k}} + \frac{a_{n_{k=1}}}{(z - z_0)^{n_{k-1}}} + \cdots+ \sum_{n=0}^\infty a_n (z - z_0)^n\\ &=  \frac{1}{(z - z_0)^{n_k}}\left(a_{n_k}+ a_{n_{k-1}}(z - z_0)^{m_k} + \cdots + a_{n_1}(z - z_0)^{m_1} \right) + \sum_{n=0}^\infty a_n (z - z_0)^n \\
     &\to \infty
     \end{align*}
-    
+\end{proof}
+
+\newpage
+\subsection{Tuesday, May 13: }
+
+Continuing the proof from last class, where we were dealing with essential isolated singularities. Before we do so, consider the following example:
+\begin{exmp}
+    Consider the function $f(z) = e^\frac{1}{z}.$ Then our puncture disk is $\bbC\sm \{0\}.$ The expansion is
+    \[e^{\frac{1}{z}} = 1 + \frac{1}{1!}\frac{1}{z} + \frac{1}{2!}(\frac{1}{z})^2 + \cdots\] Clearly, as $z\to 0,$ the function blows up, and so we can see why this essential singularity theorem could be true.
+\end{exmp}
+\begin{proof}
+Suppose now $f$ has infinitely many negative powers in the Laurent expansion of $z_0$. But suppose, for the sake of contradiction, that there exists some $\epsilon>0$ such that the value set of $f(z)$ for $z\in D_\epsilon(z)$ that is not dense in $\bbC.$ Thus, there is some open disk in $\bbC$ that contains no such $f(z).$ Thus, $f(z) \notin D_\delta(\alpha)$ for some $\delta>0$ and $\alpha \in \bbC.$ Consider now 
+\[g(z) = \frac{1}{f(z) - \alpha}\] for $D_\epsilon(z_0)\sm \{z_0\}.$ We know that $g$ is bounded since the denominator is bounded below by $\delta.$ Hence, by Riemann's Theorem (21), we can define $g(z_0)$ such that $g(z_0) \in H(D_\epsilon(z_0)).$ If $g(z_0) \neq 0,$ then $f(z) - \alpha$ is holomorphic at $z_0,$ contradicting the fact that $z_0$ is an essential singularity. If $g(z_0) = 0,$ then $f$ has a pole at $z_0,$ another contradiction.
+\end{proof}
+
+\begin{defn}
+Suppose $f\in H(D_\epsilon(z_0))$ for some $z_0 \in \bbC.$
+    We say that $f$ has a \textbf{zero of order $N$} at $z_0$ if 
+    \[f(z) = \sum_{n = N}a_n (z - z_0)^n\]
+\end{defn}
+\begin{rem}
+    Clearly, 
+    \[f(z_0) = f'(z_0) = \cdots = f^{(N-1)}(z_0)  =0\] and $f^{(N)}(z_0) \neq 0.$
+\end{rem}
+
+
+\begin{defn}
+    Suppose $f \in H(D_\epsilon(z_0)\sm \{z_0\})$ and $f$ has a \textbf{pole of at $z_0 $ of order $N$} if the negative powers of the Laurent series are both finite and the smallest negative power is of order $N.$
+\end{defn}
+
+\begin{defn}
+    Let $O\subseteq \bbC$ be an open set and suppose $f: O\sm S \to \bbC,$ where $S$ has no limit points in $O$ and $f \in H(O \sm S).$ If at each point of $S,$ $f$ has either a removable singularity or a pole, then $f$ is \textbf{meromorphic.}
+\end{defn}
+
+\begin{rem}
+    In this class, $S = \{z_0, z_1, \dots, z_n\}$ is finite.
+\end{rem}
+\begin{defn}
+    Suppose $f$ has an isolated singularity at $z_0,$ and the Laurent expansion at $z_0$ is 
+    \[f(z_0) = \sum_{-\infty}^\infty a_n (z - z_0)^n,\] then the \textbf{residue} of $f$ at $z_0$ is 
+    \[\Res_{z_0}{f} = a_{-1}\]
+\end{defn}
+
+\begin{thm}
+(Residue Theorem)
+Let $f$ be meromorphic in a simply connected region $O$ with poles at $z_0, \dots, z_N.$ Let $\gamma$ be any closed path in $O$ not passing through any of the poles. Then 
+\[\int_\gamma f(z)\,dz = 2\pi i \sum_{k=0}^N \Ind_\gamma(z_k) \Res_{z_k}f\]
 \end{thm}
-
-
-
-
-
-
-
 
 
 
