@@ -1272,6 +1272,48 @@ There are two way of building $B_t:$
     \[\limsup_{n\to \infty}\frac{B_{t + \epsilon} - B_t}{\epsilon} = \infty.\]
 \end{proof}
 
+\newpage
+\subsection*{Wednesday, May 14: Applications of Brownian Motion}
+\begin{rem}
+    Suppose $\{X_n\}$ is a discrete stochastic process, and $A\subset S$ has $\bbP\{X_n \in A\}= 0$ for any $n.$ Then 
+    \[\bbP\{\exists \, n : X_n \in A\} \leq \sum_{n=0}^\infty \bbP\{X_n \in A\} = 0.\] This is not true for B.M. We know that $\bbP\{B_t = 0\},$ but we will see in this class that 
+    \[\bbP\{\exists \, t : B_t = 1\}\]
+\end{rem}
+
+
+\begin{exmp}
+    Suppose $B$ is S.B.M. Then 
+    \begin{enumerate}
+        \item 
+        \[\bbE[B_4 \mid B_2 = 6] = \bbE[B_4 - B_2 + B_2 \mid B_2 = 6] = \bbE[B_4- B_2] + \bbE[B_2 \mid B_2] = 6\]
+        \item  Suppose $s\leq t,$ then
+        \begin{align*}
+           \bbE[B_s^2 B_t^2] &= \bbE[B_s^2(B_t - B_s + B_s)^2]\\
+           &= \bbE[\left(B_s(B_t - B_s)+ B_s^2\right)^2]\\
+           &= \bbE[B_s^2(B_t - B_s)^2 + 2B_s^3(B_t - B_s) + B_s^4]\\
+           &= \bbE[B_s]^2\bbE[B_t - B_s]^2 + 2\bbE[B_s^3]\bbE[B_t - B_s]+ \bbE[B_s^4]\\
+           &= s(t-s) + 0 + 3s^2\\
+           &= s(t-s) + 3s^2
+        \end{align*}
+        Where the fourth moment can be calculated using the moment-generating function of $X\sim N(0,1).$ 
+        \[\bbE[X^{2n}]= (2n-1)!! \sigma^{2n}\]
+        \item Find 
+        \[\bbP\{B_2 >B_1 > B_3\}.\] Let $X = B_1,$ $Y = B_2 - B_1$ and $Z = B_3 -B_2.$ It suffices to find
+        \begin{align*}
+            \bbP\{X + Y > X > X + Y  + Z\} &= \bbP\{Y >0 > Y + Z\}\\
+            &= \bbP\{B_1 >0, B_2 < 0\}\\
+            &= \int_0^\infty\bbP\{B_2 < 0 \mid B_1  = x\}\frac{1}{\sqrt{2\pi }}e^{-\frac{x^2}{2}}\,dx\\
+            &= \int_0^\infty\bbP\{B_2 < -x \mid B_1  = 0\}\frac{1}{\sqrt{2\pi }}e^{-\frac{x^2}{2}}\,dx\\
+            &= \int_0^\infty\bbP\{B_2 > x \mid B_1  = 0\}\frac{1}{\sqrt{2\pi }}e^{-\frac{x^2}{2}}\,dx\\
+            &= \int_0^\infty\left(\int_x^\infty  \frac{1}{\sqrt{2\pi}}e^{-\frac{y^2}{2}}\right)\frac{1}{\sqrt{2\pi }}e^{-\frac{x^2}{2}}\,dx\\
+            &= \frac{1}{2\pi}\int_0^\infty \int_0^\infty e^{-(\frac{y^2 + x^2}{2})}\,dxdy\\
+            &= \frac{1}{2\pi}\int_\frac{\pi}{4}^{\frac{\pi}{2}}\int_0^\infty e^{\frac{r^2}{2}}r\,dr\theta\\
+            &= \frac{1}{8}
+        \end{align*}
+    \end{enumerate}
+\end{exmp}
+
+
 
 
 \newpage

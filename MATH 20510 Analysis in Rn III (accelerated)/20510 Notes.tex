@@ -1042,5 +1042,105 @@ For this class, we let $E\subset \bbR^n$ and $F\subset\bbR^m$ be open.
 \end{rem}
 
 
+\newpage
+\subsection{Wednesday, May 14: }
+\begin{defn}
+    Let $p_0, p_1, \dots, p_k \in \bbR^n.$ The \textbf{oriented affine $k-$simplex} $\sigma = [p_0, \dots, p_k]$ is the $k-$surface in $\bbR^n$ with parameter domain $Q^k$ given by the affine map 
+    \[\sigma(\alpha_1\,e_1, \dots, \alpha_k \,e_k) = p_0 + \sum_{1}^k \alpha_i(p_i - p_0)\]
+\end{defn}
+\begin{rem}
+   For all $u \in Q^k,$ we can write $\sigma(u) = p_0 + Au,$  where $A \in L(\bbR^k, \bbR^n)$ such that $Ae_i = p_i - p_0.$ 
+
+   For intuition, $\sigma$ is a map from the endpoints of $Q^k$ to the points $p_0, \dots, p_k.$ 
+
+   $\sigma$ is called oriented to emphasize that the order of the points $p_0, \dots, p_k$ matters. To illustrate this, consider $\overline{\sigma} = [p_{i_0}, \dots, p_{i_k}],$ where $\{i_0, \dots, i_k\}$ is a permutation of $\{0,1,\dots, k\}.$ Then 
+   \[\overline{\sigma} = s(i_0, \dots, i_k)\sigma, \quad s(\vec{i_j}) = (-1)^\alpha, \alpha\text{ is min \# swaps needed to permute $i_0, \dots, i_k$ to $0, \dots, k$}\] Suppose $\overline{\sigma} = \varepsilon\sigma,$ where $\varepsilon = \pm 1.$ If $\epsilon = 1,$ we say that $\overline{\sigma}$ and $\sigma$ have the same orientation. Otherwise, we say that they have opposite orientations.
+\end{rem}
+
+\begin{defn}
+    An \textbf{oriented $0$-simplex} is a point $p_0 \in \bbR^n$ with a sign attached. We write $\sigma = \pm p_0.$ If $f$ is a $0-$form, $\sigma = \varepsilon p_0,$ where $\varepsilon = \pm1 ,$ then 
+    \[\int_\sigma f = \varepsilon f(p_0).\]
+\end{defn}
+\begin{thm}
+    If $\sigma$ is an oriented $k-$simplex in $E\subseteq \bbR^n$ open and if $\overline{\sigma} = \varepsilon \sigma,$ $\varepsilon = \pm 1,$ then for all $\omega \in \Lambda^k(E)$ is given by 
+    \[\int_\sigma \omega = \varepsilon \int_{\overline{\sigma}}\omega\]
+\end{thm}
+
+\begin{defn}
+    An \textbf{affine $k-$chain} $\Gamma$ in an open set $E\subseteq \bbR^n$ is a collection of finitely many oriented affine $k-$simplexes in $E,$ denoted by
+    \[\sigma_1, \dots, \sigma_r\]
+\end{defn}
+Note that $\Gamma$ may not be distinct, there might be multiples of the same simplex many times within the same chain.
+\begin{defn}
+    If $\Gamma$ is an affine $k-$chain is $E\subseteq \bbR^n$ and $\omega \in \Lambda^k(E),$ then 
+    \[\int_\Gamma \omega = \sum_{i=1}^r \int_{\sigma_i} \omega\] 
+\end{defn}
+\begin{rem}
+    We will often abuse notation and write formally 
+    \[\Gamma = \sigma_1 + \dots+ \sigma_r = \sum_{1}^r \sigma_i.\]
+\end{rem}
+\begin{exmp}
+    Consider 
+    \[\sigma_1 = [p_0, p_1, p_2], \quad \sigma_2 = [p_1, p_0, p_2],\] where $\sigma_1 = -\sigma_2.$ 
+\[    \begin{tikzpicture}
+    % Points
+    \coordinate (P0) at (0, 0);
+    \coordinate (P1) at (3, 0);
+    \coordinate (P2) at (1.5, 2);
+
+    % Edges and Labels
+    \draw[thick, ->] (P0) -- (P1) node[midway, below] {$\sigma_1$};
+    \draw[thick, ->] (P1) -- (P2);
+    \draw[thick, ->] (P2) -- (P0);
+
+    % Points Labels
+    \node[below left] at (P0) {$p_0$};
+    \node[below right] at (P1) {$p_1$};
+    \node[above] at (P2) {$p_2$};
+
+\end{tikzpicture}\]
+
+
+
+% Simplex Sigma_2 (Reversed Orientation)
+\[\begin{tikzpicture}
+    % Points
+    \coordinate (P0) at (0, 0);
+    \coordinate (P1) at (3, 0);
+    \coordinate (P2) at (1.5, 2);
+
+    % Edges and Labels
+    \draw[thick, ->] (P1) -- (P0) node[midway, below] {$\sigma_2$};
+    \draw[thick, ->] (P0) -- (P2);
+    \draw[thick, ->] (P2) -- (P1);
+
+    % Points Labels
+    \node[below left] at (P0) {$p_0$};
+    \node[below right] at (P1) {$p_1$};
+    \node[above] at (P2) {$p_2$};
+
+\end{tikzpicture}\]
+
+If $\Gamma = \sigma_1 + \sigma_2,$ then if $\omega \in \Lambda^2(E),$ we have that by Theorem 23,
+\[\int_\Gamma \omega = \int_{\sigma_1}\omega + \int_{\sigma_2}\omega = \int_{\sigma_1}\omega - \int_{\sigma_1}\omega = 0.\] Thus, we abuse notation again and write 
+\[\Gamma = 0\]
+
+Moreover, we note that the boundary of $\sigma_1$ is simply three lines (a triangle), making 
+\[\partial \sigma_1 = \sigma'_1 + \sigma_2' + \sigma_3',\] where $\sigma_i'$ are all oriented affine $1-$simplexes.
+\end{exmp}
+
+
+\begin{defn}
+    For $k \geq 1,$ the boundary of an orientated affine $k-$simplex  $\sigma = [p_0, \dots, p_k]$ is the affine $(k-1)$ chain
+    \[\partial \sigma = \sum_{j=0}^k (-1)^k [p_0, \dots, p_{j-1}, p_{j+1}, p_k]\]
+\end{defn}
+\begin{exmp}
+    Consider $\sigma = [p_0, p_1, p_2]$ to be the filled in triangle. By definition
+    \[\partial \sigma = [p_1, p_2] - [p_0, p_2] + [p_0, p_1] = [p_1, p_2] + [p_2, p_0] + [p_0, p_1]\]
+\end{exmp}
+\begin{exmp}
+    Consider the tetrahedron $\sigma = [p_0, \dots, p_3].$ Intuitively, the boundary of the tetrahedron are the faces of the triangles. Formally, 
+    \[\partial \sigma = [p_1, p_2, p_3] - [p_0, p_2, p_3] + [p_0, p_1, p_2] - [p_0, p_1, p_2]\]
+\end{exmp}
 
 \end{document}
