@@ -1,0 +1,211 @@
+\documentclass[11pt]{article}
+
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{20510}
+\newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
+\newcommand{\instructors}{Don Stull}
+\newcommand{\assignment}{Problem Set 8}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{05-21-2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}	
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+    
+    
+    \section*{Problem 1}
+Which of the following forms on $\mathbb{R}^3$ are closed?
+\begin{enumerate}
+    \item $\omega = x \, dx \wedge dy \wedge dz$
+    \begin{solution}
+    \begin{align*}
+        d\omega &= d\left(x \, dx \wedge dy \wedge dz\right)\\
+        &= \left(\frac{\partial}{\partial x}x\,dx + \frac{\partial}{\partial y}x\,dy + \frac{\partial}{\partial z}x\,dz\right)\wedge dx \wedge dy \wedge dz\\
+        &= 1\,dx \wedge\,dx \wedge dy \wedge dz\\
+        &= (dx\wedge dx) \wedge dy \wedge dz\\
+        &= 0
+    \end{align*}
+    \end{solution}
+    \item $\omega = z \, dy \wedge dx + x \, dy \wedge dz$
+\begin{solution}
+        \begin{align*}
+        d\omega &= d\left(z \, dy \wedge dx + x \, dy \wedge dz\right)\\
+        &= d\left(z \, dy \wedge dx\right) + d\left(x\,  dy \wedge dz\right)\\
+        &= \left(\frac{\partial}{\partial x}z\,dx + \frac{\partial}{\partial y}z\,dy + \frac{\partial}{\partial z}z\,dz\right)\wedge dy \wedge dx + \left(\frac{\partial}{\partial x}x\,dx + \frac{\partial}{\partial y}x\,dy + \frac{\partial}{\partial z}x\,dz\right)\wedge dy\wedge dz\\
+        &= dz\wedge dy\wedge dx + dx \wedge dy \wedge dz\\
+        &= (-1)^3 \,dx\wedge dy\wedge dz+ dx\wedge dy\wedge dz\\
+        &= 0
+    \end{align*}
+\end{solution}
+    \item $\omega = x \, dx + y \, dy$
+\begin{solution}
+    \begin{align*}
+        d\omega &= d\left( x\,dx\right)  + d(y\,dy)\\
+        &= \left(\frac{\partial}{\partial x}x\,dx + \frac{\partial}{\partial y}x\,dy + \frac{\partial}{\partial z}x\,dz\right)\wedge dx + \left(\frac{\partial}{\partial x}y\,dx + \frac{\partial}{\partial y}y\,dy + \frac{\partial}{\partial z}y\,dz\right)\wedge dy\\
+        &= dx\wedge dx + dy\wedge dy\\
+        &= 0
+    \end{align*}
+\end{solution}
+\end{enumerate}
+
+
+
+\newpage
+\section*{Problem 2}
+Show that every $k$-form on $\mathbb{R}^k$ is closed.
+\begin{solution}
+    Consider first the case when 
+    \[\omega = f \,dx_1\wedge \cdots dx_k,\] Then
+    \begin{align*}
+        d\omega &= \left(\sum_{i=1}^k \frac{\partial f}{\partial x_i}\wedge dx_i\right) \wedge dx_1 \cdots \wedge dx_k\\
+        &= \sum_{i=1}^k \left(\frac{\partial f}{\partial x_i}\wedge dx_i \wedge dx_1 \cdots \wedge dx_k\right)\\
+        &= \sum_{i=1}^k 0
+    \end{align*}
+    by the repeated index in every sum. Now consider 
+    \[\omega = f\,dx_{i_1}\wedge \cdots \wedge dx_{i_k} = (-1)^\alpha f \,dx_1 \wedge \cdots \wedge dx_k,\] we get that by the first case, since $(-1)^\alpha$ is a constant\footnote{Let $\omega$ be a $k-$form and $c>0$, then $d(c\omega) = cd(\omega)$. To see this, note that we can pull out the $c$ constant out of every partial in the sum}
+    \[d\omega = (-1)^\alpha d\left(f \,dx_1 \wedge \cdots \wedge dx_k\right) = (-1)^\alpha (0) = 0\]
+    For the general case, let 
+    \[\omega = \sum_I f_I \,dx_I,\] where the $I = \sigma\{1,2,\dots, k\}$ are permutations of $\{1,2,\dots, k\}.$ Then by definition,
+    \[d \omega = \sum_I (df_I)\wedge dx_I = \sum_I 0 = 0\]
+
+\end{solution}
+
+\newpage
+\section*{Problem 3}
+In $\mathbb{R}^4$, consider the following 2-form 
+\[ \omega = dx_1 \wedge dx_2 + dx_3 \wedge dx_4. \]
+Compute $\omega \wedge \omega$ and $\omega \wedge \omega \wedge \omega$. Find a 1-form $\eta$ such that $d\eta = \omega$. This 1-form is called the Liouville form.
+\begin{solution}
+    \begin{align*}
+        \omega\wedge \omega &= (dx_1 \wedge dx_2 + dx_3 \wedge dx_4) \wedge(dx_1 \wedge dx_2 + dx_3 \wedge dx_4) \\
+        &= (dx_1 \wedge dx_2)\wedge (dx_1 \wedge dx_2) + 2\,(dx_1 \wedge dx_2)\wedge (dx_3 \wedge dx_4)+ (dx_3 \wedge dx_4)\wedge (dx_3 \wedge dx_4)\\
+        &= 2 \,dx_1 \wedge dx_2 \wedge dx_3 \wedge dx_4
+    \end{align*}
+    Using this, 
+    \begin{align*}
+        \omega \wedge \omega \wedge \omega &= (\omega \wedge \omega) \wedge \omega\\
+        &= (2 \,dx_1 \wedge dx_2 \wedge dx_3 \wedge dx_4) \wedge (dx_1 \wedge dx_2 + dx_3 \wedge dx_4)\\
+        &= 2(dx_1 \wedge dx_2) \wedge dx_3 \wedge dx_4 \wedge (dx_1 \wedge dx_2) + 2\,dx_1 \wedge dx_2 \wedge (dx_3 \wedge dx_4) \wedge (dx_3 \wedge dx_4)\\
+        &= 0 + 0\\
+        &= 0
+    \end{align*}
+    Consider 
+    \[\eta = x_1 \,dx_2 + x_3 \, dx_4.\]
+    Then 
+    \begin{align*}
+        d\eta &= \left(\frac{\partial }{\partial x_1}x_1 dx_1 +   \frac{\partial }{\partial x_1}x_1 dx_2 + \frac{\partial }{\partial x_1}x_1 dx_3 + \frac{\partial }{\partial x_1}x_1 dx_4\right)\wedge dx_2\\
+        \qquad &+ \left(\frac{\partial }{\partial x_1}x_3 dx_1 +   \frac{\partial }{\partial x_2}x_3 dx_2 + \frac{\partial }{\partial x_3}x_3 dx_3 + \frac{\partial }{\partial x_4}x_3 dx_4\right)\wedge dx_4\\
+        &= dx_1 \wedge dx_w + dx_3 \wedge dx_4
+    \end{align*}
+\end{solution}
+
+
+\end{document}

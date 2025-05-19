@@ -6,9 +6,9 @@
 \newcommand{\classnum}{20510}
 \newcommand{\subject}{Accelerated Analysis in $\bbR^n$ III}
 \newcommand{\instructors}{Don Stull}
-\newcommand{\assignment}{Problem Set 6}
+\newcommand{\assignment}{Problem Set 7}
 \newcommand{\semester}{Spring 2025}
-\newcommand{\duedate}{05-07-2025}
+\newcommand{\duedate}{05-14-2025}
 \newcommand{\bA}{\mathbf{A}}
 \newcommand{\bB}{\mathbf{B}}
 \newcommand{\bC}{\mathbf{C}}
@@ -122,8 +122,47 @@
     
     
     \section*{Problem 1}
+Let $E\subseteq\bbR^n$ and $F \subseteq \bbR^\ell.$ Suppose $T \in C^1(E,F).$ Let $\omega \in \Lambda^k(F)$ and $\lambda \in \Lambda^m(F).$ Prove that 
+\[(\omega \wedge \lambda)_T = \omega_T \wedge \lambda_T\]
+\begin{solution}
+We remark that by definition, $(dx_{i})_T = dt_i$
+    Suppose $r = 1,$ then by definition 
+    \[(dx_1)_T = (dt_1).\]
+    Suppose that we preserve order in the pullback when $r = n,$ i.e,
+    \[(dx_{i_1} \wedge \cdots \wedge dx_{i_n})_T  = (dx_{i_1})_T \wedge \cdots \wedge (dx_{i_n})_T  = dt_{i_1}\wedge \cdots \wedge dt_{i_n}\]
+    Now for $r = n+1,$ we have that (if we denote $dx_I$ to be the standard presentation of the form), then if $\alpha$ is the number of permutations necessary to make $i_1, \dots, i_{n+1}$ into the standard presentation $I'= i_{1}', \dots, i'_{n+1}$
+    \begin{align*}
+        (dx_{i_1}\wedge \dots \wedge dx_{i_n} \wedge dx_{i_{n+1}})_T &= (-1^\alpha dx_{I'})_T\\
+        &= (-1)^\alpha (dx_{I'})_T\\
+        &= (-1)^\alpha \left(dt_{i'_1} \wedge \cdots \wedge dt_{i'_{n+1}}\right)\\
+        &= dt_{i_1} \wedge \cdots \wedge dt_{i_n} \wedge dt_{i_{n+1}}\\
+        &= (dt_{i_1} \wedge \cdots \wedge dt_{i_n}) \wedge dt_{i_{n+1}}\\
+        &= (dt_{i_1} \wedge \cdots \wedge dt_{i_n}) \wedge (dx_{i_{n+1}})_T\\
+        &= (dx_{i_1} \wedge \cdots \wedge dx_{i_n})_T \wedge (dx_{i_{n+1}})_T\\
+        &= (dx_{i_1})_T \wedge \cdots \wedge (dx_{i_n})_T\wedge (dx_{i_{n+1}})_T\\
+    \end{align*}
 
-Give a rigorous proof of Theorem 10.22(b) in Rudin.
+Consider first the case when 
+\[\omega = f\,dx_I = f\,dx_{i_1}\wedge \cdots \wedge dx_{i_k}, \qquad \lambda = g\,dx_J = g\,dx_{j_1}\wedge \cdots \wedge dx_{j_m}.\] Then by the lemma, 
+\begin{align*}
+(\omega\wedge\lambda)_T &=  (fg\,dx_{i_1}\wedge \cdots \wedge dx_{i_k}\wedge dx_{j_{1}}\wedge \cdots \wedge dx_{j_{m}})_T\\
+&= fg(T(\textbf{x}))\,dt_{i_1}\wedge \cdots \wedge dt_{i_k}\wedge dt_{j_{1}}\wedge \cdots \wedge dt_{j_{m}}\\
+&= (f(T(\textbf{x}))\,dt_{i_1}\wedge \cdots \wedge dt_{i_k}) \wedge (g(T(\textbf{x}))\,dt_{j_{1}}\wedge \cdots \wedge dt_{j_{m}})\\
+&= (f\,dx_{i_1}\wedge\cdots\wedge dx_{i_k})_T\wedge (g\,dx_{j_{1}}\wedge \cdots \wedge dx_{j_{m}})_T\\
+&= \omega_T \wedge \lambda_T
+\end{align*}
+Now consider general $\omega$ and $\lambda.$ We can express 
+\[\omega = \sum_I f_I dx_I, \qquad \lambda = \sum_J g_J dx_J.\] We have that using part (a) of the Theorem,
+\begin{align*}
+    \omega_T \wedge \lambda_T &= (\sum_I f_I dx_I)_T \wedge (\sum_J g_J dx_J)_T\\
+    &= \sum_I (f_I dx_I)_T  \wedge \sum_J (g_J dx_J)_T\\
+    &= \sum_{I,J}(f_Idx_I)_T\wedge (g_J dx_J)_T \\
+    &= \sum_{I,J} (f_I g_J dx_I \wedge dx_J)_T\\
+    &= (\omega \wedge \lambda)_T
+\end{align*}
+
+
+\end{solution}
 
 \newpage
 
@@ -136,6 +175,19 @@ Let $\omega$ be a 1-form on $\mathbb{R}^n$ and let $\gamma : [a, b] \to \mathbb{
 \]
 
 Do not just apply Theorem 10.24 or 10.25, please give a direct proof.
+\begin{solution}
+Suppose first $\omega = \sum_I f_I dx_I$ Then by definition of integrating $k-$forms,
+    \begin{align*}
+        \int_\gamma \omega &= \int_a^b  \sum_{I}f_I(\gamma(x))dy_I(\gamma_1'(x), \dots,\gamma_n'(x))\,dx\\
+        &= \int_a^b \sum_{I} f_I(\gamma(x))\gamma_I'(x)\,dx\\
+        &= \int_a^b \sum_If_I(\gamma(x))dt_I\,dx\\
+        &=\int_a^b \omega_\gamma(x)\,dx\\
+        &= \int_a^b \omega_\gamma(\Delta(x)) \Delta'(x)\,dx\\
+        &= \int_\Delta \omega_\gamma.
+    \end{align*}
+    For general $\omega= \sum_I f_I dx_I,$ we use the linearity of the integral to conclude. 
+\end{solution}
+
 
 \newpage
 
@@ -195,26 +247,33 @@ Let $\omega = xy \, dx \wedge dz + z \, dx \wedge dy$ be a 2-form in $\mathbb{R}
 
 Let $T : \mathbb{R}^3 \to \mathbb{R}^3$ be the function defined by $T (x, y, z) = (xy, xz, yz)$. Find the following forms:
 
-(a) $(dx)^T$, $(dy)^T$ and $(dz)^T$.
+(a) $(dx)_T$, $(dy)_T$ and $(dz)_T$.
 
-(b) $(dx \wedge dy)^T$
+(b) $(dx \wedge dy)_T$
 
-(c) $(dx \wedge dy \wedge dz)^T$.
+(c) $(dx \wedge dy \wedge dz)_T$.
 
 Write all forms in standard presentation.
 \begin{solution}
+We consider 
+\[J = \begin{pmatrix}
+    y & x & 0\\
+    z & 0 & x\\
+    0 & z & y
+\end{pmatrix}\] and we can immediately see
+\[dt_1 = ydx + xdy\]
+\[dt_2 = zdx + xdz\]
+\[dt_3 = zdy + ydz\]
     \begin{enumerate}
-        \item For (a), we compute the pull back
-        \begin{align*}
-            (dx)^T &= d(T_x) = y\, dx + x\,dy\\
-            (dy)^T &= (dT_y) = z\,dx + x\,dz\\
-            (dz)^T &= (dT_z) = z\,dy + y\,dz
-        \end{align*}
+        \item We have by definition
+        \[(dx)_T = dt_1 = ydx + xdy\]
+        \[(dy)_T = dt_2 = zdx + xdz\]
+        \[(dz)_T = dt_3 = zdy + ydz\]
         \item The pullback is distributive, so
-        \[(dx \wedge dy)^T = (dx)^T \wedge (dy)^T = (y\, dx + x\,dy) \wedge (z\,dx + x\,dz) = -xz \,dx \wedge dy + xy\, dx\wedge dz + x^2 \, dy\wedge dz\]
+        \[(dx \wedge dy)_T = (dx)_T \wedge (dy)_T = (y\, dx + x\,dy) \wedge (z\,dx + x\,dz) = -xz \,dx \wedge dy + xy\, dx\wedge dz + x^2 \, dy\wedge dz\]
         \item Similarly to (b) but just more annoying
         \begin{align*}
-            (dx \wedge dy \wedge dz)^T &= (dx \wedge dy )^T\wedge (dz)^T\\
+            (dx \wedge dy \wedge dz)_T &= (dx \wedge dy )_T\wedge (dz)_T\\
             &= (-xz \,dx \wedge dy + xy\, dx\wedge dz + x^2 \, dy\wedge dz)\wedge z\,dy + y\,dz\\
             &= -xyz\,dx \wedge dy\wedge dz - xyz\, dx\wedge dy\wedge dz\\
             &= -2xyz\, dx\wedge dy\wedge dz
@@ -226,7 +285,7 @@ Write all forms in standard presentation.
 
 \section*{Problem 6}
 
-Let $T (r, \theta, \phi) = (r \cos \theta \sin\phi, r \sin \theta \sin\phi, r \cos\phi)$ (this function gives the spherical coordinates of $\mathbb{R}^3$). Calculate $\omega^T$ for each of the following forms $\omega$:
+Let $T (r, \theta, \phi) = (r \cos \theta \sin\phi, r \sin \theta \sin\phi, r \cos\phi)$ (this function gives the spherical coordinates of $\mathbb{R}^3$). Calculate $\omega_T$ for each of the following forms $\omega$:
 
 $dx$, $dy$, $dz$, $dx \wedge dy$, $dx \wedge dz$, $dy \wedge dz$, $dx \wedge dy \wedge dz$.
 \begin{solution}
@@ -235,20 +294,26 @@ $dx$, $dy$, $dz$, $dx \wedge dy$, $dx \wedge dz$, $dy \wedge dz$, $dx \wedge dy 
     \cos \theta \sin\phi & -r\sin \theta \sin \phi & r\cos \theta \cos \phi\\\sin \theta \sin \phi & r\cos \theta \sin \phi & r\sin \theta \cos \phi\\\cos \phi & 0 & -r\sin \phi
     \end{pmatrix}\]
     \begin{align*}
-        (dx)^T &= d(T_x) = \cos \theta \sin\phi \,dr -r\sin \theta \sin\phi \,d\theta + r\cos \theta \cos \phi \, d\phi\\
-        (dy)^T &= d(T_y) = \sin \theta \sin \phi \,d\theta +r\cos \theta \sin \phi\,d\theta + r\sin \theta \cos \phi\,d\theta\\
-        (dz)^T &= d(T_z) = \cos \phi \,dr - r\sin \phi \, d\phi\\
-        (dx \wedge dy)^T &= (dx)^T \wedge (dy)^T = r^2\sin^2 \phi \, dr \wedge d\theta \\
-        (dx \wedge dz)^T &= (dx)^T \wedge (dz)^T = -r\cos\theta\, dr\wedge d\phi\\
-        (dy \wedge dz)^T &= (dy)^T \wedge (dz)^T = -r\sin\theta \, dr\wedge d\phi\\
-        (dx \wedge dy \wedge dz)^T &= (dx\wedge dy)^T \wedge dz 
+        (dx)_T &= d(T_x) = \cos \theta \sin\phi \,dr -r\sin \theta \sin\phi \,d\theta + r\cos \theta \cos \phi \, d\phi\\
+        (dy)_T &= d(T_y) = \sin \theta \sin \phi \,d\theta +r\cos \theta \sin \phi\,d\theta + r\sin \theta \cos \phi\,d\theta\\
+        (dz)_T &= d(T_z) = \cos \phi \,dr - r\sin \phi \, d\phi\\
+    \end{align*}
+    We do not show our work for the following, but we make a lot of use of the fact that wedge products are zero when indices are shared.
+    \begin{align*}
+        (dx \wedge dy)_T &= (dx)_T \wedge (dy)_T =  \\
+        &= r\sin ^2 \phi dr \wedge d\theta - r^2 \sin \phi \cos \phi d\theta \wedge d\phi\\
+        (dx \wedge dz)_T &= (dx)_T \wedge (dz)_T \\
+        &= (r\sin \theta \sin \phi \cos \phi)dr\wedge d\theta - r\cos \theta dr \wedge d\phi + r^2 \sin \theta \sin^2 \phi d\theta \wedge d\phi\\
+        (dy \wedge dz)_T &= (dy)_T \wedge (dz)_T\\
+        &= -r\cos \theta \sin \phi \cos \phi dr \wedge d\theta - r\sin \theta dr\wedge d\phi - r^2 \cos \theta\sin^2 \phi d\theta \wedge d\phi\\
+        (dx \wedge dy \wedge dz)_T &= (dx\wedge dy)_T \wedge dz = -r^2 \sin \phi dr\wedge d\theta \wedge d\phi
     \end{align*}
 \end{solution}
 \newpage
 
 \section*{Problem 7}
 
-Consider the 2-form $dx \wedge dy$ in $\mathbb{R}^2$. Find all linear maps $T : \mathbb{R}^2 \to \mathbb{R}^2$ such that $\omega^T = \omega$.
+Consider the 2-form $dx \wedge dy$ in $\mathbb{R}^2$. Find all linear maps $T : \mathbb{R}^2 \to \mathbb{R}^2$ such that $\omega_T = \omega$.
 \begin{solution}
     Since $T: \bbR^2 \to \bbR^2$ is linear, then 
     \[T= \begin{pmatrix}
@@ -256,9 +321,13 @@ Consider the 2-form $dx \wedge dy$ in $\mathbb{R}^2$. Find all linear maps $T : 
     \end{pmatrix} = \begin{pmatrix}
         ax + by\\
         cx + dy
-    \end{pmatrix}\] Pulling back,
+    \end{pmatrix}\] We see the Jacobian is given by 
+    \[J = \begin{pmatrix}
+        a & b\\
+        c & d
+    \end{pmatrix}\] and thus
     \begin{align*}
-    (dx\wedge dy)^T &= d(T_x) \wedge d(T_y)\\&= (a\,dx + b\,dy)\wedge (c\,dx + d\,dy)\\
+    (dx\wedge dy)_T &= d(T_x) \wedge d(T_y)\\&= (a\,dx + b\,dy)\wedge (c\,dx + d\,dy)\\
     &= (ad)\,dx\wedge dy + (cb)\,dy \wedge dx\\
     &= (ad -bc)\,dx\wedge dy\\
     &= dx\wedge dy
@@ -275,6 +344,19 @@ Let $f : \mathbb{R}^n \to \mathbb{R}$ be $C^1$, and let $df$ be the 1-form which
 \[
 \int_{\gamma} df = f(\gamma(b)) - f(\gamma(a)).
 \]
+\begin{solution}
+    By definition, we have that 
+    \begin{align*}
+        \int_\gamma df &= \int_a^b df(\gamma(u))J(u)\,du\\
+        &= \int_a^b \sum_{j=1}^n (D_jf)(\gamma(u))dx_j J(u)\,du\\
+        &= \int_a^b \sum_{j=1}^n (D_jf(\gamma(u)))(\gamma_j'(u))\,du\\
+        &= \int_a^b \langle\nabla f(\gamma(u)), \gamma'(u)\rangle\,du\\
+        &= \int_a^b (f(\gamma(u)))'\,du\\
+        &= f(\gamma(b)) - f(\gamma(a))
+    \end{align*}
+    Where the normal FTC was used in the last step.
+\end{solution}
+
 
 \newpage
 
@@ -289,10 +371,39 @@ Let $\omega$ be the 1-form on $\mathbb{R}^2 \setminus \{0\}$ given by
 Let $\gamma : [0, 1] \to \mathbb{R}^2$ be the curve defined by $\gamma(t) = (2 \cos(2\pi t), \sin(2\pi t))$.
 
 (a) Compute $d\omega$.
+\begin{solution}
+    \begin{align*}
+        d\omega&= d\left(\frac{y}{x^2 + 4y^2}\,dx - \frac{x}{x^2 + 4y^2}\,dy\right)\\
+        &= d\left(\frac{y}{x^2 + 4y^2}\, dx\right) - d\left(\frac{x}{x^2 + 4y^2}\,dy\right)\\
+        &= \frac{(x^2 + 4y^2) - (y(8y))}{(x^2 + 4y^2)^2}dy \wedge dx - \frac{(x^2 + 4y^2) - (x(2x))}{(x^2 + 4y^2)^2}\,dx\wedge dy\\
+        &= \frac{-x^2 + 4y^2}{(x^2 + 4y^2)^2}dx \wedge dy - \frac{-x^2 + 4y^2}{(x^2 + 4y^2)^2}\,dx\wedge dy\\
+        &= 0
+    \end{align*}
+\end{solution}
 
 (b) Compute $\int_{\gamma} \omega$.
+\begin{solution}
+Notice that 
+\[\gamma'(x) = \begin{pmatrix}
+    -4\pi\sin (2\pi t) & 2\pi \cos (2\pi t) 
+\end{pmatrix}\]
+    By definition,
+\begin{align*}
+    \int_\gamma \omega &= \int_0^1\omega(\gamma(t))\gamma'(t)\,dt\\
+    &= \int_0^1 \frac{\sin(2\pi t))}{4 \cos^2(2\pi t)^2 + 4\sin^2(2\pi t)}(-4\pi\sin (2\pi t))- \int_0^1\frac{2 \cos(2\pi t)}{4 \cos^2(2\pi t)^2 + 4\sin^2(2\pi t)}(2\pi \cos (2\pi t))\\
+    &= \int_0^1-\pi \sin^2(2\pi t)\,dt  - \int_0^1 \pi \cos^2(2\pi t)\,dt\\
+    &= -\pi
+\end{align*}
+\end{solution}
 
 (c) Is $\omega$ closed? Is it exact? (Hint: For exactness, use the previous Problem.)
+\begin{solution}
+    Part (a) shows that $\omega$ is closed. 
+
+    Suppose $\omega$ is exact. Since $\omega$ is a one form, then there exists some $f\in C^1(\bbR^n, \bbR)$ such that $df = \omega.$ Since $(2, 0)=\gamma(1) = \gamma(0) = (2,0),$ we have by Problem 8 that 
+    \[\int_\gamma df = f(\gamma(b)) - f(\gamma(a)) = 0.\] But by (b) we have that
+    \[\int_\gamma df = \int_\gamma \omega \neq \pi.\] Thus, $\omega$ cannot be exact.
+\end{solution}
 
 
 \end{document}

@@ -1,0 +1,202 @@
+\documentclass[11pt]{article}
+\usepackage{float}
+% NOTE: Add in the relevant information to the commands below; or, if you'll be using the same information frequently, add these commands at the top of paolo-pset.tex file. 
+\newcommand{\name}{Agustín Esteva}
+\newcommand{\email}{aesteva@uchicago.edu}
+\newcommand{\classnum}{270}
+\newcommand{\subject}{Complex Variables}
+\newcommand{\instructors}{Robert Fefferman}
+\newcommand{\assignment}{Problem Set 5}
+\newcommand{\semester}{Spring 2025}
+\newcommand{\duedate}{5-15-2025}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\Ind}{\text{Ind}}
+
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
+
+% NOTE: Defining collaborators is optional; to not list collaborators, comment out the line below.
+%\newcommand{\collaborators}{Alyssa P. Hacker (\texttt{aphacker}), Ben Bitdiddle (\texttt{bitdiddle})}
+
+\input{paolo-pset.tex}
+
+% NOTE: To compile a version of this pset without problems, solutions, or reflections, uncomment the relevant line below.
+
+%\excludeversion{problem}
+%\excludeversion{solution}
+%\excludeversion{reflection}
+
+\begin{document}
+	
+	% Use the \psetheader command at the beginning of a pset. 
+	\psetheader
+\section*{Problem 1}
+\begin{problem}
+    Suppose $f \in H(O),$ where $O\subseteq \bbC$ is an open connected region. If there is some $z_0 \in O$ such that $|f(z_0)| \geq |f(z)|$ for all $z\in O,$ then $f$ is constant on $O.$
+\end{problem}
+\begin{solution}
+Define 
+\[A = \{z\in O \mid |f(z)|= |f(z_0)|\}.\] It suffices to show that $A$ is clopen in $O.$ Note that $A \neq \emptyset$ since $z_0 \in A.$
+
+Let $z\in A.$ Since $O$ is open, there exists some $R>0$ such that $\overline{D_R(z)} \subseteq O.$ Let $z' \in D_R(z),$ then consider the circle $C_r(z)$ where $r:= |z -z'|.$ As a consequence of the Cauchy integral equation, we have seen in class that 
+\[f(z_0) = \frac{1}{2\pi i}\int_0^{2\pi}f(z_0 + re^{i\theta})\,d\theta.\] By PSET 1 problem 4, we have that since $|f|$ achieves its max at $z$ and $|f|$ is continuous since $f$ is holomorphic, then $|f(z)| = |f(z')|,$ and so $z' \in A.$
+
+Let $z \in O$ such that $(z_n) \in A$ such that $z_n \to z.$ Then since $z_n \in A,$ then $f(z_n) = f(z_0),$ and so by continuity, $f(z) = f(z_0),$ and thus $z \in A.$ 
+
+Since $O$ is connected and $A$ is a nonempty clopen set, we are dnoe.
+
+\end{solution}
+
+\newpage
+\section*{Problem 2}
+\begin{problem}
+    Suppose $f \in H(O)$ where $O\subseteq \bbC$ is an open connected region. If $|f|$ is constant, then $f$ is constant.
+\end{problem}
+\begin{solution}
+    Let $f = u + iv.$ Then since $|f|$ is constant, we have that 
+    \[|f| = |u + iv| = \sqrt{u^2 + v^2} \implies u^2 + v^2 \equiv C.\]
+    Thus, differentiating the above with respect to $x$ and then $y,$
+\[\frac{\partial u^2}{\partial x} + \frac{\partial v^2}{\partial x} = 0\]
+\[\frac{\partial u^2}{\partial y} + \frac{\partial v^2}{\partial y} = 0\]
+
+    Thus,
+    \begin{align}
+\begin{pmatrix}
+        \frac{\partial u}{\partial x} & \frac{\partial v}{\partial x}\\
+        \frac{\partial u}{\partial y} & \frac{\partial v}{\partial y}
+    \end{pmatrix}\begin{pmatrix}
+        u\\v
+    \end{pmatrix} = \begin{pmatrix}
+        \frac{\partial u}{\partial x}u + \frac{\partial v}{\partial x}v\\
+        \frac{\partial u}{\partial y}u + \frac{\partial v}{\partial y}v\\
+    \end{pmatrix}
+    = \begin{pmatrix}
+        0\\0
+    \end{pmatrix}        
+    \end{align}
+
+Consider that using the Riemann-Cauchy equations, we find that the above implies that every component in the Jacobian is zero.
+\begin{align*}
+\det \begin{pmatrix}
+        \frac{\partial u}{\partial x} & \frac{\partial v}{\partial x}\\
+        \frac{\partial u}{\partial y} & \frac{\partial v}{\partial y}
+    \end{pmatrix}
+    &= \frac{\partial u}{\partial x}\frac{\partial v}{\partial y} - 
+    \frac{\partial v}{\partial x}\frac{\partial u}{\partial y}\\ &= (\frac{\partial u}{\partial x})^2 + (\frac{\partial u}{\partial y})^2\\
+    &= |\nabla u|^2\\
+    &= 0
+    \end{align*}
+    
+    but also using similar logic,
+    \[\det \begin{pmatrix}
+        \frac{\partial u}{\partial x} & \frac{\partial v}{\partial x}\\
+        \frac{\partial u}{\partial y} & \frac{\partial v}{\partial y}
+    \end{pmatrix}
+    = |\nabla v|^2 = 0\]
+This then implies that $\nabla u = \nabla v =0,$ showing that $f$ is constant.
+
+\end{solution}
+
+\newpage
+
+
+
+
+
+
+
+
+
+
+\end{document}

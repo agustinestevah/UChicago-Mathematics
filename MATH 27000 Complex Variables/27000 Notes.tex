@@ -982,7 +982,69 @@ Let $f$ be meromorphic in a simply connected region $O$ with poles at $z_0, \dot
 \end{thm}
 
 
+\newpage
+\subsection{Thursday, May 15: The Residue Theorem}
+\begin{thm} (Residue Theorem)
+    Suppose $O$ is a simply connected region and $f$ is meromorphic in $O.$  Let $\gamma$ be a closed path not passing through any of the $n$ poles. Then 
+    \[\int_\gamma f(z)\,dz = 2\pi i \sum_{k = 1}^n\Ind_\gamma (z_k)\Res_{z_k}(f)\]
+\end{thm}
+\begin{proof}
+    If $f$ has a pole at $z_k,$ then by the Caseratti-Weierstrass theorem,
+    \[f(z) = \sum_{j=1}^N \frac{a_j}{(z - z_k)^j} + \text{power series in $(z-z_k)$}.\] Let 
+    \[P_k = \sum_{j=1}^N\frac{a_j}{(z - z_k)^j}\] be the principal part of the Laurent expansion.
+    
+    Thus, there is some $r_k<0$ such that if $z \in D_{r_k}(z_k),$ then $z$ is not a residual of $f.$ We claim that 
+    \[f(z) - \sum_{k=1}^n P_k(z):= g(z)\in H(O).\] Consider $z_1.$ We claim that $f(z) - P_1(z)$ has a removable singularity at $z_1.$ One can see this because at $D_1(z_1),$ $f(z) - P_1(z)$ can be expressed as a power series with a removable singularity at $z_1.$ Note that $\sum_{k=2}^n P_k(z)$ does not interfere with this because of how we defined $r_1.$ Thus, $g(z)\in H(O)$ by Riemann's theorem. Hence, we use Cauchy's theorem
+    \begin{align*}
+    \int_\gamma f(z)\,dz &= \int_\gamma (f(z) - \sum P_k(z))\,dx + \int_\gamma P_k(z) \,dz\\ &= \int_\gamma \sum P_k(z) \,dz \\
+    &= \sum_{k=1}^n \int_\gamma P_k(z)\,dz\\
+    &= 2\pi i \sum_{k=1}^n \frac{1}{2\pi i}\int_\gamma \sum_{j=1}^{N_k} \frac{a_j}{(z - z_k)^j}\,dz\\
+    &= 2\pi i \sum_{k=1}^n \sum_{j=1}^{N_k}\frac{a_j}{2\pi i}\int_\gamma \sum_{j=1}^{N_k} \frac{1}{(z - z_k)^j}\,dz\\
+    &= 2\pi i \sum_{k=1}^n a_1^{(k)}\frac{1}{2\pi i}\int_\gamma\frac{1}{(z - z_k)}\,dz\\
+    &=2\pi i \sum_{k=1}^n \frac{1}{2\pi i} \Res_{z_k}(f) \Ind_\gamma(z_k)
+    \end{align*}
+    
+\end{proof}
 
+\begin{exmp}
+    Consider some function $f(z)$ with poles at $n\pi$ on the real axis, where $n \in \bbZ.$ Let $R>0$ such that $|n \pi |< R$ for all $n \in \bbZ.$ The consider the disk $D_R(0).$ We want this function $f(z)$ have residuals such that 
+    \[\Res_{n\pi}(f) = \frac{1}{(n\pi )^2}.\] Consider now $\sin^{-1} z.$ The Laurent expansion about $0$ is 
+    \[\frac{1}{\sin z} = \frac{1}{z - \frac{z^3}{3!} + \frac{z^5}{5!} + \cdots } = \frac{1}{z}\frac{1}{1 - \frac{z^2}{3!} + \frac{z^4}{5!} + \cdots}\] Near $z = 0,$ the second term is holomorphic, and thus it has a power series. Thus, 
+    \[\frac{1}{\sin z} = \frac{1}{z} (a_0 + a_1z + a_2z^2 + \cdots).\] It suffices to find $a_0,$ which is clearly $1.$ Now consider 
+    \[\Res_{n \pi} (\frac{1}{z^2(\sin z)})\] We have that about $n\pi,$
+    \[(\frac{1}{z^2(\sin z)})=\frac{1}{z^2}\left[ \frac{1}{z - n\pi} + \text{ power series}\right]\] But $\frac{1}{z^2}$ is perfectly holomorphic about $n\pi$ for $n \neq0,$ and so it is analytic, and thus 
+    \[\frac{1}{z^2(\sin z)} = (b_0 + b_1(z- n\pi)+ \cdots)\left[\frac{1}{z - n\pi} + \text {power series}\right]\] so it suffices to find $b_0,$ which is clearly $\frac{1}{(n\pi)^2}.$ Observe that as $z\to \infty,$
+    \[\left|\frac{\cos z}{\sin z}\right| = \left|\frac{e^{iz}+ e^{-iz}}{e^{iz} - e^{-iz}}\right|\to 1.\] 
+\end{exmp}
+\begin{thm}
+    \[\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{8}\]
+\end{thm}
+\begin{proof}
+    We claim that $\cot z$ is $\pi$ periodic. Consider that 
+    \begin{align*}
+        \cot z &= \frac{\cos z}{\sin z}\\
+        &= \frac{\frac{e^{iz} + e^{-iz}}{ 2}}{\frac{e^{iz} - e^{-iz}}{2i}}\\
+        &= i\frac{e^{i(w + \pi) + e^{-i(w + \pi)}}}{e^{i(w + \pi)} - e^{i(w + \pi)}}\\
+        &= i\frac{e^{i(w)e^\pi + e^{-i(w)e^\pi}}}{e^{i(w)}e^\pi - e^{i(w)}e^\pi}\\
+        &= \cot z
+    \end{align*}
+    We now claim that $\cot z \frac{1}{z^2}$ has a pole exactly at $n\pi$ for $n \in \bbZ.$ We can expand $\cot z$ at $0$ by 
+    \begin{align*}
+        \cot z &= \frac{\cos z}{\sin z}\\
+        &= \frac{1 - \frac{z^2}{2!} + \frac{z^4}{4!} + \cdots}{z - \frac{z^3}{3!} + \frac{z^5}{5!} + \cdots }\\
+        &= \frac{1}{z}\left[\frac{1 - \frac{z^2}{2!} + \frac{z^4}{4!} + \cdots}{1 - \frac{z^2}{3!} + \frac{z^4}{5!} + \cdots} \right]\\
+        &= \frac{1}{z}(a_0 + a_1 z + \cdots)
+    \end{align*}
+    And so 
+    \[\Rez_0 \cot(z) = a_0= 1\]
+
+    Now consider for $n\pi \neq 0,$
+    \begin{align*}
+        \frac{1}{z^2} \cot z
+        &= \frac{1}{z^2}\left[\frac{1}{z - n\pi} + \text{power series}\right]\\
+    \end{align*}
+    so it suffices to find $a_1.$ We will find next class that $a_1 = \frac{1}{n^2 \pi^2}.$
+\end{proof}
 
 
 

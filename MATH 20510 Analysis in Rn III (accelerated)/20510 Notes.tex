@@ -1043,7 +1043,7 @@ For this class, we let $E\subset \bbR^n$ and $F\subset\bbR^m$ be open.
 
 
 \newpage
-\subsection{Wednesday, May 14: }
+\subsection{Wednesday, May 14: Oriented Simplexes}
 \begin{defn}
     Let $p_0, p_1, \dots, p_k \in \bbR^n.$ The \textbf{oriented affine $k-$simplex} $\sigma = [p_0, \dots, p_k]$ is the $k-$surface in $\bbR^n$ with parameter domain $Q^k$ given by the affine map 
     \[\sigma(\alpha_1\,e_1, \dots, \alpha_k \,e_k) = p_0 + \sum_{1}^k \alpha_i(p_i - p_0)\]
@@ -1142,5 +1142,93 @@ Moreover, we note that the boundary of $\sigma_1$ is simply three lines (a trian
     Consider the tetrahedron $\sigma = [p_0, \dots, p_3].$ Intuitively, the boundary of the tetrahedron are the faces of the triangles. Formally, 
     \[\partial \sigma = [p_1, p_2, p_3] - [p_0, p_2, p_3] + [p_0, p_1, p_2] - [p_0, p_1, p_2]\]
 \end{exmp}
+
+
+\newpage
+\subsection*{Friday, May 16: Introducing Stokes Theorem}
+\begin{defn}
+    Let $T \in C^2(E, F).$ Let $\sigma$ be an oriented affine $k-$simplex in $E.$ The map $\phi: T\circ \sigma$ is a $k=$surface in $F.$ We call $\phi$ an \textbf{oriented $k-$simplex.}
+\end{defn}
+\begin{defn}
+    A finite collection $\Psi$ of oriented $k-$simplex, $\{\phi_1, \dots, \phi_r\}$ is called a \textbf{$k-$chain} of class $C^2$ in $F.$ 
+\end{defn}
+Formally, we denote $\Psi = \sum \phi_i$
+\begin{defn}
+    If $\omega \in \Lambda^k(F),$ we define 
+    \[\int_\Psi \omega = \sum_{i=1}^r \int_{\phi_i}\omega\]
+\end{defn}
+
+If $\Gamma = \sum \sigma_i$ and $\phi_i = T \circ \sigma_i$, we formally write $\Psi = T \circ \Gamma.$
+
+\begin{defn}
+    The \textbf{boundary of an oriented $k-$simplex} $\phi = T\circ \sigma$ is the $k-1$ chain defined by
+    \[\partial \phi = T\circ \partial \sigma.\]
+\end{defn}
+Note that if $\phi \in C^2(E,F),$ then so is $\partial \phi.$ 
+\begin{defn}
+    The {boundary of a $k-$chain }$\Psi = \sum \phi_i$ is the $k-1$chain denoted 
+    \[\partial T = \sum \partial \phi_i\]
+\end{defn}
+
+\begin{thm}
+    (Stokes) If $\Psi \in C^2(E,F)$ is a $k-$chain, $\omega \in \Lambda^{k-1}(F)$ of class $C^1,$ then 
+    \[\int_\Psi d\omega = \int_{\partial \Psi}\omega\]
+\end{thm}
+The proof is deferred till next class.
+\begin{rem}
+    A few consequences of the FTC:
+    \begin{enumerate}
+        \item (FTC)
+        
+        When $k = m = 1,$ then $\omega = f \in C^1(E,F).$ Since $m = 1,$ then $F = \subseteq \bbR.$ It suffices the case when 
+        \[\Psi = \sigma = [a,b].\] Thus, the boundary is a $0-$chain of oriented points:
+        \[\partial \sigma = [b] - [a].\] Thus, by definition
+        \[\int_{\partial \sigma} f = \int_{[b]} f - \int_{[a]} f = f(b) - f(a).\] Thus, 
+        \[f(b) - f(a) = \int_{\Psi} d\omega = \int_{\sigma} df = \int_a^b df(x)\,dx\]
+    \item (Green's Thm) is the case when $k = m = 2.$
+    \item (Divergence) is the case when $k = m = 3.$
+    \item (OG Stokes) is the case when $k = 2$ and $m =3.$ 
+    \end{enumerate}
+\end{rem}
+
+\begin{thm}
+    (Baby Stokes) Let $E\subset \bbR^k$ containing $Q^k.$ Let $\sigma = [0, e_1, \dots, e_k].$ Let $\lambda \in \Lambda^{k-1}(E)$ of class $C^1.$ Then 
+    \[\int_{\sigma} d\lambda = \int_{\partial \sigma} \lambda.\]
+\end{thm}
+The proof is again differed to next class. 
+
+\begin{prop}
+    To prove Stokes' Theorem, it suffices to prove Baby Stokes.
+\end{prop}
+\begin{proof}
+    It suffices to prove stokes with $\Psi = \phi$ by the linearity of addition. Moreover, it suffices to prove Stokes when $\Psi = \phi$ and $\phi = \sigma,$ where $\sigma$ is an affine $k-$simplex. To show this, we suppose $\phi = T\sigma.$ Then using Theorem 22 (Change of Var)
+    \[\int_\Psi d\omega = \int_{T\sigma} d\omega = \int_\sigma (d\omega)_T = \int_\sigma d(\omega_T)\] Supposing Baby stokes, 
+    \[\int_\sigma d(\omega_T) = \int_{\partial \sigma} \omega_T = \int_{T\circ \partial \sigma} \omega = \int_{\partial \psi}\omega.\] It remains to show that is suffices to show that Stokes holds when $\sigma = [0, e_1, \dots, e_k].$ Let $\Psi = T \sigma,$ where $T$ is affine. Then 
+    \[\int_{\Psi}d\omega = \int_{T \circ \sigma} d\omega = \int_\sigma d(\omega_T) = \int_{\partial \sigma} \omega_T = \int_{T\circ \partial \sigma}\omega = \int_{\partial \Psi}\omega\]
+\end{proof}
+
+\subsection{Monday, May 19: Stokes Theorem}
+We prove Baby Stokes (Theorem 25)
+\begin{proof}
+    If $k =1 ,$ the conclusion follows by FTC. Fix $r$ such that $1\leq r \leq k,$ and let $f \in C^1(E).$ It suffices to prove the conclusion when 
+    \[\lambda = f dx_1 \wedge \dots dx_{r-1}\wedge dx_{r+1}\wedge \cdots \wedge dx_k.\] By definition, 
+    \[\partial \sigma = [e_1, \dots, e_k] + \sum_{j=1}^\infty (-1)^i \tau_i,\] where 
+    \[\tau_i = [0,e_1, \dots, e_{i-1}, e_{i+1}, \dots, e_k].\] For convenience, we let 
+    \[\tau_0:= [e_r, e_1, \dots, e_{r-1}, e_{r +1}, \dots, e_k]  = (-1)^{r-1}[e_1, \dots, e_k].\] Let $u\in \bbQ^{k-1}$ and let $x = (x_1, \dots, x_k) = \tau_0(u).$ Then the $j$th component of $x$ is given by
+    \[x_j  = \begin{cases}
+        u_j \qquad \qquad \qquad \quad \qquad  1\leq j \leq r-1\\
+        1-(u_1 + \cdots + u_k) \qquad j = r\\
+        u_{j-1}\qquad \quad \qquad \qquad r + 1 \leq j \leq k
+    \end{cases}\]
+
+    Let $x = \tau_i(u),$ where $i \neq 0.$ Then 
+        \[x_j  = \begin{cases}
+        u_j \qquad  1\leq j \leq i-1\\
+        0 \qquad j = i\\
+        u_{j-1} \quad i + 1 \leq j \leq k
+    \end{cases}\]
+\end{proof}
+
+
 
 \end{document}

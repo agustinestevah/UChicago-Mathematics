@@ -206,22 +206,9 @@ Thus, our integral computes to
     Let $n \in \bbN.$ Show that there are exactly $n$ $n$th roots of unity. What are they?
 \end{problem}
 \begin{solution}
-Consider that the polynomial 
-\[P(z)= z^n - 1\] has at least one root by the fundamental theorem of algebra. If we call it $z_0,$ then 
-\[P(z_0) = z_0^n - 1 = 0.\] Thus, we use the binomial formula to see that
-\begin{align*}
-P(z) = z^n - 1 &= ((z - z_0) + z_0)^n - 1\\ &= \sum_{k=0}^n\binom{n}{k}(z - z_0)^{k}z_0^{n-k} - 1\\
-&= a_n(z - z_0)^n + a_{n-1}(z - z_0)^{n-1} + \dots a_{0}- 1
-\end{align*}
-We plug in $z_1$ to see that
-\[ 0 = P(z_0) =a_n(z_0 - z_0)^n + a_{n-1}(z_0 - z_0)^{n-1} + \dots a_{0}- 1  = a_0 - 1\implies a_0 = 1\]
-Thus, 
-\[P(z) = (z - z_0) (a_n(z - z_0)^{n-1} + \dots + a_1) = (z -z_0) Q(z).\] Since $Q(z)$ is a polynomial of degree $n-1,$ then it too has 
-
-
-    We need to show that there are $n$ complex numbers that satisfy $z^n = 1.$ 
-We have that for $k\geq 0,$
-\[z^n = 1 \iff n\text{Log}(z) = 0 \iff e^{n\text{Log}(z)} = 1 \iff n\text{Log}(z) = 2\pi i k \geq 0 \iff z = e^{\frac{2\pi i k}{n}}\]
+As a consequence of the fundamental theorem of algebra, the polynomial $P(z) = z^n - 1$ has exactly $n$ roots. Thus, there exist $n$ different $z\in \bbC$ such that $z^n = 1.$ To characterize such $z,$ we have that
+\[z^n = 1 \iff n\text{Log}(z) = 0 \iff e^{n\text{Log}(z)} = 1 \iff n\text{Log}(z) = 2\pi i k \geq 0 \iff z = e^{\frac{2\pi i k}{n}}.\] For only $k \in \{0,1,2,\dots, n-1,\}$ we have by periodicity that $\frac{2\pi i k}{n}$ takes on distinct values and so the $n$th roots of unity are given by 
+\[\boxed{\{e^0, e^{\frac{2\pi i}{n}}, \dots, e^{\frac{2\pi i(n-1)}{n}}\}}\]
 \end{solution}
 
 \newpage
@@ -232,39 +219,40 @@ We have that for $k\geq 0,$
         \item Let $a,b \in \bbC$ with $a\neq b,$ what is 
         \[\Res_a \left(\frac{1}{z - a}\frac{1}{z-b}\right).\]
         \begin{solution}
-We calculate the power series of $g(z )\frac{1}{z-b}$ around $a$ to be 
-\[g(z) = \frac{1}{a-b} + \sum_{n=1}^\infty g^{(n)}(a)(z-a)^n\]
-\[f(z) = \frac{1}{z-a} g(z) = \frac{1}{z-a}\left(\frac{1}{a-b} + \sum_{n=1}^\infty g^{(n)}(a)(a - z)^n\right),\] and so 
-\[a_{-1} = \frac{1}{a-b},\] which is the residue.
+We calculate the power series of $g(z ) = \frac{1}{z-b}$ around $a$ to be 
+\[g(z) = \frac{1}{a-b} + \sum_{n=1}^\infty a_n(z-a)^n\]
+\[f(z) = \frac{1}{z-a} g(z) = \frac{1}{z-a}\left(\frac{1}{a-b} + \sum_{n=1}^\infty a_n(a - z)^n\right),\] and so 
+\[a_{-1} = \boxed{\frac{1}{a-b}},\] which is the residue.
 \end{solution}
 \item 
 \[\Res_i (\frac{1}{z}e^{iz})\]
 \begin{solution}
-The expansion of $f$ around $i$ has no negative powers, and so \[a_{-1} = 0\] is our residue
+The expansion of $f$ around $i$ has no negative powers since $f(z)$ is holomorphic in a disk not containing $z=  0$, and so $f(z)$ is analytic around $z = i,$ implying that \[a_{-1} = \boxed{0}\] is our residue.
 \end{solution}
 \item 
 \[\Res_0 (\frac{1}{z}e^{iz})\]
 \begin{solution}
     We have that 
     \[\frac{1}{z}e^{iz} = \frac{1}{z}(1 + \frac{1}{1!} (iz)+ \frac{1}{2!}(iz)^2 + \dots + ),\] and so 
-    \[a_{-1} = 1\] which is the residue. 
+    \[a_{-1} = \boxed{1}\] which is the residue. 
     \end{solution}
     \item 
 \[\Res_1 (\frac{1}{z^3 - 1}\]
 \begin{solution}
 We can factor and consider expanding about $z = 1$ 
-\[f(z) = \frac{1}{z^3 - 1} = \frac{1}{z-1}\frac{1}{z^2 + 1 + z} = \frac{1}{z-1}\left(\frac{1}{3} + \cdots + \right)\] and so $a_{-1} = \frac{1}{3}$
+\[f(z) = \frac{1}{z^3 - 1} = \frac{1}{z-1}\frac{1}{z^2 + 1 + z} =: \frac{1}{z-1}g(z)= \frac{1}{z-1}(b_0 + b_1 z + \cdots )\] where the last equality comes due to $g(z)$ being perfectly analytic/holomorphic about $z = 1.$ Thus, we look for \[b_0 = g(1)= \boxed{\frac{1}{3}},\] which is $a_{-1}$ in the Laurent series, and thus our residual. 
 \end{solution}
 
     \end{enumerate}
 \end{problem}
 
+\newpage
 \section*{Problem 5}
 \begin{problem}
     Are complex polynomials dense in the set of continuous complex functions $f(z): \overline{D_1(z)} \to \bbC$?
 \end{problem}
 \begin{solution}
-No, we need the added assumption that $f$ is holomorphic. 
+\textbf{No}, we need the added assumption that $f$ is holomorphic. 
 
 Suppose we could approximate $f(z)$ though! Then 
 \[P_n\uconv f\] for polynomials $P_n.$ Let $K \subseteq \overline{D_1(z)}$ be a compact subset. It should be clear that the convergence is uniform on $K$ as well. Since $P_n \in H(\overline{D_1(z)})$ for all $n,$ then by Problem 4 on PSET 3, $f \in H(\overline{D_1(z)}).$ Thus, it suffices to show there exists a function merely continuous on the unit disk. Take 

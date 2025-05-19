@@ -1315,6 +1315,106 @@ There are two way of building $B_t:$
 
 
 
+\newpage
+\subsection*{Friday, May 16: Properties of Brownian Motion}
+\begin{defn}
+    A continuous-time stochastic process $M_t$ is a \textbf{martingale} with respect to $\mathcal{F}_t$ if:
+    \begin{enumerate}
+        \item $M_t$ is $\mathcal{F}-$measurable.
+        \item $\bbE[|M_t|] < \infty$ for all $t.$
+        \item For all $u >t,$ 
+        \[\bbE[M_u \mid \mathcal{F}_t] = M_t.\]
+    \end{enumerate}
+\end{defn}
+\begin{prop}
+    (Markov Property) Let $\{B_t\}$ be a SBM. Then for each $t\geq 0,$ the process $\{B_{s + t} - B_t\}_{s\geq 0}$ is an SBM independent of $\mathcal{F}_t.$ 
+
+    (Martingale Property) $B$ is a martingale w.r.t. $\mathcal{F}_t$
+\end{prop}
+\begin{proof}
+    We show the martingale property. Take $u>t.$ Then 
+    \begin{align*}
+        \bbE[B_u \mid \mathcal{F}_t] &= \bbE[B_{u-t} \mid \mathcal{F}_t] + \bbE[B_t \mid \mathcal{F}_t]\\
+        &= \bbE[B_{u-t}] + B_t\\
+        &= B_t
+    \end{align*}
+\end{proof}
+
+\begin{defn}
+    A random variable $\tau \in [0, \infty]$ is a \textbf{stopping time} for $\mathcal{F}_t$ if, for any $t\geq 0,$ we have that $\{\tau \leq t\}$ is $\mathcal{F}_t-$measurable. 
+\end{defn}
+\begin{exmp}
+    For $a\in \bbR,$ let $\tau = \min\{t \geq 0 \mid B_t = a\}$ is a stopping time. $\tau' = \max\{t\leq 1 \mid B_t= a\}$ is \textit{not} a stopping time.
+\end{exmp}
+
+\begin{thm}
+    (OST) Let $\{M_t\}_{t\geq 0}$ be a martingale w.r.t $\{\mathcal{F}_t\}$ such that $t\mapsto M_t$ is continuous. Let $\tau$ be a stopping time and suppose there is a $c>0$ such that 
+    \[\bbP\{\tau < \infty, |M_t| \leq C, \forall\,t\leq \tau\} = 1.\] Then 
+    \[\bbE[M_\tau] = \bbE[M_0].\]
+\end{thm}
+
+\begin{prop}
+    Suppose $B$ is an SBM and define 
+    \[\tau:= \min\{t \geq 0 \mid B_t =a \text{ or } B_t = -b\}.\] Then 
+    \[\bbP\{B_\tau = a\} = \frac{b}{a + b}\]
+\end{prop}
+\begin{proof}
+    We know that since $B_t$ has not struck $a$ or $b$ when $\tau >t,$ we have that 
+    \[\bbP\{\tau >t \}\leq \bbP\{B_t \in [-b, a]\} \to 0\implies \bbP\{\tau < \infty\} = 1.\]
+    We also know that for $t\leq \tau,$
+    \[|B_t| \leq \max\{|a|, |b|\}.\] Hence, by the OST
+    \[\bbE[B_\tau]=\bbE[B_0] = 0\] but 
+    \[\bbE[B_\tau]= \bbP\{\tau = a\}a + \bbP\{\tau = -b\}(-b)= \bbP\{\tau = a\}a + (1-\bbP\{\tau = a\})(-b) = 0\]
+\end{proof}
+
+\begin{prop}
+    Brownian motion is recurrent in one dimension. That is, for each $T\geq 0 ,$ 
+    \[\bbP\{\exists t>T: B_t = 0\} = 1\]
+\end{prop}
+\begin{proof}
+    The process 
+    $\{B_{T + t} - B_T\}_{t\geq 0}$ is an SBM independent of $\mathcal{F}_T$ by the Markov property. It suffices to show that there exists some $t$ such that $B_{T + t} - B_T = -B_T$ almost surely. We use the previous result with $b = -B_T$ and $a>0$ to find that 
+    \[\bbP\{B_{T + t} - B_T = a \text{ before } -B_T\}  =\frac{B_T}{a + B_T} \xrightarrow[a\to \infty]{} 0 .\] 
+\end{proof}
+
+
+\newpage
+\subsection{Monday, May 19: The Reflection Principle}
+
+\begin{prop}
+    (Strong Markov Property) Let $\tau$ be a stopping time for $B_t.$ The process $\{B_{ s + \tau} - B_\tau\}_{s\geq 0}$ is a Brownian motion and is independent of $\mathcal{F}_\tau.$
+\end{prop}
+
+
+\begin{prop}
+    Let $B_t$ be a SBM and let $a >0.$ Then 
+    \[\bbP\{\max_{0 \leq s \leq t}B_s \geq a\} = 2\bbP\{B_t \geq a\}\]
+\end{prop}
+\begin{proof}
+    Define 
+    \[\tau:= \min\{t\geq 0 : B_t = a\}.\] Then $\tau$ is a stopping time w.r.t. $\mathcal{F}_t.$ Thus, 
+    \[\{\max_{0\leq s\leq t}B_s \geq a\} = \{\tau \leq t\}\] and so using the law of total probability and then the strong markov property on the event $\tau \leq t,$ we know that 
+    \[B_t - B_\tau = B_t - a \sim N(0, t - \tau)\]
+    \begin{align*}
+        \bbP\{B_t \geq a\} &= \bbP\{B_t \geq a \mid \tau \leq t\}\bbP\{\tau \leq t\} + \bbP\{B_t \geq a \mid \tau \geq t\}\bbP\{\tau >t\}\\
+        &= \bbP\{B_t \geq a \mid \tau \leq t\}\bbP\{\tau \leq t\} + 0\\
+        &= \bbP\{B_t - a \geq 0 \mid \tau \leq t\}\bbP\{\tau \leq t\}\\
+        &= \frac{1}{2} \bbP\{\tau \leq t\}
+    \end{align*}
+\end{proof}
+
+\begin{exmp}
+    Let $\{B_t\}$ be a SBM. For $t>1,$ we wish to compute $\bbP\{B_s = 0 \text{ for some } 1\leq s \leq t\}.$ Suppose $B_1 = a >0.$ Then the probability $B_s = 0$ for some $s \in [1,t]$ is the same as probability that $B_s \leq a$ for some $0\leq s \leq t-1.$ By symmetry, this is the same as the probability that $B_s \geq a$ for some $0\leq s \leq t-1.$ Thus, 
+    \begin{align*}
+    \bbP\{B_s = 0 \text{ for some } 1 \leq s \leq t \mid B_1 = a\}&= \bbP\{B_s \geq a \text{ for some $0\leq s \leq t-1$}\}\\ &= 2\bbP\{B_{t-1} \geq a\}\\
+    &= 2\int_a^\infty \frac{1}{\sqrt{2\pi (t-1)}}e^{-\frac{x^2}{2(t-1)}}
+    \end{align*}
+    Averaging over all possible values of $a,$ 
+    \[\bbP\{B_s = 0\text{ for some } 1\leq s \leq t\} = 2\int_{-\infty}^\infty \left(\int_a^\infty \int_a^\infty \frac{1}{\sqrt{2\pi (t-1)}}e^{-\frac{x^2}{2(t-1)}}\right) \frac{1}{\sqrt{2\pi} }e^{-\frac{a^2}{2}}\,da = 1 - \frac{2}{\pi}\arctan \frac{1}{\sqrt{t-1}}\]
+    
+\end{exmp}
+
+
 
 \newpage
 \section{Problem Sessions}
