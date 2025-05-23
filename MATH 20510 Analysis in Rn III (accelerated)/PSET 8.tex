@@ -207,5 +207,105 @@ Compute $\omega \wedge \omega$ and $\omega \wedge \omega \wedge \omega$. Find a 
     \end{align*}
 \end{solution}
 
+\newpage
+\section*{Problem 4}
+\begin{problem}
+    Suppose $\sigma = [p_0, \dots, p_k]$ is an oriented affine $k-$simplex. Show that $\partial^2 \sigma = 0.$
+\end{problem}
+\begin{solution}
+    Let \[\sigma_i = [p_0, \dots, p_{i-1}, p_{i+1}, \dots, p_k]\] and \[\sigma_{ij} = [p_0, \dots, p_{j-1}, p_{j+1}, \dots, p_{i-1}, p_{i+1}, \dots, p_k].\] That is, $\sigma_{ij}$ is the oriented affine $k-2$simplex with the $i$ and $j$ coordinate removed. Without loss of generality up to a sign, suppose $k$ is odd. Then by definition 
+    \begin{align*}
+        \partial \sigma = \sigma_0 - \sigma_1 + \dots - \sigma_k.
+    \end{align*}
+    Since $\partial\sigma$ is a oriented affine $k-1$ chain, then by definition
+    \begin{align*}
+        \partial(\partial \sigma) &= \partial\sigma_0 - \partial\sigma_1 + \dots - \partial \sigma_k\\
+        &= (\sigma_{01} - \sigma_{02} + \dots +\sigma_{0k})- (\sigma_{10} - \sigma_{12} + \dots + \sigma_{1k}) + \dots -(\sigma_{k0} - \sigma_{k1} + \cdots + \sigma_{k(k-1)})
+    \end{align*}
+    It is clear that for any $i, j$ where $i\neq j,$ $\sigma_{ij} = \sigma_{ji}.$ Thus, we see that the sum above is zero.
+\end{solution}
+
+\newpage
+\section*{Problem 5}
+\begin{problem}
+    Define $J^2 = \tau_1 + \tau_2,$ where
+    \[\tau_1 = [\textbf{0}, e_1, e_1 + e_2] \qquad \tau_2 = -[\textbf{0}, e_2, e_2 + e_1].\] Explain why it is reasonable to call $J^2$ the positively oriented unit square in $\bbR^2.$ What is $\partial J^2?$ 
+\end{problem}
+\begin{solution}
+    We know that $\tau_1$ is the triangle with edges $(0,0), (1,0), (1,1)$ with the orientation that 
+    \[(0,0)\to (1,0)\to (1,1)\to (0,0).\] Meanwhile, $\tau_2$ is the triangle with edges $(0,0), (0,1), (1,1)$ such that 
+    \[(0,0)\leftarrow(0,1)\leftarrow(1,1)\leftarrow(0,0).\] Thus, the diagonal lines 'cancel out' and we are left with the unit square. By definition, 
+    \begin{align*}
+        \partial J^2 &= \partial \tau_1 + \partial \tau _2\\ &= ([e_1, e_1 + e_2] - [0, e_1 + e_2] + [0, e_1]) - ([e_2, e_2 + e_1]- [0, e_2 + e_1] + [0, e_2])\\
+        &= [e_1, e_1 + e_2] +[0, e_1] - [e_2, e_2 + e_1] - [0,e_2]
+    \end{align*}
+\end{solution}
+
+
+\newpage
+\begin{problem}
+    Consider the oriented affine $3-$simplex
+    \[\sigma_1 = [0, e_1, e_1 + e_2, e_1 + e_2 + e_3]\] has determinant $1$ when regarded as a linear transform and is thus positively oriented.
+\end{problem}
+\begin{solution}
+    $\sigma_1$ when regarded as a linear transform is simply the identity mapping and therefore has determinant $1.$ 
+\end{solution}
+
+\newpage
+\section*{Problem 6}
+\begin{problem}
+    State the conditions under which the formula 
+    \[\int_\Phi f\,d\omega = \int_{d\Phi}f \,\omega - \int_{\Phi}(df)\wedge \omega\]
+\end{problem}
+\begin{solution}
+Let $E \subseteq \bbR^n$ be open and $F\subseteq \bbR^m$ be open. Let $f\in C^1(E, \bbR)$ and $\omega \in \Lambda^{k-1}(F)$ be of class $C^1.$ Suppose $\Phi\in C^2(E,F)$ is a $k-$chain. Since $f\omega = f\wedge \omega \in \Lambda^{k-1}(F),$ then we apply Stokes' theorem to find that 
+\[\int_{\partial\Phi} f\omega = \int_{\Phi} d(f\omega) = \int_{\Phi} (df \wedge \omega + f \wedge d\omega) = \int_\Phi df\wedge \omega + \int_{\Phi} f\wedge d\omega,\] and so the conclusion follows from subtracting. Recall the integration by parts formula. Let $f,g \in C^1([a,b], \bbR),$ then 
+\[\int_a^b (f'g)(x) \,dx= [(fg)(b) - (fg)(a)] - \int_a^b (fg')(x)\,dx.\] Letting $\Phi = [a,b]$ be the oriented $1-$simplex, we have that $\partial \Phi = [b] - [a].$ Letting $\omega = g,$ we see that 
+\[d\omega = g'\qquad df = f'.\] Thus, 
+\[\int_{\partial \Phi} fg = \int_{[b] - [a]}fg = \int_{[b]}fg - \int_{[a]}fg = (fg)(b) - (fg)(b).\] Letting $\Delta:[a,b]\to [a,b]$ be the identity, we use the definition of the integral over forms to see that 
+\[\int_{\Phi}f\,d\omega = \int_{[a,b]}fg' = \int_{\Delta([a,b])}fg' = \int_a^b (fg')(\Delta(x))\Delta'(x)\,dx = \int_a^b (fg')(x)\,dx.\] Similarly, 
+\[\int_{\Phi}(df)\wedge \omega = \int_a^b f'g.\] Thus, we have recovered the integration by parts formula.
+\end{solution}
+
+\newpage
+\section*{Problem 7}
+\begin{problem}
+    Define the annulus to be the $2-$surface 
+    \[\Phi(r,\theta) = (r\cos \theta, r\sin \theta)\qquad a\leq r\leq b, \theta \in [0,2\pi].\]Let $\omega = x^3\,dy.$ Show that Stokes theorem holds by computing both sides explicitly.
+\end{problem}
+\begin{solution}
+Note that by the standard change of variables, 
+\[\int_{\Phi}d\omega = \int_{[a,b]\times [0,2\pi]}(d\omega)_\Phi.\] 
+We have that 
+    \[d\omega = 3x^2\,dx \wedge dy.\] 
+Pulling back, 
+\[dt_1 = \cos \theta \,dr -r\sin\theta\,d\theta\]
+\[dt_2 = \sin\theta\,dr + r\cos\theta\,d\theta\] and thus 
+\begin{align*}
+    (d\omega)_\Phi &= 3x^2(T(x_1))\,dt_1 \wedge dt_2\\
+    &= 3r^2\cos^2\theta \left[(\cos \theta \,dr -r\sin\theta\,d\theta) \wedge (\sin\theta\,dr + r\cos\theta\,d\theta)\right]\\
+    &= 3r^2\cos^2\theta[r\cos^2\theta\,dr\wedge d\theta - r\sin^2\theta\,d\theta \wedge dr]\\
+    &= 3r^3\cos^2 \theta \,dr\wedge d\theta
+\end{align*}
+Thus, 
+\begin{align*}
+\int_{\Phi}d\omega &= \int_{\Delta([a,b]\times [0,2\pi])}3r^3\cos^2 \theta \,dr\wedge d\theta\\ &= \int_0^{2\pi}\int_a^b 3(\Delta_r(u))^3 \cos^2(\Delta_\theta(u)\, \Delta'(u)\,du\\ &= \int_0^{2\pi}\int_a^b 3r^4 \cos^2(\theta)\,dr\,d\theta   \\
+&= \int_0^{2\pi} \frac{3}{4}(b^4 - a^4)\cos^2\theta \,d\theta\\
+&= \frac{3\pi}{4}(b^4 - a^4)
+\end{align*}
+On the other hand, since $\Phi = T\circ J^2,$ where $T(r,\theta) = (r\sin\theta, r\cos \theta)$ and $J^2= \tau_1 + \tau_2, $ where 
+\[\tau_1 = [(a,0), (b,0), (b, 2\pi)]\qquad \tau = -[(a,0), (0,2\pi), (b, 2\pi)].\] We've computed that 
+\[\partial J^2 = [(b,0), (b, 2\pi)] + [(a,0), (b, 0)] - [(a,2\pi), (b, 2\pi)] - [(a,0), (a,2\pi)]\] and so 
+\[T\circ \partial J^2 = [b\sin\theta, b\cos \theta] + [0, r] - [0, r] - [a\sin\theta, a\cos\theta].\] Define $R(\theta)= (b\sin\theta, b\cos\theta)$ and $S(\theta) = (a\sin\theta, a\cos \theta).$
+\begin{align*}
+    \int_{\partial \Phi} \omega &= \int_{[b\sin\theta, b\cos \theta]}x^3\,dy - \int_{[a\sin\theta, a\cos\theta]}x^3\,dy\\
+    &= \int_{R[0,2\pi]} x^3\,dy - \int_{S[0,2\pi]}x^3 \,dy\\
+    &= \int_{\Delta[0,2\pi]} (x^3\,dy)_R - \int_{\Delta[0,2\pi]}(x^3\,dy)_S\\
+    &= \int_{\Delta[0,2\pi]} (-b^4 \sin^4\theta)\,d\theta - \int_{\Delta[0,2\pi]}(-a^4\sin^4 \theta)\,d\theta\\
+    &= (a^4 - b^4)\int_0^{2\pi}\sin^4\theta\,d\theta\\
+    &= (a^4 - b^4)\frac{3\pi }{4}
+\end{align*}
+
+\end{solution}
 
 \end{document}

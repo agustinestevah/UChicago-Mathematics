@@ -935,7 +935,7 @@ And we then compute:
 \end{proof}
 
 \newpage
-\subsection{Tuesday, May 13: }
+\subsection{Tuesday, May 13: Poles and Introducing the Residue Theorem}
 
 Continuing the proof from last class, where we were dealing with essential isolated singularities. Before we do so, consider the following example:
 \begin{exmp}
@@ -1046,6 +1046,140 @@ Let $f$ be meromorphic in a simply connected region $O$ with poles at $z_0, \dot
     so it suffices to find $a_1.$ We will find next class that $a_1 = \frac{1}{n^2 \pi^2}.$
 \end{proof}
 
+\newpage
+\subsection{Tuesday, May 20: $\sum \frac{1}{n^2}$}
+Final: Thursday, May 29. 10am. Ryerson 358. Continuing from the previous class:
+\begin{proof}
+    We have shown that $\cot z$ is $\pi-$periodic and that it has poles at exactly multiples of $\pi$ and that $\Res_{n\pi} \cot z = 1.$ We also showed that $\Res_{n\pi}(\frac{\cot z}{z^2}) = \frac{1}{n^2 \pi^2}$ for $n \neq 0.$ It remains to show that if we remove $\mathcal{D} = \{D_{r}(n\pi)\}_{n \in \bbZ}$ for $r$ small, then $\frac{\cot z}{z^2}$ is bounded in $\mathcal{D}^c.$ By periodicity, it suffices to see that it is bounded  in the strip $[-\frac{\pi}{2}, \frac{\pi}{2}].$ To see this, first note that $|e^{iz}| = e^{-y}$ and $|e^{-iz}| = e^y$
+    \begin{align*}
+        |\cot (z)| &= |\cot (x + iy)|\\
+        &= \left|\frac{\cos (x + iy)}{\sin (x + iy)}\right|\\
+        &= \left|\frac{\frac{e^{iz} + e^{-iz}}{2}}{\frac{e^{iz} - e^{-iz}}{2}}\right|\\
+        &= \frac{|e^{iz} + e^{-iz}|}{|e^{iz} - e^{-iz}|}\\
+        &= |\frac{e^{iz}e^{-2y} + e^{ix}}{e^{ix}e^{-2y} - e^{ix}}|\\
+        &\xrightarrow[y\to \infty]{} |\frac{e^{ix}}{e^{ix}}|\\
+        &= 1
+    \end{align*}
+    Thus, our function is bounded as $y\to \infty$ If we remove the disk $D_r(0),$ then our function is a continuous function on a compact set, and is thus bounded in $x.$ Consider $n = 5.$ Recall the Laurent expansion to be 
+    \[\frac{\cot z}{z^2} = \frac{1}{z^2}\left[\frac{1}{(z - 5\pi)^2} + a_0 + a_1(z - 5\pi) + \dots\right] \implies \Res_{5\pi }f =  \frac{1}{25\pi^2}\]
+
+    When $z = 0,$ 
+    \[\frac{\cot z}{z^2} = \frac{1}{z^2}\left[\frac{1}{z^2} + a_0 + a_1z + \dots\right]\] and so $\Res_0 \frac{\cot z}{z^2} = a_1$. We see that 
+    \begin{align*}
+        \frac{1}{z^2}\frac{\cos z}{\sin z} &= \frac{1}{z^2}\frac{1 - \frac{z^2}{2!} + \cdots}{z(1 - \frac{z^2}{3!} + \cdots)}\\
+        &= \frac{1}{z^3}(1 - \frac{z^2}{2!} + \frac{z^4}{4!} + \cdots)\left(\frac{1}{1 - (\frac{z^2}{3!} - \frac{z^4}{5!}+\cdots)}\right) \\
+        &= \frac{1}{z^3}\left[(1 - \frac{z^2}{2!} + \frac{z^4}{4!} + \cdots)(1 + (\frac{z^2}{3!} - \frac{z^4}{5!}+\cdots)+ (\frac{z^2}{3!} - \frac{z^4}{5!}+\cdots)^2 + \cdots)\right]\\
+        \\
+        1&\mapsto \frac{1}{3!} = \frac{1}{6}\\
+        -\frac{z^2}{2!}&\mapsto -\frac{1}{2}\\
+    \end{align*}
+    Where the last two lines are due to the powers of $z^2$ in the brackets from distributing $1$ in the first term to the second and then distributing $\frac{-z^2}{2!}$ into the second term. Thus, adding up the coefficients of $z^2,$ we see that $a_1 = -\frac{1}{3}.$
+
+    Consider $C_R(0)$ to be the circle of radius $R$ about the origin and remove $\mathcal{D}$ from this circle. Then since we have shown $\cot Z$ is bounded by some $M,$
+    \begin{align*}
+        |\int_{C_{(n + \frac{1}{2})\pi}(0)}\frac{\cot z}{z^2}\,dz| &\leq 2\pi ((n + \frac{1}{2})\pi) \frac{M}{((n + \frac{1}{2})\pi)^2} \to 0
+    \end{align*}
+    By the Residue Theorem, 
+    \[\int_{C_{(n + \frac{1}{2})\pi}} \frac{\cot z}{z}\,dz = 2\pi i\sum_{\text{$z_k$ residues}}\Res_{z_k f} = 2\pi i (-\frac{1}{3} + \sum_{k=-n, k\neq 0}^n \frac{1}{n^2 \pi ^2}) \to 0\] Thus, rearranging in the limit,
+    \[\frac{1}{3}= 2\sum_{k=1}^\infty \frac{1}{n^2 \pi^2} \implies \sum_{k=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\]
+\end{proof}
+
+\begin{rem}
+    Consider the expression $z^n  = w.$ It turns out there are $n$ such $z.$ Consider the roots of unity $z^n = 1.$ To find the $n$ such roots, consider that 
+    \[z^n =1 \iff n\log z = \log 1 = 0 \implies e^{n\log z} = e^0 = 1.\]By a theorem done in class, this implies that $\log z = 2\pi i \frac{k}{n}$ for $k \in \bbN.$ and thus 
+    \[z = e^{2\pi i \frac{k}{n}}.\] But by periodicity of $e,$ only $k = 0, 1, \dots, n-1$ are distinct. We claim that the $n$th root of $w$ has the form 
+    \[w = e^{\frac{1}{n}} e^{i\frac{\rho}{n}}(\text{$n$th roots of unity})\]
+\end{rem}
+
+\newpage
+\subsection{Thursday, May 22: The Argument Principle}
+\begin{thm}
+    (Argument Principle) Suppose $O\subseteq \bbC$ is open and let $\overline{D_r(z_0)}\subseteq O.$ Let $f$ be meromorphic on $O.$ Suppose $f$ has no poles on $\gamma = C_r(z_0)$ and it doesn't vanish on $\gamma.$ Then the winding number 
+    \[\Ind_{f\circ \gamma}(0) = \#\text{ zeros of $f$ inside } D_{r}(z_0) - \# \text{ poles inside $D_{r}(z_0)$}\] where the zeros are counted according to multiplicity
+\end{thm}
+\begin{proof}
+    Recall that if $f$ has a zero of order $n$ at $z_0,$ then you can write 
+    \[f(z) = a_n(z-z_0)^n+ \dots = (z-z_0)^n (a_n+ a_{n+1}(z-z_0) + \dots)= (z-z_0)^ng(z).\] where $g(z)$ is analytic and is never $0$ around $z_0.$ If $f$ has a pole of order $n$ at $z_0,$ then the most negative power to appear has coefficient $a_{-n}$ and 
+    \[f(z) = (z-z_0)^n\left[a_{-n}+ a_{-n_{k+1}}(z-z_0) + \dots\right]= (z-z_0)^n g(z),\] where $g(z)$ is analytic and is never $0$ around $z_0.$ 
+    \begin{lemma}
+        If $f(z), g(z)\in H(D_r(z_0)\sm \{z_0\})$ never vanish in $D_r(z_0)\sm \{z_0\}$, then in $D_r(z_0)\sm\{z_0\}$
+        \[\frac{(f g)'(z)}{(f g)(z)} = (\frac{f'}{f})(z) + (\frac{g'}{g})(z).\]
+    \end{lemma}
+    \begin{proof}
+        Using the product rule, $(fg)' = f'g + g'f,$ and the result follows by dividing by $fg.$ 
+    \end{proof}
+    \begin{lemma}
+        Suppose that $f$ is holomorphic, never zero in 
+        $D_r(z_0)\sm \{z_0\}.$ Then $\frac{f'(z)}{f(z)}$ has a simple pole at $z_0$ in two cases:
+        \begin{enumerate}
+            \item $f$ has a zero of order $n$ at $z_0,$ in which case 
+            \[\Res_{z_0}(\frac{f'}{f}) = n\]
+            \item If $f$ has a pole of order $n$ at $z_0,$ then 
+            \[\Res_{z_0}(\frac{f'}{f}) = -n\]
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        If $f$ has a zero of order $n$ at $z_0,$ we can write 
+        \[f(z) = (z- z_0)^n g(z),\] where $g(z) \in H(D_r(z_0))$ and $g(z_0)\neq 0$ Then using our beautiful lemma 4,
+        \[\frac{f'(z)}{f(z)}= \frac{\left((z - z_0)^n\right)'}{(z-z_0)} + \frac{g'(z)}{g(z)}= \frac{n}{(z-z_0)} + \frac{g'(z)}{g(z)} = \frac{n}{(z-z_0)} + (a_0 + a_1(z-z_0) + \dots).\] Hence, the residue is clearly $n.$
+
+        If $f$ has a pole at order $n$ at $z_0,$ we can run it back and it is clear that the residue is $-n.$
+    \end{proof}
+    Consider that by Lemma 5, we can apply the residue theorem to 
+    \[\frac{1}{2\pi i }\int_{\gamma} \frac{f'(z)}{f(z)}\,dz=  \sum_{z_k \text{ are zeros or poles}} \Res_{z_k}\frac{f'}{f}\] and by our Lemma 5 we get our result. To conclude, we compute
+    \[\Ind_{f\circ \gamma} (0)= \frac{1}{2\pi i}\int_{f\circ \gamma}\frac{1}{z}\,dz = \frac{1}{2\pi i}\int_{0}^{2\pi}\frac{(f\circ \gamma)'(\theta)}{f(\gamma(\theta))}\,d\theta = \frac{1}{2\pi i}\int_0^{2\pi}\frac{f'(\gamma(\theta))\,d\theta}{f(\gamma(\theta))}\gamma'(\theta)\,d\theta = \frac{1}{2\pi i}\int_{\gamma} \frac{f'(z)}{f(z)}\,dz\]
+\end{proof}
+
+\begin{defn}
+    Let $f\in H(D_r(z_0)).$ We say that $f$ has an \textbf{a-point} of order $n$ at $z_0$ if 
+    \[f(z) - a\] has a zero of order $n$ at $z_0.$ 
+\end{defn}
+\begin{cor}
+    Suppose $f \in H(O),$ and $\overline{D_r(z_0)}\subseteq O.$ If $f(z) \neq a$ on $\gamma = C_r(z_0),$  then the number of a-points inside $\gamma$  (counted according to multiplicity) is equal to $\Ind_{f\circ \gamma}(a)$
+\end{cor}
+\begin{proof}
+    Let $g(z) = f(z) -a.$ Then $g$ has no zeros on $\gamma.$ By the argument principle, 
+    \[\# \text{ a points of $f$} = \# \text{ zeros of $g$ inside $\gamma$} = \frac{1}{2\pi i}\int_\gamma \frac{g'(z)}{g(z)}\,dz = \frac{1}{2\pi i}\int_\gamma \frac{f'(z)}{f(z) - a}\,dz= \Ind_{f\circ \gamma}(a).\]
+\end{proof}
+
+This theorem was not done in class, but it is necessary for the open mapping theorem. 
+\begin{thm}
+    (Rouche's Theorem) Suppose that $f, g \in H(O),$ where $O$ is an open set containing $\overline{D_r(z_0)}.$ If $|f(z)| > |g(z)|$ for any $z\in C_r(z_0),$ then 
+    $f$ and $f + g$ have the same number of zeros inside of $C_r(z_0).$
+\end{thm}
+
+\begin{proof}
+    Define 
+    \[f_t(z) = f + tg(z)\] for all $t\in [0,1]$ such that $f_0 = f$ and $f_1 = f + g.$ Let $n_t$ be the number of zeros of $f_t$ counted with multiplicity.  Since $|f(z)| > |g(z)|$ on $C_r(z_0),$ then $f_t(z)\neq 0$ for any $z\in C_r(z_0),$ and thus by the argument principle, 
+    \[n_t = \frac{1}{2\pi i}\int_{C_r(z_0)}\frac{f_t'(z)}{f_t(z)}\,dz.\] We know that $n_t$ is continuous from the fact that both $f_t'(z)$ and $f_t(z) \neq 0$ are continuous. Hence, $n_t$ must be constant, since otherwise, the continuity implies that $n_t$ takes on some non-integer values. Hence, $n_0 = n_1,$ and we conclude. 
+\end{proof}
+
+\begin{thm}
+    (Open Mapping Theorem) Suppose $f \in H(\Omega)$ is non-constant, where $\Omega$ is a region. Then $f(\Omega)$ is open. 
+\end{thm}
+\begin{proof}
+    Let $a \in f(\Omega)$ such that $a = f(z_0)$. Define 
+    \[F(z) = f(z) -a.\] We know that $F$ has an isolated zero at $z_0.$ Let $r>0$ such that $F$ doesn't vanish anywhere on $\overline{D_r(z_0)}\sm \{z_0\}.$ Since $|F|$ is continuous on the compact $C_r(z_0)=: C,$ $|F|$ achieves its minimum. Let 
+    \[\rho = \min_{z\in C}|F(z)| = \min_{z\in C}|f(z)- a|>0.\] Now we consider the disk $\overline{D_\rho(a)}.$ Let $w \in D_\rho(a).$ It suffices to show that $w\in f(\Omega).$ Define 
+    \[g(z) = (f(z) - a) + (a- w) =: F(z) + H(z) = f(z)-w.\] To use Rouche's theorem, it suffices to see that $|F(z)|>|H(z)|$ for $z\in C.$ Let $z\in C,$ then 
+    \[|F(z)| = |f(z) - a| = \rho > |w-a| = |H(z)|.\] Thus, $f(z) - w$ has the same number of zeros as $f(z) - a.$  Namely, there is some $z_1 \in \Omega$ such that $f(z_1) - w = 0,$ and thus $f(z_1) = w.$ Hence, $w \in f(\Omega).$
+\end{proof}
+
+\begin{thm}
+    (Maximum Modulus Principle) Let $\Omega$ be a region and suppose $f\in H(\Omega).$ If $f$ is non-constant, then $f$ cannot attain its maximum in $\Omega.$
+\end{thm}
+\begin{proof}
+    Suppose there exists some $z_0$ such that $|f(z_0)| \geq f(z)$ for all $z\in H(O).$ Since $\Omega$ is open, then $f(\Omega)$ is open by the open mapping theorem. Thus, there is some $r>0$ such that $D_r(f(z_0))\subset f(\Omega),$ and thus there is some $z_1$ such that $f(z_1) \in D_r(f(z_0))$ and $|f(z_1)| \geq |f(z_0)|.$ Which is a contradiction.
+\end{proof}
+
+\begin{thm}
+    (Fundamental Theorem of Algebra)
+\end{thm}
+
+\begin{thm}
+    Suppose $P(z)$ is never zero. Then $
+    \frac{1}{P(z)}\in H(\Omega).$ We know that $|\frac{1}{P(z)}|\to 0$ for $z\to \infty.$ For $z$ large, say larger than some $R>0,$ we know that $\frac{1}{P(z)} \leq \frac{1}{P(0)}.$ Take $\overline{D_R(0)}.$ Since $\frac{1}{P(z)}$ is continuous and $\overline{D_R(0)}$ is compact, then $\frac{1}{P(z)}$ achieves its maximum on $\overline{D_R(0)}.$ But by the maximum modulus principle, this implies that $\frac{1}{P(z)}$ is constant, and thus $P(z)$ is constant, which is a contradiction!
+\end{thm}
 
 
 \end{document}

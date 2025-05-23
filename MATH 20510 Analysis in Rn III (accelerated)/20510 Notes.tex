@@ -426,7 +426,7 @@ Define $g_n := \inf_{k\geq n}f_k.$ We have that $g_n$ is measurable for each $n,
  \end{proof}
 
 \newpage
-\subsection*{Friday, Apr 11: A Non-Measurable Set}
+\subsection{Friday, Apr 11: A Non-Measurable Set}
 \begin{thm}
     There exists some set $V \subseteq \bbR$ that is not measurable.
 \end{thm}
@@ -636,7 +636,7 @@ The result is important, and shows the order of the iterated integral does not m
 
 
 \newpage
-\subsection*{Wednesday, Apr 30: Differential $2-$Forms}
+\subsection{Wednesday, Apr 30: Differential $2-$Forms}
 A $2-$surface is a $C^1-$map $\gamma: I^2 \to \bbR^n.$
 \begin{rem}
     Informally a \textit{$2-$form} is
@@ -710,7 +710,7 @@ Intuitively, a $2-$form is the orientated area of the parallelogram's shadow on 
 
 
 \newpage
-\subsection*{Friday, May 2: Differential $k-$Forms}
+\subsection{Friday, May 2: Differential $k-$Forms}
 \begin{quote}
     God grant me the serenity to accept the things I cannot change, courage to change the things I can, and wisdom to know the difference.
 \end{quote}
@@ -793,7 +793,7 @@ Let $I = (i_1, \dots, i_k)$ be a multi-index in $\bbR^n.$
 
 
 \newpage
-\subsection*{Monday, May 5: The Wedge Product}
+\subsection{Monday, May 5: The Wedge Product}
 
 \begin{defn}
     Suppose $I = (i_1, \dots, i_k)$ is a multi-index such that $i_1 < i_2< \cdots < i_k.$ We call $I$ an \textbf{increasing multi-index} and say that 
@@ -1145,7 +1145,7 @@ Moreover, we note that the boundary of $\sigma_1$ is simply three lines (a trian
 
 
 \newpage
-\subsection*{Friday, May 16: Introducing Stokes Theorem}
+\subsection{Friday, May 16: Introducing Stokes Theorem}
 \begin{defn}
     Let $T \in C^2(E, F).$ Let $\sigma$ be an oriented affine $k-$simplex in $E.$ The map $\phi: T\circ \sigma$ is a $k=$surface in $F.$ We call $\phi$ an \textbf{oriented $k-$simplex.}
 \end{defn}
@@ -1185,8 +1185,15 @@ The proof is deferred till next class.
         \[\partial \sigma = [b] - [a].\] Thus, by definition
         \[\int_{\partial \sigma} f = \int_{[b]} f - \int_{[a]} f = f(b) - f(a).\] Thus, 
         \[f(b) - f(a) = \int_{\Psi} d\omega = \int_{\sigma} df = \int_a^b df(x)\,dx\]
-    \item (Green's Thm) is the case when $k = m = 2.$
+    \item (Green's Thm) is the case when $k = m = 2.$ To see this, consider a smooth vector field $F: \bbR^2 \to \bbR^2.$ We can write $F = F_1 + F_2,$ where $F_1$ and $F_2$ are the $x$ and $y$ components of $F.$ Green's Theorem states that if $D$ is a surface in $\bbR^2$ bounded by a curve $C,$ then 
+    \[\int_C F_1 \,dx + F_2\,dy = -\int_D \left(\frac{d F_2}{d x}- \frac{dF_1}{dy}\right) \,dx\,dy.\]
+Let 
+\[\omega = F_1\,dx++ F_2\,dy \in \Lambda^1(\bbR^2).\] Then Stokes' theorem states that 
+\[\int_C F_1 dx + F_2dy= \int_{\partial D} \omega = \int_D d\omega = \int_D \frac{\partial F_1}{\partial y}\,dy \wedge dx +  \frac{\partial F_2}{\partial x}\,dx \wedge dy= \int_D \left(\frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}\right)\,dxdy\]
+    
     \item (Divergence) is the case when $k = m = 3.$
+Consider a smooth vector field $F: \bbR^3 \to \bbR^3,$ writing $F = F_1 + F_2 + F_3.$ Let $\omega^2_F = F_1 \,dx\wedge dy + F_2 \,dz\wedge dx + F_3\,dy\wedge dz.$ We have shown that $d\omega_F^2 = (\nabla \cdot F) dx\wedge dy \wedge dz = (\div F)dV.$ Thus, we have by Stokes' Theorem that 
+\[\int_{\Phi}(\div F)dV = \int_\Phi d\omega_F^2 = \int_{\partial \Phi}\omega_F^2 = \int_{\partial\Phi} F\cdot n\]
     \item (OG Stokes) is the case when $k = 2$ and $m =3.$ 
     \end{enumerate}
 \end{rem}
@@ -1206,7 +1213,7 @@ The proof is again differed to next class.
     \[\int_\sigma d(\omega_T) = \int_{\partial \sigma} \omega_T = \int_{T\circ \partial \sigma} \omega = \int_{\partial \psi}\omega.\] It remains to show that is suffices to show that Stokes holds when $\sigma = [0, e_1, \dots, e_k].$ Let $\Psi = T \sigma,$ where $T$ is affine. Then 
     \[\int_{\Psi}d\omega = \int_{T \circ \sigma} d\omega = \int_\sigma d(\omega_T) = \int_{\partial \sigma} \omega_T = \int_{T\circ \partial \sigma}\omega = \int_{\partial \Psi}\omega\]
 \end{proof}
-
+\newpage
 \subsection{Monday, May 19: Stokes Theorem}
 We prove Baby Stokes (Theorem 25)
 \begin{proof}
@@ -1227,8 +1234,102 @@ We prove Baby Stokes (Theorem 25)
         0 \qquad j = i\\
         u_{j-1} \quad i + 1 \leq j \leq k
     \end{cases}\]
+
+    Let $J_{i}$ be the Jacobian of the map $u_1, \dots, u_{k-1}\mapsto (x_1, \dots, x_{r-1}, x_{r + 1}, \dots, x_k)$ induced by $\tau_i.$ Then if $i = 0,$ $J_0 = 1$ since the map is the identity map. If $i = r,$ then $J_r = 1.$ For any other $i,$ $J_i = 0.$ Then by definition, 
+    \begin{align*}
+    \int_{\partial \sigma}\lambda &= (-1)^{r-1}\int_{\tau_0}\lambda + (-1)^r \int_{\tau_r}\lambda\\
+    & =(-1)^{r-1}\left[\int_{\tau_0}\lambda - \int_{\tau_r}\lambda \right]\\
+    &=(-1)^{r-1}\left[\int_{Q^{k-1}}f(\tau_0(u))\,du - \int_{Q^{k-1}}f(\tau_r(u))\,du\right]\\ 
+    &= (-1)^{r-1}\int_{Q^{k-1}} \left[f(\tau_0(u)) - f(\tau_r(u))\right]du
+    \end{align*}
+    On the other hand, 
+    \begin{align*}
+      d\lambda &= \left(\sum_i^k D_if \,dx_k\right)\wedge dx_1 \wedge \cdots\wedge dx_{r-1}\wedge dx_{r+1}\wedge \cdots \wedge dx_k\\ &= D_r f\,dx_r \wedge dx_1 \wedge \cdots\wedge dx_{r-1}\wedge dx_{r+1}\wedge \cdots \wedge dx_k  \\
+      &= (-1)^{r-1} D_r f\, dx_1 \wedge \cdots \wedge dx_k\\
+    \end{align*}
+    Then by definition,
+    \begin{align*}
+        \int_\sigma d\lambda &= (-1)^{r-1}\int_{Q^k}D_r f(x)\,dx\\
+        &= (-1)^{r-1} \int_{Q^{k-1}}\left(\int_0^{1-x_r - x_{r-1} + \cdots x_1} D_rf(x)\,dx_r\right)dx_1 dx_1\cdots dx_{r-1}dx_{r+1}\cdots dx_k\\
+        &= (-1)^{r-1}\int_{Q^{k-1}}f(1- (\sum_{1}^r x_i)) - f(0)\,du\\
+        &= (-1)^{r-1}\int_{Q^{k-1}}f(\tau_0(u)) - f(\tau_r(u))\,du
+    \end{align*}
+\end{proof}
+By proposition 3, we have proved Stokes theorem.
+
+\newpage
+\subsection{Wednesday, May 21: Baire Category}
+\begin{defn}
+    Let $X$ be a metric space with metric $d.$ Let $E\subseteq X.$
+    \begin{enumerate}
+        \item The \textbf{interior} of $E$ is 
+        \[E^\circ  = \bigcup G_n,\] where $G_n \subseteq E$ are open.
+        \item The \textbf{closure} of $E$ is 
+        \[\overline{E} = \bigcap F_n,\] where $F_n \supset E$ are closed.
+        \item We say that $E$ is \textbf{dense} in $X$ if 
+        \[\overline{E}= X.\]
+        \item We say that $E$ is \textbf{nowhere dense} if 
+        \[(\overline{E})^\circ  = \emptyset\]
+        \item We say that $E$ is of \textbf{first category} or \textbf{meager} if 
+        \[E = \bigcup E_n,\] where $E_n$ are nowhere dense sets (e.g, the rationals)
+        \item If $E$ is not of first category, then $E$ is \textbf{second category}.
+        \item If $E^c$ is of first category, then $E$ is said to be a \textbf{residual} or \textbf{generic} set.
+    \end{enumerate}
+\end{defn}
+
+\begin{thm}
+    (Baire Category) If $X$ is a complete metric, then $X$ is of second category. That is, if $X = \bigcup F_n,$ where each $F_n$ is closed, then at least one of the $F_n$ is not nowhere dense.
+\end{thm}
+
+\begin{proof}
+    Suppose $X$ is not of second category. Then $X  = \bigcup F_n,$ where $F_n$ are nowhere dense. Without loss of generality, take $F_n$ to be closed. We will show that there exists some $x\in X$ such that $x\notin \bigcup F_n.$ Since $F_1$ closed and nowhere dense, then $F_1 \neq X$ and there is some ${r_1}>0$ and $x_1 \in X\sm F_1$ such that $\overline{B_{r_1}(x_1)} \subseteq F_1^c.$ Since $F_2$ is  nowhere dense, then $B_{r_1}(x_1)\not\subseteq F_2.$ Let $x_2 \in B_{r_1}(x_1) \sm F_2.$ There is some $0<r_2< \frac{r_1}{2}$ such that $\overline{B_{r_2}(x_2)}\subseteq B_{r_1}(x_1)$ and $\overline{B_{r_2}(x_2)}\subseteq F_2^c.$ We obtain a sequence of balls with \[B_1\supset B_2 \supset \cdots \] and $r_1, r_2,\dots,$ such that $r_n \to 0$ and  $F_n \cap \overline{B}_n= 0.$ The sequence $\{x_n\}$ is clearly Cauchy and thus converges to some $x_\infty \in X.$ But since $x_\infty \in \bigcap B_n,$ $x_\infty \notin F_n$ for all $n \in \bbN.$ Thus, $x_\infty \notin \bigcup F_n,$ a contradiction! Hence, $X$ is of second category.  
+\end{proof}
+\begin{cor}
+    If $X$ is complete, then a residual set of $X$ is dense. 
+\end{cor}
+\begin{proof}
+    Let $E$ be residual, and suppose $E$ is not dense. Thus, there exists some $\overline{E} \neq X.$ Thus, there exists some $r>0$ such that $B = B_r(x) \subset E^c$ where $x\in E^c.$ We know that $E^c$ is of first category. I.e, 
+    \[E^c = \bigcup_{n=1}^\infty F_n,\] where $F_n$ are nowhere dense. Thus, 
+    \[\overline{B} = \bigcup_{1}^\infty (F_n \cap \overline{B}).\] But $\overline{B}$ is a complete metric space, contradiction BCT.
 \end{proof}
 
+For the following, we let $X = C([0,1], \bbR)$ be equipped with the $\sup$ metric, i.e.
+\[d(f,g) = \|f-g\| = \sup_{x\in [0,1]}|f(x) - g(x)|.\]
+We have shown $(X,d)$ to be complete. 
 
+\begin{thm}
+    The set of functions $f \in X$ that are nowhere differentiable is residual.
+\end{thm}
+\begin{proof}
+    Let $D= \{f \in X \mid f'(x) \text{ exists for some }x\in [0,1]\}.$ It suffices to show that $D$ is of first category. That is, it suffices to show that 
+    \[D = \bigcup_{n=1}^\infty D_n,\] where the $D_n$ are nowhere dense. Consider defining 
+    \[D_n = \{f\in X \mid \exists x^* \in [0,1] : |f(x) - f(x^*)| \leq n|x-x^*|\forall x\in [0,1] \}.\] We know that 
+    \[D \subseteq \bigcup_{n=1}^\infty D_n\]
+\begin{lemma}
+    $D_n$ is closed.
+\end{lemma}
+\begin{proof}
+    Let $(f_k) \in D_n$ such that $f_k \to f.$ It suffices to show that $f\in D_n.$ Since $f_k \in D_n,$ then for each $f_k,$ there exists some $x^*_k \in [0,1]$ such that $|f_k(x) - f_k(x^*_k)| \leq n|x - x^*_k|$ for all $x\in [0,1].$ Consider that $(x^*_k)$ is a sequence of real numbers, and thus has a subsequence converging to some $x^*$.
+    Using the triangle inequality, we have that for large enough $k_j,$ 
+    \begin{align*}
+|f(x) - f(x^*)| &\leq |f(x) - f_{k_j}(x)| + |f_{k_j}(x) - f_{k_j}(x^*)| + |f_{k_j}(x^*) - f(x^*)|    \\
+&\leq \|f - f_{k_j}\| + |f_{k_j}(x) - f_{k_j}(x^*)| + \|f- f_{k_j}\|\\
+&\leq \epsilon + |f_{k_j}(x) - f_{k_j}(x^*)|\\
+&\leq \epsilon + |f_{k_j}(x) - f_{k_j}(x^*_{k_j})| + |f_{k_j}(x_{k_j}^*) - f_{k_j}(x^*)|\\
+&\leq \epsilon + n|x - x_{k_j}^*| + n|x_{k_j}^* - x^*|\\
+&\leq \epsilon + n|x - x_{k_j}^*| + \epsilon\\
+&\leq 2\epsilon + n(|x-x^*| + |x^* - x_{k_j}^*|)\\
+&\leq 3\epsilon + n|x - x^*|
+    \end{align*}
+    Taking $\epsilon \to 0,$ we see that $f\in D_n.$ 
+\end{proof}
+\begin{lemma}
+    $D_n$ is nowhere differentiable.
+\end{lemma}
+\begin{proof}
+    Let $\mathcal{P}\subseteq X$ be the set of piecewise linear functions in $C([0,1]).$ Let $\mathcal{P}_m\subseteq \mathcal{P}$ be the piecewise continuous functions in $\mathcal{P}$ such that the if $\beta$ is a slope of any line segment in $f \in \mathcal{P}_m$, then $|\beta|\geq M.$ We claim that $\mathcal{P}_M$ is dense in $X$ for all $M \geq 0.$
+\end{proof}
+
+\end{proof}
 
 \end{document}

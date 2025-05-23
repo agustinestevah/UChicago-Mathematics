@@ -181,6 +181,13 @@ In other words, if $C$ is recurrent, then the chain never leaves. If it is trans
     Suppose $S$ is finite. If $C$ is a transient communication class, then w.p. 1, $X$ eventually leaves $C$ and never returns.
 \end{prop}
 
+\begin{rem}
+    In fact, there exists a $c>0$ such that if $X_0 = x$ and $C$ is transient, then 
+    \[\bbP\{X_n \text{ exits $C$ before time $n$} \geq 1- e^{-cn}\}\] Thus, if we let 
+    \[\tau = \inf\{n \geq 0 : X_n \notin C\},\] then 
+    \[\bbP\{\tau \geq n\} = 1- \bbP\{X_n \text{ exits $C$ before time $n$} \leq 1 - (1-e^{-cn}) = e^{-cn}\to 0\] as $n\to \infty.$ 
+\end{rem}
+
 \newpage
 \subsection{Friday, Mar 28: The Strong Markov Property}
 
@@ -521,7 +528,7 @@ In the countably infinite space, we note that a transient state space cannot yie
 \end{exmp}
 
 \newpage
-\subsection*{Friday, Apr 11: Random Walks on $\bbZ^d$}
+\subsection{Friday, Apr 11: Random Walks on $\bbZ^d$}
 Consider $\bbZ^d$ as a graph with edges joining each $x,y \in \bbZ^d$ such that $\|z-y\|_1 = 1.$ Then the random walk $\bbZ^d$ is a Markov chain moving distance $1$ in any of the $2d$ possible directions at each step.
 \begin{rem}
     (Stirling's Approximation) For $n$ large, 
@@ -709,7 +716,7 @@ Recall that $\bbE[T] = \frac{1}{\lambda}$ and $\Var[T] = \frac{1}{\lambda^2}.$
 \end{exmp}
 
 \newpage
-\subsection*{Monday, Apr 21: Continuous Time Markov Process}
+\subsection{Monday, Apr 21: Continuous Time Markov Process}
 \begin{prop}
     (Minimum Property) Suppose $T_1, \dots, T_n$ are independent exponential r.v. with parameters $\lambda_1, \dots, \lambda_n$ (respectively). Then $\min\{T_1, \dots, T_n\}$ is an exponential random variable with parameter $\lambda_1 + \cdots + \lambda_n.$ Moreover, for any $j  = 1,2,3\dots, n,$ we have that
     \[\bbP\{T_j = \min\{T_1, \dots, T_n\}\} = \frac{\lambda_j}{\lambda_1 + \dots + \lambda_n}\]
@@ -1024,7 +1031,7 @@ We know $\bbE[M_n] = \bbE[M_0]$ for any $n.$ Is this still true for a random tim
 \end{exmp}
 
 \newpage
-\subsection*{Friday, May 2: Optional Stopping Theorem}
+\subsection{Friday, May 2: Optional Stopping Theorem}
 \begin{thm}
 (OST I)
     Suppose $\{M_n\}$ is a Martingale with respect to some filtration $\{\mathcal{F}_n\},$ and let $\tau$ be a stopping time such that $\bbP\{\tau < K\} = 1$ for some constant $K.$ Then $\bbE[M_\tau] = \bbE[M_0].$
@@ -1082,7 +1089,7 @@ This remark leads to the following result:
 
 
 \newpage
-\subsection*{Monday, May 5: Applications of the OST}
+\subsection{Monday, May 5: Applications of the OST}
 \begin{exmp}
     Let $\{X_n\}$ be a symmetric random walk on $\bbZ,$ and let $\tau := \min\{n >0 : X_n = a \text{ or }X_n = b \mid X_0 = 0\}.$ Then let $M_n := X_n^2 - n.$ Recall from Example 1.29 that $M_n$ is a martingale (noting that $\sigma^2 = 1$) with respect to $\mathcal{F}_n.$ 
 
@@ -1273,7 +1280,7 @@ There are two way of building $B_t:$
 \end{proof}
 
 \newpage
-\subsection*{Wednesday, May 14: Applications of Brownian Motion}
+\subsection{Wednesday, May 14: Applications of Brownian Motion}
 \begin{rem}
     Suppose $\{X_n\}$ is a discrete stochastic process, and $A\subset S$ has $\bbP\{X_n \in A\}= 0$ for any $n.$ Then 
     \[\bbP\{\exists \, n : X_n \in A\} \leq \sum_{n=0}^\infty \bbP\{X_n \in A\} = 0.\] This is not true for B.M. We know that $\bbP\{B_t = 0\},$ but we will see in this class that 
@@ -1316,7 +1323,7 @@ There are two way of building $B_t:$
 
 
 \newpage
-\subsection*{Friday, May 16: Properties of Brownian Motion}
+\subsection{Friday, May 16: Properties of Brownian Motion}
 \begin{defn}
     A continuous-time stochastic process $M_t$ is a \textbf{martingale} with respect to $\mathcal{F}_t$ if:
     \begin{enumerate}
@@ -1413,6 +1420,71 @@ There are two way of building $B_t:$
     \[\bbP\{B_s = 0\text{ for some } 1\leq s \leq t\} = 2\int_{-\infty}^\infty \left(\int_a^\infty \int_a^\infty \frac{1}{\sqrt{2\pi (t-1)}}e^{-\frac{x^2}{2(t-1)}}\right) \frac{1}{\sqrt{2\pi} }e^{-\frac{a^2}{2}}\,da = 1 - \frac{2}{\pi}\arctan \frac{1}{\sqrt{t-1}}\]
     
 \end{exmp}
+
+
+
+\newpage
+\subsection*{Wednesday, May 21: Multi-Dimensional Brownian Motion}
+\begin{defn}
+Let $d \in \bbN.$ The \textbf{Gaussian (normal) distribution in $\bbR^d$ } with mean $0$ and covariance matrix $\sigma^2 I$ is the distribution of 
+\[\overline{X} = (X_1, \dots, X_d),\] where each $X_i \sim N(0,\sigma^2)$ i.i.d. 
+\end{defn}
+
+\begin{rem}
+The density of $\overline{X}$ is given by 
+\[\prod_{j=1}^d \frac{1}{\sqrt{2\pi \sigma^2}}e^{\frac{-x_j^2}{2\sigma^2}} = \frac{1}{(2\pi \sigma^2)^{\frac d2}}\exp\{\frac{-|\overline{x}|^2}{2\sigma^2}\}\]
+\end{rem}
+
+\begin{prop}
+Let $\overline{X}$ be a normal r.v. in $\bbR^d$ with mean $0$ and covariance matrix $\sigma^2 I $ and let $Q$ be an $n\times n$ orthonormal matrix. Then $Q\overline{X} \substack{d\\=} \overline{X}$
+\end{prop}
+
+\begin{defn}
+The \textbf{standard Brownian motion in $\bbR^d$} is the stochastic process $\{\overline{B}_t\}_{t\geq 0} = \{(B_t^1, B_t^2, \dots, B_t^d)\}_{t\geq 0}$ where $B_t^1, \dots, B_t^d$ are independent one dimensional standard Brownian motions. 
+\end{defn}
+
+\begin{prop}
+The S.B.M. in $\bbR^d$ is the unique stochastic process taking values in $\bbR^d$ satisfying:
+\begin{enumerate}
+\item $\overline{B}_0 = 0$;
+\item $\overline{B}$ is continuous;
+\item For each $s< t,$ $(\overline{B}_t - \overline{B}_s)$ has a multivariate Gaussian distribution with mean $0$ and covariance matrix $(t-s)I.$ 
+\item For $s_1 \leq t_1 \leq \cdots s_k \leq t_k \leq \cdots $ the increments $\overline{B}_{t_j}- \overline{B}_{s_j}$ are independent.
+\end{enumerate}
+\end{prop}
+
+\begin{rem}
+Multi-dimensional B.M. satisfies some things that the one-dimensional B.M did:
+\begin{itemize}
+\item $\overline{B}$ satisfies Brownian scaling. I.e, $\{\sqrt c \overline{B}_{ct}\} =^d \{\overline{B}\}$
+\item $\overline{B}$ satisfies the Markov property and the strong Markov property.
+\end{itemize}
+\end{rem}
+
+\begin{exmp}
+Suppose $\{W_t\}$ is a 2D B.M starting at $(1,1).$ What is the probability that $W_t$ hits the positive real axis before it hits the negative real axis. We can write 
+\[W_t = \begin{pmatrix} 1\\1\end{pmatrix} + \begin{pmatrix}B_t^1 \\B_t^2\end{pmatrix}\] where $B_t^1, B_t^2$ are S.B.M. Let
+\[\tau = \inf\{t \geq 0 : (1,1) + (B_t^1, B_t^2) \in \bbR \times (-\infty, 0]\} = \inf\{\tau \geq 0 : 1+ B_t^2 \leq 0\}\]
+Then $\tau$ is a stopping time w.r.t. $\mathcal{F}_t^2.$ We seek 
+\[\bbP\{1 + B_\tau^1 \geq 0\} = 1-\bbP\{B_\tau^1 \leq -1\}.\] Conditioning, 
+\begin{align*}
+\bbP\{B_\tau^1 \leq -1\} &= \int_0^\infty \bbP\{B^1_t \leq -1 \mid \tau = t\}\bbP\{\tau = t\}\,dt\\
+&= \int_0^\infty \bbP\{B_t^1 \leq -1 \mid \tau = t\}f_\tau(t)\,dt\\
+&= \int_0^\infty \bbP\{B_t^1 \leq -1\}f_\tau(t)\,dt
+\end{align*}
+We know by the Reflection Principle that
+\[\bbP\{\tau \leq t\} = 2\bbP\{B_t^1 \leq -1\}\] and thus
+\begin{align*}
+\int_0^\infty \bbP\{B_t^1 \leq -1\}f_\tau(t)\,dt &= 2\int_0^\infty \bbP\{B_t^1 \leq -1\}d\bbP\{B_t^{1} \leq -1\}\,dt\\
+&= (\bbP\{B^1_t \leq -1\}^2)_0^\infty\\
+&= \lim_{t\to \infty}\left(\bbP\{B^1_t \leq -1\}\right)^2\\
+&= \lim_{t\to \infty} \left(B_1^1 \leq \frac{-1}{\sqrt{t}}\right)^2\\
+&= \lim_{t\to \infty} (\Phi(\frac{-1}{\sqrt{t}}))^2\\
+&= \frac{1}{4}
+\end{align*}
+and so our answer is $\frac{3}{4}.$
+\end{exmp}
+
 
 
 
