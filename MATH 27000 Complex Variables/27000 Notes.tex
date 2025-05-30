@@ -157,7 +157,7 @@ Let $t\in [0,1].$ \begin{enumerate}
     \item The straight path from $z_1$ to $z_2$ is 
     \[\gamma(t) = (1-t)z_1 + tz_2\]
     \item The circle centered at $z_0$ of radius $r$ counterclockwise. 
-    \[\gamma(\theta) = z_0 + r\cos\theta  + ir\sin\theta = z_0 + e^{ir\theta}, \qquad \theta \in [0, 2\pi)\]
+    \[\gamma(\theta) = z_0 + r\cos\theta  + ir\sin\theta = z_0 + re^{i\theta}, \qquad \theta \in [0, 2\pi)\]
 \end{enumerate}
 \end{exmp}
 
@@ -402,6 +402,13 @@ Since $\sum_{N+1}^\infty na_nz_0^{n-1} $ converges geometrically, then the sum g
 \[|z_0  + h| \leq |z_0| + |h| < \rho - \frac{\epsilon}{2}\]
 \[\left|\sum_{N+1}^\infty a_n\frac{ (z_0 + h)^n - z_0^n}{h}\right| = \sum_{N+1}^\infty |a_n|\left|\frac{ (z_0 + h)^n - z_0^n}{(z_0 + h) - z_0}\right| \leq \sum_{N+1}^\infty |a_n|\sum_{k=0}^{n-1} |(z_0 + h)|^k |z_0|^{n-1-k}  < \sum_{N+1}^\infty n|a_n|  (\rho - \frac{\epsilon}{2})^{n-1} \xrightarrow[N\to \infty]{} 0\] since it converges geometrically again
 \end{proof}
+Here is a much cleaner proof.
+\begin{proof}
+    We know that if $f_n \uconv f,$ and $f_n' \uconv g,$ then if $f$ is sufficiently smooth, $f' = g.$ Call $F_N(z) = \sum_{n=1}^N a_nz^n.$ By Proposition 5, $F_N \uconv F$ for some $F.$ We claim that $F_N' \uconv G$ for some $G.$  To see this, it suffices to show that $F_N'$ is uniformly convergent. Consider that 
+    \[F_N' = \sum_{n=1}^N nz^{n-1}a_n.\] Thus, 
+    \[R = \frac{1}{\limsup_{n\to \infty} \sqrt[n]{n a_n}} = \frac{1}{\limsup_{n\to \infty} \sqrt[n]{a_n}}.\] Hence, the radius of convergence is the same as $F_N,$ and thus we know that $F_N' \uconv G$ for some $G.$ Hence, $G = F',$ but we know that 
+    \[F = \sum_{n=1}^\infty z^na_n \qquad G = G' = \sum_{n=1}^\infty nz^{n-1} a_n.\]
+\end{proof}
 
 \begin{cor}
     $f(z) = \sum_{n=0}^\infty a_n z^n$ is infinitely differentiable for all $z$ such that $|z| < \rho.$ Moreover, 
@@ -570,37 +577,31 @@ So it suffices to show that the denominator is bounded below. Since $\gamma$ is 
     \[\int_{\partial \triangle} f(z)dz = 0.\]
 \end{thm}
 \begin{proof}
-    Suppose not, that 
-    \[\int_{\partial \triangle}f(z)dz  = \ell \neq 0\] Take the midpoints of the triangle, and we get four sub triangles with specific orientation, $\triangle_i,$ for $i\in \{1,2,3,4\}$ as follows: 
+Take $d_0= \text{diam}(\triangle)$ and $\ell = \text{length}(\partial \triangle).$
+ Take the midpoints of the triangle, and we get four sub triangles with specific orientation, $\triangle_i,$ for $i\in \{1,2,3,4\}$ as follows: 
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\linewidth]{Images/Goursat.png}
         \caption{Goursat's Triangle}
     \end{figure}
     (Note that $T^{(i)} = \triangle_i$ in the picture.) It is clear that 
-    \[\int_{\partial \triangle} f(z)dz = \sum_{k=1}^4 \int_{\partial \triangle_k}f(z)dz.\] Using the triangle inequality, we see that at least $k \in \{1,2,3,4\}$
-    \[\left|\int_{\partial \triangle_k}f(z)dz\right| \geq \frac{|\ell|}{2}.\] For this triangle, define
-    \[\triangle_{(1)}:= \triangle_k.\] Split up $\triangle_{(1)}$ into four sub-triangles with the same process as before. We can induct on this process to find a sequence such that
-    \[\triangle_{(1)}\supset \triangle_{(2)}\supset \cdots , \qquad \left|\int_{\partial \triangle_{(n)}}f(z)dz\right| \geq \frac{|\ell|}{4^n}, \qquad \text{diam}(\triangle_{(n)}) \leq \text{arclength}(\partial \triangle_{(n)}) = \frac{1}{2^n}\text{arclength}(\partial \triangle).\] Since $\bbC$ is complete, we can use Cantor's nested set theorem to find some $z_0 \in \bigcap \triangle_{(n)}.$ Let $\epsilon>0.$ Since $f$ is holomorphic at $z_0,$ we have that if $|z - z_0| < \delta,$ then 
-    \[|f(z) - [f(z_0) + f'(z)(z-z_0)|< \epsilon|z - z_0|\] If we define the error function $\varepsilon(z)$ as the LHS of the above, then 
-    \[|\varepsilon(z)|< \epsilon |z - z_0|.\] Then we can use the fact that $f(z_0)$ and  $f'(z_0)(\zeta - z_0)$ are linear functions with primitives to calculate
+    \[\int_{\partial \triangle} f(z)dz = \sum_{k=1}^4 \int_{\partial \triangle_k}f(z)dz.\] By the triangle inequality, 
+    \[\left|\int_{\partial \triangle}f(z)dz\right| \leq \sum_{k=1}^4 \left|\int_{\partial \triangle_k}f(z)dz\right| \leq 4 \left|\int_{\partial \triangle_{(1)}}f(z)dz\right|\] We know that 
+    \[d_1 = \text{diam}(\triangle_{(1)}) \leq \frac{d_0}{2} \qquad \ell_1 = \text{length}(\partial \triangle_{(1)}) \leq \frac{\ell}{2}.\]
+    
+    Split up $\triangle_{(1)}$ into four sub-triangles with the same process as before. We can induct on this process to find a sequence such that
+    \[\triangle_{(1)}\supset \triangle_{(2)}\supset \cdots , \qquad \left|\int_{\partial \triangle}f(z)dz\right|  \leq 4^n \left|\int_{\partial \triangle_{(n)}}f(z)dz\right|, \qquad d_n \leq \frac{d_0}{2^n} \qquad \ell_n \leq \frac{\ell_0}{2^n}\] Since $\bbC$ is complete, we can use Cantor's nested set theorem to find some $z_\infty \in \bigcap \triangle_{(n)}.$ Let $\epsilon>0.$ Since $f$ is holomorphic at $z_\infty,$ we have that for $z$ close to $z_\infty,$ 
+    
+    if we call $R$ to be an error function such that $R(z)\to 0$ as $z\to z_{\infty},$ 
+    \[f'(z_\infty) = \frac{f(z) - f(z_\infty)}{z- z_\infty} + R(z) \iff f(z)= f'(z_{\infty})(z - z_{\infty}) - R(z)(z - z_{\infty}) + f(z_{\infty}).\]
+    We can use the fact that $f(z_\infty)$ and  $f'(z_\infty)(\zeta - z_0)$ are linear functions with primitives to calculate
     \begin{align*}
-    \int_{\partial \triangle_{(n)}}f(z)dz &= \int_{\partial \triangle_{(n)}} [f(z_0) + f'(z_0)(\zeta - z_0)] + \varepsilon(\zeta) d\zeta \\
-    &= 0 + \int_{\partial \triangle_{(n)}}\varepsilon(\zeta)d\zeta\\
-    &= \int_{\partial \triangle_{(n)}}\varepsilon(\zeta)d\zeta
+    \int_{\partial \triangle_{(n)}}f(z)dz &= \int_{\partial \triangle_{(n)}} [f(z_\infty) + f'(z_\infty)(z - z_\infty)] + R(z)(z- z_{\infty}) d\zeta \\
+    &= \int_{\partial \triangle_{(n)}}R(z)(z - z_\infty)\,dz
     \end{align*}
-    
-    
-    
-    We can estimate that 
-    \begin{align*}
-    \left|\int_{\partial \triangle_{(n)}}f(z)dz\right| &= \int_{\partial \triangle_{(n)}}\varepsilon(\zeta)d\zeta\\ &\leq \text{arclength}(\triangle_{(n)})\max_{z\in \partial \triangle_n} |\varepsilon(z)|\\ &\leq \frac{1}{2^n}\text{arclength}(\partial \triangle) \epsilon \max_{\zeta \in \partial \triangle_{(n)}}|\zeta - z_0| \\&
-    \leq   \frac{\epsilon}{2^n}\text{arclength}(\partial \triangle)  \text{diam}(\triangle_{(n)})\\
-    &\leq \frac{\epsilon}{4^n}\text{arclength}(\partial \triangle) ^2\\
-    & \to 0
-    \end{align*}
-     Which is a contradiction to the fact that the integral is bounded above. 
-    
+    Hence, since $z$ lies on $\partial \triangle_{(n)},$ then 
+    \[\left|\int_{\partial \triangle_{(n)}}f(z)dz\right| \leq \frac{\ell_0   }{2^n} \frac{d_0}{2^n}\epsilon'.\] Thus, choosing $\epsilon'= \frac{\epsilon}{d_0, \ell_0}$
+    \[\left|\int_{\partial \triangle}f(z)dz\right| <\epsilon\]
 \end{proof}
 
 \begin{thm}
@@ -745,13 +746,14 @@ Thus, for $n = 1,$ we have that
 Since $f$ is bounded, we have that $|f(\zeta)| \leq M$ for all $\zeta\in M.$
     By the remark above, we know that 
     \begin{align*}
-        |f(z_0)| &\leq \frac{1}{2\pi }\big|\text{arclength}\big[C_r(z_0)\big]\big| \max_{\zeta \in C_r(z_0)} |\frac{f(\zeta)}{(\zeta - z_0)^2}|\\
+        |f
+        '(z_0)| &\leq \frac{1}{2\pi }\big|\text{arclength}\big[C_r(z_0)\big]\big| \max_{\zeta \in C_r(z_0)} |\frac{f(\zeta)}{(\zeta - z_0)^2}|\\
         &= \frac{1}{2\pi }2\pi r   \max_{\zeta \in C_r(z_0)} \frac{|f(\zeta)|}{(\zeta - z_0)^2}\\
         &\leq \frac{M}{2\pi }2\pi  r  \max_{\zeta \in C_r(z_0)} \frac{1}{(\zeta - z_0)^2}\\
         &= \frac{M}{2\pi }2\pi r \frac{1}{r^2}\\
         &= \frac{M}{r}
     \end{align*}
-    But $f \in H(O),$ and so we can let $r\to \infty,$ implying that $f(z_0) = 0$ for all $z_0 \in \bbC.$
+    But $f \in H(O),$ and so we can let $r\to \infty,$ implying that $f'(z_0) = 0$ for all $z_0 \in \bbC.$
 \end{proof}
 
 \begin{thm}
@@ -1017,7 +1019,7 @@ Let $f$ be meromorphic in a simply connected region $O$ with poles at $z_0, \dot
     \[\left|\frac{\cos z}{\sin z}\right| = \left|\frac{e^{iz}+ e^{-iz}}{e^{iz} - e^{-iz}}\right|\to 1.\] 
 \end{exmp}
 \begin{thm}
-    \[\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{8}\]
+    \[\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}\]
 \end{thm}
 \begin{proof}
     We claim that $\cot z$ is $\pi$ periodic. Consider that 

@@ -33,7 +33,7 @@
 
 
 
-\title{UChicago Real Analysis III Notes: 20510}
+\title{UChicago Accelerated Analysis III Notes: 20510}
 \author{Notes by Agustín Esteva, Lectures by Donald Stull, Books by Rudin, Stein and Shakarchi}
 \date{Academic Year 2024-2025}
 
@@ -439,6 +439,135 @@ A contradiction!
     
 \end{proof}
 
+\newpage
+\subsection{Monday, Apr 14: Fourier Series}
+Let $f: \bbR \to \bbC.$ If $f = u + iv,$ then recall we define the integral to be 
+\[\int f = \int u + i \int v.\] For the discussion on Fourier series, we suppose $f$ is defined on intervals of length $2\pi$ and is $2\pi-$periodic that are Riemann integrable. We denote these functions to be in $\mathcal{R}.$ 
+\begin{defn}
+    A \textbf{trigonometric polynomial} is a function $f$ defined by 
+    \[f(x) = \sum_{-N}^N c_ne^{inx},\] where $a_n, b_n, c_n \in \bbC.$
+\end{defn}
+\begin{rem}
+    On PSET 5, we show that we can alternatively and equivalently take 
+    \[f(x) = S_N(f)=  a_0 + \sum_{n=1}^N a_n \cos(nx) + b_n i\sin (nx)\]
+\end{rem}
+\begin{rem}
+    We work on $\mathcal{R}$ with the following inner product. Let $f,g \in \mathcal{R},$ then 
+    \[(f,g) = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)\overline{g(x)}\,dx.\] In this space, $\{e^{inx}\}_{n \geq 0}$ is an orthonormal basis. That is, 
+    \[(e_n, e_n) = \frac{1}{2\pi}\int_{-\pi}^\pi e^{inx}e^{-inx} = 1\]
+    \[(e_n, e_m) = 0\]
+\end{rem}
+
+\begin{defn}
+    Let $f \in \mathcal{R}.$ We define the \textbf{Fourier Coefficients} of $f$ to be 
+    \[\hat{f}(n) = ( f, e_n )  =\frac{1}{2\pi}\int_{-\pi}^\pi f(x) e^{-inx}\,dx\]
+\end{defn}
+\begin{defn}
+    The \textbf{Fourier series}, $S(f)$ of $f$ is defined to be 
+    \[f(x)\sim \sum_{-\infty}^\infty \hat{f}(n) e_n\]
+\end{defn}
+\begin{rem}
+    Suppose $f$ is a trigonometric polynomial. Then 
+    \begin{align*}
+        \hat{f}(m) &= (f,e_n)\\
+        &= \frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-imx}\,dx\\
+        &= \frac{1}{2\pi}\int_{-\pi}^\pi \sum_{-N}^N c_ne^{inx}e^{-imx}\,dx\\
+        &= \sum_{-N}^N c_n \frac{1}{2\pi}\int_{-\pi}^\pi e^{inx}e^{-imx}\,dx\\
+        &= c_m
+    \end{align*}
+    Hence, if $f$ is a trigonometric polynomial, then 
+    \[f(x) = \sum_{-\infty}^\infty \hat{f}(n)e_n = \sum_{-N}^N \hat{f}(n)e_n= S_N(f)\]
+\end{rem}
+\begin{exmp}
+    Consider $f(x) = x$ on $[-\pi, \pi].$ Then the Fourier coefficients of $f$ are 
+    \begin{align*}
+      \hat{f}(n) = (f,e_n) &= \frac{1}{2\pi}\int_{-\pi}^\pi x e^{-inx} = \frac{1}{2\pi}\left[\left[\frac{-x}{in}e^{-inx}\right]_{-\pi}^\pi 
+ + \frac{1}{in}\int_{-\pi}^\pi e^{-inx}\,dx \right] \\
+ &= \frac{(-1)^{n+1}}{in}
+    \end{align*}
+    Hence, 
+    \[S(f) = 2\sum_{n=1}^\infty (-1)^{n+1} \frac{\sin(nx)}{n}\]
+\end{exmp}
+
+\newpage
+\subsection{Wednesday, Apr 16: Properties of Fourier Series}
+\begin{thm}
+    Suppose $f\in \mathcal{R}$ on $[-\pi, \pi]$ and is $2\pi-$periodic. If $\hat{f}(n) = 0$ for all $n,$ then $f(x) = 0$ whenever $f$ is continuous at $x.$
+\end{thm}
+\begin{cor}
+    Suppose $f\in \mathcal{R}$ on $[-\pi, \pi]$ and is $2\pi-$periodic. If $f$ is continuous and $\hat{f}(n) = 0$ for all $n,$ then $f(x) \equiv 0.$
+\end{cor}
+\begin{cor}
+    If $f,g \in \mathcal{R}$ are continuous, $2\pi-$periodic, and $\hat{f}(n  )= \hat{g}(n) $ for all $n$, then $f  \equiv g$
+\end{cor}
+\begin{proof}
+Consider that it suffices to see that $f - g \equiv 0,$ which by the previous corollary, implies that it suffices to to show that $\widehat{f - g}(n) =0.$ We know that $\hat{f}(n ) - \hat{g}(n) = 0,$ so it suffices to see that the Fourier coefficients are linear in some sense. This follows by the linearity of the inner product:
+\begin{align*}
+    \widehat{f - g}(n) = (f-g, e_n) = (f, e_n) - (g, e_n) = \hat{f}(n) - \hat{g}(n) = 0
+\end{align*}
+\end{proof}
+\begin{cor}
+    Suppose $f$ is continuous, $2\pi-$periodic and $S_N(f)$ converges absolutely. Then $S_N(f)\uconv f.$ 
+\end{cor}
+\begin{proof}
+    Since $S_N(f)$ converges absolutely, then 
+    \[ \sum_{-N}^N \left|(f,e_n)e_n\right| = \sum_{-N}^N |\hat{f}(n)| < \infty.\] From this, we can define 
+    \[g(x):= S(f).\] By the above corollary, it suffices to note that $\hat{g}(n)= \hat{f}(n).$ We compute:
+    \begin{align*}
+        \hat{g}(m) &= (g,e_m) = \left(\sum_{-\infty}^\infty (f, e_n)e_n, e_m\right)= \sum_{-\infty}^\infty(f,e_n)(e_n, e_m)= (f,e_n)= \hat{f}(n)
+    \end{align*}
+\end{proof}
+\begin{lemma}
+    Suppose $f \in C^2$ and is $2\pi-$periodic. Then there exists some $c>0$ such that for large enough $|n|,$
+    \[\hat{f}(n) \leq \frac{c}{|n|^2}\]
+\end{lemma}
+The proof is an exercise is integration by parts.
+
+\newpage
+\subsection{Friday, Apr 18: Inner Product Spaces}
+\begin{thm}
+    Let $f\in \mathcal{R}$ be $2\pi-$periodic. Then 
+    \[\lim_{N\to \infty} \int_{-\pi}^\pi |f - S_N(f)|^2 = 0\]
+\end{thm}
+
+\begin{defn}
+   Let $V$ be a vector space. An \textbf{inner product} $(\cdot, \cdot): V\times V \to \bbR$ is that satisfies:
+   \begin{enumerate}
+       \item $(x,y) = \overline{(y,x)}$
+       \item $(x,x) \geq 0$ and $(x,x) = 0$ if and only if $ x = 0.$
+       \item $(\alpha x +  \beta y, z) = \alpha(x,z)+ \beta(y,z)$
+   \end{enumerate}
+\end{defn}
+\begin{rem}
+    We can induce a norm on an inner product space quite easily: 
+    \[\|x\| = \sqrt{(x,x)}.\] The opposite is not always true. For the vector space we have been working on, recall that 
+    \[(f,g) = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)\overline{g}(x)\,dx\] Thus, 
+    \[\|f\| = \left(\frac{1}{2\pi}\int_{-\pi}^\pi |f(x)|^2\,dx\right)^{\frac{1}{2}}\] Hence, we can interpret Theorem 16 to mean convergence in this norm. 
+\end{rem}
+\begin{defn}
+    We say that $x,y \in V$ are \textbf{orthogonal} and write $x\perp y$ if $(x,y) = 0.$
+\end{defn}
+\begin{prop}
+    Let $V$ be an inner product space. Then for any $x,y,z \in V$
+    \begin{enumerate}
+        \item (C-S Inequality). $|(x,y)| \leq \|x\| \|y\|$
+        \item (Pythagoras). If $(x\perp y),$ then $\|x + y\|^2 = \|x\|^2 + \|y\|^2$
+        \item (Triangle Inequality)
+        $\|x - y\| \leq \|x - z\| + \|z - y\| \iff \|x + y\| \leq \|x\| + \|y\|$
+    \end{enumerate}
+\end{prop}
+\begin{rem}
+A useful property of $S_N(f)$ is that 
+\[|S_N(f)|^2= (S_N(f), S_N(f))= (\sum_{-N}^N (f, e_n)e_n, \sum_{-N}^N (f, e_m), e_m) = \sum_{n= -N}^N (f,e_n)\left(e_n, \sum_{m = -N}^N (f, e_m)e_m\right) = \sum_{-N}^N |(f,e_n)|^2 \]
+\end{rem}
+\begin{prop}
+    For all $|m| \leq N,$ we have that $(f - S_N(f)) \perp e_n.$
+\end{prop}
+\begin{proof}
+    Computing, 
+    \[(f - S_N(f), e_n) = (f, e_n) - (S_N(f), e_n) = 0\]
+\end{proof}
+
 
 
 \newpage
@@ -459,7 +588,7 @@ A contradiction!
     \[( f- S_n(f))\perp \sum_{-N}^N c_n e_n.\]
 \end{cor}
 \begin{rem}
-The consequences of Remark 12 and Corollary 4 are 
+The consequences of Remark 17 and Corollary 7 are 
     \begin{enumerate}
         \item We can write $f = f - S_N(f) + S_N(f)$ and thus
         \[\|f\|^2 = \|f - S_N(f)\|^2 + \|S_N(f)\|^2\]
@@ -504,7 +633,54 @@ The consequences of Remark 12 and Corollary 4 are
     (Riemann-Lebesgue) If $f\in \cal R,$ then 
     \[\lim_{n\to \infty}|\hat{f}(n)|  = 0.\]
 \end{cor}
-    
+
+\newpage
+\subsection*{Wednesday, Apr 23: Midterm}
+\begin{thm}
+    (Borel Cantelli) Suppose $\{A_n\}_{n\geq 0}$ is a sequence of measurable sets. Let 
+    \[A = \bigcap_{n=1}^\infty \bigcup_{k=n}^\infty A_n.\] Show that if $\sum_{n=1}^\infty m(A_n) < \infty,$ then $m(A)= 0.$
+\end{thm}
+\begin{proof}
+Note that $A$ is measurable since it is the countable intersection of measurable sets. Let $\epsilon>0.$Since $\sum_{n=1}^\infty m(A_n) < \infty,$ then then there is some large $m$ such that $\sum_{m=1}^\infty m(A_n) < \infty.$ Since \[A\subset \bigcup_{m}^\infty A_n,\] then using the countable (sub)-additivity of measure \[m(A)  \leq m(\bigcup_{m=1}^\infty A_n) \leq \sum_{m=1}^\infty m(A_n) < \epsilon.\]
+\end{proof}
+
+\begin{thm} (Markov's Inequality)
+    Let $E\subseteq \bbR^n$ be measurable, and suppose $f: E \to \bbR$ is non-negative and measurable. Show that for all $c>0,$ 
+    \[m(\{x \in E \mid f(x) \geq c\}) \leq \frac{1}{c}\int_{E} f.\]
+\end{thm}
+\begin{proof}
+    Let $C = \{x \in E \mid f(x) \geq c \}.$ Define 
+    \[g:= f\chi_C.\] We know that $g \leq f$ on $E$ and thus
+    \[\int_E f \geq \int_E g = \int_C f \geq \int_C c = c \,m(C).\] The result follows from dividing by $c.$
+\end{proof}
+
+\begin{thm}
+    Let $f: [0,1] \to \bbR$ be integrable. Prove that 
+    \[\int_{[0,
+    1]} x^k f(x) \,dm\to 0\]
+\end{thm}
+\begin{proof}
+    Let $f_k = x^k f.$ Define 
+    \[g(x) = \begin{cases}
+        f(x) \qquad x = 1\\
+        0\qquad x = 0
+    \end{cases}\] We have that $f_k \to g$ since $x\in [0,1]$ and $|f_k| \leq f$ since $x\in [0,1].$ We use DCT to show that 
+    \[\int_{[0,1]} f_k \to \int_{[0,1]}g = \int_{[0,1]\sm \{1\}} 0 = 0\]
+\end{proof}
+
+\newpage
+\begin{thm}
+    Let $f: \bbR \to \bbR$ be a non-negative integrable function. Prove that for all $\epsilon>0,$ there exists a $\delta>0$ such that if $A$ is measurable with $m(A) < \delta,$ then 
+    \[\int_A f < \epsilon\]
+\end{thm}
+\begin{proof}
+    First we show this for simple functions. Let $\varphi$ be a simple non-negative measurable function . Consider that 
+    \[\int_A \varphi = \sum_{k=1}^N c_k m(A_k \cap A) \leq \sum_{k=1}^N c_k m(A) \leq N\,c_{(N)} m(A).\] Letting $\delta = \frac{\epsilon}{c_{(N)} N}$ yields the result. 
+
+By definition, there is some $\varphi$ such that \[\int_A \varphi \geq \int_A f - \frac{\epsilon}{2}.\] Hence, 
+\[\int_A f \leq \int_A \varphi  + \frac{\epsilon}{2}.\] Choose $A$ such that the above holds for this choice of $\varphi,$ then the result follows. 
+\end{proof}
+
 \newpage
 \subsection{Friday, Apr 25: Introduction to Differential Forms}
 \begin{rem} (Recall)
@@ -932,7 +1108,7 @@ For this class, we let $E\subset \bbR^n$ and $F\subset\bbR^m$ be open, and $T: E
     \[d(f_T) = (df)_T.\]
 \end{lemma}
 \begin{proof}
-    Follow your nose and use change of variable
+    Follow your nose and use chain rule
     \begin{align*}
         d(f_T) &= \sum_{j=1}^n D_j f_T\,dx_j\\
         &= \sum_{j=1}^n D_j (f\circ T)dx_j\\
@@ -1323,13 +1499,69 @@ We have shown $(X,d)$ to be complete.
     \end{align*}
     Taking $\epsilon \to 0,$ we see that $f\in D_n.$ 
 \end{proof}
+Let $\mathcal{P}\subseteq X$ be the set of piecewise linear functions in $C([0,1]).$ Let $\mathcal{P}_m\subseteq \mathcal{P}$ be the piecewise continuous functions in $\mathcal{P}$ such that the if $\beta$ is a slope of any line segment in $f \in \mathcal{P}_m$, then $|\beta|\geq M.$ Note that if $M >N,$ then $\mathcal{P}_M \cap D_N = \emptyset.$ 
 \begin{lemma}
-    $D_n$ is nowhere differentiable.
+$\mathcal{P}_M$ is dense in $X$ for all $M \geq 0.$
 \end{lemma}
 \begin{proof}
-    Let $\mathcal{P}\subseteq X$ be the set of piecewise linear functions in $C([0,1]).$ Let $\mathcal{P}_m\subseteq \mathcal{P}$ be the piecewise continuous functions in $\mathcal{P}$ such that the if $\beta$ is a slope of any line segment in $f \in \mathcal{P}_m$, then $|\beta|\geq M.$ We claim that $\mathcal{P}_M$ is dense in $X$ for all $M \geq 0.$
+    Let $\epsilon>0$ and let $f \in X.$ We will first show that $\mathcal{P}$ is dense in $X.$ Since $f$ is uniformly continuous, there exists $\delta>0$ such that for all $x, y\in [0,1]$ with $d(x,y) < \delta,$ we have that $d(f(x), f(y))< \epsilon.$ Let $N \in \bbN$ such that $n > \frac{1}{\delta}.$ Define $g$ to be the piecewise linear function such that for all $k  = 0, \dots, n-1,$ we have
+    \[g(\frac{k}{n}) = f(\frac{k}{n}) \qquad g(\frac{k+1}{n}) = f(\frac{k+1}{n}).\]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Images/WhatsApp Image 2025-05-23 at 11.46.10_213c88e5.jpg}
+    \end{figure}
+    By definition, $d(f,g) < \epsilon.$ Now, we will show that there is some $h \in \mathcal{P}_M$ such that $d(g,h) < \epsilon.$ For each interval $[\frac{k}{n}, \frac{k + 1}{n}]$ such that the slope of $g$ on this segment is between $(-M, M),$ we construct $h$ as follows. For $k = 0,$ let 
+    \[\varphi_{\epsilon}(x) = g(x) + \epsilon\qquad \qquad \psi_\epsilon(x) = g(x) - \epsilon\] Starting at $g(0),$ travel the line segment of slope $M$ until we intersect $\varphi_\epsilon.$ Then travel the line segment of slope $-M$ until we intersect $\psi_\epsilon.$ Repeat to obtain $\psi_\epsilon \leq h \leq \varphi_\epsilon$ on $[0,\frac{1}{n}].$ Then repeat on $[\frac{1}{n}, \frac{2}{n}]$ starting at $h(\frac{1}{n}).$
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/WhatsApp Image 2025-05-23 at 11.50.24_ebac9ac0.jpg}
+\end{figure}
+Thus, $\mathcal{P}_M$ are dense in $X.$ 
+\end{proof}
+By Lemma 2, we know that $D_N^\circ  =  \emptyset$ for all $N>0,$ since for $M>0,$ there is some $h \in \mathcal{P}_M$ such that $d(f,h) < \epsilon,$ but $\mathcal{P}_M$ and $D_N$ are disjoint, and so there is no open ball containing only $f\in D_N.$ By Lemma 1, $D_N$ is closed. Thus, $D_N$ are nowhere dense. Hence, $D = \bigcup_{n=1}^\infty (D_n \cap \mathcal{D})$ is a countable union of nowhere dense sets, and thus it is of first category. Hence, $D^c$ is residual.
+
 \end{proof}
 
+\newpage
+\subsection{Friday, May 23: Corollaries of Baire Category}
+\begin{thm}
+    Suppose that $\{f_n\}$ is a sequence of continuous real valued functions on $\bbR.$ Suppose that $f_n \to f$ pointwise. The set of points at which $f$ is continuous is generic. 
+\end{thm}
+
+\begin{thm}
+    Let $B$ be the set of complex valued functions on $[-\pi, \pi].$ The set of $f\in B$ whose Fourier series diverges on a generic set of $[-\pi, \pi]$ is itself generic.
+\end{thm}
+
+\newpage
+\subsection{Thursday, May 29: Final}
+The first question was an easy ahh integration over a one-form. The second one was an easy ahh pullback of a two-form.
+\begin{prop}
+    Suppose $\alpha \in \Lambda^k(\bbR^n)$ and $\beta \in \Lambda^\ell(\bbR^n).$ Show that if 
+    \begin{enumerate}
+        \item $\alpha$ is closed and $\beta$ is closed, then $\alpha \wedge \beta$ is closed.
+        \item $\alpha$ is closed and $\beta$ is exact, then $\alpha \wedge \beta$ is exact. 
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (a) Use the wedge product rule to conclude.
+    (b) There is some $\lambda$ such that $d(\lambda) = \beta.$ Use the wedge product rule on $d(\lambda \wedge \alpha)$ to conclude. 
+\end{proof}
+\begin{prop}
+    Suppose $f$ is continuous and $2\pi-$periodic and Riemann integrable. Show that $\|S_N(f) - f\|_{L_1} \to 0.$
+\end{prop}
+\begin{proof}
+    Using C-S inequality (up to a constand of $2\pi$)
+    \[ \|S_N(f) - f\|_{L_1}= (S_N(f) - f, 1) \leq \|S_N - f\|_{L_2}\cdot \|1\|_{L_2} \to 0\]
+\end{proof}
+\begin{prop}
+    Suppose $f_n \to f$ pointwise. Define 
+    \[F_n = \int_{(0,x)} f_n \qquad F = \int_{(0,x)} f.\] Then 
+    \[\int_{(0,1)} f + F \leq \liminf_{n\to \infty} \left(\int_{(0,1)} f_n+ F_n\right)\]
+\end{prop}
+\begin{proof}
+    Using Fatou's lemma, linearity of the integral, and the fact that 
+    \[\liminf (a_n) + \liminf (b_n) \leq \liminf (a_n + b_n),\] then it suffices to show that
+    \[\int_{(0,1)} F \leq \liminf \int_{(0,1)} F_n.\] Use Fatou's lemma again to show this.
 \end{proof}
 
 \end{document}

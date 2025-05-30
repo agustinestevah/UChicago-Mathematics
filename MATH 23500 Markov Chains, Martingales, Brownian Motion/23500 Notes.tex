@@ -29,8 +29,8 @@
 
 
 
-\title{UChicago Markov Chains, Martingales, and Brownian Motion Analysis Notes: 23500}
-\author{Notes by Agustín Esteva, Lectures by Stephen Yearwood, Books by }
+\title{UChicago Markov Chains, Martingales, and Brownian Motion Notes: 23500}
+\author{Notes by Agustín Esteva, Lectures by Stephen Yearwood, Book by Greg Lawler}
 \date{Academic Year 2024-2025}
 
 \begin{document}
@@ -775,6 +775,8 @@ In matrix form,
 \newpage
 \subsection{Wednesday, Apr 23: Midterm}
 
+
+
 \newpage
 \subsection{Friday, Apr 25: $t-$Time Transition Matrix}
 \begin{rem}
@@ -1424,7 +1426,7 @@ There are two way of building $B_t:$
 
 
 \newpage
-\subsection*{Wednesday, May 21: Multi-Dimensional Brownian Motion}
+\subsection{Wednesday, May 21: Multi-Dimensional Brownian Motion}
 \begin{defn}
 Let $d \in \bbN.$ The \textbf{Gaussian (normal) distribution in $\bbR^d$ } with mean $0$ and covariance matrix $\sigma^2 I$ is the distribution of 
 \[\overline{X} = (X_1, \dots, X_d),\] where each $X_i \sim N(0,\sigma^2)$ i.i.d. 
@@ -1483,6 +1485,56 @@ We know by the Reflection Principle that
 &= \frac{1}{4}
 \end{align*}
 and so our answer is $\frac{3}{4}.$
+\end{exmp}
+
+\newpage
+
+\subsection{Friday, May 23: The Heat Equation}
+\begin{defn}
+    Let $f\in C^2(\bbR^d, \bbR).$ The \textbf{Laplacian} of $f$ is defined by 
+    \[\Delta f (\overline{x}) = \sum_{i=1}^d \frac{\partial^2 f(x_i)}{dx_i^2}.\]
+\end{defn}
+\begin{thm}
+    Let $f\in C^2(\bbR^d \times [0,\infty), \bbR)$ and assume that for each $t>0,$ there is some $C_t$ such that 
+    \[|f(\overline{x}, t)| \leq C_t e^{C_t |\overline{x}|}\] and so are its partials. Assume $f$ also satisfies the \textbf{heat equation}, i.e, 
+    \begin{align}
+    \frac{\partial}{\partial t}f(\overline{x}, t) + \frac{1}{2}\Delta_{\overline{x}} f(\overline{x}, t) = 0    ,
+    \end{align}
+    where $\Delta_\overline{x}$ is only taken in $\overline{x}.$ Let $\overline{B}$ be a Brownian motion in $\bbR^d.$ Then $f(\overline{B}_t, t)$ is a Martingale w.r.t. $\mathcal{F}_t.$
+\end{thm}
+\begin{proof}
+    We sketch the proof. We claim that for any $\overline{x}_0 \in \bbR^d$ and for any $t>0,$
+    \[\bbE[f(\overline{B}_t + \overline{x}_0, t)] = f(\overline{x}, 0).\] Note that 
+    \[p_t(\overline{x}) := \frac{1}{(\sqrt{2\pi t})^d}e^{\frac{-\overline{x}^2}{2t}}\] satisfies the heat equation with the sign flipped. That is, 
+    \[\partial_t p(t)- \frac{1}{2}\Delta_{\overline{x}}p_t(\overline{x}) = 0.\] Note that 
+    \begin{align*}
+        \partial_t\bbE[f(\overline{B}_t  + \overline{x}_0, t)] &= \partial_t \int_{\bbR^d} p_t(\overline{x} - \overline{x}_0)f(\overline{x}, t)\,d\overline{x}\\
+        &= \cdots \text{[integrating by parts 3x]}\\
+        &= 0
+    \end{align*}
+    Hence, we get the martingale property with $\overline{B}_s$ instead of $\overline{x}_0$ and $t-s$ instead of $t$:
+    \begin{align*}
+        \bbE[f(\overline{B}_t + \overline{x}_0, t )\mid \mathcal{F}_s] &= \bbE[f(\overline{B}_t - \overline{B}_s + \overline{B}_s , t-s + s)\mid \mathcal{F}_s]\\
+        &= f(\overline{B}_s, s)
+    \end{align*}
+\end{proof}
+
+\begin{defn}
+    Let $f\in C^2(\bbR^d, \bbR).$ We say that $f$ is \textbf{harmonic} if $\Delta f = 0.$ 
+\end{defn}
+\begin{rem}
+    Harmonic functions immediately imply (1) since they are not dependent on time. 
+\end{rem}
+
+\begin{exmp}
+    Let $f(x,y) = e^x \cos y.$ We have that 
+    \[\frac{\partial ^2}{\partial x ^2} = e^x\cos y\]
+    \[\frac{\partial ^2}{\partial y^2} = \frac{\partial}{\partial y}(-e^x\sin y) = -e^x\cos y.\] Hence, $f$ is harmonic. We also have that 
+    \[|f(x, y)| \leq |e^x \cos x| \leq e^x\] Then if $\overline{B}_t$ is a standard 2D B.M, we know that $f(\overline{B}_t)$ is a martingale w.r.t $\mathcal{F}_t.$
+
+    Let $\tau = \inf\{t \geq 0 \mid |\overline{B}_t - (1,0)| >5\}$ be a stopping time for $\overline{B}_t.$ Suppose the conditions of OST are met. Then 
+    \[\bbE[f(\overline{B}_\tau)] = \bbE[f(\overline{B}_0)] = 1\] But 
+    \[\bbE[f(\overline{B}_\tau)] >\bbP\{\tau < \infty \} f(\overline{B}_\tau)\]
 \end{exmp}
 
 
