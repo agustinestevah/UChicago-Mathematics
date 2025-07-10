@@ -15,6 +15,9 @@
 \newcommand{\curl}{\text{curl}}
 \newcommand{\Ind}{\text{Ind}}
 \newcommand{\Log}{\text{Log}}
+\newcommand{\hcap}{\text{hcap}}
+\newcommand{\rad}{\text{rad}}
+
 
 \newcommand{\sm}{\setminus}
 
@@ -28,6 +31,101 @@
 \newtheorem{lem}{Lemma}
 \newtheorem{cor}{Corollary}
 \input{paolo-pset.tex}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bC}{\mathbf{C}}
+\newcommand{\bD}{\mathbf{D}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bF}{\mathbf{F}}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bH}{\mathbf{H}}
+\newcommand{\bI}{\mathbf{I}}
+\newcommand{\bJ}{\mathbf{J}}
+\newcommand{\bK}{\mathbf{K}}
+\newcommand{\bL}{\mathbf{L}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bN}{\mathbf{N}}
+\newcommand{\bO}{\mathbf{O}}
+\newcommand{\bP}{\mathbf{P}}
+\newcommand{\bQ}{\mathbf{Q}}
+\newcommand{\bR}{\mathbf{R}}
+\newcommand{\bS}{\mathbf{S}}
+\newcommand{\bT}{\mathbf{T}}
+\newcommand{\bU}{\mathbf{U}}
+\newcommand{\bV}{\mathbf{V}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\bY}{\mathbf{Y}}
+\newcommand{\bZ}{\mathbf{Z}}
+\newcommand{\Vol}{\text{Vol}}
+
+%% blackboard bold math capitals
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+%% script math capitals
+\newcommand{\sA}{\mathscr{A}}
+\newcommand{\sB}{\mathscr{B}}
+\newcommand{\sC}{\mathscr{C}}
+\newcommand{\sD}{\mathscr{D}}
+\newcommand{\sE}{\mathscr{E}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sG}{\mathscr{G}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sI}{\mathscr{I}}
+\newcommand{\sJ}{\mathscr{J}}
+\newcommand{\sK}{\mathscr{K}}
+\newcommand{\sL}{\mathscr{L}}
+\newcommand{\sM}{\mathscr{M}}
+\newcommand{\sN}{\mathscr{N}}
+\newcommand{\sO}{\mathscr{O}}
+\newcommand{\sP}{\mathscr{P}}
+\newcommand{\sQ}{\mathscr{Q}}
+\newcommand{\sR}{\mathscr{R}}
+\newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sU}{\mathscr{U}}
+\newcommand{\sV}{\mathscr{V}}
+\newcommand{\sW}{\mathscr{W}}
+\newcommand{\sX}{\mathscr{X}}
+\newcommand{\sY}{\mathscr{Y}}
+\newcommand{\sZ}{\mathscr{Z}}
+\newcommand{\SLE}{\text{SLE}}
+
+
+\renewcommand{\emptyset}{\O}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\sm}{\setminus}
+
+
+\newcommand{\sarr}{\rightarrow}
+\newcommand{\arr}{\longrightarrow}
 
 
 
@@ -1182,6 +1280,778 @@ This theorem was not done in class, but it is necessary for the open mapping the
     Suppose $P(z)$ is never zero. Then $
     \frac{1}{P(z)}\in H(\Omega).$ We know that $|\frac{1}{P(z)}|\to 0$ for $z\to \infty.$ For $z$ large, say larger than some $R>0,$ we know that $\frac{1}{P(z)} \leq \frac{1}{P(0)}.$ Take $\overline{D_R(0)}.$ Since $\frac{1}{P(z)}$ is continuous and $\overline{D_R(0)}$ is compact, then $\frac{1}{P(z)}$ achieves its maximum on $\overline{D_R(0)}.$ But by the maximum modulus principle, this implies that $\frac{1}{P(z)}$ is constant, and thus $P(z)$ is constant, which is a contradiction!
 \end{thm}
+\newpage
+\section{Extra Material}
+\subsection{Riemann Mapping Theorem}
+The following material is an intersection between Brownian Motion and Complex Analysis used for research.
+\begin{defn}
+    Let $U,V \subseteq \bbC$ be open. We say $f: U \to V$ is \textbf{conformal} if $f \in H(U)$ is bijective.
+\end{defn}
+\begin{prop}
+    Suppose $f: U \to V$ such that $f$ is conformal. Then $f'(z) \neq 0$ for all $z\in U.$
+\end{prop}
+\begin{proof}
+    Suppose not. Let $z_0 \in U$ such that $f(z_0) = 0.$ Since $f \in H(U),$ then $f$ is analytic about $z_0$ and $f'(z_0) =: a_1,$  we can express
+    \[f(z) = a_0 + (z - z_0) a_1 + (z-z_0)^2a_2 + \cdots  = a_0 + (z - z_0)^2 a_2 + \cdots.\] Rearranging and letting $k$ be the first non-zero coefficient,
+    \[f(z) - f(z_0) = a_k(z - z_0)^k  + G(z).\] Let $w\in \bbC$ be small and define 
+    \[F(z) =  a_k(z - z_0)^k - w.\] Then we get that for $z\to z_0,$ $|F(z)| > |G(z)|.$ Since $F(z_0) = 0$ and there is some $z_1$ such that $a_k(z - z_0)^k = w$ because $w$ is small, then $F$ has two zeros in a small disk about $z_0.$ By Roche's Theorem, $F + G$ has two zeros, and thus 
+    \[f(z')  = f(z_0)  - w \qquad f(z'') = f(z_0) - w,\] a contradiction to the fact that $f$ is injective!
+\end{proof}
+\begin{rem}
+    With the assumptions above, we have that $f^{-1}: V\to U$ is conformal. Clearly it is a bijection. Let $w_0 \in V$ with $f(z_0) = w_0$ for some $z_0 \in V.$ Then 
+    \[\frac{f^{-1}(w)- f^{-1}(w_0)}{w - w_0} = \frac{z - z_0}{f(z) - f(z_0)}\] As $z\to z_0,$ since $f'(z_0) \neq 0$ by the above claim, We have that 
+    \[(f^{-1}(w_0))' = \frac{1}{f'(g(w_0))}\]
+\end{rem}
+\begin{exmp}
+    The upper half plane and the unit disk are comformally equivalent. Consider 
+    \[F(z)= \frac{i-z}{i+z}: \mathbb{H}\to \mathbb{D}\] with (show this) inverse
+    \[G(z) = i \frac{1-w}{1 + w}.\] Show that $F$ and $G$ are holomorphic, bijective, and inverses. 
+\end{exmp}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Images/ComformalMaps.png}
+    \caption{Conformal Maps}
+\end{figure}
+
+\begin{defn}
+    A \textbf{rotation} is a map of the form $z\to cz$ where $|c| = 1$ such that $c = e^{i\varphi}$ with $\varphi \in  [0,2\pi)$
+\end{defn}
+
+\begin{lem}
+    Let $f: \mathbb{D}\to \mathbb{D}$ such that $f \in H(\mathbb{D})$ and $f(0) = 0.$ Then 
+    \begin{enumerate}
+        \item $|f(z)| \leq |z|$ for all $z \in \mathbb{D}.$
+        \item If for some $z_0 \neq 0$ we have $|f(z_0)| = |z_0|,$ then $f$ is a rotation.
+        \item $|f'(0)| \leq 1.$ If $|f'(0)| = 1,$ then $f$ is a rotation.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    About $0,$ since $f(0) = a_0 = 0,$ we use Riemann's Singularity Theorem (21) to show that 
+    \[f(z) = a_1 z + a_2z^2 + \cdots \implies \frac{f(z)}{z} \in H(\mathbb{D}).\] Since $|f(z)| \leq 1,$ then 
+    \[\frac{|f(z)|}{|z|}  \leq \frac{1}{|z|}\leq \frac{1}{r}\] for some $r<1.$ By the maximum modulus principle, this is true for any $|z| \leq r,$ and letting $r\to 1$ obtains the result. 
+
+    By the first part, we have that for any $z\in \mathbb{D},$
+    \[g(z) =\frac{|f(z)|}{|z|} \leq 1,\] but $g(z_0) = 1$ is the maximum and thus by the maximum modulus principle $g(z)$ is constant. Hence, 
+    \[g(z)= c \implies |f(z_0)| = |c||z_0| \implies |c| = 1\]
+
+    Define 
+    \[g(z) = \frac{f(z)}{z}\] and thus 
+    \[g(0) = \lim_{z\to 0}\frac{f(z) - f(0)}{z} = f'(0) \leq 1.\] Use the Maximum Modulus principle for equality.
+\end{proof}
+
+\begin{exmp}
+    Let $f$ be conformal on $\{z: \Re{(z) >0}\}$ and $f(a) = a $ for some $a\in \bbR.$ Show that $|f'(a)| < 1.$
+
+    There is some $|r|<1$ such that for $|z| < r ,$ 
+    \[f(z) = f(a) + a_1(z-a) + \cdots.\] Define the map
+    \[g(z) = \frac{f(z) - a}{z - a}\] which is holomorphic in $D_r(a).$ 
+    By continuity, we have that $|f(z) - a| < r$ as $z \to r.$ Hence, 
+    \[|g(z)| \leq \frac{1}{|r|} \to 1.\] By the maximum modulus principle, either $g(z)$ is constant or $|g(z)|< 1$ for all $z\in D_r(a).$ We are probably assuming that the map is not the constant map and so by the latter, we have that $|g(a)| < 1.$ But then 
+    \[|g(a)| = \lim_{z\to a}\frac{|f(z) - a|}{|z-a|} =|f'(a)|< 1.\]
+
+Alternatively, by the Riemann Mapping theorem, there exists some conformal map $F: \bbH_+ \to \bbD$ such that $F(a) = 0$ and $|F'(a)| >0$ Now we can consider the conformal map $\psi = F\circ f \circ F^{-1}: \bbD \to \bbD$ with $F(0) = F(f(F^{-1}(0))) = F(f(a)) = F(a)= 0.$ By the Schwarz lemma, we have that $|\psi'(0)| \leq 1.$ Expanding, we see that 
+\begin{align*}
+\psi'(z) &= (F(f(F^{-1}))'\\ &= F'(f(F^{-1}(z)))\cdot f'(F^{-1}(z))\cdot (F^{-1})'(z)\\
+\psi'(0) &= F'(f(F^{-1}(0)))\cdot f'(F^{-1}(0))\cdot (F^{-1})'(0)\\
+&= F'(f(a)) \cdot f'(a)\cdot \frac{1}{F'(F^{-1}(0))}\\
+&= F'(a)\cdot f'(a) \cdot \frac{1}{F'(a)}\\
+&= f'(a)
+\end{align*}
+and thus $|\psi'(a)| = |f'(a)| \leq 1.$ 
+
+
+    \end{exmp}
+
+\begin{defn}
+We say that $f$ is an \textbf{automorphism} if it is a conformal map $f: \Omega \to \Omega$ where $\Omega$ is open. 
+\end{defn}
+
+\begin{exmp}
+    Show that $f(z) = 2z + z^2$ with $z\in \mathbb{D}$ is an automorphism.
+
+    Clearly $f \in H(\bbD).$ Suppose $f(z_1) = f(z_2).$ Then 
+    \[2z_1 + z_1^2 = 2z_2 + z_2^2 \iff z_1^2 - z_2^2 + 2(z_1 - z_2) = 0\iff (z_1 - z_2)(z_1 + z_2 + 2) = 0\]
+    Thus, either $z_1 - z_2 = 0$ in which case we are done, or 
+    \[z_1 + z_2 + 2 = 0 \iff z_1 + z_2 = 0 \implies |z_1 + z_2| = 2\] but 
+    \[|z_1 + z_2| \leq |z_1| + |z_2| < 1 + 1 = 2\] and this is a contradiction.
+
+    Let $w\in \bbD.$ Consider $z = \sqrt{1 + w} -  1.$ Note that 
+    \[2z + z^2 = w.\] TO see that $|z| < 1,$ we note that 
+    \[1 + w = z^2 + 2z + 1 \iff w = z^2 + 2z = z(z + 2) \iff |w| = |z||z + 2| \leq |z|(2 + |z|) < 1\] Solving 
+    \[|z|^2 + 2|z| - 1 <0,\] we see that \[|z| = -1 + \sqrt{2} < 1\]
+\end{exmp}
+
+\begin{defn}
+    We say that $\Omega\subseteq \bbC$ is \textbf{proper} if it is nonempty and not $\bbC.$
+\end{defn}
+\begin{defn}
+    Let $\mathcal{F}$ be a family of holomorphic functions. We say that $\mathcal{F}$ is \textbf{normal} if every sequence in $\mathcal{F}$ has a subsequence that converges uniformly on every compact subset of $\Omega.$
+\end{defn}
+\begin{defn}
+    We say that $\mathcal{F}$ is \textbf{uniformly bounded on compact subsets}of $\Omega$ is for each compact $K\subset \Omega,$ there is some $B>0$ such that 
+    \[|f(z)| \leq B \qquad \forall z \in K, f\in \mathcal{F}\]
+ \end{defn}
+ \begin{defn}
+     We say that $\mathcal{F}$ is \textbf{equicontinuous} if for every $\epsilon>0,$ there is some $\delta>0$ such that  if $z,w \in K$ and $|z - w| < \delta$ then $|f(z) - f(w)| < \epsilon$ for any $f \in \mathcal{F}$
+ \end{defn}
+ \begin{thm}
+     (Montel) Suppose $\mathcal{F}$ is a family of holomorphic functions on $\Omega$ that is uniformly bounded on compact subsets of $\Omega,$ then 
+     \begin{enumerate}
+         \item $\mathcal{F}$ is equicontinuous on every compact subset of $\Omega$.
+         \item $\mathcal{F}$ is a normal family.
+     \end{enumerate}
+ \end{thm}
+ \begin{proof}
+     The second is simply Arzela-Ascoli. For the second, use the Cauchy Integral formula for $f(z) - f(w)$ and estimate.   
+ \end{proof}
+
+\begin{prop}
+    If $\Omega$ is a connected open subset of $\bbC$ and $\{f_n\}$ is a sequence of injective holomorphic functions on $\Omega$  that converge uniformly on every compact subset of $\Omega$ to a holomorphic function $f,$ then $f$ is either injective or constant. 
+\end{prop}
+\begin{proof}
+    Suppose not. Let $z_1, z_2 \in \Omega$ such that $z_1\neq z_2$ but $f(z_1) = f(z_1).$ Then 
+    \[g_n(z) = f_n(z) - f_n(z_1) \to g(z) = f(z) - f(z_1).\] Note that 1) $g_n$ has no zeros other than $z_1$ since $f_n$ are all injective and 2) If $f$ is not constant, then $z_2$is an isolated zero for $g$ since $\Omega$ is connected. Thus, by the argument principle, for $\gamma$ small circle about $z_2,$
+    \[\frac{1}{2\pi i} \int_\gamma \frac{g'}{g}d\zeta = 1\] However, we know that inside $\gamma,$
+    \[\frac{1}{2\pi i}\int_\gamma \frac{g_n'}{g_n}d\zeta \to \frac{1}{2\pi i}\int_\gamma \frac{g'}{g}d\zeta = 1,\] a contradiction to the fact that $g_n$ has no zeros inside $\gamma.$ 
+\end{proof}
+
+\begin{thm}
+    (Riemann Mapping Thm) Suppose $\Omega$ is proper and simply connected. If $z_0 \in \Omega,$ then there exists a unique conformal mapping $F: \Omega \to \mathbb{D}$ such that 
+    \[F(z_0) = 0 \qquad F'(z_0) >0\]
+\end{thm}
+\begin{proof}
+    We show uniqueness first. Let $F,G: \Omega \to \mathbb{D}$ be conformal. Then consider $H = F \circ G^{-1}$ to be the automorphism of the disk fixing the origin. By the Schwarz Lemma, we have that $H(z) = e^{i\varphi} z$ is a rotation, but since $H'(0) >0,$ then $e^{i\varphi} = 1,$ and thus $F = G$
+
+    \textit{Step 1} In this step, we will show $\Omega$ is conformally equivalent to some $U \subseteq \mathbb{D}$ open such that $0 \in U.$ Since $\Omega \neq \bbC,$ let $\alpha \in \bbC \sm \Omega.$ Since $z-\alpha \neq 0$ for any $z\in \Omega,$ we define $f(z)= \log(z - \alpha)$ to be holomorphic on $\Omega.$ It is not hard to see $f$ is injective. Let $w \in \Omega.$ Assume that $f(z) = f(w) + 2\pi i,$ then exponentiating, 
+    \[z-\alpha=e^{f(z)} = e^{f(w)} = w-\alpha,\] an obvious contradiction. We actually claim something much stronger, that there is some disk about $f(w)+ 2\pi i$ containing no points of $f(\Omega).$ Suppose not, then there is a sequence $f_n(z)\to f(w) + 2\pi i,$ exponentiating yields a sequence $z_n \to w$ and by continuity of $f$ implies $f(z_n)\to f(w),$ which we have seen is a contradiction. Hence, there is a disk about $f(w) + 2\pi i$ such that $f(z) - (f(w) - 2\pi i)$ doesn't vanish, and so we can define $F: \Omega \to \bbC$ by 
+    \[F(z) = \frac{1}{f(z) - (f(w) - 2\pi i)}\] which is injective since $f $ is injective. Thus, $F: \Omega \to F(\Omega)$ is conformal. By dilating it and traslating it, we obtain $F: \Omega \to U.$
+
+    \textit{Step 2} By step 1, we assume WLOG that $\Omega \subseteq \mathbb{D}$ is open and contains the origin. Let 
+    \[\mathcal{F}:= \{f: \Omega \to \mathbb{D} \mid f \text{ injective, holomorphic, $f(0) = 0$}\}\]
+Because of the identity map, $\mathcal{F}\neq \emptyset,$ and because $\|f\| \leq 1$ for any $f \in \cal F,$ then $\cal F$ is uniformly bounded. Moreover, we apply the Cauchy Integral formula to uniformly bound $|f'(0)|.$ Hence $s = \sup_{f\in \cal F} |f'(0)|$ exists. Choose a sequence $f_n \subset \cal F$ such that $|f_n'(0)|\to 0.$ By Montel's Theorem (Arzela-Ascoli), there exists a subsequence that converges uniformly on compact sets of $\Omega$ to some function $f.$ We know that $s \geq 1$ since $z\mapsto z$ is in $\cal F,$ and thus $f$ cannot be constant, and thus by the previous proposition, $f$ must be injective. We know by continuity that $|f(z)| \leq 1,$ but the Maximum Modulus principle tells us that the inequality is actually strict. Since $f(0) = 0,$ we know that $f \in \cal F$ with $|f'(0)| = s.$   
+
+\textit{Step 3} It remains to see that the $f$ from step 2 is conformal into $\mathcal{D}.$ We know that $f$ is holomorphic by Morera's theorem, and we know it to be injective by step 2, so it suffices to show surjective. This is weird and  doesn't contribute to anything so I'm good.
+    
+\end{proof}
+
+\begin{cor}
+    Any two proper and simply connected sets are conformally equivalent. If $z \in U$ and $w \in V,$ then $f(z) = w$ and $f'(z) >0.$ 
+\end{cor}
+\begin{proof}
+    Let $U,V$ be proper and simply connected. By the Riemann Mapping Thm, there exist $F,G$ conformal maps such that $F: U \to \mathbb{D}$ and $G: V\to \mathbb{D}.$ Define $H: U\to V$ by $H = G^{-1}\circ F.$ We know that $G^{-1}$ is conformal by remark 21, and clearly a composition of conformal maps is conformal. 
+\end{proof}
+
+\begin{exmp}
+    Let $\Omega \subseteq \bbC$ be a simply connected domain. Let $z_1, z_2 \in \Omega.$ Show there exists an automorphism such that $f(z_1) = z_2.$ 
+
+    We simply apply the Riemann mapping theorem if $\Omega \neq \bbC$ and use the Mobius automorphism of the disk
+    \[\varphi_\alpha(z) = \frac{z-\alpha}{1-\bar\alpha z}\]
+    Suppose now $\Omega = \bbC.$ Then consider $f(z) = z - z_1 + z_2.$ Then $f$ is clearly an automorphism with $f(z_1) = z_2.$
+\end{exmp}
+
+\begin{exmp}
+    Let $H_t = \mathbb{H}\sm [0, 2\sqrt{t}i].$ Let $g_t : H_t \to \mathbb{H}$ be defined such that 
+    \[g_t(z) = \sqrt{z^2 + 4t},\] then $g_t$ is a conformal. As $z\to \infty,$ 
+    \[|sqrt{z^2 - 4t}\to z,\] and thus $g_t$ looks like the identity map for large $z.$ Consider the ODE 
+    \begin{align}
+\partial_t f_t (z) = \frac{2}{f_t(z)}, \qquad f_0(z)= z        
+    \end{align}
+ We claim that $g_t$ is a solution. Clearly the boundary condition is satisfied. Taking the partial, 
+    \[\partial_t g_t(z) = \frac{1}{2\sqrt{z^2 + 4t}}\cdot 4 = \frac{2}{g_t(z)}.\] Before the denominator in $(3)$ implodes, theorems in ODE (Picard-Lindelof) imply that $g_t$ is the unique solution to (3). Hence, the geometry of the curve $\gamma(t) = 2\sqrt{t}i$ is completely encoded by $g_t.$
+\end{exmp}
+
+\newpage
+\subsection{Distortion Estimates}
+
+\begin{rem}
+    Recall that $f = u + iv$ is holomorphic iff it satisfies the Cauchy-Riemann equations:
+    \[\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \qquad \frac{\partial u}{\partial y} = - \frac{\partial v}{\partial x}.\] In particular, we have showed that this implies that 
+    \[\triangle u = \frac{\partial^2}{\partial x^2}u + \frac{\partial^2}{\partial y^2} u  = 0 \qquad \triangle v = 0\]
+\end{rem}
+\begin{defn}
+    We say that $f$ is \textbf{harmonic} if $\triangle f = 0.$
+\end{defn}
+
+\begin{defn}
+    We say that a process $B = B^1 + iB^2$ is a \textbf{complex Brownian motion} if $B^1, B^2$ are independent S.B.M in $\bbR.$ 
+\end{defn}
+Recall the following theorem from probability:
+\begin{thm}
+    Let $u$ be a harmonic function on a bounded domain $D$ continuous on $\overline{D}.$ Then $u(B_t)$ is a martingale. 
+\end{thm}
+\begin{rem}
+    We can use the continuous time OST to see that if $\tau = \inf\{t \geq 0 \mid B_t  \notin D\}$ is the first time $B_t$ leaves $D,$ then 
+    \[\bbE[u(B_\tau)] = \bbE[u(B_0)] = u(z)\]
+\end{rem}
+We recall a few theorems we have already shown. In the context of the previous theorem, $u$ is harmonic and thus is holomorphic and thus, 
+\begin{enumerate}
+    \item (Mean value property) \[u(z_0) = \frac{1}{2\pi i}\int_0^{2\pi} u(z_0 + re^{i\theta})d\theta.\]
+    \item (Maximum Modulus) If the $u$ attains its maximum on the interior of $D,$ then $u$ is constant. 
+\end{enumerate}
+For notation, if we let $D \subseteq \bbC$ be any proper and simply connected set containing the origin, we define 
+\[\mathcal{U}:= \{f: \mathbb{D}\to D\mid f \text{conformal s.t. } f(0) = 0, f'(0) = 1\}\]
+If $f\in U,$ then $f$ is analytic with $a_0 = 0, a_1 = 1$ and thus 
+\[f(z) = z+ \sum_{n=2}^\infty a_n z^n\]
+\begin{lemma}
+    If $f\in \cal U,$ there exists an odd function $h \in \cal U$ such that $h(z)^2 = f(z^2).$
+\end{lemma}
+\begin{proof}
+    Recall that $h$ is odd if $h(-z) = -h(z).$ Define 
+    \[\tilde{f}(z) = \begin{cases}
+        \frac{f(z)}{z}\qquad z\neq 0\\
+        f'(0)\qquad z = 0
+    \end{cases}\] Since $\tilde{f}$ is conformal and never vanishes, we can express
+    \[\tilde{f}(z)= e^{\log \tilde{f}(z)}\] and so we can define 
+    \[g(z) := e^{\frac{1}{2}\log \tilde{ f}(z)} \implies g(z)^2= \tilde{f}(z).\] Define now 
+    \[h(z):= zg(z^2).\] Notice that $h$ is odd since 
+    \[h(-z) =-zg((-z)^2)= -zg(z^2) = -h(z)\] and that 
+    \[h(z)^2 = z^2 g(z^2) = z^2 \tilde{f}(z^2) = f(z^2).\] It remains to show that $h\in \cal U.$ This is not hard to show.
+\end{proof}
+
+\begin{prop}
+    If $f \in \cal U,$ then 
+    \[\text{area} (f(\mathbb{D})) = \pi  \sum_{n=1}^\infty n |a_n|^2\]
+\end{prop}
+\begin{proof}
+    Let $C$ be the circle of radius $r$ and let $\gamma  = f(C).$ Then 
+    \begin{align*}
+        \frac{1}{2i} \int_\gamma \overline{z} \,dz &= \frac{1}{2i}\int_\gamma (x - iy)(dx + i\,dy)\\
+        &= \frac{1}{2i}\int_\gamma (x - iy)\,dx + (ix + y)\,dy\\
+        &= \frac{1}{2i}\int \int_{f(r\mathbb{D})}2i\,dxdy\\
+        &= \text{area}(f(r\mathbb{D}))
+    \end{align*}
+    by the Green's Theorem. But by definition, we have that 
+\begin{align*}
+    \frac{1}{2i}\int_\gamma \overline{z}\,dz &= \frac{1}{2i}\int_0^{2\pi}\overline{f(re^{i\theta})}f'(re^{i\theta})ire^{i\theta}\,d\theta\\
+    &= \frac{1}{2i} \int_0^{2\pi} \sum_{n=1}^\infty \overline{a_n} r^n e^{{-i\theta n}} \sum_{n=1}^\infty n{a_n} r^{n-1} e^{{i\theta (n-1)}} ir^{i\theta}d\theta\\
+    &= \pi \sum_{n=1}^\infty r^{2n}|a_n|^2 n
+\end{align*}
+Letting $r\to 1$ proves the result.
+\end{proof}
+
+\begin{defn}
+    Let $K\subseteq \bbC$ be compact and connected. Then $K$ is a \textbf{compact hull} if $\bbC \sm K$ is connected and $K$ consists of more than a single point. 
+\end{defn}
+\begin{rem}
+    Note  by the Riemann Mapping Thm, there exists some $F: \bbC \sm \overline{D} \to \bbC \sm K$ such that $F$ is bijective and conformal and such that fixes $\infty$ and $\lim_{z\to \infty} \frac{F(z)}{z} >0.$ To see this we call $I(z) = \frac{1}{z},$ and $f: \bbD \to I(\bbC \sm K)$ to be the conformal map with $f'(0)>0,$ then 
+    \[\frac{F(z)}{z} = \frac{1}{zf(\frac{1}{z})} \xrightarrow[]{z\to \infty} \frac{1}{f'(0)} >0\]
+    Define 
+    \[\mathcal{H}:= \{K \text{ compact hull }\mid \lim_{z\to \infty}  \frac{F(z)}{z} = 1\}\] Thus, if $K \in \cal H,$ then the Laurent expansion of $F$ is 
+    \[F(z) = \sum_{n=0}^\infty \frac{b_n}{z^n} + \sum_{n=1}^\infty a_nz^n \] but imposing our condition implies that $a_n = 0$ for all $n>1$ and that $a_1 = 1.$ Thus, 
+    \[F(z) = z + a_0 + \sum_{n=1}^\infty \frac{b_n}{z^n}\]
+\end{rem}
+
+\begin{prop}
+    Suppose $K \in \cal H,$ then 
+    \[\text{area}(K) = \pi(1 - \sum_{n=1}^\infty n |b_n|^2).\] Since area is non-negative, we must have that $\sum_{n=1}^\infty n |b_n|^2 \leq 1.$ 
+\end{prop}
+\begin{proof}
+    Letting $r>1$ and $K_r = F(r\overline{\bbD})$ (rather, $K_r$ is the image of the annulus $r\overline{\bbD}\sm \bbD$). Since $F$ is bijective, then as $r\to 1,$ $F(r\overline{\bbD})\to \bbC\sm K.$ Hence, it suffices to find that $\text{area}(K_r).$ Letting $\gamma = F(re^{i\theta}),$ we compute 
+    \begin{align*}
+        \text{Area}(K_r) = \frac{1}{2i}\int_\gamma \overline{z} \,dz\\
+        &= \frac{1}{2i}\int_{0}^{2\pi} \overline{F(re^{i\theta})}F'(re^{i\theta})ire^{i\theta}\,d\theta\\
+        &= \pi(r^2 - \sum_{n=1}^\infty n |b_n|^2 r^{-2n})\\
+        &\to \pi(1 - \sum_{n=1}^\infty n|b_n|^2)
+    \end{align*}
+\end{proof}
+
+
+
+\begin{prop}
+    If $f \in \cal U,$ then $|a_2| \leq 2.$ 
+\end{prop}
+\begin{proof}
+    Define $h$ as in the previous lemma. Since it is odd, its expansion about $0$ has no even powers of $z.$ Thus, we can express
+    \[h(z) = z + c_3 c^3 + c_5z^5 + \cdots\] Since $f(z^2) = h(z)^2,$ we have that 
+    \[z^2 + a_2z^4 + \cdots = (z + c_3 c^3 + c_5z^5 + \cdots) = z^2 + 2c_3z^4 + \cdots\] implying that $c_3 = \frac{a_2}{2}.$ Defining $g(z) = \frac{1}{h(\frac{1}{z})},$ we see that 
+    \[g(z) = \frac{1}{z^{-1} + (\frac{a_2}{2})z^{-3} + \cdots} = z - \frac{a_2}{2}z^{-1} + \cdots \]
+    By Proposition 14, 
+    \[|\frac{a_2}{2}|^2 \leq 1 \implies |a_2| \leq 2\]
+\end{proof}
+
+\begin{thm} (Koebe$-\frac{1}{4}$)
+    If $f\in \cal U,$ $0<r\leq 1,$ then $B_{\frac{r}{4}}(0)\subseteq f(r\mathbb{D})$
+\end{thm}
+\begin{proof}
+    Let $r = 1$ and let $z_0 \notin D.$ It suffices to show for this case that $|z_0| \geq \frac{1}{4}.$ Define 
+    \[\tilde{f}(z) = \frac{z_0 f(z)}{z_0 - f(z)}.\] To see that $\tilde{f} \in \cal U,$ notice that $\tilde{f}(0) = 0$ and 
+    \[\tilde{f}'(z) = \frac{z_0f'(z)(z_0 - f(z)) + z_0f(z)'f(z)}{(z_0 - f(z))^2} \implies \tilde{f}'(0) = \frac{z_0^2 f'(0)}{z_0^2} = 1.\] Writing $f(z) = z + \sum_{n=2}^\infty a_n z^n,$ 
+    \[\tilde{f}(z) = \frac{z_0(z + a_2z^2 + \cdots)}{z_0 - (z - a_2z^2 + \cdots)}= (z + a_2z^2)\frac{1}{1 - \frac{z}{z_0} + \frac{z^2}{z_0^2} + \cdots} \] recognizing the last term as geometric, 
+    \[\tilde{f}(z) = (z + a_2z^2)(1 + \frac{z}{z_0} + \cdots) = z + \frac{z^2}{z_0} + a_2z^2 + \cdots = z + (a_2 + \frac{1}{z_0})z^2 + \cdots\] From the last proposition, we have that 
+    \[|a_2| \leq 2 \quad |a_2 + \frac{1}{z_0}| \leq 2 \implies |z_0| \leq \frac{1}{4}\] as desired. Now let $r \in (0,1).$ Consider the conformal map $g(z) = \frac{f(rz)}{r}.$ Let $|z| < \frac{1}{4} \implies z \in g(\bbD) = \frac{f(r\mathbb{D})}{r}$ and thus we are done.
+\end{proof}
+
+\begin{cor}
+    Suppose $D, \tilde{D}\subset \bbC$ and $z \in D$ and $\tilde{z}\in \tilde{D}$ and $f D \to \tilde{D}$is conformal with $f(z) = \tilde{z}.$ Then if $d = \text{dist}(z, \partial D)$ and $\tilde{d}= \text{dist}(\tilde{z}, \partial \tilde{D}),$ we have that 
+    \[\frac{\tilde{d}}{4d} \leq |f'(z)| \leq \frac{4\tilde{d}}{d}.\]
+\end{cor}
+\begin{proof}
+    We assume WLOG that $z = \tilde{z} = 0.$ Letting 
+    \[[\tilde{f}(w) = \frac{f(dw)}{df'(0)},\] we note that $\tilde{f} \in \cal U$ and thus by Koebe's theorem, 
+    \[B_{\frac{r}{4}}(0) \subseteq \tilde{f}(r\mathbb{D}).\] Thus, for every $\epsilon>0,$ there is some $\delta>0$ such that $w \in \mathbb{D}\sm (1-\delta)\mathbb{D} = \mathbb{D}\sm r\mathbb{D},$ we have that 
+    \[|\frac{f(dw)}{df'(0)}| = |\tilde{f}(w)| \geq \frac{1}{4} - \epsilon = \frac{r}{4}\] Taking the infemum over all such $w,$ we see that 
+    \[\frac{\tilde{d}}{d|f'(0)|} \geq \inf _{w \in \mathbb{D}\sm (1-\delta)\mathbb{D}}|f'(w)|  \geq \frac{1}{4} - \epsilon.\] Taking $\epsilon\to 0$ and rearranging 
+    \[\frac{4\tilde{d}}{d} \geq |f'(0)|.\] The lower bound follows from the same logic with $f^{-1}.$
+\end{proof}
+
+\newpage
+\subsection{Half-Plane Capacities}
+\begin{thm}
+    (Shwarz Reflection Principle) Let $\Omega =\{z \in \Omega \mid \Im{z} >0\}$. Suppose $f: \Omega^+ \to \bbC$ is continuous to $\bbR$ such that $f$ is real valued on $\bbR,$ then there is a function $F \in H(\Omega)$ such that $F = f$ on $\Omega.$ 
+\end{thm}
+\begin{proof}
+    Define $F(z)$ for $z\in \Omega^-$ by 
+    \[F(z) = \overline{f(\overline{z})}\] Then since $f$ is analytic, we have that if $z_0, z_1 \in \Omega^{-},$ then their conjugates are clearly in $\Omega^+$ and so
+    \[F(z) = \overline{\sum_{n=1}^\infty a_n (\overline{z}_0 - \overline{z}_1)^n} = \sum_{n=1}^\infty \overline{a}_n (z_0 - z_1)^n.\] Thus, $F\in H(\Omega^{-1})$ and it extends continuously to $\bbR$ since $\overline{f(x)} = f(x)$ since $f$ is real valued on $\bbR.$ Let $T$ be a triangle. If $T$ lies entirely on $\Omega^{-}$ or $\Omega^+,$ then $\int_T F(z)\,dz = 0$ by Cauchy's theorem. Suppose an edge of $T$ lies on $\bbR.$ Then call $T_\epsilon$ to be the triangle a tiny bit up and thus by continuity,
+    \[0 = \int_{T_\epsilon} F(z)\,dz \to \int_{T} F(z)\,dz.\] By Morera's Theorem, we are done. 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Images/Symmetry Principle.png}
+        \caption{Proof idea}
+    \end{figure}
+\end{proof}
+\begin{cor}
+    Let $D\subseteq \bbH$ be a simply connected domain and $\phi: D\to \bbH$ be a conformal transformation bounded on bounded sets. Then $\phi $ extends by reflection to a conformal transformation on $D^* = D\cup \{\overline{z}:z \in D\}\cup(\overline{D} \cap \{ \in \partial H\})$
+\end{cor}
+
+\begin{defn}
+    A set $A \subseteq \bbH$ is called a \textbf{compact $\bbH-$hall} if $A = \bbH \cap \overline{A}$ and $\bbH \sm A$ is simply connected. We denote 
+    \[\mathcal{Q} = \{A \subseteq \bbH \mid A \text{ compact hull}\}\]
+\end{defn}
+\begin{prop}
+    For each $A\in \cal Q,$ there exists a unique conformal transformation $g_A:\bbH \sm A \to \bbH$ such that $|g_A(z) - z|\to 0$ as $z\to \infty.$
+\end{prop}
+\begin{proof}
+    The Riemann Mapping Thm takes care of the first part, giving us some $g: \bbH\sm A \to \bbH $ and the fact that $|g(z)|\to \infty $ as $|z|\to \infty$ (this might mean that we compose $g$ with something as well but it's fine). By setting $g(\overline{z}) =\overline{g(z)}$, the Schwarz Reflection Principle tells us we can shave off more of the domain, extending $g$ to be defined on $\bbC \sm (\{\overline{z} : z\in A\}\cup \overline{A}).$ The Laurent expansion of $g$ becomes (as we showed in Remark 24)
+    \[g(z) = a_0 + a_1z + \sum_{n=1}^\infty \frac{b_n}{z^n}.\] If $z\in \bbR,$ then $\bar z = z$ and by how we defined $g,$ $g(z) = g(\bar z) = \overline{g(z)}.$ Let $z\in \bbR \sm \overline{A},$ then since $g(z) \in \bbR,$ we can expand $g(z)$ to be
+    \[a_0 + a_1 z + \sum_{n=1}^\infty \frac{b_n}{z^n} = \overline{a_0} + \overline{a_1} z + \sum_{n=1}^\infty \frac{\overline{b_n}}{z^n} \] implying that each coefficient is real. Now define 
+    \[g_A(z) := \frac{g(z) - a_0}{a_1} = z + \sum_{n=1}^\infty \frac{c_n}{z^n}.\] Hence, $|g_A(z) - z|\to \infty$
+
+    Since the group of automorphisms of $\bbH$ is of the form 
+    \[\frac{az + b}{cz + d}\] where $a,b,c,d \in \bbR$ and $ad - bc = 1$ then if $g_A, \tilde{g}_A: \bbH \sm A \to \bbH$ are two maps with the property that they look identical to $z$ at infinity, then $g_A \circ \tilde{g}^{-1}_A: \bbH \to \bbH$ is of the form 
+    \[g_A \circ \tilde{g}^{-1}_A = \frac{az+b}{cz + d}\] and 
+    \[\left| \frac{az+b}{cz + d} - z\right| \to 0 \implies a = c = 1, b = d = 0\] Hence, $g_A$ is an inverse of $\tilde{g}^{-1}$ and so we are done.
+\end{proof}
+
+\begin{defn}
+    Let $A\in \cal Q.$ We define the \textbf{half-plane} capacity of $A$ to be 
+    \[\hcap(A) = \lim_{z\to \infty} z(g_A(z) -z).\]
+\end{defn}
+\begin{rem}
+    Equivalently, we can see that by rearranging, 
+    \[g_A(z) =z + \frac{\hcap(A)}{z} \]
+    
+    
+    since 
+    \[z(g_A(z)-z) =z(z + \sum_{n=1}^\infty \frac{c_n}{z^n} -z_ ) = c_1 + \frac{c_2}{z} + \cdots \to c_1\] Thus, 
+    \[\hcap(A) = c_1.\]
+\end{rem}
+\begin{exmp}
+    Consider $A = [0, 2\sqrt{t}i].$ Recall that $g_A: \bbH \sm A \to \bbH$ is 
+    \[g_A(z) = \sqrt{z^2 + 4t}\] with $|\sqrt{z^2 + 4t} - z|.$ Expanding, we see that 
+    \[g_A(z) = z\sqrt{(1 + \frac{4t}{z^2})} = z(1 + \frac{2t}{z^2} + \cdots)\] and thus 
+    \[\hcap(A) = 2t\]
+\end{exmp}
+
+\begin{exmp}
+    (Upper disk). Consider that $g_{\overline{\bbD}\cap \bbH}(z) = z + \frac{1}{z}$ is the conformal transformation $\bbH\sm \overline{\bbD}\to \bbH$ with $\hcap (\overline{\bbD}\cap \bbH) = 1$
+\end{exmp}
+\begin{prop}
+    The following hold:
+    \begin{enumerate}
+        \item Let $r>0,$ then $\hcap(rA) = r^2\hcap(A)$
+        \item Let $x\in \bbR$. Then $\hcap(A + x) = \hcap (A)$
+        \item Suppose $A\subseteq \hat A,$ then $\hcap(A) \leq \hcap (\hat A)$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (i) Let 
+    \[g_A = z + \frac{c_1}{z} + \cdots \] such that $\hcap (A)= c_1.$ It suffices to show that $\hcap (rA) = r^2 c_1.$ To see this, we note that, 
+    \[g_{rA}(z) = rg_A(\frac{z}{r}) = r(\frac{z}{r} + \frac{c_1}{\frac{z}{r}} + \cdots ) = z + \frac{r^2 c_1}{z} + \cdots\] and we are done.
+
+    (ii) This is obvious by considering that $g_A(z - x) + x: \bbH \sm (A + x)\to \bbH$ is the conformal transformation. 
+
+    (iii) Ask Yearwood
+\end{proof}
+\begin{rem}
+    If $A\subseteq r\overline{\bbD} \cap \bbH,$ then $\hcap (A) \leq \hcap (r\overline{\bbD}\cap \bbH) = r^2 \hcap(\overline{\bbD}\cap \bbH) = r^2$
+\end{rem}
+
+\begin{thm}
+    Suppose $A \in \cal Q,$ $B$ is a complex Brownian motion, $\tau$ is the first exit time of $B$ from $\bbH \sm A.$ Then 
+    \begin{enumerate}
+        \item For all $z\in \bbH \sm A, $ $\Im{(z - g_A(z))} = \bbE[\Im{(B_\tau) \mid B_0 = z}]$
+        \item $\hcap(A) = \lim_{y\to \infty} y \bbE[\Im{(B_\tau)} \mid B_0 = iy]$
+        \item 
+        \[\hcap(A)  = \frac{2}{\pi} \int_0^\pi \bbE[\Im{(B_\tau)\mid B_0 = e^{i\theta}}] \sin \theta \,d\theta\]
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    (a) Note that for any $w\in \partial (\bbH \sm {A}),$ we have that $\Im(g_A(z)) = 0.$ 
+    
+    We have showed that $\Im(\cdot)$ is harmonic by the Cauchy-Riemann equations. Thus, we can apply Remark 23 to see that since $z - g_A(z)$ is holomorphic, then $\Im(z - g_A(z))$ is harmonic and thus 
+    \[\Im(z -g_A(z)) = \bbE[\Im{B_\tau - g(B_\tau)} \mid B_0 = z]\] 
+
+    
+    (b) Recall that $\Re(iz) = \Im(ix -y)  = -\Im(z).$ Applying this to the fact that $\hcap(A)$ is real then by taking the real part of the following expression
+    \[\hcap(A) = \lim_{z\to \infty} z(g_A(z) - z) = \lim_{y\to \infty} iy(g_A(iz) - iy)\] we see that 
+    \[\hcap(A) = \lim_{y\to \infty} y\Im(iy - g_A(iy)) = \lim_{y\to \infty}y \bbE[\Im(B_\tau)\mid B_0 = iy]\] where the last equality comes from part 1.
+
+    (c) 
+\end{proof}
+
+If $f$ is conformal, then $f(B)$ is a Brownian motion. Basically:
+\begin{thm}
+    Let $D, \tilde{D}\subseteq \bbC$ and $f: D\to \tilde{D}$ be conformal. Let $B, \tilde{B}$ be complex Brownian motions starting from $z\in D$ and $\tilde{z}= f(z) \in \tilde{D}.$ Denoting the exit times by 
+    \[\tau = \inf\{t\geq 0 \mid B_t \notin D\} \qquad \tilde{\tau} = \inf\{\tilde{B}_t \notin \tilde{D}\}\]  we set 
+    \[\tau' = \int_0^\tau |f'(B_s)|^2 \,ds \qquad \sigma(t) = \inf\{s\geq 0 : \int_0^s |f'(B_r)|^2 = t\}\] for $t< \tau'$. Setting $B_t' = f(B_{\sigma(t)})$, 
+    \[(\tau', B_t' : t< \tau ') =^d= (\tilde{\tau}, \tilde{B}_t: t< \tilde{\tau})\]
+\end{thm}
+\begin{rem}
+    Here are a few facts I might prove:
+    \begin{itemize}
+        \item The first exit time distribution of $B$ starting at $0 \in \bbD$ in $\bbD$ is given by a uniform distribution on $\partial D.$
+        \item If now we start at $z\in \bbD,$ the distribution is given by 
+        \[\frac{1}{2\pi} \frac{1 - |z|^2}{|e^{i\theta}- z|^2}\qquad \theta \in [0,2\pi).\]
+        \begin{proof}
+            Let 
+            \[\varphi_z(w) = e^{i\theta}\frac{z-w}{1-\bar z w}\] be the automorphism such that $z\mapsto 0.$ Consider that by the above theorem, $V = \varphi_z(B_\tau) \sim \text{Uniform}(2\pi).$ And consider $U = B_\tau = \varphi^{-1}(V).$ We seek 
+            \[f_U(u) = f_V(\varphi(u))\left|\varphi_z'(u)\right| = \frac{1}{2\pi} \frac{-1 - |z|^2}{|1 - \bar z u|^2} = \frac{1}{2\pi} \frac{-1 - |z|^2}{|u-z|^2} = \frac{1}{2\pi}\frac{-1 - |z|^2}{|e^{i\theta} - z|^2}\]
+        \end{proof}
+        \item Starting from $z = x + iy \in \bbH,$ 
+        \[\frac{1}{\pi} \frac{y}{(x- u)^2 + y^2} \qquad u \in \partial \bbH\]
+    \end{itemize}
+\end{rem}
+
+\begin{defn}
+    Let $A\in \cal Q.$ We define the radius of $A$ to be 
+    \[\rad(A) =\sup\{|z| : z \in A\}\]
+\end{defn}
+
+\begin{prop}
+    Suppose that $A\in \cal Q,$ $B$ is a complex Brownian motion, and $\tau = \inf \{t \geq 0 : B_t \notin \bbH \sm A\}.$ Then 
+    \[g_A(x) = \lim_{y\to \infty} \pi y\left(\frac{1}{2} - \bbP\{B_\tau \in [x, \infty) \mid B_0 = iy\}\right) \qquad x>\rad (A)\]
+    \[g_A(x) = \lim_{y\to \infty} \pi y\left(-\frac{1}{2}+ \bbP\{B_\tau \in (-\infty, x] \mid B_0 = iy\}\right) \qquad x<-\rad (A)\]
+\end{prop}
+
+\begin{proof}
+    Suppose $A = \emptyset.$ We have that $g_\emptyset: \bbH \to \bbH$ with $g_\emptyset(z) = z$ satisfies $|z - z|\to 0$ as $z\to \infty.$ Using symmetry and a weird little result, if we suppose $x> 0,$
+    \begin{align*}
+        \pi y \left(\frac{1}{2} - \bbP\{B_\tau \in [x, \infty) \mid B_0 = iy\}\right) &= \pi y \pi y\bbP\{B_\tau \in [0,x]\}\\
+        &= \lim_{y\to \infty}\int_0^x \frac{y}{\pi (s^2 + y^2)}\,ds\\
+        &\xrightarrow[y\to \infty]{}x\\
+        &= g_A(x)
+    \end{align*}
+
+    Suppose now $A \neq \emptyset.$ Let $g_A = u_A + iv_A$ and $\sigma = \inf \{t \geq 0 : B_t \notin \bbH\}.$ We know that 
+    \[\bbP_{iy}\{B_\tau \in [x, \infty)\} = \bbP_{g_A(iy)}\{B_\sigma \in [g_A(x), \infty)\} = \bbP_{iv_A(iy)}\{B_\sigma  \in [g_A(x)- u_A(iy), \infty)\}\]
+\end{proof}
+
+\begin{cor}
+    Suppose that $A\in \cal Q$ with $\rad(A) \leq 1,$ then 
+    \[x \leq g_A(x) \leq x + \frac{1}{x} \qquad x>1\]
+    \[x + \frac{1}{x} \leq g_A(x) \leq x \qquad x<-1\] If $A \in \cal W,$ then $|g_A(z) - z| \leq 3\rad(A)$ for all $z\in \bbH \sm A.$ 
+\end{cor}
+\begin{prop}
+    There is some $c>0$ so that for any $A\in \cal Q$ and $|z| \geq 2 \rad(A),$ 
+    \[\left|g_A(z) - z - \frac{\hcap(A)}{z}\right| \leq c \frac{\rad(A)\hcap (A)}{|z|^2}\]
+\end{prop}
+\begin{proof}
+    Suppose $\rad(A) = 1.$ Let $h(z) = g_A(z) - z - \frac{\hcap(A)}{z}.$ Recall that 
+    \[\Im(\frac{1}{z}) = \Im(\frac{1}{x+ iy}) = -\frac{y}{x^2 + y^2}\]
+    
+    Let 
+    \[v(z) = \Im(h(z)) = \Im(z - g_A(z)) - \Im(z)\hcap(A) = \Im(z - g_A(z)) - \frac{y\hcap(A)}{x^2 + y^2}.\] Letting $B_t$ be a complex Brownian motion and $\sigma$ and $\tau$ being exit times from $\bbH \sm A.$ Let $\theta \in [0,2\pi],$ and let $p(z, e^{i\theta})$ be the density at $e^{i\theta}$ for $B_\sigma.$ By Theorem 37, we have that 
+    \[\Im(z - g_A(z)) = \bbE_z[\Im(B_\sigma)] = \bbE[\bbE[\Im(B_\tau )\mid \tau = e^{i\theta}]] = \int_0^\pi \bbE_{e^{i\theta}}[\Im(B_\tau)]p(z, e^{i\theta})d\theta\]
+
+
+    From an example problem, we know that 
+    \[p(z, e^{i\theta}) = \frac{2}{\pi}\frac{\Im(z )}{|z|^2}\sin\theta (1 + O(|z|^{-1}))\]
+    \[\hcap(A)  = \frac{2}{\pi} \int_0^\pi \bbE[\Im{(B_\tau)\mid B_0 = e^{i\theta}}] \sin \theta \,d\theta\] Plugging in, 
+    \begin{align*}
+        |v(z)| &= \left|\Im(z - g_A(z)) - \frac{y\hcap(A)}{x^2 + y^2}\right|\\
+        &= \left|\int_0^\pi \bbE_{e^{i\theta}}[\Im(B_\tau)]p(z, e^{i\theta})d\theta - \frac{2}{\pi}\frac{\Im(z)}{|z|^2}\int_0^\pi \bbE[\Im{(B_\tau)\mid B_0 = e^{i\theta}}] \sin \theta \,d\theta\right|\\
+        &=\left|\int_0^\pi \bbE_{e^{i\theta}}[\Im(B_\tau)]\frac{2}{\pi}\frac{\Im(z )}{|z|^2}\sin\theta (1 + O(|z|^{-1}))d\theta - \frac{2}{\pi}\frac{\Im(z)}{|z|^2}\int_0^\pi \bbE[\Im{(B_\tau)\mid B_0 = e^{i\theta}}] \sin \theta \,d\theta\right|\\
+        &=\frac{\hcap(A)\Im(z)}{|z|^3}c
+    \end{align*}
+\end{proof}
+
+\begin{thm}
+    There exists a constant $c>0$ such that the following holds. Let $A\subseteq \bar \bbD$ be connected with $0 \in A$ and $A\cap \partial \bbD \neq \emptyset.$ Then 
+    \[\bbP_z(B([0, \tau]) \cap A = \emptyset) \leq c\sqrt{|z|}\]
+\end{thm}
+\begin{prop}
+    Suppose $A,\tilde{A} \in \cal Q$ where $A\subseteq \tilde{A}$ and $\tilde{A}\sm A$ is connected. Then there is some $c>0$ such that
+    \[\text{diam}(g_A(\tilde{A}\sm A)) \leq c \begin{cases}
+        d^\frac{1}{2}r^\frac{1}{2} \qquad d\leq r\\
+        \text{rad}(\tilde{A}) \,\quad d>r
+    \end{cases},\]
+    where $d = \text{diam}(\tilde{A}\sm A)$ and $r = \sup\{\Im(z) : z\in \tilde{A}\}$
+\end{prop}
+\begin{proof}
+    We assume WLOG that $r = 1.$ Consider the case when $d>1.$ We know from a previous corollary that 
+    $|g_A(z) - z|< 4\rad(A).$ Hence, 
+    \[\text{diam}(g_A(\tilde{A}\sm A))  \leq \text{diam}(\tilde{A}) + 6\rad(A) \leq 8\rad(\tilde{A})\]
+\end{proof}
+
+\newpage
+\subsection{The Chordal Lowener Equation}
+\begin{defn}
+    Suppose that $(A_t) = (A_t)_{t\geq 0}$ is a family of compact $\bbH-$hulls. We say that $(A_t)$ is 
+    \begin{enumerate}
+        \item \textbf{non-decreasing} if $0\leq s \leq t < \infty$ implies $A_s \subseteq A_t$
+        \item \textbf{locally growing} if gor every $T, \epsilon>0,$ there is some $\delta>0$ such that $0 \leq s \leq t \leq s + \delta \leq T$ so that $\text{diam}(g_{A_s}(A_t \sm A_s)) \leq \epsilon.$
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\linewidth]{Images/local SLE.png}
+        \caption{A continuity Condition}
+        \label{fig:enter-label}
+    \end{figure}
+    \item Parameterized by half plane capacity if $\hcap(A_t) = 2t$ for all $t\geq 0.$
+        \end{enumerate}
+        We denote $\cal A$ to be the families of $\bbH-$hulls which satisfy 1-3. 
+\end{defn}
+
+\begin{thm}
+    Suppose that $(A_t)\in \cal A$ with $g_t = g_{A_t}.$ There exists some $U: [0, \infty) \to \bbR$ continuous such that 
+    \[\partial_t g_t(z)= \frac{2}{g_t(z) - U_t}, \quad g_0(z) = z\] We call $U$ the Loewner driving function for $(A_t).$
+\end{thm}
+\begin{proof}
+    Since $\cal A$ is locally growing, we know that $\cap_{s\geq t} \overline{g_t(A_s)}$ contains a single point (compact and decreasing). Calling the point $U_t.$ clearly $U_t$ is continuous in $t.$ We know by Proposition 20 that 
+    \[g_A(z) = z + \frac{\hcap (A)}{z} + O\left(\frac{c\,\rad(A)\hcap (A) }{|z|^2}\right)\] Recall that $g_{A + x}(z)- x = g_{A}(z-x).$  Combining these two facts,
+    \begin{align}
+    g_A(z) = g_{A + x}(z + x) - x  = z + \frac{\hcap (A + x)}{z +x} + O\left(\frac{c\,\rad(A+x)\hcap (A+x) }{|z+x|^2} \right)    
+    \end{align}
+     Let $\epsilon>0.$ By the fact that $\cal A$ is parameterized by a half plane capacacity, we know that $g_t(A_{t + \epsilon \sm A_t}) = 2\epsilon.$ Let $0 \leq s \leq t,$ and call 
+    $g_{s,t} := g_t \circ g_s^{-1}$ In the above, let $A = g_t(A_{t + \epsilon}\sm A_t)$ and $x = -U_t.$ Noting that  $\rad(A - U_t) = \rad(A) \leq \text{diam}(A)$, we apply the above equation to show that 
+    \[g_{t, t + \epsilon}(z) = z + \frac{2\epsilon}{z - U_t} + 2\epsilon \,\text{diam}(g_t(A_{t  + \epsilon} \sm A_t))\,O(\frac{1}{|z - U_t|^2})\] Tautologically, 
+    \begin{align*}
+        \frac{1}{\epsilon}\left(g_{t+ \epsilon}(z)\right) - g_t(z) &= \frac{1}{\epsilon}\left((g_{t,t + \epsilon} - g_{t,t})\circ g_t(z)\right)\\
+        &= \frac{2}{g_t(z) - U_t} + 2 \,\text{diam}(g_t(A_{t  + \epsilon} \sm A_t))\,O(\frac{1}{|g_t(z) - U_t|^2})\\
+        &\xrightarrow[\epsilon \to 0]{} \frac{2}{g_t(z) - U_t}
+    \end{align*}
+    
+\end{proof}
+
+\subsection{The Schramm-Loewner Evolution}
+\begin{defn}
+    Suppose that $(A_t)$ is a random family in $\cal A$ encoded with the Loewner driving function $U.$ We say that $A_t$ satisfies the \textbf{conformal Markov property} if the following holds. For each $t \geq 0,$ define $\mathcal{F} = \sigma(U_s : s \leq t).$ Then 
+    \begin{enumerate}
+        \item Conditioning the left side on $\cal F_s,$ we have that 
+        \[\{g_s(A_{s + t}) - U_t\}_{t \geq 0} =^d \{A_s\}_{s\geq 0}\]
+        \item For each $r>0,$ $(rA_{t/r^2}) = ^d (A_t)$
+    \end{enumerate}
+\end{defn}
+
+\begin{rem}
+    With 1, we see that $(T_{t + s} - U_t)_{s \geq 0}$ has the same distribution as $U_s$ (given $\cal F_t$). Since $U$ has stationary independent increments and it is continuous, then there is some $\kappa \geq 0$ and $a \in \bbR$ such that $U_t = \sqrt{\kappa}B_t + at,$ where $B$ is a SBM. Hence, by two, 
+    \[r U_{r\sm r^2} = \sqrt{\kappa}r B_{r/ r^2} + ra(t/ r^2) =\sqrt{\kappa}\tilde{B} + at/r =^d U_t,\] implying $a = 0.$
+\end{rem}
+\begin{thm}
+    If $A_t$ satisfies the conformal Markov property, then there is some $\kappa\geq 0$ such that $U_t = \sqrt{\kappa}B_t$ where $B$ is a SBM.
+\end{thm}
+
+\begin{defn}
+    We define $\SLE_\kappa$ to be the random family of hulls $A_t$ which are obtained by solving the Loewner equation with $U_t = \sqrt{\kappa B_t},$ where $B$ is a standard Brownian Motion. 
+\end{defn}
+\begin{exmp}
+    If $\kappa = 0,$ then $U_t = 0,$ corresponding to the family $A_t = [0, 2\sqrt{ t}i],$ as we have seen. 
+\end{exmp}
+
+\begin{exmp}
+    Solve the SDE:
+    \[dX_t = -\frac{X_t}{1-t}dt + dB_t\].
+    Consider a more general SDE 
+    \[dX_t = f(t)X_tdt + g(t)dB_t.\] Define 
+    \[\mu(t):= \exp\{-\int_0^s f(s)\,ds\}, \implies d\mu_t = -f(t)\mu_t \,dt\] Using Ito's product rule, 
+    \begin{align*}
+    d(\mu_t, X_t) &= d\mu_t \,X_t + \mu_t\,dX_t + d\langle \mu \rangle_t\,d\langle X\rangle_t\\
+    &= -f(t)\mu_t\,dt \,X_t+ \mu_t(f(t)X_tdt + g(t)dB_t)\\
+    &= \mu_t g(t)\,dB_t
+    \end{align*}
+    Integrating both sides yields
+    \[\mu_t X_t  =\int_0^s \mu_s g(s) \,dB_s\]
+    Implying that 
+    \[X_t = \frac{1}{\mu_t}\int_0^s \mu_s g(s) \,dB_s\]
+    Solving our specific example, 
+    \[X_t = (1-t)\int_0^t \frac{1}{1-s}\,dB_s\]
+\end{exmp}
+
+\begin{exmp}
+    Let $A_r$ be unit annulus with inner disk radius $e^{-r}.$ Let $\tau$ be the exit time from $A_r$ of a Brownian motion. What is 
+    \[\bbP\{|B_\tau| = e^{-r}\}\]
+$\Im$
+    Consider $\varphi = \log z,$ which sends $A_r \mapsto V,$ the vertical strip with sides $0$ and $-r$ on the real axis. Consider the Dirichlet problem on $V.$ where, up to rescaling, we need 
+    \[H: \begin{cases}
+        \triangle H(u) = 0, \quad 0<|u|<r\\
+        H(u) = 0, \qquad u = 0\\
+        H(u) = 1, \qquad u = -r
+    \end{cases}\]
+    Thus, 
+    \[H(u) = \frac{-u}{r}\]  Using the fact that harmonic measure and exit probabilities are the same, we realize that 
+    \[f_V(w) = \frac{-\Re(w)}{r}\] is exit probability on the strip. Using the conformal invariance, and noting $A_r = \varphi^{-1}(V),$ we compute
+    \[f_{A_r}(z) = f_V(\varphi(z)) |\varphi'(z)| = \frac{- \Re(\log(z))}{r}\frac{1}{z} = \frac{-\log |z|}{r}\frac{1}{z}\]
+\end{exmp}
+
+\begin{exmp}
+    Show that 2-D Brownian motion is neighborhood recurrent.
+    \begin{proof}
+        Without loss of generality, we will show Brownian motion is neighborhood recurrent about zero and suppose $B_0 = z.$ Let $\epsilon>0$ and let $R>|z|>\epsilon>0.$ Let $r$ large such that $e^{-r} < \epsilon$ and define $A_r$ as before. We define $\tau_r$ to be the exit of the Brownian motion through the inner radius and $\tau_R$ to be the one through the outer. Still using $\varphi(z) = \log(z),$ we send $A_r\mapsto V,$ where $V = \{w: -r < \Re(w) < \log (R)\}.$ We need 
+        \[H: \begin{cases}
+        \triangle H(u) = 0, \quad r<|u|<R\\
+        H(u) = 0, \qquad u = \log (R)\\
+        H(u) = 1, \qquad u = -r
+    \end{cases}\]
+    Thus, 
+    \[H(u) = \frac{-u + \log (R)}{-\log (r) + \log (R)}\] Thus, pulling back to $A_r,$ we see that 
+    \[\bbP\{\tau_r < \tau_R\} = \frac{-\log |z| + \log(R)}{-\log (r) + \log (R)}\] Sending $R\to \infty$ and apply to the strong Markov property to conclude. 
+    \end{proof}
+\end{exmp}
+
+
+\subsection{Stochastic Calculus}
+\begin{thm}
+Suppose $\varphi(t,x)$ is sufficiently smooth. Let $X_t$ be a Brownian motion. Then 
+\[\partial \varphi(t,X_t) = \partial_t \varphi(t,X_t) dt + \partial_x \varphi(t,X_t)\,dX_t + \frac{1}{2}\partial_{xx}\varphi(t,X_t)d\langle X\rangle_t\]
+\end{thm}
+
+
+
+\begin{thm}
+    (Levy's Characterization of Brownian Motion) Let $M_t$ be a continuous martingale with $M_0 = 0.$ Suppose $\langle M_t\rangle = t.$ Then $M_t$ is a Brownian motion.
+\end{thm}
+
+
+\begin{rem}
+    Let $X = (B^1, \dots, B^d)$ be a $d-$dimensional Brownian motion, then define
+    \[Z_t := \|X_t\|^2 = \sum_{i=1}^d (B_t^i)^2\] As an aside, let $\varphi(x)= x^2,$ then using Ito's formula,
+    \[d(B_t^2) = 2B_t \,dB_t + dt  \iff B_t^2 = \int_0^t2B_s dB_s + dt\] Thus, 
+    \[Z_t =Z_0 +  \sum_{i=1}^d \left(\int_0^t 2B^i_s\,dB_s^i\right) + dt\] We define 
+    \[Y_t:= \sum \int_0^t \frac{1}{Z_s^\frac{1}{2}}B_s^i \,dB_s^i.\] We know that $Y_t$ is a continuous local martingale since it is an Ito integral. Moreover, 
+    \begin{align*}
+    \langle Y\rangle_t &= \left\langle \sum_{i=1}^d \int_0^t \frac{1}{Z_s^\frac{1}{2}}B_s^i \,dB_s^i\right\rangle_t    \\
+    &= \sum_{i=1}^d\left\langle \int_0^t \frac{1}{Z_s^\frac{1}{2}}B_s^i \,dB_s^i\right\rangle_t\\
+    &= \sum_{i=1}^d \int_0^t \frac{1}{Z_s}(B_s^i)^2 ds\\
+    &= t
+    \end{align*}
+    Hence, by Levy's characterization, $Y_t$ is a Brownian motion.
+    Thus, we expand
+    \begin{align*}
+        Z_0 + 2\int_0^t Z_s^\frac{1}{2} dY_s + dt &= Z_0 + 2\int_0^t Z_s^\frac{1}{2} \sum_{i=1}^d \frac{1}{Z_t^\frac{1}{2}}B_t^i \,dB_t^i + dt\\
+        &= Z_t
+    \end{align*}
+    Equivalently, $dZ_t = 2Z_t^\frac{1}{2}dY_t + d\cdot dt,$ where we call $Z$ the \textbf{square Bessel process of dimension $d$} and write $Z_t \sim \text{BESQ}^d$.
+
+    Letting $\phi(x) = x^\frac{1}{2},$ we apply Ito's formula to $Z_t$ and see that 
+    \begin{align*}
+    dZ_t^\frac{1}{2} &= \frac{1}{2}Z_t^\frac{-1}{2}dZ_t - \frac{1}{8}Z^\frac{-3}{2} \,d\langle Z\rangle_t\\
+    &= \frac{1}{2}Z_t^\frac{-1}{2}(2Z_t^\frac{1}{2}dY_t + d\cdot dt) - \frac{1}{8}Z^\frac{-3}{2} (4Z_t \,dt)\\
+    &= dY_t + \frac{d}{2}Z_t^\frac{-1}{2}\,dt-\frac{1}{2}Z_t^\frac{-1}{2}\,dt\\
+    &= dY_t + (\frac{d-1}{2})Z_t^\frac{-1}{2}\,dt
+    \end{align*}
+
+Defining $U_t:= Z_t^\frac{1}{2},$ we see that 
+\[dU_t = (\frac{d-1}{2})\frac{1}{U_t}\,dt + dY_t\] We call this the \textbf{Bessel SDE of dimension $d$} and write $U_t \sim \text{BES}^d$
+\end{rem}
+\begin{prop}
+    Suppose $d\in \bbR$ and $U_t \sim \text{BES}^d.$
+    \begin{itemize}
+        \item If $d < 2,$ then $U_t$ hits $0$ a.s.
+        \item If $d\geq 2,$ then $U_t$ does not hit $0$ a.s.
+    \end{itemize}
+    \end{prop}
+\begin{proof}
+    Consider $U_t^{2-d}.$ Using Ito's formula, 
+    \begin{align*}
+        dU_t^{2-d} &= (2-d)U_t^{1-d}\,dU_t + \frac{1}{2}(1-d)(2-d)U_t^{-d}d\langle U
+\rangle_t\\
+&= (2-d)U_t^{1-d}\left((\frac{d-1}{2})\frac{1}{U_t}\,dt + dY_t\right) + \frac{1}{2}(2-d)(1-d)U_t^{-d}\,dt\\
+&= \frac{1}{2}(d-1)(d-2)U_t^{1-d}\frac{1}{U_t}\,dt + (2-d)U_t^{1-d}dY_t + \frac{1}{2}(1-d)(2-d)U_t^{-d}\,dt\\
+&= (2-d)U_t^{1-d}dY_t
+    \end{align*}
+    Since this shows that $U_t$ is an Ito integral, then $U_t^{2-d}$ is a continuous martingale For any $a\in \bbR,$ we let $\tau_a = \inf\{t \geq 0 : U_t = a\}$ Thus, if $a\leq U_0 < b < \infty,$ then $U_{t\wedge \tau_a \wedge \tau_b}$ is a bounded continuous martingale, and so by the OST,
+    \[U_0^{2-d} = \bbE[U_{\tau_a \wedge \tau_b}^{2-d}] = a^{2-d}\bbP\{\tau_a < \tau_b\} + b^{2-d}\bbP\{\tau_b < \tau_a\}\] Letting $a = 0$ for the $d< 2$ case, we have that as $b\to \infty,$ 
+    \[\bbP\{\tau_b < \tau_0\} = \left(\frac{U_0}{b}\right)^{2-d} \to 0\] For $d>2,$ we write 
+    \[\bbP\{\tau)a < \tau_b\} = \left(\frac{U_0}{b}\right)^{2-d} - \left(\frac{b}{a}\right)^{2-d} \bbP\{\tau_b < \tau_a\}\] Letting $a\to 0,$ the result becomes clear. For $d = 2,$ replace $U_t^{2-d}$ with $\log U_t$ and prove similar.  
+\end{proof}
+\begin{rem}
+    Back to Loewner! Suppose $U_t = \sqrt{\kappa}B_t$ and $g_t$ solves
+    \[\partial_t g_t(z) = \frac{2}{g_t(z) - U_t}.\] Letting $\gamma$ be the curve corresponded to the family of hulls encoded by $(g_t),$ for each 
+     $x\in \bbR,$  define $V_t^x = g_t(x) - U_t.$ Letting $\tau_x = \inf\{t \geq 0 \mid V_t^x = 0\}$ be the first time a singularity in the curve is absorbed by the real axis, we see that by using Ito's formula,
+     \[dV_t^x = \frac{2}{g_t(x) - U_t}\,dt - dU_t = \frac{2}{V_t^x}\,dt - \sqrt{\kappa}\,dB_t.\] Letting $Y_t = -B_t,$ we see that 
+     \[d(V_t^x/\sqrt{k}) = \left(\frac{2}{\kappa}\right) \frac{\sqrt{\kappa}}{V_t}\,dt + dY_t.\] Thus, $V_t^x/\sqrt{\kappa} \sim \text{BES}^d,$ where 
+     \[\frac{d-1}{2} = \frac{2}{\kappa} \implies d = 1 + \frac{4}{\kappa}\] Hence, 
+     \[d \geq 2 \iff \kappa \leq 4\] and by Proposition 22, $\tau_x < \infty$ iff $\kappa >4.$
+\end{rem}
+
+\begin{prop}
+    $\SLE_\kappa$ corresponds to a simple curve for $\kappa \leq 4,$ and it is self intersecting for $\kappa >4.$ 
+\end{prop}
+\begin{proof}
+    We have seen in the previous remark that $\SLE_\kappa$  intersects $\partial \bbH$ iff $\kappa>4.$ Let $t>0$ be fixed. We claim that $\gamma'$ defined by $\gamma'(s):= g_t(\gamma(s + t)) - U_t$ is an $\SLE_\kappa$ curve. One can see this by the conformal Markov property. Thus, for $\kappa \leq 4,$ $\gamma'$ never intersects $\partial \bbH,$ and thus the curve $\gamma$ never intersects itself.
+\end{proof}
+
+Let $\kappa >4.$
+\begin{rem}
+    Let $0 < x < y,$ and define 
+    \[g(x,y):= \bbP\{\tau_x = \tau_y\}\] be the probability both $x$ and $y$ are cut off from $\infty$ at the same time. Note that 
+    \begin{itemize}
+        \item $g(x,y) = g(1, \frac{y}{x})$ since $\SLE_\kappa$ is scale-invariant by assumption. Clearly, $\bbP\{\tau_1 < t\} \to 1$ as $t \to \infty. $ Also, $\bbP\{\tau_r < t\} \to 0$ as $r\to \infty.$ Hence, $g(1,r) \to 0$ as $r\to \infty$
+    \end{itemize}
+\end{rem}
+\begin{defn}
+    We say that two events are equivalent if they differ by an event of probability zero.
+\end{defn}
+
+\begin{lem}
+    For fixed $r>1,$ the even $\{\tau_1 = \tau_r\}$ is equivalent to 
+    \[E = \{\sup_{t< \tau_1} \frac{V_t^r - V_t^1}{V_t^1} < \infty\}\]
+\end{lem}
+\begin{proof}
+    Suppose $E$ occurs. Then there is some $C>0$ such that 
+    \[\frac{V_t^r- V_t^1}{V_t^1} \leq C \iff \frac{V_t^r}{V_t^1} \leq C + 1  \iff V_t^r \leq V_t^1 \cdot C'\] Taking $r\to \infty,$ we know that $V_t^1 \to 0$ as $t\uparrow \tau_1$ and hence $V_t^r \to 0$ as $t \uparrow \tau_1,$ and thus $\tau_r \leq \tau_1.$ Thus $r$ must be swallowed before $1.$ Hence, 
+    \[E \subseteq \{\tau_1 \geq \tau_r\} = \{\tau_1 = \tau_r\}\cup \{\tau_1 > \tau _r\}\]
+
+    For the other direction, let $M>0,$ then if we define 
+    \[\sigma_M:= \inf\{t \geq 0 : \frac{V_t^r - V_t^1}{V_t^1} \geq M\},\] we have by definition that
+    \[\bbP\{\tau_1 = \tau_r \mid \sup_{t <  \tau_1}\frac{V_t^r - V_t^1}{V_t^1}\geq M\}= \bbP\{\tau_1 = \tau_r \mid \sigma_M < \tau_1\}\] Consider the map $z \mapsto \frac{z}{V^1_{\sigma_M}}$. Clearly, $V_{\sigma_M}^1 \mapsto 1$ and since 
+    \[\frac{V^r_{\sigma_M}}{V_{\sigma_M}^1} = M +1,\] then $V^1_{\sigma_r}\mapsto M+1.$ Hence, by the scale invariance, $g(1, r) = g(1, 1 + M).$ We start the new $\SLE_\kappa$ from $0$ at time $\sigma_M$ by the Strong Markov Property, we have that 
+    \[\bbP\{\tau_1 = \tau_r \mid \sigma_M < \tau_1\} = g(1, 1 + M) \to 0 \qquad M \to \infty.\] Thus, 
+    \[\bbP\{\tau_1 = \tau_r , E^c\} = 0\]
+\end{proof}
+
+\begin{lem}
+Let $C\in (0,1). $We have that \[\bbP\{\sup_{t < \tau_1} \frac{V_t^r - V_t^1}{V_t^1} < \infty\} = \begin{cases}
+        C, \qquad \kappa\in (4,8)\\
+        0, \qquad \kappa  = 8
+    \end{cases}\]
+\end{lem}
+\begin{proof}
+    Let $Z_t = \log \left(\frac{V_t^r - V_t^1}{V_t^1}\right)$ Recall that $dV_t^x = \frac{2}{V_t^x}dt + \sqrt{\kappa}dB_t$
+    
+    Letting $d = 1 + \frac{4}{\kappa},$ then by Ito's formula, 
+    \[dZ_t = \left((\frac{3}{2} -d) \frac{1}{(V_t^1)^2} + \left(\frac{d-1}{2}\right)\left(\frac{V_t^r - V_t^1}{(V_t^1)^2 V_t^r}\right)\right)\,dt - \frac{1}{V_t^1} \,dB_t\]
+
+Thus, to turn the martingale part of $Z_t$ ($-\frac{1}{V_t}\,dB_t$) into a SBM, we perform a time change. Consider
+\[\sigma(t) := \inf\{u \geq 0 : \int_0^u \frac{1}{(V_s^1)^2}\,ds = t\} \implies t = \int_0^{\sigma(t)}\frac{1}{(V_s^1)^2}\,ds  \implies dt = \frac{d\sigma(t)}{(V_{\sigma(t)}^1)^2}\]
+
+Defining 
+\[Y_t:= -\int_0^{\sigma(t)}\frac{1}{V_s^1}\,dB_s\] as a local continuous martingale, then 
+
+\[\langle Y\rangle_t = \left\langle- \int_0^{\sigma(t)} \frac{1}{V_s^1}\,dB_s\right\rangle_t = \int_0^{\sigma(t)}\frac{1}{(V_s^1)^2}\,dt = t\] and by Levy's characterization of a Brownian motion is a SBM. 
+
+Defining $\tilde{Z}_t$ such that $\tilde{Z}_t = Z_{\sigma(t)},$ we have that
+\begin{align*}
+    d\tilde{Z}_t &= dZ_{\sigma(t)}\\
+    &= dZ_{\sigma(t)}\cdot d\sigma(t)\\
+    &= \left((\frac{3}{2} -d) \frac{1}{(V_{\sigma(t)}^1)^2} + \left(\frac{d-1}{2}\right)\left(\frac{V_{\sigma(t)}^r - V_{\sigma(t)}^1}{(V_{\sigma(t)}^1)^2 V_{\sigma(t)}^r}\right)\right)\,d\sigma(t) - \frac{1}{V_{\sigma(t)}^1} \,dB_{\sigma(t)}\\
+    &= \left((\frac{3}{2} -d) \frac{1}{(V_{\sigma(t)}^1)^2} + \left(\frac{d-1}{2}\right)\left(\frac{V_{\sigma(t)}^r - V_{\sigma(t)}^1}{(V_{\sigma(t)}^1)^2 V_{\sigma(t)}^r}\right)\right)(V_{\sigma(t)}^1)^2\,dt + dY_t\\
+    &= \left((\frac{3}{2} -d) + \left(\frac{d-1}{2}\right)\left(\frac{V_{\sigma(t)}^r - V_{\sigma(t)}^1}{ V_{\sigma(t)}^r}\right)\right)\,dt + dY_t
+\end{align*}
+
+\end{proof}
+
+    
 
 
 \end{document}
